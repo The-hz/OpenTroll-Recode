@@ -134,8 +134,6 @@ implements Listener3 {
      */
     @Override
     public void m368(Object var1_1, boolean var2_2) {
-        // Reconstructed from bytecode (opaque isSet32()/** GOTO removed): render the enabled-module list
-        // with slide-in animation (value77), rainbow/solid color, and LEFT_TAG/RIGHT_TAG/FRAME styles.
         DrawContext ctx = (DrawContext) var1_1;
         java.util.List<ModuleData> list = this.getList7();
         int y = this.y.getInt50();
@@ -226,7 +224,6 @@ implements Listener3 {
      * Exception decompiling
      */
     private String m633(Object var1_1) {
-        // Reconstructed from bytecode (CFR failed): "<name> §7<suffix>" with the Case transform applied.
         Module module = (Module) var1_1;
         String name = module.getText43();
         String suffix = this.m562(module);

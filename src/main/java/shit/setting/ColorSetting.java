@@ -33,8 +33,6 @@ extends Setting {
      * Could not resolve type clashes
      */
     public void setObj22(Object var1_1) {
-        // Reconstructed from bytecode (opaque `** GOTO` folded): store the color; when this setting has no
-        // alpha channel (flag60 == false) force the alpha byte to fully opaque.
         int color = (Integer) var1_1;
         if (this.flag60) {
             super.setObj94(color);

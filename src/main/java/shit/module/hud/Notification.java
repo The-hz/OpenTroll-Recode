@@ -104,8 +104,6 @@ implements Listener3 {
      */
     @Override
     public void m368(Object var1_1, boolean var2_2) {
-        // Reconstructed from bytecode (opaque isSet32()/** GOTO removed): render active notifications with
-        // a lerp slide animation; when editing with none active, show an example preview.
         DrawContext ctx = (DrawContext) var1_1;
         boolean editing = var2_2;
         float y = this.getInt5();

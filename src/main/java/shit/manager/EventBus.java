@@ -22,8 +22,6 @@ public class EventBus {
     private final Map map5 = new ConcurrentHashMap();
     private static final String a = null;
 
-    // Reconstructed from bytecode: register all @EventHandler methods of `object`, grouped by event
-    // type and sorted by priority (highest first).
     @SuppressWarnings("unchecked")
     public void subscribe(Object object) {
         List<Data> handlers = (List<Data>) this.map5.computeIfAbsent(object, o -> this.m687(o));
@@ -34,7 +32,6 @@ public class EventBus {
         }
     }
 
-    // Reconstructed: unregister every handler previously registered for `object`.
     @SuppressWarnings("unchecked")
     public void setObj18(Object object) {
         List<Data> handlers = (List<Data>) this.map5.get(object);
@@ -49,7 +46,6 @@ public class EventBus {
         }
     }
 
-    // Reconstructed: dispatch an event to its handlers (priority order), stopping if it gets cancelled.
     @SuppressWarnings("unchecked")
     public Event m287(Object object) {
         Event event = (Event) object;
@@ -100,8 +96,6 @@ public class EventBus {
         if (method.getParameterCount() != 1) {
             return false;
         }
-        // `a` was a ZKM-encrypted implicit-handler name prefix, stripped during deobfuscation. All real
-        // handlers are @EventHandler-annotated (handled above), so implicit detection is disabled.
         if (a == null || !method.getName().startsWith(a)) {
             return false;
         }
@@ -124,9 +118,6 @@ public class EventBus {
                 this.method.invoke(this.field, event);
             }
             catch (java.lang.reflect.InvocationTargetException ite) {
-                // Deobf tail: some handlers are un-reconstructable stubs, others are reconstructed from
-                // type-imperfect bytecode (e.g. boolean-stored-as-int). Swallow their failures so the
-                // client keeps running instead of crashing the whole tick/render loop.
                 Throwable cause = ite.getCause();
                 if (cause instanceof UnsupportedOperationException) {
                     return;

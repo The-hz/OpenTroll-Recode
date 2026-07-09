@@ -20,7 +20,6 @@ import shit.manager.ShaderProgramManager;
 public class ScreenMainMenuBackgroundMixin {
     @Inject(method={"renderBackground(Lnet/minecraft/client/gui/DrawContext;IIF)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void m901(DrawContext drawContext, int n, int n2, float f, CallbackInfo callbackInfo) {
-        // Reconstructed: on the world-select / multiplayer screens, draw the shader background and cancel vanilla.
         if (!((Object) this instanceof net.minecraft.client.gui.screen.world.SelectWorldScreen)
                 && !((Object) this instanceof net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen)) {
             return;

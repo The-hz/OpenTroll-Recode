@@ -21,7 +21,6 @@ import shit.module.Module;
 
 @Environment(value=EnvType.CLIENT)
 public final class Client {
-    // Reconstructed from the bytecode <clinit> (each manager singleton is a no-arg construction).
     public static final EventBus eventBus = new EventBus();
     public static final ModuleManager moduleManager = new ModuleManager();
     public static final CommandManager commandManager = new CommandManager();

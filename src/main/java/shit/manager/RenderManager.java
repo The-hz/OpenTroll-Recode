@@ -433,7 +433,6 @@ extends ModuleState {
      */
     @Override
     public boolean m855(double var1_2, double var3_3, int var5_4, double var6_5, double var8_1) {
-        // Drag handler: irreducible ZKM control flow, not reconstructable. No-op (panel drag disabled) so it can't crash the GUI.
         return false;
     }
 

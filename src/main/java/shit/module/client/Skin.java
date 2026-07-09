@@ -261,7 +261,6 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum EMode  {
-        // Cape texture file per option (original strings ZKM-encrypted; restored to the shipped cape/*.png).
         MELON("melon_cape.png"), VAPE("vape_cape.png"), Chicken("chicken_cape.png"), BadLion("badlion_cape.png"),
         Creeper("creeper_cape.png"), Dragon("dragon_cape.png"), Elaina("elaina_cape.png"), FDP("fdp_cape.png"),
         LUNAR_LIGHT("lunar_light_cape.png"), LUNAR_DARK("lunar_dark_cape.png"), Mojang("mojang_cape.png"),

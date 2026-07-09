@@ -372,7 +372,6 @@ public class RenderUtil4 {
         }
 
         private static void m390() {
-            // Reconstructed from bytecode: clear each cached uniform storage (raw-map cast added).
             map19.values().forEach(v -> ((DynamicUniformStorage) v).clear());
         }
 

@@ -29,7 +29,6 @@ extends Screen {
     private static final String b = null;
 
     public HudEditorScreen() {
-        // Reconstructed: `b` (title) was ZKM-encrypted -> literal; build the HUD-category panel.
         super((Text) Text.literal("HUD Editor"));
         this.renderManager = new RenderManager(net.minecraft.client.MinecraftClient.getInstance().textRenderer, Category.HUD, 0, 0);
     }
@@ -41,7 +40,6 @@ extends Screen {
     }
 
     public void render(DrawContext drawContext, int n, int n2, float f) {
-        // Reconstructed (opaque `null==null`/break removed): draw every enabled HUD element + its editor box.
         for (Module module : Client.moduleManager.getByCategory(Category.HUD)) {
             if (module instanceof Listener3 && module.isSet19()) {
                 Listener3 listener3 = (Listener3) module;
@@ -49,7 +47,6 @@ extends Screen {
                     listener3.m368(drawContext, true);
                     this.m969(drawContext, listener3);
                 } catch (RuntimeException e) {
-                    // HUD element whose render isn't reconstructed -> skip it, keep the editor usable.
                 }
             }
         }
@@ -57,7 +54,6 @@ extends Screen {
     }
 
     public boolean mouseClicked(Click click, boolean bl) {
-        // Reconstructed: delegate to the panel, else pick up the top-most HUD element under the cursor.
         if (this.renderManager.m3(click.x(), click.y(), click.button())) return true;
         if (this.renderManager.m851(click.x(), click.y(), click.button())) return true;
         java.util.List<Module> hud = Client.moduleManager.getByCategory(Category.HUD);
@@ -104,7 +100,6 @@ extends Screen {
     }
 
     public boolean mouseDragged(Click click, double d, double d2) {
-        // Reconstructed (opaque removed): move the grabbed HUD element with the cursor.
         if (this.renderManager.m479(click.x(), click.y(), click.button(), d, d2)) return true;
         if (this.listener3 != null) {
             this.listener3.m274((int) click.x() - this.count221, (int) click.y() - this.count126);
@@ -158,7 +153,6 @@ extends Screen {
      * Enabled aggressive block sorting
      */
     private boolean m55(double d, double d2, Object object) {
-        // Reconstructed hit-test: is (d,d2) inside the HUD element's bounding box?
         Listener3 listener3 = (Listener3) object;
         return d >= listener3.getInt12() && d <= (double) (listener3.getInt12() + listener3.hudWidth())
             && d2 >= listener3.getInt5() && d2 <= (double) (listener3.getInt5() + listener3.getInt28());

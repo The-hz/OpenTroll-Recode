@@ -88,7 +88,6 @@ implements Listener4 {
         return n != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n) || n2 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n2) || n3 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n3) || n4 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n4);
     }
 
-    // Velocity.NoClimb — stop auto-climbing/clinging to ladders & vines (local player only).
     @Inject(method={"isClimbing()Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noClimb(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         Velocity velocity = Velocity.INSTANCE;

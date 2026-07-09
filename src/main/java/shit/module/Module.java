@@ -83,14 +83,12 @@ implements MC {
                 try {
                     this.onEnable();
                 } catch (RuntimeException e) {
-                    // Deobf tail: modules whose onEnable isn't reconstructed toggle without crashing.
                 }
                 if (null == null) break block7;
             }
             try {
                 this.m709();
             } catch (RuntimeException e) {
-                // onDisable not reconstructed -> no-op instead of crashing on toggle-off.
             }
             Client.eventBus.setObj18(this);
         }

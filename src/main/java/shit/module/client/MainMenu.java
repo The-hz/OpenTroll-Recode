@@ -90,7 +90,6 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum EMode  {
-        // Title label per style (original strings ZKM-encrypted; restored to the styled client names).
         TROLL_HACK("TrollHack"), MINECRAFT("Minecraft");
 
         public final String displayName;

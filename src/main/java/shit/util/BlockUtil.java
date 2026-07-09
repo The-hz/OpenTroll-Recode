@@ -74,8 +74,6 @@ implements MC {
             return;
         }
         boolean bl2 = minecraftClient.player.isSneaking();
-        // When not sneaking, clicking an interactable block (chest/etc.) would open its GUI instead of
-        // placing — skip those so scaffold/burrow don't accidentally open containers.
         if (!bl2 && BlockUtil.m32(minecraftClient.world.getBlockState(blockHitResult.getBlockPos()))) {
             return;
         }

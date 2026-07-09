@@ -51,7 +51,6 @@ extends Setting {
     }
 
     public void setObj85(Object object) {
-        // DeBox erasure: callers pass int (autoboxed Integer) as well as Double -> accept any Number.
         double d = ((Number) object).doubleValue();
         super.setObj94(Math.max(this.value169, Math.min(this.value205, d)));
     }

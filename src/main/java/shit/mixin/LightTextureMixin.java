@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shit.module.render.Ambience;
+import shit.module.render.Fullbright;
 import shit.module.render.NoRender;
 import shit.render.Lightmap;
 
@@ -40,6 +41,15 @@ public class LightTextureMixin {
 
     @Inject(method={"update(F)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$worldColor(float f, CallbackInfo callbackInfo) {
+        Fullbright fullbright = Fullbright.INSTANCE;
+        if (fullbright != null && fullbright.isSet19()) {
+            Lightmap.field33 = this.buffer;
+            Lightmap.gpuTextureView3 = this.glTextureView;
+            float g = ((Double)fullbright.gamma.getObj()).floatValue();
+            Lightmap.writeLightmap(g, g, g);
+            callbackInfo.cancel();
+            return;
+        }
         Ambience ambience = Ambience.INSTANCE;
         if (ambience == null || !ambience.isSet19() || !((Boolean)ambience.worldColorDraw.getObj()).booleanValue()) {
             return;

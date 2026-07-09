@@ -214,8 +214,6 @@ extends Module {
         if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) - (Double)SpeedMine.INSTANCE.range.getObj() > 0.0) {
             return false;
         }
-        // Reachability guard SpeedMine.INSTANCE.m561(pos) == null is subsumed by the range check
-        // above (m561 returns null only when distance > range), so it is a no-op here.
         if (blockPos.equals((Object)SpeedMine.blockPos7)) {
             return false;
         }

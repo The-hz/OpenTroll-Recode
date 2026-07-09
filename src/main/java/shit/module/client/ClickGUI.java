@@ -69,8 +69,6 @@ extends Module {
      */
     @Override
     public void onEnable() {
-        // Reconstructed from bytecode (opaque `** GOTO` control flow removed): open the ClickGUI screen
-        // if no screen is currently open, then toggle this module back off (momentary button).
         if (MC.client3.currentScreen == null) {
             MC.client3.setScreen((Screen) new ClickGUIScreen());
         }

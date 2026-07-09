@@ -49,7 +49,6 @@ public class RenderUtil2 {
     }
 
     public void setObj113(Object object) {
-        // Reconstructed from bytecode: draw the button background (animated hover color) and its label.
         DrawContext drawContext = (DrawContext) object;
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         float f = 1.0f;
@@ -77,7 +76,6 @@ public class RenderUtil2 {
      * Unable to fully structure code
      */
     public boolean m49(double var1_1, double var3_2) {
-        // Reconstructed (opaque ** GOTO folded): is the cursor within this menu button's bounds?
         double x = var1_1;
         double y = var3_2;
         float lineH = Client.fontManager.isSet89() ? 9.0f : (float) Client.fontManager.renderer2().getInt19();

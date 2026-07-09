@@ -72,7 +72,6 @@ implements Listener3 {
      */
     @Override
     public void m368(Object var1_1, boolean var2_2) {
-        // Reconstructed from bytecode (opaque/** GOTO removed): show tracked combat-item counts.
         DrawContext ctx = (DrawContext) var1_1;
         boolean editing = var2_2;
         int x = this.x.getInt50();

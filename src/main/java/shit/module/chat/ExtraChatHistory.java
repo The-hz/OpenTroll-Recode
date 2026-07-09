@@ -22,7 +22,6 @@ extends Module {
     }
 
     public int getInt33() {
-        // Reconstructed from bytecode: extended chat-history cap when enabled, else the vanilla 100.
         return this.isSet19() ? this.maxMessages.getInt50() : 100;
     }
 }

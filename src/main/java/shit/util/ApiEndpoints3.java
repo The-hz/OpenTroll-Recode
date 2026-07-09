@@ -76,7 +76,6 @@ public final class ApiEndpoints3 {
      * Lifted jumps to return sites
      */
     public static boolean isSet46() {
-        // Verification removed: the session/license gate always reports a valid session.
         return true;
     }
 
@@ -85,12 +84,10 @@ public final class ApiEndpoints3 {
      * Lifted jumps to return sites
      */
     public static boolean isSet68() {
-        // Verification removed: always valid.
         return true;
     }
 
     public static synchronized void startPeriodicRevalidation(Object object) {
-        // Verification removed: no periodic session revalidation / phone-home thread is started.
         if (true) return;
         MinecraftClient minecraftClient = (MinecraftClient)object;
         Object var3_2 = null;

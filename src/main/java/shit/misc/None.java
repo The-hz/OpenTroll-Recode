@@ -48,8 +48,6 @@ extends ModuleState {
      */
     @Override
     public void m945(Object var1_1, int var2_2, int var3_3) {
-        // Reconstructed from bytecode (single opaque `** GOTO` color-select folded): draw the setting row
-        // background (hover/pressed tint), the setting content, and enum/color sub-panels when expanded.
         DrawContext drawContext = (DrawContext) var1_1;
         int n = var2_2;
         int n2 = var3_3;
@@ -264,7 +262,6 @@ extends ModuleState {
      */
     @Override
     public boolean m510(double var1_1, double var3_2, int var5_3) {
-        // Reconstructed (opaque `** GOTO` folded): a mouse release clears any active drag/edit state.
         boolean wasActive = this.flag102 || this.flag164 || this.flag120 || this.flag108;
         this.flag102 = false;
         this.flag164 = false;
@@ -310,8 +307,6 @@ extends ModuleState {
      */
     @Override
     public boolean m121(int var1_1, int var2_2, int var3_3) {
-        // Reconstructed (opaque `** GOTO` folded): key input for a setting being edited — a bind capture
-        // for a ColorSetting2 keybind, or text editing (ESC/ENTER finish, BACKSPACE delete) for a StringSetting.
         int key = var1_1;
         if (this.flag48 && this.setting instanceof ColorSetting2) {
             ColorSetting2 cs = (ColorSetting2) this.setting;

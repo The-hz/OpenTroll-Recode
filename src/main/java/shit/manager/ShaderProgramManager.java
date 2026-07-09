@@ -190,8 +190,6 @@ public final class ShaderProgramManager {
 
     @Environment(value=EnvType.CLIENT)
     public static enum EMode  {
-        // Fragment-shader file per background mode. The original file->mode strings were ZKM-encrypted
-        // (unrecoverable); mapped to the shipped menu shaders so every option renders a real background.
         eMode("galaxy.frag.glsl"), eMode2("minecraft.frag.glsl"), eMode3("cubecave.frag.glsl"),
         eMode4("tube.frag.glsl"), eMode5("redlandscape.frag.glsl"), eMode6("bluegrid.frag.glsl"),
         eMode7("greennebula.frag.glsl"), eMode8("circuits.frag.glsl"), eMode9("matrix.frag.glsl"),

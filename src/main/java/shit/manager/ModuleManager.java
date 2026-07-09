@@ -191,7 +191,6 @@ public class ModuleManager {
     private final List list20 = new ArrayList();
 
     public void init() {
-        // Reconstructed from bytecode: register all modules, then sort by display name.
         this.setObj16(new shit.module.chat.AntiSpam());
         this.setObj16(new shit.module.chat.AutoCope());
         this.setObj16(new shit.module.chat.AutoQMain());
@@ -218,6 +217,22 @@ public class ModuleManager {
         this.setObj16(new shit.module.hud.Watermark());
         this.setObj16(new shit.module.hud.Notification());
         this.setObj16(new shit.module.hud.Coordinates());
+        this.setObj16(new shit.misc.Username());
+        this.setObj16(new shit.misc.Memory());
+        this.setObj16(new shit.misc.ServerBrand());
+        this.setObj16(new shit.misc.BaritoneProcess());
+        this.setObj16(new shit.misc.Time());
+        this.setObj16(new shit.misc.TPS());
+        this.setObj16(new shit.misc.Direction());
+        this.setObj16(new shit.misc.Durability());
+        this.setObj16(new shit.misc.PlayerSpeed());
+        this.setObj16(new shit.misc.Rotation());
+        this.setObj16(new shit.misc.TimerSpeed());
+        this.setObj16(new shit.misc.Biome());
+        this.setObj16(new shit.misc.EntityList());
+        this.setObj16(new shit.misc.TextRadar());
+        this.setObj16(new shit.misc.CPS());
+        this.setObj16(new shit.misc.WorldTime());
         this.setObj16(new shit.module.render.MobOwner());
         this.setObj16(new shit.module.hud.InventoryViewer());
         this.setObj16(new shit.module.hud.AutoRegearHud());

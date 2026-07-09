@@ -334,7 +334,6 @@ extends Module {
          * WARNING - void declaration
          */
         private EMode() {
-            // Display label was ZKM-encrypted (lost); fall back to the constant name.
             this.text2676 = name();
         }
 

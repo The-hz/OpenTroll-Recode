@@ -29,7 +29,6 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum SizeMode {
-      // Per-mode font size (px) recovered from bytecode; CUSTOM (-1) uses the module's CustomSize slider.
       SMALL(8.0f), NORMAL(9.0f), LARGE(11.0f), CUSTOM(-1.0f);
 
       private SizeMode(float value127) { this.value127 = value127; }
@@ -69,7 +68,6 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum Mode {
-        // Font-file per mode, recovered from the FontManager load order (the strings were ZKM-encrypted).
         TROLLHACK_JURA("jura-light.ttf"), TROLLHACK_LEXEND("lexenddeca-regular.ttf"), MISANS("next/mi-sans-regular.ttf"),
         GOOGLE_SANS("next/google-sans-regular.ttf"), GOOGLE_SANS_MEDIUM("next/google-sans-medium.ttf"),
         GOOGLE_SANS_SEMI_BOLD("next/google-sans-semibold.ttf"), GOOGLE_SANS_BOLD("next/google-sans-bold.ttf"),

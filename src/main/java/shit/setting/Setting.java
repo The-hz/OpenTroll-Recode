@@ -26,8 +26,6 @@ public abstract class Setting {
         this(string, object3, () -> true, (object, object2) -> object2, "", false);
     }
 
-    // Reconstructed from bytecode: store name/default/visibility-supplier/value-transform/description/flag,
-    // defaulting the supplier (-> true) and transform (-> new value) when null.
     protected Setting(String string, Object object, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl) {
         this.text265 = string;
         this.field47 = object;

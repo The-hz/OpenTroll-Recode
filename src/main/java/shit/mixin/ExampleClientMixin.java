@@ -29,7 +29,6 @@ import shit.util.AuthUtil;
 public class ExampleClientMixin {
     @Inject(method={"tick()V"}, at={@At(value="HEAD")})
     private void trollhack$preTick(CallbackInfo callbackInfo) {
-        // Reconstructed from bytecode (auth revalidation call stripped).
         Client.eventBus.m287(new Event2.Event2Inner());
     }
 
@@ -40,7 +39,6 @@ public class ExampleClientMixin {
 
     @Inject(method={"setScreen(Lnet/minecraft/client/gui/screen/Screen;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$setScreen(Screen screen, CallbackInfo callbackInfo) {
-        // Reconstructed from bytecode (auth gate + kick stripped).
         SetScreenEvent setScreenEvent = (SetScreenEvent) Client.eventBus.m287(new SetScreenEvent(screen));
         if (setScreenEvent.isSet85()) {
             callbackInfo.cancel();
@@ -49,7 +47,6 @@ public class ExampleClientMixin {
 
     @Inject(method={"doAttack()Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$startAttack(CallbackInfoReturnable callbackInfoReturnable) {
-        // Reconstructed from bytecode (auth gate stripped; friend-attack check kept).
         MinecraftClient minecraftClient = (MinecraftClient) (Object) this;
         Entity entity = minecraftClient.targetedEntity;
         if (entity instanceof PlayerEntity) {

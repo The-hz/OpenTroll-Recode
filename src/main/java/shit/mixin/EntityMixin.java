@@ -27,7 +27,6 @@ public class EntityMixin {
         }
     }
 
-    // Velocity.NoEntityPush — cancel getting shoved by other entities (local player only).
     @Inject(method={"pushAwayFrom(Lnet/minecraft/entity/Entity;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noEntityPush(Entity entity, CallbackInfo callbackInfo) {
         Velocity velocity = Velocity.INSTANCE;
@@ -36,7 +35,6 @@ public class EntityMixin {
         }
     }
 
-    // Velocity.NoBlockPush — cancel the anti-suffocation shove out of blocks (local player only).
     @Inject(method={"pushOutOfBlocks(DDD)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noBlockPush(double d, double d2, double d3, CallbackInfo callbackInfo) {
         Velocity velocity = Velocity.INSTANCE;
@@ -45,7 +43,6 @@ public class EntityMixin {
         }
     }
 
-    // Velocity.NoWaterPush — skip only the fluid-flow velocity add, keeping fluid detection intact.
     @Redirect(method={"updateMovementInFluid(Lnet/minecraft/registry/tag/TagKey;D)Z"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
     private void trollhack$noWaterPush(Entity self, Vec3d vec3d) {
         Velocity velocity = Velocity.INSTANCE;

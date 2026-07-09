@@ -19,8 +19,6 @@ public final class RenderUtil {
     }
 
     public static void setObj31(Object object) {
-        // Reconstructed: ZKM opaque predicates (`null != null` / `null == null`) had mangled this loop
-        // into an unconditional Listener3 cast + early break. Intended: render every enabled render-listener.
         DrawContext drawContext = (DrawContext)object;
         if (MinecraftClient.getInstance().currentScreen instanceof HudEditorScreen) {
             return;
@@ -30,9 +28,7 @@ public final class RenderUtil {
                 try {
                     ((Listener3) module).m368(drawContext, false);
                 } catch (UnsupportedOperationException stub) {
-                    // HUD element whose render was not reconstructed from bytecode -> skip it.
                 } catch (RuntimeException e) {
-                    // Type-imperfect reconstruction -> skip this element, keep rendering the rest.
                 }
             }
         }

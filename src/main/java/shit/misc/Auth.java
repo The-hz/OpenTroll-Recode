@@ -17,9 +17,6 @@ import shit.util.HttpUtil;
 @Environment(value=EnvType.CLIENT)
 public class Auth
 implements ClientModInitializer {
-    // Reconstructed from bytecode (obf-test-NAMED.jar). The original also ran the license/session
-    // verification here (HttpUtil auth check -> AuthUtil.setObj59 -> CLIENT_STARTED revalidation);
-    // that verification has been stripped per request, keeping only the real client init.
     public void onInitializeClient() {
         SystemManager.m320();
         Client.m841();

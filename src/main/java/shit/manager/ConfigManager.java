@@ -223,8 +223,6 @@ public class ConfigManager {
                                 try {
                                     setting.setObj58(string3);
                                 } catch (RuntimeException e) {
-                                    // Deobf tail: a setting whose deserializer isn't reconstructed -> skip it,
-                                    // keep loading the rest of the config instead of crashing startup.
                                 }
                             }
                             if (null == null) continue;
@@ -237,7 +235,6 @@ public class ConfigManager {
                         try {
                             module.setFlag3(bl13);
                         } catch (RuntimeException e) {
-                            // Module whose onEnable/onDisable isn't reconstructed -> don't crash config load.
                         }
                         if (null == null) break block10;
                     }

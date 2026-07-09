@@ -34,14 +34,10 @@ extends Screen {
     private static final String a = null;
 
     public ClickGUIScreen() {
-        // `a` was the ZKM-encrypted screen title, stripped to null during deobf -> use a literal title
-        // (Outline.m14(null) NPEs on String.isEmpty()).
         super((Text) Text.literal("ClickGUI"));
     }
 
     protected void init() {
-        // Reconstructed: the ZKM opaque `FontUtil2.isSet101()` (always true) had gated out the whole
-        // panel-creation loop. Add one column per non-HUD category, 80px apart.
         Client.configManager.m1042();
         if (this.list19.isEmpty()) {
             int n2 = 0;
@@ -56,9 +52,6 @@ extends Screen {
     }
 
     public void render(DrawContext drawContext, int n, int n2, float f) {
-        // Reconstructed: the ZKM opaque `FontUtil2.isSet101()` (always true) had broken both panel loops
-        // after the first element and left the tooltip width uninitialized (the "black block" at the
-        // cursor). Draw the dimmed background, every panel, every overlay, then the hover tooltip.
         int n4 = ClickGUI.getInt69();
         if (n4 >>> 24 > 0) {
             drawContext.fill(0, 0, this.width, this.height, n4);
@@ -82,7 +75,6 @@ extends Screen {
     }
 
     public boolean mouseClicked(Click click, boolean bl) {
-        // Reconstructed (opaque loop-break removed): offer the click to every panel, top-most first.
         for (int i = this.list19.size() - 1; i >= 0; --i) {
             if (this.list19.get(i).m3(click.x(), click.y(), click.button())) {
                 return true;
@@ -97,7 +89,6 @@ extends Screen {
     }
 
     public boolean mouseReleased(Click click) {
-        // Reconstructed (opaque loop-break removed): offer the release to every panel, top-most first.
         for (int i = this.list19.size() - 1; i >= 0; --i) {
             if (this.list19.get(i).m103(click.x(), click.y(), click.button())) {
                 return true;
@@ -112,7 +103,6 @@ extends Screen {
     }
 
     public boolean mouseDragged(Click click, double d, double d2) {
-        // Reconstructed (opaque loop-break removed): offer the drag to every panel, top-most first.
         for (int i = this.list19.size() - 1; i >= 0; --i) {
             if (this.list19.get(i).m479(click.x(), click.y(), click.button(), d, d2)) {
                 return true;
@@ -175,8 +165,6 @@ extends Screen {
      * Enabled aggressive block sorting
      */
     public boolean keyPressed(KeyInput keyInput) {
-        // Reconstructed (char/boolean erasure removed): let the open settings panel consume the key,
-        // otherwise fall back to default handling (ESC closes the GUI).
         int n = this.list19.size() - 1;
         if (n >= 0 && ((RenderManager) this.list19.get(n)).m121(keyInput.key(), keyInput.scancode(), keyInput.modifiers())) {
             return true;
@@ -185,8 +173,6 @@ extends Screen {
     }
 
     public boolean charTyped(CharInput charInput) {
-        // Reconstructed (char/boolean erasure removed): route typed chars to the settings panels'
-        // search boxes, appending valid characters to the search text.
         String string = charInput.asString();
         if (string == null || string.isEmpty()) {
             return super.charTyped(charInput);
@@ -217,9 +203,6 @@ extends Screen {
     }
 
     private String m669(int n, int n2) {
-        // Reconstructed: the ZKM opaque predicate had flattened this loop into an unconditional
-        // `break` that discarded the tooltip and always returned "", so no tooltip ever showed.
-        // Scan panels top-most first and return the first non-empty hover tooltip.
         for (int n3 = this.list19.size() - 1; n3 >= 0; --n3) {
             String string = ((RenderManager)this.list19.get(n3)).m329(n, n2);
             if (string != null && !string.isEmpty()) {

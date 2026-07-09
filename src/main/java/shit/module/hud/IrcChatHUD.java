@@ -112,7 +112,6 @@ implements Listener3 {
      */
     @Override
     public void m368(Object var1_1, boolean var2_2) {
-        // Reconstructed from bytecode (opaque/** GOTO removed): scrollable IRC chat panel + scrollbar.
         DrawContext ctx = (DrawContext) var1_1;
         shit.manager.FontManager2 r = Client.fontManager.renderer2();
         int x = this.x.getInt50();

@@ -318,7 +318,6 @@ extends Module {
                 d2 = (Double)this.upFactor.getObj();
             } else {
                 if (MC.client3.player.isOnGround() || d2 < -0.05) {
-                    // empty if block
                 }
                 d2 = -3.0E-11 * (Double)this.fallSpeed.getObj();
             }

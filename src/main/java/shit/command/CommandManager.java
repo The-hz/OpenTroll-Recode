@@ -71,7 +71,6 @@ implements MC {
         try {
             command.run(stringArray2);
         } catch (RuntimeException e) {
-            // Command whose body isn't reconstructed -> report instead of crashing the client.
             CommandManager.setObj21("Command '" + stringArray[0] + "' is not available in this build.");
         }
         return true;

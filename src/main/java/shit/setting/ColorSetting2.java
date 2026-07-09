@@ -31,7 +31,6 @@ extends Setting {
     }
 
     public boolean isSet148() {
-        // Reconstructed (int-as-boolean erasure removed): a keybind is "set" when its keycode != 0.
         return ((Integer) this.getObj()).intValue() != 0;
     }
 
@@ -41,7 +40,6 @@ extends Setting {
     }
 
     public static boolean m232(int n) {
-        // Reconstructed: a keycode <= -100 encodes a mouse button (see m559).
         return n <= -100;
     }
 
@@ -55,7 +53,6 @@ extends Setting {
      * Could not resolve type clashes
      */
     public static Integer m911(Object var0) {
-        // Reconstructed: parse a keycode from its saved form (raw int) or a key-name lookup.
         String s = ((String) var0).trim();
         try {
             return Integer.parseInt(s);
@@ -158,8 +155,6 @@ extends Setting {
      */
     @Override
     public void setObj58(Object var1_1) {
-        // Reconstructed from bytecode: parse a saved keybind "<keycode>:<Type>" (see getText29). Keeps the
-        // current value when the keycode can't be parsed; defaults the Type to Toggle on any error.
         String s = (String) var1_1;
         try {
             if (s.contains(":")) {

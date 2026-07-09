@@ -240,7 +240,6 @@ public final class HttpUtil {
         Class<HttpUtil> clazz = HttpUtil.class;
         synchronized (HttpUtil.class) {
             if (flag78) {
-                // ** MonitorExit[var2_1] (shouldn't be in output)
                 return data2;
             }
             flag78 = true;
@@ -256,7 +255,6 @@ public final class HttpUtil {
                     block18: {
                         if (inputStream == null) {
                             Data data = null;
-                            // ** MonitorExit[var2_1] (shouldn't be in output)
                             return data;
                         }
                         String string7 = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8).trim();
@@ -271,16 +269,13 @@ public final class HttpUtil {
                         if (!string5.isBlank() && !string2.isBlank()) break block19;
                     }
                     Data data = null;
-                    // ** MonitorExit[var2_1] (shouldn't be in output)
                     return data;
                 }
                 Data data = data2 = new Data(string6, string5, string4, string3, string2, string, l);
-                // ** MonitorExit[var2_1] (shouldn't be in output)
                 return data;
             }
             catch (Throwable throwable) {
                 data2 = null;
-                // ** MonitorExit[var2_1] (shouldn't be in output)
                 return null;
             }
         }
