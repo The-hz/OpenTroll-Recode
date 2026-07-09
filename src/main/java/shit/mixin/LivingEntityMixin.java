@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shit.Client;
 import shit.api.Listener4;
 import shit.module.movement.InMove;
+import shit.module.movement.Velocity;
 import shit.module.player.AntiEffects;
 
 @Environment(value=EnvType.CLIENT)
@@ -85,6 +86,15 @@ implements Listener4 {
         int n3 = minecraftClient.options.leftKey.getDefaultKey().getCode();
         int n4 = minecraftClient.options.rightKey.getDefaultKey().getCode();
         return n != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n) || n2 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n2) || n3 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n3) || n4 != -1 && InputUtil.isKeyPressed((Window)minecraftClient.getWindow(), (int)n4);
+    }
+
+    // Velocity.NoClimb — stop auto-climbing/clinging to ladders & vines (local player only).
+    @Inject(method={"isClimbing()Z"}, at={@At(value="HEAD")}, cancellable=true)
+    private void trollhack$noClimb(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        Velocity velocity = Velocity.INSTANCE;
+        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isSet19() && (Boolean) velocity.noClimb.getObj()) {
+            callbackInfoReturnable.setReturnValue(false);
+        }
     }
 }
 

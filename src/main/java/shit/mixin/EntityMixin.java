@@ -7,11 +7,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shit.module.movement.NoSlow;
+import shit.module.movement.Velocity;
 
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={Entity.class})
@@ -21,6 +25,34 @@ public class EntityMixin {
         if ((Object) this instanceof ClientPlayerEntity && NoSlow.INSTANCE != null && NoSlow.INSTANCE.isSet87()) {
             callbackInfoReturnable.setReturnValue((Object)Float.valueOf(1.0f));
         }
+    }
+
+    // Velocity.NoEntityPush — cancel getting shoved by other entities (local player only).
+    @Inject(method={"pushAwayFrom(Lnet/minecraft/entity/Entity;)V"}, at={@At(value="HEAD")}, cancellable=true)
+    private void trollhack$noEntityPush(Entity entity, CallbackInfo callbackInfo) {
+        Velocity velocity = Velocity.INSTANCE;
+        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isSet19() && (Boolean) velocity.noEntityPush.getObj()) {
+            callbackInfo.cancel();
+        }
+    }
+
+    // Velocity.NoBlockPush — cancel the anti-suffocation shove out of blocks (local player only).
+    @Inject(method={"pushOutOfBlocks(DDD)V"}, at={@At(value="HEAD")}, cancellable=true)
+    private void trollhack$noBlockPush(double d, double d2, double d3, CallbackInfo callbackInfo) {
+        Velocity velocity = Velocity.INSTANCE;
+        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isSet19() && (Boolean) velocity.noBlockPush.getObj()) {
+            callbackInfo.cancel();
+        }
+    }
+
+    // Velocity.NoWaterPush — skip only the fluid-flow velocity add, keeping fluid detection intact.
+    @Redirect(method={"updateMovementInFluid(Lnet/minecraft/registry/tag/TagKey;D)Z"}, at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
+    private void trollhack$noWaterPush(Entity self, Vec3d vec3d) {
+        Velocity velocity = Velocity.INSTANCE;
+        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isSet19() && (Boolean) velocity.noWaterPush.getObj()) {
+            return;
+        }
+        self.setVelocity(vec3d);
     }
 }
 
