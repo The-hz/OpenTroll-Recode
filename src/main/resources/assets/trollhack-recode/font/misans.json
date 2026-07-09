@@ -1,0 +1,19 @@
+{
+	"providers": [
+		{
+			"type": "ttf",
+			"file": "trollhack-recode:misans-regular.ttf",
+			"shift": [0, 0],
+			"size": 11.0,
+			"oversample": 2.0
+		},
+		{
+			"type": "reference",
+			"id": "minecraft:include/default"
+		},
+		{
+			"type": "reference",
+			"id": "minecraft:include/unifont"
+		}
+	]
+}

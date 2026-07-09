@@ -1,0 +1,59 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package shit.module.player;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
+import shit.event.Event2;
+import shit.event.EventHandler;
+import shit.misc.Helper7;
+import shit.module.Category;
+import shit.module.Module;
+import shit.setting.NumberSetting;
+import shit.setting.StringSetting;
+import shit.util.MC;
+import shit.util.Util3;
+
+@Environment(value=EnvType.CLIENT)
+public class AutoEject
+extends Module {
+    private final StringSetting items = (StringSetting)this.m28(new StringSetting("Items", "minecraft:egg,minecraft:snowball"));
+    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
+    private final Helper7 helper72 = new Helper7();
+
+    public AutoEject() {
+        super("AutoEject", "Drops configured items from your inventory.", Category.PLAYER);
+    }
+
+    @EventHandler
+    private void setEvent2Inner220(Event2.Event2Inner2 event2Inner2) {
+        if (Module.isSet37() || !this.helper72.m432((Double)this.delay.getObj())) {
+            return;
+        }
+        for (int i = 0; i < MC.client3.player.currentScreenHandler.slots.size(); ++i) {
+            Slot slot = (Slot)MC.client3.player.currentScreenHandler.slots.get(i);
+            if (slot.inventory != MC.client3.player.getInventory() || !slot.hasStack() || !this.m208(slot.getStack())) continue;
+            Util3.m235(i, 1, SlotActionType.THROW);
+            this.helper72.m533();
+            return;
+        }
+    }
+
+    private boolean m208(Object object) {
+        ItemStack itemStack = (ItemStack)object;
+        String string = Registries.ITEM.getId(itemStack.getItem()).toString();
+        String[] stringArray = ((String)this.items.getObj()).split(",");
+        boolean bl = false;
+        for (String string2 : stringArray) {
+            if (!string.equalsIgnoreCase(string2.trim())) continue;
+            return true;
+        }
+        return false;
+    }
+}
+
