@@ -197,8 +197,10 @@ setObj27(null);                                                 // 它自己在 
 
 ## 构建 & 运行
 
+**必须用 JDK 21 跑 Gradle**（Gradle 8.14 不支持 JDK 22+,更别说 26;编译版本由 build.gradle 的 toolchain 锁死在 21,不写死任何机器路径)。把 `JAVA_HOME` 指向一个 JDK 21 即可:
+
 ```bash
-# 需要 JDK 21
+export JAVA_HOME="$(/usr/libexec/java_home -v 21)"   # macOS;Linux 指向你的 JDK 21,Windows 设环境变量
 ./gradlew build          # 编译打包
 ./gradlew runClient      # 启动开发客户端
 ```
