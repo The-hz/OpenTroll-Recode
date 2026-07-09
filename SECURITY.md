@@ -4,61 +4,13 @@
 **状态:本仓库已移除**
 **类型:未声明的遥测 / 坐标记录器(coord logger)**
 
-原版 TrollHack("Oa7h EXTREME" / ZKM 混淆)客户端存在两处恶意行为:
-1. **原生 DLL 加载器**(严重 / 潜在 RCE)—— 打包了一个伪装成 `.dat` 的 Windows DLL 并在启动时 `System.load` 执行;
-2. **坐标记录器**(高 / 隐私外泄)—— 持续把玩家实时坐标、服务器、HWID、会话 token 上报到作者后端。
+原版 TrollHack("Oa7h EXTREME" / ZKM 混淆)客户端在用户不知情的情况下,**持续把玩家的实时坐标、所在服务器、维度、硬件指纹(HWID)和会话 token 上报到作者控制的后端**。本文给出完整静态分析证据,所有结论均可在 `obf-test-NAMED.jar` 字节码中复核。**本仓库已将其移除**(发送逻辑与触发器打桩、联网授权中和),编译产物不发任何网络请求。
 
-本文给出完整静态分析证据。所有结论均可在 `obf-test-NAMED.jar` 字节码中复核。**本仓库已将两者全部移除**(相关文件删除、加载代码删除),编译产物不含任何原生库、不发任何网络请求。
+> 说明:原版还带一枚 JNIC(Java→原生)编译的 native DLL(`neko/lib/*.dat`)。那是**代码保护混淆,不是后门**;本仓库把它连同无人引用的 `shit.Loader` 死代码一并删掉了(源码重建后用不上),特此更正之前把它当"后门"的错误描述。
 
 ---
 
-## 发现一:伪装成 `.dat` 的原生 DLL 加载器(最严重)
-
-原版在 jar 资源里**藏了一个 16 MB 的 Windows 原生 DLL**,扩展名伪装成 `.dat`:
-
-```
-src/main/resources/neko/lib/9e1c3a7f-5d2b-48f1-b7c4-troll-extreme.dat
-```
-
-`file` 一看便知它根本不是数据:
-
-```
-PE32+ executable (DLL) (GUI) x86-64, for MS Windows     # 头部魔数 4D 5A = "MZ"
-```
-
-`shit.Loader` 的静态初始化块会把它释放到临时目录、**改名成 `Strinova_*.dll`(冒充另一款游戏的文件)**,然后加载执行:
-
-```java
-static {
-    System.out.println("... Obf by Oa7h [EXTREME] ...");
-    Loader.nekoLoaderPayload();                                  // 填充 JNI 载荷(ByteBuffer z)
-    String nativeLibrary = "neko/lib/9e1c3a7f-...-troll-extreme.dat";
-    File file = File.createTempFile("Strinova_", ".dll");        // ← 伪装文件名
-    file.deleteOnExit();
-    try (InputStream in = Loader.class.getResourceAsStream("/" + nativeLibrary)) {
-        Files.copy(in, file.toPath(), REPLACE_EXISTING);
-    }
-    System.load(file.getAbsolutePath());                         // ← 加载并执行原生代码
-}
-// 另有 native 方法:
-public static native void registerNativesForClass(int, Class<?>);
-```
-
-**为什么这是最严重的:** 原生 DLL 运行在 JVM **沙箱之外**,可以做任何事 —— 读写任意文件、联网、注入其他进程、持久化、读取凭据。一个作弊端在你不知情时释放并执行一个来路不明、还刻意伪装文件名的原生 DLL,这已经不是"作弊功能",而是**恶意程序 / RAT 级别的能力**。DLL 本体未做动态分析,但"隐藏 + 伪装 + 自动加载"这三点本身就足以判定为后门。
-
-配套的还有两个 DRM/会话 blob(`assets/trollhack-recode/loader-session.dat`、`user.dat`)+ `HttpUtil` 里一串校验文案(`"This runtime must be started by the TrollHack Loader."` / `"Loader launch proof does not match this runtime."`)——说明整个客户端被设计成**必须由一个私有的外部 "TrollHack Loader" 启动**,而那个 Loader 正是注入这枚原生 DLL 的载体。
-
-### 本仓库处置(发现一)
-- **删除** 原生 DLL `neko/lib/…-troll-extreme.dat` 及整个 `neko/` 目录 —— 不分发任何原生二进制
-- **删除** `shit/Loader.java`(那段 `System.load` 加载器 + JNI 载荷),该类在重建后本就无人引用(死代码)
-- **删除** DRM blob `loader-session.dat` / `user.dat`
-- 删除后 `./gradlew build` 依旧 **BUILD SUCCESSFUL**,证明无任何功能依赖它们
-
-> 注:该 DLL 仅 Windows 可加载,且 `Loader` 类在反编译重建后已无人 class-load,所以它在本项目运行时从未被执行 —— 但它仍**躺在原始 jar 里**,任何拿到原版的人都会中招。这就是它必须被揪出来的原因。
-
----
-
-## 发现二:坐标记录器(coord logger)
+## 坐标记录器(coord logger)
 
 | 项目 | 内容 |
 |---|---|
