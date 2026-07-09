@@ -55,7 +55,7 @@ extends Module {
     private final List list = new ArrayList();
     private int count147;
     private boolean flag160 = false;
-    private static final UUID field12 = null;
+    private static final UUID field12 = UUID.fromString("66666666-6666-6666-6666-666666666666");
 
     public FakePlayer() {
         super("FakePlayer", "Spawns a client-side fake player for testing.", Category.MISC);
