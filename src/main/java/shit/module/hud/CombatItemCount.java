@@ -105,7 +105,7 @@ implements Listener3 {
             Item item = (Item)object;
             int n2 = 0;
             int n3 = 0;
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             while (n3 < MC.mc.player.getInventory().size()) {
                 ItemStack itemStack = MC.mc.player.getInventory().getStack(n3);
                 if (!bl) {

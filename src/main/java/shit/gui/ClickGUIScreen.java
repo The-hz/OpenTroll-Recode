@@ -71,7 +71,7 @@ extends Screen {
         int n6 = Math.min(n + 8, this.width - n5 - 8);
         int n7 = Math.min(n2 + 10, this.height - 15);
         drawContext.fill(n6 - 3, n7 - 3, n6 + n5 + 3, n7 + 11, -871032800);
-        FontUtil2.m640(this.textRenderer, drawContext, object, n6, n7, -1184275);
+        FontUtil2.drawTextSimple(this.textRenderer, drawContext, object, n6, n7, -1184275);
     }
 
     public boolean mouseClicked(Click click, boolean bl) {

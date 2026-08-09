@@ -256,7 +256,7 @@ implements Listener2 {
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", slice);
-            renderPass.setIndexBuffer(RenderUtil4.m577(indexCount), RenderUtil4.getObj19());
+            renderPass.setIndexBuffer(RenderUtil4.m577(indexCount), RenderUtil4.getIndexType());
             this.setObj52(renderPass);
         }
     }
@@ -301,7 +301,7 @@ implements Listener2 {
                 }
                 return;
             }
-            renderPass.setIndexBuffer(RenderUtil4.m577(this.count180), RenderUtil4.getObj19());
+            renderPass.setIndexBuffer(RenderUtil4.m577(this.count180), RenderUtil4.getIndexType());
             renderPass.setUniform("DynamicTransforms", this.gpuBufferSlice5);
             textureRenderer = this;
         }
@@ -431,7 +431,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m155() {
+    public void endFrame() {
         block6: {
             Iterator iterator = this.map34.values().iterator();
             String[] stringArray = TextureRenderer.getTextArray3();
@@ -468,7 +468,7 @@ implements Listener2 {
     public void m523() {
         block2: {
             String[] stringArray = TextureRenderer.getTextArray3();
-            this.m155();
+            this.endFrame();
             String[] stringArray2 = stringArray;
             for (GpuManagerHolder gpuManagerHolder : this.map34.values()) {
                 gpuManagerHolder.gpuManager2.flush();

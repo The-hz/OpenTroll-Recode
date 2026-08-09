@@ -115,7 +115,7 @@ implements MC {
         return renderLayer;
     }
 
-    public static void m69(Object object, Object object2, int n, boolean bl) {
+    public static void drawBoxFilled(Object object, Object object2, int n, boolean bl) {
         block0: {
             Matrix4f matrix4f = (Matrix4f)object;
             Box box = (Box)object2;
@@ -146,7 +146,7 @@ implements MC {
         }
     }
 
-    public static void m688(Object object, Object object2, int n, boolean bl) {
+    public static void drawBoxOutline(Object object, Object object2, int n, boolean bl) {
         Matrix4f matrix4f = (Matrix4f)object;
         Box box = (Box)object2;
         int n2 = n;
@@ -159,7 +159,7 @@ implements MC {
         VertexRendering.drawOutline((MatrixStack)matrixStack, (VertexConsumer)vertexConsumer, (VoxelShape)voxelShape, (double)(-vec3d.x), (double)(-vec3d.y), (double)(-vec3d.z), (int)n2, (float)1.0f);
     }
 
-    public static void m125() {
+    public static void drawBuffers() {
         EspRenderLayers.getObj2().draw();
     }
 

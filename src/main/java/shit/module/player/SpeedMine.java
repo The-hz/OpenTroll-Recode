@@ -848,7 +848,7 @@ extends Module {
                 break;
             }
             case 3: {
-                Client.mathUtil.m355(fArray[0], fArray[1]);
+                Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                 Client.mathUtil.setFloat6(45.0f);
                 break;
             }
@@ -979,10 +979,10 @@ extends Module {
                 this.timer2.setLong4((long)Math.max(this.value113, 1.0));
                 d = this.timer2.m1037((Object)((EaseMode)((Object)this.ease.getValue())));
                 if (((Boolean)this.box.getValue()).booleanValue()) {
-                    EspRenderLayers.m69(matrix4f, this.m556(blockPos7, d), (Integer)this.doubleFill.getValue(), (Boolean)this.through.getValue());
+                    EspRenderLayers.drawBoxFilled(matrix4f, this.m556(blockPos7, d), (Integer)this.doubleFill.getValue(), (Boolean)this.through.getValue());
                 }
                 if (((Boolean)this.outline.getValue()).booleanValue()) {
-                    EspRenderLayers.m688(matrix4f, this.m460(blockPos7, d), (Integer)this.doubleOutline.getValue(), (Boolean)this.through.getValue());
+                    EspRenderLayers.drawBoxOutline(matrix4f, this.m460(blockPos7, d), (Integer)this.doubleOutline.getValue(), (Boolean)this.through.getValue());
                 }
             }
         }
@@ -994,15 +994,15 @@ extends Module {
             int n = SpeedMine.m425((Integer)this.startFill.getValue(), (Integer)this.endFill.getValue(), d2);
             int n2 = SpeedMine.m425((Integer)this.startOutline.getValue(), (Integer)this.endOutline.getValue(), d2);
             if (((Boolean)this.box.getValue()).booleanValue()) {
-                EspRenderLayers.m69(matrix4f, this.m556(this.blockPos12, d), n, (Boolean)this.through.getValue());
+                EspRenderLayers.drawBoxFilled(matrix4f, this.m556(this.blockPos12, d), n, (Boolean)this.through.getValue());
             }
             if (((Boolean)this.outline.getValue()).booleanValue()) {
-                EspRenderLayers.m688(matrix4f, this.m460(this.blockPos12, d), n2, (Boolean)this.through.getValue());
+                EspRenderLayers.drawBoxOutline(matrix4f, this.m460(this.blockPos12, d), n2, (Boolean)this.through.getValue());
             }
         } else {
             value189 = 0.0;
         }
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     private Box m556(Object object, double d) {

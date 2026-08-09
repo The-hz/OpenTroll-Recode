@@ -55,7 +55,7 @@ extends ModuleState {
             return;
         }
         this.m874();
-        boolean hovered = this.m120(n, n2, this.count108, this.count103, this.count141, 13);
+        boolean hovered = this.checkState(n, n2, this.count108, this.count103, this.count141, 13);
         int color = (hovered || this.flag48 || this.flag62) ? 1714633543 : 858402874;
         drawContext.fill(this.count108, this.count103, this.count108 + this.count141, this.count103 + 13, color);
         this.setObj76(drawContext);
@@ -83,7 +83,7 @@ extends ModuleState {
                                 BooleanSetting booleanSetting = (BooleanSetting)object2;
                                 int n = (Boolean)booleanSetting.getValue() != false ? -1439005464 : -2005897104;
                                 drawContext.fill(this.count108 + this.count141 - 13, this.count103 + 3, this.count108 + this.count141 - 3, this.count103 + 10, n);
-                                FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName(), this.count108 + 2, this.count103 + 3, -1184275);
+                                FontUtil2.drawTextSimple(this.field27, drawContext, this.setting.getDisplayName(), this.count108 + 2, this.count103 + 3, -1184275);
                                 break block3;
                             }
                             object2 = this.setting;
@@ -93,7 +93,7 @@ extends ModuleState {
                             double d2 = d <= 0.0 ? 0.0 : ((Double)numberSetting.getValue() - numberSetting.getMin()) / d;
                             int n = (int)((double)this.count141 * this.m94(d2));
                             drawContext.fill(this.count108, this.count103, this.count108 + n, this.count103 + 13, -1439005464);
-                            FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m961((Double)numberSetting.getValue()), this.count108 + 2, this.count103 + 3, -1);
+                            FontUtil2.drawTextSimple(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m961((Double)numberSetting.getValue()), this.count108 + 2, this.count103 + 3, -1);
                             break block3;
                         }
                         object2 = this.setting;
@@ -102,7 +102,7 @@ extends ModuleState {
                         int n = (Integer)colorSetting.getValue();
                         drawContext.fill(this.count108 + this.count141 - 18, this.count103 + 2, this.count108 + this.count141 - 3, this.count103 + 11, -15394784);
                         drawContext.fill(this.count108 + this.count141 - 17, this.count103 + 3, this.count108 + this.count141 - 4, this.count103 + 10, n);
-                        FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m482(colorSetting), this.count108 + 2, this.count103 + 3, -1184275);
+                        FontUtil2.drawTextSimple(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m482(colorSetting), this.count108 + 2, this.count103 + 3, -1184275);
                         break block3;
                     }
                     object2 = this.setting;
@@ -110,17 +110,17 @@ extends ModuleState {
                     ColorSetting2 colorSetting2 = (ColorSetting2)object2;
                     object2 = this.flag48 ? Outline.m14("Press key/mouse...") : colorSetting2.getDisplayName();
                     String string = this.setting.getDisplayName() + " " + (String)object2;
-                    FontUtil2.m640(this.field27, drawContext, string, this.count108 + 2, this.count103 + 3, -1184275);
+                    FontUtil2.drawTextSimple(this.field27, drawContext, string, this.count108 + 2, this.count103 + 3, -1184275);
                     String string2 = "[" + Outline.m14(colorSetting2.getType().name()) + "]";
                     int n = this.count108 + this.count141 - this.field27.getWidth(string2) - 5;
-                    FontUtil2.m640(this.field27, drawContext, string2, n, this.count103 + 3, -7829368);
+                    FontUtil2.drawTextSimple(this.field27, drawContext, string2, n, this.count103 + 3, -7829368);
                     break block3;
                 }
                 if (!(this.setting instanceof StringSetting)) break block7;
-                FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + String.valueOf(this.setting.getValue()) + (this.flag62 ? "_" : ""), this.count108 + 2, this.count103 + 3, -1184275);
+                FontUtil2.drawTextSimple(this.field27, drawContext, this.setting.getDisplayName() + " " + String.valueOf(this.setting.getValue()) + (this.flag62 ? "_" : ""), this.count108 + 2, this.count103 + 3, -1184275);
                 if (null == null) break block3;
             }
-            FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.getText21(), this.count108 + 2, this.count103 + 3, -1184275);
+            FontUtil2.drawTextSimple(this.field27, drawContext, this.setting.getDisplayName() + " " + this.getText21(), this.count108 + 2, this.count103 + 3, -1184275);
         }
     }
 
@@ -137,7 +137,7 @@ extends ModuleState {
             Enum enum_2 = enumArray2[i];
             boolean bl = enum_2 == enum_;
             drawContext.fill(this.count108, n, this.count108 + this.count141, n + 13, bl ? this.m1031(-1439005464, 170) : -1440733907);
-            FontUtil2.m640(this.field27, drawContext, this.m983(enum_2), this.count108 + 6, n + 3, bl ? -1 : -2039584);
+            FontUtil2.drawTextSimple(this.field27, drawContext, this.m983(enum_2), this.count108 + 6, n + 3, bl ? -1 : -2039584);
             n += 13;
             if (null == null) continue;
         }
@@ -234,7 +234,7 @@ extends ModuleState {
             setting2 = this.setting;
             if (setting2 instanceof EnumSetting) {
                 setting = (EnumSetting)setting2;
-                if (this.m120(d3, d4, this.count108, this.count103 + 13, this.count141, this.count119 - 13)) {
+                if (this.checkState(d3, d4, this.count108, this.count103 + 13, this.count141, this.count119 - 13)) {
                     this.m954(setting, d4);
                     return true;
                 }
@@ -244,13 +244,13 @@ extends ModuleState {
             setting2 = this.setting;
             if (setting2 instanceof ColorSetting) {
                 setting = (ColorSetting)setting2;
-                if (this.m120(d3, d4, this.count108, this.count103 + 13, this.count141, this.count119 - 13)) {
+                if (this.checkState(d3, d4, this.count108, this.count103 + 13, this.count141, this.count119 - 13)) {
                     this.m312(setting, d3, d4);
                     return true;
                 }
             }
         }
-        if (!this.m120(d3, d4, this.count108, this.count103, this.count141, 13)) {
+        if (!this.checkState(d3, d4, this.count108, this.count103, this.count141, 13)) {
             return false;
         }
         this.m405(n2, d3);

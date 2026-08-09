@@ -74,7 +74,7 @@ implements Listener3 {
                     boolean bl;
                     block4: {
                         block2: {
-                            bl = AbstractHudModule.isSet32();
+                            bl = AbstractHudModule.isEditMode();
                             minecraftClient = MC.mc;
                             if (bl) break block2;
                             if (minecraftClient.getNetworkHandler() == null) break block3;

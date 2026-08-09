@@ -26,7 +26,7 @@ implements MC {
                         MinecraftClient minecraftClient;
                         block4: {
                             string = (String)object;
-                            bl = Util2.isSet69();
+                            bl = Util2.isAlwaysTrue();
                             minecraftClient = MC.mc;
                             if (bl) break block4;
                             if (minecraftClient.player == null) break block5;
@@ -100,7 +100,7 @@ implements MC {
         return flag100;
     }
 
-    public static boolean isSet69() {
+    public static boolean isAlwaysTrue() {
         boolean bl = false;
         return true;
     }

@@ -486,7 +486,7 @@ extends Module {
         float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts15[this.getRotateMode10().ordinal()]) {
             case 1: {
-                Client.mathUtil.m355(fArray[0], fArray[1]);
+                Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                 Client.mathUtil.setFloat6((float)this.getDouble6());
                 if (null == null) break;
             }

@@ -162,9 +162,9 @@ extends Module {
         double d2 = this.vec3d9.z - 0.48;
         double d3 = (double)this.blockPos20.getY() + (Double)this.renderHeight.getValue();
         Box box = new Box(d, d3, d2, d + 0.96, d3 + 0.04, d2 + 0.96);
-        EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, this.count156, true);
-        EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box.expand(0.002), this.count156 | 0x55000000, true);
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, this.count156, true);
+        EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box.expand(0.002), this.count156 | 0x55000000, true);
+        EspRenderLayers.drawBuffers();
     }
 
     private BlockPos findBestHole() {

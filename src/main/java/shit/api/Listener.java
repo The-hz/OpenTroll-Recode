@@ -11,7 +11,7 @@ import shit.manager.BufferUtilDataManager;
 
 @Environment(value=EnvType.CLIENT)
 public interface Listener {
-    public void m883(Object var1, float var2, float var3, float var4, Object var5, Object var6);
+    public void render(Object var1, float var2, float var3, float var4, Object var5, Object var6);
 
     default public void m227(Object object, float f, float f2, float f3, Object object2, Object object3, Object object4) {
         String string = (String)object;
@@ -21,7 +21,7 @@ public interface Listener {
         Color color = (Color)object2;
         Color cfr_ignored_0 = (Color)object3;
         BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)object4;
-        this.m883(string, f4, f5, f6, color, bufferUtilDataManager);
+        this.render(string, f4, f5, f6, color, bufferUtilDataManager);
     }
 
     public void draw();

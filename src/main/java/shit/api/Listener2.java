@@ -19,7 +19,7 @@ public interface Listener2 {
         RenderPass cfr_ignored_0 = (RenderPass)object;
     }
 
-    public void m155();
+    public void endFrame();
 
     public void m523();
 }

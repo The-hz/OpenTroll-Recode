@@ -74,7 +74,7 @@ extends Module {
         }
         Matrix4f matrix4f = renderLevelEvent.getMatrix4f3();
         map47.values().removeIf(mathUtil -> ((MathUtil)mathUtil).m506(matrix4f));
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     public void setObj98(Object object) {
@@ -129,10 +129,10 @@ extends Module {
                             this.timer.m136();
                             Box box = new Box(this.blockPos19);
                             if (((Boolean)this.placeRender.tryFillDraw.getValue()).booleanValue()) {
-                                EspRenderLayers.m69(matrix4f, box, (Integer)this.placeRender.tryPlaceFill.getValue(), (Boolean)this.placeRender.through.getValue());
+                                EspRenderLayers.drawBoxFilled(matrix4f, box, (Integer)this.placeRender.tryPlaceFill.getValue(), (Boolean)this.placeRender.through.getValue());
                             }
                             if (((Boolean)this.placeRender.tryBoxDraw.getValue()).booleanValue()) {
-                                EspRenderLayers.m688(matrix4f, box, (Integer)this.placeRender.tryPlaceBox.getValue(), (Boolean)this.placeRender.through.getValue());
+                                EspRenderLayers.drawBoxOutline(matrix4f, box, (Integer)this.placeRender.tryPlaceBox.getValue(), (Boolean)this.placeRender.through.getValue());
                             }
                         }
                         return false;
@@ -149,11 +149,11 @@ extends Module {
             Box box = new Box(this.blockPos19).expand(-d3 * 0.5);
             if (((Boolean)this.placeRender.fillDraw.getValue()).booleanValue()) {
                 n = (Integer)this.placeRender.fill.getValue();
-                EspRenderLayers.m69(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
+                EspRenderLayers.drawBoxFilled(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
             if (((Boolean)this.placeRender.boxDraw.getValue()).booleanValue()) {
                 n = (Integer)this.placeRender.box.getValue();
-                EspRenderLayers.m688(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
+                EspRenderLayers.drawBoxOutline(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
             return false;
         }

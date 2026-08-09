@@ -19,7 +19,7 @@ extends AbstractHudModule {
 
     @Override
     protected List lines() {
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (!bl) {
             if (clientPlayerEntity == null) {

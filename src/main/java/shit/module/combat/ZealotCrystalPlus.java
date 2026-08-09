@@ -1170,7 +1170,7 @@ extends Module {
                 if (null == null) break;
             }
             case SMOOTH: {
-                Client.mathUtil.m355(fArray[0], fArray[1]);
+                Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                 Client.mathUtil.setFloat6(ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f);
                 if (null == null) break;
             }
@@ -1530,27 +1530,27 @@ extends Module {
                 box = box.expand((this.value157 - 1.0) * 0.5);
             }
             if (n4 != 0) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, n4, true);
+                EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, n4, true);
                 bl3 = true;
             }
             if (n != 0) {
-                EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, n, true);
+                EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, n, true);
                 bl3 = true;
             }
         }
         if (this.vec3d11 != null) {
             box = new Box(this.vec3d11.subtract(0.5, 0.5, 0.5), this.vec3d11.add(0.5, 0.5, 0.5));
             if (n4 != 0) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, n4, true);
+                EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, n4, true);
                 bl3 = true;
             }
             if (n != 0) {
-                EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, n, true);
+                EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, n, true);
                 bl3 = true;
             }
         }
         if (bl3) {
-            EspRenderLayers.m125();
+            EspRenderLayers.drawBuffers();
         }
     }
 

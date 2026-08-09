@@ -49,7 +49,7 @@ implements Listener3 {
         block2: {
             int n2 = 0;
             Iterator iterator = this.lines().iterator();
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             while (iterator.hasNext()) {
                 String string = (String)iterator.next();
                 n = Math.max(n2, Client.fontManager.renderer2().getStringWidth(string));
@@ -88,7 +88,7 @@ implements Listener3 {
                 drawContext = (DrawContext)object;
                 int n3 = n ? 1 : 0;
                 list = this.lines();
-                bl = AbstractHudModule.isSet32();
+                bl = AbstractHudModule.isEditMode();
                 n2 = list.isEmpty() ? 1 : 0;
                 if (bl) break block5;
                 if (n2 == 0) break block6;
@@ -122,7 +122,7 @@ implements Listener3 {
         return flag22;
     }
 
-    public static boolean isSet32() {
+    public static boolean isEditMode() {
         boolean bl = true;
         return !true;
     }

@@ -121,11 +121,11 @@ extends Module {
                     break;
                 }
                 case 2: {
-                    Client.mathUtil.m355(fArray[0], fArray[1]);
+                    Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                     Client.mathUtil.setFloat6(this.getFloat4());
                     if (!(Client.mathUtil.getFloat51() <= 5.0f)) break;
                     if (((Boolean)this.grim.getValue()).booleanValue()) {
-                        Client.mathUtil.setRotationPacket(Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58());
+                        Client.mathUtil.setRotationPacket(Client.mathUtil.getFloat55(), Client.mathUtil.getPitch());
                     }
                     this.m378(data, vec3d, hand);
                     break;

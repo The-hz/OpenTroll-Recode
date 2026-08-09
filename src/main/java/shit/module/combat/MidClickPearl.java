@@ -98,13 +98,13 @@ extends Module {
                     Object var2_4 = null;
                     switch (Lambda.counts12[rotateMode.ordinal()]) {
                         case 1: {
-                            Client.mathUtil.m355(f, f2);
+                            Client.mathUtil.setTargetRotation(f, f2);
                             Client.mathUtil.setFloat6(this.getFloat59());
                             if (Client.mathUtil.getFloat51() > 5.0f) {
                                 return false;
                             }
                             f = Client.mathUtil.getFloat55();
-                            f2 = Client.mathUtil.getFloat58();
+                            f2 = Client.mathUtil.getPitch();
                             if (null == null) break;
                         }
                         case 2: {

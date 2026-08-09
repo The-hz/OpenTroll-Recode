@@ -67,7 +67,7 @@ extends Module {
         if (Module.isNotInGame()) {
             return;
         }
-        if (!(((Boolean)this.sneakingPause.getValue()).booleanValue() && MC.mc.player.isInSneakingPose() || ((Boolean)this.inBlockPause.getValue()).booleanValue() && ItemUtil.isSet26() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || ((Boolean)this.inWebPause.getValue()).booleanValue() && MC.mc.player.isClimbing() || !MC.mc.player.isOnGround() || ((Boolean)this.onlyMoving.getValue()).booleanValue() && !MathUtil.isSet7())) {
+        if (!(((Boolean)this.sneakingPause.getValue()).booleanValue() && MC.mc.player.isInSneakingPose() || ((Boolean)this.inBlockPause.getValue()).booleanValue() && ItemUtil.isInGame() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || ((Boolean)this.inWebPause.getValue()).booleanValue() && MC.mc.player.isClimbing() || !MC.mc.player.isOnGround() || ((Boolean)this.onlyMoving.getValue()).booleanValue() && !MathUtil.isMoving())) {
             Step.setFloat8(((Double)this.height.getValue()).floatValue());
         } else {
             Step.setFloat8(0.6f);

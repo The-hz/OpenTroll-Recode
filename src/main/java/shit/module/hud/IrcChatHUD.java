@@ -46,7 +46,7 @@ implements Listener3 {
                     boolean bl2;
                     block2: {
                         string = (String)object;
-                        bl2 = AbstractHudModule.isSet32();
+                        bl2 = AbstractHudModule.isEditMode();
                         ircChatHUD = INSTANCE;
                         if (bl2) break block2;
                         if (ircChatHUD == null) break block3;
@@ -66,7 +66,7 @@ implements Listener3 {
 
     public void setObj77(Object object) {
         String string = (String)object;
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         this.copyOnWriteArrayList2.add(string);
         boolean bl2 = bl;
         IrcChatHUD ircChatHUD = this;

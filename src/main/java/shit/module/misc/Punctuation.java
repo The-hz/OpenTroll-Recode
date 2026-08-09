@@ -220,10 +220,10 @@ extends Module {
         for (Data data : (java.util.Collection<Data>)this.concurrentHashMap.values()) {
             Box box = new Box((double)data.getBlockPos4().getX() + 0.25, -60.0, (double)data.getBlockPos4().getZ() + 0.25, (double)data.getBlockPos4().getX() + 0.75, 320.0, (double)data.getBlockPos4().getZ() + 0.75);
             int n = data.count15();
-            EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, n, true);
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, n | 0xFF000000, true);
+            EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, n, true);
+            EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, n | 0xFF000000, true);
         }
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     @EventHandler

@@ -32,8 +32,8 @@ extends Module {
         if (MC.mc.options.sneakKey.isPressed()) {
             return;
         }
-        if (MathUtil.isSet7()) {
-            dArray = MathUtil.m246((Double)this.speed.getValue());
+        if (MathUtil.isMoving()) {
+            dArray = MathUtil.getMotionVector((Double)this.speed.getValue());
         } else {
             double[] dArray2 = new double[2];
             dArray2[0] = 0.0;

@@ -102,7 +102,7 @@ extends ModuleState {
             if (ClickGUI.isSet43()) {
                 RenderUtil3.m795(drawContext, this.count108, this.count103, this.count141, n3, ClickGUI.getInt38());
             }
-            FontUtil2.m640(this.field16, drawContext, this.m736((Object)this.category), this.count108 + ClickGUI.getInt53(), this.count103 + 3, ClickGUI.getInt27());
+            FontUtil2.drawTextSimple(this.field16, drawContext, this.m736((Object)this.category), this.count108 + ClickGUI.getInt53(), this.count103 + 3, ClickGUI.getInt27());
             if (n3 > 15) {
                 drawContext.enableScissor(this.count108, this.count103 + 14, this.count108 + this.count141, this.count103 + n3);
                 for (RenderUtil renderUtil : this.list9) {
@@ -158,7 +158,7 @@ extends ModuleState {
                         return true;
                     }
                 }
-                if (this.m120(d4, d3, this.count108, this.count103, this.count141, 14)) {
+                if (this.checkState(d4, d3, this.count108, this.count103, this.count141, 14)) {
                     if (n2 == 0) {
                         this.m774();
                         this.flag148 = true;
@@ -168,7 +168,7 @@ extends ModuleState {
                         return true;
                     }
                 }
-                if (this.m120(d4, d3, this.count108, this.count103, this.count141, 14)) {
+                if (this.checkState(d4, d3, this.count108, this.count103, this.count141, 14)) {
                     if (n2 == 1) {
                         this.flag16 = !this.flag16;
                         return true;
@@ -329,7 +329,7 @@ extends ModuleState {
                         }
                         if (n2 == 0) break block12;
                         if (bl) break block13;
-                        n = this.m120(d6, d5, this.count108, this.count103, this.count141, this.getInt43()) ? 1 : 0;
+                        n = this.checkState(d6, d5, this.count108, this.count103, this.count141, this.getInt43()) ? 1 : 0;
                         if (n2 == 0) break block14;
                         if (n != 0) break block15;
                     }
@@ -466,7 +466,7 @@ extends ModuleState {
             boolean bl = renderUtil.flag162;
             if (n != 0) {
                 if (!bl) continue;
-                bl = this.m120(d4, d3, renderUtil.count108, renderUtil.count103, renderUtil.count141, renderUtil.count119);
+                bl = this.checkState(d4, d3, renderUtil.count108, renderUtil.count103, renderUtil.count141, renderUtil.count119);
             }
             if (bl) {
                 return renderUtil.getModule2().getDisplayDescription();
@@ -617,11 +617,11 @@ extends ModuleState {
         boolean bl = this.flag16;
         if (n2 != 0) {
             if (bl) return false;
-            bl = this.m120(d3, d4, this.count108 - 3, this.count103 - 3, this.count141 + 6, n + 6);
+            bl = this.checkState(d3, d4, this.count108 - 3, this.count103 - 3, this.count141 + 6, n + 6);
         }
         if (n2 != 0) {
             if (!bl) return false;
-            bl = this.m120(d3, d4, this.count108 + 3, this.count103 + 3, this.count141 - 6, n - 6);
+            bl = this.checkState(d3, d4, this.count108 + 3, this.count103 + 3, this.count141 - 6, n - 6);
         }
         if (n2 == 0) return bl;
         if (bl) return false;
@@ -631,7 +631,7 @@ extends ModuleState {
     private boolean m928(double d, double d2) {
         double d3 = d;
         double d4 = d2;
-        return this.m120(d3, d4, this.count108, this.count103 + 14, this.count141, Math.max(0, this.getInt43() - 14));
+        return this.checkState(d3, d4, this.count108, this.count103 + 14, this.count141, Math.max(0, this.getInt43() - 14));
     }
 
     private int getInt43() {

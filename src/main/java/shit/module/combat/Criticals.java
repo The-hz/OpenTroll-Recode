@@ -238,7 +238,7 @@ extends Module {
             }
         }
         if ((Boolean)this.movePause.getValue() == false) return false;
-        if (!MathUtil.isSet7()) return false;
+        if (!MathUtil.isMoving()) return false;
         return true;
     }
 
@@ -251,7 +251,7 @@ extends Module {
         if (((Boolean)this.crawlingDisable.getValue()).booleanValue()) {
             if (MC.mc.player.isCrawling()) return true;
         }
-        if (!MathUtil.isSet7()) return false;
+        if (!MathUtil.isMoving()) return false;
         if ((Boolean)this.autoDisable.getValue() == false) return false;
         return true;
     }
@@ -310,7 +310,7 @@ extends Module {
                 if (null == null) break;
             }
             case 7: {
-                if (MathUtil.isSet7() || !MathUtil.isSet132()) {
+                if (MathUtil.isMoving() || !MathUtil.isSet132()) {
                     return;
                 }
                 this.m179(0.0, true);

@@ -689,7 +689,7 @@ implements AutoCloseable {
 
         private void m476() {
             this.m545();
-            this.listener2.m155();
+            this.listener2.endFrame();
         }
 
         @Override

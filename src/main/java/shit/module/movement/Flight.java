@@ -43,8 +43,8 @@ extends Module {
         }
         double d = 0.0;
         double d2 = 0.0;
-        if (MathUtil.isSet7()) {
-            double[] dArray = MathUtil.m246((Double)this.speed.getValue());
+        if (MathUtil.isMoving()) {
+            double[] dArray = MathUtil.getMotionVector((Double)this.speed.getValue());
             d = dArray[0];
             d2 = dArray[1];
         }

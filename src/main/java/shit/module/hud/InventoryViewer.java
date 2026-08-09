@@ -66,7 +66,7 @@ implements Listener3 {
         boolean bl2 = bl;
         int n = this.x.getInt();
         int n2 = this.y.getInt();
-        boolean bl3 = AbstractHudModule.isSet32();
+        boolean bl3 = AbstractHudModule.isEditMode();
         boolean bl4 = (Boolean)this.background.getValue();
         if (!bl3) {
             if (bl4) {

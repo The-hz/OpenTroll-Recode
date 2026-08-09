@@ -44,7 +44,7 @@ extends ModuleState {
             DrawContext drawContext = (DrawContext)object;
             int n3 = n;
             int n4 = n2;
-            boolean bl = this.m120(n3, n4, this.count108, this.count103, this.count141, this.count119);
+            boolean bl = this.checkState(n3, n4, this.count108, this.count103, this.count141, this.count119);
             Object var8_8 = null;
             float f = this.field24.m170(this.module3.isEnabled() ? 1.0f : 0.0f);
             float f2 = this.field67.m170(bl ? 1.0f : 0.0f);
@@ -56,7 +56,7 @@ extends ModuleState {
                 drawContext.fill(this.count108, this.count103, this.count108 + this.count141, this.count103 + this.count119, RenderUtil3.m23(ClickGUI.getInt10(), f2));
             }
             int n5 = this.module3.isEnabled() ? -1 : (bl ? ClickGUI.getInt27() : RenderUtil3.m517(ClickGUI.getInt27(), 232));
-            FontUtil2.m640(this.field51, drawContext, this.module3.getDisplayName(), this.count108 + 2 + Math.round(2.0f * f2), this.count103 + 3, n5);
+            FontUtil2.drawTextSimple(this.field51, drawContext, this.module3.getDisplayName(), this.count108 + 2 + Math.round(2.0f * f2), this.count103 + 3, n5);
             if (null == null) break block2;
             Module.setTextArray9(new String[3]);
         }
@@ -72,7 +72,7 @@ extends ModuleState {
             if (!this.flag162) {
                 return false;
             }
-            if (!this.m120(d3, d4, this.count108, this.count103, this.count141, this.count119)) {
+            if (!this.checkState(d3, d4, this.count108, this.count103, this.count141, this.count119)) {
                 return false;
             }
             if (n2 == 0) {

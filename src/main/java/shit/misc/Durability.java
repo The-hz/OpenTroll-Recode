@@ -32,7 +32,7 @@ extends AbstractHudModule {
             boolean bl;
             ArrayList arrayList;
             block5: {
-                boolean bl2 = AbstractHudModule.isSet32();
+                boolean bl2 = AbstractHudModule.isEditMode();
                 if (MC.mc.player == null) {
                     return List.of("Durability N/A");
                 }

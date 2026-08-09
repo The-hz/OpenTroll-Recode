@@ -245,7 +245,7 @@ implements Listener3 {
         }
 
         private boolean isSet79() {
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             long l = this.getLong11() - this.time16;
             long l2 = l == 0L ? 0 : (l < 0L ? -1 : 1);
             if (!bl) {
@@ -283,7 +283,7 @@ implements Listener3 {
         private float getFloat14() {
             long l = this.getLong11();
             long l2 = this.time16 - 500L;
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             long l3 = l - 300L;
             long l4 = l3 == 0L ? 0 : (l3 < 0L ? -1 : 1);
             if (!bl) {

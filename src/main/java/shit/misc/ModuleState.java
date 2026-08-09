@@ -47,7 +47,7 @@ public abstract class ModuleState {
      * Enabled force condition propagation
      * Lifted jumps to return sites
      */
-    protected boolean m120(double d, double d2, int n, int n2, int n3, int n4) {
+    protected boolean checkState(double d, double d2, int n, int n2, int n3, int n4) {
         double d3 = d;
         double d4 = d2;
         int n5 = n;

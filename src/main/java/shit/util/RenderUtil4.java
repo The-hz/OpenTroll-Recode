@@ -163,7 +163,7 @@ public class RenderUtil4 {
         int n3 = n2 / 4 * 6;
         GpuBuffer gpuBuffer = RenderUtil4.m577(n3);
         GpuBufferSlice gpuBufferSlice = RenderUtil4.m998(RenderSystem.getModelViewMatrix(), new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), new Vector3f(0.0f, 0.0f, 0.0f), TextureTransform.DEFAULT_TEXTURING.getTransformSupplier());
-        return new Data(gpuTextureView, gpuTextureView2, RenderUtil4.getObj19(), gpuBuffer, n3, gpuBufferSlice);
+        return new Data(gpuTextureView, gpuTextureView2, RenderUtil4.getIndexType(), gpuBuffer, n3, gpuBufferSlice);
     }
 
     public static GpuBuffer m577(int n) {
@@ -172,7 +172,7 @@ public class RenderUtil4 {
         return shapeIndexBuffer.getIndexBuffer(n2);
     }
 
-    public static VertexFormat.IndexType getObj19() {
+    public static VertexFormat.IndexType getIndexType() {
         RenderSystem.ShapeIndexBuffer shapeIndexBuffer = RenderSystem.getSequentialBuffer((VertexFormat.DrawMode)VertexFormat.DrawMode.QUADS);
         return shapeIndexBuffer.getIndexType();
     }

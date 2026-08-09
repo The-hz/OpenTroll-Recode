@@ -170,7 +170,7 @@ public final class StringUtil {
         block13: {
             String string = (String)object;
             String string2 = (String)object2;
-            boolean bl = Util2.isSet69();
+            boolean bl = Util2.isAlwaysTrue();
             try {
                 String string3;
                 CharSequence charSequence;

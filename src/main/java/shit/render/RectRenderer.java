@@ -204,7 +204,7 @@ implements Listener2 {
                 renderPass2.disableScissor();
             }
             renderPass2.setVertexBuffer(0, this.gpuManager8.getGpuBuffer());
-            renderPass2.setIndexBuffer(RenderUtil4.m577(data.getInt()), RenderUtil4.getObj19());
+            renderPass2.setIndexBuffer(RenderUtil4.m577(data.getInt()), RenderUtil4.getIndexType());
             renderPass = renderPass2;
             n4 = 0;
             n3 = 0;
@@ -215,7 +215,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m155() {
+    public void endFrame() {
         String[] stringArray = TextureRenderer.getTextArray3();
         RectRenderer rectRenderer = this;
         if (stringArray != null) {
@@ -238,7 +238,7 @@ implements Listener2 {
 
     @Override
     public void m523() {
-        this.m155();
+        this.endFrame();
         this.gpuManager8.flush();
         Manager4.manager4.setObj100(this);
     }

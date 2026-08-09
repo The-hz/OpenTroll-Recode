@@ -221,7 +221,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m155() {
+    public void endFrame() {
         String[] stringArray = TextureRenderer.getTextArray3();
         TriangleRenderer triangleRenderer = this;
         if (stringArray != null) {
@@ -244,7 +244,7 @@ implements Listener2 {
 
     @Override
     public void m523() {
-        this.m155();
+        this.endFrame();
         this.gpuManager3.flush();
         Manager4.manager4.setObj100(this);
     }

@@ -56,7 +56,7 @@ extends Module {
         if (Module.isNotInGame() || this.flag97) {
             return;
         }
-        if (MathUtil.isSet7()) {
+        if (MathUtil.isMoving()) {
             this.flag17 = true;
         }
         if (((Boolean)this.afterMoving.getValue()).booleanValue() && !this.flag17) {

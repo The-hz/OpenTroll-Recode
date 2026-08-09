@@ -45,7 +45,7 @@ extends AbstractHudModule {
             return List.of("TextRadar N/A");
         }
         List<AbstractClientPlayerEntity> list = MC.mc.world.getPlayers().stream().filter(abstractClientPlayerEntity -> abstractClientPlayerEntity != MC.mc.player).filter(abstractClientPlayerEntity -> {
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             int m = abstractClientPlayerEntity.isAlive() ? 1 : 0;
             if (!bl) {
                 if (m == 0) return 0 != 0;

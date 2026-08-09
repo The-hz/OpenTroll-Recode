@@ -472,7 +472,7 @@ extends Module {
             int n3 = MC.mc.player.getInventory().getSelectedSlot();
             this.list23.add((Runnable)(() -> this.m16(shulkerBoxScreenHandler.syncId, n4, n3, SlotActionType.SWAP)));
             this.list23.add((Runnable)(() -> {
-                float[] fArray = new float[]{Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58()};
+                float[] fArray = new float[]{Client.mathUtil.getFloat55(), Client.mathUtil.getPitch()};
                 MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, fArray[0], fArray[1]));
             }));
             this.list23.add((Runnable)(() -> this.m16(shulkerBoxScreenHandler.syncId, n4, n3, SlotActionType.SWAP)));
@@ -766,7 +766,7 @@ extends Module {
         float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts24[rotateMode.ordinal()]) {
             case 1: {
-                Client.mathUtil.m355(fArray[0], fArray[1]);
+                Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                 Client.mathUtil.setFloat6((float)this.getDouble15());
                 if (null == null) break;
             }

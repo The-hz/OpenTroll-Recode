@@ -72,10 +72,10 @@ extends Module {
             double d = Math.max(0.05, Math.min(1.0, (double)(blockBreakingInfo.getStage() + 1) / 10.0));
             Box box = this.m91(blockPos, d);
             int n = this.m41(blockBreakingInfo);
-            EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
+            EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
+            EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
         }
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     @EventHandler

@@ -48,12 +48,12 @@ extends Module {
             if (var2 != null) {
                 boolean var6 = !(Boolean)this.depth.getValue();
                 if ((Boolean)this.filled.getValue()) {
-                    EspRenderLayers.m69(var1.getMatrix4f3(), var2, this.m116((Integer)this.color.getValue(), this.filledAlpha.getInt()), var6);
+                    EspRenderLayers.drawBoxFilled(var1.getMatrix4f3(), var2, this.m116((Integer)this.color.getValue(), this.filledAlpha.getInt()), var6);
                 }
                 if ((Boolean)this.outline.getValue()) {
-                    EspRenderLayers.m688(var1.getMatrix4f3(), var2, this.m116((Integer)this.color.getValue(), this.outlineAlpha.getInt()), var6);
+                    EspRenderLayers.drawBoxOutline(var1.getMatrix4f3(), var2, this.m116((Integer)this.color.getValue(), this.outlineAlpha.getInt()), var6);
                 }
-                EspRenderLayers.m125();
+                EspRenderLayers.drawBuffers();
             }
         }
     }

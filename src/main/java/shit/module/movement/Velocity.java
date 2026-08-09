@@ -163,7 +163,7 @@ extends Module {
                 if (!this.helper735.hasPassedMs((Double)this.lagPause.getValue())) {
                     return vec3d;
                 }
-                boolean bl2 = ItemUtil.isSet26();
+                boolean bl2 = ItemUtil.isInGame();
                 boolean bl3 = this.getBlockPos5() != null;
                 if (!bl2) {
                     if (!bl3) {
@@ -182,7 +182,7 @@ extends Module {
                 if (!this.helper735.hasPassedMs((Double)this.lagPause.getValue())) {
                     return vec3d;
                 }
-                if (!ItemUtil.isSet26()) {
+                if (!ItemUtil.isInGame()) {
                     return vec3d;
                 }
                 if (vec3d.x == 0.0) {
@@ -237,7 +237,7 @@ extends Module {
             return;
         }
         boolean bl2 = this.helper735.hasPassedMs((Double)this.lagPause.getValue());
-        boolean bl3 = bl = (Boolean)this.flagInWall.getValue() == false || !this.flag130 || (Boolean)this.whilePushOut.getValue() != false || !ItemUtil.isSet26();
+        boolean bl3 = bl = (Boolean)this.flagInWall.getValue() == false || !this.flag130 || (Boolean)this.whilePushOut.getValue() != false || !ItemUtil.isInGame();
         if (bl2 && bl) {
             float f = MC.mc.player.getYaw();
             float f2 = this.isSet173() ? 89.0f : MC.mc.player.getPitch();
@@ -273,7 +273,7 @@ extends Module {
         if (this.mode.getValue() != Mode.Grim) {
             if (this.mode.getValue() != Mode.Wall) return false;
         }
-        if (!ItemUtil.isSet26()) return false;
+        if (!ItemUtil.isInGame()) return false;
         if ((Boolean)this.noRotation.getValue() == false) return false;
         return true;
     }

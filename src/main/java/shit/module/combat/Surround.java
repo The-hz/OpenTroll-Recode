@@ -302,7 +302,7 @@ extends Module {
                 return true;
             }
             case 3: {
-                Client.mathUtil.m355(fArray[0], fArray[1]);
+                Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                 Client.mathUtil.setFloat6(this.getFloat66());
                 return Client.mathUtil.getFloat51() <= 10.0f;
             }

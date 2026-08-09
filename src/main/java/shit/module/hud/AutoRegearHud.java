@@ -113,7 +113,7 @@ implements Listener3 {
      * Lifted jumps to return sites
      */
     private boolean isSet118() {
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         if (MC.mc.player == null) return false;
         AutoRegear autoRegear = AutoRegear.INSTANCE;
         if (!bl) {

@@ -156,7 +156,7 @@ implements MC {
         BlockPos blockPos = (BlockPos)object;
         boolean bl2 = bl;
         Direction[] directionArray = Direction.values();
-        boolean bl3 = Util2.isSet69();
+        boolean bl3 = Util2.isAlwaysTrue();
         for (Direction direction : directionArray) {
             boolean bl4;
             BlockPos blockPos2 = blockPos.offset(direction);
@@ -221,7 +221,7 @@ implements MC {
     public static boolean m572(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockState blockState = MC.mc.world.getBlockState(blockPos);
-        boolean bl = Util2.isSet69();
+        boolean bl = Util2.isAlwaysTrue();
         boolean bl2 = blockState.isAir();
         if (!bl) {
             if (bl2) return false;
@@ -247,7 +247,7 @@ implements MC {
     public static boolean m57(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockState blockState = MC.mc.world.getBlockState(blockPos);
-        boolean bl = Util2.isSet69();
+        boolean bl = Util2.isAlwaysTrue();
         boolean bl2 = blockState.isAir();
         if (bl) return bl2;
         if (bl2) return true;
@@ -264,7 +264,7 @@ implements MC {
     public static boolean m32(Object object) {
         BlockState blockState = (BlockState)object;
         Block block = blockState.getBlock();
-        boolean bl = Util2.isSet69();
+        boolean bl = Util2.isAlwaysTrue();
         boolean bl2 = block instanceof AbstractChestBlock;
         if (bl) return bl2;
         if (bl2) return true;
@@ -418,7 +418,7 @@ implements MC {
                     return true;
                 }
                 case 3: {
-                    Client.mathUtil.m355(fArray[0], fArray[1]);
+                    Client.mathUtil.setTargetRotation(fArray[0], fArray[1]);
                     Client.mathUtil.setFloat6(f2);
                     float f3 = Client.mathUtil.getFloat51() - 10.0f;
                     float f4 = f3 == 0.0f ? 0 : (f3 < 0.0f ? -1 : 1);

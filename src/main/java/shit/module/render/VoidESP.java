@@ -61,12 +61,12 @@ extends Module {
         for (Object o : this.list6) {
             Box box = (Box)o;
             if (((Boolean)this.filled.getValue()).booleanValue()) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, this.m921((Integer)this.color.getValue(), this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
+                EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, this.m921((Integer)this.color.getValue(), this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
             }
             if (!((Boolean)this.outline.getValue()).booleanValue()) continue;
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, this.m921((Integer)this.color.getValue(), this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
+            EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, this.m921((Integer)this.color.getValue(), this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
         }
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     private void m583() {

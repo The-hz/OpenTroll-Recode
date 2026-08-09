@@ -16,7 +16,7 @@ public final class FontUtil2 {
     private FontUtil2() {
     }
 
-    public static void m640(Object object, Object object2, Object object3, int n, int n2, int n3) {
+    public static void drawTextSimple(Object object, Object object2, Object object3, int n, int n2, int n3) {
         TextRenderer textRenderer = (TextRenderer)object;
         DrawContext drawContext = (DrawContext)object2;
         String string = (String)object3;

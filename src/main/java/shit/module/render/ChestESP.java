@@ -72,12 +72,12 @@ extends Module {
                 box = new Box(blockPos);
             }
             if (this.mode.getValue() == Mode.FILL || this.mode.getValue() == Mode.BOTH) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
+                EspRenderLayers.drawBoxFilled(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
             }
             if (this.mode.getValue() != Mode.OUTLINE && this.mode.getValue() != Mode.BOTH) continue;
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
+            EspRenderLayers.drawBoxOutline(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
         }
-        EspRenderLayers.m125();
+        EspRenderLayers.drawBuffers();
     }
 
     private void m251() {

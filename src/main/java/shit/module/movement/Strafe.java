@@ -32,14 +32,14 @@ extends Module {
         if (Module.isNotInGame()) {
             return;
         }
-        if (!(MC.mc.player.isInSneakingPose() || MC.mc.player.isGliding() || ItemUtil.isSet26() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || MC.mc.player.getAbilities().flying)) {
-            if (!MathUtil.isSet7()) {
+        if (!(MC.mc.player.isInSneakingPose() || MC.mc.player.isGliding() || ItemUtil.isInGame() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || MC.mc.player.getAbilities().flying)) {
+            if (!MathUtil.isMoving()) {
                 if (((Boolean)this.airStop.getValue()).booleanValue()) {
                     MathUtil.setDouble8(0.0);
                     MathUtil.setDouble9(0.0);
                 }
             } else {
-                double[] dArray = MathUtil.m246(this.getDouble10());
+                double[] dArray = MathUtil.getMotionVector(this.getDouble10());
                 moveEvent.setDouble2(dArray[0]);
                 moveEvent.setDouble(dArray[1]);
             }

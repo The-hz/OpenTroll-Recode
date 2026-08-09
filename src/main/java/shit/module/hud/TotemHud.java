@@ -58,7 +58,7 @@ implements Listener3 {
     public void renderHud(Object object, boolean n) {
         DrawContext drawContext = (DrawContext)object;
         int n2 = n ? 1 : 0;
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         int n3 = n2;
         if (!bl) {
             if (n3 == 0 && MC.mc.player == null) {
@@ -83,7 +83,7 @@ implements Listener3 {
         int n;
         boolean bl;
         block7: {
-            bl = AbstractHudModule.isSet32();
+            bl = AbstractHudModule.isEditMode();
             if (MC.mc.player == null) {
                 return 0;
             }

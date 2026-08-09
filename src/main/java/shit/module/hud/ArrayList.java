@@ -79,7 +79,7 @@ implements Listener3 {
         block3: {
             ArrayList arrayList;
             block2: {
-                boolean bl = AbstractHudModule.isSet32();
+                boolean bl = AbstractHudModule.isEditMode();
                 arrayList = this;
                 if (bl) break block2;
                 if (arrayList.side.getValue() != SideMode.LEFT) break block3;
@@ -106,7 +106,7 @@ implements Listener3 {
         block2: {
             int n2 = Client.fontManager.renderer2().getFontHeight() + 2 + this.spacing.getInt();
             int n3 = 0;
-            boolean bl = AbstractHudModule.isSet32();
+            boolean bl = AbstractHudModule.isEditMode();
             for (ModuleData moduleData : this.getList7()) {
                 n = n3 + Math.round((float)n2 * moduleData.value77());
                 if (!bl) {
@@ -197,7 +197,7 @@ implements Listener3 {
      */
     private boolean m385(Object object) {
         Module module = (Module)object;
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         boolean bl2 = module.isEnabled();
         if (!bl) {
             if (!bl2) return false;

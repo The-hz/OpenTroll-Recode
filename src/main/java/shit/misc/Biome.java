@@ -30,7 +30,7 @@ extends AbstractHudModule {
                     MinecraftClient minecraftClient;
                     boolean bl;
                     block2: {
-                        bl = AbstractHudModule.isSet32();
+                        bl = AbstractHudModule.isEditMode();
                         minecraftClient = MC.mc;
                         if (bl) break block2;
                         if (minecraftClient.player == null) break block3;

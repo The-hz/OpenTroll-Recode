@@ -87,7 +87,7 @@ extends Module {
         float f2 = 88.0f;
         switch (Lambda.counts29[rotateMode.ordinal()]) {
             case 1: {
-                Client.mathUtil.m355(f, f2);
+                Client.mathUtil.setTargetRotation(f, f2);
                 Client.mathUtil.setFloat6(this.getFloat52());
                 if (Client.mathUtil.getFloat51() > 5.0f) {
                     return;

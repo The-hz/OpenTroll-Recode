@@ -47,7 +47,7 @@ implements Listener2 {
         Color color = (Color)object2;
         BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)object3;
         this.m798();
-        this.listener.m883(string, f4, f5, f6, color, bufferUtilDataManager);
+        this.listener.render(string, f4, f5, f6, color, bufferUtilDataManager);
     }
 
     public void m321(Object object, float f, float f2, float f3, Object object2) {
@@ -56,7 +56,7 @@ implements Listener2 {
         float f5 = f2;
         float f6 = f3;
         Color color = (Color)object2;
-        this.listener.m883(string, f4, f5, f6, color, Helper5.bufferUtilDataManager8);
+        this.listener.render(string, f4, f5, f6, color, Helper5.bufferUtilDataManager8);
     }
 
     public float m567(float f) {
@@ -113,7 +113,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m155() {
+    public void endFrame() {
         this.listener.tick();
     }
 

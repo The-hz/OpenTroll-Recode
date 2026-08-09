@@ -22,7 +22,7 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         String string = this.getText24();
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         String string2 = string;
         if (bl) return List.of("Baritone " + string2);
         if (string2 != null) {

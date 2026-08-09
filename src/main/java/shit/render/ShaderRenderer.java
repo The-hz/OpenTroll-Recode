@@ -57,7 +57,7 @@ implements Listener {
     }
 
     @Override
-    public void m883(Object object, float f, float f2, float f3, Object object2, Object object3) {
+    public void render(Object object, float f, float f2, float f3, Object object2, Object object3) {
         BufferUtilDataManager bufferUtilDataManager;
         Color color;
         float f4;
@@ -416,7 +416,7 @@ implements Listener {
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-            renderPass.setIndexBuffer(indexBuffer, RenderUtil4.getObj19());
+            renderPass.setIndexBuffer(indexBuffer, RenderUtil4.getIndexType());
             this.setObj34(renderPass);
         }
     }
@@ -466,7 +466,7 @@ implements Listener {
             n = this.count206;
         }
         GpuBuffer gpuBuffer = RenderUtil4.m577(n);
-        renderPass.setIndexBuffer(gpuBuffer, RenderUtil4.getObj19());
+        renderPass.setIndexBuffer(gpuBuffer, RenderUtil4.getIndexType());
         renderPass.setUniform("DynamicTransforms", this.gpuBufferSlice4);
         this.setObj34(renderPass);
     }

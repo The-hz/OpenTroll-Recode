@@ -16,9 +16,9 @@ implements MC {
     /*
      * Enabled aggressive block sorting
      */
-    public static boolean isSet7() {
+    public static boolean isMoving() {
         float f;
-        boolean bl = Util2.isSet69();
+        boolean bl = Util2.isAlwaysTrue();
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (!bl) {
             if (clientPlayerEntity == null) {
@@ -52,7 +52,7 @@ implements MC {
         return d2 != 0;
     }
 
-    public static double[] m246(double d) {
+    public static double[] getMotionVector(double d) {
         double d2 = d;
         boolean bl = false;
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
@@ -88,7 +88,7 @@ implements MC {
                                         d2 = d;
                                         f7 = f;
                                         f6 = f2;
-                                        bl = Util2.isSet69();
+                                        bl = Util2.isAlwaysTrue();
                                         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                                         if (!bl) {
                                             if (clientPlayerEntity == null) {
@@ -158,7 +158,7 @@ implements MC {
             double d2;
             block2: {
                 d2 = d;
-                boolean bl = Util2.isSet69();
+                boolean bl = Util2.isAlwaysTrue();
                 clientPlayerEntity = MC.mc.player;
                 if (bl) break block2;
                 if (clientPlayerEntity == null) break block3;
@@ -208,7 +208,7 @@ implements MC {
                 int n;
                 boolean bl3 = bl;
                 d2 = d;
-                boolean bl4 = Util2.isSet69();
+                boolean bl4 = Util2.isAlwaysTrue();
                 ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                 if (!bl4) {
                     if (clientPlayerEntity == null) {

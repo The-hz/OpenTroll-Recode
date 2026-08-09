@@ -98,7 +98,7 @@ extends Module {
         if (Module.isNotInGame()) {
             return;
         }
-        if (ItemUtil.isSet26()) {
+        if (ItemUtil.isInGame()) {
             double d = (Double)this.speed.getValue();
             double d2 = 0.002873 * d;
             double d3 = MC.mc.player.forwardSpeed;
@@ -124,7 +124,7 @@ extends Module {
             return;
         }
         boolean bl = MC.mc.player.hasStatusEffect(StatusEffects.SLOW_FALLING);
-        boolean bl2 = ItemUtil.isSet26();
+        boolean bl2 = ItemUtil.isInGame();
         if (bl && bl2) {
             this.m801();
         } else {

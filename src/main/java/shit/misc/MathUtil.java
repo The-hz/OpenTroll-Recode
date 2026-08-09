@@ -290,11 +290,11 @@ implements MC {
         return this.value136;
     }
 
-    public float getFloat58() {
+    public float getPitch() {
         return this.value163;
     }
 
-    public void m355(float f, float f2) {
+    public void setTargetRotation(float f, float f2) {
         float f3 = f;
         float f4 = f2;
         this.type2 = Type.CUSTOM;

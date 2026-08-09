@@ -212,7 +212,7 @@ extends Module {
         if (((Boolean)this.controlRotation.getValue()).booleanValue()) {
             if (this.isSet35()) {
                 this.m290();
-                Client.mathUtil.m355(this.value110, this.value153);
+                Client.mathUtil.setTargetRotation(this.value110, this.value153);
             }
         }
         if ((Boolean)this.airStop.getValue() == false) return;

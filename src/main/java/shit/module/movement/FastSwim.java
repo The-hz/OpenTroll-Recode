@@ -36,7 +36,7 @@ extends Module {
         if (!(((Boolean)this.water.getValue()).booleanValue() && bl || ((Boolean)this.lava.getValue()).booleanValue() && bl2)) {
             return;
         }
-        if (MathUtil.isSet7()) {
+        if (MathUtil.isMoving()) {
             MC.mc.player.setVelocity(MC.mc.player.getVelocity().x * (Double)this.horizontal.getValue(), MC.mc.player.getVelocity().y, MC.mc.player.getVelocity().z * (Double)this.horizontal.getValue());
         }
         if (MC.mc.options.jumpKey.isPressed()) {

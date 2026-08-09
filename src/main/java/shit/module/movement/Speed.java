@@ -51,15 +51,15 @@ extends Module {
         switch (mode) {
             case STRAFE: {
                 if (!MC.mc.player.isOnGround()) break;
-                if (!MathUtil.isSet7()) break;
-                double[] dArray = MathUtil.m246(d);
+                if (!MathUtil.isMoving()) break;
+                double[] dArray = MathUtil.getMotionVector(d);
                 MC.mc.player.setVelocity(dArray[0], MC.mc.player.getVelocity().y, dArray[1]);
                 break;
             }
             case ON_GROUND: {
                 if (!MC.mc.player.isOnGround()) break;
-                if (!MathUtil.isSet7()) break;
-                double[] dArray = MathUtil.m246(d);
+                if (!MathUtil.isMoving()) break;
+                double[] dArray = MathUtil.getMotionVector(d);
                 MC.mc.player.setVelocity(dArray[0], 0.0, dArray[1]);
                 if (MC.mc.options.jumpKey.isPressed()) {
                     MC.mc.player.jump();
@@ -68,8 +68,8 @@ extends Module {
             }
             case VANILLA: {
                 MC.mc.player.setSprinting(true);
-                if (!MathUtil.isSet7()) break;
-                double[] dArray = MathUtil.m246(d + ((Double)this.boost.getValue()).doubleValue());
+                if (!MathUtil.isMoving()) break;
+                double[] dArray = MathUtil.getMotionVector(d + ((Double)this.boost.getValue()).doubleValue());
                 MC.mc.player.setVelocity(dArray[0], MC.mc.player.getVelocity().y, dArray[1]);
                 break;
             }

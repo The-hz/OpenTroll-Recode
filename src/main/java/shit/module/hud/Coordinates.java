@@ -62,7 +62,7 @@ implements Listener3 {
     public void renderHud(Object object, boolean bl) {
         DrawContext drawContext = (DrawContext)object;
         boolean bl2 = bl;
-        boolean bl3 = AbstractHudModule.isSet32();
+        boolean bl3 = AbstractHudModule.isEditMode();
         if (!bl3) {
             if (Module.isNotInGame() && !bl2) {
                 return;
@@ -73,7 +73,7 @@ implements Listener3 {
 
     private String getText38() {
         int n;
-        boolean bl = AbstractHudModule.isSet32();
+        boolean bl = AbstractHudModule.isEditMode();
         int n2 = Module.isNotInGame() ? 1 : 0;
         if (!bl) {
             if (n2 != 0) {
