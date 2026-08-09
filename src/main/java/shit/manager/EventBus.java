@@ -24,7 +24,7 @@ public class EventBus {
 
     @SuppressWarnings("unchecked")
     public void subscribe(Object object) {
-        List<Data> handlers = (List<Data>) this.map5.computeIfAbsent(object, o -> this.m687(o));
+        List<Data> handlers = (List<Data>) this.map5.computeIfAbsent(object, o -> this.findHandlers(o));
         for (Data data : handlers) {
             List<Data> list = (List<Data>) this.map40.computeIfAbsent(data.class_(), k -> new CopyOnWriteArrayList());
             list.add(data);
@@ -33,7 +33,7 @@ public class EventBus {
     }
 
     @SuppressWarnings("unchecked")
-    public void setObj18(Object object) {
+    public void unsubscribe(Object object) {
         List<Data> handlers = (List<Data>) this.map5.get(object);
         if (handlers == null) {
             return;
@@ -47,7 +47,7 @@ public class EventBus {
     }
 
     @SuppressWarnings("unchecked")
-    public Event m287(Object object) {
+    public Event post(Object object) {
         Event event = (Event) object;
         List<Data> list = (List<Data>) this.map40.get(event.getClass());
         if (list == null) {
@@ -55,20 +55,20 @@ public class EventBus {
         }
         for (Data data : list) {
             data.setEvent(event);
-            if (event.isSet85()) {
+            if (event.isCancelled()) {
                 break;
             }
         }
         return event;
     }
 
-    private List m687(Object object) {
+    private List findHandlers(Object object) {
         ArrayList<Data> arrayList = new ArrayList<Data>();
         int n = 27;
         for (Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
             for (Method method : clazz.getDeclaredMethods()) {
                 EventHandler eventHandler = method.getAnnotation(EventHandler.class);
-                if (!this.m111(method, eventHandler) || !Event.class.isAssignableFrom(method.getParameterTypes()[0])) continue;
+                if (!this.isHandler(method, eventHandler) || !Event.class.isAssignableFrom(method.getParameterTypes()[0])) continue;
                 method.setAccessible(true);
                 arrayList.add(new Data(object, method, method.getParameterTypes()[0], eventHandler != null ? eventHandler.priority() : 0));
                 if (27 != 0) continue;
@@ -78,7 +78,7 @@ public class EventBus {
         return arrayList;
     }
 
-    private boolean m111(Object object, Object object2) {
+    private boolean isHandler(Object object, Object object2) {
         Method method;
         block7: {
             block6: {

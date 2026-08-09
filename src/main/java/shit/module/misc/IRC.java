@@ -14,8 +14,8 @@ import shit.setting.BooleanSetting;
 public class IRC
 extends Module {
     public static IRC INSTANCE;
-    private final BooleanSetting ircFriend = (BooleanSetting)this.m28(new BooleanSetting("IrcFriend", false));
-    private final BooleanSetting hideAdmin = (BooleanSetting)this.m28(new BooleanSetting("HideAdmin", false));
+    private final BooleanSetting ircFriend = (BooleanSetting)this.registerSetting(new BooleanSetting("IrcFriend", false));
+    private final BooleanSetting hideAdmin = (BooleanSetting)this.registerSetting(new BooleanSetting("HideAdmin", false));
     private static volatile long time76;
     private static String text1489;
 
@@ -30,7 +30,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         ChatClient.stop();
     }
 
@@ -45,10 +45,10 @@ extends Module {
             if (iRC == null) return false;
             iRC = INSTANCE;
         }
-        boolean bl = iRC.isSet19();
+        boolean bl = iRC.isEnabled();
         if (string != null) {
             if (!bl) return false;
-            bl = (Boolean)IRC.INSTANCE.hideAdmin.getObj();
+            bl = (Boolean)IRC.INSTANCE.hideAdmin.getValue();
         }
         if (string == null) return bl;
         if (!bl) return false;
@@ -66,10 +66,10 @@ extends Module {
             if (iRC == null) return false;
             iRC = INSTANCE;
         }
-        boolean bl = iRC.isSet19();
+        boolean bl = iRC.isEnabled();
         if (string != null) {
             if (!bl) return false;
-            bl = (Boolean)IRC.INSTANCE.ircFriend.getObj();
+            bl = (Boolean)IRC.INSTANCE.ircFriend.getValue();
         }
         if (string == null) return bl;
         if (!bl) return false;

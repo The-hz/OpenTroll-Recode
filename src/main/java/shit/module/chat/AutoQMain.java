@@ -24,9 +24,9 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AutoQMain
 extends Module {
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 5.0, 0.0, 15.0, 0.1));
-    private final BooleanSetting _2BCheck = (BooleanSetting)this.m28(new BooleanSetting("2BCheck", true));
-    private final StringSetting command = (StringSetting)this.m28(new StringSetting("Command", "/queue main"));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 5.0, 0.0, 15.0, 0.1));
+    private final BooleanSetting _2BCheck = (BooleanSetting)this.registerSetting(new BooleanSetting("2BCheck", true));
+    private final StringSetting command = (StringSetting)this.registerSetting(new StringSetting("Command", "/queue main"));
     private final Helper7 helper718 = new Helper7();
 
     public AutoQMain() {
@@ -35,33 +35,33 @@ extends Module {
 
     @Override
     public void onEnable() {
-        this.helper718.m533();
+        this.helper718.resetTimer();
     }
 
     @EventHandler
     private void setEvent2Inner4(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.world.getRegistryKey() != World.END) {
+        if (MC.mc.world.getRegistryKey() != World.END) {
             return;
         }
-        if (MC.client3.world.getDifficulty() != Difficulty.PEACEFUL) {
+        if (MC.mc.world.getDifficulty() != Difficulty.PEACEFUL) {
             return;
         }
-        if (((Boolean)this._2BCheck.getObj()).booleanValue() && !this.isSet58()) {
+        if (((Boolean)this._2BCheck.getValue()).booleanValue() && !this.isSet58()) {
             return;
         }
-        if (!this.helper718.m114((Double)this.delay.getObj())) {
+        if (!this.helper718.hasPassedSeconds((Double)this.delay.getValue())) {
             return;
         }
-        String string = (String)this.command.getObj();
+        String string = (String)this.command.getValue();
         if (string.startsWith("/")) {
-            Util2.setObj14(string.substring(1));
+            Util2.sendChatCommand(string.substring(1));
         } else {
-            Util2.setObj62(string);
+            Util2.sendChatMessage(string);
         }
-        this.helper718.m533();
+        this.helper718.resetTimer();
     }
 
     /*
@@ -71,17 +71,17 @@ extends Module {
     private boolean isSet58() {
         String string;
         int[] nArray = ChatTimestamp.getIntArray2();
-        ClientPlayNetworkHandler clientPlayNetworkHandler = MC.client3.getNetworkHandler();
+        ClientPlayNetworkHandler clientPlayNetworkHandler = MC.mc.getNetworkHandler();
         if (nArray != null) {
             if (clientPlayNetworkHandler == null) return false;
-            clientPlayNetworkHandler = MC.client3.getNetworkHandler();
+            clientPlayNetworkHandler = MC.mc.getNetworkHandler();
         }
         ServerInfo serverInfo = clientPlayNetworkHandler.getServerInfo();
         if (nArray != null) {
             if (serverInfo == null) {
                 return false;
             }
-            serverInfo = MC.client3.getNetworkHandler().getServerInfo();
+            serverInfo = MC.mc.getNetworkHandler().getServerInfo();
         }
         String string2 = string = serverInfo.address;
         if (nArray != null) {

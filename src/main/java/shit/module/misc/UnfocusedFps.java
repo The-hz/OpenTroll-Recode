@@ -19,7 +19,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class UnfocusedFps
 extends Module {
-    private final NumberSetting fPS = (NumberSetting)this.m28(new NumberSetting("FPS", 30.0, 1.0, 240.0, 1.0));
+    private final NumberSetting fPS = (NumberSetting)this.registerSetting(new NumberSetting("FPS", 30.0, 1.0, 240.0, 1.0));
     private Integer integer;
 
     public UnfocusedFps() {
@@ -27,21 +27,21 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m1040();
     }
 
     @EventHandler
     private void setEvent2Inner216(Event2.Event2Inner2 event2Inner2) {
-        if (MC.client3.getWindow() == null) {
+        if (MC.mc.getWindow() == null) {
             return;
         }
-        SimpleOption simpleOption = MC.client3.options.getMaxFps();
-        if (!MC.client3.isWindowFocused()) {
+        SimpleOption simpleOption = MC.mc.options.getMaxFps();
+        if (!MC.mc.isWindowFocused()) {
             if (this.integer == null) {
                 this.integer = (Integer)simpleOption.getValue();
             }
-            ((OptionInstanceAccessor)(Object)simpleOption).trollhack$set(this.fPS.getInt50());
+            ((OptionInstanceAccessor)(Object)simpleOption).trollhack$set(this.fPS.getInt());
         } else {
             this.m1040();
         }
@@ -54,13 +54,13 @@ extends Module {
                 block2: {
                     String string = IRC.getText7();
                     if (this.integer == null) break block2;
-                    gameOptions = MC.client3.options;
+                    gameOptions = MC.mc.options;
                     if (string == null) break block3;
                     if (gameOptions != null) break block4;
                 }
                 return;
             }
-            gameOptions = MC.client3.options;
+            gameOptions = MC.mc.options;
         }
         ((OptionInstanceAccessor)(Object)gameOptions.getMaxFps()).trollhack$set(this.integer);
         this.integer = null;

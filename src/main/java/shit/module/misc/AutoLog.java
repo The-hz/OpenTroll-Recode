@@ -32,19 +32,19 @@ import shit.util.Util2;
 public class AutoLog
 extends Module {
     public static boolean flag84;
-    private final BooleanSetting logOnEnable = (BooleanSetting)this.m28(new BooleanSetting("LogOnEnable", false));
-    private final BooleanSetting onPop = (BooleanSetting)this.m28(new BooleanSetting("OnPop", true));
-    private final BooleanSetting lowArmor = (BooleanSetting)this.m28(new BooleanSetting("LowArmor", true));
-    private final BooleanSetting totemLess = (BooleanSetting)this.m28(new BooleanSetting("TotemLess", true));
-    private final NumberSetting totems = (NumberSetting)this.m28(new NumberSetting("Totems", 2.0, 0.0, 20.0, 1.0));
-    private final BooleanSetting antiMace = (BooleanSetting)this.m28(new BooleanSetting("AntiMace", true));
-    private final NumberSetting antiRange = (NumberSetting)this.m28(new NumberSetting("AntiRange", 15.0, 3.0, 30.0, 0.5));
-    private final NumberSetting safeRange = (NumberSetting)this.m28(new NumberSetting("SafeRange", 3.0, 1.0, 20.0, 0.5));
-    private final NumberSetting antiHRange = (NumberSetting)this.m28(new NumberSetting("AntiHRange", 8.0, 1.0, 20.0, 0.5));
-    private final BooleanSetting ignoreElytra = (BooleanSetting)this.m28(new BooleanSetting("IgnoreElytra", true));
-    private final BooleanSetting sendMessage = (BooleanSetting)this.m28(new BooleanSetting("SendMessage", true));
-    private final NumberSetting msgRandomLen = (NumberSetting)this.m28(new NumberSetting("MsgRandomLen", 4.0, 0.0, 10.0, 1.0));
-    private final BooleanSetting autoDisable = (BooleanSetting)this.m28(new BooleanSetting("AutoDisable", true));
+    private final BooleanSetting logOnEnable = (BooleanSetting)this.registerSetting(new BooleanSetting("LogOnEnable", false));
+    private final BooleanSetting onPop = (BooleanSetting)this.registerSetting(new BooleanSetting("OnPop", true));
+    private final BooleanSetting lowArmor = (BooleanSetting)this.registerSetting(new BooleanSetting("LowArmor", true));
+    private final BooleanSetting totemLess = (BooleanSetting)this.registerSetting(new BooleanSetting("TotemLess", true));
+    private final NumberSetting totems = (NumberSetting)this.registerSetting(new NumberSetting("Totems", 2.0, 0.0, 20.0, 1.0));
+    private final BooleanSetting antiMace = (BooleanSetting)this.registerSetting(new BooleanSetting("AntiMace", true));
+    private final NumberSetting antiRange = (NumberSetting)this.registerSetting(new NumberSetting("AntiRange", 15.0, 3.0, 30.0, 0.5));
+    private final NumberSetting safeRange = (NumberSetting)this.registerSetting(new NumberSetting("SafeRange", 3.0, 1.0, 20.0, 0.5));
+    private final NumberSetting antiHRange = (NumberSetting)this.registerSetting(new NumberSetting("AntiHRange", 8.0, 1.0, 20.0, 0.5));
+    private final BooleanSetting ignoreElytra = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnoreElytra", true));
+    private final BooleanSetting sendMessage = (BooleanSetting)this.registerSetting(new BooleanSetting("SendMessage", true));
+    private final NumberSetting msgRandomLen = (NumberSetting)this.registerSetting(new NumberSetting("MsgRandomLen", 4.0, 0.0, 10.0, 1.0));
+    private final BooleanSetting autoDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoDisable", true));
     private final Random random4 = new Random();
 
     public AutoLog() {
@@ -59,7 +59,7 @@ extends Module {
                 String string = IRC.getText7();
                 autoLog = this;
                 if (string == null) break block2;
-                if (!((Boolean)autoLog.logOnEnable.getObj()).booleanValue()) break block3;
+                if (!((Boolean)autoLog.logOnEnable.getValue()).booleanValue()) break block3;
                 autoLog = this;
             }
             autoLog.setObj73("Enabled");
@@ -68,10 +68,10 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner3(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.antiMace.getObj()).booleanValue() && this.isSet150()) {
+        if (((Boolean)this.antiMace.getValue()).booleanValue() && this.isSet150()) {
             return;
         }
         this.m354();
@@ -79,32 +79,32 @@ extends Module {
 
     @EventHandler
     private void setPlayerEvent3(PlayerEvent playerEvent) {
-        if (((Boolean)this.onPop.getObj()).booleanValue() && playerEvent.getPlayer4() == MC.client3.player) {
+        if (((Boolean)this.onPop.getValue()).booleanValue() && playerEvent.getPlayer4() == MC.mc.player) {
             this.setObj73("Totem Popped");
         }
     }
 
     @EventHandler
     private void setDisconnectEvent2(DisconnectEvent disconnectEvent) {
-        if (((Boolean)this.autoDisable.getObj()).booleanValue() && this.isSet19()) {
-            this.setFlag3(false);
+        if (((Boolean)this.autoDisable.getValue()).booleanValue() && this.isEnabled()) {
+            this.setEnabled(false);
         }
     }
 
     private boolean isSet150() {
-        Iterator iterator = MC.client3.world.getPlayers().iterator();
+        Iterator iterator = MC.mc.world.getPlayers().iterator();
         String string = IRC.getText7();
         while (iterator.hasNext()) {
             PlayerEntity playerEntity;
             PlayerEntity playerEntity2 = playerEntity = (PlayerEntity)iterator.next();
             if (string != null) {
-                if (playerEntity2 == MC.client3.player) continue;
+                if (playerEntity2 == MC.mc.player) continue;
                 playerEntity2 = playerEntity;
             }
             boolean bl = playerEntity2.isAlive();
             if (string != null) {
                 if (!bl) continue;
-                bl = Client.manager.m258(playerEntity.getName().getString());
+                bl = Client.manager.isFriend(playerEntity.getName().getString());
             }
             if (bl) continue;
             PlayerEntity playerEntity3 = playerEntity;
@@ -112,23 +112,23 @@ extends Module {
                 if (playerEntity3.getMainHandStack().getItem() != Items.MACE) continue;
                 playerEntity3 = playerEntity;
             }
-            double d = playerEntity3.getY() - MC.client3.player.getY();
-            double d2 = Math.hypot(playerEntity.getX() - MC.client3.player.getX(), playerEntity.getZ() - MC.client3.player.getZ());
-            double d3 = d - (Double)this.safeRange.getObj();
+            double d = playerEntity3.getY() - MC.mc.player.getY();
+            double d2 = Math.hypot(playerEntity.getX() - MC.mc.player.getX(), playerEntity.getZ() - MC.mc.player.getZ());
+            double d3 = d - (Double)this.safeRange.getValue();
             double d4 = d3 == 0.0 ? 0 : (d3 < 0.0 ? -1 : 1);
             if (string != null) {
                 if (d4 <= 0) continue;
-                double d5 = d - (Double)this.antiRange.getObj();
+                double d5 = d - (Double)this.antiRange.getValue();
                 d4 = d5 == 0.0 ? 0 : (d5 > 0.0 ? 1 : -1);
             }
             if (string != null) {
                 if (d4 > 0) continue;
-                double d6 = d2 - (Double)this.antiHRange.getObj();
+                double d6 = d2 - (Double)this.antiHRange.getValue();
                 d4 = d6 == 0.0 ? 0 : (d6 > 0.0 ? 1 : -1);
             }
             if (string != null) {
                 if (d4 > 0) continue;
-                d4 = ((Boolean)this.ignoreElytra.getObj()).booleanValue() ? 1.0 : 0.0;
+                d4 = ((Boolean)this.ignoreElytra.getValue()).booleanValue() ? 1.0 : 0.0;
             }
             if (string != null) {
                 if (d4 != 0.0) {
@@ -152,9 +152,9 @@ extends Module {
         String string2 = IRC.getText7();
         AutoLog autoLog = this;
         if (string2 != null) {
-            if (((Boolean)autoLog.sendMessage.getObj()).booleanValue()) {
+            if (((Boolean)autoLog.sendMessage.getValue()).booleanValue()) {
                 try {
-                    Util2.setObj62("@" + string + " tried to mace me " + this.m694(this.msgRandomLen.getInt50()));
+                    Util2.sendChatMessage("@" + string + " tried to mace me " + this.m694(this.msgRandomLen.getInt()));
                 }
                 catch (Exception exception) {}
             }
@@ -167,17 +167,17 @@ extends Module {
      * Unable to fully structure code
      */
     private void m354() {
-        if (((Boolean)this.totemLess.getObj()).booleanValue()) {
+        if (((Boolean)this.totemLess.getValue()).booleanValue()) {
             int n = this.getInt13();
-            if (n <= this.totems.getInt50()) {
+            if (n <= this.totems.getInt()) {
                 this.setObj73("Low Totems (" + n + ")");
                 return;
             }
         }
-        if (!((Boolean)this.lowArmor.getObj()).booleanValue()) {
+        if (!((Boolean)this.lowArmor.getValue()).booleanValue()) {
             return;
         }
-        if (ItemUtil.m749(MC.client3.player, 5)) {
+        if (ItemUtil.m749(MC.mc.player, 5)) {
             this.setObj73("Armor Durability Low");
         }
     }
@@ -191,7 +191,7 @@ extends Module {
     private int getInt13() {
         int n = 0;
         String string = IRC.getText7();
-        for (ItemStack itemStack : MC.client3.player.getInventory().getMainStacks()) {
+        for (ItemStack itemStack : MC.mc.player.getInventory().getMainStacks()) {
             if (itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
                 n += itemStack.getCount();
             }
@@ -211,25 +211,25 @@ extends Module {
                     string2 = (String)object;
                     flag84 = true;
                     string = IRC.getText7();
-                    CommandManager.setObj21("\u00a74[AutoLog] \u00a7f" + string2);
-                    bl = (Boolean)this.autoDisable.getObj();
+                    CommandManager.sendFeedback("\u00a74[AutoLog] \u00a7f" + string2);
+                    bl = (Boolean)this.autoDisable.getValue();
                     if (string == null) break block5;
                     if (!bl) break block6;
                     autoLog = this;
                     if (string == null) break block7;
-                    bl = autoLog.isSet19();
+                    bl = autoLog.isEnabled();
                 }
                 if (!bl) break block6;
                 autoLog = this;
             }
-            autoLog.setFlag3(false);
+            autoLog.setEnabled(false);
         }
-        MinecraftClient minecraftClient = MC.client3;
+        MinecraftClient minecraftClient = MC.mc;
         if (string != null) {
             if (minecraftClient.world != null) {
-                MC.client3.world.disconnect((Text)Text.literal((String)string2));
+                MC.mc.world.disconnect((Text)Text.literal((String)string2));
             }
-            minecraftClient = MC.client3;
+            minecraftClient = MC.mc;
         }
         minecraftClient.disconnect(null, false);
     }

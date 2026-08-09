@@ -151,42 +151,42 @@ extends Module {
 
         public SpeedMine() {
         super("SpeedMine", "Sends mine packets for faster block breaking.", Category.PLAYER);
-        this.range = (NumberSetting)this.m28(new NumberSetting("Range", 6.0, 3.0, 10.0, 0.1));
-        this.damage = (NumberSetting)this.m28(new NumberSetting("Damage", 0.7, 0.1, 2.0, 0.01));
-        this.stopDelay = (NumberSetting)this.m28(new NumberSetting("StopDelay", 50.0, 0.0, 500.0, 1.0));
-        this.startDelay = (NumberSetting)this.m28(new NumberSetting("StartDelay", 200.0, 0.0, 500.0, 1.0));
-        this.instant = (BooleanSetting)this.m28(new BooleanSetting("Instant", false));
-        this.wait = (BooleanSetting)this.m28(new BooleanSetting("Wait", true));
-        this.swing = (BooleanSetting)this.m28(new BooleanSetting("Swing", true));
-        this.endSwing = (BooleanSetting)this.m28(new BooleanSetting("EndSwing", false));
-        this.onlyGround = (BooleanSetting)this.m28(new BooleanSetting("OnlyGround", true));
-        this.farCancel = (BooleanSetting)this.m28(new BooleanSetting("FarCancel", false));
-        this.eatPause = (BooleanSetting)this.m28(new BooleanSetting("EatPause", true));
-        this.switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
-        this.doubleBreak = (BooleanSetting)this.m28(new BooleanSetting("DoubleBreak", true));
-        this.booleanSetting6 = (BooleanSetting)this.m28(new BooleanSetting("1.21", false));
-        this.doubleDelay = (NumberSetting)this.m28(new NumberSetting("DoubleDelay", 50.0, 0.0, 500.0, 1.0));
-        this.start = (NumberSetting)this.m28(new NumberSetting("Start", 0.9, 0.0, 2.0, 0.01));
-        this.timeOut = (NumberSetting)this.m28(new NumberSetting("TimeOut", 1.2, 0.5, 5.0, 0.01));
-        this.debugLog = (BooleanSetting)this.m28(new BooleanSetting("DebugLog", false));
-        this.startRotate = (BooleanSetting)this.m28(new BooleanSetting("StartRotate", true));
-        this.endRotate = (BooleanSetting)this.m28(new BooleanSetting("EndRotate", false));
-        this.doubleStartRotate = (BooleanSetting)this.m28(new BooleanSetting("DoubleStartRotate", false));
-        this.doubleEndRotate = (BooleanSetting)this.m28(new BooleanSetting("DoubleEndRotate", false));
-        this.rotateMs = (NumberSetting)this.m28(new NumberSetting("RotateMs", 150.0, 0.0, 1500.0, 10.0));
-        this.rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-        this.animation = (EnumSetting)this.m28(new EnumSetting("Animation", AnimationMode.Up));
-        this.ease = (EnumSetting)this.m28(new EnumSetting("Ease", EaseMode.CubicInOut));
-        this.fadeEase = (EnumSetting)this.m28(new EnumSetting("FadeEase", EaseMode.CubicInOut));
-        this.box = (BooleanSetting)this.m28(new BooleanSetting("Box", true));
-        this.outline = (BooleanSetting)this.m28(new BooleanSetting("Outline", true));
-        this.through = (BooleanSetting)this.m28(new BooleanSetting("Through", false));
-        this.startFill = (ColorSetting)this.m28(new ColorSetting("StartFill", 0x64FFFFFF));
-        this.startOutline = (ColorSetting)this.m28(new ColorSetting("StartOutline", -1));
-        this.endFill = (ColorSetting)this.m28(new ColorSetting("EndFill", 1677765375));
-        this.endOutline = (ColorSetting)this.m28(new ColorSetting("EndOutline", -16733441));
-        this.doubleFill = (ColorSetting)this.m28(new ColorSetting("DoubleFill", 1683513087));
-        this.doubleOutline = (ColorSetting)this.m28(new ColorSetting("DoubleOutline", -10985729));
+        this.range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 6.0, 3.0, 10.0, 0.1));
+        this.damage = (NumberSetting)this.registerSetting(new NumberSetting("Damage", 0.7, 0.1, 2.0, 0.01));
+        this.stopDelay = (NumberSetting)this.registerSetting(new NumberSetting("StopDelay", 50.0, 0.0, 500.0, 1.0));
+        this.startDelay = (NumberSetting)this.registerSetting(new NumberSetting("StartDelay", 200.0, 0.0, 500.0, 1.0));
+        this.instant = (BooleanSetting)this.registerSetting(new BooleanSetting("Instant", false));
+        this.wait = (BooleanSetting)this.registerSetting(new BooleanSetting("Wait", true));
+        this.swing = (BooleanSetting)this.registerSetting(new BooleanSetting("Swing", true));
+        this.endSwing = (BooleanSetting)this.registerSetting(new BooleanSetting("EndSwing", false));
+        this.onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", true));
+        this.farCancel = (BooleanSetting)this.registerSetting(new BooleanSetting("FarCancel", false));
+        this.eatPause = (BooleanSetting)this.registerSetting(new BooleanSetting("EatPause", true));
+        this.switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+        this.doubleBreak = (BooleanSetting)this.registerSetting(new BooleanSetting("DoubleBreak", true));
+        this.booleanSetting6 = (BooleanSetting)this.registerSetting(new BooleanSetting("1.21", false));
+        this.doubleDelay = (NumberSetting)this.registerSetting(new NumberSetting("DoubleDelay", 50.0, 0.0, 500.0, 1.0));
+        this.start = (NumberSetting)this.registerSetting(new NumberSetting("Start", 0.9, 0.0, 2.0, 0.01));
+        this.timeOut = (NumberSetting)this.registerSetting(new NumberSetting("TimeOut", 1.2, 0.5, 5.0, 0.01));
+        this.debugLog = (BooleanSetting)this.registerSetting(new BooleanSetting("DebugLog", false));
+        this.startRotate = (BooleanSetting)this.registerSetting(new BooleanSetting("StartRotate", true));
+        this.endRotate = (BooleanSetting)this.registerSetting(new BooleanSetting("EndRotate", false));
+        this.doubleStartRotate = (BooleanSetting)this.registerSetting(new BooleanSetting("DoubleStartRotate", false));
+        this.doubleEndRotate = (BooleanSetting)this.registerSetting(new BooleanSetting("DoubleEndRotate", false));
+        this.rotateMs = (NumberSetting)this.registerSetting(new NumberSetting("RotateMs", 150.0, 0.0, 1500.0, 10.0));
+        this.rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+        this.animation = (EnumSetting)this.registerSetting(new EnumSetting("Animation", AnimationMode.Up));
+        this.ease = (EnumSetting)this.registerSetting(new EnumSetting("Ease", EaseMode.CubicInOut));
+        this.fadeEase = (EnumSetting)this.registerSetting(new EnumSetting("FadeEase", EaseMode.CubicInOut));
+        this.box = (BooleanSetting)this.registerSetting(new BooleanSetting("Box", true));
+        this.outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+        this.through = (BooleanSetting)this.registerSetting(new BooleanSetting("Through", false));
+        this.startFill = (ColorSetting)this.registerSetting(new ColorSetting("StartFill", 0x64FFFFFF));
+        this.startOutline = (ColorSetting)this.registerSetting(new ColorSetting("StartOutline", -1));
+        this.endFill = (ColorSetting)this.registerSetting(new ColorSetting("EndFill", 1677765375));
+        this.endOutline = (ColorSetting)this.registerSetting(new ColorSetting("EndOutline", -16733441));
+        this.doubleFill = (ColorSetting)this.registerSetting(new ColorSetting("DoubleFill", 1683513087));
+        this.doubleOutline = (ColorSetting)this.registerSetting(new ColorSetting("DoubleOutline", -10985729));
         this.blockPos12 = null;
         this.direction8 = null;
         this.direction7 = null;
@@ -226,7 +226,7 @@ extends Module {
     public static BlockPos getBlockPos7() {
         boolean bl = false;
         if (INSTANCE == null) return null;
-        if (!INSTANCE.isSet19()) return null;
+        if (!INSTANCE.isEnabled()) return null;
         BlockPos blockPos = SpeedMine.INSTANCE.blockPos12;
         return blockPos;
     }
@@ -238,7 +238,7 @@ extends Module {
         if (INSTANCE != null) {
             SpeedMine.INSTANCE.flag128 = false;
             SpeedMine.INSTANCE.flag180 = false;
-            SpeedMine.INSTANCE.helper740.m533();
+            SpeedMine.INSTANCE.helper740.resetTimer();
             SpeedMine.INSTANCE.direction7 = null;
         }
     }
@@ -249,7 +249,7 @@ extends Module {
             block6: {
                 blockPos = (BlockPos)object;
                 boolean bl = false;
-                if (Module.isSet37() || MC.client3.player.isCreative()) {
+                if (Module.isNotInGame() || MC.mc.player.isCreative()) {
                     return;
                 }
                 if (blockPos == null) break block6;
@@ -270,7 +270,7 @@ extends Module {
         this.flag98 = false;
         flag95 = false;
         flag73 = false;
-        this.helper733.m533();
+        this.helper733.resetTimer();
         this.timer4.m136();
     }
 
@@ -284,7 +284,7 @@ extends Module {
                 if (this.blockPos12 == null) break block4;
                 if (SpeedMine.m822(this.blockPos12)) break block4;
                 if (this.m193(this.blockPos12)) break block4;
-                if (!(MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)this.blockPos12)) > (Double)this.range.getObj())) break block5;
+                if (!(MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)this.blockPos12)) > (Double)this.range.getValue())) break block5;
             }
             this.flag172 = false;
             return false;
@@ -298,7 +298,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m989();
         Client.renderUtil3.m608();
     }
@@ -325,20 +325,20 @@ extends Module {
         this.blockPos9 = null;
         this.direction5 = null;
         value189 = 0.0;
-        this.helper740.m533();
-        this.helper733.m533();
+        this.helper740.resetTimer();
+        this.helper733.resetTimer();
     }
 
     @EventHandler
     private void setStartAttackEvent2(StartAttackEvent startAttackEvent) {
         Direction direction;
-        if (Module.isSet37() || MC.client3.player.isCreative()) {
+        if (Module.isNotInGame() || MC.mc.player.isCreative()) {
             return;
         }
-        if (((Boolean)this.eatPause.getObj()).booleanValue() && MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.eatPause.getValue()).booleanValue() && MC.mc.player.isUsingItem()) {
             return;
         }
-        HitResult hitResult = MC.client3.crosshairTarget;
+        HitResult hitResult = MC.mc.crosshairTarget;
         if (!(hitResult instanceof BlockHitResult)) {
             return;
         }
@@ -350,7 +350,7 @@ extends Module {
         if (SpeedMine.m822(blockPos349)) {
             return;
         }
-        if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos349)) > (Double)this.range.getObj()) {
+        if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos349)) > (Double)this.range.getValue()) {
             return;
         }
         if (this.m561(blockPos349) == null) {
@@ -366,20 +366,20 @@ extends Module {
         this.flag98 = false;
         flag95 = false;
         flag73 = false;
-        this.helper733.m533();
+        this.helper733.resetTimer();
         this.timer4.m136();
-        if (!this.helper727.m432((Double)this.startDelay.getObj())) {
+        if (!this.helper727.hasPassedMs((Double)this.startDelay.getValue())) {
             return;
         }
         this.direction8 = direction = this.m138(this.blockPos12);
-        if (((Boolean)this.swing.getObj()).booleanValue()) {
-            MC.client3.player.swingHand(Hand.MAIN_HAND);
+        if (((Boolean)this.swing.getValue()).booleanValue()) {
+            MC.mc.player.swingHand(Hand.MAIN_HAND);
         }
-        if (((Boolean)this.doubleBreak.getObj()).booleanValue()) {
+        if (((Boolean)this.doubleBreak.getValue()).booleanValue()) {
             if (blockPos7 == null || this.m193(blockPos7)) {
                 int n = this.m862(this.blockPos12);
                 if (n == -1) {
-                    n = MC.client3.player.getInventory().getSelectedSlot();
+                    n = MC.mc.player.getInventory().getSelectedSlot();
                 }
                 this.value113 = this.m710(this.blockPos12, n, 1.0);
                 this.timer2.m136();
@@ -388,14 +388,14 @@ extends Module {
             }
             this.setObj99(direction);
         }
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, direction));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, direction));
         this.setObj36("onAttack START breakPos=" + String.valueOf(this.blockPos12) + " side=" + String.valueOf(direction));
-        this.helper727.m533();
+        this.helper727.resetTimer();
     }
 
     @EventHandler
     private void setPacketEventInner213(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (Module.isSet37() || MC.client3.player.isCreative()) {
+        if (Module.isNotInGame() || MC.mc.player.isCreative()) {
             return;
         }
         Packet packet = packetEventInner2.getPacket();
@@ -407,7 +407,7 @@ extends Module {
             if (playerActionC2SPacket.getPos().equals((Object)this.blockPos12)) {
                 this.flag98 = true;
             }
-        } else if (playerActionC2SPacket.getAction() == PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK && playerActionC2SPacket.getPos().equals((Object)this.blockPos12) && !((Boolean)this.instant.getObj()).booleanValue()) {
+        } else if (playerActionC2SPacket.getAction() == PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK && playerActionC2SPacket.getPos().equals((Object)this.blockPos12) && !((Boolean)this.instant.getValue()).booleanValue()) {
             this.flag98 = false;
             flag95 = false;
             flag73 = false;
@@ -416,17 +416,17 @@ extends Module {
 
     @EventHandler
     private void onTick3(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.player.isCreative()) {
+        if (MC.mc.player.isCreative()) {
             this.m989();
             return;
         }
-        long rotMs = ((Double)this.rotateMs.getObj()).longValue();
+        long rotMs = ((Double)this.rotateMs.getValue()).longValue();
         boolean rotated = false;
         if (this.flag24) {
-            if (this.helper729.m432(rotMs)) {
+            if (this.helper729.hasPassedMs(rotMs)) {
                 this.flag24 = false;
                 this.m244();
             } else {
@@ -439,7 +439,7 @@ extends Module {
             }
         }
         if (this.flag168) {
-            if (this.helper730.m432(rotMs)) {
+            if (this.helper730.hasPassedMs(rotMs)) {
                 this.flag168 = false;
                 if (!this.flag24 && !this.flag131 && !this.flag91) {
                     this.m244();
@@ -454,7 +454,7 @@ extends Module {
             }
         }
         if (this.flag131) {
-            if (this.helper715.m432(rotMs)) {
+            if (this.helper715.hasPassedMs(rotMs)) {
                 this.flag131 = false;
                 if (!this.flag24 && !this.flag168 && !this.flag91) {
                     this.m244();
@@ -469,7 +469,7 @@ extends Module {
             }
         }
         if (this.flag91) {
-            if (this.helper736.m432(rotMs)) {
+            if (this.helper736.hasPassedMs(rotMs)) {
                 this.flag91 = false;
                 if (!this.flag24 && !this.flag168 && !this.flag131) {
                     this.m244();
@@ -489,14 +489,14 @@ extends Module {
         if (blockPos7 != null) {
             int slot = this.m862(blockPos7);
             if (slot == -1) {
-                slot = MC.client3.player.getInventory().getSelectedSlot();
+                slot = MC.mc.player.getInventory().getSelectedSlot();
             }
             this.value113 = this.m710(blockPos7, slot, 1.0);
             if (!this.m193(blockPos7) && !SpeedMine.m822(blockPos7)) {
-                double need = this.m710(blockPos7, MC.client3.player.getInventory().getSelectedSlot(), 1.0);
-                if (this.helper740.m432((long)(need * (Double)this.timeOut.getObj()))) {
-                    long elapsed = this.helper740.getLong12();
-                    long limit = (long)(need * (Double)this.timeOut.getObj());
+                double need = this.m710(blockPos7, MC.mc.player.getInventory().getSelectedSlot(), 1.0);
+                if (this.helper740.hasPassedMs((long)(need * (Double)this.timeOut.getValue()))) {
+                    long elapsed = this.helper740.getElapsed();
+                    long limit = (long)(need * (Double)this.timeOut.getValue());
                     this.setObj36("secondPos TIMEOUT elapsed=" + elapsed + "ms limit=" + limit + "ms");
                     SpeedMine.setObj27(null);
                 }
@@ -506,17 +506,17 @@ extends Module {
             }
         }
         if (blockPos7 != null && !this.flag128) {
-            this.helper740.m533();
+            this.helper740.resetTimer();
             if (!blockPos7.equals((Object)this.blockPos12)) {
                 Direction dir = this.getDirection2();
                 this.blockPos9 = blockPos7;
                 this.direction5 = dir;
-                if (((Boolean)this.doubleStartRotate.getObj()).booleanValue()) {
+                if (((Boolean)this.doubleStartRotate.getValue()).booleanValue()) {
                     this.m400(blockPos7, dir);
                     this.flag131 = true;
-                    this.helper715.m533();
+                    this.helper715.resetTimer();
                 }
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, blockPos7, dir));
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, blockPos7, dir));
                 this.setObj36("secondPos START secondPos=" + String.valueOf(blockPos7) + " side=" + String.valueOf(dir));
             }
             this.flag128 = true;
@@ -530,40 +530,40 @@ extends Module {
             this.direction8 = null;
             value189 = 0.0;
         } else {
-            if (MC.client3.world.isAir(this.blockPos12)) {
+            if (MC.mc.world.isAir(this.blockPos12)) {
                 flag73 = true;
             }
             int slot = this.m862(this.blockPos12);
             if (slot == -1) {
-                slot = MC.client3.player.getInventory().getSelectedSlot();
+                slot = MC.mc.player.getInventory().getSelectedSlot();
             }
             this.value120 = this.m975(this.blockPos12, slot);
-            value189 = (double)this.helper733.getLong12() / this.value120;
+            value189 = (double)this.helper733.getElapsed() / this.value120;
             if (SpeedMine.m822(this.blockPos12)) {
                 this.blockPos12 = null;
                 this.direction8 = null;
                 this.flag98 = false;
                 flag95 = false;
                 flag73 = false;
-            } else if (((Boolean)this.farCancel.getObj()).booleanValue()
-                    && MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)this.blockPos12)) > (Double)this.range.getObj()) {
+            } else if (((Boolean)this.farCancel.getValue()).booleanValue()
+                    && MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)this.blockPos12)) > (Double)this.range.getValue()) {
                 this.flag98 = false;
                 flag95 = false;
                 flag73 = false;
                 this.count133 = 0;
                 this.blockPos12 = null;
                 this.direction8 = null;
-            } else if (this.helper716.m432((Double)this.stopDelay.getObj())) {
-                if (!((Boolean)this.eatPause.getObj()).booleanValue() || !MC.client3.player.isUsingItem()) {
+            } else if (this.helper716.hasPassedMs((Double)this.stopDelay.getValue())) {
+                if (!((Boolean)this.eatPause.getValue()).booleanValue() || !MC.mc.player.isUsingItem()) {
                     if (this.flag98) {
                         if (this.m193(this.blockPos12)) {
                             return;
                         }
-                        if (((Boolean)this.onlyGround.getObj()).booleanValue() && !MC.client3.player.isOnGround()) {
+                        if (((Boolean)this.onlyGround.getValue()).booleanValue() && !MC.mc.player.isOnGround()) {
                             return;
                         }
-                        if (this.helper733.m432(this.value120)) {
-                            if (System.currentTimeMillis() - this.time10 < (Double)this.doubleDelay.getObj()) {
+                        if (this.helper733.hasPassedMs(this.value120)) {
+                            if (System.currentTimeMillis() - this.time10 < (Double)this.doubleDelay.getValue()) {
                                 return;
                             }
                             ClientSetting.SwitchMode sm = this.getSwitchMode4();
@@ -571,13 +571,13 @@ extends Module {
                             Direction dir = this.getDirection4();
                             this.blockPos14 = bp;
                             this.direction6 = dir;
-                            if (((Boolean)this.endRotate.getObj()).booleanValue()) {
+                            if (((Boolean)this.endRotate.getValue()).booleanValue()) {
                                 this.m400(bp, dir);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
-                                    float f = itemStack.getMiningSpeedMultiplier(MC.client3.world.getBlockState(bp)) - 1.0f;
+                                    float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
                                         f2 = f2 > 0 ? 1.0f : 0.0f;
@@ -585,52 +585,52 @@ extends Module {
                                     return f2 != 0.0f;
                                 }, (Object)sm);
                             }
-                            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, bp, dir));
+                            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, bp, dir));
                             this.setObj36("STOP breakPos=" + String.valueOf(bp));
                             this.time10 = System.currentTimeMillis();
-                            if (((Boolean)this.endSwing.getObj()).booleanValue()) {
-                                MC.client3.player.swingHand(Hand.MAIN_HAND);
+                            if (((Boolean)this.endSwing.getValue()).booleanValue()) {
+                                MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 Client.renderUtil3.m608();
                             }
                             this.flag24 = false;
-                            if (((Boolean)this.endRotate.getObj()).booleanValue()) {
+                            if (((Boolean)this.endRotate.getValue()).booleanValue()) {
                                 this.flag168 = true;
-                                this.helper730.m533();
+                                this.helper730.resetTimer();
                             } else {
                                 this.m244();
                             }
                             this.count133++;
-                            this.helper716.m533();
-                            this.helper727.m533();
+                            this.helper716.resetTimer();
+                            this.helper727.resetTimer();
                             flag95 = true;
                         }
                     } else {
-                        if (!this.helper727.m432((Double)this.startDelay.getObj())) {
+                        if (!this.helper727.hasPassedMs((Double)this.startDelay.getValue())) {
                             return;
                         }
-                        if (!((Boolean)this.wait.getObj()).booleanValue() && this.m193(this.blockPos12)) {
+                        if (!((Boolean)this.wait.getValue()).booleanValue() && this.m193(this.blockPos12)) {
                             return;
                         }
                         Direction dir = this.m138(this.blockPos12);
                         this.direction8 = dir;
                         this.blockPos14 = this.blockPos12;
                         this.direction6 = dir;
-                        if (((Boolean)this.startRotate.getObj()).booleanValue()) {
+                        if (((Boolean)this.startRotate.getValue()).booleanValue()) {
                             this.m400(this.blockPos12, dir);
                         }
-                        this.helper733.m533();
+                        this.helper733.resetTimer();
                         this.timer4.m136();
-                        if (((Boolean)this.swing.getObj()).booleanValue()) {
-                            MC.client3.player.swingHand(Hand.MAIN_HAND);
+                        if (((Boolean)this.swing.getValue()).booleanValue()) {
+                            MC.mc.player.swingHand(Hand.MAIN_HAND);
                         }
-                        boolean instantBreak = ((Boolean)this.instant.getObj()).booleanValue() || this.m975(this.blockPos12, slot) <= 50.0;
-                        if (((Boolean)this.doubleBreak.getObj()).booleanValue()) {
+                        boolean instantBreak = ((Boolean)this.instant.getValue()).booleanValue() || this.m975(this.blockPos12, slot) <= 50.0;
+                        if (((Boolean)this.doubleBreak.getValue()).booleanValue()) {
                             if (blockPos7 == null || this.m193(blockPos7)) {
                                 int slot2 = this.m862(this.blockPos12);
                                 if (slot2 == -1) {
-                                    slot2 = MC.client3.player.getInventory().getSelectedSlot();
+                                    slot2 = MC.mc.player.getInventory().getSelectedSlot();
                                 }
                                 this.value113 = this.m710(this.blockPos12, slot2, 1.0);
                                 this.timer2.m136();
@@ -639,7 +639,7 @@ extends Module {
                             }
                             this.setObj99(dir);
                         }
-                        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, dir));
+                        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, dir));
                         this.setObj36("START breakPos=" + String.valueOf(this.blockPos12) + " side=" + String.valueOf(dir) + " instant=" + instantBreak);
                         if (instantBreak) {
                             ClientSetting.SwitchMode sm = this.getSwitchMode4();
@@ -647,7 +647,7 @@ extends Module {
                                 BlockPos bp = this.blockPos12;
                                 Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
-                                    float f = itemStack.getMiningSpeedMultiplier(MC.client3.world.getBlockState(bp)) - 1.0f;
+                                    float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
                                         f2 = f2 > 0 ? 1.0f : 0.0f;
@@ -655,10 +655,10 @@ extends Module {
                                     return f2 != 0.0f;
                                 }, (Object)sm);
                             }
-                            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, this.blockPos12, dir));
+                            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, this.blockPos12, dir));
                             this.time10 = System.currentTimeMillis();
-                            if (((Boolean)this.endSwing.getObj()).booleanValue()) {
-                                MC.client3.player.swingHand(Hand.MAIN_HAND);
+                            if (((Boolean)this.endSwing.getValue()).booleanValue()) {
+                                MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 Client.renderUtil3.m608();
@@ -666,19 +666,19 @@ extends Module {
                             this.setObj36("INSTANT STOP breakPos=" + String.valueOf(this.blockPos12));
                             flag95 = true;
                             this.flag24 = false;
-                            if (((Boolean)this.endRotate.getObj()).booleanValue()) {
+                            if (((Boolean)this.endRotate.getValue()).booleanValue()) {
                                 this.flag168 = true;
-                                this.helper730.m533();
+                                this.helper730.resetTimer();
                             } else {
                                 this.m244();
                             }
-                        } else if (((Boolean)this.startRotate.getObj()).booleanValue()) {
+                        } else if (((Boolean)this.startRotate.getValue()).booleanValue()) {
                             this.flag24 = true;
-                            this.helper729.m533();
+                            this.helper729.resetTimer();
                         } else {
                             this.m244();
                         }
-                        this.helper727.m533();
+                        this.helper727.resetTimer();
                     }
                 }
             }
@@ -687,8 +687,8 @@ extends Module {
 
     private void setObj99(Object object) {
         Direction direction = (Direction)object;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, direction));
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, this.blockPos12, direction));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, this.blockPos12, direction));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, this.blockPos12, direction));
         this.setObj36("doDoubleBreak START+STOP breakPos=" + String.valueOf(this.blockPos12) + " side=" + String.valueOf(direction));
     }
 
@@ -718,7 +718,7 @@ extends Module {
                                                         block27: {
                                                             block25: {
                                                                 n = AutoArmor.getInt66();
-                                                                if (!((Boolean)this.doubleBreak.getObj()).booleanValue()) {
+                                                                if (!((Boolean)this.doubleBreak.getValue()).booleanValue()) {
                                                                     return;
                                                                 }
                                                                 if (blockPos7 == null) break block25;
@@ -750,21 +750,21 @@ extends Module {
                                     n3 = n2 = n4;
                                     if (n == 0) break block32;
                                     if (n3 != -1) break block33;
-                                    n3 = MC.client3.player.getInventory().getSelectedSlot();
+                                    n3 = MC.mc.player.getInventory().getSelectedSlot();
                                 }
                                 n2 = n3;
                             }
-                            long l = (long)this.m710(blockPos7, n2, (Double)this.start.getObj());
+                            long l = (long)this.m710(blockPos7, n2, (Double)this.start.getValue());
                             String string = String.valueOf(blockPos7);
                             long l2 = l;
-                            long l3 = this.helper740.getLong12();
+                            long l3 = this.helper740.getElapsed();
                             this.setObj36("autoSwitch: elapsed=" + l3 + "ms need=" + l2 + "ms secondPos=" + string);
-                            int n5 = this.helper740.m432(l) ? 1 : 0;
+                            int n5 = this.helper740.hasPassedMs(l) ? 1 : 0;
                             if (n != 0) {
                                 if (n5 == 0) {
                                     return;
                                 }
-                                double d = (double)(System.currentTimeMillis() - this.time10) - (Double)this.doubleDelay.getObj();
+                                double d = (double)(System.currentTimeMillis() - this.time10) - (Double)this.doubleDelay.getValue();
                                 n5 = d == 0.0 ? 0 : (d < 0.0 ? -1 : 1);
                             }
                             if (n5 < 0) {
@@ -776,7 +776,7 @@ extends Module {
                                 net.minecraft.util.math.BlockPos blockPosF = blockPos;
                                 Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
-                                    float f = itemStack.getMiningSpeedMultiplier(MC.client3.world.getBlockState(blockPosF)) - 1.0f;
+                                    float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(blockPosF)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
                                         f2 = f2 > 0 ? 1.0f : 0.0f;
@@ -788,24 +788,24 @@ extends Module {
                             Direction direction = this.getDirection2();
                             this.blockPos9 = blockPos;
                             this.direction5 = direction;
-                            bl = (Boolean)this.doubleEndRotate.getObj();
+                            bl = (Boolean)this.doubleEndRotate.getValue();
                             if (n == 0) break block34;
                             if (bl) {
                                 this.m400(blockPos, direction);
                             }
-                            clientPlayerEntity = MC.client3.player;
+                            clientPlayerEntity = MC.mc.player;
                             if (n == 0) break block35;
                             clientPlayerEntity.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, blockPos, direction));
                             long l4 = l;
-                            long l5 = this.helper740.getLong12();
+                            long l5 = this.helper740.getElapsed();
                             String string2 = String.valueOf(direction);
                             String string3 = String.valueOf(blockPos);
                             this.setObj36("STOP secondPos=" + string3 + " side=" + string2 + " elapsed=" + l5 + "ms needed=" + l4 + "ms");
                             this.time10 = System.currentTimeMillis();
-                            bl = (Boolean)this.endSwing.getObj();
+                            bl = (Boolean)this.endSwing.getValue();
                         }
                         if (!bl) break block36;
-                        clientPlayerEntity = MC.client3.player;
+                        clientPlayerEntity = MC.mc.player;
                     }
                     clientPlayerEntity.swingHand(Hand.MAIN_HAND);
                 }
@@ -816,12 +816,12 @@ extends Module {
                 }
                 speedMine = this;
                 if (n == 0) break block38;
-                object = speedMine.doubleEndRotate.getObj();
+                object = speedMine.doubleEndRotate.getValue();
             }
             if (((Boolean)object).booleanValue()) {
                 this.flag131 = false;
                 this.flag91 = true;
-                this.helper736.m533();
+                this.helper736.resetTimer();
             }
             speedMine = this;
         }
@@ -837,7 +837,7 @@ extends Module {
         Vec3d vec3d = direction != null
                 ? Vec3d.ofCenter((Vec3i)blockPos).add(direction.getOffsetX() * 0.5, direction.getOffsetY() * 0.5, direction.getOffsetZ() * 0.5)
                 : Vec3d.ofCenter((Vec3i)blockPos);
-        float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts14[this.getRotateMode6().ordinal()]) {
             case 1: {
                 Client.mathUtil.m303(fArray[0], fArray[1]);
@@ -875,7 +875,7 @@ extends Module {
     private ClientSetting.RotateMode getRotateMode6() {
         ClientSetting.RotateMode rotateMode;
         int n = AutoArmor.getInt66();
-        Object object = this.rotateMode.getObj();
+        Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {
                 ClientSetting.RotateMode rotateMode2;
@@ -885,12 +885,12 @@ extends Module {
                         rotateMode2 = ClientSetting.RotateMode.NONE;
                         return rotateMode2;
                     }
-                    object2 = ClientSetting.INSTANCE.rotateMode.getObj();
+                    object2 = ClientSetting.INSTANCE.rotateMode.getValue();
                 }
                 rotateMode2 = (ClientSetting.RotateMode)((Object)object2);
                 return rotateMode2;
             }
-            object = this.rotateMode.getObj();
+            object = this.rotateMode.getValue();
         }
         switch (((RotateMode)((Object)object)).ordinal()) {
             case 1: {
@@ -920,7 +920,7 @@ extends Module {
     private ClientSetting.SwitchMode getSwitchMode4() {
         ClientSetting.SwitchMode switchMode;
         int n = AutoArmor.getInt66();
-        Object object = this.switchMode.getObj();
+        Object object = this.switchMode.getValue();
         if (n != 0) {
             if (object == SwitchMode.DEFAULT) {
                 ClientSetting.SwitchMode switchMode2;
@@ -930,12 +930,12 @@ extends Module {
                         switchMode2 = ClientSetting.SwitchMode.NONE;
                         return switchMode2;
                     }
-                    object2 = ClientSetting.INSTANCE.switchMode.getObj();
+                    object2 = ClientSetting.INSTANCE.switchMode.getValue();
                 }
                 switchMode2 = (ClientSetting.SwitchMode)((Object)object2);
                 return switchMode2;
             }
-            object = this.switchMode.getObj();
+            object = this.switchMode.getValue();
         }
         switch (((SwitchMode)((Object)object)).ordinal()) {
             case 1: {
@@ -962,11 +962,11 @@ extends Module {
     @EventHandler
     private void setRenderLevelEvent3(RenderLevelEvent renderLevelEvent) {
         double d;
-        if (!((Boolean)this.box.getObj()).booleanValue() && !((Boolean)this.outline.getObj()).booleanValue()) {
+        if (!((Boolean)this.box.getValue()).booleanValue() && !((Boolean)this.outline.getValue()).booleanValue()) {
             return;
         }
         Matrix4f matrix4f = renderLevelEvent.getMatrix4f3();
-        if (this.blockPos12 != null && MC.client3.world != null && MC.client3.world.isAir(this.blockPos12)) {
+        if (this.blockPos12 != null && MC.mc.world != null && MC.mc.world.isAir(this.blockPos12)) {
             flag73 = true;
         }
         if (blockPos7 != null) {
@@ -977,27 +977,27 @@ extends Module {
                 SpeedMine.setObj27(objectArray2[0]);
             } else {
                 this.timer2.setLong4((long)Math.max(this.value113, 1.0));
-                d = this.timer2.m1037((Object)((EaseMode)((Object)this.ease.getObj())));
-                if (((Boolean)this.box.getObj()).booleanValue()) {
-                    EspRenderLayers.m69(matrix4f, this.m556(blockPos7, d), (Integer)this.doubleFill.getObj(), (Boolean)this.through.getObj());
+                d = this.timer2.m1037((Object)((EaseMode)((Object)this.ease.getValue())));
+                if (((Boolean)this.box.getValue()).booleanValue()) {
+                    EspRenderLayers.m69(matrix4f, this.m556(blockPos7, d), (Integer)this.doubleFill.getValue(), (Boolean)this.through.getValue());
                 }
-                if (((Boolean)this.outline.getObj()).booleanValue()) {
-                    EspRenderLayers.m688(matrix4f, this.m460(blockPos7, d), (Integer)this.doubleOutline.getObj(), (Boolean)this.through.getObj());
+                if (((Boolean)this.outline.getValue()).booleanValue()) {
+                    EspRenderLayers.m688(matrix4f, this.m460(blockPos7, d), (Integer)this.doubleOutline.getValue(), (Boolean)this.through.getValue());
                 }
             }
         }
         if (this.blockPos12 != null) {
-            value189 = (double)this.helper733.getLong12() / Math.max(this.value120, 1.0);
+            value189 = (double)this.helper733.getElapsed() / Math.max(this.value120, 1.0);
             this.timer4.setLong4((long)Math.max(this.value120, 1.0));
-            d = this.timer4.m1037((Object)((EaseMode)((Object)this.ease.getObj())));
-            double d2 = this.timer4.m1037((Object)((EaseMode)((Object)this.fadeEase.getObj())));
-            int n = SpeedMine.m425((Integer)this.startFill.getObj(), (Integer)this.endFill.getObj(), d2);
-            int n2 = SpeedMine.m425((Integer)this.startOutline.getObj(), (Integer)this.endOutline.getObj(), d2);
-            if (((Boolean)this.box.getObj()).booleanValue()) {
-                EspRenderLayers.m69(matrix4f, this.m556(this.blockPos12, d), n, (Boolean)this.through.getObj());
+            d = this.timer4.m1037((Object)((EaseMode)((Object)this.ease.getValue())));
+            double d2 = this.timer4.m1037((Object)((EaseMode)((Object)this.fadeEase.getValue())));
+            int n = SpeedMine.m425((Integer)this.startFill.getValue(), (Integer)this.endFill.getValue(), d2);
+            int n2 = SpeedMine.m425((Integer)this.startOutline.getValue(), (Integer)this.endOutline.getValue(), d2);
+            if (((Boolean)this.box.getValue()).booleanValue()) {
+                EspRenderLayers.m69(matrix4f, this.m556(this.blockPos12, d), n, (Boolean)this.through.getValue());
             }
-            if (((Boolean)this.outline.getObj()).booleanValue()) {
-                EspRenderLayers.m688(matrix4f, this.m460(this.blockPos12, d), n2, (Boolean)this.through.getObj());
+            if (((Boolean)this.outline.getValue()).booleanValue()) {
+                EspRenderLayers.m688(matrix4f, this.m460(this.blockPos12, d), n2, (Boolean)this.through.getValue());
             }
         } else {
             value189 = 0.0;
@@ -1011,7 +1011,7 @@ extends Module {
         double d3 = blockPos.getX();
         double d4 = blockPos.getY();
         double d5 = blockPos.getZ();
-        return switch (((AnimationMode)((Object)this.animation.getObj())).ordinal()) {
+        return switch (((AnimationMode)((Object)this.animation.getValue())).ordinal()) {
             default -> throw new MatchException(null, null);
             case 0, 4 -> {
                 double var14_8 = (1.0 - d2) / 2.0;
@@ -1033,7 +1033,7 @@ extends Module {
         double d3 = blockPos.getX();
         double d4 = blockPos.getY();
         double d5 = blockPos.getZ();
-        return switch (((AnimationMode)((Object)this.animation.getObj())).ordinal()) {
+        return switch (((AnimationMode)((Object)this.animation.getValue())).ordinal()) {
             default -> throw new MatchException(null, null);
             case 0, 4 -> {
                 double var14_8 = (1.0 - d2) / 2.0;
@@ -1056,7 +1056,7 @@ extends Module {
         int n = directionArray.length;
         for (int i = 0; i < n; ++i) {
             Direction direction = directionArray[i];
-            if (MC.client3.world.getBlockState(blockPos.offset(direction)).isAir()) continue;
+            if (MC.mc.world.getBlockState(blockPos.offset(direction)).isAir()) continue;
             return direction;
         }
         return Direction.UP;
@@ -1064,7 +1064,7 @@ extends Module {
 
     Direction m561(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.range.getObj()) {
+        if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.range.getValue()) {
             return null;
         }
         return this.m138(blockPos);
@@ -1108,7 +1108,7 @@ extends Module {
     double m975(Object object, int n) {
         BlockPos blockPos = (BlockPos)object;
         int n2 = n;
-        return this.m710(blockPos, n2, (Double)this.damage.getObj());
+        return this.m710(blockPos, n2, (Double)this.damage.getValue());
     }
 
     double m710(Object object, int n, double d) {
@@ -1118,7 +1118,7 @@ extends Module {
         int n3 = n;
         double d2 = d;
         int n4 = AutoArmor.getInt66();
-        int n5 = Module.isSet37() ? 1 : 0;
+        int n5 = Module.isNotInGame() ? 1 : 0;
         if (n4 != 0) {
             if (n5 != 0) {
                 return Double.MAX_VALUE;
@@ -1126,9 +1126,9 @@ extends Module {
             n5 = n3;
         }
         if (n4 != 0) {
-            n5 = n2 = n5 < 0 ? MC.client3.player.getInventory().getSelectedSlot() : n3;
+            n5 = n2 = n5 < 0 ? MC.mc.player.getInventory().getSelectedSlot() : n3;
         }
-        if ((f = this.m964(blockPos, MC.client3.player.getInventory().getStack(n2))) <= 0.0f) {
+        if ((f = this.m964(blockPos, MC.mc.player.getInventory().getStack(n2))) <= 0.0f) {
             return Double.MAX_VALUE;
         }
         return 1.0 / (double)f / 20.0 * 1000.0 * d2;
@@ -1140,8 +1140,8 @@ extends Module {
     private float m964(Object var1_1, Object var2_2) {
         BlockPos blockPos = (BlockPos)var1_1;
         ItemStack itemStack = (ItemStack)var2_2;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
-        float hardness = blockState.getHardness((BlockView)MC.client3.world, blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
+        float hardness = blockState.getHardness((BlockView)MC.mc.world, blockPos);
         if (hardness < 0.0f) {
             return 0.0f;
         }
@@ -1168,14 +1168,14 @@ extends Module {
                 speed += (float)(Math.pow(efficiency, 2.0) + 1.0);
             }
         }
-        if (MC.client3.player.hasStatusEffect(StatusEffects.HASTE)) {
-            net.minecraft.entity.effect.StatusEffectInstance haste = MC.client3.player.getStatusEffect(StatusEffects.HASTE);
+        if (MC.mc.player.hasStatusEffect(StatusEffects.HASTE)) {
+            net.minecraft.entity.effect.StatusEffectInstance haste = MC.mc.player.getStatusEffect(StatusEffects.HASTE);
             if (haste != null) {
                 speed *= 1.0f + (float)(haste.getAmplifier() + 1) * 0.2f;
             }
         }
-        if (MC.client3.player.hasStatusEffect(StatusEffects.MINING_FATIGUE)) {
-            net.minecraft.entity.effect.StatusEffectInstance fatigue = MC.client3.player.getStatusEffect(StatusEffects.MINING_FATIGUE);
+        if (MC.mc.player.hasStatusEffect(StatusEffects.MINING_FATIGUE)) {
+            net.minecraft.entity.effect.StatusEffectInstance fatigue = MC.mc.player.getStatusEffect(StatusEffects.MINING_FATIGUE);
             if (fatigue != null) {
                 speed *= switch (fatigue.getAmplifier()) {
                     case 0 -> 0.3f;
@@ -1185,10 +1185,10 @@ extends Module {
                 };
             }
         }
-        if (MC.client3.player.isSubmergedInWater()) {
-            speed *= (float)MC.client3.player.getAttributeValue(EntityAttributes.SUBMERGED_MINING_SPEED);
+        if (MC.mc.player.isSubmergedInWater()) {
+            speed *= (float)MC.mc.player.getAttributeValue(EntityAttributes.SUBMERGED_MINING_SPEED);
         }
-        if (!MC.client3.player.isOnGround()) {
+        if (!MC.mc.player.isOnGround()) {
             speed /= 5.0f;
         }
         return Math.max(speed, 0.0f);
@@ -1197,14 +1197,14 @@ extends Module {
     int m862(Object object) {
         BlockPos blockPos = (BlockPos)object;
         boolean bl = false;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return -1;
         }
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         int n = -1;
         float f = 1.0f;
         for (int i = 0; i < 9; ++i) {
-            ItemStack itemStack = MC.client3.player.getInventory().getStack(i);
+            ItemStack itemStack = MC.mc.player.getInventory().getStack(i);
             if (itemStack.isEmpty()) continue;
             int n2 = 0;
             for (Object2IntMap.Entry entry : itemStack.getEnchantments().getEnchantmentEntries()) {
@@ -1234,10 +1234,10 @@ extends Module {
             if (speedMine == null) return false;
             speedMine = INSTANCE;
         }
-        if (n != 0 && Module.isSet37()) {
+        if (n != 0 && Module.isNotInGame()) {
             return false;
         }
-        float f = MC.client3.world.getBlockState(blockPos).getHardness((BlockView)MC.client3.world, blockPos);
+        float f = MC.mc.world.getBlockState(blockPos).getHardness((BlockView)MC.mc.world, blockPos);
         float f2 = f - 0.0f;
         float f3 = f2 == 0.0f ? 0 : (f2 < 0.0f ? -1 : 1);
         if (n == 0) return f3 != 0.0f;
@@ -1262,10 +1262,10 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         int n = AutoArmor.getInt66();
         if (blockPos == null) return true;
-        boolean bl = Module.isSet37();
+        boolean bl = Module.isNotInGame();
         if (n == 0) return bl;
         if (bl) return true;
-        bl = MC.client3.world.isAir(blockPos);
+        bl = MC.mc.world.isAir(blockPos);
         if (n == 0) return bl;
         if (!bl) return false;
         return true;
@@ -1274,7 +1274,7 @@ extends Module {
     private void setObj36(Object object) {
         block0: {
             String string = (String)object;
-            if (!((Boolean)this.debugLog.getObj()).booleanValue()) break block0;
+            if (!((Boolean)this.debugLog.getValue()).booleanValue()) break block0;
             System.out.println("[SpeedMine] " + string);
         }
     }
@@ -1295,7 +1295,7 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         if (this.blockPos12 == null) {
             return null;
         }

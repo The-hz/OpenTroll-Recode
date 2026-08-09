@@ -11,11 +11,11 @@ public class Event {
     private boolean flag29;
     private static int count55;
 
-    public boolean isSet85() {
+    public boolean isCancelled() {
         return this.flag29;
     }
 
-    public void m209() {
+    public void cancel() {
         this.flag29 = true;
     }
 

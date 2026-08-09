@@ -88,7 +88,7 @@ public class TitleScreenMainMenuMixin {
         } else {
             FontManager2 fontManager2 = Client.fontManager.renderer2();
             for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
-                float f3 = fontManager2.m277(renderUtil2.getText71());
+                float f3 = fontManager2.getStringWidth(renderUtil2.getText71());
                 if (!(f3 > f)) continue;
                 f = f3;
             }
@@ -167,7 +167,7 @@ public class TitleScreenMainMenuMixin {
         } else {
             FontManager2 fontManager2 = Client.fontManager.renderer(28.0f);
             int n4 = Math.round(Client.fontManager.getFloat47());
-            fontManager2.m5(drawContext, string, Math.round(f2), Math.round(f3) + n4, -1, true);
+            fontManager2.drawText(drawContext, string, Math.round(f2), Math.round(f3) + n4, -1, true);
         }
         for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
             renderUtil2.m194(n, n2);

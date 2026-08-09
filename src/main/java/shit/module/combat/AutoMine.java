@@ -37,16 +37,16 @@ public class AutoMine
 extends Module {
     public static AutoMine INSTANCE;
     public static final List list33 = new java.util.ArrayList<>();
-    public final NumberSetting targetRange = (NumberSetting)this.m28(new NumberSetting("TargetRange", 6.0, 0.0, 8.0, 0.1));
-    public final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 6.0, 0.0, 8.0, 0.1));
-    private final NumberSetting doubleDelay = (NumberSetting)this.m28(new NumberSetting("DoubleDelay", 100.0, 0.0, 1000.0, 1.0));
-    private final BooleanSetting burrow = (BooleanSetting)this.m28(new BooleanSetting("Burrow", true));
-    private final BooleanSetting head = (BooleanSetting)this.m28(new BooleanSetting("Head", true));
-    private final BooleanSetting face = (BooleanSetting)this.m28(new BooleanSetting("Face", true));
-    private final BooleanSetting down = (BooleanSetting)this.m28(new BooleanSetting("Down", false));
-    private final BooleanSetting surround = (BooleanSetting)this.m28(new BooleanSetting("Surround", true));
-    private final BooleanSetting priorityOwn = (BooleanSetting)this.m28(new BooleanSetting("PriorityOwn", true));
-    private final BooleanSetting forceDouble = (BooleanSetting)this.m28(new BooleanSetting("ForceDouble", false));
+    public final NumberSetting targetRange = (NumberSetting)this.registerSetting(new NumberSetting("TargetRange", 6.0, 0.0, 8.0, 0.1));
+    public final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 6.0, 0.0, 8.0, 0.1));
+    private final NumberSetting doubleDelay = (NumberSetting)this.registerSetting(new NumberSetting("DoubleDelay", 100.0, 0.0, 1000.0, 1.0));
+    private final BooleanSetting burrow = (BooleanSetting)this.registerSetting(new BooleanSetting("Burrow", true));
+    private final BooleanSetting head = (BooleanSetting)this.registerSetting(new BooleanSetting("Head", true));
+    private final BooleanSetting face = (BooleanSetting)this.registerSetting(new BooleanSetting("Face", true));
+    private final BooleanSetting down = (BooleanSetting)this.registerSetting(new BooleanSetting("Down", false));
+    private final BooleanSetting surround = (BooleanSetting)this.registerSetting(new BooleanSetting("Surround", true));
+    private final BooleanSetting priorityOwn = (BooleanSetting)this.registerSetting(new BooleanSetting("PriorityOwn", true));
+    private final BooleanSetting forceDouble = (BooleanSetting)this.registerSetting(new BooleanSetting("ForceDouble", false));
     private long time45 = 0L;
 
     public AutoMine() {
@@ -56,13 +56,13 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner34(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (SpeedMine.INSTANCE == null || !SpeedMine.INSTANCE.isSet19()) {
+        if (SpeedMine.INSTANCE == null || !SpeedMine.INSTANCE.isEnabled()) {
             return;
         }
-        if (((Boolean)this.priorityOwn.getObj()).booleanValue() && SpeedMine.INSTANCE.isSet149()) {
+        if (((Boolean)this.priorityOwn.getValue()).booleanValue() && SpeedMine.INSTANCE.isSet149()) {
             return;
         }
         if (SpeedMine.blockPos7 != null && !SpeedMine.blockPos7.equals((Object)SpeedMine.getBlockPos7())) {
@@ -81,16 +81,16 @@ extends Module {
         double[] offsets = new double[]{0.3, -0.3};
 
         ArrayList<Double> yList = new ArrayList<Double>();
-        if (((Boolean)this.down.getObj()).booleanValue()) {
+        if (((Boolean)this.down.getValue()).booleanValue()) {
             yList.add(-0.8);
         }
-        if (((Boolean)this.burrow.getObj()).booleanValue()) {
+        if (((Boolean)this.burrow.getValue()).booleanValue()) {
             yList.add(0.3);
         }
-        if (((Boolean)this.face.getObj()).booleanValue()) {
+        if (((Boolean)this.face.getValue()).booleanValue()) {
             yList.add(1.1);
         }
-        if (((Boolean)this.head.getObj()).booleanValue()) {
+        if (((Boolean)this.head.getValue()).booleanValue()) {
             yList.add(2.3);
         }
         for (double y : yList) {
@@ -104,7 +104,7 @@ extends Module {
             }
         }
 
-        if (((Boolean)this.surround.getObj()).booleanValue()) {
+        if (((Boolean)this.surround.getValue()).booleanValue()) {
             for (Direction direction : Direction.values()) {
                 if (direction == Direction.UP || direction == Direction.DOWN) continue;
                 BlockPos bp = playerPos.offset(direction);
@@ -115,16 +115,16 @@ extends Module {
         }
 
         ArrayList<Float> yList2 = new ArrayList<Float>();
-        if (((Boolean)this.down.getObj()).booleanValue()) {
+        if (((Boolean)this.down.getValue()).booleanValue()) {
             yList2.add(-0.8f);
         }
-        if (((Boolean)this.head.getObj()).booleanValue()) {
+        if (((Boolean)this.head.getValue()).booleanValue()) {
             yList2.add(2.3f);
         }
-        if (((Boolean)this.burrow.getObj()).booleanValue()) {
+        if (((Boolean)this.burrow.getValue()).booleanValue()) {
             yList2.add(0.3f);
         }
-        if (((Boolean)this.face.getObj()).booleanValue()) {
+        if (((Boolean)this.face.getValue()).booleanValue()) {
             yList2.add(1.1f);
         }
 
@@ -152,12 +152,12 @@ extends Module {
             }
         }
 
-        if (((Boolean)this.surround.getObj()).booleanValue()) {
+        if (((Boolean)this.surround.getValue()).booleanValue()) {
             for (Direction direction : Direction.values()) {
                 if (direction == Direction.UP || direction == Direction.DOWN) continue;
                 BlockPos bp = playerPos.offset(direction);
-                if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)bp)) <= (Double)this.range.getObj()
-                        && (MC.client3.world.isAir(bp) || bp.equals((Object)SpeedMine.getBlockPos7()))
+                if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)bp)) <= (Double)this.range.getValue()
+                        && (MC.mc.world.isAir(bp) || bp.equals((Object)SpeedMine.getBlockPos7()))
                         && this.m616(bp, false)
                         && !bp.equals((Object)SpeedMine.blockPos7)) {
                     return;
@@ -169,7 +169,7 @@ extends Module {
             for (Direction direction : Direction.values()) {
                 if (direction == Direction.UP || direction == Direction.DOWN) continue;
                 BlockPos bp = playerPos.offset(direction);
-                if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)bp)) <= (Double)this.range.getObj() && this.m331(bp) && !this.m157(bp)) {
+                if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)bp)) <= (Double)this.range.getValue() && this.m331(bp) && !this.m157(bp)) {
                     if (this.m616(bp, true)) {
                         strict.add(bp);
                     }
@@ -180,7 +180,7 @@ extends Module {
             }
             ArrayList<BlockPos> chosen = !strict.isEmpty() ? strict : loose;
             if (!chosen.isEmpty()) {
-                BlockPos best = chosen.stream().min(Comparator.comparingDouble(b -> MC.client3.player.getEyePos().squaredDistanceTo(Vec3d.ofCenter((Vec3i)b)))).orElse(null);
+                BlockPos best = chosen.stream().min(Comparator.comparingDouble(b -> MC.mc.player.getEyePos().squaredDistanceTo(Vec3d.ofCenter((Vec3i)b)))).orElse(null);
                 if (best != null) {
                     SpeedMine.INSTANCE.setObj84(best);
                     this.time45 = System.currentTimeMillis();
@@ -188,11 +188,11 @@ extends Module {
             }
         }
 
-        if (((Boolean)this.forceDouble.getObj()).booleanValue()) {
+        if (((Boolean)this.forceDouble.getValue()).booleanValue()) {
             BlockPos current = SpeedMine.getBlockPos7();
             if (current != null) {
                 BlockPos next = this.getNextBestTarget(playerEntity, current);
-                if (next != null && !next.equals((Object)SpeedMine.blockPos7) && System.currentTimeMillis() - this.time45 >= (Double)this.doubleDelay.getObj()) {
+                if (next != null && !next.equals((Object)SpeedMine.blockPos7) && System.currentTimeMillis() - this.time45 >= (Double)this.doubleDelay.getValue()) {
                     SpeedMine.setObj27(next);
                 }
             }
@@ -204,14 +204,14 @@ extends Module {
         if (blockPos == null) {
             return false;
         }
-        net.minecraft.block.BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        net.minecraft.block.BlockState blockState = MC.mc.world.getBlockState(blockPos);
         if (blockState.getBlock() instanceof TrapdoorBlock && blockPos.equals((Object)SpeedMine.getBlockPos7())) {
             return false;
         }
         if (!list33.contains(blockState.getBlock())) {
             return false;
         }
-        if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) - (Double)SpeedMine.INSTANCE.range.getObj() > 0.0) {
+        if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) - (Double)SpeedMine.INSTANCE.range.getValue() > 0.0) {
             return false;
         }
         if (blockPos.equals((Object)SpeedMine.blockPos7)) {
@@ -227,16 +227,16 @@ extends Module {
         double[] dArray = new double[]{0.3, -0.3};
         boolean bl = false;
         ArrayList<Float> arrayList2 = new ArrayList<Float>();
-        if (((Boolean)this.down.getObj()).booleanValue()) {
+        if (((Boolean)this.down.getValue()).booleanValue()) {
             arrayList2.add(Float.valueOf(-0.8f));
         }
-        if (((Boolean)this.face.getObj()).booleanValue()) {
+        if (((Boolean)this.face.getValue()).booleanValue()) {
             arrayList2.add(Float.valueOf(1.1f));
         }
-        if (((Boolean)this.head.getObj()).booleanValue()) {
+        if (((Boolean)this.head.getValue()).booleanValue()) {
             arrayList2.add(Float.valueOf(2.3f));
         }
-        if (((Boolean)this.burrow.getObj()).booleanValue()) {
+        if (((Boolean)this.burrow.getValue()).booleanValue()) {
             arrayList2.add(Float.valueOf(0.3f));
         }
         Iterator<Float> iterator2 = arrayList2.iterator();
@@ -261,7 +261,7 @@ extends Module {
             if (!false) continue;
             break;
         }
-        if (((Boolean)this.surround.getObj()).booleanValue()) {
+        if (((Boolean)this.surround.getValue()).booleanValue()) {
             BlockPos blockPos3 = playerEntity.getBlockPos();
             for (Direction direction : Direction.values()) {
                 if (direction == Direction.UP || direction == Direction.DOWN) continue;
@@ -273,7 +273,7 @@ extends Module {
                 if (!false) continue;
             }
         }
-        return arrayList.stream().min(Comparator.comparingDouble(blockPos -> MC.client3.player.getEyePos().squaredDistanceTo(Vec3d.ofCenter((Vec3i)blockPos)))).orElse(null);
+        return arrayList.stream().min(Comparator.comparingDouble(blockPos -> MC.mc.player.getEyePos().squaredDistanceTo(Vec3d.ofCenter((Vec3i)blockPos)))).orElse(null);
     }
 
     /*
@@ -297,7 +297,7 @@ extends Module {
                     bl2 = bl3;
                     if (n == 0) break block5;
                     if (!bl2) break block6;
-                    block2 = block3 = MC.client3.world.getBlockState(blockPos2).getBlock();
+                    block2 = block3 = MC.mc.world.getBlockState(blockPos2).getBlock();
                     block = Blocks.BEDROCK;
                     if (n == 0) break block7;
                     if (block2 == block) break block6;
@@ -323,7 +323,7 @@ extends Module {
         boolean bl;
         block3: {
             BlockPos blockPos = (BlockPos)object;
-            Iterator iterator = MC.client3.world.getNonSpectatingEntities(Entity.class, new Box(blockPos)).iterator();
+            Iterator iterator = MC.mc.world.getNonSpectatingEntities(Entity.class, new Box(blockPos)).iterator();
             int n = AutoArmor.getInt66();
             while (iterator.hasNext()) {
                 block5: {
@@ -352,7 +352,7 @@ extends Module {
 
     private boolean m157(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockPos blockPos2 = MC.client3.player.getBlockPos();
+        BlockPos blockPos2 = MC.mc.player.getBlockPos();
         Direction[] directionArray = Direction.values();
         int n = directionArray.length;
         boolean bl = false;
@@ -366,13 +366,13 @@ extends Module {
 
     private PlayerEntity getPlayer() {
         PlayerEntity playerEntity = null;
-        double d = (Double)this.targetRange.getObj();
+        double d = (Double)this.targetRange.getValue();
         boolean bl = false;
-        for (PlayerEntity playerEntity2 : MC.client3.world.getPlayers()) {
-            if (playerEntity2 == MC.client3.player) continue;
+        for (PlayerEntity playerEntity2 : MC.mc.world.getPlayers()) {
+            if (playerEntity2 == MC.mc.player) continue;
             if (playerEntity2.isSpectator()) continue;
-            if (playerEntity2.isCreative() || Client.manager.m258(playerEntity2.getName().getString())) continue;
-            double d2 = MC.client3.player.distanceTo((Entity)playerEntity2);
+            if (playerEntity2.isCreative() || Client.manager.isFriend(playerEntity2.getName().getString())) continue;
+            double d2 = MC.mc.player.distanceTo((Entity)playerEntity2);
             if (d2 < d) {
                 d = d2;
                 playerEntity = playerEntity2;

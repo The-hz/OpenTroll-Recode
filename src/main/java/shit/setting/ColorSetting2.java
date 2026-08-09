@@ -31,7 +31,7 @@ extends Setting {
     }
 
     public boolean isSet148() {
-        return ((Integer) this.getObj()).intValue() != 0;
+        return ((Integer) this.getValue()).intValue() != 0;
     }
 
     public static int m559(int n) {
@@ -63,7 +63,7 @@ extends Setting {
     }
 
     @Override
-    public String getText51() {
+    public String getDisplayName() {
         String string;
         int n;
         String string2;
@@ -74,7 +74,7 @@ extends Setting {
                 block13: {
                     int n3;
                     block12: {
-                        n2 = (Integer)this.getObj();
+                        n2 = (Integer)this.getValue();
                         string2 = Setting.getText54();
                         n = this.isSet148() ? 1 : 0;
                         if (string2 == null) {
@@ -145,8 +145,8 @@ extends Setting {
     }
 
     @Override
-    public String getText29() {
-        return String.valueOf(this.getObj()) + ":" + this.type5.name();
+    public String getValueString() {
+        return String.valueOf(this.getValue()) + ":" + this.type5.name();
     }
 
     /*
@@ -154,13 +154,13 @@ extends Setting {
      * Could not resolve type clashes
      */
     @Override
-    public void setObj58(Object var1_1) {
+    public void setValueFromString(Object var1_1) {
         String s = (String) var1_1;
         try {
             if (s.contains(":")) {
                 String[] parts = s.split(":");
                 Integer kc = m911(parts[0]);
-                this.setObj94(kc != null ? kc : (Integer) this.getObj20());
+                this.setValueInternal(kc != null ? kc : (Integer) this.getDefaultValue());
                 try {
                     this.setObj23(Type.valueOf(parts[1]));
                 } catch (RuntimeException e) {
@@ -168,11 +168,11 @@ extends Setting {
                 }
             } else {
                 Integer kc = m911(s);
-                this.setObj94(kc != null ? kc : (Integer) this.getObj20());
+                this.setValueInternal(kc != null ? kc : (Integer) this.getDefaultValue());
                 this.setObj23(Type.Toggle);
             }
         } catch (RuntimeException e) {
-            this.setObj94((Integer) this.getObj20());
+            this.setValueInternal((Integer) this.getDefaultValue());
             this.setObj23(Type.Toggle);
         }
     }

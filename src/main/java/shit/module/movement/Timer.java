@@ -25,47 +25,47 @@ import shit.type.EaseMode;
 public class Timer
 extends Module {
     public static Timer INSTANCE;
-    public final NumberSetting speed = (NumberSetting)this.m28(new NumberSetting("Speed", 1.0, 0.1, 5.0, 0.01));
+    public final NumberSetting speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 1.0, 0.1, 5.0, 0.01));
     private final DecimalFormat decimalFormat2 = new DecimalFormat("0.0");
-    private final BooleanSetting tickShift = (BooleanSetting)this.m28(new BooleanSetting("TickShift", true));
-    private final NumberSetting shiftTimer = (NumberSetting)this.m28(new NumberSetting("ShiftTimer", 2.0, 1.0, 10.0, 0.1, 0.1, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final NumberSetting charge = (NumberSetting)this.m28(new NumberSetting("Charge", 2000.0, 1.0, 10000.0, 50.0, 50.0, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final NumberSetting minCharge = (NumberSetting)this.m28(new NumberSetting("MinCharge", 500.0, 1.0, 10000.0, 50.0, 50.0, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final BooleanSetting smooth = (BooleanSetting)this.m28(new BooleanSetting("Smooth", true, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final EnumSetting ease = (EnumSetting)this.m28(new EnumSetting("Ease", EaseMode.CubicInOut, () -> {
+    private final BooleanSetting tickShift = (BooleanSetting)this.registerSetting(new BooleanSetting("TickShift", true));
+    private final NumberSetting shiftTimer = (NumberSetting)this.registerSetting(new NumberSetting("ShiftTimer", 2.0, 1.0, 10.0, 0.1, 0.1, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final NumberSetting charge = (NumberSetting)this.registerSetting(new NumberSetting("Charge", 2000.0, 1.0, 10000.0, 50.0, 50.0, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final NumberSetting minCharge = (NumberSetting)this.registerSetting(new NumberSetting("MinCharge", 500.0, 1.0, 10000.0, 50.0, 50.0, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final BooleanSetting smooth = (BooleanSetting)this.registerSetting(new BooleanSetting("Smooth", true, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final EnumSetting ease = (EnumSetting)this.registerSetting(new EnumSetting("Ease", EaseMode.CubicInOut, () -> {
         boolean bl = false;
-        if ((Boolean)this.smooth.getObj() == false) return false;
-        if ((Boolean)this.tickShift.getObj() == false) return false;
+        if ((Boolean)this.smooth.getValue() == false) return false;
+        if ((Boolean)this.tickShift.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final BooleanSetting reset = (BooleanSetting)this.m28(new BooleanSetting("Reset", true, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final BooleanSetting indicator = (BooleanSetting)this.m28(new BooleanSetting("Indicator", true, () -> (Boolean)this.tickShift.getObj(), null, "", false));
-    private final ColorSetting completed = (ColorSetting)this.m28(new ColorSetting("Completed", -16711936, true, () -> {
+    private final BooleanSetting reset = (BooleanSetting)this.registerSetting(new BooleanSetting("Reset", true, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final BooleanSetting indicator = (BooleanSetting)this.registerSetting(new BooleanSetting("Indicator", true, () -> (Boolean)this.tickShift.getValue(), null, "", false));
+    private final ColorSetting completed = (ColorSetting)this.registerSetting(new ColorSetting("Completed", -16711936, true, () -> {
         int n = AutoArmor.getInt66();
-        boolean bl = (Boolean)this.indicator.getObj();
+        boolean bl = (Boolean)this.indicator.getValue();
         if (n != 0) {
             if (!bl) return false;
-            bl = (Boolean)this.tickShift.getObj();
+            bl = (Boolean)this.tickShift.getValue();
         }
         if (n == 0) return bl;
         if (!bl) return false;
         return true;
     }, null, "", false));
-    private final ColorSetting charging = (ColorSetting)this.m28(new ColorSetting("Charging", -65536, true, () -> {
+    private final ColorSetting charging = (ColorSetting)this.registerSetting(new ColorSetting("Charging", -65536, true, () -> {
         int n = AutoArmor.getInt66();
-        boolean bl = (Boolean)this.indicator.getObj();
+        boolean bl = (Boolean)this.indicator.getValue();
         if (n != 0) {
             if (!bl) return false;
-            bl = (Boolean)this.tickShift.getObj();
+            bl = (Boolean)this.tickShift.getValue();
         }
         if (n == 0) return bl;
         if (!bl) return false;
         return true;
     }, null, "", false));
-    private final NumberSetting yOffset = (NumberSetting)this.m28(new NumberSetting("YOffset", 0.0, -200.0, 200.0, 1.0, 1.0, () -> {
+    private final NumberSetting yOffset = (NumberSetting)this.registerSetting(new NumberSetting("YOffset", 0.0, -200.0, 200.0, 1.0, 1.0, () -> {
         boolean bl = false;
-        if ((Boolean)this.indicator.getObj() == false) return false;
-        if ((Boolean)this.tickShift.getObj() == false) return false;
+        if ((Boolean)this.indicator.getValue() == false) return false;
+        if ((Boolean)this.tickShift.getValue() == false) return false;
         return true;
     }, null, "", false));
     private final Helper7 helper726 = new Helper7();
@@ -80,21 +80,21 @@ extends Module {
     }
 
     @Override
-    public void m709() {
-        super.m709();
+    public void onDisable() {
+        super.onDisable();
         Client.helper4.m502();
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         boolean bl = false;
-        if (((Boolean)this.tickShift.getObj()).booleanValue()) {
-            double d = this.flag46 ? (double)Math.max(this.time42 - this.helper712.getLong12(), 0L) : (double)this.helper726.getLong12();
-            double d2 = (Double)this.charge.getObj();
+        if (((Boolean)this.tickShift.getValue()).booleanValue()) {
+            double d = this.flag46 ? (double)Math.max(this.time42 - this.helper712.getElapsed(), 0L) : (double)this.helper726.getElapsed();
+            double d2 = (Double)this.charge.getValue();
             double d3 = Math.min(d / d2 * 100.0, 100.0);
             return this.decimalFormat2.format(d3) + "%";
         }
-        return String.valueOf(this.speed.getObj()) + "x";
+        return String.valueOf(this.speed.getValue()) + "x";
     }
 
     @Override
@@ -105,7 +105,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner39(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         Client.helper4.m64();
@@ -113,7 +113,7 @@ extends Module {
 
     @EventHandler
     public void setPacketEventInner7(PacketEvent.PacketEventInner packetEventInner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket) {

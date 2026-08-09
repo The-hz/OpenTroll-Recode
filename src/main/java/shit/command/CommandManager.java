@@ -63,7 +63,7 @@ implements MC {
         String[] stringArray = string2.split("\\s+");
         Command command = (Command)this.map4.get(stringArray[0].toLowerCase(Locale.ROOT));
         if (command == null) {
-            CommandManager.setObj21("Unknown command. Try " + this.text2195 + "help.");
+            CommandManager.sendFeedback("Unknown command. Try " + this.text2195 + "help.");
             return true;
         }
         String[] stringArray2 = new String[stringArray.length - 1];
@@ -71,7 +71,7 @@ implements MC {
         try {
             command.run(stringArray2);
         } catch (RuntimeException e) {
-            CommandManager.setObj21("Command '" + stringArray[0] + "' is not available in this build.");
+            CommandManager.sendFeedback("Command '" + stringArray[0] + "' is not available in this build.");
         }
         return true;
     }
@@ -85,7 +85,7 @@ implements MC {
         return this.map4.values();
     }
 
-    public String getText10() {
+    public String getPrefix() {
         return this.text2195;
     }
 
@@ -98,18 +98,18 @@ implements MC {
         }
     }
 
-    public static void setObj21(Object object) {
+    public static void sendFeedback(Object object) {
         String string = (String)object;
         Object var3_2 = null;
-        if (MC.client3.inGameHud == null) {
+        if (MC.mc.inGameHud == null) {
             return;
         }
-        int n = ClientSetting.INSTANCE != null ? (Integer)ClientSetting.INSTANCE.prefixColor.getObj() : -11141121;
+        int n = ClientSetting.INSTANCE != null ? (Integer)ClientSetting.INSTANCE.prefixColor.getValue() : -11141121;
         int n2 = n & 0xFFFFFF;
         Style style = Style.EMPTY.withColor(TextColor.fromRgb((int)n2));
         MutableText mutableText = Text.literal((String)"[TrollHack-Recode] ").fillStyle(style);
         MutableText mutableText2 = Text.literal((String)string);
-        MC.client3.inGameHud.getChatHud().addMessage((Text)mutableText.copy().append((Text)mutableText2));
+        MC.mc.inGameHud.getChatHud().addMessage((Text)mutableText.copy().append((Text)mutableText2));
     }
 }
 

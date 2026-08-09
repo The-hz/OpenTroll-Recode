@@ -63,28 +63,28 @@ import shit.util.MC;
 public class AutoRegear
 extends Module {
     public static AutoRegear INSTANCE;
-    private final StringSetting kitName = (StringSetting)this.m28(new StringSetting("KitName", "default"));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 4.0, 1.0, 6.0, 0.1));
-    private final NumberSetting regearDelay = (NumberSetting)this.m28(new NumberSetting("RegearDelay", 50.0, 0.0, 1000.0, 10.0));
-    private final NumberSetting perAction = (NumberSetting)this.m28(new NumberSetting("PerAction", 1.0, 1.0, 10.0, 1.0));
-    private final NumberSetting openDelay = (NumberSetting)this.m28(new NumberSetting("OpenDelay", 200.0, 0.0, 500.0, 10.0));
-    private final NumberSetting placeDelay = (NumberSetting)this.m28(new NumberSetting("PlaceDelay", 200.0, 0.0, 500.0, 10.0));
-    private final NumberSetting enderChestDelay = (NumberSetting)this.m28(new NumberSetting("EnderChestDelay", 150.0, 0.0, 500.0, 10.0));
-    private final BooleanSetting place = (BooleanSetting)this.m28(new BooleanSetting("Place", true));
-    private final BooleanSetting take = (BooleanSetting)this.m28(new BooleanSetting("Take", true));
-    private final BooleanSetting returnExtras = (BooleanSetting)this.m28(new BooleanSetting("ReturnExtras", true));
-    private final BooleanSetting regearArmor = (BooleanSetting)this.m28(new BooleanSetting("RegearArmor", true));
-    private final BooleanSetting mine = (BooleanSetting)this.m28(new BooleanSetting("Mine", true));
-    private final BooleanSetting autoDisable = (BooleanSetting)this.m28(new BooleanSetting("AutoDisable", true));
-    private final NumberSetting disableTime = (NumberSetting)this.m28(new NumberSetting("DisableTime", 500.0, 0.0, 2000.0, 50.0));
-    private final BooleanSetting enderChest = (BooleanSetting)this.m28(new BooleanSetting("EnderChest", true));
-    private final BooleanSetting smartSearch = (BooleanSetting)this.m28(new BooleanSetting("SmartSearch", true));
-    private final NumberSetting armorCoin = (NumberSetting)this.m28(new NumberSetting("ArmorCoin", 1000.0, 1.0, 5000.0, 1.0));
-    private final NumberSetting weaponCoin = (NumberSetting)this.m28(new NumberSetting("WeaponCoin", 1000.0, 1.0, 5000.0, 1.0));
-    private final NumberSetting regearItemCoin = (NumberSetting)this.m28(new NumberSetting("RegearItemCoin", 1.0, 1.0, 5000.0, 1.0));
-    public final BooleanSetting silentDisplay = (BooleanSetting)this.m28(new BooleanSetting("SilentDisplay", true));
+    private final StringSetting kitName = (StringSetting)this.registerSetting(new StringSetting("KitName", "default"));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 4.0, 1.0, 6.0, 0.1));
+    private final NumberSetting regearDelay = (NumberSetting)this.registerSetting(new NumberSetting("RegearDelay", 50.0, 0.0, 1000.0, 10.0));
+    private final NumberSetting perAction = (NumberSetting)this.registerSetting(new NumberSetting("PerAction", 1.0, 1.0, 10.0, 1.0));
+    private final NumberSetting openDelay = (NumberSetting)this.registerSetting(new NumberSetting("OpenDelay", 200.0, 0.0, 500.0, 10.0));
+    private final NumberSetting placeDelay = (NumberSetting)this.registerSetting(new NumberSetting("PlaceDelay", 200.0, 0.0, 500.0, 10.0));
+    private final NumberSetting enderChestDelay = (NumberSetting)this.registerSetting(new NumberSetting("EnderChestDelay", 150.0, 0.0, 500.0, 10.0));
+    private final BooleanSetting place = (BooleanSetting)this.registerSetting(new BooleanSetting("Place", true));
+    private final BooleanSetting take = (BooleanSetting)this.registerSetting(new BooleanSetting("Take", true));
+    private final BooleanSetting returnExtras = (BooleanSetting)this.registerSetting(new BooleanSetting("ReturnExtras", true));
+    private final BooleanSetting regearArmor = (BooleanSetting)this.registerSetting(new BooleanSetting("RegearArmor", true));
+    private final BooleanSetting mine = (BooleanSetting)this.registerSetting(new BooleanSetting("Mine", true));
+    private final BooleanSetting autoDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoDisable", true));
+    private final NumberSetting disableTime = (NumberSetting)this.registerSetting(new NumberSetting("DisableTime", 500.0, 0.0, 2000.0, 50.0));
+    private final BooleanSetting enderChest = (BooleanSetting)this.registerSetting(new BooleanSetting("EnderChest", true));
+    private final BooleanSetting smartSearch = (BooleanSetting)this.registerSetting(new BooleanSetting("SmartSearch", true));
+    private final NumberSetting armorCoin = (NumberSetting)this.registerSetting(new NumberSetting("ArmorCoin", 1000.0, 1.0, 5000.0, 1.0));
+    private final NumberSetting weaponCoin = (NumberSetting)this.registerSetting(new NumberSetting("WeaponCoin", 1000.0, 1.0, 5000.0, 1.0));
+    private final NumberSetting regearItemCoin = (NumberSetting)this.registerSetting(new NumberSetting("RegearItemCoin", 1.0, 1.0, 5000.0, 1.0));
+    public final BooleanSetting silentDisplay = (BooleanSetting)this.registerSetting(new BooleanSetting("SilentDisplay", true));
     private Type type11 = Type.IDLE;
     public BlockPos blockPos15 = null;
     private BlockPos blockPos10 = null;
@@ -108,8 +108,8 @@ extends Module {
     public static boolean isSet128() {
         Object var1 = null;
         if (INSTANCE == null) return false;
-        if (!INSTANCE.isSet19()) return false;
-        if ((Boolean)AutoRegear.INSTANCE.silentDisplay.getObj() == false) return false;
+        if (!INSTANCE.isEnabled()) return false;
+        if ((Boolean)AutoRegear.INSTANCE.silentDisplay.getValue() == false) return false;
         return true;
     }
 
@@ -119,10 +119,10 @@ extends Module {
             block2: {
                 this.m781();
                 Object var2_1 = null;
-                if (((Boolean)this.take.getObj()).booleanValue()) {
-                    if (!this.m344((String)this.kitName.getObj())) {
-                        CommandManager.setObj21("\u00a7c[AutoRegear] \u00a77Failed to load kit: " + (String)this.kitName.getObj() + ".kit");
-                        this.setFlag3(false);
+                if (((Boolean)this.take.getValue()).booleanValue()) {
+                    if (!this.m344((String)this.kitName.getValue())) {
+                        CommandManager.sendFeedback("\u00a7c[AutoRegear] \u00a77Failed to load kit: " + (String)this.kitName.getValue() + ".kit");
+                        this.setEnabled(false);
                         return;
                     }
                 }
@@ -137,7 +137,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Client.renderUtil3.m608();
         this.m781();
@@ -159,7 +159,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner40(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         switch (this.type11.ordinal()) {
@@ -192,7 +192,7 @@ extends Module {
                 break;
             }
             case 7: {
-                this.setFlag3(false);
+                this.setEnabled(false);
             }
         }
     }
@@ -205,13 +205,13 @@ extends Module {
             this.type11 = Type.OPENING_SHULKER;
             return;
         }
-        if (((Boolean)this.place.getObj()).booleanValue()) {
+        if (((Boolean)this.place.getValue()).booleanValue()) {
             if (this.getInt41() != -1) {
                 this.type11 = Type.PLACING_SHULKER;
                 return;
             }
         }
-        if (((Boolean)this.enderChest.getObj()).booleanValue()) {
+        if (((Boolean)this.enderChest.getValue()).booleanValue()) {
             BlockPos blockPos2 = this.getBlockPos2();
             if (blockPos2 != null) {
                 this.blockPos15 = blockPos2;
@@ -219,21 +219,21 @@ extends Module {
                 this.type11 = Type.OPENING_ECHEST;
                 return;
             }
-            if (((Boolean)this.place.getObj()).booleanValue()) {
+            if (((Boolean)this.place.getValue()).booleanValue()) {
                 if (this.m950(Items.ENDER_CHEST) != -1) {
                     this.type11 = Type.PLACING_ECHEST;
                     return;
                 }
             }
         }
-        if (((Boolean)this.autoDisable.getObj()).booleanValue()) {
-            this.setFlag3(false);
+        if (((Boolean)this.autoDisable.getValue()).booleanValue()) {
+            this.setEnabled(false);
         }
     }
 
     private void tickPlacingShulker() {
         Object var2_1 = null;
-        if ((double)(System.currentTimeMillis() - this.time28) < (Double)this.placeDelay.getObj()) {
+        if ((double)(System.currentTimeMillis() - this.time28) < (Double)this.placeDelay.getValue()) {
             return;
         }
         BlockPos blockPos = this.getBlockPos6();
@@ -266,13 +266,13 @@ extends Module {
 
     private void m791() {
         Object var2_1 = null;
-        if (MC.client3.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
-            this.flag39 = (Boolean)this.silentDisplay.getObj();
+        if (MC.mc.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
+            this.flag39 = (Boolean)this.silentDisplay.getValue();
             this.type11 = Type.INSIDE_SHULKER;
             this.blockPos10 = this.blockPos15;
             return;
         }
-        if ((double)(System.currentTimeMillis() - this.time15) < (Double)this.openDelay.getObj()) {
+        if ((double)(System.currentTimeMillis() - this.time15) < (Double)this.openDelay.getValue()) {
             return;
         }
         if (this.blockPos15 != null) {
@@ -290,7 +290,7 @@ extends Module {
                     block21: {
                         block20: {
                             block18: {
-                                ScreenHandler screenHandler = MC.client3.player.currentScreenHandler;
+                                ScreenHandler screenHandler = MC.mc.player.currentScreenHandler;
                                 Object var2_3 = null;
                                 if (!(screenHandler instanceof ShulkerBoxScreenHandler)) break block18;
                                 shulkerBoxScreenHandler = (ShulkerBoxScreenHandler)screenHandler;
@@ -298,9 +298,9 @@ extends Module {
                             }
                             this.flag39 = false;
                             this.flag13 = false;
-                            if (((Boolean)this.mine.getObj()).booleanValue()) {
+                            if (((Boolean)this.mine.getValue()).booleanValue()) {
                                 if (this.blockPos10 != null) {
-                                    if (MC.client3.world.getBlockState(this.blockPos10).getBlock() instanceof ShulkerBoxBlock) {
+                                    if (MC.mc.world.getBlockState(this.blockPos10).getBlock() instanceof ShulkerBoxBlock) {
                                         this.setObj64(this.blockPos10);
                                     }
                                 }
@@ -308,7 +308,7 @@ extends Module {
                             this.blockPos10 = null;
                             this.blockPos15 = null;
                             this.time28 = System.currentTimeMillis();
-                            if (!((Boolean)this.autoDisable.getObj()).booleanValue()) break block20;
+                            if (!((Boolean)this.autoDisable.getValue()).booleanValue()) break block20;
                             this.type11 = Type.DONE;
                             if (null == null) break block21;
                         }
@@ -316,20 +316,20 @@ extends Module {
                     }
                     return;
                 }
-                this.flag39 = (Boolean)this.silentDisplay.getObj();
+                this.flag39 = (Boolean)this.silentDisplay.getValue();
                 if (this.blockPos10 != null) {
                     this.setObj68(this.blockPos10);
                 }
-                if (!((Boolean)this.take.getObj()).booleanValue()) {
-                    MC.client3.player.closeHandledScreen();
+                if (!((Boolean)this.take.getValue()).booleanValue()) {
+                    MC.mc.player.closeHandledScreen();
                     this.time28 = System.currentTimeMillis();
                     this.type11 = Type.DONE;
                     return;
                 }
-                if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.regearDelay.getObj()) {
+                if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.regearDelay.getValue()) {
                     return;
                 }
-                if (((Boolean)this.regearArmor.getObj()).booleanValue()) {
+                if (((Boolean)this.regearArmor.getValue()).booleanValue()) {
                     if (!this.flag13) {
                         if (this.m257(shulkerBoxScreenHandler)) {
                             this.time56 = System.currentTimeMillis();
@@ -340,9 +340,9 @@ extends Module {
                     }
                 }
                 boolean bl = false;
-                for (int i = 0; i < this.perAction.getInt50(); ++i) {
+                for (int i = 0; i < this.perAction.getInt(); ++i) {
                     boolean bl2 = false;
-                    if (((Boolean)this.returnExtras.getObj()).booleanValue()) {
+                    if (((Boolean)this.returnExtras.getValue()).booleanValue()) {
                         bl2 = this.m870(shulkerBoxScreenHandler);
                     }
                     if (!bl2) {
@@ -361,8 +361,8 @@ extends Module {
                 this.time23 = System.currentTimeMillis();
                 if (null == null) break block23;
             }
-            if (((Boolean)this.autoDisable.getObj()).booleanValue() && (double)(System.currentTimeMillis() - this.time23) > (Double)this.disableTime.getObj()) {
-                MC.client3.player.closeHandledScreen();
+            if (((Boolean)this.autoDisable.getValue()).booleanValue() && (double)(System.currentTimeMillis() - this.time23) > (Double)this.disableTime.getValue()) {
+                MC.mc.player.closeHandledScreen();
                 this.time28 = System.currentTimeMillis();
             }
         }
@@ -370,7 +370,7 @@ extends Module {
 
     private void tickPlacingEchest() {
         Object var2_1 = null;
-        if ((double)(System.currentTimeMillis() - this.time28) < (Double)this.placeDelay.getObj()) {
+        if ((double)(System.currentTimeMillis() - this.time28) < (Double)this.placeDelay.getValue()) {
             return;
         }
         BlockPos blockPos = this.getBlockPos2();
@@ -398,14 +398,14 @@ extends Module {
 
     private void m202() {
         Object var2_1 = null;
-        if (MC.client3.player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+        if (MC.mc.player.currentScreenHandler instanceof GenericContainerScreenHandler) {
             this.type11 = Type.INSIDE_ECHEST;
             return;
         }
-        if ((double)(System.currentTimeMillis() - this.time15) < (Double)this.openDelay.getObj()) {
+        if ((double)(System.currentTimeMillis() - this.time15) < (Double)this.openDelay.getValue()) {
             return;
         }
-        if (this.blockPos15 != null && MC.client3.world.getBlockState(this.blockPos15).getBlock() instanceof EnderChestBlock) {
+        if (this.blockPos15 != null && MC.mc.world.getBlockState(this.blockPos15).getBlock() instanceof EnderChestBlock) {
             this.setObj68(this.blockPos15);
             this.setObj53(this.blockPos15);
             this.time15 = System.currentTimeMillis();
@@ -434,7 +434,7 @@ extends Module {
                         block12: {
                             block11: {
                                 block9: {
-                                    ScreenHandler screenHandler = MC.client3.player.currentScreenHandler;
+                                    ScreenHandler screenHandler = MC.mc.player.currentScreenHandler;
                                     Object var2_3 = null;
                                     if (!(screenHandler instanceof GenericContainerScreenHandler)) break block9;
                                     genericContainerScreenHandler = (GenericContainerScreenHandler)screenHandler;
@@ -451,15 +451,15 @@ extends Module {
                         }
                         return;
                     }
-                    this.flag39 = (Boolean)this.silentDisplay.getObj();
-                    if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.enderChestDelay.getObj()) {
+                    this.flag39 = (Boolean)this.silentDisplay.getValue();
+                    if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.enderChestDelay.getValue()) {
                         return;
                     }
                     if (this.getInt41() != -1) {
-                        if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.enderChestDelay.getObj()) {
+                        if ((double)(System.currentTimeMillis() - this.time56) < (Double)this.enderChestDelay.getValue()) {
                             return;
                         }
-                        MC.client3.player.closeHandledScreen();
+                        MC.mc.player.closeHandledScreen();
                         this.time28 = System.currentTimeMillis();
                         return;
                     }
@@ -470,11 +470,11 @@ extends Module {
                     this.time56 = System.currentTimeMillis();
                     if (null == null) break block15;
                 }
-                MC.client3.player.closeHandledScreen();
+                MC.mc.player.closeHandledScreen();
                 this.type11 = Type.DONE;
                 if (null == null) break block15;
             }
-            MC.client3.player.closeHandledScreen();
+            MC.mc.player.closeHandledScreen();
             this.type11 = Type.DONE;
         }
     }
@@ -483,7 +483,7 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
         Object var4_4 = null;
-        float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts15[this.getRotateMode10().ordinal()]) {
             case 1: {
                 Client.mathUtil.m355(fArray[0], fArray[1]);
@@ -516,10 +516,10 @@ extends Module {
     }
 
     private ClientSetting.RotateMode getRotateMode10() {
-        RotateMode rotateMode = (RotateMode)((Object)this.rotateMode.getObj());
+        RotateMode rotateMode = (RotateMode)((Object)this.rotateMode.getValue());
         Object var2_2 = null;
         if (rotateMode == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
         return switch (rotateMode.ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
@@ -532,14 +532,14 @@ extends Module {
 
     private double getDouble6() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? (Double)ClientSetting.INSTANCE.rotateSpeed.getObj() : 45.0;
+        return ClientSetting.INSTANCE != null ? (Double)ClientSetting.INSTANCE.rotateSpeed.getValue() : 45.0;
     }
 
     private ClientSetting.SwitchMode getSwitchMode() {
-        SwitchMode switchMode = (SwitchMode)((Object)this.switchMode.getObj());
+        SwitchMode switchMode = (SwitchMode)((Object)this.switchMode.getValue());
         Object var2_2 = null;
         if (switchMode == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
         return switch (switchMode.ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
@@ -553,27 +553,27 @@ extends Module {
     private void setObj53(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.interactionManager == null) {
+        if (MC.mc.interactionManager == null) {
             return;
         }
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos).add(0.0, 0.5, 0.0);
-        Direction direction = MC.client3.world.getBlockState(blockPos.up()).isAir() ? Direction.UP : Direction.NORTH;
+        Direction direction = MC.mc.world.getBlockState(blockPos.up()).isAir() ? Direction.UP : Direction.NORTH;
         if (direction == Direction.NORTH) {
             vec3d = Vec3d.ofCenter((Vec3i)blockPos);
         }
-        MC.client3.interactionManager.interactBlock(MC.client3.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, direction, blockPos, false));
-        MC.client3.player.swingHand(Hand.MAIN_HAND, false);
+        MC.mc.interactionManager.interactBlock(MC.mc.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, direction, blockPos, false));
+        MC.mc.player.swingHand(Hand.MAIN_HAND, false);
         this.m879();
     }
 
     private void setObj114(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        if (MC.client3.interactionManager == null) {
+        if (MC.mc.interactionManager == null) {
             return;
         }
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos).add(0.0, 0.5, 0.0);
-        MC.client3.interactionManager.interactBlock(MC.client3.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, Direction.UP, blockPos, false));
-        MC.client3.player.swingHand(Hand.MAIN_HAND, false);
+        MC.mc.interactionManager.interactBlock(MC.mc.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, Direction.UP, blockPos, false));
+        MC.mc.player.swingHand(Hand.MAIN_HAND, false);
     }
 
     private void m678(Object object, Object object2) {
@@ -588,7 +588,7 @@ extends Module {
                 switchMode = this.getSwitchMode();
                 Object var6_6 = null;
                 if (switchMode != ClientSetting.SwitchMode.NONE) break block9;
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(MC.client3.player.getInventory().getSelectedSlot());
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(MC.mc.player.getInventory().getSelectedSlot());
                 if (!predicate.test(itemStack)) {
                     return;
                 }
@@ -601,10 +601,10 @@ extends Module {
         data = BlockUtil.m573(blockPos);
         if (data != null) {
             Vec3d vec3d = data.getVec3d5();
-            if (MC.client3.player.getEyePos().distanceTo(vec3d) <= (Double)this.range.getObj()) {
+            if (MC.mc.player.getEyePos().distanceTo(vec3d) <= (Double)this.range.getValue()) {
                 if (this.getRotateMode10() != ClientSetting.RotateMode.NONE) {
-                    float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
-                    MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(fArray[0], fArray[1], MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+                    float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+                    MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(fArray[0], fArray[1], MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
                 }
                 BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
             }
@@ -621,15 +621,15 @@ extends Module {
             block4: {
                 blockPos = (BlockPos)object;
                 Object var4_3 = null;
-                if (MC.client3.interactionManager == null) {
+                if (MC.mc.interactionManager == null) {
                     return;
                 }
                 if (SpeedMine.INSTANCE == null) break block4;
-                if (!SpeedMine.INSTANCE.isSet19()) break block4;
+                if (!SpeedMine.INSTANCE.isEnabled()) break block4;
                 SpeedMine.INSTANCE.setObj84(blockPos);
                 if (null == null) break block5;
             }
-            MC.client3.interactionManager.attackBlock(blockPos, Direction.UP);
+            MC.mc.interactionManager.attackBlock(blockPos, Direction.UP);
         }
     }
 
@@ -637,19 +637,19 @@ extends Module {
         block6: {
             block5: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block5;
-                if (MC.client3.world != null) break block6;
+                if (MC.mc.player == null) break block5;
+                if (MC.mc.world != null) break block6;
             }
             return null;
         }
-        BlockPos blockPos = MC.client3.player.getBlockPos();
-        int n = this.range.getInt50();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
+        int n = this.range.getInt();
         for (int i = -n; i <= n; ++i) {
             for (int j = -n; j <= n; ++j) {
                 for (int k = -n; k <= n; ++k) {
                     BlockPos blockPos2 = blockPos.add(i, j, k);
-                    if (!(MC.client3.world.getBlockState(blockPos2).getBlock() instanceof ShulkerBoxBlock)) continue;
-                    if (!MC.client3.world.getBlockState(blockPos2.up()).isAir() || !MC.client3.world.getOtherEntities(null, new Box(blockPos2)).isEmpty()) continue;
+                    if (!(MC.mc.world.getBlockState(blockPos2).getBlock() instanceof ShulkerBoxBlock)) continue;
+                    if (!MC.mc.world.getBlockState(blockPos2.up()).isAir() || !MC.mc.world.getOtherEntities(null, new Box(blockPos2)).isEmpty()) continue;
                     return blockPos2;
                 }
                 if (null == null) continue;
@@ -663,18 +663,18 @@ extends Module {
         block6: {
             block5: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block5;
-                if (MC.client3.world != null) break block6;
+                if (MC.mc.player == null) break block5;
+                if (MC.mc.world != null) break block6;
             }
             return null;
         }
-        BlockPos blockPos = MC.client3.player.getBlockPos();
-        int n = this.range.getInt50();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
+        int n = this.range.getInt();
         for (int i = -n; i <= n; ++i) {
             for (int j = -n; j <= n; ++j) {
                 for (int k = -n; k <= n; ++k) {
                     BlockPos blockPos2 = blockPos.add(i, j, k);
-                    if (!(MC.client3.world.getBlockState(blockPos2).getBlock() instanceof EnderChestBlock) || !MC.client3.world.getBlockState(blockPos2.up()).isAir()) continue;
+                    if (!(MC.mc.world.getBlockState(blockPos2).getBlock() instanceof EnderChestBlock) || !MC.mc.world.getBlockState(blockPos2.up()).isAir()) continue;
                     return blockPos2;
                 }
                 if (null == null) continue;
@@ -688,29 +688,29 @@ extends Module {
         block9: {
             block8: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block8;
-                if (MC.client3.world != null) break block9;
+                if (MC.mc.player == null) break block8;
+                if (MC.mc.world != null) break block9;
             }
             return null;
         }
-        BlockPos blockPos = MC.client3.player.getBlockPos();
-        int n = this.range.getInt50();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
+        int n = this.range.getInt();
         BlockPos blockPos2 = null;
         double d = Double.NEGATIVE_INFINITY;
         for (int i = -n; i <= n; ++i) {
             for (int j = -n; j <= n; ++j) {
                 for (int k = -n; k <= n; ++k) {
                     BlockPos blockPos3 = blockPos.add(i, j, k);
-                    if (!MC.client3.world.getBlockState(blockPos3).isReplaceable()) continue;
-                    BlockState blockState = MC.client3.world.getBlockState(blockPos3.down());
+                    if (!MC.mc.world.getBlockState(blockPos3).isReplaceable()) continue;
+                    BlockState blockState = MC.mc.world.getBlockState(blockPos3.down());
                     if (blockState.isAir()) continue;
-                    if (blockState.isReplaceable() || !MC.client3.world.getBlockState(blockPos3.up()).isAir() || !MC.client3.world.getOtherEntities(null, new Box(blockPos3)).isEmpty()) continue;
-                    double d2 = MC.client3.player.squaredDistanceTo((double)blockPos3.getX() + 0.5, (double)blockPos3.getY() + 0.5, (double)blockPos3.getZ() + 0.5);
+                    if (blockState.isReplaceable() || !MC.mc.world.getBlockState(blockPos3.up()).isAir() || !MC.mc.world.getOtherEntities(null, new Box(blockPos3)).isEmpty()) continue;
+                    double d2 = MC.mc.player.squaredDistanceTo((double)blockPos3.getX() + 0.5, (double)blockPos3.getY() + 0.5, (double)blockPos3.getZ() + 0.5);
                     if (d2 < 1.0) continue;
-                    if (d2 > (Double)this.range.getObj() * (Double)this.range.getObj()) continue;
+                    if (d2 > (Double)this.range.getValue() * (Double)this.range.getValue()) continue;
                     int n2 = 0;
                     for (Direction direction : Direction.Type.HORIZONTAL) {
-                        if (!MC.client3.world.getBlockState(blockPos3.offset(direction)).isReplaceable()) {
+                        if (!MC.mc.world.getBlockState(blockPos3.offset(direction)).isReplaceable()) {
                             ++n2;
                         }
                         if (null == null) continue;
@@ -735,7 +735,7 @@ extends Module {
             if (!this.map27.containsKey(i)) continue;
             Item item = (Item)this.map27.get(i);
             if (item == null) continue;
-            if (item == Items.AIR || MC.client3.player.getInventory().getStack(i).getItem() == item) continue;
+            if (item == Items.AIR || MC.mc.player.getInventory().getStack(i).getItem() == item) continue;
             for (int j = 0; j < 27; ++j) {
                 if (shulkerBoxScreenHandler.getSlot(j).getStack().getItem() != item) continue;
                 this.m814(shulkerBoxScreenHandler.syncId, j, 0, SlotActionType.QUICK_MOVE);
@@ -828,7 +828,7 @@ extends Module {
         GenericContainerScreenHandler genericContainerScreenHandler = (GenericContainerScreenHandler)object;
         int n2 = Math.min(27, genericContainerScreenHandler.slots.size());
         Object var4_4 = null;
-        if (!((Boolean)this.smartSearch.getObj()).booleanValue()) {
+        if (!((Boolean)this.smartSearch.getValue()).booleanValue()) {
             for (int i = 0; i < n2; ++i) {
                 if (!this.m203(genericContainerScreenHandler.getSlot(i).getStack())) continue;
                 return i;
@@ -862,7 +862,7 @@ extends Module {
      */
     private List getList9() {
         ArrayList list = new ArrayList();
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return list;
         }
         Iterator iterator = this.map27.entrySet().iterator();
@@ -871,7 +871,7 @@ extends Module {
             int n = (Integer)entry.getKey();
             Item item = (Item)entry.getValue();
             if (item != null && item != Items.AIR && n >= 0 && n < 40) {
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(n);
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(n);
                 boolean bl = !this.m918(itemStack.getItem(), item) || itemStack.isStackable() && itemStack.getCount() < itemStack.getMaxCount();
                 if (bl) {
                     boolean bl2 = false;
@@ -964,12 +964,12 @@ extends Module {
         Item item = (Item)object;
         Object var4_3 = null;
         if (this.m724(item)) {
-            return this.armorCoin.getInt50();
+            return this.armorCoin.getInt();
         }
         if (this.m667(item)) {
-            return this.weaponCoin.getInt50();
+            return this.weaponCoin.getInt();
         }
-        return this.regearItemCoin.getInt50();
+        return this.regearItemCoin.getInt();
     }
 
     /*
@@ -1083,11 +1083,11 @@ extends Module {
 
     private int getInt41() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return -1;
         }
         for (int i = 0; i < 36; ++i) {
-            if (!this.m203(MC.client3.player.getInventory().getStack(i))) continue;
+            if (!this.m203(MC.mc.player.getInventory().getStack(i))) continue;
             return i;
         }
         return -1;
@@ -1096,11 +1096,11 @@ extends Module {
     private int m950(Object object) {
         Item item = (Item)object;
         Object var4_3 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return -1;
         }
         for (int i = 0; i < 36; ++i) {
-            if (!MC.client3.player.getInventory().getStack(i).isOf(item)) continue;
+            if (!MC.mc.player.getInventory().getStack(i).isOf(item)) continue;
             return i;
         }
         return -1;
@@ -1108,11 +1108,11 @@ extends Module {
 
     private boolean isSet139() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
         for (int i = 0; i < 36; ++i) {
-            if (!MC.client3.player.getInventory().getStack(i).isEmpty()) continue;
+            if (!MC.mc.player.getInventory().getStack(i).isEmpty()) continue;
             return true;
         }
         return false;
@@ -1124,9 +1124,9 @@ extends Module {
         int n6 = n3;
         SlotActionType slotActionType = (SlotActionType)object;
         Object var10_9 = null;
-        if (MC.client3.player != null) {
-            if (MC.client3.interactionManager != null) {
-                MC.client3.interactionManager.clickSlot(n4, n5, n6, slotActionType, (PlayerEntity)MC.client3.player);
+        if (MC.mc.player != null) {
+            if (MC.mc.interactionManager != null) {
+                MC.mc.interactionManager.clickSlot(n4, n5, n6, slotActionType, (PlayerEntity)MC.mc.player);
             }
         }
     }
@@ -1137,7 +1137,7 @@ extends Module {
         Object var4_3 = null;
         try {
             String string2;
-            File file = new File(MC.client3.runDirectory, "kissoo/kits/" + string + ".kit");
+            File file = new File(MC.mc.runDirectory, "kissoo/kits/" + string + ".kit");
             if (!file.exists()) {
                 return false;
             }

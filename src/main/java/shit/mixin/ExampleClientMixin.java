@@ -29,18 +29,18 @@ import shit.util.AuthUtil;
 public class ExampleClientMixin {
     @Inject(method={"tick()V"}, at={@At(value="HEAD")})
     private void trollhack$preTick(CallbackInfo callbackInfo) {
-        Client.eventBus.m287(new Event2.Event2Inner());
+        Client.eventBus.post(new Event2.Event2Inner());
     }
 
     @Inject(method={"tick()V"}, at={@At(value="TAIL")})
     private void trollhack$postTick(CallbackInfo callbackInfo) {
-        Client.eventBus.m287(new Event2.Event2Inner2());
+        Client.eventBus.post(new Event2.Event2Inner2());
     }
 
     @Inject(method={"setScreen(Lnet/minecraft/client/gui/screen/Screen;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$setScreen(Screen screen, CallbackInfo callbackInfo) {
-        SetScreenEvent setScreenEvent = (SetScreenEvent) Client.eventBus.m287(new SetScreenEvent(screen));
-        if (setScreenEvent.isSet85()) {
+        SetScreenEvent setScreenEvent = (SetScreenEvent) Client.eventBus.post(new SetScreenEvent(screen));
+        if (setScreenEvent.isCancelled()) {
             callbackInfo.cancel();
         }
     }
@@ -56,7 +56,7 @@ public class ExampleClientMixin {
                 return;
             }
         }
-        if (((StartAttackEvent) Client.eventBus.m287(new StartAttackEvent())).isSet85()) {
+        if (((StartAttackEvent) Client.eventBus.post(new StartAttackEvent())).isCancelled()) {
             callbackInfoReturnable.setReturnValue((Object) false);
         }
     }
@@ -67,14 +67,14 @@ public class ExampleClientMixin {
             callbackInfo.cancel();
             return;
         }
-        if (((StartUseItemEvent)Client.eventBus.m287(new StartUseItemEvent())).isSet85()) {
+        if (((StartUseItemEvent)Client.eventBus.post(new StartUseItemEvent())).isCancelled()) {
             callbackInfo.cancel();
         }
     }
 
     @Inject(method={"disconnect(Lnet/minecraft/client/gui/screen/Screen;ZZ)V"}, at={@At(value="HEAD")})
     private void trollhack$disconnect(Screen screen, boolean bl, boolean bl2, CallbackInfo callbackInfo) {
-        Client.eventBus.m287(new DisconnectEvent());
+        Client.eventBus.post(new DisconnectEvent());
     }
 
     @Inject(method={"onResolutionChanged()V"}, at={@At(value="TAIL")})

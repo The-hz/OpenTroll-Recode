@@ -31,10 +31,10 @@ extends AbstractHudModule {
                     boolean bl;
                     block2: {
                         bl = AbstractHudModule.isSet32();
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                         if (bl) break block2;
                         if (minecraftClient.player == null) break block3;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                     }
                     clientWorld = minecraftClient.world;
                     if (bl) break block4;
@@ -42,9 +42,9 @@ extends AbstractHudModule {
                 }
                 return List.of("Biome N/A");
             }
-            clientWorld = MC.client3.world;
+            clientWorld = MC.mc.world;
         }
-        Optional optional = clientWorld.getBiome(BlockPos.ofFloored((Position)MC.client3.player.getEntityPos())).getKey();
+        Optional optional = clientWorld.getBiome(BlockPos.ofFloored((Position)MC.mc.player.getEntityPos())).getKey();
         return List.of("Biome " + optional.map(registryKey -> ((net.minecraft.registry.RegistryKey)registryKey).getValue().getPath()).orElse("unknown"));
     }
 }

@@ -18,7 +18,7 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class MotionLogger
 extends Module {
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 5.0, 1.0, 60.0, 1.0));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 5.0, 1.0, 60.0, 1.0));
     private final Helper7 helper747 = new Helper7();
 
     public MotionLogger() {
@@ -27,12 +27,12 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner224(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || !this.helper747.m114((Double)this.delay.getObj())) {
+        if (Module.isNotInGame() || !this.helper747.hasPassedSeconds((Double)this.delay.getValue())) {
             return;
         }
-        Vec3d vec3d = MC.client3.player.getVelocity();
-        Util2.setObj10(String.format("[Motion] x=%.3f y=%.3f z=%.3f", vec3d.x, vec3d.y, vec3d.z));
-        this.helper747.m533();
+        Vec3d vec3d = MC.mc.player.getVelocity();
+        Util2.sendClientMessage(String.format("[Motion] x=%.3f y=%.3f z=%.3f", vec3d.x, vec3d.y, vec3d.z));
+        this.helper747.resetTimer();
     }
 }
 

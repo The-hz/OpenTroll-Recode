@@ -14,7 +14,7 @@ import shit.setting.NumberSetting;
 public class ExtraTab
 extends Module {
     public static ExtraTab INSTANCE;
-    private final NumberSetting maxPlayers = (NumberSetting)this.m28(new NumberSetting("MaxPlayers", 265.0, 80.0, 400.0, 5.0));
+    private final NumberSetting maxPlayers = (NumberSetting)this.registerSetting(new NumberSetting("MaxPlayers", 265.0, 80.0, 400.0, 5.0));
 
     public ExtraTab() {
         super("ExtraTab", "Expands the player tab list.", Category.RENDER);
@@ -22,8 +22,8 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
-        return Integer.toString(this.maxPlayers.getInt50());
+    public String getInfo() {
+        return Integer.toString(this.maxPlayers.getInt());
     }
 
     public static List m762(Object object) {
@@ -35,11 +35,11 @@ extends Module {
                 extraTab = INSTANCE;
                 Object var3_3 = null;
                 if (extraTab == null) break block2;
-                if (extraTab.isSet19()) break block3;
+                if (extraTab.isEnabled()) break block3;
             }
             return list;
         }
-        int n = Math.min(extraTab.maxPlayers.getInt50(), list.size());
+        int n = Math.min(extraTab.maxPlayers.getInt(), list.size());
         return list.subList(0, n);
     }
 }

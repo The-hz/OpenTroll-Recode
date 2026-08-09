@@ -105,10 +105,10 @@ public final class AuthUtil {
             if (Client.moduleManager == null) {
                 return;
             }
-            for (Module module : Client.moduleManager.getList6()) {
+            for (Module module : Client.moduleManager.getModules()) {
                 if (module != null) {
-                    if (module.isSet19()) {
-                        module.setFlag3(false);
+                    if (module.isEnabled()) {
+                        module.setEnabled(false);
                     }
                 }
                 if (null == null) continue;

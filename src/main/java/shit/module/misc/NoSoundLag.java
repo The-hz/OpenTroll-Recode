@@ -15,7 +15,7 @@ import shit.setting.NumberSetting;
 @Environment(value=EnvType.CLIENT)
 public class NoSoundLag
 extends Module {
-    private final NumberSetting maxPerSecond = (NumberSetting)this.m28(new NumberSetting("MaxPerSecond", 80.0, 10.0, 500.0, 10.0));
+    private final NumberSetting maxPerSecond = (NumberSetting)this.registerSetting(new NumberSetting("MaxPerSecond", 80.0, 10.0, 500.0, 10.0));
     private long time17 = System.currentTimeMillis();
     private int count225;
 
@@ -33,8 +33,8 @@ extends Module {
             this.time17 = l;
             this.count225 = 0;
         }
-        if (++this.count225 > this.maxPerSecond.getInt50()) {
-            packetEventInner.m209();
+        if (++this.count225 > this.maxPerSecond.getInt()) {
+            packetEventInner.cancel();
         }
     }
 }

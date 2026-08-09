@@ -57,7 +57,7 @@ extends ModuleState {
         int n2 = n;
         this.flag162 = false;
         this.nUWed.setFloat(0.0f);
-        for (Setting setting : module.getList8()) {
+        for (Setting setting : module.getSettings()) {
             this.list22.add(new None(textRenderer, setting));
             if (n2 != 0) continue;
         }
@@ -125,7 +125,7 @@ extends ModuleState {
             if (bl) {
                 RenderUtil3.m795(drawContext, this.count108, this.count103, this.count141, n3, ClickGUI.getInt38());
             }
-            FontUtil2.m640(this.field42, drawContext, this.module.getText43(), this.count108 + ClickGUI.getInt53(), this.count103 + 3, ClickGUI.getInt27());
+            FontUtil2.m640(this.field42, drawContext, this.module.getDisplayName(), this.count108 + ClickGUI.getInt53(), this.count103 + 3, ClickGUI.getInt27());
             drawContext.enableScissor(this.count108, this.count103 + 14, this.count108 + this.count141, this.count103 + n3);
             for (None none : this.list22) {
                 block15: {

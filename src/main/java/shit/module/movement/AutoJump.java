@@ -15,7 +15,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoJump
 extends Module {
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 10.0, 0.0, 40.0, 1.0));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 10.0, 0.0, 40.0, 1.0));
     private int count61;
 
     public AutoJump() {
@@ -24,21 +24,21 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner20(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.player.isTouchingWater() || MC.client3.player.isInLava()) {
-            MC.client3.player.setVelocity(MC.client3.player.getVelocity().x, 0.1, MC.client3.player.getVelocity().z);
+        if (MC.mc.player.isTouchingWater() || MC.mc.player.isInLava()) {
+            MC.mc.player.setVelocity(MC.mc.player.getVelocity().x, 0.1, MC.mc.player.getVelocity().z);
             return;
         }
-        if (!MC.client3.player.isOnGround()) {
+        if (!MC.mc.player.isOnGround()) {
             return;
         }
-        if (this.count61++ < this.delay.getInt50()) {
+        if (this.count61++ < this.delay.getInt()) {
             return;
         }
         this.count61 = 0;
-        MC.client3.player.jump();
+        MC.mc.player.jump();
     }
 }
 

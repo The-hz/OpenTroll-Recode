@@ -87,32 +87,32 @@ extends Module {
         public ElytraFly() {
         super("ElytraFly", "Enhances elytra movement with Grim/NCP bypass.", Category.MOVEMENT);
         this.count105 = 0;
-        this.mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.GRIM));
-        this.fireWorkDelay = (NumberSetting)this.m28(new NumberSetting("FireWorkDelay", 1500.0, 200.0, 10000.0, 50.0));
-        this.packetDelay = (NumberSetting)this.m28(new NumberSetting("PacketDelay", 0.0, 0.0, 20.0, 1.0));
-        this.noAnimation = (BooleanSetting)this.m28(new BooleanSetting("NoAnimation", false));
-        this.setFlag = (BooleanSetting)this.m28(new BooleanSetting("SetFlag", false));
-        this.defaultPitch = (NumberSetting)this.m28(new NumberSetting("DefaultPitch", -10.0, -90.0, 90.0, 1.0));
-        this.upPitch = (NumberSetting)this.m28(new NumberSetting("UpPitch", -45.0, -90.0, 90.0, 1.0));
-        this.downPitch = (NumberSetting)this.m28(new NumberSetting("DownPitch", 45.0, -90.0, 90.0, 1.0));
-        this.controlRotation = (BooleanSetting)this.m28(new BooleanSetting("ControlRotation", false));
-        this.airStop = (BooleanSetting)this.m28(new BooleanSetting("AirStop", false));
-        this.fireWorkDelay2 = (NumberSetting)this.m28(new NumberSetting("FireWorkDelay", 1500.0, 200.0, 10000.0, 50.0));
-        this.firework = (BooleanSetting)this.m28(new BooleanSetting("Firework", true));
-        this.upFactor = (NumberSetting)this.m28(new NumberSetting("UpFactor", 1.0, 0.0, 10.0, 0.1));
-        this.fallSpeed = (NumberSetting)this.m28(new NumberSetting("FallSpeed", 1.0, 0.0, 10.0, 0.1));
-        this.speed = (NumberSetting)this.m28(new NumberSetting("Speed", 1.0, 0.1, 10.0, 0.1));
-        this.slownessModifier = (BooleanSetting)this.m28(new BooleanSetting("SlownessModifier", false));
-        this.slownessSpeed = (NumberSetting)this.m28(new NumberSetting("SlownessSpeed", 1.0, 0.1, 10.0, 0.1));
-        this.slownessTimer = (BooleanSetting)this.m28(new BooleanSetting("SlownessTimer", false));
-        this.timerSpeed = (NumberSetting)this.m28(new NumberSetting("TimerSpeed", 1.5, 0.1, 10.0, 0.1));
-        this.speedLimit = (BooleanSetting)this.m28(new BooleanSetting("SpeedLimit", true));
-        this.maxSpeed = (NumberSetting)this.m28(new NumberSetting("MaxSpeed", 2.5, 0.1, 10.0, 0.1));
-        this.noDrag = (BooleanSetting)this.m28(new BooleanSetting("NoDrag", false));
-        this.downSpeed = (NumberSetting)this.m28(new NumberSetting("DownSpeed", 1.0, 0.1, 10.0, 0.1));
-        this.autoMend = (BooleanSetting)this.m28(new BooleanSetting("AutoMend", false));
-        this.mendThreshold = (NumberSetting)this.m28(new NumberSetting("MendThreshold", 30.0, 10.0, 90.0, 1.0));
-        this.mendDelay = (NumberSetting)this.m28(new NumberSetting("MendDelay", 3.0, 0.0, 10.0, 1.0));
+        this.mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.GRIM));
+        this.fireWorkDelay = (NumberSetting)this.registerSetting(new NumberSetting("FireWorkDelay", 1500.0, 200.0, 10000.0, 50.0));
+        this.packetDelay = (NumberSetting)this.registerSetting(new NumberSetting("PacketDelay", 0.0, 0.0, 20.0, 1.0));
+        this.noAnimation = (BooleanSetting)this.registerSetting(new BooleanSetting("NoAnimation", false));
+        this.setFlag = (BooleanSetting)this.registerSetting(new BooleanSetting("SetFlag", false));
+        this.defaultPitch = (NumberSetting)this.registerSetting(new NumberSetting("DefaultPitch", -10.0, -90.0, 90.0, 1.0));
+        this.upPitch = (NumberSetting)this.registerSetting(new NumberSetting("UpPitch", -45.0, -90.0, 90.0, 1.0));
+        this.downPitch = (NumberSetting)this.registerSetting(new NumberSetting("DownPitch", 45.0, -90.0, 90.0, 1.0));
+        this.controlRotation = (BooleanSetting)this.registerSetting(new BooleanSetting("ControlRotation", false));
+        this.airStop = (BooleanSetting)this.registerSetting(new BooleanSetting("AirStop", false));
+        this.fireWorkDelay2 = (NumberSetting)this.registerSetting(new NumberSetting("FireWorkDelay", 1500.0, 200.0, 10000.0, 50.0));
+        this.firework = (BooleanSetting)this.registerSetting(new BooleanSetting("Firework", true));
+        this.upFactor = (NumberSetting)this.registerSetting(new NumberSetting("UpFactor", 1.0, 0.0, 10.0, 0.1));
+        this.fallSpeed = (NumberSetting)this.registerSetting(new NumberSetting("FallSpeed", 1.0, 0.0, 10.0, 0.1));
+        this.speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 1.0, 0.1, 10.0, 0.1));
+        this.slownessModifier = (BooleanSetting)this.registerSetting(new BooleanSetting("SlownessModifier", false));
+        this.slownessSpeed = (NumberSetting)this.registerSetting(new NumberSetting("SlownessSpeed", 1.0, 0.1, 10.0, 0.1));
+        this.slownessTimer = (BooleanSetting)this.registerSetting(new BooleanSetting("SlownessTimer", false));
+        this.timerSpeed = (NumberSetting)this.registerSetting(new NumberSetting("TimerSpeed", 1.5, 0.1, 10.0, 0.1));
+        this.speedLimit = (BooleanSetting)this.registerSetting(new BooleanSetting("SpeedLimit", true));
+        this.maxSpeed = (NumberSetting)this.registerSetting(new NumberSetting("MaxSpeed", 2.5, 0.1, 10.0, 0.1));
+        this.noDrag = (BooleanSetting)this.registerSetting(new BooleanSetting("NoDrag", false));
+        this.downSpeed = (NumberSetting)this.registerSetting(new NumberSetting("DownSpeed", 1.0, 0.1, 10.0, 0.1));
+        this.autoMend = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoMend", false));
+        this.mendThreshold = (NumberSetting)this.registerSetting(new NumberSetting("MendThreshold", 30.0, 10.0, 90.0, 1.0));
+        this.mendDelay = (NumberSetting)this.registerSetting(new NumberSetting("MendDelay", 3.0, 0.0, 10.0, 1.0));
         this.time72 = 0L;
         this.count197 = 0;
         this.value110 = 0.0f;
@@ -122,7 +122,7 @@ extends Module {
     @Override
     public void onEnable() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
         this.time72 = 0L;
@@ -130,37 +130,37 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m844();
         Client.renderUtil3.m608();
     }
 
     private boolean isSet137() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
-        return MC.client3.player.getEquippedStack(EquipmentSlot.CHEST).isOf(Items.ELYTRA);
+        return MC.mc.player.getEquippedStack(EquipmentSlot.CHEST).isOf(Items.ELYTRA);
     }
 
     private double getDouble21() {
         Object var2_1 = null;
-        if (((Boolean)this.slownessModifier.getObj()).booleanValue()) {
-            if (MC.client3.player.hasStatusEffect(StatusEffects.SLOWNESS)) {
-                return (Double)this.slownessSpeed.getObj();
+        if (((Boolean)this.slownessModifier.getValue()).booleanValue()) {
+            if (MC.mc.player.hasStatusEffect(StatusEffects.SLOWNESS)) {
+                return (Double)this.slownessSpeed.getValue();
             }
         }
-        return (Double)this.speed.getObj();
+        return (Double)this.speed.getValue();
     }
 
     @EventHandler
     public void setEvent2Inner47(Event2.Event2Inner event2Inner) {
-        if (MC.client3.player == null || MC.client3.world == null) {
+        if (MC.mc.player == null || MC.mc.world == null) {
             return;
         }
-        if (this.mode.getObj() == Mode.GRIM) {
+        if (this.mode.getValue() == Mode.GRIM) {
             this.m860();
-        } else if (this.mode.getObj() == Mode.NCP) {
+        } else if (this.mode.getValue() == Mode.NCP) {
             this.m566();
         }
     }
@@ -173,7 +173,7 @@ extends Module {
         block13: {
             block12: {
                 Object var2_1 = null;
-                if (MC.client3.player.isOnGround()) {
+                if (MC.mc.player.isOnGround()) {
                     this.count197 = 0;
                     return;
                 }
@@ -186,21 +186,21 @@ extends Module {
                     return;
                 }
                 ++this.count197;
-                if (this.count197 <= this.packetDelay.getInt50()) {
+                if (this.count197 <= this.packetDelay.getInt()) {
                     return;
                 }
                 this.count197 = 0;
                 if (this.isSet137()) break block12;
                 int n = this.m352(Items.ELYTRA);
                 if (n != -1) {
-                    MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                    MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, 6, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
+                    MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                    MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, 6, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
                     this.m279();
                     if (this.isSet17()) {
                         this.m579();
                     }
-                    MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, 6, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                    MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
+                    MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, 6, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                    MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
                 }
                 if (null == null) break block13;
             }
@@ -209,54 +209,54 @@ extends Module {
                 this.m579();
             }
         }
-        if (((Boolean)this.controlRotation.getObj()).booleanValue()) {
+        if (((Boolean)this.controlRotation.getValue()).booleanValue()) {
             if (this.isSet35()) {
                 this.m290();
                 Client.mathUtil.m355(this.value110, this.value153);
             }
         }
-        if ((Boolean)this.airStop.getObj() == false) return;
+        if ((Boolean)this.airStop.getValue() == false) return;
         if (!this.isSet35()) return;
         if (this.isSet17()) return;
-        if (MC.client3.options.sneakKey.isPressed()) return;
-        MC.client3.player.setVelocity(0.0, 0.0, 0.0);
+        if (MC.mc.options.sneakKey.isPressed()) return;
+        MC.mc.player.setVelocity(0.0, 0.0, 0.0);
     }
 
     /*
      * Unable to fully structure code
      */
     private void m290() {
-        boolean forward = MC.client3.options.forwardKey.isPressed();
-        boolean back = MC.client3.options.backKey.isPressed();
-        boolean left = MC.client3.options.leftKey.isPressed();
-        boolean right = MC.client3.options.rightKey.isPressed();
-        boolean jump = MC.client3.options.jumpKey.isPressed();
-        boolean sneak = MC.client3.options.sneakKey.isPressed();
+        boolean forward = MC.mc.options.forwardKey.isPressed();
+        boolean back = MC.mc.options.backKey.isPressed();
+        boolean left = MC.mc.options.leftKey.isPressed();
+        boolean right = MC.mc.options.rightKey.isPressed();
+        boolean jump = MC.mc.options.jumpKey.isPressed();
+        boolean sneak = MC.mc.options.sneakKey.isPressed();
         boolean moving = forward || back || left || right;
         boolean vertical = jump || sneak;
         if (moving) {
-            this.value110 = this.m265(MC.client3.player.getYaw());
+            this.value110 = this.m265(MC.mc.player.getYaw());
         } else {
-            this.value110 = MC.client3.player.getYaw();
+            this.value110 = MC.mc.player.getYaw();
         }
         if (vertical) {
             if (moving) {
                 if (jump && !sneak) {
-                    this.value153 = ((Double)this.upPitch.getObj()).floatValue();
+                    this.value153 = ((Double)this.upPitch.getValue()).floatValue();
                 } else if (sneak && !jump) {
-                    this.value153 = ((Double)this.downPitch.getObj()).floatValue();
+                    this.value153 = ((Double)this.downPitch.getValue()).floatValue();
                 } else {
-                    this.value153 = ((Double)this.defaultPitch.getObj()).floatValue();
+                    this.value153 = ((Double)this.defaultPitch.getValue()).floatValue();
                 }
             } else if (jump && !sneak) {
                 this.value153 = -90.0f;
             } else if (sneak && !jump) {
                 this.value153 = 90.0f;
             } else {
-                this.value153 = ((Double)this.defaultPitch.getObj()).floatValue();
+                this.value153 = ((Double)this.defaultPitch.getValue()).floatValue();
             }
         } else {
-            this.value153 = ((Double)this.defaultPitch.getObj()).floatValue();
+            this.value153 = ((Double)this.defaultPitch.getValue()).floatValue();
         }
     }
 
@@ -265,21 +265,21 @@ extends Module {
         if (!this.isSet137()) {
             return;
         }
-        boolean bl = MC.client3.options.sneakKey.isPressed();
+        boolean bl = MC.mc.options.sneakKey.isPressed();
         if (!this.isSet35()) {
-            if (!MC.client3.player.isOnGround()) {
-                if (MC.client3.player.getVelocity().y < -0.1) {
-                    if (MC.client3.player.fallDistance > (double)0.2f) {
+            if (!MC.mc.player.isOnGround()) {
+                if (MC.mc.player.getVelocity().y < -0.1) {
+                    if (MC.mc.player.fallDistance > (double)0.2f) {
                         if (!bl) {
-                            MC.client3.getNetworkHandler().sendPacket((Packet)new ClientCommandC2SPacket((Entity)MC.client3.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
-                            MC.client3.player.startGliding();
+                            MC.mc.getNetworkHandler().sendPacket((Packet)new ClientCommandC2SPacket((Entity)MC.mc.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
+                            MC.mc.player.startGliding();
                         }
                     }
                 }
             }
         }
         if (this.isSet35()) {
-            if (((Boolean)this.firework.getObj()).booleanValue()) {
+            if (((Boolean)this.firework.getValue()).booleanValue()) {
                 if (this.isSet71()) {
                     if (this.isSet14()) {
                         this.m713();
@@ -293,33 +293,33 @@ extends Module {
     @EventHandler
     public void setTravelHeadEvent2(TravelHeadEvent travelHeadEvent) {
         boolean bl;
-        if (MC.client3.player == null || !this.isSet19() || this.mode.getObj() != Mode.NCP) {
+        if (MC.mc.player == null || !this.isEnabled() || this.mode.getValue() != Mode.NCP) {
             return;
         }
         if (!this.isSet137() || !this.isSet35()) {
             return;
         }
-        boolean bl2 = MC.client3.options.sneakKey.isPressed();
-        boolean bl3 = MC.client3.options.jumpKey.isPressed();
+        boolean bl2 = MC.mc.options.sneakKey.isPressed();
+        boolean bl3 = MC.mc.options.jumpKey.isPressed();
         double d = travelHeadEvent.getDouble3();
         double d2 = travelHeadEvent.getDouble5();
         double d3 = travelHeadEvent.getDouble11();
-        if (!MC.client3.player.isOnGround() && d2 < -0.05) {
+        if (!MC.mc.player.isOnGround() && d2 < -0.05) {
             d2 = 0.0;
         }
         double d4 = this.getDouble21();
-        boolean bl4 = bl = (Boolean)this.firework.getObj() != false && this.isSet71();
+        boolean bl4 = bl = (Boolean)this.firework.getValue() != false && this.isSet71();
         if (bl) {
             if (bl2 && bl3) {
                 d2 = 0.0;
             } else if (bl2) {
-                d2 = -((Double)this.downSpeed.getObj()).doubleValue();
+                d2 = -((Double)this.downSpeed.getValue()).doubleValue();
             } else if (bl3) {
-                d2 = (Double)this.upFactor.getObj();
+                d2 = (Double)this.upFactor.getValue();
             } else {
-                if (MC.client3.player.isOnGround() || d2 < -0.05) {
+                if (MC.mc.player.isOnGround() || d2 < -0.05) {
                 }
-                d2 = -3.0E-11 * (Double)this.fallSpeed.getObj();
+                d2 = -3.0E-11 * (Double)this.fallSpeed.getValue();
             }
             double[] var13_9 = this.m538(d4);
             d = (double)var13_9[0];
@@ -329,12 +329,12 @@ extends Module {
             double d5 = Math.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z);
             double d6 = Math.sqrt(d * d + d3 * d3);
             if (bl2) {
-                d2 = -((Double)this.downSpeed.getObj()).doubleValue();
+                d2 = -((Double)this.downSpeed.getValue()).doubleValue();
             } else if (!bl3) {
-                d2 = -3.0E-11 * (Double)this.fallSpeed.getObj();
+                d2 = -3.0E-11 * (Double)this.fallSpeed.getValue();
             }
             if (bl3) {
-                double d7 = (Double)this.upFactor.getObj() / 10.0;
+                double d7 = (Double)this.upFactor.getValue() / 10.0;
                 if (d6 > d7) {
                     double d8 = d6 * 0.01325;
                     d2 += d8 * 3.2;
@@ -356,25 +356,25 @@ extends Module {
                 d3 = dArray[1];
             }
         }
-        if (!((Boolean)this.noDrag.getObj()).booleanValue()) {
+        if (!((Boolean)this.noDrag.getValue()).booleanValue()) {
             d2 *= 0.99;
             d *= 0.98;
             d3 *= 0.99;
         }
         double d9 = Math.sqrt(d * d + d3 * d3);
-        if (((Boolean)this.speedLimit.getObj()).booleanValue() && d9 > (Double)this.maxSpeed.getObj()) {
-            double d10 = (Double)this.maxSpeed.getObj() / d9;
+        if (((Boolean)this.speedLimit.getValue()).booleanValue() && d9 > (Double)this.maxSpeed.getValue()) {
+            double d10 = (Double)this.maxSpeed.getValue() / d9;
             d *= d10;
             d3 *= d10;
         }
         travelHeadEvent.setDouble5(d);
         travelHeadEvent.setDouble3(d2);
         travelHeadEvent.setDouble6(d3);
-        travelHeadEvent.m209();
+        travelHeadEvent.cancel();
     }
 
     private Vec3d getVec3d3() {
-        float f = MC.client3.player.getYaw();
+        float f = MC.mc.player.getYaw();
         float f2 = -f * ((float)Math.PI / 180);
         float f3 = MathHelper.cos((double)f2);
         float f4 = MathHelper.sin((double)f2);
@@ -385,7 +385,7 @@ extends Module {
 
     private void m713() {
         Object var2_1 = null;
-        if (MC.client3.player.isUsingItem() || System.currentTimeMillis() - this.time72 < ((Double)this.fireWorkDelay2.getObj()).longValue()) {
+        if (MC.mc.player.isUsingItem() || System.currentTimeMillis() - this.time72 < ((Double)this.fireWorkDelay2.getValue()).longValue()) {
             return;
         }
         this.useFirework();
@@ -393,7 +393,7 @@ extends Module {
 
     private void m579() {
         Object var2_1 = null;
-        if (MC.client3.player.isUsingItem() || System.currentTimeMillis() - this.time72 < ((Double)this.fireWorkDelay.getObj()).longValue()) {
+        if (MC.mc.player.isUsingItem() || System.currentTimeMillis() - this.time72 < ((Double)this.fireWorkDelay.getValue()).longValue()) {
             return;
         }
         this.useFirework();
@@ -403,7 +403,7 @@ extends Module {
         boolean bl = Client.renderUtil3.m223((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.isOf(Items.FIREWORK_ROCKET)), (Object)ClientSetting.SwitchMode.NORMAL);
         Object var2_2 = null;
         if (bl) {
-            MC.client3.getNetworkHandler().sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, MC.client3.player.getYaw(), MC.client3.player.getPitch()));
+            MC.mc.getNetworkHandler().sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, MC.mc.player.getYaw(), MC.mc.player.getPitch()));
             Client.renderUtil3.m608();
             this.time72 = System.currentTimeMillis();
         }
@@ -411,9 +411,9 @@ extends Module {
 
     private void m279() {
         Object var2_1 = null;
-        MC.client3.getNetworkHandler().sendPacket((Packet)new ClientCommandC2SPacket((Entity)MC.client3.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
-        if (((Boolean)this.setFlag.getObj()).booleanValue()) {
-            MC.client3.player.startGliding();
+        MC.mc.getNetworkHandler().sendPacket((Packet)new ClientCommandC2SPacket((Entity)MC.mc.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
+        if (((Boolean)this.setFlag.getValue()).booleanValue()) {
+            MC.mc.player.startGliding();
         }
     }
 
@@ -423,11 +423,11 @@ extends Module {
      */
     private boolean isSet17() {
         Object var2_1 = null;
-        if (MC.client3.options.forwardKey.isPressed()) return true;
-        if (MC.client3.options.backKey.isPressed()) return true;
-        if (MC.client3.options.leftKey.isPressed()) return true;
-        if (MC.client3.options.rightKey.isPressed()) return true;
-        if (!MC.client3.options.jumpKey.isPressed()) return false;
+        if (MC.mc.options.forwardKey.isPressed()) return true;
+        if (MC.mc.options.backKey.isPressed()) return true;
+        if (MC.mc.options.leftKey.isPressed()) return true;
+        if (MC.mc.options.rightKey.isPressed()) return true;
+        if (!MC.mc.options.jumpKey.isPressed()) return false;
         return true;
     }
 
@@ -437,20 +437,20 @@ extends Module {
      */
     private boolean isSet14() {
         Object var2_1 = null;
-        if (MC.client3.options.forwardKey.isPressed()) return true;
-        if (MC.client3.options.backKey.isPressed()) return true;
-        if (MC.client3.options.leftKey.isPressed()) return true;
-        if (!MC.client3.options.rightKey.isPressed()) return false;
+        if (MC.mc.options.forwardKey.isPressed()) return true;
+        if (MC.mc.options.backKey.isPressed()) return true;
+        if (MC.mc.options.leftKey.isPressed()) return true;
+        if (!MC.mc.options.rightKey.isPressed()) return false;
         return true;
     }
 
     private boolean isSet71() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
         for (int i = 0; i < 36; ++i) {
-            if (!MC.client3.player.getInventory().getStack(i).isOf(Items.FIREWORK_ROCKET)) continue;
+            if (!MC.mc.player.getInventory().getStack(i).isOf(Items.FIREWORK_ROCKET)) continue;
             return true;
         }
         return false;
@@ -462,15 +462,15 @@ extends Module {
      */
     public boolean isSet35() {
         Object var2_1 = null;
-        if (this.mode.getObj() == Mode.GRIM) {
-            if (MC.client3.player == null) return false;
-            if (MC.client3.player.isGliding()) return true;
+        if (this.mode.getValue() == Mode.GRIM) {
+            if (MC.mc.player == null) return false;
+            if (MC.mc.player.isGliding()) return true;
             if (!this.isSet137()) return false;
-            if (MC.client3.player.isOnGround()) return false;
+            if (MC.mc.player.isOnGround()) return false;
             return true;
         }
-        if (MC.client3.player == null) return false;
-        if (!MC.client3.player.isGliding()) return false;
+        if (MC.mc.player == null) return false;
+        if (!MC.mc.player.isGliding()) return false;
         return true;
     }
 
@@ -484,35 +484,35 @@ extends Module {
                             block5: {
                                 f2 = f;
                                 Object var4_3 = null;
-                                if (!MC.client3.options.forwardKey.isPressed()) break block4;
-                                if (MC.client3.options.backKey.isPressed()) break block4;
-                                if (!MC.client3.options.leftKey.isPressed()) break block5;
-                                if (MC.client3.options.rightKey.isPressed()) break block5;
+                                if (!MC.mc.options.forwardKey.isPressed()) break block4;
+                                if (MC.mc.options.backKey.isPressed()) break block4;
+                                if (!MC.mc.options.leftKey.isPressed()) break block5;
+                                if (MC.mc.options.rightKey.isPressed()) break block5;
                                 f2 -= 45.0f;
                                 if (null == null) break block6;
                             }
-                            if (!MC.client3.options.rightKey.isPressed() || MC.client3.options.leftKey.isPressed()) break block6;
+                            if (!MC.mc.options.rightKey.isPressed() || MC.mc.options.leftKey.isPressed()) break block6;
                             f2 += 45.0f;
                             if (null == null) break block6;
                         }
-                        if (!MC.client3.options.backKey.isPressed()) break block7;
-                        if (MC.client3.options.forwardKey.isPressed()) break block7;
+                        if (!MC.mc.options.backKey.isPressed()) break block7;
+                        if (MC.mc.options.forwardKey.isPressed()) break block7;
                         f2 += 180.0f;
-                        if (!MC.client3.options.leftKey.isPressed()) break block8;
-                        if (MC.client3.options.rightKey.isPressed()) break block8;
+                        if (!MC.mc.options.leftKey.isPressed()) break block8;
+                        if (MC.mc.options.rightKey.isPressed()) break block8;
                         f2 += 45.0f;
                         if (null == null) break block6;
                     }
-                    if (!MC.client3.options.rightKey.isPressed() || MC.client3.options.leftKey.isPressed()) break block6;
+                    if (!MC.mc.options.rightKey.isPressed() || MC.mc.options.leftKey.isPressed()) break block6;
                     f2 -= 45.0f;
                     if (null == null) break block6;
                 }
-                if (!MC.client3.options.leftKey.isPressed()) break block9;
-                if (MC.client3.options.rightKey.isPressed()) break block9;
+                if (!MC.mc.options.leftKey.isPressed()) break block9;
+                if (MC.mc.options.rightKey.isPressed()) break block9;
                 f2 -= 90.0f;
                 if (null == null) break block6;
             }
-            if (MC.client3.options.rightKey.isPressed() && !MC.client3.options.leftKey.isPressed()) {
+            if (MC.mc.options.rightKey.isPressed() && !MC.mc.options.leftKey.isPressed()) {
                 f2 += 90.0f;
             }
         }
@@ -530,9 +530,9 @@ extends Module {
                     block11: {
                         d2 = d;
                         Object var6_3 = null;
-                        f3 = MC.client3.options.forwardKey.isPressed() ? 1.0f : (MC.client3.options.backKey.isPressed() ? -1.0f : 0.0f);
-                        f2 = MC.client3.options.leftKey.isPressed() ? 1.0f : (MC.client3.options.rightKey.isPressed() ? -1.0f : 0.0f);
-                        f = MC.client3.player.getYaw();
+                        f3 = MC.mc.options.forwardKey.isPressed() ? 1.0f : (MC.mc.options.backKey.isPressed() ? -1.0f : 0.0f);
+                        f2 = MC.mc.options.leftKey.isPressed() ? 1.0f : (MC.mc.options.rightKey.isPressed() ? -1.0f : 0.0f);
+                        f = MC.mc.player.getYaw();
                         if (f3 == 0.0f) break block10;
                         if (!(f2 > 0.0f)) break block11;
                         f += (float)(f3 > 0.0f ? -45 : 45);
@@ -568,7 +568,7 @@ extends Module {
         Item item = (Item)object;
         Object var4_4 = null;
         for (int i = 9; i < 36; ++i) {
-            if (!MC.client3.player.getInventory().getStack(i).isOf(item)) continue;
+            if (!MC.mc.player.getInventory().getStack(i).isOf(item)) continue;
             return i;
         }
         return -1;

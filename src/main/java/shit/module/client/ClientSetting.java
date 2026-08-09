@@ -32,18 +32,18 @@ extends Module {
 
         public ClientSetting() {
         super("ClientSetting", "Global client settings.", Category.CLIENT);
-        this.rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.NONE));
-        this.rotateSpeed = (NumberSetting)this.m28(new NumberSetting("RotateSpeed", 45.0, 1.0, 180.0, 5.0));
-        this.movementSync = (BooleanSetting)this.m28(new BooleanSetting("MovementSync", false));
-        this.switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.NONE));
-        this.prefixColor = (ColorSetting)this.m28(new ColorSetting("PrefixColor", -11141121));
-        this.chinese = (BooleanSetting)this.m28(new BooleanSetting("Chinese", false));
-        this.renderScale = (NumberSetting)this.m28(new NumberSetting("RenderScale", 1.0, 0.5, 3.0, 0.05, 0.01, null, null, "", false));
-        this.fontAntiAliasing = (BooleanSetting)this.m28(new BooleanSetting("FontAntiAliasing", true));
+        this.rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.NONE));
+        this.rotateSpeed = (NumberSetting)this.registerSetting(new NumberSetting("RotateSpeed", 45.0, 1.0, 180.0, 5.0));
+        this.movementSync = (BooleanSetting)this.registerSetting(new BooleanSetting("MovementSync", false));
+        this.switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.NONE));
+        this.prefixColor = (ColorSetting)this.registerSetting(new ColorSetting("PrefixColor", -11141121));
+        this.chinese = (BooleanSetting)this.registerSetting(new BooleanSetting("Chinese", false));
+        this.renderScale = (NumberSetting)this.registerSetting(new NumberSetting("RenderScale", 1.0, 0.5, 3.0, 0.05, 0.01, null, null, "", false));
+        this.fontAntiAliasing = (BooleanSetting)this.registerSetting(new BooleanSetting("FontAntiAliasing", true));
     }
 
     public double getDouble7() {
-        return (Double)this.renderScale.getObj();
+        return (Double)this.renderScale.getValue();
     }
 
     public static void setIntArray3(int[] nArray) {

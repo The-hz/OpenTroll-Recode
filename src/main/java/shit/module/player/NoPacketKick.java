@@ -21,10 +21,10 @@ import shit.util.Util2;
 public class NoPacketKick
 extends Module {
     public static NoPacketKick INSTANCE;
-    private final BooleanSetting cancelDisconnect = (BooleanSetting)this.m28(new BooleanSetting("CancelDisconnect", true));
-    private final BooleanSetting cancelResourcePack = (BooleanSetting)this.m28(new BooleanSetting("CancelResourcePack", true));
-    private final BooleanSetting cancelCloseScreen = (BooleanSetting)this.m28(new BooleanSetting("CancelCloseScreen", false));
-    private final BooleanSetting logToChat = (BooleanSetting)this.m28(new BooleanSetting("LogToChat", true));
+    private final BooleanSetting cancelDisconnect = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelDisconnect", true));
+    private final BooleanSetting cancelResourcePack = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelResourcePack", true));
+    private final BooleanSetting cancelCloseScreen = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelCloseScreen", false));
+    private final BooleanSetting logToChat = (BooleanSetting)this.registerSetting(new BooleanSetting("LogToChat", true));
 
     public NoPacketKick() {
         super("NoPacketKick", "Cancels incoming packets that could disconnect or trap the player.", Category.PLAYER);
@@ -33,37 +33,37 @@ extends Module {
 
     @Override
     public void onEnable() {
-        Util2.setObj10("[NoPacketKick] Active. Cancelling: disconnect=" + (Boolean)this.cancelDisconnect.getObj() + ", resourcePack=" + (Boolean)this.cancelResourcePack.getObj() + ", closeScreen=" + (Boolean)this.cancelCloseScreen.getObj());
+        Util2.sendClientMessage("[NoPacketKick] Active. Cancelling: disconnect=" + (Boolean)this.cancelDisconnect.getValue() + ", resourcePack=" + (Boolean)this.cancelResourcePack.getValue() + ", closeScreen=" + (Boolean)this.cancelCloseScreen.getValue());
     }
 
     @EventHandler(priority=2000)
     private void setPacketEventInner9(PacketEvent.PacketEventInner packetEventInner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         Packet packet = packetEventInner.getPacket();
         if (packet == null) {
             return;
         }
-        if (((Boolean)this.cancelDisconnect.getObj()).booleanValue() && packet instanceof DisconnectS2CPacket) {
+        if (((Boolean)this.cancelDisconnect.getValue()).booleanValue() && packet instanceof DisconnectS2CPacket) {
             DisconnectS2CPacket disconnectS2CPacket = (DisconnectS2CPacket)packet;
             String string = disconnectS2CPacket.reason() != null ? disconnectS2CPacket.reason().getString() : "(no reason)";
-            if (((Boolean)this.logToChat.getObj()).booleanValue()) {
-                Util2.setObj10("\u00a7c[NoPacketKick] \u00a7fBlocked server disconnect: " + string);
+            if (((Boolean)this.logToChat.getValue()).booleanValue()) {
+                Util2.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server disconnect: " + string);
             }
-            packetEventInner.m209();
+            packetEventInner.cancel();
             return;
         }
-        if (((Boolean)this.cancelResourcePack.getObj()).booleanValue() && packet instanceof ResourcePackSendS2CPacket) {
-            if (((Boolean)this.logToChat.getObj()).booleanValue()) {
-                Util2.setObj10("\u00a7c[NoPacketKick] \u00a7fBlocked server resource pack prompt.");
+        if (((Boolean)this.cancelResourcePack.getValue()).booleanValue() && packet instanceof ResourcePackSendS2CPacket) {
+            if (((Boolean)this.logToChat.getValue()).booleanValue()) {
+                Util2.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server resource pack prompt.");
             }
-            packetEventInner.m209();
+            packetEventInner.cancel();
             return;
         }
-        if (((Boolean)this.cancelCloseScreen.getObj()).booleanValue() && packet instanceof CloseScreenS2CPacket) {
-            if (MC.client3.currentScreen != null) {
-                packetEventInner.m209();
+        if (((Boolean)this.cancelCloseScreen.getValue()).booleanValue() && packet instanceof CloseScreenS2CPacket) {
+            if (MC.mc.currentScreen != null) {
+                packetEventInner.cancel();
             }
         }
     }

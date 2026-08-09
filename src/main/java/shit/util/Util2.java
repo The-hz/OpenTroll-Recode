@@ -15,7 +15,7 @@ public class Util2
 implements MC {
     private static boolean flag100;
 
-    public static void setObj62(Object object) {
+    public static void sendChatMessage(Object object) {
         String string;
         block8: {
             String string2;
@@ -27,10 +27,10 @@ implements MC {
                         block4: {
                             string = (String)object;
                             bl = Util2.isSet69();
-                            minecraftClient = MC.client3;
+                            minecraftClient = MC.mc;
                             if (bl) break block4;
                             if (minecraftClient.player == null) break block5;
-                            minecraftClient = MC.client3;
+                            minecraftClient = MC.mc;
                         }
                         if (minecraftClient.getNetworkHandler() != null) break block6;
                     }
@@ -43,10 +43,10 @@ implements MC {
             }
             string = string2;
         }
-        MC.client3.player.networkHandler.sendChatMessage(string);
+        MC.mc.player.networkHandler.sendChatMessage(string);
     }
 
-    public static void setObj14(Object object) {
+    public static void sendChatCommand(Object object) {
         String string;
         String string2;
         block8: {
@@ -55,10 +55,10 @@ implements MC {
                 block6: {
                     string2 = (String)object;
                     boolean bl = false;
-                    minecraftClient = MC.client3;
+                    minecraftClient = MC.mc;
                     if (!false) break block6;
                     if (minecraftClient.player == null) break block7;
-                    minecraftClient = MC.client3;
+                    minecraftClient = MC.mc;
                 }
                 if (minecraftClient.getNetworkHandler() != null) break block8;
             }
@@ -72,21 +72,21 @@ implements MC {
             if (string.length() > 255) {
                 string = string.substring(0, 255);
             }
-            MC.client3.player.networkHandler.sendChatCommand(string);
+            MC.mc.player.networkHandler.sendChatCommand(string);
         }
     }
 
-    public static void setObj10(Object object) {
+    public static void sendClientMessage(Object object) {
         block3: {
             InGameHud inGameHud;
             String string;
             block2: {
                 string = (String)object;
                 boolean bl = false;
-                inGameHud = MC.client3.inGameHud;
+                inGameHud = MC.mc.inGameHud;
                 if (!false) break block2;
                 if (inGameHud == null) break block3;
-                inGameHud = MC.client3.inGameHud;
+                inGameHud = MC.mc.inGameHud;
             }
             inGameHud.getChatHud().addMessage((Text)Text.literal((String)string));
         }

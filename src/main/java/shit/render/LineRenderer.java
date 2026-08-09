@@ -80,11 +80,11 @@ implements MC {
         color26 = color2;
         Object var13_10 = null;
         value125 = f2;
-        float f3 = entity.getEntityWorld().getTickManager().isFrozen() ? 1.0f : MC.client3.getRenderTickCounter().getTickProgress(true);
+        float f3 = entity.getEntityWorld().getTickManager().isFrozen() ? 1.0f : MC.mc.getRenderTickCounter().getTickProgress(true);
         value160 = MathHelper.lerp((double)f3, (double)entity.lastRenderX, (double)entity.getX());
         value150 = MathHelper.lerp((double)f3, (double)entity.lastRenderY, (double)entity.getY());
         value161 = MathHelper.lerp((double)f3, (double)entity.lastRenderZ, (double)entity.getZ());
-        EntityRenderer entityRenderer = MC.client3.getEntityRenderDispatcher().getRenderer(entity);
+        EntityRenderer entityRenderer = MC.mc.getEntityRenderDispatcher().getRenderer(entity);
         EntityRenderState entityRenderState = entityRenderer.getAndUpdateRenderState(entity, f3);
         Vec3d vec3d = entityRenderer.getPositionOffset(entityRenderState);
         value160 += vec3d.x;
@@ -92,7 +92,7 @@ implements MC {
         value161 += vec3d.z;
         matrixStack.push();
         matrixStack.scale((float)d2, (float)d2, (float)d2);
-        CameraRenderState cameraRenderState = MC.client3.gameRenderer.getEntityRenderStates().cameraRenderState;
+        CameraRenderState cameraRenderState = MC.mc.gameRenderer.getEntityRenderStates().cameraRenderState;
         entityRenderer.render(entityRenderState, matrixStack, (OrderedRenderCommandQueue)field55, cameraRenderState);
         matrixStack.pop();
         field38.render();
@@ -143,7 +143,7 @@ implements MC {
             float f22 = f10;
             float f23 = f11;
             float f24 = f12;
-            Vec3d vec3d = MC.client3.getEntityRenderDispatcher().camera.getCameraPos();
+            Vec3d vec3d = MC.mc.getEntityRenderDispatcher().camera.getCameraPos();
             float f25 = (float)(value160 + (double)f13 - vec3d.x);
             float f26 = (float)(value150 + (double)f14 - vec3d.y);
             float f27 = (float)(value161 + (double)f15 - vec3d.z);

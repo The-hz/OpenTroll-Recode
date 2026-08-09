@@ -17,14 +17,14 @@ import shit.setting.StringSetting;
 @Environment(value=EnvType.CLIENT)
 public class SettingTest
 extends Module {
-    public final BooleanSetting boolean_ = (BooleanSetting)this.m28(new BooleanSetting("Boolean", true));
-    public final NumberSetting slider = (NumberSetting)this.m28(new NumberSetting("Slider", 5.0, 0.0, 10.0, 0.5));
-    public final EnumSetting enum_ = (EnumSetting)this.m28(new EnumSetting("Enum", EnumMode.ONE));
-    public final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -12942104));
-    public final ColorSetting alphaColor = (ColorSetting)this.m28(new ColorSetting("AlphaColor", -2009430808));
-    public final ColorSetting noAlphaColor = (ColorSetting)this.m28(new ColorSetting("NoAlphaColor", -12200829, false, null, null, "", false));
-    public final StringSetting string = (StringSetting)this.m28(new StringSetting("String", "text"));
-    public final ColorSetting2 key = (ColorSetting2)this.m28(new ColorSetting2("Key", 82));
+    public final BooleanSetting boolean_ = (BooleanSetting)this.registerSetting(new BooleanSetting("Boolean", true));
+    public final NumberSetting slider = (NumberSetting)this.registerSetting(new NumberSetting("Slider", 5.0, 0.0, 10.0, 0.5));
+    public final EnumSetting enum_ = (EnumSetting)this.registerSetting(new EnumSetting("Enum", EnumMode.ONE));
+    public final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -12942104));
+    public final ColorSetting alphaColor = (ColorSetting)this.registerSetting(new ColorSetting("AlphaColor", -2009430808));
+    public final ColorSetting noAlphaColor = (ColorSetting)this.registerSetting(new ColorSetting("NoAlphaColor", -12200829, false, null, null, "", false));
+    public final StringSetting string = (StringSetting)this.registerSetting(new StringSetting("String", "text"));
+    public final ColorSetting2 key = (ColorSetting2)this.registerSetting(new ColorSetting2("Key", 82));
 
     public SettingTest() {
         super("SettingTest", "Debug module for every setting type.", Category.CLIENT);

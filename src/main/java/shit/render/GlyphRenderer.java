@@ -64,9 +64,9 @@ implements BakedGlyph {
         if (this.bufferUtilData == null) {
             throw new IllegalStateException("Whitespace glyphs do not have render types");
         }
-        Map map = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj() != false ? map42 : map15;
-        RenderPipeline renderPipeline = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj() != false ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18;
-        String string = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj() != false ? "lumin_ttf_text_aa" : "lumin_ttf_text_no_aa";
+        Map map = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? map42 : map15;
+        RenderPipeline renderPipeline = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18;
+        String string = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? "lumin_ttf_text_aa" : "lumin_ttf_text_no_aa";
         return (RenderLayer)map.computeIfAbsent(this.bufferUtilData.bufferUtil(), bufferUtil -> RenderLayer.of((String)string, (RenderSetup)RenderSetup.builder((RenderPipeline)renderPipeline).texture("Sampler0", ((shit.misc.BufferUtil)bufferUtil).getObj18(), () -> ((shit.misc.BufferUtil)bufferUtil).getTexture().getSampler()).expectedBufferSize(786432).build()));
     }
 
@@ -300,7 +300,7 @@ implements BakedGlyph {
         }
 
         public RenderPipeline getPipeline() {
-            return (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj() != false ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18;
+            return (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18;
         }
 
         public float getEffectiveMinX() {

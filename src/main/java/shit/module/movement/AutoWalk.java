@@ -17,8 +17,8 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoWalk
 extends Module {
-    private final EnumSetting direction = (EnumSetting)this.m28(new EnumSetting("Direction", DirectionMode.Forward));
-    private final BooleanSetting disconnect = (BooleanSetting)this.m28(new BooleanSetting("Disconnect", true));
+    private final EnumSetting direction = (EnumSetting)this.registerSetting(new EnumSetting("Direction", DirectionMode.Forward));
+    private final BooleanSetting disconnect = (BooleanSetting)this.registerSetting(new BooleanSetting("Disconnect", true));
 
     public AutoWalk() {
         super("AutoWalk", "Automatically holds a movement direction.", Category.MOVEMENT);
@@ -26,33 +26,33 @@ extends Module {
 
     @EventHandler
     private void setInputTickEvent3(InputTickEvent inputTickEvent) {
-        if (Module.isSet37() || MC.client3.player.input == null) {
+        if (Module.isNotInGame() || MC.mc.player.input == null) {
             return;
         }
-        switch (((DirectionMode)((Object)this.direction.getObj())).ordinal()) {
+        switch (((DirectionMode)((Object)this.direction.getValue())).ordinal()) {
             case 0: {
-                MC.client3.options.forwardKey.setPressed(true);
+                MC.mc.options.forwardKey.setPressed(true);
                 break;
             }
             case 1: {
-                MC.client3.options.backKey.setPressed(true);
+                MC.mc.options.backKey.setPressed(true);
             }
         }
     }
 
     @EventHandler
     private void setDisconnectEvent(DisconnectEvent disconnectEvent) {
-        if (((Boolean)this.disconnect.getObj()).booleanValue()) {
-            this.setFlag3(false);
+        if (((Boolean)this.disconnect.getValue()).booleanValue()) {
+            this.setEnabled(false);
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Object var2_1 = null;
-        if (MC.client3.options != null) {
-            MC.client3.options.forwardKey.setPressed(false);
-            MC.client3.options.backKey.setPressed(false);
+        if (MC.mc.options != null) {
+            MC.mc.options.forwardKey.setPressed(false);
+            MC.mc.options.backKey.setPressed(false);
         }
     }
 

@@ -26,10 +26,10 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoFish
 extends Module {
-    private final BooleanSetting autoCast = (BooleanSetting)this.m28(new BooleanSetting("AutoCast", true));
-    private final NumberSetting castDelay = (NumberSetting)this.m28(new NumberSetting("CastDelay", 5.0, 1.0, 20.0, 1.0));
-    private final NumberSetting catchDelay = (NumberSetting)this.m28(new NumberSetting("CatchDelay", 300.0, 50.0, 2000.0, 50.0));
-    private final NumberSetting recastDelay = (NumberSetting)this.m28(new NumberSetting("RecastDelay", 450.0, 50.0, 2000.0, 50.0));
+    private final BooleanSetting autoCast = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoCast", true));
+    private final NumberSetting castDelay = (NumberSetting)this.registerSetting(new NumberSetting("CastDelay", 5.0, 1.0, 20.0, 1.0));
+    private final NumberSetting catchDelay = (NumberSetting)this.registerSetting(new NumberSetting("CatchDelay", 300.0, 50.0, 2000.0, 50.0));
+    private final NumberSetting recastDelay = (NumberSetting)this.registerSetting(new NumberSetting("RecastDelay", 450.0, 50.0, 2000.0, 50.0));
     private final Helper7 helper742 = new Helper7();
     private Type type9 = Type.Idle;
 
@@ -38,51 +38,51 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.type9 = Type.Idle;
     }
 
     @EventHandler
     private void setPacketEventInner9(PacketEvent.PacketEventInner packetEventInner) {
         Packet packet;
-        if (Module.isSet37() || !((packet = packetEventInner.getPacket()) instanceof PlaySoundS2CPacket)) {
+        if (Module.isNotInGame() || !((packet = packetEventInner.getPacket()) instanceof PlaySoundS2CPacket)) {
             return;
         }
         PlaySoundS2CPacket playSoundS2CPacket = (PlaySoundS2CPacket)packet;
-        if (!this.isSet117() || MC.client3.player.fishHook == null) {
+        if (!this.isSet117() || MC.mc.player.fishHook == null) {
             return;
         }
         if (playSoundS2CPacket.getSound().value() == SoundEvents.ENTITY_FISHING_BOBBER_SPLASH) {
             this.type9 = Type.Catch;
-            this.helper742.m533();
+            this.helper742.resetTimer();
         }
     }
 
     @EventHandler
     private void setEvent2Inner221(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (!this.isSet117()) {
             this.type9 = Type.Idle;
             return;
         }
-        FishingBobberEntity fishingBobberEntity = MC.client3.player.fishHook;
+        FishingBobberEntity fishingBobberEntity = MC.mc.player.fishHook;
         if (fishingBobberEntity == null) {
-            if (this.type9 == Type.Recast && this.helper742.m432((Double)this.recastDelay.getObj())) {
+            if (this.type9 == Type.Recast && this.helper742.hasPassedMs((Double)this.recastDelay.getValue())) {
                 this.m732();
                 this.type9 = Type.Idle;
-                this.helper742.m533();
-            } else if (((Boolean)this.autoCast.getObj()).booleanValue() && this.type9 == Type.Idle && this.helper742.m114((Double)this.castDelay.getObj())) {
+                this.helper742.resetTimer();
+            } else if (((Boolean)this.autoCast.getValue()).booleanValue() && this.type9 == Type.Idle && this.helper742.hasPassedSeconds((Double)this.castDelay.getValue())) {
                 this.m732();
-                this.helper742.m533();
+                this.helper742.resetTimer();
             }
             return;
         }
-        if (this.type9 == Type.Catch && this.helper742.m432((Double)this.catchDelay.getObj())) {
+        if (this.type9 == Type.Catch && this.helper742.hasPassedMs((Double)this.catchDelay.getValue())) {
             this.m732();
             this.type9 = Type.Recast;
-            this.helper742.m533();
+            this.helper742.resetTimer();
         }
     }
 
@@ -92,19 +92,19 @@ extends Module {
      */
     private boolean isSet117() {
         String string = IRC.getText7();
-        boolean bl = MC.client3.player.getMainHandStack().isOf(Items.FISHING_ROD);
+        boolean bl = MC.mc.player.getMainHandStack().isOf(Items.FISHING_ROD);
         if (string == null) return bl;
         if (bl) return true;
-        bl = MC.client3.player.getOffHandStack().isOf(Items.FISHING_ROD);
+        bl = MC.mc.player.getOffHandStack().isOf(Items.FISHING_ROD);
         if (string == null) return bl;
         if (!bl) return false;
         return true;
     }
 
     private void m732() {
-        Hand hand = MC.client3.player.getOffHandStack().isOf(Items.FISHING_ROD) ? Hand.OFF_HAND : Hand.MAIN_HAND;
-        MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, hand);
-        MC.client3.player.swingHand(hand);
+        Hand hand = MC.mc.player.getOffHandStack().isOf(Items.FISHING_ROD) ? Hand.OFF_HAND : Hand.MAIN_HAND;
+        MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, hand);
+        MC.mc.player.swingHand(hand);
     }
 
     @Environment(value=EnvType.CLIENT)

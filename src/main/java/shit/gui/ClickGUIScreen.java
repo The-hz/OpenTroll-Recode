@@ -67,7 +67,7 @@ extends Screen {
         if (object == null || ((String) object).isEmpty()) {
             return;
         }
-        int n5 = Client.fontManager.renderer2().m277(object);
+        int n5 = Client.fontManager.renderer2().getStringWidth(object);
         int n6 = Math.min(n + 8, this.width - n5 - 8);
         int n7 = Math.min(n2 + 10, this.height - 15);
         drawContext.fill(n6 - 3, n7 - 3, n6 + n5 + 3, n7 + 11, -871032800);
@@ -247,9 +247,9 @@ extends Screen {
         long l4 = l3;
         int n = (int)(l4 << 24 | ClickGUI.getInt27() & 0xFFFFFF);
         FontManager2 fontManager2 = Client.fontManager.renderer(18.0f);
-        int n2 = fontManager2.m277(this.text2036);
-        int n3 = fontManager2.getInt19();
-        fontManager2.m5(drawContext, this.text2036, (this.width - n2) / 2, (this.height - n3) / 2, n, true);
+        int n2 = fontManager2.getStringWidth(this.text2036);
+        int n3 = fontManager2.getFontHeight();
+        fontManager2.drawText(drawContext, this.text2036, (this.width - n2) / 2, (this.height - n3) / 2, n, true);
     }
 
     private String m406(Object object) {

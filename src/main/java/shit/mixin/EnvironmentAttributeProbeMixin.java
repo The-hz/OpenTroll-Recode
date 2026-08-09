@@ -20,17 +20,17 @@ public class EnvironmentAttributeProbeMixin {
     @Inject(method={"get(Lnet/minecraft/world/attribute/EnvironmentAttribute;F)Ljava/lang/Object;"}, at={@At(value="RETURN")}, cancellable=true)
     private void m897(EnvironmentAttribute environmentAttribute, float f, CallbackInfoReturnable callbackInfoReturnable) {
         Ambience ambience = Ambience.INSTANCE;
-        if (ambience == null || !ambience.isSet19()) {
+        if (ambience == null || !ambience.isEnabled()) {
             return;
         }
-        if (environmentAttribute == EnvironmentAttributes.FOG_COLOR_VISUAL && ((Boolean)ambience.fogColorDraw.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue(ambience.fogColor.getObj());
-        } else if (environmentAttribute == EnvironmentAttributes.SKY_COLOR_VISUAL && ((Boolean)ambience.skyColorDraw.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue(ambience.skyColor.getObj());
-        } else if (environmentAttribute == EnvironmentAttributes.CLOUD_COLOR_VISUAL && ((Boolean)ambience.cloudColorDraw.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue(ambience.cloudColor.getObj());
-        } else if (environmentAttribute == EnvironmentAttributes.SKY_LIGHT_COLOR_VISUAL && ((Boolean)ambience.worldColorDraw.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue(ambience.worldColor.getObj());
+        if (environmentAttribute == EnvironmentAttributes.FOG_COLOR_VISUAL && ((Boolean)ambience.fogColorDraw.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue(ambience.fogColor.getValue());
+        } else if (environmentAttribute == EnvironmentAttributes.SKY_COLOR_VISUAL && ((Boolean)ambience.skyColorDraw.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue(ambience.skyColor.getValue());
+        } else if (environmentAttribute == EnvironmentAttributes.CLOUD_COLOR_VISUAL && ((Boolean)ambience.cloudColorDraw.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue(ambience.cloudColor.getValue());
+        } else if (environmentAttribute == EnvironmentAttributes.SKY_LIGHT_COLOR_VISUAL && ((Boolean)ambience.worldColorDraw.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue(ambience.worldColor.getValue());
         }
     }
 }

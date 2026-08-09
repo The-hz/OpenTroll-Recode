@@ -24,8 +24,8 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class MobOwner
 extends Module {
-    private final BooleanSetting speed = (BooleanSetting)this.m28(new BooleanSetting("Speed", true));
-    private final BooleanSetting jump = (BooleanSetting)this.m28(new BooleanSetting("Jump", true));
+    private final BooleanSetting speed = (BooleanSetting)this.registerSetting(new BooleanSetting("Speed", true));
+    private final BooleanSetting jump = (BooleanSetting)this.registerSetting(new BooleanSetting("Jump", true));
     private final Map map11 = new HashMap();
 
     public MobOwner() {
@@ -33,17 +33,17 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m948();
         this.map11.clear();
     }
 
     @EventHandler
     private void onTick2(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        for (Entity entity : MC.client3.world.getEntities()) {
+        for (Entity entity : MC.mc.world.getEntities()) {
             Tameable tameable;
             block6: {
                 block5: {
@@ -92,10 +92,10 @@ extends Module {
             return "";
         }
         StringBuilder stringBuilder = new StringBuilder();
-        if (((Boolean)this.speed.getObj()).booleanValue()) {
+        if (((Boolean)this.speed.getValue()).booleanValue()) {
             stringBuilder.append(" S: ").append(this.m717(43.17 * abstractHorseEntity.getAttributeValue(EntityAttributes.MOVEMENT_SPEED)));
         }
-        if (((Boolean)this.jump.getObj()).booleanValue()) {
+        if (((Boolean)this.jump.getValue()).booleanValue()) {
             double d = abstractHorseEntity.getAttributeValue(EntityAttributes.JUMP_STRENGTH);
             double d2 = -0.1817584952 * Math.pow(d, 3.0) + 3.689713992 * Math.pow(d, 2.0) + 2.128599134 * d - 0.343930367;
             stringBuilder.append(" J: ").append(this.m717(d2));
@@ -110,10 +110,10 @@ extends Module {
 
     private void m948() {
         Object var2_1 = null;
-        if (MC.client3.world == null) {
+        if (MC.mc.world == null) {
             return;
         }
-        for (Entity entity : MC.client3.world.getEntities()) {
+        for (Entity entity : MC.mc.world.getEntities()) {
             this.setObj2(entity);
             if (null == null) continue;
         }

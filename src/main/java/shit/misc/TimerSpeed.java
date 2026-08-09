@@ -20,10 +20,10 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         boolean bl = true;
-        if (Timer.INSTANCE == null || !Timer.INSTANCE.isSet19()) {
+        if (Timer.INSTANCE == null || !Timer.INSTANCE.isEnabled()) {
             return List.of("Timer 1.0x");
         }
-        return List.of(String.format(Locale.ROOT, "Timer %.2fx", Timer.INSTANCE.speed.getObj()));
+        return List.of(String.format(Locale.ROOT, "Timer %.2fx", Timer.INSTANCE.speed.getValue()));
     }
 }
 

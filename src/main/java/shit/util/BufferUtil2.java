@@ -31,7 +31,7 @@ public final class BufferUtil2 {
      */
     public static ByteBuffer m37(Object object) {
         Identifier identifier = (Identifier)object;
-        ResourceManager resourceManager = MC.client3.getResourceManager();
+        ResourceManager resourceManager = MC.mc.getResourceManager();
         Optional optional = resourceManager.getResource(identifier);
         if (optional.isEmpty()) {
             throw new RuntimeException("Couldn't find resource at " + String.valueOf(identifier));

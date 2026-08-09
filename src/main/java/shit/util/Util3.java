@@ -40,12 +40,12 @@ implements MC {
             int n4 = n;
             int n5 = n2;
             boolean bl = Util2.isSet69();
-            if (MC.client3.player == null) {
+            if (MC.mc.player == null) {
                 return -1;
             }
             int n6 = n4;
             while (n6 < n5) {
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(n6);
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(n6);
                 if (!bl) {
                     n3 = predicate.test(itemStack) ? 1 : 0;
                     if (bl) break block5;
@@ -96,10 +96,10 @@ implements MC {
                         n3 = n2;
                         slotActionType = (SlotActionType)object;
                         boolean bl = false;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                         if (!false) break block2;
                         if (minecraftClient.player == null) break block3;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                     }
                     clientPlayerInteractionManager = minecraftClient.interactionManager;
                     if (!false) break block4;
@@ -107,9 +107,9 @@ implements MC {
                 }
                 return;
             }
-            clientPlayerInteractionManager = MC.client3.interactionManager;
+            clientPlayerInteractionManager = MC.mc.interactionManager;
         }
-        clientPlayerInteractionManager.clickSlot(MC.client3.player.currentScreenHandler.syncId, n4, n3, slotActionType, (PlayerEntity)MC.client3.player);
+        clientPlayerInteractionManager.clickSlot(MC.mc.player.currentScreenHandler.syncId, n4, n3, slotActionType, (PlayerEntity)MC.mc.player);
     }
 
     public static boolean m334(int n, int n2) {
@@ -157,22 +157,22 @@ implements MC {
             boolean bl;
             block4: {
                 boolean bl2 = Util2.isSet69();
-                MinecraftClient minecraftClient2 = MC.client3;
+                MinecraftClient minecraftClient2 = MC.mc;
                 if (!bl2) {
                     if (minecraftClient2.player == null) return false;
-                    minecraftClient2 = MC.client3;
+                    minecraftClient2 = MC.mc;
                 }
                 bl = minecraftClient2.currentScreen instanceof HandledScreen;
                 if (bl2) break block4;
                 if (!bl) return false;
-                minecraftClient = MC.client3;
+                minecraftClient = MC.mc;
                 if (bl2) break block5;
                 bl = minecraftClient.currentScreen instanceof InventoryScreen;
             }
             if (bl) return false;
-            minecraftClient = MC.client3;
+            minecraftClient = MC.mc;
         }
-        if (minecraftClient.player.currentScreenHandler == MC.client3.player.playerScreenHandler) return false;
+        if (minecraftClient.player.currentScreenHandler == MC.mc.player.playerScreenHandler) return false;
         return true;
     }
 
@@ -183,7 +183,7 @@ implements MC {
             if (n == 0) {
                 return 0;
             }
-            n = Math.max(0, MC.client3.player.currentScreenHandler.slots.size() - 36);
+            n = Math.max(0, MC.mc.player.currentScreenHandler.slots.size() - 36);
         }
         return n;
     }

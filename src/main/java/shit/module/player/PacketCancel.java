@@ -15,8 +15,8 @@ import shit.setting.StringSetting;
 @Environment(value=EnvType.CLIENT)
 public class PacketCancel
 extends Module {
-    private final StringSetting sendContains = (StringSetting)this.m28(new StringSetting("SendContains", "None"));
-    private final StringSetting receiveContains = (StringSetting)this.m28(new StringSetting("ReceiveContains", "None"));
+    private final StringSetting sendContains = (StringSetting)this.registerSetting(new StringSetting("SendContains", "None"));
+    private final StringSetting receiveContains = (StringSetting)this.registerSetting(new StringSetting("ReceiveContains", "None"));
 
     public PacketCancel() {
         super("PacketCancel", "Cancels packets whose class names contain configured text.", Category.PLAYER);
@@ -24,15 +24,15 @@ extends Module {
 
     @EventHandler(priority=999)
     private void setPacketEventInner27(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (this.m475((String)this.sendContains.getObj(), packetEventInner2.getPacket().getClass().getSimpleName())) {
-            packetEventInner2.m209();
+        if (this.m475((String)this.sendContains.getValue(), packetEventInner2.getPacket().getClass().getSimpleName())) {
+            packetEventInner2.cancel();
         }
     }
 
     @EventHandler(priority=999)
     private void setPacketEventInner31(PacketEvent.PacketEventInner packetEventInner) {
-        if (this.m475((String)this.receiveContains.getObj(), packetEventInner.getPacket().getClass().getSimpleName())) {
-            packetEventInner.m209();
+        if (this.m475((String)this.receiveContains.getValue(), packetEventInner.getPacket().getClass().getSimpleName())) {
+            packetEventInner.cancel();
         }
     }
 

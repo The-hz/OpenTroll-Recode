@@ -24,15 +24,15 @@ import shit.util.Util2;
 public class Friend
 extends Module {
     public static Friend INSTANCE;
-    private final BooleanSetting mCF = (BooleanSetting)this.m28(new BooleanSetting("MCF", true));
-    private final BooleanSetting sendMessage = (BooleanSetting)this.m28(new BooleanSetting("SendMessage", false));
-    private final BooleanSetting sound = (BooleanSetting)this.m28(new BooleanSetting("Sound", true));
+    private final BooleanSetting mCF = (BooleanSetting)this.registerSetting(new BooleanSetting("MCF", true));
+    private final BooleanSetting sendMessage = (BooleanSetting)this.registerSetting(new BooleanSetting("SendMessage", false));
+    private final BooleanSetting sound = (BooleanSetting)this.registerSetting(new BooleanSetting("Sound", true));
     private String text1363 = null;
     private int count137 = 0;
 
     public Friend() {
         super("Friend", "Manages your client-side friends.", Category.MISC);
-        this.setFlag3(true);
+        this.setEnabled(true);
         INSTANCE = this;
     }
 
@@ -48,12 +48,12 @@ extends Module {
             if (friend == null) return false;
             friend = INSTANCE;
         }
-        boolean bl = friend.isSet19();
+        boolean bl = friend.isEnabled();
         if (string2 != null) {
             if (!bl) {
                 return false;
             }
-            bl = Client.manager.m258(string);
+            bl = Client.manager.isFriend(string);
         }
         if (string2 == null) return bl;
         if (bl) return true;
@@ -70,7 +70,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.text1363 = null;
         this.count137 = 0;
     }
@@ -79,7 +79,7 @@ extends Module {
     private void setEvent2Inner7(Event2.Event2Inner event2Inner) {
         EntityHitResult entityHitResult;
         Object object;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (this.text1363 != null && this.count137 > 0) {
@@ -89,29 +89,29 @@ extends Module {
                 this.text1363 = null;
             }
         }
-        if (((Boolean)this.mCF.getObj()).booleanValue() && MC.client3.options.pickItemKey.wasPressed() && MC.client3.currentScreen == null && (object = MC.client3.crosshairTarget) instanceof EntityHitResult && (object = (entityHitResult = (EntityHitResult)object).getEntity()) instanceof PlayerEntity) {
+        if (((Boolean)this.mCF.getValue()).booleanValue() && MC.mc.options.pickItemKey.wasPressed() && MC.mc.currentScreen == null && (object = MC.mc.crosshairTarget) instanceof EntityHitResult && (object = (entityHitResult = (EntityHitResult)object).getEntity()) instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity)object;
             if (Friend.m913(object = playerEntity.getGameProfile().name())) {
-                Util2.setObj10("\u00a7d\u273f \u00a7f\u8fd9\u662f\u732b\u732b\u7684\u7279\u522b\u597d\u53cb\u54e6~ \u4e0d\u80fd\u79fb\u9664\u7684\u55b5~ \u00a7d\u273f");
-                if (((Boolean)this.sound.getObj()).booleanValue()) {
-                    MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), SoundEvents.ENTITY_CAT_AMBIENT, SoundCategory.PLAYERS, 1.0f, 1.5f, false);
+                Util2.sendClientMessage("\u00a7d\u273f \u00a7f\u8fd9\u662f\u732b\u732b\u7684\u7279\u522b\u597d\u53cb\u54e6~ \u4e0d\u80fd\u79fb\u9664\u7684\u55b5~ \u00a7d\u273f");
+                if (((Boolean)this.sound.getValue()).booleanValue()) {
+                    MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_CAT_AMBIENT, SoundCategory.PLAYERS, 1.0f, 1.5f, false);
                 }
                 return;
             }
-            boolean bl = Client.manager.m258(object);
+            boolean bl = Client.manager.isFriend(object);
             if (bl) {
-                Client.manager.m933(object);
-                Util2.setObj10("\u00a77\u2716 \u00a7c\u5df2\u79fb\u9664\u597d\u53cb\u00a7f: " + (String)object + " \u00a77\u2716 \u545c\u545c...");
-                if (((Boolean)this.sound.getObj()).booleanValue()) {
-                    MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), (SoundEvent)SoundEvents.ENTITY_ITEM_BREAK.value(), SoundCategory.PLAYERS, 1.0f, 0.8f, false);
+                Client.manager.removeFriend(object);
+                Util2.sendClientMessage("\u00a77\u2716 \u00a7c\u5df2\u79fb\u9664\u597d\u53cb\u00a7f: " + (String)object + " \u00a77\u2716 \u545c\u545c...");
+                if (((Boolean)this.sound.getValue()).booleanValue()) {
+                    MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), (SoundEvent)SoundEvents.ENTITY_ITEM_BREAK.value(), SoundCategory.PLAYERS, 1.0f, 0.8f, false);
                 }
             } else {
-                Client.manager.m151(object);
-                Util2.setObj10("\u00a7d\u2661 \u00a7a\u5df2\u6dfb\u52a0\u597d\u53cb\u00a7f: " + (String)object + " \u00a7d\u2661 \uff90\u30e3~");
-                if (((Boolean)this.sound.getObj()).booleanValue()) {
-                    MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.2f, false);
+                Client.manager.addFriend(object);
+                Util2.sendClientMessage("\u00a7d\u2661 \u00a7a\u5df2\u6dfb\u52a0\u597d\u53cb\u00a7f: " + (String)object + " \u00a7d\u2661 \uff90\u30e3~");
+                if (((Boolean)this.sound.getValue()).booleanValue()) {
+                    MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.2f, false);
                 }
-                if (((Boolean)this.sendMessage.getObj()).booleanValue()) {
+                if (((Boolean)this.sendMessage.getValue()).booleanValue()) {
                     this.text1363 = (String)object;
                     this.count137 = 10;
                 }
@@ -123,15 +123,15 @@ extends Module {
         String string = (String)object;
         String string2 = IRC.getText7();
         if (string2 != null) {
-            if (MC.client3.player == null) {
+            if (MC.mc.player == null) {
                 return;
             }
             try {
-                Util2.setObj14("w " + string + " I Just Add you as friend on TrollHack-Recode!");
-                Util2.setObj10("\u00a7d\u2709 \u00a7f\u5df2\u5411 \u00a7a" + string + " \u00a7f\u53d1\u9001\u4e86\u52a0\u597d\u53cb\u79c1\u4fe1~ \u00a7d\u55b5\u2661");
+                Util2.sendChatCommand("w " + string + " I Just Add you as friend on TrollHack-Recode!");
+                Util2.sendClientMessage("\u00a7d\u2709 \u00a7f\u5df2\u5411 \u00a7a" + string + " \u00a7f\u53d1\u9001\u4e86\u52a0\u597d\u53cb\u79c1\u4fe1~ \u00a7d\u55b5\u2661");
             }
             catch (Exception exception) {
-                Util2.setObj10("\u00a7c\u81ea\u52a8\u53d1\u9001\u79c1\u4fe1\u5931\u8d25\u4e86\u55b5... (\u0e51\u2022\u0301 \u2083 \u2022\u0300\u0e51)");
+                Util2.sendClientMessage("\u00a7c\u81ea\u52a8\u53d1\u9001\u79c1\u4fe1\u5931\u8d25\u4e86\u55b5... (\u0e51\u2022\u0301 \u2083 \u2022\u0300\u0e51)");
             }
         }
     }

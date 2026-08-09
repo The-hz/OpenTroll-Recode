@@ -23,9 +23,9 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class CoordsLog
 extends Module {
-    private final BooleanSetting death = (BooleanSetting)this.m28(new BooleanSetting("Death", true));
-    private final BooleanSetting autoLog = (BooleanSetting)this.m28(new BooleanSetting("AutoLog", false));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 15.0, 1.0, 300.0, 1.0));
+    private final BooleanSetting death = (BooleanSetting)this.registerSetting(new BooleanSetting("Death", true));
+    private final BooleanSetting autoLog = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoLog", false));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 15.0, 1.0, 300.0, 1.0));
     private final Helper7 helper714 = new Helper7();
     private String x = "";
     private boolean flag114;
@@ -36,27 +36,27 @@ extends Module {
 
     @Override
     public void onEnable() {
-        this.helper714.m533();
+        this.helper714.resetTimer();
         this.x = "";
         this.flag114 = false;
     }
 
     @EventHandler
     private void setEvent2Inner217(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.autoLog.getObj()).booleanValue() && this.helper714.m114((Double)this.delay.getObj())) {
+        if (((Boolean)this.autoLog.getValue()).booleanValue() && this.helper714.hasPassedSeconds((Double)this.delay.getValue())) {
             String string = this.m469("Auto");
             if (!string.equals(this.x)) {
                 CoordsLog.setObj67(string);
                 this.x = string;
             }
-            this.helper714.m533();
+            this.helper714.resetTimer();
         }
-        if (((Boolean)this.death.getObj()).booleanValue()) {
+        if (((Boolean)this.death.getValue()).booleanValue()) {
             boolean bl;
-            boolean bl2 = bl = MC.client3.player.isDead() || MC.client3.player.getHealth() <= 0.0f;
+            boolean bl2 = bl = MC.mc.player.isDead() || MC.mc.player.getHealth() <= 0.0f;
             if (bl && !this.flag114) {
                 CoordsLog.setObj67(this.m469("Death"));
                 this.flag114 = true;
@@ -68,7 +68,7 @@ extends Module {
 
     static void setObj67(Object object) {
         String string = (String)object;
-        Util2.setObj10("[CoordsLog] " + string);
+        Util2.sendClientMessage("[CoordsLog] " + string);
         CoordsLog.setObj42(string);
     }
 
@@ -89,9 +89,9 @@ extends Module {
 
     private String m469(Object object) {
         String string = (String)object;
-        int n = MC.client3.player.getBlockZ();
-        int n2 = MC.client3.player.getBlockY();
-        int n3 = MC.client3.player.getBlockX();
+        int n = MC.mc.player.getBlockZ();
+        int n2 = MC.mc.player.getBlockY();
+        int n3 = MC.mc.player.getBlockX();
         return string + " " + n3 + ", " + n2 + ", " + n;
     }
 }

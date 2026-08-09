@@ -27,7 +27,7 @@ import shit.event.PlayerEvent;
 public class ConnectionMixin {
     @Inject(method={"sendImmediately(Lnet/minecraft/network/packet/Packet;Lio/netty/channel/ChannelFutureListener;Z)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$sendPacket(Packet packet, ChannelFutureListener channelFutureListener, boolean bl, CallbackInfo callbackInfo) {
-        if (((PacketEvent.PacketEventInner2)Client.eventBus.m287(new PacketEvent.PacketEventInner2(packet))).isSet85()) {
+        if (((PacketEvent.PacketEventInner2)Client.eventBus.post(new PacketEvent.PacketEventInner2(packet))).isCancelled()) {
             callbackInfo.cancel();
         }
     }
@@ -35,7 +35,7 @@ public class ConnectionMixin {
     @Inject(method={"channelRead0(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/packet/Packet;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$channelRead(ChannelHandlerContext channelHandlerContext, Packet packet, CallbackInfo callbackInfo) {
         EntityStatusS2CPacket entityStatusS2CPacket;
-        if (((PacketEvent.PacketEventInner)Client.eventBus.m287(new PacketEvent.PacketEventInner(packet))).isSet85()) {
+        if (((PacketEvent.PacketEventInner)Client.eventBus.post(new PacketEvent.PacketEventInner(packet))).isCancelled()) {
             callbackInfo.cancel();
             return;
         }
@@ -48,7 +48,7 @@ public class ConnectionMixin {
                 Entity entity = entityStatusS2CPacket.getEntity((World)minecraftClient.world);
                 if (entity instanceof PlayerEntity) {
                     PlayerEntity playerEntity = (PlayerEntity)entity;
-                    Client.eventBus.m287(new PlayerEvent(playerEntity));
+                    Client.eventBus.post(new PlayerEvent(playerEntity));
                 }
             });
         }

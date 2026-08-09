@@ -20,7 +20,7 @@ import shit.module.movement.AutoSprint;
 @Mixin(value={Input.class})
 public class ClientInputMixin {
     private boolean shouldMovementSync() {
-        boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getObj() != false;
+        boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getValue() != false;
         boolean bl2 = AutoSprint.INSTANCE != null && AutoSprint.INSTANCE.isSet160();
         return (bl || bl2) && Client.mathUtil.isSet111();
     }

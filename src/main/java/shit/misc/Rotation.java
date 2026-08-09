@@ -19,10 +19,10 @@ extends AbstractHudModule {
 
     @Override
     protected List lines() {
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return List.of("Rotation 0.0 0.0");
         }
-        return List.of(String.format(Locale.ROOT, "Rotation %.1f %.1f", Float.valueOf(MC.client3.player.getYaw()), Float.valueOf(MC.client3.player.getPitch())));
+        return List.of(String.format(Locale.ROOT, "Rotation %.1f %.1f", Float.valueOf(MC.mc.player.getYaw()), Float.valueOf(MC.mc.player.getPitch())));
     }
 
     private static MatchException a(MatchException matchException) {

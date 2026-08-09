@@ -76,7 +76,7 @@ public final class RenderUtil3 {
                 drawContext.drawText(textRenderer, string, n6, n5, n4, bl2);
                 if (null == null) break block3;
             }
-            Client.fontManager.renderer2().m5(drawContext, string, n6, n5 + Math.round(Client.fontManager.getFloat47()), n4, bl2);
+            Client.fontManager.renderer2().drawText(drawContext, string, n6, n5 + Math.round(Client.fontManager.getFloat47()), n4, bl2);
         }
     }
 

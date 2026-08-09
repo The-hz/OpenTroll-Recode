@@ -35,10 +35,10 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class ChestESP
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.OUTLINE));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1427720118));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 64.0, 8.0, 256.0, 8.0));
-    private final BooleanSetting throughWall = (BooleanSetting)this.m28(new BooleanSetting("ThroughWall", true));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.OUTLINE));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1427720118));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 64.0, 8.0, 256.0, 8.0));
+    private final BooleanSetting throughWall = (BooleanSetting)this.registerSetting(new BooleanSetting("ThroughWall", true));
     private final List list17 = new ArrayList();
     private int count159;
 
@@ -47,7 +47,7 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         return Integer.toString(this.list17.size());
     }
 
@@ -62,20 +62,20 @@ extends Module {
 
     @EventHandler
     private void setRenderLevelEvent10(RenderLevelEvent renderLevelEvent) {
-        if (Module.isSet37() || this.list17.isEmpty()) {
+        if (Module.isNotInGame() || this.list17.isEmpty()) {
             return;
         }
         for (Object blockPosObj : this.list17) {
             BlockPos blockPos = (BlockPos)blockPosObj;
-            Box box = MC.client3.world.getBlockState(blockPos).getOutlineShape((BlockView)MC.client3.world, blockPos).getBoundingBox().offset(blockPos);
+            Box box = MC.mc.world.getBlockState(blockPos).getOutlineShape((BlockView)MC.mc.world, blockPos).getBoundingBox().offset(blockPos);
             if (box.getLengthX() <= 0.0 || box.getLengthY() <= 0.0 || box.getLengthZ() <= 0.0) {
                 box = new Box(blockPos);
             }
-            if (this.mode.getObj() == Mode.FILL || this.mode.getObj() == Mode.BOTH) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getObj(), (Boolean)this.throughWall.getObj());
+            if (this.mode.getValue() == Mode.FILL || this.mode.getValue() == Mode.BOTH) {
+                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
             }
-            if (this.mode.getObj() != Mode.OUTLINE && this.mode.getObj() != Mode.BOTH) continue;
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getObj(), (Boolean)this.throughWall.getObj());
+            if (this.mode.getValue() != Mode.OUTLINE && this.mode.getValue() != Mode.BOTH) continue;
+            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, (Integer)this.color.getValue(), (Boolean)this.throughWall.getValue());
         }
         EspRenderLayers.m125();
     }
@@ -83,19 +83,19 @@ extends Module {
     private void m251() {
         this.list17.clear();
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        int n = Math.max(1, (int)Math.ceil((Double)this.range.getObj() / 16.0));
-        int n2 = MC.client3.player.getChunkPos().x;
-        int n3 = MC.client3.player.getChunkPos().z;
-        double d = (Double)this.range.getObj() * (Double)this.range.getObj();
+        int n = Math.max(1, (int)Math.ceil((Double)this.range.getValue() / 16.0));
+        int n2 = MC.mc.player.getChunkPos().x;
+        int n3 = MC.mc.player.getChunkPos().z;
+        double d = (Double)this.range.getValue() * (Double)this.range.getValue();
         for (int i = n2 - n; i <= n2 + n; ++i) {
             for (int j = n3 - n; j <= n3 + n; ++j) {
-                for (BlockEntity blockEntity : MC.client3.world.getChunk(i, j).getBlockEntities().values()) {
+                for (BlockEntity blockEntity : MC.mc.world.getChunk(i, j).getBlockEntities().values()) {
                     BlockPos blockPos = blockEntity.getPos();
-                    if (MC.client3.player.squaredDistanceTo((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5) > d) continue;
-                    if (this.m655(MC.client3.world.getBlockState(blockPos).getBlock())) {
+                    if (MC.mc.player.squaredDistanceTo((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5) > d) continue;
+                    if (this.m655(MC.mc.world.getBlockState(blockPos).getBlock())) {
                         this.list17.add(blockPos.toImmutable());
                     }
                     if (null == null) continue;

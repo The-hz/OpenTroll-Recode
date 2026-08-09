@@ -25,7 +25,7 @@ public class LevelRendererShaderMixin {
     @Inject(method={"canDrawEntityOutlines()Z"}, at={@At(value="RETURN")}, cancellable=true)
     private void setCallbackInfoReturnable(CallbackInfoReturnable callbackInfoReturnable) {
         Shaders shaders = Shaders.INSTANCE;
-        if (shaders != null && shaders.isSet19()) {
+        if (shaders != null && shaders.isEnabled()) {
             callbackInfoReturnable.setReturnValue((Object)true);
         }
     }
@@ -33,7 +33,7 @@ public class LevelRendererShaderMixin {
     @Inject(method={"pushEntityRenders(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/state/WorldRenderState;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;)V"}, at={@At(value="HEAD")})
     private void m890(MatrixStack matrixStack, WorldRenderState worldRenderState, OrderedRenderCommandQueue orderedRenderCommandQueue, CallbackInfo callbackInfo) {
         Shaders shaders = Shaders.INSTANCE;
-        if (shaders != null && shaders.isSet19()) {
+        if (shaders != null && shaders.isEnabled()) {
             worldRenderState.hasOutline = true;
         }
     }
@@ -41,11 +41,11 @@ public class LevelRendererShaderMixin {
     @Inject(method={"drawEntityOutlinesFramebuffer()V"}, at={@At(value="HEAD")}, cancellable=true)
     private void setCallbackInfo(CallbackInfo callbackInfo) {
         Shaders shaders = Shaders.INSTANCE;
-        if (shaders == null || !shaders.isSet19()) {
+        if (shaders == null || !shaders.isEnabled()) {
             return;
         }
-        InterceptEntityOutlineEvent interceptEntityOutlineEvent = (InterceptEntityOutlineEvent)Client.eventBus.m287(new InterceptEntityOutlineEvent((WorldRenderer)(Object)this, ObjectAllocator.TRIVIAL));
-        if (interceptEntityOutlineEvent.isSet85()) {
+        InterceptEntityOutlineEvent interceptEntityOutlineEvent = (InterceptEntityOutlineEvent)Client.eventBus.post(new InterceptEntityOutlineEvent((WorldRenderer)(Object)this, ObjectAllocator.TRIVIAL));
+        if (interceptEntityOutlineEvent.isCancelled()) {
             callbackInfo.cancel();
         }
     }

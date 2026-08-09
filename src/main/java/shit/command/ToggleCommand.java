@@ -26,7 +26,7 @@ extends Command {
         boolean bl = false;
         if (n2 == 1) {
             String string = stringArray.length > 1 ? stringArray[1].toLowerCase() : "";
-            return (String[])Client.moduleManager.getList6().stream().map(Module::getText69).filter(string2 -> string2.toLowerCase().startsWith(string)).toArray(String[]::new);
+            return (String[])Client.moduleManager.getModules().stream().map(Module::getName).filter(string2 -> string2.toLowerCase().startsWith(string)).toArray(String[]::new);
         }
         return new String[0];
     }
@@ -43,21 +43,21 @@ extends Command {
                 if (!bl) break block5;
                 if (stringArray.length >= 1) break block6;
                 String string = this.getText31();
-                String string2 = Client.commandManager.getText10();
-                CommandManager.setObj21("Usage: " + string2 + string);
+                String string2 = Client.commandManager.getPrefix();
+                CommandManager.sendFeedback("Usage: " + string2 + string);
             }
             return;
         }
-        Module module2 = module = Client.moduleManager.m979(stringArray[0]);
+        Module module2 = module = Client.moduleManager.getModule(stringArray[0]);
         if (bl) {
             if (module2 == null) {
-                CommandManager.setObj21("Module not found: " + stringArray[0]);
+                CommandManager.sendFeedback("Module not found: " + stringArray[0]);
                 return;
             }
-            module.m84();
+            module.toggle();
             module2 = module;
         }
-        CommandManager.setObj21(module2.getText69() + " " + (module.isSet19() ? "enabled" : "disabled") + ".");
+        CommandManager.sendFeedback(module2.getName() + " " + (module.isEnabled() ? "enabled" : "disabled") + ".");
     }
 
     public static void setFlag8(boolean bl) {

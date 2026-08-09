@@ -75,21 +75,21 @@ public class RenderUtil4 {
     }
 
     public static float getFloat57() {
-        return (float)((double)MC.client3.getWindow().getFramebufferWidth() / RenderUtil4.getDouble18());
+        return (float)((double)MC.mc.getWindow().getFramebufferWidth() / RenderUtil4.getDouble18());
     }
 
     public static float getFloat53() {
-        return (float)((double)MC.client3.getWindow().getFramebufferHeight() / RenderUtil4.getDouble18());
+        return (float)((double)MC.mc.getWindow().getFramebufferHeight() / RenderUtil4.getDouble18());
     }
 
     public static double m1015(double d) {
         double d2 = d;
-        return d2 * (double)MC.client3.getWindow().getScaleFactor() / RenderUtil4.getDouble18();
+        return d2 * (double)MC.mc.getWindow().getScaleFactor() / RenderUtil4.getDouble18();
     }
 
     public static double m171(double d) {
         double d2 = d;
-        return d2 * (double)MC.client3.getWindow().getScaleFactor() / RenderUtil4.getDouble18();
+        return d2 * (double)MC.mc.getWindow().getScaleFactor() / RenderUtil4.getDouble18();
     }
 
     public static ColorData m13(float f, float f2, float f3, float f4) {
@@ -126,7 +126,7 @@ public class RenderUtil4 {
             }
             return autoCloseableImpl.getGpuTextureView();
         }
-        return MC.client3.getFramebuffer().getColorAttachmentView();
+        return MC.mc.getFramebuffer().getColorAttachmentView();
     }
 
     public static GpuTextureView getGpuTextureView4() {
@@ -141,7 +141,7 @@ public class RenderUtil4 {
             }
             return autoCloseableImpl.getGpuTextureView5();
         }
-        return MC.client3.getFramebuffer().getDepthAttachmentView();
+        return MC.mc.getFramebuffer().getDepthAttachmentView();
     }
 
     public static Data m1023(int n) {
@@ -245,7 +245,7 @@ public class RenderUtil4 {
             }
             GpuSampler gpuSampler = RenderSystem.getDevice().createSampler(AddressMode.CLAMP_TO_EDGE, AddressMode.CLAMP_TO_EDGE, FilterMode.NEAREST, FilterMode.NEAREST, 1, OptionalDouble.empty());
             this.texture4 = new Texture(gpuTexture, gpuTextureView, gpuSampler);
-            MC.client3.getTextureManager().registerTexture(this.field62, (AbstractTexture)this.getTexture2());
+            MC.mc.getTextureManager().registerTexture(this.field62, (AbstractTexture)this.getTexture2());
         }
 
         public GpuTextureView getGpuTextureView() {
@@ -276,7 +276,7 @@ public class RenderUtil4 {
                     return;
                 }
                 this.flag179 = true;
-                MC.client3.getTextureManager().destroyTexture(this.field62);
+                MC.mc.getTextureManager().destroyTexture(this.field62);
                 autoCloseableImpl = this;
             }
             if (null != null) {

@@ -17,7 +17,7 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AutoKit
 extends Module {
-    private final StringSetting kitName = (StringSetting)this.m28(new StringSetting("KitName", ""));
+    private final StringSetting kitName = (StringSetting)this.registerSetting(new StringSetting("KitName", ""));
     private boolean flag140;
     private boolean flag40;
     private long time49;
@@ -29,13 +29,13 @@ extends Module {
     @Override
     public void onEnable() {
         block0: {
-            if (Module.isSet37()) break block0;
+            if (Module.isNotInGame()) break block0;
             this.setLong2(3000L);
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag140 = false;
         this.flag40 = false;
         this.time49 = 0L;
@@ -49,7 +49,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner228(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             this.flag140 = false;
             return;
         }
@@ -57,16 +57,16 @@ extends Module {
             this.flag140 = true;
             this.setLong2(3000L);
         }
-        if (MC.client3.player.isDead()) {
+        if (MC.mc.player.isDead()) {
             this.setLong2(1500L);
             return;
         }
         if (!this.flag40 || System.currentTimeMillis() < this.time49) {
             return;
         }
-        String string = (String)this.kitName.getObj();
+        String string = (String)this.kitName.getValue();
         if (string != null && !string.isBlank()) {
-            Util2.setObj14("kit " + string.trim());
+            Util2.sendChatCommand("kit " + string.trim());
         }
         this.flag40 = false;
     }

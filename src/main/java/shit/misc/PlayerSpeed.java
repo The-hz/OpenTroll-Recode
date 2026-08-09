@@ -20,11 +20,11 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         boolean bl = true;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return List.of("Speed 0.00 km/h");
         }
-        double d = MC.client3.player.getX() - MC.client3.player.lastRenderX;
-        double d2 = MC.client3.player.getZ() - MC.client3.player.lastRenderZ;
+        double d = MC.mc.player.getX() - MC.mc.player.lastRenderX;
+        double d2 = MC.mc.player.getZ() - MC.mc.player.lastRenderZ;
         double d3 = Math.sqrt(d * d + d2 * d2) * 20.0;
         return List.of(String.format(Locale.ROOT, "Speed %.2f km/h", d3 * 3.6));
     }

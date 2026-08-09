@@ -19,17 +19,17 @@ implements MC {
     public static boolean isSet7() {
         float f;
         boolean bl = Util2.isSet69();
-        ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+        ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (!bl) {
             if (clientPlayerEntity == null) {
                 return false;
             }
-            clientPlayerEntity = MC.client3.player;
+            clientPlayerEntity = MC.mc.player;
         }
         float f2 = (f = clientPlayerEntity.sidewaysSpeed - 0.0f) == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
         if (bl) return f2 != 0;
         if (f2 == 0) {
-            float f3 = MC.client3.player.forwardSpeed - 0.0f;
+            float f3 = MC.mc.player.forwardSpeed - 0.0f;
             f2 = f3 == 0.0f ? 0 : (f3 > 0.0f ? 1 : -1);
             if (bl) return f2 != 0;
             if (f2 == 0) {
@@ -46,7 +46,7 @@ implements MC {
      */
     public static boolean isSet132() {
         boolean bl = false;
-        ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+        ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         double d = clientPlayerEntity.getVelocity().x - 0.0;
         double d2 = d == 0.0 ? 0 : (d > 0.0 ? 1 : -1);
         return d2 != 0;
@@ -55,15 +55,15 @@ implements MC {
     public static double[] m246(double d) {
         double d2 = d;
         boolean bl = false;
-        ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+        ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (false) {
             if (clientPlayerEntity == null) {
                 return new double[]{0.0, 0.0};
             }
-            clientPlayerEntity = MC.client3.player;
+            clientPlayerEntity = MC.mc.player;
         }
         float f = clientPlayerEntity.forwardSpeed;
-        float f2 = MC.client3.player.sidewaysSpeed;
+        float f2 = MC.mc.player.sidewaysSpeed;
         return MathUtil.m381(d2, f, f2);
     }
 
@@ -89,12 +89,12 @@ implements MC {
                                         f7 = f;
                                         f6 = f2;
                                         bl = Util2.isSet69();
-                                        ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+                                        ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                                         if (!bl) {
                                             if (clientPlayerEntity == null) {
                                                 return new double[]{0.0, 0.0};
                                             }
-                                            clientPlayerEntity = MC.client3.player;
+                                            clientPlayerEntity = MC.mc.player;
                                         }
                                         f5 = clientPlayerEntity.getYaw();
                                         f4 = f7;
@@ -159,12 +159,12 @@ implements MC {
             block2: {
                 d2 = d;
                 boolean bl = Util2.isSet69();
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
                 if (bl) break block2;
                 if (clientPlayerEntity == null) break block3;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
             }
-            clientPlayerEntity.setVelocity(d2, MC.client3.player.getVelocity().y, MC.client3.player.getVelocity().z);
+            clientPlayerEntity.setVelocity(d2, MC.mc.player.getVelocity().y, MC.mc.player.getVelocity().z);
         }
     }
 
@@ -175,12 +175,12 @@ implements MC {
             block2: {
                 d2 = d;
                 boolean bl = false;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
                 if (!false) break block2;
                 if (clientPlayerEntity == null) break block3;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
             }
-            clientPlayerEntity.setVelocity(MC.client3.player.getVelocity().x, d2, MC.client3.player.getVelocity().z);
+            clientPlayerEntity.setVelocity(MC.mc.player.getVelocity().x, d2, MC.mc.player.getVelocity().z);
         }
     }
 
@@ -191,12 +191,12 @@ implements MC {
             block2: {
                 d2 = d;
                 boolean bl = false;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
                 if (!false) break block2;
                 if (clientPlayerEntity == null) break block3;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
             }
-            clientPlayerEntity.setVelocity(MC.client3.player.getVelocity().x, MC.client3.player.getVelocity().y, d2);
+            clientPlayerEntity.setVelocity(MC.mc.player.getVelocity().x, MC.mc.player.getVelocity().y, d2);
         }
     }
 
@@ -209,31 +209,31 @@ implements MC {
                 boolean bl3 = bl;
                 d2 = d;
                 boolean bl4 = Util2.isSet69();
-                ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+                ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                 if (!bl4) {
                     if (clientPlayerEntity == null) {
                         return d2;
                     }
-                    clientPlayerEntity = MC.client3.player;
+                    clientPlayerEntity = MC.mc.player;
                 }
                 bl2 = clientPlayerEntity.hasStatusEffect(StatusEffects.SPEED);
                 if (!bl4) {
                     if (bl2) {
-                        n = MC.client3.player.getStatusEffect(StatusEffects.SPEED).getAmplifier();
+                        n = MC.mc.player.getStatusEffect(StatusEffects.SPEED).getAmplifier();
                         d2 *= 1.0 + 0.2 * (double)(n + 1);
                     }
                     bl2 = bl3;
                 }
                 if (bl4) break block9;
                 if (!bl2) break block10;
-                bl2 = MC.client3.player.hasStatusEffect(StatusEffects.SLOWNESS);
+                bl2 = MC.mc.player.hasStatusEffect(StatusEffects.SLOWNESS);
                 if (bl4) break block9;
                 if (bl2) {
-                    n = MC.client3.player.getStatusEffect(StatusEffects.SLOWNESS).getAmplifier();
+                    n = MC.mc.player.getStatusEffect(StatusEffects.SLOWNESS).getAmplifier();
                     d2 /= 1.0 + 0.2 * (double)(n + 1);
                 }
             }
-            bl2 = MC.client3.player.isInSneakingPose();
+            bl2 = MC.mc.player.isInSneakingPose();
         }
         if (bl2) {
             d2 /= 5.0;

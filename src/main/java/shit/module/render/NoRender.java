@@ -59,45 +59,45 @@ extends Module {
 
         public NoRender() {
         super("NoRender", "Disables overlays, particles and entity visuals.", Category.RENDER);
-        this.potionsIcon = (BooleanSetting)this.m28(new BooleanSetting("PotionsIcon", false));
-        this.portal = (BooleanSetting)this.m28(new BooleanSetting("Portal", true));
-        this.nausea = (BooleanSetting)this.m28(new BooleanSetting("Nausea", true));
-        this.guiToast = (BooleanSetting)this.m28(new BooleanSetting("GuiToast", false));
-        this.fireOverlay = (BooleanSetting)this.m28(new BooleanSetting("FireOverlay", true));
-        this.waterOverlay = (BooleanSetting)this.m28(new BooleanSetting("WaterOverlay", true));
-        this.blockOverlay = (BooleanSetting)this.m28(new BooleanSetting("BlockOverlay", true));
-        this.hurtCam = (BooleanSetting)this.m28(new BooleanSetting("HurtCam", true));
-        this.totem = (BooleanSetting)this.m28(new BooleanSetting("Totem", true));
-        this.weather = (BooleanSetting)this.m28(new BooleanSetting("Weather", true));
-        this.darkness = (BooleanSetting)this.m28(new BooleanSetting("Darkness", true));
-        this.fog = (BooleanSetting)this.m28(new BooleanSetting("Fog", false));
-        this.blindness = (BooleanSetting)this.m28(new BooleanSetting("Blindness", true));
-        this.entityFire = (BooleanSetting)this.m28(new BooleanSetting("EntityFire", true));
-        this.invisible = (BooleanSetting)this.m28(new BooleanSetting("Invisible", false));
-        this.potions = (BooleanSetting)this.m28(new BooleanSetting("Potions", true));
-        this.xP = (BooleanSetting)this.m28(new BooleanSetting("XP", true));
-        this.arrows = (BooleanSetting)this.m28(new BooleanSetting("Arrows", false));
-        this.eggs = (BooleanSetting)this.m28(new BooleanSetting("Eggs", false));
-        this.items = (BooleanSetting)this.m28(new BooleanSetting("Items", false));
-        this.armorParts = (BooleanSetting)this.m28(new BooleanSetting("ArmorParts", false));
-        this.armorTrim = (BooleanSetting)this.m28(new BooleanSetting("ArmorTrim", false));
-        this.armorGlint = (BooleanSetting)this.m28(new BooleanSetting("ArmorGlint", false));
-        this.witherHearts = (BooleanSetting)this.m28(new BooleanSetting("WitherHearts", true));
-        this.effect = (BooleanSetting)this.m28(new BooleanSetting("Effect", true));
-        this.guardian = (BooleanSetting)this.m28(new BooleanSetting("Guardian", false));
-        this.explosions = (BooleanSetting)this.m28(new BooleanSetting("Explosions", true));
-        this.campFire = (BooleanSetting)this.m28(new BooleanSetting("CampFire", false));
-        this.fireworks = (BooleanSetting)this.m28(new BooleanSetting("Fireworks", false));
-        this.title = (BooleanSetting)this.m28(new BooleanSetting("Title", false));
+        this.potionsIcon = (BooleanSetting)this.registerSetting(new BooleanSetting("PotionsIcon", false));
+        this.portal = (BooleanSetting)this.registerSetting(new BooleanSetting("Portal", true));
+        this.nausea = (BooleanSetting)this.registerSetting(new BooleanSetting("Nausea", true));
+        this.guiToast = (BooleanSetting)this.registerSetting(new BooleanSetting("GuiToast", false));
+        this.fireOverlay = (BooleanSetting)this.registerSetting(new BooleanSetting("FireOverlay", true));
+        this.waterOverlay = (BooleanSetting)this.registerSetting(new BooleanSetting("WaterOverlay", true));
+        this.blockOverlay = (BooleanSetting)this.registerSetting(new BooleanSetting("BlockOverlay", true));
+        this.hurtCam = (BooleanSetting)this.registerSetting(new BooleanSetting("HurtCam", true));
+        this.totem = (BooleanSetting)this.registerSetting(new BooleanSetting("Totem", true));
+        this.weather = (BooleanSetting)this.registerSetting(new BooleanSetting("Weather", true));
+        this.darkness = (BooleanSetting)this.registerSetting(new BooleanSetting("Darkness", true));
+        this.fog = (BooleanSetting)this.registerSetting(new BooleanSetting("Fog", false));
+        this.blindness = (BooleanSetting)this.registerSetting(new BooleanSetting("Blindness", true));
+        this.entityFire = (BooleanSetting)this.registerSetting(new BooleanSetting("EntityFire", true));
+        this.invisible = (BooleanSetting)this.registerSetting(new BooleanSetting("Invisible", false));
+        this.potions = (BooleanSetting)this.registerSetting(new BooleanSetting("Potions", true));
+        this.xP = (BooleanSetting)this.registerSetting(new BooleanSetting("XP", true));
+        this.arrows = (BooleanSetting)this.registerSetting(new BooleanSetting("Arrows", false));
+        this.eggs = (BooleanSetting)this.registerSetting(new BooleanSetting("Eggs", false));
+        this.items = (BooleanSetting)this.registerSetting(new BooleanSetting("Items", false));
+        this.armorParts = (BooleanSetting)this.registerSetting(new BooleanSetting("ArmorParts", false));
+        this.armorTrim = (BooleanSetting)this.registerSetting(new BooleanSetting("ArmorTrim", false));
+        this.armorGlint = (BooleanSetting)this.registerSetting(new BooleanSetting("ArmorGlint", false));
+        this.witherHearts = (BooleanSetting)this.registerSetting(new BooleanSetting("WitherHearts", true));
+        this.effect = (BooleanSetting)this.registerSetting(new BooleanSetting("Effect", true));
+        this.guardian = (BooleanSetting)this.registerSetting(new BooleanSetting("Guardian", false));
+        this.explosions = (BooleanSetting)this.registerSetting(new BooleanSetting("Explosions", true));
+        this.campFire = (BooleanSetting)this.registerSetting(new BooleanSetting("CampFire", false));
+        this.fireworks = (BooleanSetting)this.registerSetting(new BooleanSetting("Fireworks", false));
+        this.title = (BooleanSetting)this.registerSetting(new BooleanSetting("Title", false));
     }
 
     @EventHandler
     private void setPacketEventInner32(PacketEvent.PacketEventInner packetEventInner) {
-        if (!((Boolean)this.title.getObj()).booleanValue()) {
+        if (!((Boolean)this.title.getValue()).booleanValue()) {
             return;
         }
         if (packetEventInner.getPacket() instanceof TitleS2CPacket || packetEventInner.getPacket() instanceof TitleFadeS2CPacket || packetEventInner.getPacket() instanceof ClearTitleS2CPacket) {
-            packetEventInner.m209();
+            packetEventInner.cancel();
         }
     }
 

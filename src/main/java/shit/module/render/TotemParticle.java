@@ -17,10 +17,10 @@ import shit.setting.NumberSetting;
 public class TotemParticle
 extends Module {
     public static TotemParticle INSTANCE;
-    private final NumberSetting velocityXZ = (NumberSetting)this.m28(new NumberSetting("VelocityXZ", 100.0, 0.0, 500.0, 1.0));
-    private final NumberSetting velocityY = (NumberSetting)this.m28(new NumberSetting("VelocityY", 100.0, 0.0, 500.0, 1.0));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1));
-    private final ColorSetting color2 = (ColorSetting)this.m28(new ColorSetting("Color2", -16777216));
+    private final NumberSetting velocityXZ = (NumberSetting)this.registerSetting(new NumberSetting("VelocityXZ", 100.0, 0.0, 500.0, 1.0));
+    private final NumberSetting velocityY = (NumberSetting)this.registerSetting(new NumberSetting("VelocityY", 100.0, 0.0, 500.0, 1.0));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1));
+    private final ColorSetting color2 = (ColorSetting)this.registerSetting(new ColorSetting("Color2", -16777216));
     private final Random random5 = new Random();
 
     public TotemParticle() {
@@ -30,11 +30,11 @@ extends Module {
 
     @EventHandler
     private void setHookTotemParticleInitEvent(HookTotemParticleInitEvent hookTotemParticleInitEvent) {
-        hookTotemParticleInitEvent.m209();
-        hookTotemParticleInitEvent.value129 *= (Double)this.velocityXZ.getObj() / 100.0;
-        hookTotemParticleInitEvent.value200 *= (Double)this.velocityY.getObj() / 100.0;
-        hookTotemParticleInitEvent.value123 *= (Double)this.velocityXZ.getObj() / 100.0;
-        hookTotemParticleInitEvent.count184 = TotemParticle.m630((Integer)this.color.getObj(), (Integer)this.color2.getObj(), this.random5.nextFloat());
+        hookTotemParticleInitEvent.cancel();
+        hookTotemParticleInitEvent.value129 *= (Double)this.velocityXZ.getValue() / 100.0;
+        hookTotemParticleInitEvent.value200 *= (Double)this.velocityY.getValue() / 100.0;
+        hookTotemParticleInitEvent.value123 *= (Double)this.velocityXZ.getValue() / 100.0;
+        hookTotemParticleInitEvent.count184 = TotemParticle.m630((Integer)this.color.getValue(), (Integer)this.color2.getValue(), this.random5.nextFloat());
     }
 
     private static int m630(int n, int n2, float f) {

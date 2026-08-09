@@ -27,8 +27,8 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoTool
 extends Module {
-    private final BooleanSetting weapon = (BooleanSetting)this.m28(new BooleanSetting("Weapon", false));
-    private final BooleanSetting silent = (BooleanSetting)this.m28(new BooleanSetting("Silent", false));
+    private final BooleanSetting weapon = (BooleanSetting)this.registerSetting(new BooleanSetting("Weapon", false));
+    private final BooleanSetting silent = (BooleanSetting)this.registerSetting(new BooleanSetting("Silent", false));
     private int count58 = -1;
 
     public AutoTool() {
@@ -36,14 +36,14 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m604();
     }
 
     @EventHandler
     private void setPacketEventInner211(PacketEvent.PacketEventInner2 packetEventInner2) {
         PlayerActionC2SPacket playerActionC2SPacket;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         Packet packet = packetEventInner2.getPacket();
@@ -55,10 +55,10 @@ extends Module {
     @EventHandler
     private void setStartAttackEvent(StartAttackEvent startAttackEvent) {
         EntityHitResult entityHitResult;
-        if (Module.isSet37() || !((Boolean)this.weapon.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || !((Boolean)this.weapon.getValue()).booleanValue()) {
             return;
         }
-        HitResult hitResult = MC.client3.crosshairTarget;
+        HitResult hitResult = MC.mc.crosshairTarget;
         if (hitResult instanceof EntityHitResult && (entityHitResult = (EntityHitResult)hitResult).getEntity() instanceof LivingEntity) {
             this.m60();
         }
@@ -67,13 +67,13 @@ extends Module {
     private void setObj35(Object object) {
         block4: {
             BlockPos blockPos = (BlockPos)object;
-            BlockState blockState = MC.client3.world.getBlockState(blockPos);
+            BlockState blockState = MC.mc.world.getBlockState(blockPos);
             int n = -1;
-            float f = MC.client3.player.getMainHandStack().getMiningSpeedMultiplier(blockState);
+            float f = MC.mc.player.getMainHandStack().getMiningSpeedMultiplier(blockState);
             int n2 = 0;
             String string = IRC.getText7();
             while (n2 < 9) {
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(n2);
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 float f2 = itemStack.getMiningSpeedMultiplier(blockState);
                 if (string != null) {
                     if (string != null) {
@@ -94,11 +94,11 @@ extends Module {
     private void m60() {
         block4: {
             int n = -1;
-            double d = this.m971(MC.client3.player.getMainHandStack());
+            double d = this.m971(MC.mc.player.getMainHandStack());
             int n2 = 0;
             String string = IRC.getText7();
             while (n2 < 9) {
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(n2);
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 double d2 = this.m971(itemStack);
                 if (string != null) {
                     if (string != null) {
@@ -158,11 +158,11 @@ extends Module {
                                     n3 = n2;
                                 }
                                 if (string == null) break block6;
-                                if (n3 != MC.client3.player.getInventory().getSelectedSlot()) break block7;
+                                if (n3 != MC.mc.player.getInventory().getSelectedSlot()) break block7;
                             }
                             return;
                         }
-                        n3 = ((Boolean)this.silent.getObj()).booleanValue() ? 1 : 0;
+                        n3 = ((Boolean)this.silent.getValue()).booleanValue() ? 1 : 0;
                     }
                     if (string == null) break block8;
                     if (n3 == 0) break block9;
@@ -173,9 +173,9 @@ extends Module {
                 if (n3 != -1) break block9;
                 autoTool = this;
             }
-            autoTool.count58 = MC.client3.player.getInventory().getSelectedSlot();
+            autoTool.count58 = MC.mc.player.getInventory().getSelectedSlot();
         }
-        MC.client3.player.getInventory().setSelectedSlot(n2);
+        MC.mc.player.getInventory().setSelectedSlot(n2);
     }
 
     private void m604() {
@@ -188,10 +188,10 @@ extends Module {
                     autoTool = this;
                     if (string == null) break block2;
                     if (autoTool.count58 == -1) break block3;
-                    clientPlayerEntity = MC.client3.player;
+                    clientPlayerEntity = MC.mc.player;
                     if (string == null) break block4;
                     if (clientPlayerEntity == null) break block3;
-                    clientPlayerEntity = MC.client3.player;
+                    clientPlayerEntity = MC.mc.player;
                 }
                 clientPlayerEntity.getInventory().setSelectedSlot(this.count58);
             }

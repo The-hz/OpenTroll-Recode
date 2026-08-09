@@ -54,11 +54,11 @@ import shit.util.MC;
 public class Punctuation
 extends Module {
     public static Punctuation INSTANCE;
-    private final BooleanSetting sound = (BooleanSetting)this.m28(new BooleanSetting("Sound", true));
-    private final NumberSetting clearTime = (NumberSetting)this.m28(new NumberSetting("ClearTime", 10.0, 0.0, 100.0, 0.1));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", 0x64FFFFFF));
-    private final ColorSetting2 spotKey = (ColorSetting2)this.m28(new ColorSetting2("SpotKey", -1));
-    private final StringSetting encryptKey = (StringSetting)this.m28(new StringSetting("EncryptKey", "IDKWTFTHIS"));
+    private final BooleanSetting sound = (BooleanSetting)this.registerSetting(new BooleanSetting("Sound", true));
+    private final NumberSetting clearTime = (NumberSetting)this.registerSetting(new NumberSetting("ClearTime", 10.0, 0.0, 100.0, 0.1));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", 0x64FFFFFF));
+    private final ColorSetting2 spotKey = (ColorSetting2)this.registerSetting(new ColorSetting2("SpotKey", -1));
+    private final StringSetting encryptKey = (StringSetting)this.registerSetting(new StringSetting("EncryptKey", "IDKWTFTHIS"));
     public final ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
     private boolean flag135 = false;
     private Matrix4f matrix4f2;
@@ -70,22 +70,22 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.concurrentHashMap.clear();
     }
 
     @EventHandler
     private void onTick8(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        this.concurrentHashMap.values().removeIf(data -> ((Data)data).getHelper7().m114((Double)this.clearTime.getObj()));
-        int n = (Integer)this.spotKey.getObj();
-        if (n == -1 || MC.client3.currentScreen != null) {
+        this.concurrentHashMap.values().removeIf(data -> ((Data)data).getHelper7().hasPassedSeconds((Double)this.clearTime.getValue()));
+        int n = (Integer)this.spotKey.getValue();
+        if (n == -1 || MC.mc.currentScreen != null) {
             this.flag135 = false;
             return;
         }
-        boolean bl2 = ColorSetting2.m232(n) ? GLFW.glfwGetMouseButton((long)MC.client3.getWindow().getHandle(), (int)ColorSetting2.m1003(n)) == 1 : InputUtil.isKeyPressed((Window)MC.client3.getWindow(), (int)n);
+        boolean bl2 = ColorSetting2.m232(n) ? GLFW.glfwGetMouseButton((long)MC.mc.getWindow().getHandle(), (int)ColorSetting2.m1003(n)) == 1 : InputUtil.isKeyPressed((Window)MC.mc.getWindow(), (int)n);
         if (bl2 && !this.flag135) {
             this.m611();
         }
@@ -102,7 +102,7 @@ extends Module {
                 HitResult hitResult;
                 block9: {
                     HitResult hitResult2;
-                    Entity entity = MC.client3.getCameraEntity();
+                    Entity entity = MC.mc.getCameraEntity();
                     string2 = IRC.getText7();
                     Entity entity2 = entity;
                     if (string2 != null) {
@@ -122,36 +122,36 @@ extends Module {
             return;
         }
         BlockPos blockPos = blockHitResult.getBlockPos();
-        int n2 = n = ((Integer)this.color.getObj()).intValue();
+        int n2 = n = ((Integer)this.color.getValue()).intValue();
         int n3 = blockPos.getZ();
         int n4 = blockPos.getY();
         int n5 = blockPos.getX();
         String string3 = string = this.m668("EnemyHere{" + n5 + "," + n4 + "," + n3 + "," + n2 + "}");
         if (string2 != null) {
             if (string3 == null) {
-                CommandManager.setObj21("\u00a7c[Punctuation] \u52a0\u5bc6\u5931\u8d25");
+                CommandManager.sendFeedback("\u00a7c[Punctuation] \u52a0\u5bc6\u5931\u8d25");
                 return;
             }
-            string3 = MC.client3.player.getName().getString();
+            string3 = MC.mc.player.getName().getString();
         }
         String string4 = string3;
         this.concurrentHashMap.put(string4, new Data(string4, blockPos, n, new Helper7()));
         if (string2 != null) {
-            if (((Boolean)this.sound.getObj()).booleanValue()) {
+            if (((Boolean)this.sound.getValue()).booleanValue()) {
                 this.m702();
             }
             int n6 = blockPos.getZ();
             int n7 = blockPos.getY();
             int n8 = blockPos.getX();
-            CommandManager.setObj21(string4 + " \u00a77marked \u00a7f(" + n8 + ", " + n7 + ", " + n6 + ")");
-            MC.client3.player.networkHandler.sendChatMessage(string);
+            CommandManager.sendFeedback(string4 + " \u00a77marked \u00a7f(" + n8 + ", " + n7 + ", " + n6 + ")");
+            MC.mc.player.networkHandler.sendChatMessage(string);
         }
     }
 
     @EventHandler
     private void setPacketEventInner6(PacketEvent.PacketEventInner packetEventInner) {
         GameMessageS2CPacket gameMessageS2CPacket;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         Object object = packetEventInner.getPacket();
@@ -203,10 +203,10 @@ extends Module {
             name = "unknown";
         }
         this.concurrentHashMap.put(name, new Data(name, new BlockPos(x, y, z), color, new Helper7()));
-        if (((Boolean)this.sound.getObj()).booleanValue()) {
+        if (((Boolean)this.sound.getValue()).booleanValue()) {
             this.m702();
         }
-        CommandManager.setObj21(name + " \u00a77marked \u00a7f(" + x + ", " + y + ", " + z + ")");
+        CommandManager.sendFeedback(name + " \u00a77marked \u00a7f(" + x + ", " + y + ", " + z + ")");
         return true;
     }
 
@@ -214,7 +214,7 @@ extends Module {
     private void setRenderLevelEvent4(RenderLevelEvent renderLevelEvent) {
         this.matrix4f2 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f3());
         this.matrix4f12 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f());
-        if (Module.isSet37() || this.concurrentHashMap.isEmpty()) {
+        if (Module.isNotInGame() || this.concurrentHashMap.isEmpty()) {
             return;
         }
         for (Data data : (java.util.Collection<Data>)this.concurrentHashMap.values()) {
@@ -228,16 +228,16 @@ extends Module {
 
     @EventHandler
     private void setObj105(Render2DEvent render2DEvent) {
-        if (Module.isSet37() || this.concurrentHashMap.isEmpty()) {
+        if (Module.isNotInGame() || this.concurrentHashMap.isEmpty()) {
             return;
         }
         if (this.matrix4f2 == null || this.matrix4f12 == null) {
             return;
         }
-        Vec3d vec3d = MC.client3.gameRenderer.getCamera().getCameraPos();
+        Vec3d vec3d = MC.mc.gameRenderer.getCamera().getCameraPos();
         Matrix4f matrix4f = new Matrix4f((Matrix4fc)this.matrix4f12).mul((Matrix4fc)this.matrix4f2);
-        int n = MC.client3.getWindow().getScaledWidth();
-        int n2 = MC.client3.getWindow().getScaledHeight();
+        int n = MC.mc.getWindow().getScaledWidth();
+        int n2 = MC.mc.getWindow().getScaledHeight();
         for (Data data : (java.util.Collection<Data>)this.concurrentHashMap.values()) {
             int[] nArray = Punctuation.m132((double)data.getBlockPos4().getX() + 0.5, (double)data.getBlockPos4().getY() + 1.5, (double)data.getBlockPos4().getZ() + 0.5, vec3d, matrix4f, n, n2);
             if (nArray == null) continue;
@@ -246,8 +246,8 @@ extends Module {
             int n5 = data.getBlockPos4().getX();
             String string = data.text13();
             String string2 = "\u00a7a" + string + " \u00a7f(" + n5 + ", " + n4 + ", " + n3 + ")";
-            int n6 = Client.fontManager.renderer2().m277(string2);
-            Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), string2, nArray[0] - n6 / 2, nArray[1], -1, true);
+            int n6 = Client.fontManager.renderer2().getStringWidth(string2);
+            Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), string2, nArray[0] - n6 / 2, nArray[1], -1, true);
         }
     }
 
@@ -275,7 +275,7 @@ extends Module {
             Punctuation.m204(byArray, 11, n5);
             byte[] byArray2 = new byte[8];
             new SecureRandom().nextBytes(byArray2);
-            byte[] byArray3 = Punctuation.m793(byArray, (String)this.encryptKey.getObj(), Punctuation.m847(byArray2));
+            byte[] byArray3 = Punctuation.m793(byArray, (String)this.encryptKey.getValue(), Punctuation.m847(byArray2));
             byte[] byArray4 = new byte[8 + byArray3.length];
             System.arraycopy(byArray2, 0, byArray4, 0, 8);
             System.arraycopy(byArray3, 0, byArray4, 8, byArray3.length);
@@ -300,7 +300,7 @@ extends Module {
                 byArray2 = Arrays.copyOf(byArray, 8);
             }
             byte[] byArray3 = byArray2;
-            byte[] byArray4 = Punctuation.m793(Arrays.copyOfRange(byArray, 8, byArray.length), (String)this.encryptKey.getObj(), Punctuation.m847(byArray3));
+            byte[] byArray4 = Punctuation.m793(Arrays.copyOfRange(byArray, 8, byArray.length), (String)this.encryptKey.getValue(), Punctuation.m847(byArray3));
             int n2 = byArray4[0];
             if (string2 != null) {
                 if (n2 != 1) {
@@ -419,10 +419,10 @@ extends Module {
                     String string;
                     block2: {
                         string = IRC.getText7();
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                         if (string == null) break block2;
                         if (minecraftClient.player == null) break block3;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                     }
                     clientWorld = minecraftClient.world;
                     if (string == null) break block4;
@@ -430,9 +430,9 @@ extends Module {
                 }
                 return;
             }
-            clientWorld = MC.client3.world;
+            clientWorld = MC.mc.world;
         }
-        clientWorld.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.9f, false);
+        clientWorld.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.9f, false);
     }
 
     private static int[] m132(double d, double d2, double d3, Object object, Object object2, int n, int n2) {

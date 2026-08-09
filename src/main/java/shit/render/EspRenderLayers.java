@@ -37,11 +37,11 @@ implements MC {
     }
 
     private static VertexConsumerProvider.Immediate getObj2() {
-        return MC.client3.getBufferBuilders().getEntityVertexConsumers();
+        return MC.mc.getBufferBuilders().getEntityVertexConsumers();
     }
 
     private static Vec3d getVec3d2() {
-        return MC.client3.gameRenderer.getCamera().getCameraPos();
+        return MC.mc.gameRenderer.getCamera().getCameraPos();
     }
 
     private static RenderLayer m524(boolean bl) {

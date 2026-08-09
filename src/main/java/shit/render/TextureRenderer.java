@@ -402,7 +402,7 @@ implements Listener2 {
 
     private Texture m596(Object object, boolean useLinear) {
         Identifier identifier = (Identifier)object;
-        AbstractTexture abstractTexture = MC.client3.getTextureManager().getTexture(identifier);
+        AbstractTexture abstractTexture = MC.mc.getTextureManager().getTexture(identifier);
         try {
             GpuTexture gpuTexture = abstractTexture.getGlTexture();
             GpuTextureView gpuTextureView = abstractTexture.getGlTextureView();
@@ -411,7 +411,7 @@ implements Listener2 {
         } catch (Exception exception) {
             NativeImage nativeImage;
             try {
-                ResourceManager resourceManager = MC.client3.getResourceManager();
+                ResourceManager resourceManager = MC.mc.getResourceManager();
                 Resource resource = resourceManager.getResourceOrThrow(identifier);
                 try (InputStream inputStream = resource.getInputStream()) {
                     nativeImage = NativeImage.read(inputStream);

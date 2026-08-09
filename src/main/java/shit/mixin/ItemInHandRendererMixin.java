@@ -54,15 +54,15 @@ public class ItemInHandRendererMixin {
     @Inject(method={"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at={@At(value="HEAD")})
     private void trollhack$instantSwap(float f, MatrixStack matrixStack, OrderedRenderCommandQueue orderedRenderCommandQueue, ClientPlayerEntity clientPlayerEntity, int n, CallbackInfo callbackInfo) {
         ViewModel viewModel = ViewModel.INSTANCE;
-        if (viewModel == null || !viewModel.isSet19()) {
+        if (viewModel == null || !viewModel.isEnabled()) {
             return;
         }
-        if (!((Boolean)viewModel.mainhandSwap.getObj()).booleanValue()) {
+        if (!((Boolean)viewModel.mainhandSwap.getValue()).booleanValue()) {
             this.mainHand = clientPlayerEntity.getMainHandStack();
             this.equipProgressMainHand = 1.0f;
             this.lastEquipProgressMainHand = 1.0f;
         }
-        if (!((Boolean)viewModel.offhandSwap.getObj()).booleanValue()) {
+        if (!((Boolean)viewModel.offhandSwap.getValue()).booleanValue()) {
             this.offHand = clientPlayerEntity.getOffHandStack();
             this.equipProgressOffHand = 1.0f;
             this.lastEquipProgressOffHand = 1.0f;
@@ -77,7 +77,7 @@ public class ItemInHandRendererMixin {
     @Inject(method={"renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;I)V"}, at={@At(value="HEAD")})
     private void trollhack$transform(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext itemDisplayContext, MatrixStack matrixStack, OrderedRenderCommandQueue orderedRenderCommandQueue, int n, CallbackInfo callbackInfo) {
         ViewModel viewModel = ViewModel.INSTANCE;
-        if (viewModel == null || !viewModel.isSet19()) {
+        if (viewModel == null || !viewModel.isEnabled()) {
             return;
         }
         Hand hand = (Hand)trollhack$capturedHand.get();
@@ -85,24 +85,24 @@ public class ItemInHandRendererMixin {
             return;
         }
         if (hand == Hand.MAIN_HAND) {
-            matrixStack.translate(viewModel.positionMainX.getFloat35(), viewModel.positionMainY.getFloat35(), viewModel.positionMainZ.getFloat35());
-            matrixStack.scale(viewModel.scaleMainX.getFloat35(), viewModel.scaleMainY.getFloat35(), viewModel.scaleMainZ.getFloat35());
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_X.rotationDegrees(viewModel.rotationMainX.getFloat35()));
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Y.rotationDegrees(viewModel.rotationMainY.getFloat35()));
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Z.rotationDegrees(viewModel.rotationMainZ.getFloat35()));
+            matrixStack.translate(viewModel.positionMainX.getFloat(), viewModel.positionMainY.getFloat(), viewModel.positionMainZ.getFloat());
+            matrixStack.scale(viewModel.scaleMainX.getFloat(), viewModel.scaleMainY.getFloat(), viewModel.scaleMainZ.getFloat());
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_X.rotationDegrees(viewModel.rotationMainX.getFloat()));
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Y.rotationDegrees(viewModel.rotationMainY.getFloat()));
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Z.rotationDegrees(viewModel.rotationMainZ.getFloat()));
         } else {
-            matrixStack.translate(viewModel.positionOffX.getFloat35(), viewModel.positionOffY.getFloat35(), viewModel.positionOffZ.getFloat35());
-            matrixStack.scale(viewModel.scaleOffX.getFloat35(), viewModel.scaleOffY.getFloat35(), viewModel.scaleOffZ.getFloat35());
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_X.rotationDegrees(viewModel.rotationOffX.getFloat35()));
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Y.rotationDegrees(viewModel.rotationOffY.getFloat35()));
-            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Z.rotationDegrees(viewModel.rotationOffZ.getFloat35()));
+            matrixStack.translate(viewModel.positionOffX.getFloat(), viewModel.positionOffY.getFloat(), viewModel.positionOffZ.getFloat());
+            matrixStack.scale(viewModel.scaleOffX.getFloat(), viewModel.scaleOffY.getFloat(), viewModel.scaleOffZ.getFloat());
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_X.rotationDegrees(viewModel.rotationOffX.getFloat()));
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Y.rotationDegrees(viewModel.rotationOffY.getFloat()));
+            matrixStack.multiply((Quaternionfc)RotationAxis.POSITIVE_Z.rotationDegrees(viewModel.rotationOffZ.getFloat()));
         }
     }
 
     @Redirect(method={"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/util/math/RotationAxis;rotationDegrees(F)Lorg/joml/Quaternionf;"))
     private Quaternionf trollhack$noSway(RotationAxis rotationAxis, float f) {
         ViewModel viewModel = ViewModel.INSTANCE;
-        if (viewModel != null && viewModel.isSet19() && ((Boolean)viewModel.noSway.getObj()).booleanValue()) {
+        if (viewModel != null && viewModel.isEnabled() && ((Boolean)viewModel.noSway.getValue()).booleanValue()) {
             return new Quaternionf();
         }
         return rotationAxis.rotationDegrees(f);

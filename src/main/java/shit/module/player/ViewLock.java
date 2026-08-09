@@ -17,10 +17,10 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class ViewLock
 extends Module {
-    private final BooleanSetting yaw = (BooleanSetting)this.m28(new BooleanSetting("Yaw", true));
-    private final BooleanSetting pitch = (BooleanSetting)this.m28(new BooleanSetting("Pitch", true));
-    private final NumberSetting yawValue = (NumberSetting)this.m28(new NumberSetting("YawValue", 0.0, -180.0, 180.0, 1.0));
-    private final NumberSetting pitchValue = (NumberSetting)this.m28(new NumberSetting("PitchValue", 0.0, -90.0, 90.0, 1.0));
+    private final BooleanSetting yaw = (BooleanSetting)this.registerSetting(new BooleanSetting("Yaw", true));
+    private final BooleanSetting pitch = (BooleanSetting)this.registerSetting(new BooleanSetting("Pitch", true));
+    private final NumberSetting yawValue = (NumberSetting)this.registerSetting(new NumberSetting("YawValue", 0.0, -180.0, 180.0, 1.0));
+    private final NumberSetting pitchValue = (NumberSetting)this.registerSetting(new NumberSetting("PitchValue", 0.0, -90.0, 90.0, 1.0));
 
     public ViewLock() {
         super("ViewLock", "Locks client view rotation to configured values.", Category.PLAYER);
@@ -32,23 +32,23 @@ extends Module {
             block2: {
                 int n = AutoArmor.getInt66();
                 if (n == 0) break block2;
-                if (MC.client3.player == null) break block3;
-                this.yawValue.setObj85(MC.client3.player.getYaw());
+                if (MC.mc.player == null) break block3;
+                this.yawValue.setDouble(MC.mc.player.getYaw());
             }
-            this.pitchValue.setObj85(MC.client3.player.getPitch());
+            this.pitchValue.setDouble(MC.mc.player.getPitch());
         }
     }
 
     @EventHandler
     private void setEvent2Inner9(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.yaw.getObj()).booleanValue()) {
-            MC.client3.player.setYaw(this.yawValue.getFloat35());
+        if (((Boolean)this.yaw.getValue()).booleanValue()) {
+            MC.mc.player.setYaw(this.yawValue.getFloat());
         }
-        if (((Boolean)this.pitch.getObj()).booleanValue()) {
-            MC.client3.player.setPitch(this.pitchValue.getFloat35());
+        if (((Boolean)this.pitch.getValue()).booleanValue()) {
+            MC.mc.player.setPitch(this.pitchValue.getFloat());
         }
     }
 }

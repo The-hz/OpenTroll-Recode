@@ -39,8 +39,8 @@ public class Helper4 {
     public float getFloat61() {
         Object var2_1 = null;
         if (Timer.INSTANCE != null) {
-            if (Timer.INSTANCE.isSet19()) {
-                return ((Double)Timer.INSTANCE.speed.getObj()).floatValue();
+            if (Timer.INSTANCE.isEnabled()) {
+                return ((Double)Timer.INSTANCE.speed.getValue()).floatValue();
             }
         }
         return 1.0f;

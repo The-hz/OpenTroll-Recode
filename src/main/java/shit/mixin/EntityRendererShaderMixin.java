@@ -37,7 +37,7 @@ public class EntityRendererShaderMixin {
         if (chamsMod != null) {
             chamsMod.m295(entity, entityRenderState);
         }
-        if ((shaders = Shaders.INSTANCE) == null || !shaders.isSet19()) {
+        if ((shaders = Shaders.INSTANCE) == null || !shaders.isEnabled()) {
             return;
         }
         if (!shaders.m459(entity)) {

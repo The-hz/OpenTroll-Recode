@@ -23,11 +23,11 @@ public class IrcChatHUD
 extends Module
 implements Listener3 {
     public static IrcChatHUD INSTANCE;
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 10.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting y = (NumberSetting)this.m28(new NumberSetting("Y", 200.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting width = (NumberSetting)this.m28(new NumberSetting("Width", 260.0, 120.0, 640.0, 1.0));
-    private final NumberSetting height = (NumberSetting)this.m28(new NumberSetting("Height", 120.0, 50.0, 360.0, 1.0));
-    private final BooleanSetting shadow = (BooleanSetting)this.m28(new BooleanSetting("Shadow", true));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 10.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 200.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting width = (NumberSetting)this.registerSetting(new NumberSetting("Width", 260.0, 120.0, 640.0, 1.0));
+    private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 120.0, 50.0, 360.0, 1.0));
+    private final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));
     private final CopyOnWriteArrayList copyOnWriteArrayList2 = new CopyOnWriteArrayList();
     private int count189 = 0;
 
@@ -52,7 +52,7 @@ implements Listener3 {
                         if (ircChatHUD == null) break block3;
                         ircChatHUD = INSTANCE;
                     }
-                    bl = ircChatHUD.isSet19();
+                    bl = ircChatHUD.isEnabled();
                     if (bl2) break block4;
                     if (bl) break block5;
                 }
@@ -80,49 +80,49 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
     public int hudWidth() {
-        return this.width.getInt50();
+        return this.width.getInt();
     }
 
     @Override
-    public int getInt28() {
-        return this.height.getInt50();
+    public int getHudHeight() {
+        return this.height.getInt();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     /*
      * Unable to fully structure code
      */
     @Override
-    public void m368(Object var1_1, boolean var2_2) {
+    public void renderHud(Object var1_1, boolean var2_2) {
         DrawContext ctx = (DrawContext) var1_1;
         shit.manager.FontManager2 r = Client.fontManager.renderer2();
-        int x = this.x.getInt50();
-        int y = this.y.getInt50();
-        int w = this.width.getInt50();
-        int h = this.height.getInt50();
-        int lineH = r.getInt19() + 1;
+        int x = this.x.getInt();
+        int y = this.y.getInt();
+        int w = this.width.getInt();
+        int h = this.height.getInt();
+        int lineH = r.getFontHeight() + 1;
         int titleH = lineH + 2;
         ctx.fill(x, y, x + w, y + h, -1441787883);
         ctx.fill(x, y, x + w, y + titleH, -1155917270);
-        r.m5(ctx, "§dIRC Chat", x + 3, y + 2, -1, (Boolean) this.shadow.getObj());
+        r.drawText(ctx, "§dIRC Chat", x + 3, y + 2, -1, (Boolean) this.shadow.getValue());
         int contentTop = y + titleH;
         int contentH = h - titleH;
         int maxLines = contentH / lineH;
@@ -135,7 +135,7 @@ implements Listener3 {
         ctx.enableScissor(x, contentTop, x + w, y + h);
         int ly = contentTop + 2;
         for (int i = start; i < end; ++i) {
-            r.m5(ctx, (String) lines.get(i), x + 3, ly, -2236963, (Boolean) this.shadow.getObj());
+            r.drawText(ctx, (String) lines.get(i), x + 3, ly, -2236963, (Boolean) this.shadow.getValue());
             ly += lineH;
         }
         ctx.disableScissor();
@@ -169,7 +169,7 @@ implements Listener3 {
         FontManager2 fontManager2 = Client.fontManager.renderer2();
         boolean bl = true;
         ArrayList<String> arrayList = new ArrayList<String>();
-        if (fontManager2.m277(IrcChatHUD.m519(string)) <= n2) {
+        if (fontManager2.getStringWidth(IrcChatHUD.m519(string)) <= n2) {
             arrayList.add(string);
             return arrayList;
         }
@@ -187,7 +187,7 @@ implements Listener3 {
                 }
             }
             stringBuilder.append(c);
-            if (fontManager2.m277(IrcChatHUD.m519(stringBuilder.toString())) > n2) {
+            if (fontManager2.getStringWidth(IrcChatHUD.m519(stringBuilder.toString())) > n2) {
                 stringBuilder.deleteCharAt(stringBuilder.length() - 1);
                 arrayList.add(stringBuilder.toString());
                 stringBuilder = new StringBuilder((String)object2).append(c);

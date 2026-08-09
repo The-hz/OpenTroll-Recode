@@ -33,7 +33,7 @@ public class ScreenMixin {
             return;
         }
         Ambience ambience = Ambience.INSTANCE;
-        int n = (Integer)ambience.worldColor.getObj();
+        int n = (Integer)ambience.worldColor.getValue();
         float f = (float)(n >> 16 & 0xFF) / 255.0f;
         float f2 = (float)(n >> 8 & 0xFF) / 255.0f;
         float f3 = (float)(n & 0xFF) / 255.0f;
@@ -42,7 +42,7 @@ public class ScreenMixin {
 
     private static boolean isWorldColorActive() {
         Ambience ambience = Ambience.INSTANCE;
-        if (ambience == null || !ambience.isSet19() || !((Boolean)ambience.worldColorDraw.getObj()).booleanValue()) {
+        if (ambience == null || !ambience.isEnabled() || !((Boolean)ambience.worldColorDraw.getValue()).booleanValue()) {
             return false;
         }
         return Lightmap.field33 != null && Lightmap.gpuTextureView3 != null;

@@ -68,7 +68,7 @@ extends Command {
                 Client.configManager.m256();
                 string = "Config loaded.";
             }
-            CommandManager.setObj21(string);
+            CommandManager.sendFeedback(string);
         }
     }
 
@@ -119,20 +119,20 @@ extends Command {
         String[] stringArray = (String[])object;
         boolean bl = false;
         if (stringArray.length < 3) {
-            CommandManager.setObj21("Usage: .load clone <all|module|binds> <name>");
+            CommandManager.sendFeedback("Usage: .load clone <all|module|binds> <name>");
             return;
         }
         String string = LoadCommand.m323(stringArray[1]);
         String string2 = stringArray[2].trim();
         if (string.isEmpty()) {
-            CommandManager.setObj21("Unknown cloud config type. Use all, module, or binds.");
+            CommandManager.sendFeedback("Unknown cloud config type. Use all, module, or binds.");
             return;
         }
         if (string2.isEmpty()) {
-            CommandManager.setObj21("Cloud config name is required.");
+            CommandManager.sendFeedback("Cloud config name is required.");
             return;
         }
-        CommandManager.setObj21("Downloading TrollHack cloud config " + string2 + "...");
+        CommandManager.sendFeedback("Downloading TrollHack cloud config " + string2 + "...");
         try {
             JsonObject jsonObject;
             block10: {
@@ -141,19 +141,19 @@ extends Command {
                     if (!jsonObject.has("ok")) break block9;
                     if (jsonObject.get("ok").getAsBoolean()) break block10;
                 }
-                CommandManager.setObj21("Cloud config download failed: " + LoadCommand.m555(jsonObject, "error"));
+                CommandManager.sendFeedback("Cloud config download failed: " + LoadCommand.m555(jsonObject, "error"));
                 return;
             }
             String string3 = LoadCommand.m555(jsonObject, "content");
             if (!Client.configManager.m731(string3, string)) {
-                CommandManager.setObj21("Cloud config apply failed.");
+                CommandManager.sendFeedback("Cloud config apply failed.");
                 return;
             }
             Client.configManager.m1042();
-            CommandManager.setObj21("Cloud config loaded: " + LoadCommand.m555(jsonObject, "name"));
+            CommandManager.sendFeedback("Cloud config loaded: " + LoadCommand.m555(jsonObject, "name"));
         }
         catch (Exception exception) {
-            CommandManager.setObj21("Cloud config failed: " + exception.getMessage());
+            CommandManager.sendFeedback("Cloud config failed: " + exception.getMessage());
         }
     }
 

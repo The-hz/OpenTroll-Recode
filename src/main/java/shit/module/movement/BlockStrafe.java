@@ -24,42 +24,42 @@ import shit.util.MC;
 public class BlockStrafe
 extends Module {
     public static BlockStrafe INSTANCE;
-    private final NumberSetting speed = (NumberSetting)this.m28(new NumberSetting("Speed", 10.0, 0.0, 20.0, 1.0));
-    private final NumberSetting anchorSpeed = (NumberSetting)this.m28(new NumberSetting("AnchorSpeed", 3.0, 0.0, 20.0, 1.0));
-    private final BooleanSetting antiSlowFalling = (BooleanSetting)this.m28(new BooleanSetting("AntiSlowFalling", false));
-    private final EnumSetting aSFMode = (EnumSetting)this.m28(new EnumSetting("ASF Mode", EMode.NCPAlign));
-    private final NumberSetting aSFPushUp = (NumberSetting)this.m28(new NumberSetting("ASF PushUp", 0.05, 0.01, 0.2, 0.001, 0.001, () -> {
+    private final NumberSetting speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 10.0, 0.0, 20.0, 1.0));
+    private final NumberSetting anchorSpeed = (NumberSetting)this.registerSetting(new NumberSetting("AnchorSpeed", 3.0, 0.0, 20.0, 1.0));
+    private final BooleanSetting antiSlowFalling = (BooleanSetting)this.registerSetting(new BooleanSetting("AntiSlowFalling", false));
+    private final EnumSetting aSFMode = (EnumSetting)this.registerSetting(new EnumSetting("ASF Mode", EMode.NCPAlign));
+    private final NumberSetting aSFPushUp = (NumberSetting)this.registerSetting(new NumberSetting("ASF PushUp", 0.05, 0.01, 0.2, 0.001, 0.001, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.SendOffsetPacket;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.SendOffsetPacket;
     }, null, "", false));
-    private final NumberSetting aSFPushDown = (NumberSetting)this.m28(new NumberSetting("ASF PushDown", 0.05, 0.01, 0.2, 0.001, 0.001, () -> {
+    private final NumberSetting aSFPushDown = (NumberSetting)this.registerSetting(new NumberSetting("ASF PushDown", 0.05, 0.01, 0.2, 0.001, 0.001, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.SendOffsetPacket;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.SendOffsetPacket;
     }, null, "", false));
-    private final NumberSetting aSFPushDelay = (NumberSetting)this.m28(new NumberSetting("ASF PushDelay", 10.0, 1.0, 50.0, 1.0, 1.0, () -> {
+    private final NumberSetting aSFPushDelay = (NumberSetting)this.registerSetting(new NumberSetting("ASF PushDelay", 10.0, 1.0, 50.0, 1.0, 1.0, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.SendOffsetPacket;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.SendOffsetPacket;
     }, null, "", false));
-    private final BooleanSetting aSFExtraPackets = (BooleanSetting)this.m28(new BooleanSetting("ASF ExtraPackets", false, () -> {
+    private final BooleanSetting aSFExtraPackets = (BooleanSetting)this.registerSetting(new BooleanSetting("ASF ExtraPackets", false, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.SendOffsetPacket;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.SendOffsetPacket;
     }, null, "", false));
-    private final NumberSetting aSFAlignY = (NumberSetting)this.m28(new NumberSetting("ASF AlignY", 0.015625, 0.001, 0.1, 1.0E-6, 1.0E-6, () -> {
+    private final NumberSetting aSFAlignY = (NumberSetting)this.registerSetting(new NumberSetting("ASF AlignY", 0.015625, 0.001, 0.1, 1.0E-6, 1.0E-6, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.NCPAlign;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.NCPAlign;
     }, null, "", false));
-    private final BooleanSetting aSFAutoJump = (BooleanSetting)this.m28(new BooleanSetting("ASF AutoJump", true, () -> {
+    private final BooleanSetting aSFAutoJump = (BooleanSetting)this.registerSetting(new BooleanSetting("ASF AutoJump", true, () -> {
         Object var1_1 = null;
-        return (Boolean)this.antiSlowFalling.getObj() != false && this.aSFMode.getObj() == EMode.NCPAlign;
+        return (Boolean)this.antiSlowFalling.getValue() != false && this.aSFMode.getValue() == EMode.NCPAlign;
     }, null, "", false));
-    private final NumberSetting aSFJumpHeight = (NumberSetting)this.m28(new NumberSetting("ASF JumpHeight", 0.2, 0.01, 0.42, 0.01, 0.01, () -> {
+    private final NumberSetting aSFJumpHeight = (NumberSetting)this.registerSetting(new NumberSetting("ASF JumpHeight", 0.2, 0.01, 0.42, 0.01, 0.01, () -> {
         Object var1_1 = null;
-        if ((Boolean)this.antiSlowFalling.getObj() == false) return false;
-        if (this.aSFMode.getObj() != EMode.NCPAlign) return false;
-        if ((Boolean)this.aSFAutoJump.getObj() == false) return false;
+        if ((Boolean)this.antiSlowFalling.getValue() == false) return false;
+        if (this.aSFMode.getValue() != EMode.NCPAlign) return false;
+        if ((Boolean)this.aSFAutoJump.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final BooleanSetting aSFAutoSneak = (BooleanSetting)this.m28(new BooleanSetting("ASF AutoSneak", false, () -> (Boolean)this.antiSlowFalling.getObj(), null, "", false));
+    private final BooleanSetting aSFAutoSneak = (BooleanSetting)this.registerSetting(new BooleanSetting("ASF AutoSneak", false, () -> (Boolean)this.antiSlowFalling.getValue(), null, "", false));
     private boolean flag171 = false;
     private boolean flag41 = false;
     private int count179 = 0;
@@ -82,8 +82,8 @@ extends Module {
     }
 
     @Override
-    public void m709() {
-        super.m709();
+    public void onDisable() {
+        super.onDisable();
         Object var2_1 = null;
         if (this.flag171) {
             this.m771();
@@ -95,15 +95,15 @@ extends Module {
 
     @EventHandler
     public void setMoveEvent3(MoveEvent moveEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (ItemUtil.isSet26()) {
-            double d = (Double)this.speed.getObj();
+            double d = (Double)this.speed.getValue();
             double d2 = 0.002873 * d;
-            double d3 = MC.client3.player.forwardSpeed;
-            double d4 = MC.client3.player.sidewaysSpeed;
-            double d5 = MC.client3.player.getYaw();
+            double d3 = MC.mc.player.forwardSpeed;
+            double d4 = MC.mc.player.sidewaysSpeed;
+            double d5 = MC.mc.player.getYaw();
             if (d3 == 0.0 && d4 == 0.0) {
                 moveEvent.setDouble2(0.0);
                 moveEvent.setDouble(0.0);
@@ -120,18 +120,18 @@ extends Module {
 
     @EventHandler
     public void setEvent2Inner12(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37() || !((Boolean)this.antiSlowFalling.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || !((Boolean)this.antiSlowFalling.getValue()).booleanValue()) {
             return;
         }
-        boolean bl = MC.client3.player.hasStatusEffect(StatusEffects.SLOW_FALLING);
+        boolean bl = MC.mc.player.hasStatusEffect(StatusEffects.SLOW_FALLING);
         boolean bl2 = ItemUtil.isSet26();
         if (bl && bl2) {
             this.m801();
         } else {
             this.m629();
         }
-        if (this.flag41 && !MC.client3.options.sneakKey.isPressed()) {
-            MC.client3.options.sneakKey.setPressed(true);
+        if (this.flag41 && !MC.mc.options.sneakKey.isPressed()) {
+            MC.mc.options.sneakKey.setPressed(true);
         }
     }
 
@@ -141,21 +141,21 @@ extends Module {
             this.flag171 = true;
             this.count179 = 0;
             this.flag45 = false;
-            if (((Boolean)this.aSFAutoSneak.getObj()).booleanValue()) {
+            if (((Boolean)this.aSFAutoSneak.getValue()).booleanValue()) {
                 this.setFlag11(true);
             }
-            if (this.aSFMode.getObj() == EMode.SendOffsetPacket) {
+            if (this.aSFMode.getValue() == EMode.SendOffsetPacket) {
                 this.m771();
                 this.m451();
                 this.flag45 = true;
             }
         }
-        switch (((EMode)((Object)this.aSFMode.getObj())).ordinal()) {
+        switch (((EMode)((Object)this.aSFMode.getValue())).ordinal()) {
             case 0: {
                 if (!this.flag45) break;
                 int n = this.count179;
                 this.count179 = n + 1;
-                if (n < ((Double)this.aSFPushDelay.getObj()).intValue()) break;
+                if (n < ((Double)this.aSFPushDelay.getValue()).intValue()) break;
                 this.m451();
                 this.count179 = 0;
                 if (null == null) break;
@@ -171,7 +171,7 @@ extends Module {
         Object var2_1 = null;
         if (this.flag171) {
             this.m771();
-            if (((Boolean)this.aSFAutoSneak.getObj()).booleanValue()) {
+            if (((Boolean)this.aSFAutoSneak.getValue()).booleanValue()) {
                 if (this.flag41) {
                     this.setFlag11(false);
                 }
@@ -185,25 +185,25 @@ extends Module {
     private void m1000() {
         block4: {
             Object var2_1 = null;
-            if (MC.client3.player == null) {
+            if (MC.mc.player == null) {
                 return;
             }
-            if (((Boolean)this.aSFAutoJump.getObj()).booleanValue()) {
+            if (((Boolean)this.aSFAutoJump.getValue()).booleanValue()) {
                 if (this.isSet65()) {
-                    if (MC.client3.player.isOnGround()) {
-                        double d = (Double)this.aSFJumpHeight.getObj();
-                        MC.client3.player.setVelocity(MC.client3.player.getVelocity().x, d, MC.client3.player.getVelocity().z);
+                    if (MC.mc.player.isOnGround()) {
+                        double d = (Double)this.aSFJumpHeight.getValue();
+                        MC.mc.player.setVelocity(MC.mc.player.getVelocity().x, d, MC.mc.player.getVelocity().z);
                         return;
                     }
                 }
             }
-            double d = MC.client3.player.getY();
-            double d2 = (Double)this.aSFAlignY.getObj();
+            double d = MC.mc.player.getY();
+            double d2 = (Double)this.aSFAlignY.getValue();
             double d3 = Math.floor(d / d2) * d2;
             double d4 = d - d3;
             if (!(d4 > d2 * 0.6) || !(d4 < 0.05)) break block4;
-            MC.client3.player.updatePosition(MC.client3.player.getX(), d3, MC.client3.player.getZ());
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.client3.player.getX(), d3, MC.client3.player.getZ(), MC.client3.player.isOnGround(), false));
+            MC.mc.player.updatePosition(MC.mc.player.getX(), d3, MC.mc.player.getZ());
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.mc.player.getX(), d3, MC.mc.player.getZ(), MC.mc.player.isOnGround(), false));
         }
     }
 
@@ -213,27 +213,27 @@ extends Module {
      */
     private boolean isSet65() {
         Object var2_1 = null;
-        if (MC.client3.options.forwardKey.isPressed()) return true;
-        if (MC.client3.options.backKey.isPressed()) return true;
-        if (MC.client3.options.leftKey.isPressed()) return true;
-        if (!MC.client3.options.rightKey.isPressed()) return false;
+        if (MC.mc.options.forwardKey.isPressed()) return true;
+        if (MC.mc.options.backKey.isPressed()) return true;
+        if (MC.mc.options.leftKey.isPressed()) return true;
+        if (!MC.mc.options.rightKey.isPressed()) return false;
         return true;
     }
 
     private void m451() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
-        double d = MC.client3.player.getX();
-        double d2 = MC.client3.player.getY();
-        double d3 = MC.client3.player.getZ();
-        float f = MC.client3.player.getYaw();
-        float f2 = MC.client3.player.getPitch();
-        double d4 = (Double)this.aSFPushUp.getObj();
-        double d5 = (Double)this.aSFPushDown.getObj();
+        double d = MC.mc.player.getX();
+        double d2 = MC.mc.player.getY();
+        double d3 = MC.mc.player.getZ();
+        float f = MC.mc.player.getYaw();
+        float f2 = MC.mc.player.getPitch();
+        double d4 = (Double)this.aSFPushUp.getValue();
+        double d5 = (Double)this.aSFPushDown.getValue();
         this.m613(d, d2, d3, d4, d5);
-        if (((Boolean)this.aSFExtraPackets.getObj()).booleanValue()) {
+        if (((Boolean)this.aSFExtraPackets.getValue()).booleanValue()) {
             this.m1057(d, d2, d3, d4, d5, f, f2);
         }
         this.m708(d, d2 - d5 * 0.2, d3, true);
@@ -248,8 +248,8 @@ extends Module {
         this.m708(d6, d7 + d9, d8, false);
         Object var22_11 = null;
         if (this.random9.nextBoolean()) {
-            if (MC.client3.player != null) {
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(MC.client3.player.getYaw(), MC.client3.player.getPitch(), false, false));
+            if (MC.mc.player != null) {
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(MC.mc.player.getYaw(), MC.mc.player.getPitch(), false, false));
             }
         }
         this.m708(d6, d7 - d10, d8, true);
@@ -272,8 +272,8 @@ extends Module {
             boolean bl = this.random9.nextDouble() < 0.3;
             this.m708(d6 + d11, d7 + d13, d8 + d12, bl);
             if (!(this.random9.nextFloat() < 0.4f)) continue;
-            if (MC.client3.player == null) continue;
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3 + (this.random9.nextFloat() - 0.5f) * 10.0f, f4 + (this.random9.nextFloat() - 0.5f) * 10.0f, bl, false));
+            if (MC.mc.player == null) continue;
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3 + (this.random9.nextFloat() - 0.5f) * 10.0f, f4 + (this.random9.nextFloat() - 0.5f) * 10.0f, bl, false));
             if (null == null) continue;
         }
     }
@@ -284,36 +284,36 @@ extends Module {
         double d6 = d3;
         boolean bl2 = bl;
         Object var16_9 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, false));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, false));
     }
 
     private void m771() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), MC.client3.player.isOnGround(), false));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), MC.mc.player.isOnGround(), false));
     }
 
     private void setFlag11(boolean bl) {
         boolean bl2 = bl;
         Object var4_3 = null;
-        if (MC.client3.options == null) {
+        if (MC.mc.options == null) {
             return;
         }
-        MC.client3.options.sneakKey.setPressed(bl2);
+        MC.mc.options.sneakKey.setPressed(bl2);
         this.flag41 = bl2;
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
-        if (((Boolean)this.antiSlowFalling.getObj()).booleanValue()) {
+        if (((Boolean)this.antiSlowFalling.getValue()).booleanValue()) {
             if (this.flag171) {
-                return "ASF:" + ((EMode)((Object)this.aSFMode.getObj())).toString();
+                return "ASF:" + ((EMode)((Object)this.aSFMode.getValue())).toString();
             }
         }
         return null;

@@ -35,34 +35,34 @@ import shit.util.MathUtil;
 public class Criticals
 extends Module {
     public static Criticals INSTANCE;
-    public final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.OldNCP));
-    public final BooleanSetting onlyGround = (BooleanSetting)this.m28(new BooleanSetting("OnlyGround", true, () -> this.mode.getObj() != Mode.Ground, null, "", false));
-    public final BooleanSetting onlyAuraActive = (BooleanSetting)this.m28(new BooleanSetting("OnlyAuraActive", false));
-    public final BooleanSetting movePause = (BooleanSetting)this.m28(new BooleanSetting("MovePause", false));
-    private final BooleanSetting setNoGround = (BooleanSetting)this.m28(new BooleanSetting("SetNoGround", false, () -> this.mode.getObj() == Mode.Ground, null, "", false));
-    private final BooleanSetting autoJump = (BooleanSetting)this.m28(new BooleanSetting("AutoJump", true, () -> this.mode.getObj() == Mode.Ground, null, "", false));
-    private final BooleanSetting mini = (BooleanSetting)this.m28(new BooleanSetting("Mini", true, () -> {
+    public final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.OldNCP));
+    public final BooleanSetting onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", true, () -> this.mode.getValue() != Mode.Ground, null, "", false));
+    public final BooleanSetting onlyAuraActive = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyAuraActive", false));
+    public final BooleanSetting movePause = (BooleanSetting)this.registerSetting(new BooleanSetting("MovePause", false));
+    private final BooleanSetting setNoGround = (BooleanSetting)this.registerSetting(new BooleanSetting("SetNoGround", false, () -> this.mode.getValue() == Mode.Ground, null, "", false));
+    private final BooleanSetting autoJump = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoJump", true, () -> this.mode.getValue() == Mode.Ground, null, "", false));
+    private final BooleanSetting mini = (BooleanSetting)this.registerSetting(new BooleanSetting("Mini", true, () -> {
         Object var1_1 = null;
-        if (this.mode.getObj() != Mode.Ground) return false;
-        if ((Boolean)this.autoJump.getObj() == false) return false;
+        if (this.mode.getValue() != Mode.Ground) return false;
+        if ((Boolean)this.autoJump.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final NumberSetting motionY = (NumberSetting)this.m28(new NumberSetting("MotionY", 0.05, 0.0, 1.0, 0.001, 0.001, () -> {
+    private final NumberSetting motionY = (NumberSetting)this.registerSetting(new NumberSetting("MotionY", 0.05, 0.0, 1.0, 0.001, 0.001, () -> {
         Object var1_1 = null;
-        if (this.mode.getObj() != Mode.Ground) return false;
-        if ((Boolean)this.autoJump.getObj() == false) return false;
+        if (this.mode.getValue() != Mode.Ground) return false;
+        if ((Boolean)this.autoJump.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final BooleanSetting airStuck = (BooleanSetting)this.m28(new BooleanSetting("AirStuck", false, () -> this.mode.getObj() == Mode.Ground, null, "", false));
-    private final NumberSetting stuckTicks = (NumberSetting)this.m28(new NumberSetting("StuckTicks", 10.0, 1.0, 20.0, 1.0, 1.0, () -> {
+    private final BooleanSetting airStuck = (BooleanSetting)this.registerSetting(new BooleanSetting("AirStuck", false, () -> this.mode.getValue() == Mode.Ground, null, "", false));
+    private final NumberSetting stuckTicks = (NumberSetting)this.registerSetting(new NumberSetting("StuckTicks", 10.0, 1.0, 20.0, 1.0, 1.0, () -> {
         Object var1_1 = null;
-        if (this.mode.getObj() != Mode.Ground) return false;
-        if ((Boolean)this.airStuck.getObj() == false) return false;
+        if (this.mode.getValue() != Mode.Ground) return false;
+        if ((Boolean)this.airStuck.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final BooleanSetting autoDisable = (BooleanSetting)this.m28(new BooleanSetting("AutoDisable", true, () -> this.mode.getObj() == Mode.Ground, null, "", false));
-    private final BooleanSetting crawlingDisable = (BooleanSetting)this.m28(new BooleanSetting("CrawlingDisable", true, () -> this.mode.getObj() == Mode.Ground, null, "", false));
-    public final BooleanSetting autoMode = (BooleanSetting)this.m28(new BooleanSetting("AutoMode", false));
+    private final BooleanSetting autoDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoDisable", true, () -> this.mode.getValue() == Mode.Ground, null, "", false));
+    private final BooleanSetting crawlingDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("CrawlingDisable", true, () -> this.mode.getValue() == Mode.Ground, null, "", false));
+    public final BooleanSetting autoMode = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoMode", false));
     private boolean flag90;
     private boolean flag153;
     private boolean flag101;
@@ -74,12 +74,12 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
-        if (((Boolean)this.autoMode.getObj()).booleanValue()) {
-            return ((Mode)((Object)this.mode.getObj())).name() + (this.isSet42() ? " [Active]" : " [Idle]");
+        if (((Boolean)this.autoMode.getValue()).booleanValue()) {
+            return ((Mode)((Object)this.mode.getValue())).name() + (this.isSet42() ? " [Active]" : " [Idle]");
         }
-        return ((Mode)((Object)this.mode.getObj())).name();
+        return ((Mode)((Object)this.mode.getValue())).name();
     }
 
     @Override
@@ -90,16 +90,16 @@ extends Module {
             this.flag153 = this.isSet42();
             Object var2_1 = null;
             this.flag90 = true;
-            if (this.mode.getObj() == Mode.Ground) {
+            if (this.mode.getValue() == Mode.Ground) {
                 if (this.isSet6()) {
-                    if (((Boolean)this.autoDisable.getObj()).booleanValue()) {
-                        this.setFlag3(false);
+                    if (((Boolean)this.autoDisable.getValue()).booleanValue()) {
+                        this.setEnabled(false);
                     }
                     return;
                 }
             }
-            if (this.mode.getObj() != Mode.Ground || !((Boolean)this.autoJump.getObj()).booleanValue()) break block4;
-            if (MC.client3.player != null && MC.client3.player.isOnGround()) {
+            if (this.mode.getValue() != Mode.Ground || !((Boolean)this.autoJump.getValue()).booleanValue()) break block4;
+            if (MC.mc.player != null && MC.mc.player.isOnGround()) {
                 this.m534();
             }
         }
@@ -107,34 +107,34 @@ extends Module {
 
     @EventHandler
     private void setPacketEventInner35(PacketEvent.PacketEventInner packetEventInner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket) {
             this.flag101 = false;
             this.count216 = 0;
         }
-        if (this.mode.getObj() == Mode.Ground && ((Boolean)this.airStuck.getObj()).booleanValue() && this.flag101) {
+        if (this.mode.getValue() == Mode.Ground && ((Boolean)this.airStuck.getValue()).booleanValue() && this.flag101) {
             EntityVelocityUpdateS2CPacket entityVelocityUpdateS2CPacket;
             Packet packet = packetEventInner.getPacket();
-            if (packet instanceof EntityVelocityUpdateS2CPacket && (entityVelocityUpdateS2CPacket = (EntityVelocityUpdateS2CPacket)packet).getEntityId() == MC.client3.player.getId()) {
-                packetEventInner.m209();
+            if (packet instanceof EntityVelocityUpdateS2CPacket && (entityVelocityUpdateS2CPacket = (EntityVelocityUpdateS2CPacket)packet).getEntityId() == MC.mc.player.getId()) {
+                packetEventInner.cancel();
             } else if (packetEventInner.getPacket() instanceof ExplosionS2CPacket) {
-                packetEventInner.m209();
+                packetEventInner.cancel();
             }
         }
     }
 
     @EventHandler
     private void setPacketEventInner2(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (Module.isSet37() || MidClickPearl.flag80 || this.isSet99()) {
+        if (Module.isNotInGame() || MidClickPearl.flag80 || this.isSet99()) {
             return;
         }
-        if (((Boolean)this.autoMode.getObj()).booleanValue() && !this.isSet42()) {
+        if (((Boolean)this.autoMode.getValue()).booleanValue() && !this.isSet42()) {
             return;
         }
-        if (this.mode.getObj() == Mode.Ground) {
-            if (((Boolean)this.setNoGround.getObj()).booleanValue() && packetEventInner2.getPacket() instanceof PlayerMoveC2SPacket) {
+        if (this.mode.getValue() == Mode.Ground) {
+            if (((Boolean)this.setNoGround.getValue()).booleanValue() && packetEventInner2.getPacket() instanceof PlayerMoveC2SPacket) {
                 ((Listener7)packetEventInner2.getPacket()).setOnGround(false);
             }
             return;
@@ -151,10 +151,10 @@ extends Module {
         if (entity == null || entity instanceof EndCrystalEntity) {
             return;
         }
-        if (((Boolean)this.onlyGround.getObj()).booleanValue() && !MC.client3.player.isOnGround() && !MC.client3.player.getAbilities().flying) {
+        if (((Boolean)this.onlyGround.getValue()).booleanValue() && !MC.mc.player.isOnGround() && !MC.mc.player.getAbilities().flying) {
             return;
         }
-        if (MC.client3.player.isInLava() || MC.client3.player.isTouchingWater()) {
+        if (MC.mc.player.isInLava() || MC.mc.player.isTouchingWater()) {
             return;
         }
         this.setObj83(entity);
@@ -162,10 +162,10 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner35(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.autoMode.getObj()).booleanValue()) {
+        if (((Boolean)this.autoMode.getValue()).booleanValue()) {
             boolean bl = this.isSet42();
             if (!bl) {
                 this.flag153 = false;
@@ -176,31 +176,31 @@ extends Module {
                 this.flag153 = true;
             }
         }
-        if (this.mode.getObj() != Mode.Ground || this.isSet99()) {
+        if (this.mode.getValue() != Mode.Ground || this.isSet99()) {
             return;
         }
-        if (MC.client3.player.isOnGround()) {
+        if (MC.mc.player.isOnGround()) {
             this.flag101 = false;
             this.count216 = 0;
         }
-        if (this.flag101 && ((Boolean)this.airStuck.getObj()).booleanValue()) {
+        if (this.flag101 && ((Boolean)this.airStuck.getValue()).booleanValue()) {
             ++this.count216;
-            if (this.count216 > this.stuckTicks.getInt50()) {
+            if (this.count216 > this.stuckTicks.getInt()) {
                 this.flag101 = false;
             } else {
-                MC.client3.player.setVelocity(Vec3d.ZERO);
+                MC.mc.player.setVelocity(Vec3d.ZERO);
             }
         }
         if (this.isSet6()) {
-            if (((Boolean)this.autoDisable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+            if (((Boolean)this.autoDisable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
             return;
         }
-        if (MC.client3.player.isOnGround() && ((Boolean)this.autoJump.getObj()).booleanValue() && this.flag90) {
+        if (MC.mc.player.isOnGround() && ((Boolean)this.autoJump.getValue()).booleanValue() && this.flag90) {
             this.m534();
             this.flag90 = false;
-            if (((Boolean)this.airStuck.getObj()).booleanValue()) {
+            if (((Boolean)this.airStuck.getValue()).booleanValue()) {
                 this.flag101 = true;
                 this.count216 = 0;
             }
@@ -213,8 +213,8 @@ extends Module {
      */
     private boolean isSet42() {
         Object var2_1 = null;
-        if (MC.client3.player == null) return false;
-        if (!ItemUtil.m931(MC.client3.player)) return false;
+        if (MC.mc.player == null) return false;
+        if (!ItemUtil.m931(MC.mc.player)) return false;
         return true;
     }
 
@@ -223,21 +223,21 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet99() {
-        Module module = Client.moduleManager.m979("MaceSpoof");
+        Module module = Client.moduleManager.getModule("MaceSpoof");
         Object var2_2 = null;
         if (module != null) {
-            if (module.isSet19()) {
+            if (module.isEnabled()) {
                 return true;
             }
         }
-        if (((Boolean)this.onlyAuraActive.getObj()).booleanValue()) {
-            Module module2 = Client.moduleManager.m979("KillAura");
+        if (((Boolean)this.onlyAuraActive.getValue()).booleanValue()) {
+            Module module2 = Client.moduleManager.getModule("KillAura");
             if (module2 == null) return true;
-            if (!module2.isSet19()) {
+            if (!module2.isEnabled()) {
                 return true;
             }
         }
-        if ((Boolean)this.movePause.getObj() == false) return false;
+        if ((Boolean)this.movePause.getValue() == false) return false;
         if (!MathUtil.isSet7()) return false;
         return true;
     }
@@ -248,11 +248,11 @@ extends Module {
      */
     private boolean isSet6() {
         Object var2_1 = null;
-        if (((Boolean)this.crawlingDisable.getObj()).booleanValue()) {
-            if (MC.client3.player.isCrawling()) return true;
+        if (((Boolean)this.crawlingDisable.getValue()).booleanValue()) {
+            if (MC.mc.player.isCrawling()) return true;
         }
         if (!MathUtil.isSet7()) return false;
-        if ((Boolean)this.autoDisable.getObj() == false) return false;
+        if ((Boolean)this.autoDisable.getValue() == false) return false;
         return true;
     }
 
@@ -260,12 +260,12 @@ extends Module {
         block5: {
             block4: {
                 Object var2_1 = null;
-                if (!((Boolean)this.mini.getObj()).booleanValue()) break block4;
-                MathUtil.setDouble7((Double)this.motionY.getObj());
+                if (!((Boolean)this.mini.getValue()).booleanValue()) break block4;
+                MathUtil.setDouble7((Double)this.motionY.getValue());
                 if (null == null) break block5;
             }
-            if (MC.client3.player != null) {
-                MC.client3.player.jump();
+            if (MC.mc.player != null) {
+                MC.mc.player.jump();
             }
         }
     }
@@ -273,13 +273,13 @@ extends Module {
     private void setObj83(Object object) {
         Entity entity = (Entity)object;
         Object var4_3 = null;
-        switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             case 0: {
                 this.m614(entity, 2.71875E-7, 0.0);
                 if (null == null) break;
             }
             case 1: {
-                MC.client3.player.addCritParticles(entity);
+                MC.mc.player.addCritParticles(entity);
                 this.m179(0.062600301692775, false);
                 this.m179(0.07260029960661, false);
                 this.m179(0.0, false);
@@ -291,14 +291,14 @@ extends Module {
                 if (null == null) break;
             }
             case 3: {
-                MC.client3.player.addCritParticles(entity);
+                MC.mc.player.addCritParticles(entity);
                 this.m179(1.058293536E-5, false);
                 this.m179(9.16580235E-6, false);
                 this.m179(1.0371854E-7, false);
                 if (null == null) break;
             }
             case 4: {
-                MC.client3.player.addCritParticles(entity);
+                MC.mc.player.addCritParticles(entity);
                 this.m179(0.0045, true);
                 this.m179(1.52121E-4, false);
                 this.m179(0.3, false);
@@ -325,7 +325,7 @@ extends Module {
         Entity entity = (Entity)object;
         double d3 = d;
         double d4 = d2;
-        MC.client3.player.addCritParticles(entity);
+        MC.mc.player.addCritParticles(entity);
         this.m179(d3, false);
         this.m179(d4, false);
     }
@@ -333,13 +333,13 @@ extends Module {
     private void m179(double d, boolean bl) {
         double d2 = d;
         boolean bl2 = bl;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.client3.player.getX(), MC.client3.player.getY() + d2, MC.client3.player.getZ(), bl2, MC.client3.player.horizontalCollision));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.mc.player.getX(), MC.mc.player.getY() + d2, MC.mc.player.getZ(), bl2, MC.mc.player.horizontalCollision));
     }
 
     private Entity m450(Object object) {
         PlayerInteractEntityC2SPacket playerInteractEntityC2SPacket = (PlayerInteractEntityC2SPacket)object;
         Object var4_3 = null;
-        return MC.client3.world == null ? null : MC.client3.world.getEntityById(((ServerboundInteractPacketAccessor)playerInteractEntityC2SPacket).getEntityId());
+        return MC.mc.world == null ? null : MC.mc.world.getEntityById(((ServerboundInteractPacketAccessor)playerInteractEntityC2SPacket).getEntityId());
     }
 
     private boolean m467(Object object) {

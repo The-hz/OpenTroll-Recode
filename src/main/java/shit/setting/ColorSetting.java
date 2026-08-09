@@ -35,19 +35,19 @@ extends Setting {
     public void setObj22(Object var1_1) {
         int color = (Integer) var1_1;
         if (this.flag60) {
-            super.setObj94(color);
+            super.setValueInternal(color);
         } else {
-            super.setObj94(color | -16777216);
+            super.setValueInternal(color | -16777216);
         }
     }
 
     @Override
-    public String getText29() {
-        return Integer.toUnsignedString((Integer)this.getObj(), 16);
+    public String getValueString() {
+        return Integer.toUnsignedString((Integer)this.getValue(), 16);
     }
 
     @Override
-    public void setObj58(Object object) {
+    public void setValueFromString(Object object) {
         String string = (String)object;
         String string2 = Setting.getText54();
         String string3 = string;
@@ -65,12 +65,12 @@ extends Setting {
             this.setObj22((int)Long.parseLong(string4, 16));
         }
         catch (NumberFormatException numberFormatException) {
-            this.setObj22((Integer)this.getObj20());
+            this.setObj22((Integer)this.getDefaultValue());
         }
     }
 
     @Override
-    public void setObj94(Object object) {
+    public void setValueInternal(Object object) {
         Object object2 = object;
         this.setObj22((Integer)object2);
     }

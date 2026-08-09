@@ -61,8 +61,8 @@ implements AutoCloseable {
                     return;
                 }
                 RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
-                n2 = autoCloseableImpl != null ? autoCloseableImpl.getInt25() : MC.client3.getFramebuffer().textureWidth;
-                n = autoCloseableImpl != null ? autoCloseableImpl.getInt87() : MC.client3.getFramebuffer().textureHeight;
+                n2 = autoCloseableImpl != null ? autoCloseableImpl.getInt25() : MC.mc.getFramebuffer().textureWidth;
+                n = autoCloseableImpl != null ? autoCloseableImpl.getInt87() : MC.mc.getFramebuffer().textureHeight;
                 if (n2 <= 0) break block11;
                 if (n > 0) break block12;
             }

@@ -26,28 +26,28 @@ extends Setting {
         this.class_2 = enum_.getDeclaringClass();
     }
 
-    public void m788() {
+    public void cycle() {
         block1: {
             Enum[] enumArray = (Enum[])this.class_2.getEnumConstants();
-            int n = ((Enum)this.getObj()).ordinal() + 1;
+            int n = ((Enum)this.getValue()).ordinal() + 1;
             String string = Setting.getText54();
             int n2 = n;
             if (string == null) {
                 n2 = n2 >= enumArray.length ? 0 : n;
             }
-            this.setObj94(enumArray[n2]);
+            this.setValueInternal(enumArray[n2]);
             if (Module.getTextArray9() != null) break block1;
             Setting.setText14("m4Tdhc");
         }
     }
 
     @Override
-    public String getText29() {
-        return ((Enum)this.getObj()).name();
+    public String getValueString() {
+        return ((Enum)this.getValue()).name();
     }
 
     @Override
-    public void setObj58(Object object) {
+    public void setValueFromString(Object object) {
         String string = (String)object;
         String string2 = Setting.getText54();
         if (string2 == null) {
@@ -55,10 +55,10 @@ extends Setting {
                 return;
             }
             try {
-                this.setObj94(Enum.valueOf(this.class_2, string));
+                this.setValueInternal(Enum.valueOf(this.class_2, string));
             }
             catch (IllegalArgumentException illegalArgumentException) {
-                this.setObj94((Enum)this.getObj20());
+                this.setValueInternal((Enum)this.getDefaultValue());
             }
         }
     }

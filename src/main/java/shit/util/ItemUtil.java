@@ -34,21 +34,21 @@ implements MC {
      */
     public static boolean isSet84() {
         boolean bl = false;
-        Screen screen = MC.client3.currentScreen;
+        Screen screen = MC.mc.currentScreen;
         if (false) {
             if (screen == null) return true;
-            screen = MC.client3.currentScreen;
+            screen = MC.mc.currentScreen;
         }
         boolean bl2 = screen instanceof OptionsScreen;
         if (!false) return bl2;
         if (bl2) return true;
-        bl2 = MC.client3.currentScreen instanceof ChatScreen;
+        bl2 = MC.mc.currentScreen instanceof ChatScreen;
         if (!false) return bl2;
         if (bl2) return true;
-        bl2 = MC.client3.currentScreen instanceof InventoryScreen;
+        bl2 = MC.mc.currentScreen instanceof InventoryScreen;
         if (!false) return bl2;
         if (bl2) return true;
-        bl2 = MC.client3.currentScreen instanceof GameMenuScreen;
+        bl2 = MC.mc.currentScreen instanceof GameMenuScreen;
         if (!false) return bl2;
         if (!bl2) return false;
         return true;
@@ -85,10 +85,10 @@ implements MC {
                     MinecraftClient minecraftClient;
                     block4: {
                         boolean bl = false;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                         if (!false) break block4;
                         if (minecraftClient.player == null) break block5;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                     }
                     clientWorld = minecraftClient.world;
                     if (!false) break block6;
@@ -96,9 +96,9 @@ implements MC {
                 }
                 return false;
             }
-            clientWorld = MC.client3.world;
+            clientWorld = MC.mc.world;
         }
-        boolean bl = clientWorld.isSpaceEmpty((Entity)MC.client3.player, MC.client3.player.getBoundingBox());
+        boolean bl = clientWorld.isSpaceEmpty((Entity)MC.mc.player, MC.mc.player.getBoundingBox());
         if (false) {
             bl = !bl;
         }
@@ -187,10 +187,10 @@ implements MC {
             block2: {
                 hand = (Hand)object;
                 boolean bl = false;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
                 if (!false) break block2;
                 if (clientPlayerEntity == null) break block3;
-                clientPlayerEntity = MC.client3.player;
+                clientPlayerEntity = MC.mc.player;
             }
             clientPlayerEntity.swingHand(hand);
         }

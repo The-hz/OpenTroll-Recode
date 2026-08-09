@@ -33,9 +33,9 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AutoCope
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Internal));
-    private final StringSetting copeReply = (StringSetting)this.m28(new StringSetting("CopeReply", "cope $NAME"));
-    private final BooleanSetting reply = (BooleanSetting)this.m28(new BooleanSetting("Reply", false));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Internal));
+    private final StringSetting copeReply = (StringSetting)this.registerSetting(new StringSetting("CopeReply", "cope $NAME"));
+    private final BooleanSetting reply = (BooleanSetting)this.registerSetting(new BooleanSetting("Reply", false));
     private static final File file2 = null;
     private static final String[] texts = new String[0];
     private final Random random7 = new Random();
@@ -51,41 +51,41 @@ extends Module {
      */
     @Override
     public void onEnable() {
-        this.list29 = this.mode.getObj() != Mode.External ? List.of(texts) : this.getList();
-        this.helper719.setLong3(3000L);
+        this.list29 = this.mode.getValue() != Mode.External ? List.of(texts) : this.getList();
+        this.helper719.setElapsed(3000L);
     }
 
     @EventHandler
     private void setPacketEventInner21(PacketEvent.PacketEventInner packetEventInner) {
         String string;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         Object object = packetEventInner.getPacket();
         if (object instanceof HealthUpdateS2CPacket) {
             HealthUpdateS2CPacket healthUpdateS2CPacket = (HealthUpdateS2CPacket)object;
-            if (healthUpdateS2CPacket.getHealth() <= 0.0f && this.helper719.m114(3.0) && !this.isSet49()) {
-                Util2.setObj62(this.getText53());
-                this.helper719.m533();
+            if (healthUpdateS2CPacket.getHealth() <= 0.0f && this.helper719.hasPassedSeconds(3.0) && !this.isSet49()) {
+                Util2.sendChatMessage(this.getText53());
+                this.helper719.resetTimer();
             }
             return;
         }
-        if (!((Boolean)this.reply.getObj()).booleanValue()) {
+        if (!((Boolean)this.reply.getValue()).booleanValue()) {
             return;
         }
         String string2 = this.m511(packetEventInner);
-        if (string2 == null || MC.client3.player == null) {
+        if (string2 == null || MC.mc.player == null) {
             return;
         }
         object = string2.toLowerCase(Locale.ROOT);
-        if (!((String)object).contains(string = MC.client3.player.getName().getString().toLowerCase(Locale.ROOT))) {
+        if (!((String)object).contains(string = MC.mc.player.getName().getString().toLowerCase(Locale.ROOT))) {
             return;
         }
         if (!(((String)object).contains("bad") || ((String)object).contains("noob") || ((String)object).contains("skill") || ((String)object).contains("cope") || ((String)object).contains("ez"))) {
             return;
         }
         String string3 = AutoCope.m773(string2);
-        Util2.setObj62(((String)this.copeReply.getObj()).replace("$NAME", string3));
+        Util2.sendChatMessage(((String)this.copeReply.getValue()).replace("$NAME", string3));
     }
 
     /*
@@ -94,10 +94,10 @@ extends Module {
      */
     private boolean isSet49() {
         int[] nArray = ChatTimestamp.getIntArray2();
-        boolean bl = MC.client3.player.getStackInHand(Hand.MAIN_HAND).isOf(Items.TOTEM_OF_UNDYING);
+        boolean bl = MC.mc.player.getStackInHand(Hand.MAIN_HAND).isOf(Items.TOTEM_OF_UNDYING);
         if (nArray == null) return bl;
         if (bl) return true;
-        bl = MC.client3.player.getStackInHand(Hand.OFF_HAND).isOf(Items.TOTEM_OF_UNDYING);
+        bl = MC.mc.player.getStackInHand(Hand.OFF_HAND).isOf(Items.TOTEM_OF_UNDYING);
         if (nArray == null) return bl;
         if (!bl) return false;
         return true;

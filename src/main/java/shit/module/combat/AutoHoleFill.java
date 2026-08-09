@@ -24,11 +24,11 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoHoleFill
 extends Module {
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 4.0, 1.0, 6.0, 0.5));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
-    private final NumberSetting blocks = (NumberSetting)this.m28(new NumberSetting("Blocks", 1.0, 1.0, 8.0, 1.0));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 4.0, 1.0, 6.0, 0.5));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
+    private final NumberSetting blocks = (NumberSetting)this.registerSetting(new NumberSetting("Blocks", 1.0, 1.0, 8.0, 1.0));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
     private final Helper7 helper710 = new Helper7();
 
     public AutoHoleFill() {
@@ -37,24 +37,24 @@ extends Module {
 
     @EventHandler
     private void onTick4(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37() || !this.helper710.m432((Double)this.delay.getObj())) {
+        if (Module.isNotInGame() || !this.helper710.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
         int n = 0;
-        BlockPos blockPos = MC.client3.player.getBlockPos();
-        int n2 = this.range.getInt50();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
+        int n2 = this.range.getInt();
         for (BlockPos blockPos2 : BlockPos.iterate((BlockPos)blockPos.add(-n2, -1, -n2), (BlockPos)blockPos.add(n2, 1, n2))) {
             if (!this.m505(blockPos2) || !BlockUtil.m1051(blockPos2.toImmutable(), (java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> {
                 BlockItem blockItem;
                 Item item = itemStack.getItem();
                 Object var1_2 = null;
                 return item instanceof BlockItem && (blockItem = (BlockItem)item).getBlock() == Blocks.OBSIDIAN;
-            }), (Object)this.getRotateMode12(), ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f, (Object)this.getSwitchMode2(), 5.0) || ++n < this.blocks.getInt50()) continue;
-            this.helper710.m533();
+            }), (Object)this.getRotateMode12(), ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f, (Object)this.getSwitchMode2(), 5.0) || ++n < this.blocks.getInt()) continue;
+            this.helper710.resetTimer();
             return;
         }
         if (n > 0) {
-            this.helper710.m533();
+            this.helper710.resetTimer();
         }
     }
 
@@ -64,8 +64,8 @@ extends Module {
             block6: {
                 blockPos = (BlockPos)object;
                 Object var4_3 = null;
-                if (!MC.client3.world.isAir(blockPos)) break block6;
-                if (MC.client3.world.isAir(blockPos.up())) break block7;
+                if (!MC.mc.world.isAir(blockPos)) break block6;
+                if (MC.mc.world.isAir(blockPos.up())) break block7;
             }
             return false;
         }
@@ -88,17 +88,17 @@ extends Module {
     private boolean m804(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.world.getBlockState(blockPos).isOf(Blocks.OBSIDIAN)) return true;
-        if (!MC.client3.world.getBlockState(blockPos).isOf(Blocks.BEDROCK)) return false;
+        if (MC.mc.world.getBlockState(blockPos).isOf(Blocks.OBSIDIAN)) return true;
+        if (!MC.mc.world.getBlockState(blockPos).isOf(Blocks.BEDROCK)) return false;
         return true;
     }
 
     private ClientSetting.RotateMode getRotateMode12() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+        if (this.rotateMode.getValue() == RotateMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
-        return switch (((RotateMode)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((RotateMode)((Object)this.rotateMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
             case 2 -> ClientSetting.RotateMode.SMOOTH;
             case 3 -> ClientSetting.RotateMode.ONTICK;
@@ -109,10 +109,10 @@ extends Module {
 
     private ClientSetting.SwitchMode getSwitchMode2() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NORMAL;
+        if (this.switchMode.getValue() == SwitchMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NORMAL;
         }
-        return switch (((SwitchMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((SwitchMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

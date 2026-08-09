@@ -12,33 +12,33 @@ public class Helper7 {
     private static String[] texts10;
 
     public Helper7() {
-        this.m533();
+        this.resetTimer();
     }
 
-    public void m533() {
+    public void resetTimer() {
         this.time40 = System.currentTimeMillis();
     }
 
-    public long getLong12() {
+    public long getElapsed() {
         return System.currentTimeMillis() - this.time40;
     }
 
-    public boolean m114(double d) {
+    public boolean hasPassedSeconds(double d) {
         double d2 = d;
-        return this.m336((long)(d2 * 1000.0));
+        return this.hasPassedMillis((long)(d2 * 1000.0));
     }
 
-    public boolean m432(double d) {
+    public boolean hasPassedMs(double d) {
         double d2 = d;
-        return this.m336((long)d2);
+        return this.hasPassedMillis((long)d2);
     }
 
-    public void setLong3(long l) {
+    public void setElapsed(long l) {
         long l2 = l;
         this.time40 = System.currentTimeMillis() - l2;
     }
 
-    public boolean m336(long l) {
+    public boolean hasPassedMillis(long l) {
         return System.currentTimeMillis() - this.time40 >= l;
     }
 

@@ -24,12 +24,12 @@ import shit.util.MC;
 public class PlayerModel
 extends Module
 implements Listener3 {
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 350.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting y = (NumberSetting)this.m28(new NumberSetting("Y", 112.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting width = (NumberSetting)this.m28(new NumberSetting("Width", 50.0, 30.0, 160.0, 1.0));
-    private final NumberSetting height = (NumberSetting)this.m28(new NumberSetting("Height", 80.0, 50.0, 220.0, 1.0));
-    private final BooleanSetting emulateYaw = (BooleanSetting)this.m28(new BooleanSetting("EmulateYaw", true));
-    private final BooleanSetting emulatePitch = (BooleanSetting)this.m28(new BooleanSetting("EmulatePitch", true));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 350.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 112.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting width = (NumberSetting)this.registerSetting(new NumberSetting("Width", 50.0, 30.0, 160.0, 1.0));
+    private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 80.0, 50.0, 220.0, 1.0));
+    private final BooleanSetting emulateYaw = (BooleanSetting)this.registerSetting(new BooleanSetting("EmulateYaw", true));
+    private final BooleanSetting emulatePitch = (BooleanSetting)this.registerSetting(new BooleanSetting("EmulatePitch", true));
     private float value165 = 0.0f;
     private float value201 = 0.0f;
     private boolean flag150 = false;
@@ -40,12 +40,12 @@ implements Listener3 {
 
     @EventHandler
     private void setEvent2Inner18(Event2.Event2Inner event2Inner) {
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             this.flag150 = false;
             this.value165 = 0.0f;
             return;
         }
-        float f = MC.client3.player.getYaw();
+        float f = MC.mc.player.getYaw();
         if (!this.flag150) {
             this.value201 = f;
             this.flag150 = true;
@@ -58,58 +58,58 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
     public int hudWidth() {
-        return this.width.getInt50();
+        return this.width.getInt();
     }
 
     @Override
-    public int getInt28() {
-        return this.height.getInt50();
+    public int getHudHeight() {
+        return this.height.getInt();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     /*
      * Unable to fully structure code
      */
     @Override
-    public void m368(Object var1_1, boolean var2_2) {
+    public void renderHud(Object var1_1, boolean var2_2) {
         DrawContext drawContext = (DrawContext)var1_1;
-        int x = this.x.getInt50();
-        int y = this.y.getInt50();
-        if (MC.client3.player == null) {
+        int x = this.x.getInt();
+        int y = this.y.getInt();
+        if (MC.mc.player == null) {
             if (var2_2) {
-                drawContext.fill(x, y, x + this.hudWidth(), y + this.getInt28(), 1427445792);
-                Client.fontManager.renderer2().m5(drawContext, "Player", x + 4, y + 4, -1184275, true);
+                drawContext.fill(x, y, x + this.hudWidth(), y + this.getHudHeight(), 1427445792);
+                Client.fontManager.renderer2().drawText(drawContext, "Player", x + 4, y + 4, -1184275, true);
             }
             return;
         }
-        int x2 = x + this.width.getInt50();
-        int y2 = y + this.height.getInt50();
-        int size = Math.max(18, Math.min(this.width.getInt50(), this.height.getInt50()) / 2);
+        int x2 = x + this.width.getInt();
+        int y2 = y + this.height.getInt();
+        int size = Math.max(18, Math.min(this.width.getInt(), this.height.getInt()) / 2);
         float cx = (float)(x + x2) / 2.0f;
         float cy = (float)(y + y2) / 2.0f;
-        float yaw = ((Boolean)this.emulateYaw.getObj()).booleanValue() ? this.value165 : 0.0f;
-        float pitch = ((Boolean)this.emulatePitch.getObj()).booleanValue() ? MathHelper.clamp((float)MC.client3.player.getPitch(), (float)-30.0f, (float)30.0f) : 0.0f;
+        float yaw = ((Boolean)this.emulateYaw.getValue()).booleanValue() ? this.value165 : 0.0f;
+        float pitch = ((Boolean)this.emulatePitch.getValue()).booleanValue() ? MathHelper.clamp((float)MC.mc.player.getPitch(), (float)-30.0f, (float)30.0f) : 0.0f;
         float ex = cx - (float)Math.tan((double)(yaw / 20.0f)) * 40.0f;
         float ey = cy - (float)Math.tan((double)(-pitch / 20.0f)) * 40.0f;
-        InventoryScreen.drawEntity(drawContext, x, y, x2, y2, size, 0.0f, ex, ey, MC.client3.player);
+        InventoryScreen.drawEntity(drawContext, x, y, x2, y2, size, 0.0f, ex, ey, MC.mc.player);
     }
 }
 

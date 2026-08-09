@@ -35,54 +35,54 @@ extends Setting {
     }
 
     public long getLong() {
-        return ((Double)this.getObj()).longValue();
+        return ((Double)this.getValue()).longValue();
     }
 
-    public double getDouble16() {
+    public double getMin() {
         return this.value169;
     }
 
-    public double getDouble22() {
+    public double getMax() {
         return this.value205;
     }
 
-    public double getDouble20() {
+    public double getStep() {
         return this.value112;
     }
 
-    public void setObj85(Object object) {
+    public void setDouble(Object object) {
         double d = ((Number) object).doubleValue();
-        super.setObj94(Math.max(this.value169, Math.min(this.value205, d)));
+        super.setValueInternal(Math.max(this.value169, Math.min(this.value205, d)));
     }
 
-    public int getInt50() {
-        return ((Double)this.getObj()).intValue();
+    public int getInt() {
+        return ((Double)this.getValue()).intValue();
     }
 
-    public float getFloat35() {
-        return ((Double)this.getObj()).floatValue();
-    }
-
-    @Override
-    public String getText29() {
-        return Double.toString((Double)this.getObj());
+    public float getFloat() {
+        return ((Double)this.getValue()).floatValue();
     }
 
     @Override
-    public void setObj58(Object object) {
+    public String getValueString() {
+        return Double.toString((Double)this.getValue());
+    }
+
+    @Override
+    public void setValueFromString(Object object) {
         try {
             String string = (String)object;
-            this.setObj85(Double.parseDouble(string));
+            this.setDouble(Double.parseDouble(string));
         }
         catch (NumberFormatException numberFormatException) {
-            this.setObj85((Double)this.getObj20());
+            this.setDouble((Double)this.getDefaultValue());
         }
     }
 
     @Override
-    public void setObj94(Object object) {
+    public void setValueInternal(Object object) {
         Object object2 = object;
-        this.setObj85((Double)object2);
+        this.setDouble((Double)object2);
     }
 
     public static void setIntArray(int[] nArray) {

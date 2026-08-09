@@ -24,10 +24,10 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Blink
 extends Module {
-    private final BooleanSetting cancelPackets = (BooleanSetting)this.m28(new BooleanSetting("CancelPackets", false));
-    private final BooleanSetting actions = (BooleanSetting)this.m28(new BooleanSetting("Actions", false));
-    private final BooleanSetting autoPulse = (BooleanSetting)this.m28(new BooleanSetting("AutoPulse", true));
-    private final NumberSetting pulsePackets = (NumberSetting)this.m28(new NumberSetting("PulsePackets", 20.0, 1.0, 100.0, 1.0));
+    private final BooleanSetting cancelPackets = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelPackets", false));
+    private final BooleanSetting actions = (BooleanSetting)this.registerSetting(new BooleanSetting("Actions", false));
+    private final BooleanSetting autoPulse = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoPulse", true));
+    private final NumberSetting pulsePackets = (NumberSetting)this.registerSetting(new NumberSetting("PulsePackets", 20.0, 1.0, 100.0, 1.0));
     private final Queue queue = new ArrayDeque();
     private boolean flag141;
 
@@ -36,7 +36,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m500();
     }
 
@@ -45,11 +45,11 @@ extends Module {
         if (this.flag141 || !this.m306(packetEventInner2.getPacket())) {
             return;
         }
-        packetEventInner2.m209();
-        if (!((Boolean)this.cancelPackets.getObj()).booleanValue()) {
+        packetEventInner2.cancel();
+        if (!((Boolean)this.cancelPackets.getValue()).booleanValue()) {
             this.queue.add(packetEventInner2.getPacket());
         }
-        if (((Boolean)this.autoPulse.getObj()).booleanValue() && this.queue.size() >= this.pulsePackets.getInt50()) {
+        if (((Boolean)this.autoPulse.getValue()).booleanValue() && this.queue.size() >= this.pulsePackets.getInt()) {
             this.m500();
         }
     }
@@ -64,7 +64,7 @@ extends Module {
         if (packet instanceof PlayerMoveC2SPacket) {
             return true;
         }
-        if ((Boolean)this.actions.getObj() == false) return false;
+        if ((Boolean)this.actions.getValue() == false) return false;
         if (packet instanceof PlayerActionC2SPacket) return true;
         if (packet instanceof PlayerInteractItemC2SPacket) return true;
         if (!(packet instanceof PlayerInteractBlockC2SPacket)) return false;
@@ -77,7 +77,7 @@ extends Module {
             block7: {
                 n = AutoArmor.getInt66();
                 if (n == 0) break block7;
-                if (MC.client3.player != null && MC.client3.player.networkHandler != null) break block8;
+                if (MC.mc.player != null && MC.mc.player.networkHandler != null) break block8;
                 this.queue.clear();
             }
             return;
@@ -85,7 +85,7 @@ extends Module {
         this.flag141 = true;
         try {
             while (!this.queue.isEmpty()) {
-                MC.client3.player.networkHandler.sendPacket((Packet)this.queue.poll());
+                MC.mc.player.networkHandler.sendPacket((Packet)this.queue.poll());
                 if (n != 0 && n != 0) continue;
                 break;
             }
@@ -97,7 +97,7 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         return Integer.toString(this.queue.size());
     }
 }

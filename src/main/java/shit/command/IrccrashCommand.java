@@ -21,11 +21,11 @@ extends Command {
         String[] stringArray = (String[])object;
         boolean bl = false;
         if (!ChatClient.isSet2()) {
-            CommandManager.setObj21("\u00a7cYou are not an IRC admin.");
+            CommandManager.sendFeedback("\u00a7cYou are not an IRC admin.");
             return;
         }
         if (stringArray.length == 0) {
-            CommandManager.setObj21("Usage: irccrash <ircname>");
+            CommandManager.sendFeedback("Usage: irccrash <ircname>");
             return;
         }
         ChatClient.send2(";crash " + stringArray[0]);

@@ -16,13 +16,13 @@ public class HudEditor
 extends Module {
     public HudEditor() {
         super("HudEditor", "Edits HUD element positions.", Category.CLIENT);
-        this.getColorSetting2().setObj94(-1);
+        this.getKeyBindSetting().setValueInternal(-1);
     }
 
     @Override
     public void onEnable() {
-        MC.client3.setScreen((Screen)new HudEditorScreen());
-        this.setFlag3(false);
+        MC.mc.setScreen((Screen)new HudEditorScreen());
+        this.setEnabled(false);
     }
 }
 

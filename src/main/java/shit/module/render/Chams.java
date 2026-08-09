@@ -26,20 +26,20 @@ import shit.util.MC;
 public class Chams
 extends Module {
     public static Chams INSTANCE;
-    public final BooleanSetting throughWall = (BooleanSetting)this.m28(new BooleanSetting("ThroughWall", true));
-    private final BooleanSetting cancelVanilla = (BooleanSetting)this.m28(new BooleanSetting("CancelVanilla", false));
-    private final NumberSetting modelAlpha = (NumberSetting)this.m28(new NumberSetting("ModelAlpha", 255.0, 0.0, 255.0, 1.0));
-    private final BooleanSetting players = (BooleanSetting)this.m28(new BooleanSetting("Players", true));
-    private final BooleanSetting mobs = (BooleanSetting)this.m28(new BooleanSetting("Mobs", true));
-    private final BooleanSetting animals = (BooleanSetting)this.m28(new BooleanSetting("Animals", true));
-    private final BooleanSetting slimes = (BooleanSetting)this.m28(new BooleanSetting("Slimes", true));
-    private final BooleanSetting filled = (BooleanSetting)this.m28(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.m28(new BooleanSetting("Outline", true));
-    private final NumberSetting lineWidth = (NumberSetting)this.m28(new NumberSetting("LineWidth", 1.5, 0.5, 8.0, 0.1));
-    public final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1426063361));
-    public final ColorSetting fillColor = (ColorSetting)this.m28(new ColorSetting("FillColor", 0x40FFFFFF));
-    public final ColorSetting outlineColor = (ColorSetting)this.m28(new ColorSetting("OutlineColor", -855638017));
-    public final ColorSetting hand = (ColorSetting)this.m28(new ColorSetting("Hand", -1));
+    public final BooleanSetting throughWall = (BooleanSetting)this.registerSetting(new BooleanSetting("ThroughWall", true));
+    private final BooleanSetting cancelVanilla = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelVanilla", false));
+    private final NumberSetting modelAlpha = (NumberSetting)this.registerSetting(new NumberSetting("ModelAlpha", 255.0, 0.0, 255.0, 1.0));
+    private final BooleanSetting players = (BooleanSetting)this.registerSetting(new BooleanSetting("Players", true));
+    private final BooleanSetting mobs = (BooleanSetting)this.registerSetting(new BooleanSetting("Mobs", true));
+    private final BooleanSetting animals = (BooleanSetting)this.registerSetting(new BooleanSetting("Animals", true));
+    private final BooleanSetting slimes = (BooleanSetting)this.registerSetting(new BooleanSetting("Slimes", true));
+    private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final NumberSetting lineWidth = (NumberSetting)this.registerSetting(new NumberSetting("LineWidth", 1.5, 0.5, 8.0, 0.1));
+    public final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1426063361));
+    public final ColorSetting fillColor = (ColorSetting)this.registerSetting(new ColorSetting("FillColor", 0x40FFFFFF));
+    public final ColorSetting outlineColor = (ColorSetting)this.registerSetting(new ColorSetting("OutlineColor", -855638017));
+    public final ColorSetting hand = (ColorSetting)this.registerSetting(new ColorSetting("Hand", -1));
     private final Map map49 = Collections.synchronizedMap(new WeakHashMap());
     private final Map map9 = Collections.synchronizedMap(new WeakHashMap());
 
@@ -55,27 +55,27 @@ extends Module {
     public boolean m720(Object object) {
         Entity entity = (Entity)object;
         Object var4_3 = null;
-        if (!this.isSet19()) return false;
-        if (Module.isSet37()) {
+        if (!this.isEnabled()) return false;
+        if (Module.isNotInGame()) {
             return false;
         }
         if (entity instanceof EndCrystalEntity) {
             return false;
         }
-        if (entity == MC.client3.player) {
+        if (entity == MC.mc.player) {
             return false;
         }
         if (entity instanceof SlimeEntity) {
-            return (Boolean)this.slimes.getObj();
+            return (Boolean)this.slimes.getValue();
         }
         if (entity instanceof PlayerEntity) {
-            return (Boolean)this.players.getObj();
+            return (Boolean)this.players.getValue();
         }
         if (entity instanceof AnimalEntity) {
-            return (Boolean)this.animals.getObj();
+            return (Boolean)this.animals.getValue();
         }
         if (!(entity instanceof MobEntity)) return false;
-        if ((Boolean)this.mobs.getObj() == false) return false;
+        if ((Boolean)this.mobs.getValue() == false) return false;
         return true;
     }
 
@@ -96,7 +96,7 @@ extends Module {
                     return;
                 }
                 if (!this.m720(entity)) break block6;
-                this.map49.put(livingEntityRenderState, (Integer)this.color.getObj());
+                this.map49.put(livingEntityRenderState, (Integer)this.color.getValue());
                 if (null == null) break block7;
             }
             this.map49.remove(livingEntityRenderState);
@@ -140,8 +140,8 @@ extends Module {
      */
     public boolean isSet15() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.filled.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.filled.getValue() == false) return false;
         return true;
     }
 
@@ -151,8 +151,8 @@ extends Module {
      */
     public boolean isSet96() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.outline.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.outline.getValue() == false) return false;
         return true;
     }
 
@@ -162,25 +162,25 @@ extends Module {
      */
     public boolean isSet171() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.cancelVanilla.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.cancelVanilla.getValue() == false) return false;
         return true;
     }
 
     public int getInt4() {
-        return this.modelAlpha.getInt50() << 24 | 0xFFFFFF;
+        return this.modelAlpha.getInt() << 24 | 0xFFFFFF;
     }
 
     public int getInt30() {
-        return (Integer)this.fillColor.getObj();
+        return (Integer)this.fillColor.getValue();
     }
 
     public int getInt83() {
-        return (Integer)this.outlineColor.getObj();
+        return (Integer)this.outlineColor.getValue();
     }
 
     public float getFloat60() {
-        return this.lineWidth.getFloat35();
+        return this.lineWidth.getFloat();
     }
 
     /*
@@ -189,14 +189,14 @@ extends Module {
      */
     public boolean isSet155() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if (Module.isSet37()) return false;
-        if ((Integer)this.hand.getObj() == -1) return false;
+        if (!this.isEnabled()) return false;
+        if (Module.isNotInGame()) return false;
+        if ((Integer)this.hand.getValue() == -1) return false;
         return true;
     }
 
     public int getInt11() {
-        return (Integer)this.hand.getObj();
+        return (Integer)this.hand.getValue();
     }
 }
 

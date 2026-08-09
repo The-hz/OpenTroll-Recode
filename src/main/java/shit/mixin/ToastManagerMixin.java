@@ -18,7 +18,7 @@ import shit.module.render.NoRender;
 public class ToastManagerMixin {
     @Inject(method={"add(Lnet/minecraft/client/toast/Toast;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noToast(Toast toast, CallbackInfo callbackInfo) {
-        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.guiToast.getObj()).booleanValue()) {
+        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.guiToast.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }

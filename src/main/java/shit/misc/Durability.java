@@ -17,9 +17,9 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Durability
 extends AbstractHudModule {
-    private final BooleanSetting booleanSetting5 = (BooleanSetting)this.m28(new BooleanSetting("ShowItemName", true));
-    private final BooleanSetting booleanSetting4 = (BooleanSetting)this.m28(new BooleanSetting("ShowOffhand", false));
-    private final BooleanSetting booleanSetting = (BooleanSetting)this.m28(new BooleanSetting("Percentage", true));
+    private final BooleanSetting booleanSetting5 = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowItemName", true));
+    private final BooleanSetting booleanSetting4 = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowOffhand", false));
+    private final BooleanSetting booleanSetting = (BooleanSetting)this.registerSetting(new BooleanSetting("Percentage", true));
 
     public Durability() {
         super("Durability", "Shows held item durability.", 6, 222);
@@ -33,15 +33,15 @@ extends AbstractHudModule {
             ArrayList arrayList;
             block5: {
                 boolean bl2 = AbstractHudModule.isSet32();
-                if (MC.client3.player == null) {
+                if (MC.mc.player == null) {
                     return List.of("Durability N/A");
                 }
                 arrayList = new ArrayList();
-                this.m371(arrayList, "MainHand", MC.client3.player.getStackInHand(Hand.MAIN_HAND));
-                bl = (Boolean)this.booleanSetting4.getObj();
+                this.m371(arrayList, "MainHand", MC.mc.player.getStackInHand(Hand.MAIN_HAND));
+                bl = (Boolean)this.booleanSetting4.getValue();
                 if (bl2) break block5;
                 if (bl) {
-                    this.m371(arrayList, "OffHand", MC.client3.player.getStackInHand(Hand.OFF_HAND));
+                    this.m371(arrayList, "OffHand", MC.mc.player.getStackInHand(Hand.OFF_HAND));
                 }
                 list = arrayList;
                 if (bl2) break block6;
@@ -68,8 +68,8 @@ extends AbstractHudModule {
             return;
         }
         int n = itemStack.getMaxDamage() - itemStack.getDamage();
-        String string2 = (Boolean)this.booleanSetting.getObj() != false ? String.format(Locale.ROOT, "%.1f%%", Float.valueOf((float)n * 100.0f / (float)itemStack.getMaxDamage())) : n + "/" + itemStack.getMaxDamage();
-        String string3 = (Boolean)this.booleanSetting5.getObj() != false ? itemStack.getName().getString() + " " : "";
+        String string2 = (Boolean)this.booleanSetting.getValue() != false ? String.format(Locale.ROOT, "%.1f%%", Float.valueOf((float)n * 100.0f / (float)itemStack.getMaxDamage())) : n + "/" + itemStack.getMaxDamage();
+        String string3 = (Boolean)this.booleanSetting5.getValue() != false ? itemStack.getName().getString() + " " : "";
         list.add(string + " " + string3 + string2);
     }
 }

@@ -469,7 +469,7 @@ extends ModuleState {
                 bl = this.m120(d4, d3, renderUtil.count108, renderUtil.count103, renderUtil.count141, renderUtil.count119);
             }
             if (bl) {
-                return renderUtil.getModule2().getText32();
+                return renderUtil.getModule2().getDisplayDescription();
             }
             if (n != 0) continue;
         }
@@ -591,10 +591,10 @@ extends ModuleState {
                     bl = string2.isEmpty();
                     if (n == 0) continue;
                     if (bl) break block4;
-                    bl = this.m97(renderUtil.getModule2().getText69()).contains(string);
+                    bl = this.m97(renderUtil.getModule2().getName()).contains(string);
                     if (n == 0) continue;
                     if (bl) break block4;
-                    bl = this.m97(renderUtil.getModule2().getText43()).contains(string);
+                    bl = this.m97(renderUtil.getModule2().getDisplayName()).contains(string);
                     if (n == 0) continue;
                     if (!bl) break block5;
                 }

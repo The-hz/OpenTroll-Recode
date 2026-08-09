@@ -410,7 +410,7 @@ implements Listener {
         GpuBufferSlice dynamicTransforms = RenderUtil4.getGpuBufferSlice2();
         GpuBuffer indexBuffer = RenderUtil4.m577(indexCount);
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Lumin TTF Draws", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
-            renderPass.setPipeline(((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj()).booleanValue() ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18);
+            renderPass.setPipeline(((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue()).booleanValue() ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18);
             if (this.flag12) {
                 Util.m268(renderPass, this.count48, this.count90, this.count214, this.count236);
             }

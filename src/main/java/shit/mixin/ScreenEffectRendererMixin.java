@@ -22,21 +22,21 @@ import shit.module.render.NoRender;
 public class ScreenEffectRendererMixin {
     @Inject(method={"renderFireOverlay(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/texture/Sprite;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private static void trollhack$noFireOverlay(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, Sprite sprite, CallbackInfo callbackInfo) {
-        if (AntiOverlay.isSet175() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.fireOverlay.getObj()).booleanValue()) {
+        if (AntiOverlay.isSet175() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.fireOverlay.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }
 
     @Inject(method={"renderUnderwaterOverlay(Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private static void trollhack$noWaterOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, CallbackInfo callbackInfo) {
-        if (AntiOverlay.isSet147() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.waterOverlay.getObj()).booleanValue()) {
+        if (AntiOverlay.isSet147() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.waterOverlay.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }
 
     @Inject(method={"renderInWallOverlay(Lnet/minecraft/client/texture/Sprite;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private static void trollhack$noBlockOverlay(Sprite sprite, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, CallbackInfo callbackInfo) {
-        if (AntiOverlay.isSet28() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.blockOverlay.getObj()).booleanValue()) {
+        if (AntiOverlay.isSet28() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.blockOverlay.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }

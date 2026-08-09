@@ -23,7 +23,7 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class LoginMessage
 extends Module {
-    private final BooleanSetting afterMoving = (BooleanSetting)this.m28(new BooleanSetting("AfterMoving", false));
+    private final BooleanSetting afterMoving = (BooleanSetting)this.registerSetting(new BooleanSetting("AfterMoving", false));
     private static final File file3 = null;
     private final List<String> list12 = new ArrayList<>();
     private boolean flag97;
@@ -41,7 +41,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.list12.clear();
     }
 
@@ -53,21 +53,21 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner29(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || this.flag97) {
+        if (Module.isNotInGame() || this.flag97) {
             return;
         }
         if (MathUtil.isSet7()) {
             this.flag17 = true;
         }
-        if (((Boolean)this.afterMoving.getObj()).booleanValue() && !this.flag17) {
+        if (((Boolean)this.afterMoving.getValue()).booleanValue() && !this.flag17) {
             return;
         }
         for (String string : this.list12) {
             if (string.startsWith("/")) {
-                Util2.setObj14(string.substring(1));
+                Util2.sendChatCommand(string.substring(1));
                 continue;
             }
-            Util2.setObj62(string);
+            Util2.sendChatMessage(string);
         }
         this.flag97 = true;
     }
@@ -81,7 +81,7 @@ extends Module {
             if (nArray2 != null) {
                 if (!file.exists()) {
                     file3.createNewFile();
-                    Util2.setObj10("[LoginMessage] Created loginmsg.txt. Add messages before enabling again.");
+                    Util2.sendClientMessage("[LoginMessage] Created loginmsg.txt. Add messages before enabling again.");
                     return;
                 }
                 file = file3;
@@ -99,7 +99,7 @@ extends Module {
             }
         }
         catch (IOException iOException) {
-            Util2.setObj10("[LoginMessage] Failed to load loginmsg.txt: " + iOException.getMessage());
+            Util2.sendClientMessage("[LoginMessage] Failed to load loginmsg.txt: " + iOException.getMessage());
         }
     }
 

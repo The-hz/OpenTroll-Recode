@@ -21,14 +21,14 @@ extends Setting {
     }
 
     @Override
-    public String getText29() {
-        return (String)this.getObj();
+    public String getValueString() {
+        return (String)this.getValue();
     }
 
     @Override
-    public void setObj58(Object object) {
+    public void setValueFromString(Object object) {
         String string = (String)object;
-        this.setObj94(string);
+        this.setValueInternal(string);
     }
 }
 

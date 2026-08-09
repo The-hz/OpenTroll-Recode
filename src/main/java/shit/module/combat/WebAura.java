@@ -34,21 +34,21 @@ import shit.util.MC;
 public class WebAura
 extends Module {
     public static WebAura INSTANCE;
-    private final NumberSetting placeDelay = (NumberSetting)this.m28(new NumberSetting("PlaceDelay", 50.0, 0.0, 500.0, 1.0));
-    private final NumberSetting blocksPer = (NumberSetting)this.m28(new NumberSetting("BlocksPer", 2.0, 1.0, 10.0, 1.0));
-    private final NumberSetting predictTicks = (NumberSetting)this.m28(new NumberSetting("PredictTicks", 2.0, 0.0, 50.0, 1.0));
-    private final NumberSetting maxWebs = (NumberSetting)this.m28(new NumberSetting("MaxWebs", 2.0, 1.0, 8.0, 1.0));
-    private final NumberSetting offset = (NumberSetting)this.m28(new NumberSetting("Offset", 0.25, 0.0, 0.3, 0.01));
-    private final NumberSetting placeRange = (NumberSetting)this.m28(new NumberSetting("PlaceRange", 5.0, 0.5, 6.0, 0.1));
-    private final NumberSetting targetRange = (NumberSetting)this.m28(new NumberSetting("TargetRange", 8.0, 0.5, 8.0, 0.1));
-    private final BooleanSetting feet = (BooleanSetting)this.m28(new BooleanSetting("Feet", true));
-    private final BooleanSetting feetExtend = (BooleanSetting)this.m28(new BooleanSetting("FeetExtend", true));
-    private final BooleanSetting face = (BooleanSetting)this.m28(new BooleanSetting("Face", true));
-    private final BooleanSetting down = (BooleanSetting)this.m28(new BooleanSetting("Down", true));
-    private final BooleanSetting usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", true));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
-    private final EnumSetting timing = (EnumSetting)this.m28(new EnumSetting("Timing", TimingMode.ALL));
+    private final NumberSetting placeDelay = (NumberSetting)this.registerSetting(new NumberSetting("PlaceDelay", 50.0, 0.0, 500.0, 1.0));
+    private final NumberSetting blocksPer = (NumberSetting)this.registerSetting(new NumberSetting("BlocksPer", 2.0, 1.0, 10.0, 1.0));
+    private final NumberSetting predictTicks = (NumberSetting)this.registerSetting(new NumberSetting("PredictTicks", 2.0, 0.0, 50.0, 1.0));
+    private final NumberSetting maxWebs = (NumberSetting)this.registerSetting(new NumberSetting("MaxWebs", 2.0, 1.0, 8.0, 1.0));
+    private final NumberSetting offset = (NumberSetting)this.registerSetting(new NumberSetting("Offset", 0.25, 0.0, 0.3, 0.01));
+    private final NumberSetting placeRange = (NumberSetting)this.registerSetting(new NumberSetting("PlaceRange", 5.0, 0.5, 6.0, 0.1));
+    private final NumberSetting targetRange = (NumberSetting)this.registerSetting(new NumberSetting("TargetRange", 8.0, 0.5, 8.0, 0.1));
+    private final BooleanSetting feet = (BooleanSetting)this.registerSetting(new BooleanSetting("Feet", true));
+    private final BooleanSetting feetExtend = (BooleanSetting)this.registerSetting(new BooleanSetting("FeetExtend", true));
+    private final BooleanSetting face = (BooleanSetting)this.registerSetting(new BooleanSetting("Face", true));
+    private final BooleanSetting down = (BooleanSetting)this.registerSetting(new BooleanSetting("Down", true));
+    private final BooleanSetting usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", true));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+    private final EnumSetting timing = (EnumSetting)this.registerSetting(new EnumSetting("Timing", TimingMode.ALL));
     private final Helper7 helper734 = new Helper7();
     private final List list36 = new ArrayList();
     private int count183;
@@ -66,7 +66,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner14(Event2.Event2Inner event2Inner) {
-        if (this.timing.getObj() == TimingMode.POST) {
+        if (this.timing.getValue() == TimingMode.POST) {
             return;
         }
         this.m876();
@@ -74,7 +74,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner229(Event2.Event2Inner2 event2Inner2) {
-        if (this.timing.getObj() == TimingMode.PRE) {
+        if (this.timing.getValue() == TimingMode.PRE) {
             return;
         }
         this.m876();
@@ -82,15 +82,15 @@ extends Module {
 
     private void m876() {
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.usingPause.getObj()).booleanValue()) {
-            if (MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.usingPause.getValue()).booleanValue()) {
+            if (MC.mc.player.isUsingItem()) {
                 return;
             }
         }
-        if (!this.helper734.m432((Double)this.placeDelay.getObj())) {
+        if (!this.helper734.hasPassedMs((Double)this.placeDelay.getValue())) {
             return;
         }
         if (this.getInt67() == -1) {
@@ -98,22 +98,22 @@ extends Module {
         }
         this.list36.clear();
         this.count183 = 0;
-        double cfr_ignored_0 = (Double)this.targetRange.getObj() * (Double)this.targetRange.getObj();
-        block0: for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
+        double cfr_ignored_0 = (Double)this.targetRange.getValue() * (Double)this.targetRange.getValue();
+        block0: for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
             Object object;
             float f;
             int n;
             int n2;
             float[] fArray;
-            if (playerEntity == MC.client3.player) continue;
+            if (playerEntity == MC.mc.player) continue;
             if (!playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.m258(playerEntity.getName().getString())) continue;
-            Vec3d vec3d = (Double)this.predictTicks.getObj() > 0.0 ? playerEntity.getEntityPos().add(playerEntity.getVelocity().multiply(((Double)this.predictTicks.getObj()).doubleValue())) : playerEntity.getEntityPos();
+            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString())) continue;
+            Vec3d vec3d = (Double)this.predictTicks.getValue() > 0.0 ? playerEntity.getEntityPos().add(playerEntity.getVelocity().multiply(((Double)this.predictTicks.getValue()).doubleValue())) : playerEntity.getEntityPos();
             double d = vec3d.x;
             double d2 = vec3d.y;
             double d3 = vec3d.z;
             int n3 = 0;
-            float f2 = this.offset.getFloat35();
+            float f2 = this.offset.getFloat();
             for (float f3 : new float[]{0.0f, f2, -f2}) {
                 fArray = new float[]{0.0f, f2, -f2};
                 n2 = fArray.length;
@@ -124,7 +124,7 @@ extends Module {
                     for (int i = 0; i < n4; ++i) {
                         float f4 = ((float[])object)[i];
                         BlockPos blockPos = BlockPos.ofFloored((double)(d + (double)f3), (double)(d2 + (double)f4), (double)(d3 + (double)f));
-                        if (!this.m654(blockPos, playerEntity) || !MC.client3.world.getBlockState(blockPos).isOf(Blocks.COBWEB)) continue;
+                        if (!this.m654(blockPos, playerEntity) || !MC.mc.world.getBlockState(blockPos).isOf(Blocks.COBWEB)) continue;
                         ++n3;
                         if (null == null) continue;
                     }
@@ -133,16 +133,16 @@ extends Module {
                 if (null == null) continue;
                 break;
             }
-            if (((Boolean)this.feet.getObj()).booleanValue()) {
+            if (((Boolean)this.feet.getValue()).booleanValue()) {
                 if (this.m753(BlockPos.ofFloored((double)d, (double)d2, (double)d3), playerEntity)) {
                     ++n3;
                 }
             }
-            if (((Boolean)this.down.getObj()).booleanValue()) {
+            if (((Boolean)this.down.getValue()).booleanValue()) {
                 this.m753(BlockPos.ofFloored((double)d, (double)(d2 - 0.8), (double)d3), playerEntity);
             }
-            if (n3 < this.maxWebs.getInt50()) {
-                if (((Boolean)this.feetExtend.getObj()).booleanValue()) {
+            if (n3 < this.maxWebs.getInt()) {
+                if (((Boolean)this.feetExtend.getValue()).booleanValue()) {
                     for (float f3 : new float[]{0.0f, f2, -f2}) {
                         fArray = new float[]{0.0f, f2, -f2};
                         n2 = fArray.length;
@@ -152,14 +152,14 @@ extends Module {
                             object = BlockPos.ofFloored((double)(d + (double)f3), (double)d2, (double)(d3 + (double)f));
                             if (!this.m654(object, playerEntity)) continue;
                             if (!this.m753(object, playerEntity)) continue;
-                            if (++n3 >= this.maxWebs.getInt50()) continue block0;
+                            if (++n3 >= this.maxWebs.getInt()) continue block0;
                             if (null == null) continue;
                         }
                         if (null == null) continue;
                         break;
                     }
                 }
-                if (((Boolean)this.face.getObj()).booleanValue()) {
+                if (((Boolean)this.face.getValue()).booleanValue()) {
                     for (float f3 : new float[]{0.0f, f2, -f2}) {
                         fArray = new float[]{0.0f, f2, -f2};
                         n2 = fArray.length;
@@ -168,7 +168,7 @@ extends Module {
                             object = BlockPos.ofFloored((double)(d + (double)f3), (double)(d2 + 1.1), (double)(d3 + (double)f));
                             if (!this.m654(object, playerEntity)) continue;
                             if (!this.m753(object, playerEntity)) continue;
-                            if (++n3 >= this.maxWebs.getInt50()) continue block0;
+                            if (++n3 >= this.maxWebs.getInt()) continue block0;
                             if (null == null) continue;
                         }
                         if (null == null) continue;
@@ -189,7 +189,7 @@ extends Module {
                 return false;
             }
             this.list36.add(blockPos);
-            if (this.count183 >= this.blocksPer.getInt50()) {
+            if (this.count183 >= this.blocksPer.getInt()) {
                 return false;
             }
             if (!BlockUtil.m57(blockPos)) {
@@ -198,13 +198,13 @@ extends Module {
             if (!this.m654(blockPos, playerEntity)) {
                 return false;
             }
-            if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.placeRange.getObj() + 1.5) {
+            if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.placeRange.getValue() + 1.5) {
                 return false;
             }
-            bl = BlockUtil.m1051(blockPos, (java.util.function.Predicate<ItemStack>)this::m836, (Object)this.getRotateMode(), this.getFloat26(), (Object)this.getSwitchMode9(), (Double)this.placeRange.getObj());
+            bl = BlockUtil.m1051(blockPos, (java.util.function.Predicate<ItemStack>)this::m836, (Object)this.getRotateMode(), this.getFloat26(), (Object)this.getSwitchMode9(), (Double)this.placeRange.getValue());
             if (!bl) break block5;
             ++this.count183;
-            this.helper734.m533();
+            this.helper734.resetTimer();
         }
         return bl;
     }
@@ -233,11 +233,11 @@ extends Module {
         int n;
         Object var2_2 = null;
         for (n = 0; n < 9; ++n) {
-            if (!this.m836(MC.client3.player.getInventory().getStack(n))) continue;
+            if (!this.m836(MC.mc.player.getInventory().getStack(n))) continue;
             return n;
         }
         for (n = 9; n < 36; ++n) {
-            if (!this.m836(MC.client3.player.getInventory().getStack(n))) continue;
+            if (!this.m836(MC.mc.player.getInventory().getStack(n))) continue;
             return n;
         }
         return -1;
@@ -245,10 +245,10 @@ extends Module {
 
     private ClientSetting.RotateMode getRotateMode() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.ONTICK;
+        if (this.rotateMode.getValue() == RotateMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.ONTICK;
         }
-        return switch (((RotateMode)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((RotateMode)((Object)this.rotateMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
             case 2 -> ClientSetting.RotateMode.SMOOTH;
             case 3 -> ClientSetting.RotateMode.ONTICK;
@@ -259,15 +259,15 @@ extends Module {
 
     private float getFloat26() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f;
+        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f;
     }
 
     private ClientSetting.SwitchMode getSwitchMode9() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.SILENT;
+        if (this.switchMode.getValue() == SwitchMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.SILENT;
         }
-        return switch (((SwitchMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((SwitchMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

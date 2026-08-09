@@ -29,11 +29,11 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class BreakWarning
 extends Module {
-    private final BooleanSetting ignoreFriends = (BooleanSetting)this.m28(new BooleanSetting("IgnoreFriends", true));
-    private final EnumSetting burrow = (EnumSetting)this.m28(new EnumSetting("Burrow", BurrowMode.ANY));
-    private final EnumSetting surround = (EnumSetting)this.m28(new EnumSetting("Surround", BurrowMode.ANY));
-    private final EnumSetting nearby = (EnumSetting)this.m28(new EnumSetting("Nearby", BurrowMode.OFF));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 8.0, 1.0, 16.0, 1.0));
+    private final BooleanSetting ignoreFriends = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnoreFriends", true));
+    private final EnumSetting burrow = (EnumSetting)this.registerSetting(new EnumSetting("Burrow", BurrowMode.ANY));
+    private final EnumSetting surround = (EnumSetting)this.registerSetting(new EnumSetting("Surround", BurrowMode.ANY));
+    private final EnumSetting nearby = (EnumSetting)this.registerSetting(new EnumSetting("Nearby", BurrowMode.OFF));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 8.0, 1.0, 16.0, 1.0));
     private final Map map3 = new HashMap();
 
     public BreakWarning() {
@@ -44,31 +44,31 @@ extends Module {
     private void setPacketEventInner34(PacketEvent.PacketEventInner packetEventInner) {
         PlayerEntity playerEntity;
         Packet packet;
-        if (Module.isSet37() || !((packet = packetEventInner.getPacket()) instanceof BlockBreakingProgressS2CPacket)) {
+        if (Module.isNotInGame() || !((packet = packetEventInner.getPacket()) instanceof BlockBreakingProgressS2CPacket)) {
             return;
         }
         BlockBreakingProgressS2CPacket blockBreakingProgressS2CPacket = (BlockBreakingProgressS2CPacket)packet;
         if (blockBreakingProgressS2CPacket.getProgress() < 0) {
             return;
         }
-        net.minecraft.entity.Entity entity = MC.client3.world.getEntityById(blockBreakingProgressS2CPacket.getEntityId());
-        if (!(entity instanceof PlayerEntity) || (playerEntity = (PlayerEntity)entity) == MC.client3.player) {
+        net.minecraft.entity.Entity entity = MC.mc.world.getEntityById(blockBreakingProgressS2CPacket.getEntityId());
+        if (!(entity instanceof PlayerEntity) || (playerEntity = (PlayerEntity)entity) == MC.mc.player) {
             return;
         }
-        if (((Boolean)this.ignoreFriends.getObj()).booleanValue() && Client.manager.m258(playerEntity.getName().getString())) {
+        if (((Boolean)this.ignoreFriends.getValue()).booleanValue() && Client.manager.isFriend(playerEntity.getName().getString())) {
             return;
         }
         BlockPos blockPos = blockBreakingProgressS2CPacket.getPos();
-        Block block = MC.client3.world.getBlockState(blockPos).getBlock();
-        if (((BurrowMode)((Object)this.burrow.getObj())).m880(block) && blockPos.equals((Object)MC.client3.player.getBlockPos())) {
+        Block block = MC.mc.world.getBlockState(blockPos).getBlock();
+        if (((BurrowMode)((Object)this.burrow.getValue())).m880(block) && blockPos.equals((Object)MC.mc.player.getBlockPos())) {
             this.m661("burrow", playerEntity, "is breaking your burrow");
             return;
         }
-        if (((BurrowMode)((Object)this.surround.getObj())).m880(block) && this.m1004(blockPos)) {
+        if (((BurrowMode)((Object)this.surround.getValue())).m880(block) && this.m1004(blockPos)) {
             this.m661("surround:" + blockPos.asLong(), playerEntity, "is breaking your surround");
             return;
         }
-        if (((BurrowMode)((Object)this.nearby.getObj())).m880(block) && MC.client3.player.getBlockPos().getSquaredDistance((Vec3i)blockPos) <= (Double)this.range.getObj() * (Double)this.range.getObj()) {
+        if (((BurrowMode)((Object)this.nearby.getValue())).m880(block) && MC.mc.player.getBlockPos().getSquaredDistance((Vec3i)blockPos) <= (Double)this.range.getValue() * (Double)this.range.getValue()) {
             this.m661("nearby:" + blockPos.asLong(), playerEntity, "is breaking blocks nearby");
         }
     }
@@ -79,7 +79,7 @@ extends Module {
      */
     private boolean m1004(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockPos blockPos2 = MC.client3.player.getBlockPos();
+        BlockPos blockPos2 = MC.mc.player.getBlockPos();
         String string = IRC.getText7();
         int n = blockPos.getY();
         int n2 = blockPos2.getY();
@@ -105,7 +105,7 @@ extends Module {
                 return;
             }
             this.map3.put(string3, l);
-            CommandManager.setObj21(playerEntity.getName().getString() + " " + string2 + ".");
+            CommandManager.sendFeedback(playerEntity.getName().getString() + " " + string2 + ".");
         }
     }
 

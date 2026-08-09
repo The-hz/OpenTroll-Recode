@@ -23,7 +23,7 @@ import shit.module.render.NoRender;
 public class AtmosphericFogEnvironmentMixin {
     @Inject(method={"applyStartEndModifier(Lnet/minecraft/client/render/fog/FogData;Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/world/ClientWorld;FLnet/minecraft/client/render/RenderTickCounter;)V"}, at={@At(value="TAIL")})
     private void trollhack$noFog(FogData fogData, Camera camera, ClientWorld clientWorld, float f, RenderTickCounter renderTickCounter, CallbackInfo callbackInfo) {
-        if (AntiFog.isSet25() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.fog.getObj()).booleanValue()) {
+        if (AntiFog.isSet25() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.fog.getValue()).booleanValue()) {
             float f2;
             fogData.environmentalStart = f2 = 1.0E9f;
             fogData.environmentalEnd = f2;
@@ -34,9 +34,9 @@ public class AtmosphericFogEnvironmentMixin {
             return;
         }
         Ambience ambience = Ambience.INSTANCE;
-        if (ambience != null && ambience.isSet19() && ((Boolean)ambience.fogDistance.getObj()).booleanValue()) {
-            fogData.environmentalStart = ambience.fogStart.getFloat35();
-            fogData.environmentalEnd = ambience.fogEnd.getFloat35();
+        if (ambience != null && ambience.isEnabled() && ((Boolean)ambience.fogDistance.getValue()).booleanValue()) {
+            fogData.environmentalStart = ambience.fogStart.getFloat();
+            fogData.environmentalEnd = ambience.fogEnd.getFloat();
         }
     }
 }

@@ -41,36 +41,36 @@ import shit.util.MC;
 public class AutoTrap
 extends Module {
     public static AutoTrap INSTANCE;
-    public final EnumSetting targetMode = (EnumSetting)this.m28(new EnumSetting("TargetMode", TargetMode.Single));
-    private final EnumSetting blockForHead = (EnumSetting)this.m28(new EnumSetting("BlockForHead", BlockForHeadMode.Anchor));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 100.0, 0.0, 500.0, 1.0));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 5.0, 1.0, 8.0, 0.1));
-    private final NumberSetting placeRange = (NumberSetting)this.m28(new NumberSetting("PlaceRange", 4.0, 1.0, 6.0, 0.1));
-    private final NumberSetting blocksPer = (NumberSetting)this.m28(new NumberSetting("BlocksPer", 1.0, 1.0, 8.0, 1.0));
-    private final NumberSetting predictTicks = (NumberSetting)this.m28(new NumberSetting("PredictTicks", 2.0, 0.0, 50.0, 1.0));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", Surround.EMode2.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", Surround.EMode.DEFAULT));
-    private final BooleanSetting autoDisable = (BooleanSetting)this.m28(new BooleanSetting("AutoDisable", true));
-    private final BooleanSetting helper = (BooleanSetting)this.m28(new BooleanSetting("Helper", true));
-    private final BooleanSetting onlyCrawling = (BooleanSetting)this.m28(new BooleanSetting("OnlyCrawling", false));
-    private final BooleanSetting checkElytra = (BooleanSetting)this.m28(new BooleanSetting("CheckElytra", false));
-    private final BooleanSetting extend = (BooleanSetting)this.m28(new BooleanSetting("Extend", true));
-    private final BooleanSetting antiStep = (BooleanSetting)this.m28(new BooleanSetting("AntiStep", false));
-    private final BooleanSetting antiVClip = (BooleanSetting)this.m28(new BooleanSetting("AntiVClip", false));
-    private final NumberSetting vClipHeight = (NumberSetting)this.m28(new NumberSetting("VClipHeight", 5.0, 3.0, 10.0, 1.0));
-    private final BooleanSetting head = (BooleanSetting)this.m28(new BooleanSetting("Head", true));
-    private final BooleanSetting headExtend = (BooleanSetting)this.m28(new BooleanSetting("HeadExtend", true));
-    private final BooleanSetting chestUp = (BooleanSetting)this.m28(new BooleanSetting("ChestUp", true));
-    private final BooleanSetting chest = (BooleanSetting)this.m28(new BooleanSetting("Chest", true));
-    private final BooleanSetting onlyGround = (BooleanSetting)this.m28(new BooleanSetting("OnlyGround", false));
-    private final BooleanSetting ignoreCrawling = (BooleanSetting)this.m28(new BooleanSetting("IgnoreCrawling", false));
-    private final BooleanSetting legs = (BooleanSetting)this.m28(new BooleanSetting("Legs", false));
-    private final BooleanSetting legAnchor = (BooleanSetting)this.m28(new BooleanSetting("LegAnchor", true));
-    private final BooleanSetting down = (BooleanSetting)this.m28(new BooleanSetting("Down", false));
-    private final BooleanSetting onlyHole = (BooleanSetting)this.m28(new BooleanSetting("OnlyHole", false));
-    private final BooleanSetting skipBedrockHole = (BooleanSetting)this.m28(new BooleanSetting("SkipBedrockHole", true));
-    private final BooleanSetting usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", true));
-    private final BooleanSetting selfGround = (BooleanSetting)this.m28(new BooleanSetting("SelfGround", true));
+    public final EnumSetting targetMode = (EnumSetting)this.registerSetting(new EnumSetting("TargetMode", TargetMode.Single));
+    private final EnumSetting blockForHead = (EnumSetting)this.registerSetting(new EnumSetting("BlockForHead", BlockForHeadMode.Anchor));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 500.0, 1.0));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 5.0, 1.0, 8.0, 0.1));
+    private final NumberSetting placeRange = (NumberSetting)this.registerSetting(new NumberSetting("PlaceRange", 4.0, 1.0, 6.0, 0.1));
+    private final NumberSetting blocksPer = (NumberSetting)this.registerSetting(new NumberSetting("BlocksPer", 1.0, 1.0, 8.0, 1.0));
+    private final NumberSetting predictTicks = (NumberSetting)this.registerSetting(new NumberSetting("PredictTicks", 2.0, 0.0, 50.0, 1.0));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", Surround.EMode2.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", Surround.EMode.DEFAULT));
+    private final BooleanSetting autoDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoDisable", true));
+    private final BooleanSetting helper = (BooleanSetting)this.registerSetting(new BooleanSetting("Helper", true));
+    private final BooleanSetting onlyCrawling = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyCrawling", false));
+    private final BooleanSetting checkElytra = (BooleanSetting)this.registerSetting(new BooleanSetting("CheckElytra", false));
+    private final BooleanSetting extend = (BooleanSetting)this.registerSetting(new BooleanSetting("Extend", true));
+    private final BooleanSetting antiStep = (BooleanSetting)this.registerSetting(new BooleanSetting("AntiStep", false));
+    private final BooleanSetting antiVClip = (BooleanSetting)this.registerSetting(new BooleanSetting("AntiVClip", false));
+    private final NumberSetting vClipHeight = (NumberSetting)this.registerSetting(new NumberSetting("VClipHeight", 5.0, 3.0, 10.0, 1.0));
+    private final BooleanSetting head = (BooleanSetting)this.registerSetting(new BooleanSetting("Head", true));
+    private final BooleanSetting headExtend = (BooleanSetting)this.registerSetting(new BooleanSetting("HeadExtend", true));
+    private final BooleanSetting chestUp = (BooleanSetting)this.registerSetting(new BooleanSetting("ChestUp", true));
+    private final BooleanSetting chest = (BooleanSetting)this.registerSetting(new BooleanSetting("Chest", true));
+    private final BooleanSetting onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", false));
+    private final BooleanSetting ignoreCrawling = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnoreCrawling", false));
+    private final BooleanSetting legs = (BooleanSetting)this.registerSetting(new BooleanSetting("Legs", false));
+    private final BooleanSetting legAnchor = (BooleanSetting)this.registerSetting(new BooleanSetting("LegAnchor", true));
+    private final BooleanSetting down = (BooleanSetting)this.registerSetting(new BooleanSetting("Down", false));
+    private final BooleanSetting onlyHole = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyHole", false));
+    private final BooleanSetting skipBedrockHole = (BooleanSetting)this.registerSetting(new BooleanSetting("SkipBedrockHole", true));
+    private final BooleanSetting usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", true));
+    private final BooleanSetting selfGround = (BooleanSetting)this.registerSetting(new BooleanSetting("SelfGround", true));
     private final List list4 = new ArrayList();
     private final List list24 = new ArrayList();
     private long time43;
@@ -92,30 +92,30 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Client.renderUtil3.m608();
         this.player4 = null;
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
         return this.player4 != null ? this.player4.getName().getString() : null;
     }
 
     @EventHandler
     private void setEvent2Inner56(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.selfGround.getObj()).booleanValue() && !MC.client3.player.isOnGround()) {
+        if (((Boolean)this.selfGround.getValue()).booleanValue() && !MC.mc.player.isOnGround()) {
             return;
         }
-        if (((Boolean)this.usingPause.getObj()).booleanValue() && MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.usingPause.getValue()).booleanValue() && MC.mc.player.isUsingItem()) {
             return;
         }
-        if (System.currentTimeMillis() - this.time43 < (long)this.delay.getInt50()) {
+        if (System.currentTimeMillis() - this.time43 < (long)this.delay.getInt()) {
             return;
         }
         this.list4.clear();
@@ -124,8 +124,8 @@ extends Module {
         this.player4 = null;
         List list = this.getList4();
         if (list.isEmpty()) {
-            if (((Boolean)this.autoDisable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+            if (((Boolean)this.autoDisable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
             return;
         }
@@ -144,16 +144,16 @@ extends Module {
 
     private List getList4() {
         ArrayList<PlayerEntity> arrayList = new ArrayList<PlayerEntity>();
-        double d = (Double)this.range.getObj() * (Double)this.range.getObj();
-        Iterator iterator = MC.client3.world.getPlayers().iterator();
+        double d = (Double)this.range.getValue() * (Double)this.range.getValue();
+        Iterator iterator = MC.mc.world.getPlayers().iterator();
         Object var2_4 = null;
         while (iterator.hasNext()) {
             PlayerEntity playerEntity = (PlayerEntity)iterator.next();
-            if (playerEntity == MC.client3.player) continue;
+            if (playerEntity == MC.mc.player) continue;
             if (!playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.m258(playerEntity.getName().getString()) || MC.client3.player.squaredDistanceTo((Entity)playerEntity) > d) continue;
+            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d) continue;
             arrayList.add(playerEntity);
-            if (this.targetMode.getObj() != TargetMode.Single && null == null) continue;
+            if (this.targetMode.getValue() != TargetMode.Single && null == null) continue;
         }
         return arrayList;
     }
@@ -164,24 +164,24 @@ extends Module {
             block8: {
                 playerEntity = (PlayerEntity)object;
                 Object var4_3 = null;
-                if (((Boolean)this.onlyHole.getObj()).booleanValue()) {
+                if (((Boolean)this.onlyHole.getValue()).booleanValue()) {
                     if (!this.m394(playerEntity.getBlockPos())) {
                         return false;
                     }
                 }
-                if (((Boolean)this.skipBedrockHole.getObj()).booleanValue()) {
+                if (((Boolean)this.skipBedrockHole.getValue()).booleanValue()) {
                     if (this.m754(playerEntity.getBlockPos())) {
                         return false;
                     }
                 }
-                if (!((Boolean)this.onlyCrawling.getObj()).booleanValue()) break block7;
+                if (!((Boolean)this.onlyCrawling.getValue()).booleanValue()) break block7;
                 if (this.m180(playerEntity)) break block7;
-                if (!((Boolean)this.checkElytra.getObj()).booleanValue()) break block8;
+                if (!((Boolean)this.checkElytra.getValue()).booleanValue()) break block8;
                 if (playerEntity.isGliding()) break block7;
             }
             return false;
         }
-        Vec3d vec3d = (Double)this.predictTicks.getObj() > 0.0 ? playerEntity.getEntityPos().add(playerEntity.getVelocity().multiply(((Double)this.predictTicks.getObj()).doubleValue())) : playerEntity.getEntityPos();
+        Vec3d vec3d = (Double)this.predictTicks.getValue() > 0.0 ? playerEntity.getEntityPos().add(playerEntity.getVelocity().multiply(((Double)this.predictTicks.getValue()).doubleValue())) : playerEntity.getEntityPos();
         return this.m233(playerEntity, BlockPos.ofFloored((Position)vec3d));
     }
 
@@ -211,16 +211,16 @@ extends Module {
                     bl = false;
                     int n3 = this.m180(playerEntity) ? 1 : 2;
                     n = this.m180(playerEntity) ? 0 : 1;
-                    if (((Boolean)this.legs.getObj()).booleanValue()) {
+                    if (((Boolean)this.legs.getValue()).booleanValue()) {
                         Direction[] directions = this.getDirectionArray();
                         n2 = directions.length;
                         for (int i = 0; i < n2; ++i) {
                             Direction direction = directions[i];
                             blockPos3 = blockPos.offset(direction);
-                            if (this.tryPlaceBlock(blockPos3, (Boolean)this.legAnchor.getObj(), false, false)) {
+                            if (this.tryPlaceBlock(blockPos3, (Boolean)this.legAnchor.getValue(), false, false)) {
                                 bl = true;
                             }
-                            if (!((Boolean)this.helper.getObj()).booleanValue()) continue;
+                            if (!((Boolean)this.helper.getValue()).booleanValue()) continue;
                             if (BlockUtil.m573(blockPos3) != null) continue;
                             blockPos2 = this.m310(blockPos3);
                             if (blockPos2 == null) continue;
@@ -230,16 +230,16 @@ extends Module {
                             break;
                         }
                     }
-                    if (((Boolean)this.headExtend.getObj()).booleanValue()) {
+                    if (((Boolean)this.headExtend.getValue()).booleanValue()) {
                         for (int i = -1; i <= 1; ++i) {
                             for (n2 = -1; n2 <= 1; ++n2) {
                                 if (i == 0 && n2 == 0) continue;
                                 BlockPos blockPos5 = blockPos.add(i, 0, n2);
                                 if (!this.m363(blockPos5)) continue;
                                 BlockPos blockPos6 = blockPos5.up(n3);
-                                boolean bl2 = this.blockForHead.getObj() == BlockForHeadMode.Anchor;
-                                boolean bl3 = this.blockForHead.getObj() == BlockForHeadMode.Concrete;
-                                boolean bl4 = this.blockForHead.getObj() == BlockForHeadMode.Web;
+                                boolean bl2 = this.blockForHead.getValue() == BlockForHeadMode.Anchor;
+                                boolean bl3 = this.blockForHead.getValue() == BlockForHeadMode.Concrete;
+                                boolean bl4 = this.blockForHead.getValue() == BlockForHeadMode.Web;
                                 if (!this.tryPlaceBlock(blockPos6, bl2, bl3, bl4)) continue;
                                 bl = true;
                                 if (null == null) continue;
@@ -248,7 +248,7 @@ extends Module {
                             break;
                         }
                     }
-                    if (((Boolean)this.head.getObj()).booleanValue()) {
+                    if (((Boolean)this.head.getValue()).booleanValue()) {
                         blockPos4 = blockPos.up(n3);
                         if (BlockUtil.m573(blockPos4) == null) {
                             BlockPos blockPos7 = this.m310(blockPos4);
@@ -258,14 +258,14 @@ extends Module {
                                 }
                             }
                         }
-                        boolean bl5 = this.blockForHead.getObj() == BlockForHeadMode.Anchor;
-                        boolean bl6 = this.blockForHead.getObj() == BlockForHeadMode.Concrete;
-                        boolean bl7 = this.blockForHead.getObj() == BlockForHeadMode.Web;
+                        boolean bl5 = this.blockForHead.getValue() == BlockForHeadMode.Anchor;
+                        boolean bl6 = this.blockForHead.getValue() == BlockForHeadMode.Concrete;
+                        boolean bl7 = this.blockForHead.getValue() == BlockForHeadMode.Web;
                         if (this.tryPlaceBlock(blockPos4, bl5, bl6, bl7)) {
                             bl = true;
                         }
                     }
-                    if (((Boolean)this.antiStep.getObj()).booleanValue()) {
+                    if (((Boolean)this.antiStep.getValue()).booleanValue()) {
                         blockPos4 = blockPos.up(3);
                         if (BlockUtil.m573(blockPos4) == null) {
                             BlockPos blockPos8 = this.m310(blockPos4);
@@ -279,8 +279,8 @@ extends Module {
                             bl = true;
                         }
                     }
-                    if (((Boolean)this.antiVClip.getObj()).booleanValue()) {
-                        for (int i = n3 + 1; i <= this.vClipHeight.getInt50(); ++i) {
+                    if (((Boolean)this.antiVClip.getValue()).booleanValue()) {
+                        for (int i = n3 + 1; i <= this.vClipHeight.getInt(); ++i) {
                             BlockPos blockPos9 = blockPos.up(i);
                             if (!BlockUtil.m57(blockPos9)) break;
                             if (BlockUtil.m573(blockPos9) == null) {
@@ -297,7 +297,7 @@ extends Module {
                             break;
                         }
                     }
-                    if (((Boolean)this.down.getObj()).booleanValue()) {
+                    if (((Boolean)this.down.getValue()).booleanValue()) {
                         BlockPos blockPos11 = blockPos.down();
                         if (this.m867(blockPos11)) {
                             bl = true;
@@ -311,7 +311,7 @@ extends Module {
                             }
                         }
                     }
-                    if (((Boolean)this.chestUp.getObj()).booleanValue()) {
+                    if (((Boolean)this.chestUp.getValue()).booleanValue()) {
                         for (Direction direction : this.getDirectionArray()) {
                             blockPos3 = blockPos.offset(direction).up(n3);
                             if (this.m867(blockPos3)) {
@@ -326,11 +326,11 @@ extends Module {
                             break;
                         }
                     }
-                    if (!((Boolean)this.chest.getObj()).booleanValue()) break block43;
-                    if (!((Boolean)this.onlyGround.getObj()).booleanValue()) break block44;
+                    if (!((Boolean)this.chest.getValue()).booleanValue()) break block43;
+                    if (!((Boolean)this.onlyGround.getValue()).booleanValue()) break block44;
                     if (!playerEntity.isOnGround()) break block43;
                 }
-                if (!((Boolean)this.ignoreCrawling.getObj()).booleanValue()) break block45;
+                if (!((Boolean)this.ignoreCrawling.getValue()).booleanValue()) break block45;
                 if (this.m180(playerEntity)) break block43;
             }
             for (Direction direction : this.getDirectionArray()) {
@@ -347,8 +347,8 @@ extends Module {
                 break;
             }
         }
-        if (((Boolean)this.extend.getObj()).booleanValue()) {
-            if (this.count175 < this.blocksPer.getInt50()) {
+        if (((Boolean)this.extend.getValue()).booleanValue()) {
+            if (this.count175 < this.blocksPer.getInt()) {
                 for (int i = -1; i <= 1; ++i) {
                     for (int j = -1; j <= 1; ++j) {
                         if (i == 0 && j == 0) continue;
@@ -407,20 +407,20 @@ extends Module {
                 }
                 return false;
             }
-            if (this.count175 >= this.blocksPer.getInt50()) {
+            if (this.count175 >= this.blocksPer.getInt()) {
                 return false;
             }
             if (!BlockUtil.m57(blockPos)) {
                 return false;
             }
-            if (MC.client3.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.placeRange.getObj() + 1.5) {
+            if (MC.mc.player.getEyePos().distanceTo(Vec3d.ofCenter((Vec3i)blockPos)) > (Double)this.placeRange.getValue() + 1.5) {
                 return false;
             }
             Box box = new Box(blockPos);
-            if (MC.client3.player.getBoundingBox().intersects(box)) {
+            if (MC.mc.player.getBoundingBox().intersects(box)) {
                 return false;
             }
-            for (Entity entity : MC.client3.world.getOtherEntities(null, box)) {
+            for (Entity entity : MC.mc.world.getOtherEntities(null, box)) {
                 if (entity.isAlive()) {
                     if (!entity.isSpectator()) {
                         if (entity.intersectionChecked) {
@@ -431,7 +431,7 @@ extends Module {
                 if (null == null) continue;
             }
             this.list24.add(blockPos);
-            bl = BlockUtil.m1051(blockPos, predicate, (Object)this.getRotateMode3(), this.getFloat13(), (Object)this.getSwitchMode6(), (Double)this.placeRange.getObj());
+            bl = BlockUtil.m1051(blockPos, predicate, (Object)this.getRotateMode3(), this.getFloat13(), (Object)this.getSwitchMode6(), (Double)this.placeRange.getValue());
             if (!bl) break block13;
             ++this.count175;
         }
@@ -451,13 +451,13 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         Direction direction = (Direction)object2;
         Object var6_5 = null;
-        if (!((Boolean)this.helper.getObj()).booleanValue()) {
+        if (!((Boolean)this.helper.getValue()).booleanValue()) {
             return null;
         }
         for (Direction direction2 : Direction.values()) {
             if (direction2 == direction) continue;
             BlockPos blockPos2 = blockPos.offset(direction2);
-            if (!BlockUtil.m57(blockPos2) || MC.client3.player.getBoundingBox().intersects(new Box(blockPos2)) || BlockUtil.m573(blockPos2) == null) continue;
+            if (!BlockUtil.m57(blockPos2) || MC.mc.player.getBoundingBox().intersects(new Box(blockPos2)) || BlockUtil.m573(blockPos2) == null) continue;
             return blockPos2;
         }
         return null;
@@ -466,11 +466,11 @@ extends Module {
     private boolean m363(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.player.getBoundingBox().intersects(new Box(blockPos))) {
+        if (MC.mc.player.getBoundingBox().intersects(new Box(blockPos))) {
             return false;
         }
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
-            if (playerEntity != MC.client3.player) {
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
+            if (playerEntity != MC.mc.player) {
                 if (playerEntity.isAlive()) {
                     if (playerEntity.getBoundingBox().intersects(new Box(blockPos))) {
                         return true;
@@ -518,14 +518,14 @@ extends Module {
     private boolean m569(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.world.getBlockState(blockPos).isAir()) return false;
-        if (MC.client3.world.getBlockState(blockPos).isReplaceable()) return false;
+        if (MC.mc.world.getBlockState(blockPos).isAir()) return false;
+        if (MC.mc.world.getBlockState(blockPos).isReplaceable()) return false;
         return true;
     }
 
     private boolean m333(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        return MC.client3.world.getBlockState(blockPos).isOf(Blocks.BEDROCK);
+        return MC.mc.world.getBlockState(blockPos).isOf(Blocks.BEDROCK);
     }
 
     /*
@@ -543,8 +543,8 @@ extends Module {
     private boolean m43(Object object) {
         Block block = (Block)object;
         Object var4_4 = null;
-        for (int i = 0; i < MC.client3.player.getInventory().size(); ++i) {
-            ItemStack itemStack = MC.client3.player.getInventory().getStack(i);
+        for (int i = 0; i < MC.mc.player.getInventory().size(); ++i) {
+            ItemStack itemStack = MC.mc.player.getInventory().getStack(i);
             if (!this.m1005(itemStack, block)) continue;
             return true;
         }
@@ -583,10 +583,10 @@ extends Module {
 
     private ClientSetting.RotateMode getRotateMode3() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == Surround.EMode2.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+        if (this.rotateMode.getValue() == Surround.EMode2.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
-        return switch ((Surround.EMode2)((Object)this.rotateMode.getObj())) {
+        return switch ((Surround.EMode2)((Object)this.rotateMode.getValue())) {
             case Surround.EMode2.NONE -> ClientSetting.RotateMode.NONE;
             case Surround.EMode2.SMOOTH -> ClientSetting.RotateMode.SMOOTH;
             case Surround.EMode2.ONTICK -> ClientSetting.RotateMode.ONTICK;
@@ -597,10 +597,10 @@ extends Module {
 
     private ClientSetting.SwitchMode getSwitchMode6() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == Surround.EMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+        if (this.switchMode.getValue() == Surround.EMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
-        return switch ((Surround.EMode)((Object)this.switchMode.getObj())) {
+        return switch ((Surround.EMode)((Object)this.switchMode.getValue())) {
             case Surround.EMode.NONE -> ClientSetting.SwitchMode.NONE;
             case Surround.EMode.NORMAL -> ClientSetting.SwitchMode.NORMAL;
             case Surround.EMode.SILENT -> ClientSetting.SwitchMode.SILENT;
@@ -611,7 +611,7 @@ extends Module {
 
     private float getFloat13() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f;
+        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f;
     }
 
     @Environment(value=EnvType.CLIENT)

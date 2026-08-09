@@ -47,11 +47,11 @@ public class FakePlayer
 extends Module {
     public static FakePlayer INSTANCE;
     public static PlayerUtil playerUtil;
-    private final StringSetting name = (StringSetting)this.m28(new StringSetting("Name", "FakePlayer"));
-    private final BooleanSetting damage = (BooleanSetting)this.m28(new BooleanSetting("Damage", true));
-    private final BooleanSetting autoTotem = (BooleanSetting)this.m28(new BooleanSetting("AutoTotem", true));
-    private final BooleanSetting record_ = (BooleanSetting)this.m28(new BooleanSetting("Record", false));
-    private final BooleanSetting play = (BooleanSetting)this.m28(new BooleanSetting("Play", false));
+    private final StringSetting name = (StringSetting)this.registerSetting(new StringSetting("Name", "FakePlayer"));
+    private final BooleanSetting damage = (BooleanSetting)this.registerSetting(new BooleanSetting("Damage", true));
+    private final BooleanSetting autoTotem = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoTotem", true));
+    private final BooleanSetting record_ = (BooleanSetting)this.registerSetting(new BooleanSetting("Record", false));
+    private final BooleanSetting play = (BooleanSetting)this.registerSetting(new BooleanSetting("Play", false));
     private final List list = new ArrayList();
     private int count147;
     private boolean flag160 = false;
@@ -68,22 +68,22 @@ extends Module {
         super.onEnable();
         String string2 = string;
         if (string2 != null) {
-            if (Module.isSet37()) {
-                this.setFlag3(false);
+            if (Module.isNotInGame()) {
+                this.setEnabled(false);
                 return;
             }
-            playerUtil = new PlayerUtil((PlayerEntity)MC.client3.player, (String)this.name.getObj());
-            MC.client3.world.addEntity((Entity)playerUtil);
+            playerUtil = new PlayerUtil((PlayerEntity)MC.mc.player, (String)this.name.getValue());
+            MC.mc.world.addEntity((Entity)playerUtil);
         }
     }
 
     @EventHandler
     private void setEvent2Inner11(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (playerUtil != null && playerUtil.getEntityWorld() == MC.client3.world) {
-            if (((Boolean)this.autoTotem.getObj()).booleanValue()) {
+        if (playerUtil != null && playerUtil.getEntityWorld() == MC.mc.world) {
+            if (((Boolean)this.autoTotem.getValue()).booleanValue()) {
                 if (playerUtil.getOffHandStack().getItem() != Items.TOTEM_OF_UNDYING) {
                     playerUtil.setStackInHand(Hand.OFF_HAND, new ItemStack((ItemConvertible)Items.TOTEM_OF_UNDYING));
                 }
@@ -91,14 +91,14 @@ extends Module {
                     playerUtil.setStackInHand(Hand.MAIN_HAND, new ItemStack((ItemConvertible)Items.TOTEM_OF_UNDYING));
                 }
             }
-            if ((Boolean)this.record_.getObj() != this.flag160 && ((Boolean)this.record_.getObj()).booleanValue()) {
+            if ((Boolean)this.record_.getValue() != this.flag160 && ((Boolean)this.record_.getValue()).booleanValue()) {
                 this.list.clear();
             }
-            this.flag160 = (Boolean)this.record_.getObj();
-            if (((Boolean)this.record_.getObj()).booleanValue()) {
-                this.list.add(new Data(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), MC.client3.player.getYaw(), MC.client3.player.getPitch()));
+            this.flag160 = (Boolean)this.record_.getValue();
+            if (((Boolean)this.record_.getValue()).booleanValue()) {
+                this.list.add(new Data(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), MC.mc.player.getYaw(), MC.mc.player.getPitch()));
             }
-            if (((Boolean)this.play.getObj()).booleanValue() && !this.list.isEmpty()) {
+            if (((Boolean)this.play.getValue()).booleanValue() && !this.list.isEmpty()) {
                 ++this.count147;
                 if (this.count147 >= this.list.size()) {
                     this.count147 = 0;
@@ -113,17 +113,17 @@ extends Module {
                 playerUtil.setHealth(playerUtil.getMaxHealth());
             }
         } else {
-            this.setFlag3(false);
+            this.setEnabled(false);
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         block3: {
             PlayerUtil playerUtil;
             block2: {
                 String string = IRC.getText7();
-                super.m709();
+                super.onDisable();
                 String string2 = string;
                 playerUtil = FakePlayer.playerUtil;
                 if (string2 == null) break block2;
@@ -137,7 +137,7 @@ extends Module {
 
     @EventHandler
     public void setPacketEventInner24(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (Module.isSet37() || playerUtil == null || !((Boolean)this.damage.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || playerUtil == null || !((Boolean)this.damage.getValue()).booleanValue()) {
             return;
         }
         Object object = packetEventInner2.getPacket();
@@ -147,14 +147,14 @@ extends Module {
             playerInteractEntityC2SPacket.handle((PlayerInteractEntityC2SPacket.Handler)new ItemHelper(this, blArray));
             if (blArray[0] != false && ((ServerboundInteractPacketAccessor)playerInteractEntityC2SPacket).getEntityId() == playerUtil.getId()) {
                 boolean bl;
-                packetEventInner2.m209();
-                MC.client3.world.playSoundClient(playerUtil.getX(), playerUtil.getY(), playerUtil.getZ(), SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
-                float f = (float)MC.client3.player.getAttributeValue(EntityAttributes.ATTACK_DAMAGE);
-                f += FakePlayer.m1044(MC.client3.player.getMainHandStack());
-                boolean bl2 = bl = MC.client3.player.fallDistance > 0.0 && !MC.client3.player.isOnGround() && !MC.client3.player.isClimbing() && !MC.client3.player.isTouchingWater();
+                packetEventInner2.cancel();
+                MC.mc.world.playSoundClient(playerUtil.getX(), playerUtil.getY(), playerUtil.getZ(), SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
+                float f = (float)MC.mc.player.getAttributeValue(EntityAttributes.ATTACK_DAMAGE);
+                f += FakePlayer.m1044(MC.mc.player.getMainHandStack());
+                boolean bl2 = bl = MC.mc.player.fallDistance > 0.0 && !MC.mc.player.isOnGround() && !MC.mc.player.isClimbing() && !MC.mc.player.isTouchingWater();
                 if (bl) {
-                    MC.client3.world.playSoundClient(playerUtil.getX(), playerUtil.getY(), playerUtil.getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
-                    MC.client3.player.addCritParticles((Entity)playerUtil);
+                    MC.mc.world.playSoundClient(playerUtil.getX(), playerUtil.getY(), playerUtil.getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
+                    MC.mc.player.addCritParticles((Entity)playerUtil);
                     f *= 1.5f;
                 }
                 if (FakePlayer.playerUtil.hurtTime <= 0) {
@@ -166,7 +166,7 @@ extends Module {
 
     @EventHandler
     public void onPacketReceive(PacketEvent.PacketEventInner packetEventInner) {
-        if (Module.isSet37() || playerUtil == null || !((Boolean)this.damage.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || playerUtil == null || !((Boolean)this.damage.getValue()).booleanValue()) {
             return;
         }
         Packet packet = packetEventInner.getPacket();
@@ -188,7 +188,7 @@ extends Module {
             float f4 = (float)((d3 * d3 + d3) / 2.0 * 7.0 * (double)f3 + 1.0);
             float f5 = FakePlayer.m856((Object)playerUtil, f4);
             float f6 = f = FakePlayer.m881((Object)playerUtil, f5);
-            MC.client3.execute(() -> {
+            MC.mc.execute(() -> {
                 String string = IRC.getText7();
                 if (string != null) {
                     if (playerUtil == null) {
@@ -227,7 +227,7 @@ extends Module {
                                     if (playerUtil2 == null) {
                                         return;
                                     }
-                                    FakePlayer.playerUtil.serverDamage(MC.client3.world.getDamageSources().generic(), 0.1f);
+                                    FakePlayer.playerUtil.serverDamage(MC.mc.world.getDamageSources().generic(), 0.1f);
                                     playerUtil2 = FakePlayer.playerUtil;
                                 }
                                 f3 = playerUtil2.getAbsorptionAmount();
@@ -249,13 +249,13 @@ extends Module {
                     if (!bl) break block12;
                     playerUtil = FakePlayer.playerUtil;
                     if (string == null) break block13;
-                    bl = ((Listener4)((Object)playerUtil)).m642(MC.client3.world.getDamageSources().generic());
+                    bl = ((Listener4)((Object)playerUtil)).m642(MC.mc.world.getDamageSources().generic());
                 }
                 if (!bl) break block12;
                 playerUtil = FakePlayer.playerUtil;
             }
             playerUtil.setHealth(10.0f);
-            MC.client3.world.sendEntityStatus((Entity)FakePlayer.playerUtil, (byte)35);
+            MC.mc.world.sendEntityStatus((Entity)FakePlayer.playerUtil, (byte)35);
         }
     }
 
@@ -402,7 +402,7 @@ extends Module {
         private final HungerManager field29 = new HungerManager();
 
         public PlayerUtil(PlayerEntity playerEntity, String string) {
-            super(MC.client3.world, new GameProfile(field12, string));
+            super(MC.mc.world, new GameProfile(field12, string));
             this.copyPositionAndRotation((Entity)playerEntity);
             this.setPitch(playerEntity.getPitch());
             this.setYaw(playerEntity.getYaw());

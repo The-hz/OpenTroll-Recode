@@ -22,11 +22,11 @@ extends Command {
         CharSequence[] charSequenceArray = (String[])object;
         boolean bl = false;
         if (charSequenceArray.length == 0) {
-            CommandManager.setObj21("Usage: irc <message>");
+            CommandManager.sendFeedback("Usage: irc <message>");
             return;
         }
-        if (IRC.INSTANCE == null || !IRC.INSTANCE.isSet19()) {
-            CommandManager.setObj21("\u00a7cIRC module is not enabled. Enable it first.");
+        if (IRC.INSTANCE == null || !IRC.INSTANCE.isEnabled()) {
+            CommandManager.sendFeedback("\u00a7cIRC module is not enabled. Enable it first.");
             return;
         }
         ChatClient.send2(String.join((CharSequence)" ", charSequenceArray));

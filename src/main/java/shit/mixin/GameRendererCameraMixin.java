@@ -29,9 +29,9 @@ public class GameRendererCameraMixin {
             return;
         }
         if (bl) {
-            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera2.fovValue.getFloat35()));
+            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera2.fovValue.getFloat()));
         } else {
-            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera2.itemFov.getFloat35()));
+            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera2.itemFov.getFloat()));
         }
     }
 
@@ -41,7 +41,7 @@ public class GameRendererCameraMixin {
         if (camera == null || !camera.isSet61()) {
             return;
         }
-        Matrix4f matrix4f = new Matrix4f().setPerspective((float)Math.toRadians(f), camera.ratio.getFloat35(), 0.05f, this.viewDistanceBlocks * 4.0f);
+        Matrix4f matrix4f = new Matrix4f().setPerspective((float)Math.toRadians(f), camera.ratio.getFloat(), 0.05f, this.viewDistanceBlocks * 4.0f);
         callbackInfoReturnable.setReturnValue((Object)matrix4f);
     }
 

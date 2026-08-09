@@ -29,25 +29,25 @@ import shit.util.RenderUtil2;
 public class Camera
 extends Module {
     public static Camera INSTANCE;
-    public final BooleanSetting cameraClip = (BooleanSetting)this.m28(new BooleanSetting("CameraClip", false));
-    public final NumberSetting clipDistance = (NumberSetting)this.m28(new NumberSetting("ClipDistance", 4.0, 1.0, 20.0, 0.1, 1.0, () -> (Boolean)this.cameraClip.getObj(), null, "", false));
-    public final BooleanSetting aspectRatio = (BooleanSetting)this.m28(new BooleanSetting("AspectRatio", false));
-    public final NumberSetting ratio = (NumberSetting)this.m28(new NumberSetting("Ratio", 1.78, 0.1, 5.0, 0.01, 1.0, () -> (Boolean)this.aspectRatio.getObj(), null, "", false));
-    public final BooleanSetting fov = (BooleanSetting)this.m28(new BooleanSetting("Fov", false));
-    public final NumberSetting fovValue = (NumberSetting)this.m28(new NumberSetting("FovValue", 90.0, 30.0, 170.0, 1.0, 1.0, () -> (Boolean)this.fov.getObj(), null, "", false));
-    public final NumberSetting itemFov = (NumberSetting)this.m28(new NumberSetting("ItemFov", 70.0, 30.0, 170.0, 1.0, 1.0, () -> (Boolean)this.fov.getObj(), null, "", false));
-    public final BooleanSetting motionCamera = (BooleanSetting)this.m28(new BooleanSetting("MotionCamera", false));
-    public final BooleanSetting motionNoFirstPerson = (BooleanSetting)this.m28(new BooleanSetting("MotionNoFirstPerson", true, () -> (Boolean)this.motionCamera.getObj(), null, "", false));
-    public final NumberSetting motionFPSpeed = (NumberSetting)this.m28(new NumberSetting("MotionFPSpeed", 0.6, 0.0, 1.0, 0.01, 1.0, () -> (Boolean)this.motionCamera.getObj(), null, "", false));
-    public final NumberSetting motionSpeed = (NumberSetting)this.m28(new NumberSetting("MotionSpeed", 0.3, 0.0, 1.0, 0.01, 1.0, () -> (Boolean)this.motionCamera.getObj(), null, "", false));
+    public final BooleanSetting cameraClip = (BooleanSetting)this.registerSetting(new BooleanSetting("CameraClip", false));
+    public final NumberSetting clipDistance = (NumberSetting)this.registerSetting(new NumberSetting("ClipDistance", 4.0, 1.0, 20.0, 0.1, 1.0, () -> (Boolean)this.cameraClip.getValue(), null, "", false));
+    public final BooleanSetting aspectRatio = (BooleanSetting)this.registerSetting(new BooleanSetting("AspectRatio", false));
+    public final NumberSetting ratio = (NumberSetting)this.registerSetting(new NumberSetting("Ratio", 1.78, 0.1, 5.0, 0.01, 1.0, () -> (Boolean)this.aspectRatio.getValue(), null, "", false));
+    public final BooleanSetting fov = (BooleanSetting)this.registerSetting(new BooleanSetting("Fov", false));
+    public final NumberSetting fovValue = (NumberSetting)this.registerSetting(new NumberSetting("FovValue", 90.0, 30.0, 170.0, 1.0, 1.0, () -> (Boolean)this.fov.getValue(), null, "", false));
+    public final NumberSetting itemFov = (NumberSetting)this.registerSetting(new NumberSetting("ItemFov", 70.0, 30.0, 170.0, 1.0, 1.0, () -> (Boolean)this.fov.getValue(), null, "", false));
+    public final BooleanSetting motionCamera = (BooleanSetting)this.registerSetting(new BooleanSetting("MotionCamera", false));
+    public final BooleanSetting motionNoFirstPerson = (BooleanSetting)this.registerSetting(new BooleanSetting("MotionNoFirstPerson", true, () -> (Boolean)this.motionCamera.getValue(), null, "", false));
+    public final NumberSetting motionFPSpeed = (NumberSetting)this.registerSetting(new NumberSetting("MotionFPSpeed", 0.6, 0.0, 1.0, 0.01, 1.0, () -> (Boolean)this.motionCamera.getValue(), null, "", false));
+    public final NumberSetting motionSpeed = (NumberSetting)this.registerSetting(new NumberSetting("MotionSpeed", 0.3, 0.0, 1.0, 0.01, 1.0, () -> (Boolean)this.motionCamera.getValue(), null, "", false));
     private double value109;
     private double value124;
     private double value181;
     private double value130;
     private double value158;
     private double value190;
-    public final BooleanSetting motionBlur = (BooleanSetting)this.m28(new BooleanSetting("MotionBlur", false));
-    public final NumberSetting blurAmount = (NumberSetting)this.m28(new NumberSetting("BlurAmount", 50.0, 0.0, 99.0, 1.0, 1.0, () -> (Boolean)this.motionBlur.getObj(), null, "", false));
+    public final BooleanSetting motionBlur = (BooleanSetting)this.registerSetting(new BooleanSetting("MotionBlur", false));
+    public final NumberSetting blurAmount = (NumberSetting)this.registerSetting(new NumberSetting("BlurAmount", 50.0, 0.0, 99.0, 1.0, 1.0, () -> (Boolean)this.motionBlur.getValue(), null, "", false));
     private ShaderProgram shaderProgram6;
     private ShaderProgram shaderProgram7;
     private Blur2 blur23;
@@ -62,10 +62,10 @@ extends Module {
     public void onEnable() {
         Object var2_1 = null;
         if (!this.isSet98()) {
-            if (((Boolean)this.motionCamera.getObj()).booleanValue()) {
-                this.value109 = MC.client3.player.getX();
-                this.value124 = MC.client3.player.getY() + (double)MC.client3.player.getEyeHeight(MC.client3.player.getPose());
-                this.value181 = MC.client3.player.getZ();
+            if (((Boolean)this.motionCamera.getValue()).booleanValue()) {
+                this.value109 = MC.mc.player.getX();
+                this.value124 = MC.mc.player.getY() + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose());
+                this.value181 = MC.mc.player.getZ();
                 this.value130 = this.value109;
                 this.value158 = this.value124;
                 this.value190 = this.value181;
@@ -74,7 +74,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m51();
     }
 
@@ -87,12 +87,12 @@ extends Module {
             this.value130 = this.value109;
             this.value158 = this.value124;
             this.value190 = this.value181;
-            double d = MC.client3.options.getPerspective().isFirstPerson() ? (Double)this.motionFPSpeed.getObj() : (Double)this.motionSpeed.getObj();
-            this.value109 = Camera.m980(this.value109, MC.client3.player.getX(), d);
-            this.value124 = Camera.m980(this.value124, MC.client3.player.getY() + (double)MC.client3.player.getEyeHeight(MC.client3.player.getPose()), d);
-            this.value181 = Camera.m980(this.value181, MC.client3.player.getZ(), d);
+            double d = MC.mc.options.getPerspective().isFirstPerson() ? (Double)this.motionFPSpeed.getValue() : (Double)this.motionSpeed.getValue();
+            this.value109 = Camera.m980(this.value109, MC.mc.player.getX(), d);
+            this.value124 = Camera.m980(this.value124, MC.mc.player.getY() + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose()), d);
+            this.value181 = Camera.m980(this.value181, MC.mc.player.getZ(), d);
         }
-        if (((Boolean)this.motionBlur.getObj()).booleanValue()) {
+        if (((Boolean)this.motionBlur.getValue()).booleanValue()) {
             if (!this.flag51) {
                 this.m516();
             }
@@ -123,7 +123,7 @@ extends Module {
             int n3;
             block18: {
                 block17: {
-                    MinecraftClient minecraftClient = MC.client3;
+                    MinecraftClient minecraftClient = MC.mc;
                     n3 = minecraftClient.getWindow().getFramebufferWidth();
                     n2 = minecraftClient.getWindow().getFramebufferHeight();
                     if (this.blur23.count174 != n3) break block17;
@@ -134,7 +134,7 @@ extends Module {
             if ((n = this.getInt72()) <= 0) {
                 return;
             }
-            float f = (float)Math.min((Double)this.blurAmount.getObj(), 99.0) / 100.0f;
+            float f = (float)Math.min((Double)this.blurAmount.getValue(), 99.0) / 100.0f;
             int n4 = this.getInt81();
             if (n4 <= 0) {
                 return;
@@ -197,7 +197,7 @@ extends Module {
     private int getInt81() {
         GlBackend glBackend = (GlBackend)RenderSystem.getDevice();
         Object var2_2 = null;
-        GpuTexture gpuTexture = MC.client3.getFramebuffer().getColorAttachment();
+        GpuTexture gpuTexture = MC.mc.getFramebuffer().getColorAttachment();
         if (gpuTexture instanceof GlTexture) {
             GlTexture glTexture = (GlTexture)gpuTexture;
             return glTexture.getOrCreateFramebuffer(glBackend.getBufferManager(), null);
@@ -206,7 +206,7 @@ extends Module {
     }
 
     private int getInt72() {
-        GpuTexture gpuTexture = MC.client3.getFramebuffer().getColorAttachment();
+        GpuTexture gpuTexture = MC.mc.getFramebuffer().getColorAttachment();
         Object var2_3 = null;
         if (gpuTexture instanceof GlTexture) {
             GlTexture glTexture = (GlTexture)gpuTexture;
@@ -229,8 +229,8 @@ extends Module {
      */
     public boolean isSet131() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.cameraClip.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.cameraClip.getValue() == false) return false;
         return true;
     }
 
@@ -240,8 +240,8 @@ extends Module {
      */
     public boolean isSet61() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.aspectRatio.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.aspectRatio.getValue() == false) return false;
         return true;
     }
 
@@ -251,8 +251,8 @@ extends Module {
      */
     public boolean isSet70() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.fov.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.fov.getValue() == false) return false;
         return true;
     }
 
@@ -262,10 +262,10 @@ extends Module {
      */
     public boolean isSet74() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.motionCamera.getObj() == false) return false;
-        if ((Boolean)this.motionNoFirstPerson.getObj() == false) return true;
-        if (MC.client3.options.getPerspective().isFirstPerson()) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.motionCamera.getValue() == false) return false;
+        if ((Boolean)this.motionNoFirstPerson.getValue() == false) return true;
+        if (MC.mc.options.getPerspective().isFirstPerson()) return false;
         return true;
     }
 
@@ -275,27 +275,27 @@ extends Module {
      */
     public boolean isSet144() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.motionBlur.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.motionBlur.getValue() == false) return false;
         if (!this.flag51) return false;
         return true;
     }
 
     public double getDouble9() {
-        return MathHelper.lerp((float)MC.client3.getRenderTickCounter().getTickProgress(true), (float)((float)this.value130), (float)((float)this.value109));
+        return MathHelper.lerp((float)MC.mc.getRenderTickCounter().getTickProgress(true), (float)((float)this.value130), (float)((float)this.value109));
     }
 
     public double getDouble14() {
-        return MathHelper.lerp((float)MC.client3.getRenderTickCounter().getTickProgress(true), (float)((float)this.value158), (float)((float)this.value124));
+        return MathHelper.lerp((float)MC.mc.getRenderTickCounter().getTickProgress(true), (float)((float)this.value158), (float)((float)this.value124));
     }
 
     public double getDouble8() {
-        return MathHelper.lerp((float)MC.client3.getRenderTickCounter().getTickProgress(true), (float)((float)this.value190), (float)((float)this.value181));
+        return MathHelper.lerp((float)MC.mc.getRenderTickCounter().getTickProgress(true), (float)((float)this.value190), (float)((float)this.value181));
     }
 
     private boolean isSet98() {
         Object var2_1 = null;
-        return MC.client3.player == null || MC.client3.world == null;
+        return MC.mc.player == null || MC.mc.world == null;
     }
 }
 

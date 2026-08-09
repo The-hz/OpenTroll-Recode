@@ -21,9 +21,9 @@ import shit.util.Util3;
 @Environment(value=EnvType.CLIENT)
 public class ItemSaver
 extends Module {
-    private final NumberSetting durability = (NumberSetting)this.m28(new NumberSetting("Durability", 5.0, 1.0, 50.0, 1.0));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 50.0, 0.0, 1000.0, 5.0));
-    private final BooleanSetting dropIfFull = (BooleanSetting)this.m28(new BooleanSetting("DropIfFull", false));
+    private final NumberSetting durability = (NumberSetting)this.registerSetting(new NumberSetting("Durability", 5.0, 1.0, 50.0, 1.0));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 50.0, 0.0, 1000.0, 5.0));
+    private final BooleanSetting dropIfFull = (BooleanSetting)this.registerSetting(new BooleanSetting("DropIfFull", false));
     private final Helper7 helper722 = new Helper7();
 
     public ItemSaver() {
@@ -32,14 +32,14 @@ extends Module {
 
     @EventHandler
     private void onTick6(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || !this.helper722.m432((Double)this.delay.getObj())) {
+        if (Module.isNotInGame() || !this.helper722.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
-        ItemStack itemStack = MC.client3.player.getMainHandStack();
+        ItemStack itemStack = MC.mc.player.getMainHandStack();
         if (!this.m1038(itemStack)) {
             return;
         }
-        int n = MC.client3.player.getInventory().getSelectedSlot();
+        int n = MC.mc.player.getInventory().getSelectedSlot();
         int n2 = Util3.m189((java.util.function.Predicate<ItemStack>)(itemStack2 -> {
             boolean bl = false;
             if (itemStack2.isEmpty()) return false;
@@ -49,16 +49,16 @@ extends Module {
         }), false);
         if (n2 != -1) {
             Util3.m334(n2, n);
-            this.helper722.m533();
+            this.helper722.resetTimer();
             return;
         }
         int n3 = Util3.m189((java.util.function.Predicate<ItemStack>)ItemStack::isEmpty, false);
         if (n3 != -1) {
             Util3.m334(n3, n);
-            this.helper722.m533();
-        } else if (((Boolean)this.dropIfFull.getObj()).booleanValue()) {
-            MC.client3.player.dropSelectedItem(false);
-            this.helper722.m533();
+            this.helper722.resetTimer();
+        } else if (((Boolean)this.dropIfFull.getValue()).booleanValue()) {
+            MC.mc.player.dropSelectedItem(false);
+            this.helper722.resetTimer();
         }
     }
 
@@ -76,7 +76,7 @@ extends Module {
         }
         if (n != 0) {
             if (n2 == 0) return false;
-            double d = (double)ItemUtil.m239(itemStack) - (Double)this.durability.getObj();
+            double d = (double)ItemUtil.m239(itemStack) - (Double)this.durability.getValue();
             n2 = d == 0.0 ? 0 : (d < 0.0 ? (-1) : 1);
         }
         if (n == 0) return n2 != 0;

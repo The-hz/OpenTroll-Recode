@@ -14,10 +14,10 @@ import shit.setting.NumberSetting;
 @Environment(value=EnvType.CLIENT)
 public class Fonts
 extends Module {
-    public final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.TROLLHACK_LEXEND));
-    public final EnumSetting sizeMode = (EnumSetting)this.m28(new EnumSetting("SizeMode", SizeMode.NORMAL));
-    public final NumberSetting customSize = (NumberSetting)this.m28(new NumberSetting("CustomSize", 9.0, 6.0, 18.0, 1.0, 1.0, () -> this.sizeMode.getObj() == SizeMode.CUSTOM, null, "", false));
-    public final NumberSetting offset = (NumberSetting)this.m28(new NumberSetting("Offset", 0.0, -5.0, 5.0, 0.5));
+    public final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.TROLLHACK_LEXEND));
+    public final EnumSetting sizeMode = (EnumSetting)this.registerSetting(new EnumSetting("SizeMode", SizeMode.NORMAL));
+    public final NumberSetting customSize = (NumberSetting)this.registerSetting(new NumberSetting("CustomSize", 9.0, 6.0, 18.0, 1.0, 1.0, () -> this.sizeMode.getValue() == SizeMode.CUSTOM, null, "", false));
+    public final NumberSetting offset = (NumberSetting)this.registerSetting(new NumberSetting("Offset", 0.0, -5.0, 5.0, 0.5));
 
     public Fonts() {
         super("Fonts", "Controls font preferences.", Category.CLIENT);

@@ -29,7 +29,7 @@ extends Command {
                 n = ChatClient.isSet2() ? 1 : 0;
                 if (!bl) break block5;
                 if (n == 0) {
-                    CommandManager.setObj21("\u00a7cYou are not an IRC admin.");
+                    CommandManager.sendFeedback("\u00a7cYou are not an IRC admin.");
                     return;
                 }
                 stringArray = stringArray2;
@@ -37,7 +37,7 @@ extends Command {
                 n = stringArray.length;
             }
             if (n == 0) {
-                CommandManager.setObj21("Usage: irckick <ircname>");
+                CommandManager.sendFeedback("Usage: irckick <ircname>");
                 return;
             }
             stringArray = stringArray2;

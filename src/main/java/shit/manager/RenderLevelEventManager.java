@@ -64,8 +64,8 @@ implements MC {
         if (matrix4f == null) {
             return null;
         }
-        int[] nArray = new int[]{0, 0, MC.client3.getWindow().getFramebufferWidth(), MC.client3.getWindow().getFramebufferHeight()};
-        Vector4d vector4d = RenderLevelEventManager.m212(nArray, matrix4f, box, vec3d = MC.client3.gameRenderer.getCamera().getCameraPos());
+        int[] nArray = new int[]{0, 0, MC.mc.getWindow().getFramebufferWidth(), MC.mc.getWindow().getFramebufferHeight()};
+        Vector4d vector4d = RenderLevelEventManager.m212(nArray, matrix4f, box, vec3d = MC.mc.gameRenderer.getCamera().getCameraPos());
         if (vector4d == null) {
             return null;
         }

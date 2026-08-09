@@ -25,9 +25,9 @@ public class MidClickPearl
 extends Module {
     public static MidClickPearl INSTANCE;
     public static boolean flag80;
-    private final EnumSetting timing = (EnumSetting)this.m28(new EnumSetting("Timing", TimingMode.ALL));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+    private final EnumSetting timing = (EnumSetting)this.registerSetting(new EnumSetting("Timing", TimingMode.ALL));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
     private boolean flag61;
 
     public MidClickPearl() {
@@ -40,17 +40,17 @@ extends Module {
         block3: {
             block2: {
                 Object var2_1 = null;
-                if (Module.isSet37()) break block2;
+                if (Module.isNotInGame()) break block2;
                 if (this.isSet63()) break block3;
             }
-            this.setFlag3(false);
+            this.setEnabled(false);
             return;
         }
         this.flag61 = true;
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag61 = false;
         flag80 = false;
         Client.renderUtil3.m608();
@@ -59,7 +59,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner59(Event2.Event2Inner event2Inner) {
-        if (this.timing.getObj() == TimingMode.POST) {
+        if (this.timing.getValue() == TimingMode.POST) {
             return;
         }
         this.m141();
@@ -67,7 +67,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner210(Event2.Event2Inner2 event2Inner2) {
-        if (this.timing.getObj() == TimingMode.PRE) {
+        if (this.timing.getValue() == TimingMode.PRE) {
             return;
         }
         this.m141();
@@ -78,12 +78,12 @@ extends Module {
             block4: {
                 Object var2_1 = null;
                 if (!this.flag61) break block4;
-                if (!Module.isSet37()) break block5;
+                if (!Module.isNotInGame()) break block5;
             }
             return;
         }
         if (this.isSet164()) {
-            this.setFlag3(false);
+            this.setEnabled(false);
         }
     }
 
@@ -93,8 +93,8 @@ extends Module {
                 ClientSetting.RotateMode rotateMode;
                 block7: {
                     rotateMode = this.getRotateMode8();
-                    float f = MC.client3.player.getYaw();
-                    float f2 = MC.client3.player.getPitch();
+                    float f = MC.mc.player.getYaw();
+                    float f2 = MC.mc.player.getPitch();
                     Object var2_4 = null;
                     switch (Lambda.counts12[rotateMode.ordinal()]) {
                         case 1: {
@@ -122,7 +122,7 @@ extends Module {
                         return true;
                     }
                     flag80 = true;
-                    MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, f2));
+                    MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, f2));
                     ItemUtil.setObj25(Hand.MAIN_HAND);
                     flag80 = false;
                     Client.renderUtil3.m608();
@@ -141,8 +141,8 @@ extends Module {
 
     private boolean isSet63() {
         Object var2_2 = null;
-        for (int i = 0; i < MC.client3.player.getInventory().size(); ++i) {
-            if (!MC.client3.player.getInventory().getStack(i).isOf(Items.ENDER_PEARL)) continue;
+        for (int i = 0; i < MC.mc.player.getInventory().size(); ++i) {
+            if (!MC.mc.player.getInventory().getStack(i).isOf(Items.ENDER_PEARL)) continue;
             return true;
         }
         return false;
@@ -154,10 +154,10 @@ extends Module {
 
     private ClientSetting.RotateMode getRotateMode8() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+        if (this.rotateMode.getValue() == RotateMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
-        return switch (((RotateMode)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((RotateMode)((Object)this.rotateMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
             case 2 -> ClientSetting.RotateMode.SMOOTH;
             case 3 -> ClientSetting.RotateMode.ONTICK;
@@ -168,15 +168,15 @@ extends Module {
 
     private float getFloat59() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f;
+        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f;
     }
 
     private ClientSetting.SwitchMode getSwitchMode10() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+        if (this.switchMode.getValue() == SwitchMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
-        return switch (((SwitchMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((SwitchMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

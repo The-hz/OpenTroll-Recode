@@ -65,7 +65,7 @@ extends Command {
     public void run(Object object) {
         String[] args = (String[])object;
         if (args.length < 1) {
-            CommandManager.setObj21("Usage: " + Client.commandManager.getText10() + this.getText31());
+            CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());
             return;
         }
         String sub = args[0].toLowerCase();
@@ -76,7 +76,7 @@ extends Command {
         if (sub.equals("list")) {
             File[] files = dir.listFiles((file, name) -> name.endsWith(".kit"));
             if (files == null || files.length == 0) {
-                CommandManager.setObj21("No kits found. Create one with 'kit create <name>'.");
+                CommandManager.sendFeedback("No kits found. Create one with 'kit create <name>'.");
                 return;
             }
             ArrayList<String> names = new ArrayList<String>();
@@ -84,18 +84,18 @@ extends Command {
                 String name = file.getName();
                 names.add(name.substring(0, name.length() - 4));
             }
-            CommandManager.setObj21("Saved Kits: §a" + String.join("§7, §a", names));
+            CommandManager.sendFeedback("Saved Kits: §a" + String.join("§7, §a", names));
             return;
         }
         if (args.length < 2) {
-            CommandManager.setObj21("Missing kit name.");
+            CommandManager.sendFeedback("Missing kit name.");
             return;
         }
         String name = args[1];
         File file = new File(dir, name + ".kit");
         if (sub.equals("create") || sub.equals("add")) {
             if (client2.player == null) {
-                CommandManager.setObj21("You must be in-game to create a kit.");
+                CommandManager.sendFeedback("You must be in-game to create a kit.");
                 return;
             }
             try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));){
@@ -103,23 +103,23 @@ extends Command {
                     String id = Registries.ITEM.getId(client2.player.getInventory().getStack(i).getItem()).toString();
                     writer.println(i + ":" + id);
                 }
-                CommandManager.setObj21("Kit §a" + name + "§7 created successfully.");
+                CommandManager.sendFeedback("Kit §a" + name + "§7 created successfully.");
             }
             catch (Exception exception) {
-                CommandManager.setObj21("§cFailed to create kit " + name + ".");
+                CommandManager.sendFeedback("§cFailed to create kit " + name + ".");
                 exception.printStackTrace();
             }
             return;
         }
         if (sub.equals("delete") || sub.equals("del") || sub.equals("remove")) {
             if (file.exists() && file.delete()) {
-                CommandManager.setObj21("Kit §c" + name + "§7 removed.");
+                CommandManager.sendFeedback("Kit §c" + name + "§7 removed.");
             } else {
-                CommandManager.setObj21("Kit §c" + name + "§7 not found.");
+                CommandManager.sendFeedback("Kit §c" + name + "§7 not found.");
             }
             return;
         }
-        CommandManager.setObj21("Usage: " + Client.commandManager.getText10() + this.getText31());
+        CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());
     }
 
     private static /* synthetic */ String[] cfrlam$getSuggestions$5(int n) {

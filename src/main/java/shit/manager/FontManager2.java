@@ -119,7 +119,7 @@ AutoCloseable {
             this.field23 = new NativeImage(1024, 1024, true);
             this.field56 = new NativeImageBackedTexture(() -> "trollhack font " + string + " " + n, this.field23);
             this.field41 = Identifier.of((String)"trollhack-recode", (String)("font/runtime/" + string + "_" + n));
-            MC.client3.getTextureManager().registerTexture(this.field41, (AbstractTexture)this.field56);
+            MC.mc.getTextureManager().registerTexture(this.field41, (AbstractTexture)this.field56);
             this.setObj116("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?/\\_-+[]()<>|");
             this.m424();
             if (!bl2) break block1;
@@ -127,7 +127,7 @@ AutoCloseable {
         }
     }
 
-    public void m5(Object object, Object object2, int n, int n2, int n3, boolean bl) {
+    public void drawText(Object object, Object object2, int n, int n2, int n3, boolean bl) {
         boolean bl2;
         int n4;
         int n5;
@@ -236,7 +236,7 @@ AutoCloseable {
                             }
                             if (n14 != n13) break block21;
                             f = 0.0f;
-                            f2 += (float)this.getInt19();
+                            f2 += (float)this.getFontHeight();
                         }
                         if (!bl) continue;
                     }
@@ -259,7 +259,7 @@ AutoCloseable {
         }
     }
 
-    public int m277(Object object) {
+    public int getStringWidth(Object object) {
         String string;
         block12: {
             block11: {
@@ -303,7 +303,7 @@ AutoCloseable {
         return Math.round(Math.max(f, f2) / this.getFloat7());
     }
 
-    public int getInt19() {
+    public int getFontHeight() {
         return Math.round((float)this.count198 / this.getFloat7());
     }
 
@@ -311,7 +311,7 @@ AutoCloseable {
     public void close() {
         this.field58.dispose();
         boolean bl = FontManager2.isSet176();
-        MC.client3.getTextureManager().destroyTexture(this.field41);
+        MC.mc.getTextureManager().destroyTexture(this.field41);
         boolean bl2 = bl;
         this.field23.close();
         if (Module.getTextArray9() == null) {
@@ -424,7 +424,7 @@ AutoCloseable {
     }
 
     private float getFloat7() {
-        return Math.max(1.0f, (float)MC.client3.getWindow().getScaleFactor());
+        return Math.max(1.0f, (float)MC.mc.getWindow().getScaleFactor());
     }
 
     /*

@@ -153,10 +153,10 @@ public class ConfigManager {
         if (!Util4.isSet51()) {
             return;
         }
-        for (Module module : Client.moduleManager.getList6()) {
-            Boolean bl = (Boolean)this.map50.get(module.getText69());
+        for (Module module : Client.moduleManager.getModules()) {
+            Boolean bl = (Boolean)this.map50.get(module.getName());
             if (bl != null) {
-                module.setFlag3(bl);
+                module.setEnabled(bl);
             }
             if (null == null) continue;
         }
@@ -208,20 +208,20 @@ public class ConfigManager {
                 }
             }
             boolean bl11 = Util4.isSet51();
-            for (Module module : Client.moduleManager.getList6()) {
+            for (Module module : Client.moduleManager.getModules()) {
                 block10: {
                     block11: {
-                        String string2 = (String)map.get(module.getText69() + "_state");
-                        for (Setting setting : module.getList8()) {
+                        String string2 = (String)map.get(module.getName() + "_state");
+                        for (Setting setting : module.getSettings()) {
                             boolean bl12 = setting instanceof ColorSetting2;
                             if (bl12) {
                                 if (!bl10) continue;
                             }
                             if (!bl12 && !bl9) continue;
-                            String string3 = (String)map.get(module.getText69() + "_" + setting.getText26());
+                            String string3 = (String)map.get(module.getName() + "_" + setting.getName());
                             if (string3 != null) {
                                 try {
-                                    setting.setObj58(string3);
+                                    setting.setValueFromString(string3);
                                 } catch (RuntimeException e) {
                                 }
                             }
@@ -230,10 +230,10 @@ public class ConfigManager {
                         if (!bl8) break block10;
                         if (string2 == null) break block10;
                         boolean bl13 = Boolean.parseBoolean(string2);
-                        this.map50.put(module.getText69(), bl13);
+                        this.map50.put(module.getName(), bl13);
                         if (!bl11) break block11;
                         try {
-                            module.setFlag3(bl13);
+                            module.setEnabled(bl13);
                         } catch (RuntimeException e) {
                         }
                         if (null == null) break block10;
@@ -258,30 +258,30 @@ public class ConfigManager {
             }
             Files.createDirectories(this.path3, new FileAttribute[0]);
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("client_prefix:").append(Client.commandManager.getText10()).append('\n');
+            stringBuilder.append("client_prefix:").append(Client.commandManager.getPrefix()).append('\n');
             boolean bl3 = Util4.isSet51();
-            for (Module module : Client.moduleManager.getList6()) {
+            for (Module module : Client.moduleManager.getModules()) {
                 boolean bl4;
                 block11: {
                     block10: {
                         if (bl3) break block10;
-                        if (!this.map50.containsKey(module.getText69())) break block10;
-                        bl4 = (Boolean)this.map50.get(module.getText69());
+                        if (!this.map50.containsKey(module.getName())) break block10;
+                        bl4 = (Boolean)this.map50.get(module.getName());
                         if (null == null) break block11;
                     }
-                    bl4 = module.isSet19();
-                    this.map50.put(module.getText69(), bl4);
+                    bl4 = module.isEnabled();
+                    this.map50.put(module.getName(), bl4);
                 }
-                stringBuilder.append(module.getText69()).append("_state:").append(bl4).append('\n');
-                for (Setting setting : module.getList8()) {
-                    stringBuilder.append(module.getText69()).append('_').append(setting.getText26()).append(':').append(setting.getText29()).append('\n');
+                stringBuilder.append(module.getName()).append("_state:").append(bl4).append('\n');
+                for (Setting setting : module.getSettings()) {
+                    stringBuilder.append(module.getName()).append('_').append(setting.getName()).append(':').append(setting.getValueString()).append('\n');
                     if (null == null) continue;
                 }
                 if (null == null) continue;
             }
             Files.writeString(path, (CharSequence)stringBuilder.toString(), StandardCharsets.UTF_8, new OpenOption[0]);
             if (bl2) {
-                Files.write(this.path2, (Iterable<? extends CharSequence>)Client.manager.getSet2(), StandardCharsets.UTF_8, new OpenOption[0]);
+                Files.write(this.path2, (Iterable<? extends CharSequence>)Client.manager.getFriends(), StandardCharsets.UTF_8, new OpenOption[0]);
             }
         }
         catch (IOException iOException) {
@@ -320,7 +320,7 @@ public class ConfigManager {
     }
 
     private void m597() {
-        Client.manager.m624();
+        Client.manager.clearFriends();
         Object var2_1 = null;
         if (!Files.exists(this.path2, new LinkOption[0])) {
             return;
@@ -329,7 +329,7 @@ public class ConfigManager {
             List<String> list = Files.readAllLines(this.path2, StandardCharsets.UTF_8);
             for (String string : list) {
                 if (!string.isBlank()) {
-                    Client.manager.m151(string.trim());
+                    Client.manager.addFriend(string.trim());
                 }
                 if (null == null) continue;
                 break;

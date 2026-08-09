@@ -13,8 +13,8 @@ import shit.setting.BooleanSetting;
 public class AntiEffects
 extends Module {
     public static AntiEffects INSTANCE;
-    public final BooleanSetting levitation = (BooleanSetting)this.m28(new BooleanSetting("Levitation", true));
-    public final BooleanSetting slowFalling = (BooleanSetting)this.m28(new BooleanSetting("SlowFalling", true));
+    public final BooleanSetting levitation = (BooleanSetting)this.registerSetting(new BooleanSetting("Levitation", true));
+    public final BooleanSetting slowFalling = (BooleanSetting)this.registerSetting(new BooleanSetting("SlowFalling", true));
 
     public AntiEffects() {
         super("AntiEffects", "Provides anti levitation and slow falling toggles for movement hooks.", Category.PLAYER);

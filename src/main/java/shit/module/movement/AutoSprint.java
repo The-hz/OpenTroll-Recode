@@ -25,13 +25,13 @@ import shit.util.MC;
 public class AutoSprint
 extends Module {
     public static AutoSprint INSTANCE;
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Legit));
-    private final BooleanSetting inWaterPause = (BooleanSetting)this.m28(new BooleanSetting("InWaterPause", true));
-    private final BooleanSetting inWebPause = (BooleanSetting)this.m28(new BooleanSetting("InWebPause", true));
-    private final BooleanSetting sneakingPause = (BooleanSetting)this.m28(new BooleanSetting("SneakingPause", false));
-    private final BooleanSetting blindnessPause = (BooleanSetting)this.m28(new BooleanSetting("BlindnessPause", false));
-    private final BooleanSetting usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", false));
-    private final BooleanSetting lagPause = (BooleanSetting)this.m28(new BooleanSetting("LagPause", true));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Legit));
+    private final BooleanSetting inWaterPause = (BooleanSetting)this.registerSetting(new BooleanSetting("InWaterPause", true));
+    private final BooleanSetting inWebPause = (BooleanSetting)this.registerSetting(new BooleanSetting("InWebPause", true));
+    private final BooleanSetting sneakingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("SneakingPause", false));
+    private final BooleanSetting blindnessPause = (BooleanSetting)this.registerSetting(new BooleanSetting("BlindnessPause", false));
+    private final BooleanSetting usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", false));
+    private final BooleanSetting lagPause = (BooleanSetting)this.registerSetting(new BooleanSetting("LagPause", true));
     private boolean flag121;
 
     public AutoSprint() {
@@ -41,47 +41,47 @@ extends Module {
 
     public boolean isSet142() {
         Object var2_1 = null;
-        return this.isSet19() && this.mode.getObj() == Mode.Rage;
+        return this.isEnabled() && this.mode.getValue() == Mode.Rage;
     }
 
     @EventHandler
     private void setPacketEventInner5(PacketEvent.PacketEventInner packetEventInner) {
-        if (((Boolean)this.lagPause.getObj()).booleanValue() && packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket) {
+        if (((Boolean)this.lagPause.getValue()).booleanValue() && packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket) {
             this.flag121 = true;
         }
     }
 
     public boolean isSet160() {
         Object var2_1 = null;
-        return this.isSet19() && this.mode.getObj() == Mode.Rotation;
+        return this.isEnabled() && this.mode.getValue() == Mode.Rotation;
     }
 
     @EventHandler
     private void setEvent2Inner44(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.player == null || MC.client3.player.input == null) {
+        if (MC.mc.player == null || MC.mc.player.input == null) {
             return;
         }
         if (this.flag121) {
             return;
         }
-        if (this.mode.getObj() == Mode.Rotation && Client.mathUtil.getType2() != MathUtil.Type.CUSTOM) {
+        if (this.mode.getValue() == Mode.Rotation && Client.mathUtil.getType2() != MathUtil.Type.CUSTOM) {
             boolean bl;
-            float f = AutoSprint.m821(MC.client3.player.getYaw());
-            boolean bl2 = bl = AutoSprint.isSet177() && AutoSprint.m325(f, MC.client3.player.getYaw()) > 1.0f;
+            float f = AutoSprint.m821(MC.mc.player.getYaw());
+            boolean bl2 = bl = AutoSprint.isSet177() && AutoSprint.m325(f, MC.mc.player.getYaw()) > 1.0f;
             if (bl) {
-                Client.mathUtil.m24(f, MC.client3.player.getPitch());
+                Client.mathUtil.m24(f, MC.mc.player.getPitch());
             } else if (Client.mathUtil.getType2() == MathUtil.Type.SPRINT) {
                 Client.mathUtil.m844();
             }
         }
         if (!this.isSet80()) {
-            MC.client3.player.setSprinting(false);
+            MC.mc.player.setSprinting(false);
             return;
         }
-        MC.client3.player.setSprinting(true);
+        MC.mc.player.setSprinting(true);
     }
 
     @EventHandler
@@ -93,48 +93,48 @@ extends Module {
         block23: {
             block22: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block22;
-                if (MC.client3.player.input != null) break block23;
+                if (MC.mc.player == null) break block22;
+                if (MC.mc.player.input != null) break block23;
             }
             return false;
         }
-        if (MC.client3.player.getHungerManager().getFoodLevel() <= 6) {
-            if (!MC.client3.player.isCreative()) {
+        if (MC.mc.player.getHungerManager().getFoodLevel() <= 6) {
+            if (!MC.mc.player.isCreative()) {
                 return false;
             }
         }
         if (!AutoSprint.isSet177()) {
             return false;
         }
-        if (MC.client3.player.hasVehicle()) {
+        if (MC.mc.player.hasVehicle()) {
             return false;
         }
-        if (MC.client3.player.isUsingItem()) {
-            if (((Boolean)this.usingPause.getObj()).booleanValue()) {
+        if (MC.mc.player.isUsingItem()) {
+            if (((Boolean)this.usingPause.getValue()).booleanValue()) {
                 return false;
             }
         }
-        if (MC.client3.player.isInSneakingPose()) {
-            if (((Boolean)this.sneakingPause.getObj()).booleanValue()) {
+        if (MC.mc.player.isInSneakingPose()) {
+            if (((Boolean)this.sneakingPause.getValue()).booleanValue()) {
                 return false;
             }
         }
-        if (MC.client3.player.hasStatusEffect(StatusEffects.BLINDNESS)) {
-            if (((Boolean)this.blindnessPause.getObj()).booleanValue()) {
+        if (MC.mc.player.hasStatusEffect(StatusEffects.BLINDNESS)) {
+            if (((Boolean)this.blindnessPause.getValue()).booleanValue()) {
                 return false;
             }
         }
         if (AutoSprint.isSet18()) {
-            if (((Boolean)this.inWaterPause.getObj()).booleanValue()) {
+            if (((Boolean)this.inWaterPause.getValue()).booleanValue()) {
                 return false;
             }
         }
         if (AutoSprint.isInWeb()) {
-            if (((Boolean)this.inWebPause.getObj()).booleanValue()) {
+            if (((Boolean)this.inWebPause.getValue()).booleanValue()) {
                 return false;
             }
         }
-        return switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        return switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             default -> throw new MatchException(null, null);
             case 1 -> true;
             case 0 -> this.isSet133();
@@ -153,7 +153,7 @@ extends Module {
             return true;
         }
         if (!AutoSprint.isSet73()) return false;
-        if (!(AutoSprint.m325(MC.client3.player.getYaw(), AutoSprint.getFloat64()) < 40.0f)) return false;
+        if (!(AutoSprint.m325(MC.mc.player.getYaw(), AutoSprint.getFloat64()) < 40.0f)) return false;
         return true;
     }
 
@@ -162,7 +162,7 @@ extends Module {
         if (AutoSprint.isSet102()) {
             return AutoSprint.getFloat20() > 0.0f;
         }
-        return AutoSprint.m325(AutoSprint.m821(MC.client3.player.getYaw()), AutoSprint.getFloat64()) < 40.0f;
+        return AutoSprint.m325(AutoSprint.m821(MC.mc.player.getYaw()), AutoSprint.getFloat64()) < 40.0f;
     }
 
     public static float m821(float f) {
@@ -211,19 +211,19 @@ extends Module {
     }
 
     private static boolean isSet73() {
-        return MC.client3.options.forwardKey.isPressed();
+        return MC.mc.options.forwardKey.isPressed();
     }
 
     private static boolean isSet113() {
-        return MC.client3.options.backKey.isPressed();
+        return MC.mc.options.backKey.isPressed();
     }
 
     private static boolean isSet146() {
-        return MC.client3.options.leftKey.isPressed();
+        return MC.mc.options.leftKey.isPressed();
     }
 
     private static boolean isSet76() {
-        return MC.client3.options.rightKey.isPressed();
+        return MC.mc.options.rightKey.isPressed();
     }
 
     /*
@@ -243,12 +243,12 @@ extends Module {
         block3: {
             block2: {
                 Object var1 = null;
-                if (MC.client3.player == null) break block2;
-                if (MC.client3.player.input != null) break block3;
+                if (MC.mc.player == null) break block2;
+                if (MC.mc.player.input != null) break block3;
             }
             return 0.0f;
         }
-        return MC.client3.player.input.getMovementInput().y;
+        return MC.mc.player.input.getMovementInput().y;
     }
 
     /*
@@ -257,9 +257,9 @@ extends Module {
      */
     private static boolean isInWeb() {
         Object var1 = null;
-        if (MC.client3.player == null) return false;
-        if (MC.client3.world == null) return false;
-        if (!MC.client3.world.getStatesInBox(MC.client3.player.getBoundingBox()).anyMatch(blockState -> blockState.isOf(Blocks.COBWEB))) return false;
+        if (MC.mc.player == null) return false;
+        if (MC.mc.world == null) return false;
+        if (!MC.mc.world.getStatesInBox(MC.mc.player.getBoundingBox()).anyMatch(blockState -> blockState.isOf(Blocks.COBWEB))) return false;
         return true;
     }
 
@@ -269,8 +269,8 @@ extends Module {
      */
     private static boolean isSet18() {
         Object var1 = null;
-        if (MC.client3.player == null) return false;
-        if (!MC.client3.player.isTouchingWater()) return false;
+        if (MC.mc.player == null) return false;
+        if (!MC.mc.player.isTouchingWater()) return false;
         return true;
     }
 
@@ -282,7 +282,7 @@ extends Module {
         if (!Client.mathUtil.isSet111()) {
             return false;
         }
-        boolean bl = ClientSetting.INSTANCE != null && ((Boolean)ClientSetting.INSTANCE.movementSync.getObj()).booleanValue();
+        boolean bl = ClientSetting.INSTANCE != null && ((Boolean)ClientSetting.INSTANCE.movementSync.getValue()).booleanValue();
         boolean bl2 = INSTANCE != null && INSTANCE.isSet160();
         return bl || bl2;
     }
@@ -290,7 +290,7 @@ extends Module {
     private static float getFloat64() {
         MathUtil mathUtil = Client.mathUtil;
         Object var1_1 = null;
-        return mathUtil.isSet111() ? mathUtil.getFloat55() : MC.client3.player.getYaw();
+        return mathUtil.isSet111() ? mathUtil.getFloat55() : MC.mc.player.getYaw();
     }
 
     private static float m325(float f, float f2) {

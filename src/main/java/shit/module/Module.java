@@ -33,9 +33,9 @@ implements MC {
     protected Module(String string, String string2, Category category) {
         block0: {
             this.list11 = new ArrayList();
-            this.booleanSetting2 = (BooleanSetting)this.m28(new BooleanSetting("Drawn", true));
+            this.booleanSetting2 = (BooleanSetting)this.registerSetting(new BooleanSetting("Drawn", true));
             Object var4_4 = null;
-            this.colorSetting2 = (ColorSetting2)this.m28(new ColorSetting2("Bind", -1));
+            this.colorSetting2 = (ColorSetting2)this.registerSetting(new ColorSetting2("Bind", -1));
             this.text2598 = string;
             this.text1185 = string2;
             this.category = category;
@@ -44,26 +44,26 @@ implements MC {
         }
     }
 
-    protected Setting m28(Object object) {
+    protected Setting registerSetting(Object object) {
         Setting setting = (Setting)object;
         this.list11.add(setting);
         return setting;
     }
 
-    public void m84() {
+    public void toggle() {
         block0: {
             Object var2_1 = null;
-            this.setFlag3(!this.flag123);
+            this.setEnabled(!this.flag123);
             if (Module.getTextArray9() != null) break block0;
             Category.setText7("x3Qbmc");
         }
     }
 
-    public String getText57() {
+    public String getInfo() {
         return null;
     }
 
-    public void setFlag3(boolean bl) {
+    public void setEnabled(boolean bl) {
         boolean bl2;
         block7: {
             block6: {
@@ -87,29 +87,29 @@ implements MC {
                 if (null == null) break block7;
             }
             try {
-                this.m709();
+                this.onDisable();
             } catch (RuntimeException e) {
             }
-            Client.eventBus.setObj18(this);
+            Client.eventBus.unsubscribe(this);
         }
-        Client.eventBus.m287(new ModuleToggleEvent(this, bl2));
+        Client.eventBus.post(new ModuleToggleEvent(this, bl2));
     }
 
     public void onEnable() {
     }
 
-    public void m709() {
+    public void onDisable() {
     }
 
-    public String getText69() {
+    public String getName() {
         return this.text2598;
     }
 
-    public String getText43() {
+    public String getDisplayName() {
         return Outline.m14(this.text2598);
     }
 
-    public String getText32() {
+    public String getDisplayDescription() {
         return Outline.m14(this.text1185);
     }
 
@@ -117,25 +117,25 @@ implements MC {
         return this.category;
     }
 
-    public boolean isSet19() {
+    public boolean isEnabled() {
         return this.flag123;
     }
 
-    public boolean isSet36() {
-        return (Boolean)this.booleanSetting2.getObj();
+    public boolean isDrawn() {
+        return (Boolean)this.booleanSetting2.getValue();
     }
 
-    public ColorSetting2 getColorSetting2() {
+    public ColorSetting2 getKeyBindSetting() {
         return this.colorSetting2;
     }
 
-    public java.util.List<shit.setting.Setting> getList8() {
+    public java.util.List<shit.setting.Setting> getSettings() {
         return Collections.unmodifiableList(this.list11);
     }
 
-    public static boolean isSet37() {
+    public static boolean isNotInGame() {
         Object var1 = null;
-        return MC.client3.player == null || MC.client3.world == null;
+        return MC.mc.player == null || MC.mc.world == null;
     }
 
     public static void setTextArray9(String[] stringArray) {

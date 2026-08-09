@@ -25,9 +25,9 @@ import shit.util.Util3;
 @Environment(value=EnvType.CLIENT)
 public class ChestStealer
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.TOGGLE));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 250.0, 0.0, 1000.0, 25.0));
-    private final BooleanSetting shulkersOnly = (BooleanSetting)this.m28(new BooleanSetting("ShulkersOnly", false));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.TOGGLE));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 250.0, 0.0, 1000.0, 25.0));
+    private final BooleanSetting shulkersOnly = (BooleanSetting)this.registerSetting(new BooleanSetting("ShulkersOnly", false));
     private final Helper7 helper725 = new Helper7();
     private boolean flag83;
 
@@ -37,37 +37,37 @@ extends Module {
 
     @Override
     public void onEnable() {
-        this.flag83 = this.mode.getObj() != Mode.MANUAL;
-        this.helper725.m533();
+        this.flag83 = this.mode.getValue() != Mode.MANUAL;
+        this.helper725.resetTimer();
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag83 = false;
     }
 
     @EventHandler
     private void setEvent2Inner27(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || !Util3.isSet48()) {
+        if (Module.isNotInGame() || !Util3.isSet48()) {
             return;
         }
-        if (this.mode.getObj() == Mode.ALWAYS) {
+        if (this.mode.getValue() == Mode.ALWAYS) {
             this.flag83 = true;
         }
-        if (!this.flag83 || !this.helper725.m432((Double)this.delay.getObj())) {
+        if (!this.flag83 || !this.helper725.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
         int n = Util3.getInt20();
         for (int i = 0; i < n; ++i) {
             BlockItem blockItem;
             Item item;
-            Slot slot = (Slot)MC.client3.player.currentScreenHandler.slots.get(i);
-            if (!slot.hasStack() || ((Boolean)this.shulkersOnly.getObj()).booleanValue() && (!((item = slot.getStack().getItem()) instanceof BlockItem) || !((blockItem = (BlockItem)item).getBlock() instanceof ShulkerBoxBlock))) continue;
-            MC.client3.interactionManager.clickSlot(MC.client3.player.currentScreenHandler.syncId, i, 0, SlotActionType.QUICK_MOVE, (PlayerEntity)MC.client3.player);
-            this.helper725.m533();
+            Slot slot = (Slot)MC.mc.player.currentScreenHandler.slots.get(i);
+            if (!slot.hasStack() || ((Boolean)this.shulkersOnly.getValue()).booleanValue() && (!((item = slot.getStack().getItem()) instanceof BlockItem) || !((blockItem = (BlockItem)item).getBlock() instanceof ShulkerBoxBlock))) continue;
+            MC.mc.interactionManager.clickSlot(MC.mc.player.currentScreenHandler.syncId, i, 0, SlotActionType.QUICK_MOVE, (PlayerEntity)MC.mc.player);
+            this.helper725.resetTimer();
             return;
         }
-        if (this.mode.getObj() == Mode.TOGGLE) {
+        if (this.mode.getValue() == Mode.TOGGLE) {
             this.flag83 = false;
         }
     }

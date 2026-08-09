@@ -85,24 +85,24 @@ extends Module {
 
         public Tips() {
         super("Tips", "Displays lag, visual range, pop counter and health warnings.", Category.MISC);
-        this.visualRange = (BooleanSetting)this.m28(new BooleanSetting("VisualRange", false));
-        this.friends = (BooleanSetting)this.m28(new BooleanSetting("Friends", false));
-        this.popCounter = (BooleanSetting)this.m28(new BooleanSetting("PopCounter", true));
-        this.deathCoords = (BooleanSetting)this.m28(new BooleanSetting("DeathCoords", true));
-        this.serverLag = (BooleanSetting)this.m28(new BooleanSetting("ServerLag", true));
-        this.lagBack = (BooleanSetting)this.m28(new BooleanSetting("LagBack", true));
-        this.potion = (BooleanSetting)this.m28(new BooleanSetting("Potion", true));
-        this.resistanceLevelCheck = (BooleanSetting)this.m28(new BooleanSetting("ResistanceLevelCheck", true));
-        this.yOffset = (NumberSetting)this.m28(new NumberSetting("YOffset", 0.0, -200.0, 200.0, 1.0));
-        this.healthWarn = (BooleanSetting)this.m28(new BooleanSetting("HealthWarn", true));
-        this.minHealth = (NumberSetting)this.m28(new NumberSetting("MinHealth", 6.0, 0.0, 20.0, 1.0));
-        this.xPos = (NumberSetting)this.m28(new NumberSetting("XPos", 469.0, 0.0, 1000.0, 1.0));
-        this.yPos = (NumberSetting)this.m28(new NumberSetting("YPos", 378.0, 0.0, 1000.0, 1.0));
-        this.hWPlaySound = (BooleanSetting)this.m28(new BooleanSetting("HWPlaySound", false));
-        this.blinkEffect = (BooleanSetting)this.m28(new BooleanSetting("BlinkEffect", true));
-        this.showHealthText = (BooleanSetting)this.m28(new BooleanSetting("ShowHealthText", true));
-        this.shadowText = (BooleanSetting)this.m28(new BooleanSetting("ShadowText", true));
-        this.iconSize = (NumberSetting)this.m28(new NumberSetting("IconSize", 32.0, 16.0, 64.0, 1.0));
+        this.visualRange = (BooleanSetting)this.registerSetting(new BooleanSetting("VisualRange", false));
+        this.friends = (BooleanSetting)this.registerSetting(new BooleanSetting("Friends", false));
+        this.popCounter = (BooleanSetting)this.registerSetting(new BooleanSetting("PopCounter", true));
+        this.deathCoords = (BooleanSetting)this.registerSetting(new BooleanSetting("DeathCoords", true));
+        this.serverLag = (BooleanSetting)this.registerSetting(new BooleanSetting("ServerLag", true));
+        this.lagBack = (BooleanSetting)this.registerSetting(new BooleanSetting("LagBack", true));
+        this.potion = (BooleanSetting)this.registerSetting(new BooleanSetting("Potion", true));
+        this.resistanceLevelCheck = (BooleanSetting)this.registerSetting(new BooleanSetting("ResistanceLevelCheck", true));
+        this.yOffset = (NumberSetting)this.registerSetting(new NumberSetting("YOffset", 0.0, -200.0, 200.0, 1.0));
+        this.healthWarn = (BooleanSetting)this.registerSetting(new BooleanSetting("HealthWarn", true));
+        this.minHealth = (NumberSetting)this.registerSetting(new NumberSetting("MinHealth", 6.0, 0.0, 20.0, 1.0));
+        this.xPos = (NumberSetting)this.registerSetting(new NumberSetting("XPos", 469.0, 0.0, 1000.0, 1.0));
+        this.yPos = (NumberSetting)this.registerSetting(new NumberSetting("YPos", 378.0, 0.0, 1000.0, 1.0));
+        this.hWPlaySound = (BooleanSetting)this.registerSetting(new BooleanSetting("HWPlaySound", false));
+        this.blinkEffect = (BooleanSetting)this.registerSetting(new BooleanSetting("BlinkEffect", true));
+        this.showHealthText = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowHealthText", true));
+        this.shadowText = (BooleanSetting)this.registerSetting(new BooleanSetting("ShadowText", true));
+        this.iconSize = (NumberSetting)this.registerSetting(new NumberSetting("IconSize", 32.0, 16.0, 64.0, 1.0));
         this.decimalFormat2 = new DecimalFormat("0.0");
         this.helper713 = new Helper7();
         this.helper743 = new Helper7();
@@ -119,7 +119,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.map37.clear();
         this.set.clear();
         this.flag170 = false;
@@ -127,15 +127,15 @@ extends Module {
 
     @EventHandler
     private void setPacketEventInner4(PacketEvent.PacketEventInner packetEventInner) {
-        this.helper713.m533();
+        this.helper713.resetTimer();
         if (packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket) {
-            this.helper743.m533();
+            this.helper743.resetTimer();
         }
     }
 
     @EventHandler
     private void setEvent2Inner15(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         this.m413();
@@ -145,12 +145,12 @@ extends Module {
 
     @EventHandler
     private void setPlayerEvent2(PlayerEvent playerEvent) {
-        if (!((Boolean)this.popCounter.getObj()).booleanValue()) {
+        if (!((Boolean)this.popCounter.getValue()).booleanValue()) {
             return;
         }
         PlayerEntity playerEntity = playerEvent.getPlayer4();
         int n = (Integer)this.map44.merge(playerEntity.getUuid(), 1, (java.util.function.BiFunction<Integer, Integer, Integer>)Integer::sum);
-        String string = playerEntity == MC.client3.player ? "You" : playerEntity.getName().getString();
+        String string = playerEntity == MC.mc.player ? "You" : playerEntity.getName().getString();
         String string2 = Tips.m346(n, "totem");
         int n2 = n;
         String string3 = string;
@@ -161,24 +161,24 @@ extends Module {
     private void setObj9(Render2DEvent render2DEvent) {
         float f;
         String string;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        int n = MC.client3.getWindow().getScaledWidth() / 2;
+        int n = MC.mc.getWindow().getScaledWidth() / 2;
         int n2 = 19;
-        if (((Boolean)this.serverLag.getObj()).booleanValue() && this.helper713.m114(1.4)) {
-            this.m751(render2DEvent, "Server not responding (" + this.decimalFormat2.format((double)this.helper713.getLong12() / 1000.0) + "s)", n, n2, -4325376);
+        if (((Boolean)this.serverLag.getValue()).booleanValue() && this.helper713.hasPassedSeconds(1.4)) {
+            this.m751(render2DEvent, "Server not responding (" + this.decimalFormat2.format((double)this.helper713.getElapsed() / 1000.0) + "s)", n, n2, -4325376);
             n2 += 9;
         }
-        if (((Boolean)this.lagBack.getObj()).booleanValue() && !this.helper743.m114(1.5)) {
-            this.m751(render2DEvent, "Lagback (" + this.decimalFormat2.format((double)(1500L - this.helper743.getLong12()) / 1000.0) + "s)", n, n2, -4325376);
+        if (((Boolean)this.lagBack.getValue()).booleanValue() && !this.helper743.hasPassedSeconds(1.5)) {
+            this.m751(render2DEvent, "Lagback (" + this.decimalFormat2.format((double)(1500L - this.helper743.getElapsed()) / 1000.0) + "s)", n, n2, -4325376);
         }
-        if (((Boolean)this.potion.getObj()).booleanValue() && !(string = this.getText60()).isEmpty()) {
-            int n3 = MC.client3.getWindow().getScaledHeight() / 2;
-            this.m751(render2DEvent, string, n, n3 + 9 - this.yOffset.getInt50(), -1);
+        if (((Boolean)this.potion.getValue()).booleanValue() && !(string = this.getText60()).isEmpty()) {
+            int n3 = MC.mc.getWindow().getScaledHeight() / 2;
+            this.m751(render2DEvent, string, n, n3 + 9 - this.yOffset.getInt(), -1);
         }
-        if (((Boolean)this.healthWarn.getObj()).booleanValue() && (double)(f = MC.client3.player.getHealth() + MC.client3.player.getAbsorptionAmount()) <= (Double)this.minHealth.getObj()) {
-            this.m966(render2DEvent, this.xPos.getInt50(), this.yPos.getInt50(), f);
+        if (((Boolean)this.healthWarn.getValue()).booleanValue() && (double)(f = MC.mc.player.getHealth() + MC.mc.player.getAbsorptionAmount()) <= (Double)this.minHealth.getValue()) {
+            this.m966(render2DEvent, this.xPos.getInt(), this.yPos.getInt(), f);
         }
     }
 
@@ -187,19 +187,19 @@ extends Module {
      * Unable to fully structure code
      */
     private void m413() {
-        if (!((Boolean)this.visualRange.getObj()).booleanValue()) {
+        if (!((Boolean)this.visualRange.getValue()).booleanValue()) {
             this.map37.clear();
             this.flag170 = false;
             return;
         }
         HashMap<UUID, String> current = new HashMap<UUID, String>();
-        Iterator iterator = MC.client3.world.getPlayers().iterator();
+        Iterator iterator = MC.mc.world.getPlayers().iterator();
         while (iterator.hasNext()) {
             PlayerEntity playerEntity = (PlayerEntity)iterator.next();
-            if (playerEntity == MC.client3.player) continue;
+            if (playerEntity == MC.mc.player) continue;
             current.put(playerEntity.getUuid(), playerEntity.getName().getString());
             if (this.flag170 && !this.map37.containsKey(playerEntity.getUuid()) && this.m501(playerEntity)) {
-                CommandManager.setObj21(this.m734(playerEntity) + "\u00a7f entered your visual range.");
+                CommandManager.sendFeedback(this.m734(playerEntity) + "\u00a7f entered your visual range.");
                 this.m839();
             }
         }
@@ -207,7 +207,7 @@ extends Module {
             for (Object object : this.map37.entrySet()) {
                 Map.Entry entry = (Map.Entry)object;
                 if (current.containsKey(entry.getKey())) continue;
-                CommandManager.setObj21("\u00a7f" + entry.getValue() + "\u00a7f left your visual range.");
+                CommandManager.sendFeedback("\u00a7f" + entry.getValue() + "\u00a7f left your visual range.");
                 this.m839();
             }
         }
@@ -223,10 +223,10 @@ extends Module {
     private boolean m501(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
         String string = IRC.getText7();
-        boolean bl = (Boolean)this.friends.getObj();
+        boolean bl = (Boolean)this.friends.getValue();
         if (string == null) return bl;
         if (bl) return true;
-        bl = Client.manager.m258(playerEntity.getName().getString());
+        bl = Client.manager.isFriend(playerEntity.getName().getString());
         if (string == null) return bl;
         if (bl) return false;
         return true;
@@ -235,18 +235,18 @@ extends Module {
     private String m734(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
         String string = playerEntity.getName().getString();
-        return Client.manager.m258(string) ? "\u00a7b" + string : "\u00a7f" + string;
+        return Client.manager.isFriend(string) ? "\u00a7b" + string : "\u00a7f" + string;
     }
 
     private void m839() {
-        MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.9f, false);
+        MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.9f, false);
     }
 
     private void m915() {
         block5: {
             boolean bl;
             HashSet<UUID> hashSet = new HashSet<UUID>();
-            Iterator iterator = MC.client3.world.getPlayers().iterator();
+            Iterator iterator = MC.mc.world.getPlayers().iterator();
             String string = IRC.getText7();
             while (iterator.hasNext()) {
                 block8: {
@@ -285,9 +285,9 @@ extends Module {
      */
     private void setObj40(Object var1_1) {
         PlayerEntity playerEntity = (PlayerEntity)var1_1;
-        if (((Boolean)this.popCounter.getObj()).booleanValue()) {
+        if (((Boolean)this.popCounter.getValue()).booleanValue()) {
             int pops = (Integer)this.map44.getOrDefault(playerEntity.getUuid(), 0);
-            String name = playerEntity == MC.client3.player ? "You" : playerEntity.getName().getString();
+            String name = playerEntity == MC.mc.player ? "You" : playerEntity.getName().getString();
             if (pops > 0) {
                 String suffix = Tips.m346(pops, "totem");
                 this.m387("\u00a7f" + name + "\u00a7r died after popping \u00a7f" + pops + "\u00a7r " + suffix + ".", playerEntity);
@@ -296,14 +296,14 @@ extends Module {
             }
             this.map44.remove(playerEntity.getUuid());
         }
-        if (((Boolean)this.deathCoords.getObj()).booleanValue()) {
-            if (playerEntity != MC.client3.player) {
+        if (((Boolean)this.deathCoords.getValue()).booleanValue()) {
+            if (playerEntity != MC.mc.player) {
                 return;
             }
             int x = playerEntity.getBlockX();
             int y = playerEntity.getBlockY();
             int z = playerEntity.getBlockZ();
-            CommandManager.setObj21("\u00a74You died at " + x + ", " + y + ", " + z);
+            CommandManager.sendFeedback("\u00a74You died at " + x + ", " + y + ", " + z);
         }
     }
 
@@ -317,23 +317,23 @@ extends Module {
                         boolean bl;
                         block7: {
                             string = IRC.getText7();
-                            bl = (Boolean)this.healthWarn.getObj();
+                            bl = (Boolean)this.healthWarn.getValue();
                             if (string == null) break block7;
                             if (!bl) break block8;
-                            bl = (Boolean)this.hWPlaySound.getObj();
+                            bl = (Boolean)this.hWPlaySound.getValue();
                         }
                         if (bl) break block9;
                     }
                     return;
                 }
-                float f = MC.client3.player.getHealth() + MC.client3.player.getAbsorptionAmount();
-                if ((double)f > (Double)this.minHealth.getObj()) {
+                float f = MC.mc.player.getHealth() + MC.mc.player.getAbsorptionAmount();
+                if ((double)f > (Double)this.minHealth.getValue()) {
                     return;
                 }
                 l = System.currentTimeMillis();
                 if (string == null) break block10;
                 if (l - this.time74 <= 1000L) break block11;
-                MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
+                MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
             }
             this.time74 = l;
         }
@@ -347,7 +347,7 @@ extends Module {
             if (n > 0) {
                 stringBuilder.append("\u00a7e").append(n);
             }
-            this.m166(stringBuilder, StatusEffects.RESISTANCE, "\u00a79", (Boolean)this.resistanceLevelCheck.getObj());
+            this.m166(stringBuilder, StatusEffects.RESISTANCE, "\u00a79", (Boolean)this.resistanceLevelCheck.getValue());
             this.m166(stringBuilder, StatusEffects.STRENGTH, "\u00a74", false);
             this.m166(stringBuilder, StatusEffects.SPEED, "\u00a7b", false);
         }
@@ -358,13 +358,13 @@ extends Module {
         int n;
         block9: {
             String string = IRC.getText7();
-            if (MC.client3.player == null) {
+            if (MC.mc.player == null) {
                 return 0;
             }
             int n2 = 0;
             block0: for (int i = 0; i < 36; ++i) {
                 ItemStack itemStack;
-                Object object = itemStack = MC.client3.player.getInventory().getStack(i);
+                Object object = itemStack = MC.mc.player.getInventory().getStack(i);
                 if (string != null) {
                     n = itemStack.isEmpty() ? 1 : 0;
                     if (string == null) break block9;
@@ -409,7 +409,7 @@ extends Module {
                     RegistryEntry registryEntry = (RegistryEntry)object2;
                     string = (String)object3;
                     int n3 = n ? 1 : 0;
-                    statusEffectInstance = MC.client3.player.getStatusEffect(registryEntry);
+                    statusEffectInstance = MC.mc.player.getStatusEffect(registryEntry);
                     string2 = IRC.getText7();
                     if (statusEffectInstance == null) break block4;
                     n2 = n3;
@@ -457,31 +457,31 @@ extends Module {
         int px = var2_2;
         int py = var3_3;
         float health = var4_4;
-        int size = this.iconSize.getInt50();
-        int blink = ((Boolean)this.blinkEffect.getObj()).booleanValue() ? (System.currentTimeMillis() % 1000L - 500L < 0L ? 1 : 0) : 1;
+        int size = this.iconSize.getInt();
+        int blink = ((Boolean)this.blinkEffect.getValue()).booleanValue() ? (System.currentTimeMillis() % 1000L - 500L < 0L ? 1 : 0) : 1;
         int fillColor = blink != 0 ? -2130771968 : 1612718112;
         render2DEvent.getDrawContext().fill(px, py, px + size, py + size, fillColor);
         render2DEvent.getDrawContext().drawStrokedRectangle(px, py, size, size, -65536);
-        Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), "!", px + size / 2 - 3, py + size / 2 - 5, -65536, (Boolean)this.shadowText.getObj());
-        if (!((Boolean)this.showHealthText.getObj()).booleanValue()) {
+        Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), "!", px + size / 2 - 3, py + size / 2 - 5, -65536, (Boolean)this.shadowText.getValue());
+        if (!((Boolean)this.showHealthText.getValue()).booleanValue()) {
             return;
         }
         String healthStr = this.decimalFormat2.format(health);
-        int w = Client.fontManager.renderer2().m277(healthStr);
-        Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), healthStr, px + size / 2 - w / 2, py + size + 3, this.m1022(health), (Boolean)this.shadowText.getObj());
+        int w = Client.fontManager.renderer2().getStringWidth(healthStr);
+        Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), healthStr, px + size / 2 - w / 2, py + size + 3, this.m1022(health), (Boolean)this.shadowText.getValue());
     }
 
     private int m1022(float f) {
         float f2 = f;
         String string = IRC.getText7();
-        double d = (Double)this.minHealth.getObj();
+        double d = (Double)this.minHealth.getValue();
         double d2 = 0.0;
         if (string != null) {
             if (d <= d2) {
                 return -65536;
             }
             d = f2;
-            d2 = (Double)this.minHealth.getObj();
+            d2 = (Double)this.minHealth.getValue();
         }
         float f3 = (float)(d / d2);
         float f4 = f3 - 0.5f;
@@ -515,16 +515,16 @@ extends Module {
         int n4 = n;
         int n5 = n2;
         int n6 = n3;
-        int n7 = Client.fontManager.renderer2().m277(string);
-        Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), string, n4 - n7 / 2, n5, n6, true);
+        int n7 = Client.fontManager.renderer2().getStringWidth(string);
+        Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), string, n4 - n7 / 2, n5, n6, true);
     }
 
     private void m387(Object object, Object object2) {
         block0: {
             String string = (String)object;
             PlayerEntity cfr_ignored_0 = (PlayerEntity)object2;
-            if (Module.isSet37()) break block0;
-            CommandManager.setObj21(string);
+            if (Module.isNotInGame()) break block0;
+            CommandManager.sendFeedback(string);
         }
     }
 

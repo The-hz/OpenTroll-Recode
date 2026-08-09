@@ -42,15 +42,15 @@ import shit.util.MC;
 public class NameTags
 extends Module {
     public static NameTags INSTANCE;
-    private final BooleanSetting ping = (BooleanSetting)this.m28(new BooleanSetting("Ping", true));
-    private final BooleanSetting health = (BooleanSetting)this.m28(new BooleanSetting("Health", true));
-    private final BooleanSetting pops = (BooleanSetting)this.m28(new BooleanSetting("Pops", true));
-    private final BooleanSetting armor = (BooleanSetting)this.m28(new BooleanSetting("Armor", true));
-    private final BooleanSetting hands = (BooleanSetting)this.m28(new BooleanSetting("Hands", true));
-    private final BooleanSetting onlyVisible = (BooleanSetting)this.m28(new BooleanSetting("OnlyVisible", true));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 48.0, 8.0, 128.0, 1.0));
-    private final NumberSetting maxScale = (NumberSetting)this.m28(new NumberSetting("MaxScale", 1.0, 0.4, 3.0, 0.05));
-    private final NumberSetting minScale = (NumberSetting)this.m28(new NumberSetting("MinScale", 0.55, 0.2, 2.0, 0.05));
+    private final BooleanSetting ping = (BooleanSetting)this.registerSetting(new BooleanSetting("Ping", true));
+    private final BooleanSetting health = (BooleanSetting)this.registerSetting(new BooleanSetting("Health", true));
+    private final BooleanSetting pops = (BooleanSetting)this.registerSetting(new BooleanSetting("Pops", true));
+    private final BooleanSetting armor = (BooleanSetting)this.registerSetting(new BooleanSetting("Armor", true));
+    private final BooleanSetting hands = (BooleanSetting)this.registerSetting(new BooleanSetting("Hands", true));
+    private final BooleanSetting onlyVisible = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyVisible", true));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 48.0, 8.0, 128.0, 1.0));
+    private final NumberSetting maxScale = (NumberSetting)this.registerSetting(new NumberSetting("MaxScale", 1.0, 0.4, 3.0, 0.05));
+    private final NumberSetting minScale = (NumberSetting)this.registerSetting(new NumberSetting("MinScale", 0.55, 0.2, 2.0, 0.05));
     private final DecimalFormat decimalFormat2 = new DecimalFormat("0.0");
     private final Map<java.util.UUID, Integer> map41 = new HashMap<>();
     private Matrix4f matrix4f10;
@@ -62,7 +62,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.map41.clear();
     }
 
@@ -79,20 +79,20 @@ extends Module {
 
     @EventHandler
     private void setObj7(Render2DEvent render2DEvent) {
-        if (Module.isSet37() || this.matrix4f10 == null || this.matrix4f5 == null) {
+        if (Module.isNotInGame() || this.matrix4f10 == null || this.matrix4f5 == null) {
             return;
         }
-        if (((Boolean)this.onlyVisible.getObj()).booleanValue() && MC.client3.currentScreen != null) {
+        if (((Boolean)this.onlyVisible.getValue()).booleanValue() && MC.mc.currentScreen != null) {
             return;
         }
-        Vec3d vec3d = MC.client3.gameRenderer.getCamera().getCameraPos();
+        Vec3d vec3d = MC.mc.gameRenderer.getCamera().getCameraPos();
         Matrix4f matrix4f = new Matrix4f((Matrix4fc)this.matrix4f5).mul((Matrix4fc)this.matrix4f10);
-        int n = MC.client3.getWindow().getScaledWidth();
-        int n2 = MC.client3.getWindow().getScaledHeight();
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
+        int n = MC.mc.getWindow().getScaledWidth();
+        int n2 = MC.mc.getWindow().getScaledHeight();
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
             int[] nArray;
-            if (playerEntity == MC.client3.player || (double)playerEntity.distanceTo((Entity)MC.client3.player) > (Double)this.range.getObj() || (nArray = this.m763(playerEntity, vec3d, matrix4f, n, n2)) == null) continue;
-            this.m929(render2DEvent.getDrawContext(), playerEntity, nArray[0], nArray[1], this.m840(playerEntity.distanceTo((Entity)MC.client3.player)));
+            if (playerEntity == MC.mc.player || (double)playerEntity.distanceTo((Entity)MC.mc.player) > (Double)this.range.getValue() || (nArray = this.m763(playerEntity, vec3d, matrix4f, n, n2)) == null) continue;
+            this.m929(render2DEvent.getDrawContext(), playerEntity, nArray[0], nArray[1], this.m840(playerEntity.distanceTo((Entity)MC.mc.player)));
         }
     }
 
@@ -105,7 +105,7 @@ extends Module {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         Object var3_3 = null;
         if (INSTANCE == null) return false;
-        if (!INSTANCE.isSet19()) return false;
+        if (!INSTANCE.isEnabled()) return false;
         if (!(entity instanceof PlayerEntity)) return false;
         if (entity == minecraftClient.player) return false;
         return true;
@@ -141,8 +141,8 @@ extends Module {
 
     private float m840(float f) {
         float f2 = f;
-        float f3 = this.maxScale.getFloat35();
-        float f4 = Math.min(this.minScale.getFloat35(), f3);
+        float f3 = this.maxScale.getFloat();
+        float f4 = Math.min(this.minScale.getFloat(), f3);
         float f5 = f3 / (1.0f + Math.max(0.0f, f2 - 4.0f) * 0.025f);
         return Math.max(f4, Math.min(f3, f5));
     }
@@ -180,14 +180,14 @@ extends Module {
                 fontManager2 = Client.fontManager.renderer2();
                 list = this.m757(playerEntity);
                 n7 = this.m463(fontManager2, list);
-                n6 = fontManager2.getInt19();
+                n6 = fontManager2.getFontHeight();
                 n5 = Math.max(24, n7 / 2 + 5);
                 int n10 = n6 / 2 + 4;
                 n4 = n8 - n10;
                 n3 = n8 + n10 + 2;
                 Object var10_17 = null;
-                if (((Boolean)this.armor.getObj()).booleanValue()) break block4;
-                if (!((Boolean)this.hands.getObj()).booleanValue()) break block5;
+                if (((Boolean)this.armor.getValue()).booleanValue()) break block4;
+                if (!((Boolean)this.hands.getValue()).booleanValue()) break block5;
             }
             this.m266(drawContext, playerEntity, n9, n4 - 19);
         }
@@ -218,14 +218,14 @@ extends Module {
             arrayList.add(new Data(string2, n));
         }
         arrayList.add(new Data(string, n));
-        if (((Boolean)this.ping.getObj()).booleanValue()) {
+        if (((Boolean)this.ping.getValue()).booleanValue()) {
             arrayList.add(new Data(" " + this.m811(playerEntity) + "ms", -5592406));
         }
-        if (((Boolean)this.health.getObj()).booleanValue()) {
+        if (((Boolean)this.health.getValue()).booleanValue()) {
             float f = playerEntity.getHealth() + playerEntity.getAbsorptionAmount();
             arrayList.add(new Data(" " + this.decimalFormat2.format(f), this.m236(playerEntity)));
         }
-        if (((Boolean)this.pops.getObj()).booleanValue()) {
+        if (((Boolean)this.pops.getValue()).booleanValue()) {
             int n2 = this.map41.getOrDefault(playerEntity.getUuid(), 0);
             if (n2 > 0) {
                 arrayList.add(new Data(" -" + n2, -43521));
@@ -241,16 +241,16 @@ extends Module {
         int n4 = n2;
         ArrayList<ItemStack> arrayList = new ArrayList<ItemStack>();
         Object var10_10 = null;
-        if (((Boolean)this.hands.getObj()).booleanValue()) {
+        if (((Boolean)this.hands.getValue()).booleanValue()) {
             arrayList.add(playerEntity.getStackInHand(Hand.OFF_HAND));
         }
-        if (((Boolean)this.armor.getObj()).booleanValue()) {
+        if (((Boolean)this.armor.getValue()).booleanValue()) {
             arrayList.add(playerEntity.getEquippedStack(EquipmentSlot.HEAD));
             arrayList.add(playerEntity.getEquippedStack(EquipmentSlot.CHEST));
             arrayList.add(playerEntity.getEquippedStack(EquipmentSlot.LEGS));
             arrayList.add(playerEntity.getEquippedStack(EquipmentSlot.FEET));
         }
-        if (((Boolean)this.hands.getObj()).booleanValue()) {
+        if (((Boolean)this.hands.getValue()).booleanValue()) {
             arrayList.add(playerEntity.getStackInHand(Hand.MAIN_HAND));
         }
         arrayList.removeIf(ItemStack::isEmpty);
@@ -260,7 +260,7 @@ extends Module {
         int n5 = n3 - arrayList.size() * 9;
         for (ItemStack itemStack : arrayList) {
             drawContext.drawItem(itemStack, n5, n4);
-            drawContext.drawStackOverlay(MC.client3.textRenderer, itemStack, n5, n4);
+            drawContext.drawStackOverlay(MC.mc.textRenderer, itemStack, n5, n4);
             n5 += 18;
             if (null == null) continue;
         }
@@ -277,8 +277,8 @@ extends Module {
         Object var12_13 = null;
         while (iterator.hasNext()) {
             Data data = (Data)iterator.next();
-            fontManager2.m5(drawContext, data.text20(), n3 + n5, n4, data.count34(), true);
-            n5 += fontManager2.m277(data.text20());
+            fontManager2.drawText(drawContext, data.text20(), n3 + n5, n4, data.count34(), true);
+            n5 += fontManager2.getStringWidth(data.text20());
             if (null == null) continue;
         }
     }
@@ -291,7 +291,7 @@ extends Module {
         Object var6_7 = null;
         while (iterator.hasNext()) {
             Data data = (Data)iterator.next();
-            n += fontManager2.m277(data.text20());
+            n += fontManager2.getStringWidth(data.text20());
             if (null == null) continue;
         }
         return n;
@@ -300,10 +300,10 @@ extends Module {
     private int m811(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
         Object var4_3 = null;
-        if (MC.client3.getNetworkHandler() == null) {
+        if (MC.mc.getNetworkHandler() == null) {
             return -1;
         }
-        PlayerListEntry playerListEntry = MC.client3.getNetworkHandler().getPlayerListEntry(playerEntity.getUuid());
+        PlayerListEntry playerListEntry = MC.mc.getNetworkHandler().getPlayerListEntry(playerEntity.getUuid());
         return playerListEntry == null ? -1 : playerListEntry.getLatency();
     }
 

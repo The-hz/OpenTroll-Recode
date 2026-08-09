@@ -20,8 +20,8 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AutoEZ
 extends Module {
-    private final BooleanSetting self = (BooleanSetting)this.m28(new BooleanSetting("Self", false));
-    private final StringSetting message = (StringSetting)this.m28(new StringSetting("Message", "gg %s"));
+    private final BooleanSetting self = (BooleanSetting)this.registerSetting(new BooleanSetting("Self", false));
+    private final StringSetting message = (StringSetting)this.registerSetting(new StringSetting("Message", "gg %s"));
     private final Set set3 = new HashSet();
 
     public AutoEZ() {
@@ -34,23 +34,23 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.set3.clear();
     }
 
     @EventHandler
     private void setEvent2Inner22(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
-            if (playerEntity == MC.client3.player && !((Boolean)this.self.getObj()).booleanValue()) continue;
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
+            if (playerEntity == MC.mc.player && !((Boolean)this.self.getValue()).booleanValue()) continue;
             if (playerEntity.isAlive()) {
                 this.set3.add(playerEntity.getUuid());
                 continue;
             }
             if (!this.set3.remove(playerEntity.getUuid())) continue;
-            Util2.setObj62(String.format((String)this.message.getObj(), playerEntity.getName().getString()));
+            Util2.sendChatMessage(String.format((String)this.message.getValue(), playerEntity.getName().getString()));
         }
     }
 }

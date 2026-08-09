@@ -34,14 +34,14 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Scaffold
 extends Module {
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 0.0, 0.0, 10.0, 1.0));
-    private final BooleanSetting rotate = (BooleanSetting)this.m28(new BooleanSetting("Rotate", true));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final BooleanSetting grim = (BooleanSetting)this.m28(new BooleanSetting("Grim", true));
-    private final BooleanSetting tower = (BooleanSetting)this.m28(new BooleanSetting("Tower", true));
-    private final BooleanSetting safeWalk = (BooleanSetting)this.m28(new BooleanSetting("SafeWalk", true));
-    private final BooleanSetting autoSwitch = (BooleanSetting)this.m28(new BooleanSetting("AutoSwitch", true));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", EMode.DEFAULT));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 0.0, 0.0, 10.0, 1.0));
+    private final BooleanSetting rotate = (BooleanSetting)this.registerSetting(new BooleanSetting("Rotate", true));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final BooleanSetting grim = (BooleanSetting)this.registerSetting(new BooleanSetting("Grim", true));
+    private final BooleanSetting tower = (BooleanSetting)this.registerSetting(new BooleanSetting("Tower", true));
+    private final BooleanSetting safeWalk = (BooleanSetting)this.registerSetting(new BooleanSetting("SafeWalk", true));
+    private final BooleanSetting autoSwitch = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoSwitch", true));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", EMode.DEFAULT));
     private int count102;
     private long time33;
     private BlockPos blockPos17;
@@ -59,7 +59,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Client.renderUtil3.m608();
         this.blockPos17 = null;
@@ -69,19 +69,19 @@ extends Module {
     private void onTick5(Event2.Event2Inner event2Inner) {
         Hand hand;
         Data data;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.safeWalk.getObj()).booleanValue()) {
+        if (((Boolean)this.safeWalk.getValue()).booleanValue()) {
             this.m169();
         }
         if (this.count102 > 0) {
             --this.count102;
             return;
         }
-        BlockPos blockPos = BlockPos.ofFloored((double)MC.client3.player.getX(), (double)(MC.client3.player.getY() - 0.5), (double)MC.client3.player.getZ());
+        BlockPos blockPos = BlockPos.ofFloored((double)MC.mc.player.getX(), (double)(MC.mc.player.getY() - 0.5), (double)MC.mc.player.getZ());
         if (!this.m134(blockPos)) {
-            if (((Boolean)this.tower.getObj()).booleanValue() && MC.client3.player.input.playerInput.jump() && this.m134(blockPos.up())) {
+            if (((Boolean)this.tower.getValue()).booleanValue() && MC.mc.player.input.playerInput.jump() && this.m134(blockPos.up())) {
                 blockPos = blockPos.up();
             } else {
                 this.blockPos17 = null;
@@ -94,7 +94,7 @@ extends Module {
         }
         ClientSetting.SwitchMode switchMode = this.getSwitchMode11();
         boolean bl = false;
-        if (((Boolean)this.autoSwitch.getObj()).booleanValue()) {
+        if (((Boolean)this.autoSwitch.getValue()).booleanValue()) {
             boolean bl2 = Client.renderUtil3.m223((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.getItem() instanceof BlockItem), (Object)switchMode);
             if (!bl2) {
                 this.blockPos17 = null;
@@ -111,8 +111,8 @@ extends Module {
         }
         this.blockPos17 = blockPos;
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)data.blockPos3).add((double)data.direction3.getOffsetX() * 0.5, (double)data.direction3.getOffsetY() * 0.5, (double)data.direction3.getOffsetZ() * 0.5);
-        if (((Boolean)this.rotate.getObj()).booleanValue()) {
-            float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        if (((Boolean)this.rotate.getValue()).booleanValue()) {
+            float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
             fArray[1] = Math.max(fArray[1], 75.0f);
             ClientSetting.RotateMode rotateMode = this.getRotateMode13();
             switch (Lambda.counts17[rotateMode.ordinal()]) {
@@ -124,7 +124,7 @@ extends Module {
                     Client.mathUtil.m355(fArray[0], fArray[1]);
                     Client.mathUtil.setFloat6(this.getFloat4());
                     if (!(Client.mathUtil.getFloat51() <= 5.0f)) break;
-                    if (((Boolean)this.grim.getObj()).booleanValue()) {
+                    if (((Boolean)this.grim.getValue()).booleanValue()) {
                         Client.mathUtil.m11(Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58());
                     }
                     this.m378(data, vec3d, hand);
@@ -148,8 +148,8 @@ extends Module {
         if (bl) {
             Client.renderUtil3.m608();
         }
-        this.count102 = this.delay.getInt50();
-        if (((Boolean)this.tower.getObj()).booleanValue() && MC.client3.player.input.playerInput.jump()) {
+        this.count102 = this.delay.getInt();
+        if (((Boolean)this.tower.getValue()).booleanValue() && MC.mc.player.input.playerInput.jump()) {
             this.m1010();
         }
     }
@@ -163,11 +163,11 @@ extends Module {
     }
 
     private void m1010() {
-        if (!MC.client3.player.isOnGround()) {
+        if (!MC.mc.player.isOnGround()) {
             return;
         }
         long l = System.currentTimeMillis();
-        MC.client3.player.setVelocity(MC.client3.player.getVelocity().x, 0.42, MC.client3.player.getVelocity().z);
+        MC.mc.player.setVelocity(MC.mc.player.getVelocity().x, 0.42, MC.mc.player.getVelocity().z);
         this.time33 = l;
     }
 
@@ -195,7 +195,7 @@ extends Module {
                         block15: {
                             direction = directionArray2[n2];
                             blockPos = blockPos2.offset(direction);
-                            blockState0 = MC.client3.world.getBlockState(blockPos);
+                            blockState0 = MC.mc.world.getBlockState(blockPos);
                             if (n3 == 0) break block13;
                             n = blockState0.isAir() ? 1 : 0;
                             if (n3 == 0) break block12;
@@ -224,7 +224,7 @@ extends Module {
                 block16: {
                     direction = directionArray2[n2];
                     blockPos = blockPos2.offset(direction);
-                    if (!MC.client3.world.getBlockState(blockPos).isAir()) break block16;
+                    if (!MC.mc.world.getBlockState(blockPos).isAir()) break block16;
                     directionArray = directions;
                     int n6 = directionArray.length;
                     int n7 = 0;
@@ -237,7 +237,7 @@ extends Module {
                                 block19: {
                                     direction2 = directionArray[n7];
                                     blockPos3 = blockPos.offset(direction2);
-                                    BlockState blockState = MC.client3.world.getBlockState(blockPos3);
+                                    BlockState blockState = MC.mc.world.getBlockState(blockPos3);
                                     if (n3 == 0) break block17;
                                     n5 = blockState.isAir() ? 1 : 0;
                                     if (n3 == 0) continue block2;
@@ -274,7 +274,7 @@ extends Module {
                 block8: {
                     block6: {
                         blockPos = (BlockPos)object;
-                        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+                        BlockState blockState = MC.mc.world.getBlockState(blockPos);
                         n = AutoArmor.getInt66();
                         bl2 = blockState.isAir();
                         if (n == 0) break block6;
@@ -288,7 +288,7 @@ extends Module {
                 return bl2;
             }
             Box box = new Box(blockPos);
-            for (Entity entity : MC.client3.world.getOtherEntities((Entity)MC.client3.player, box)) {
+            for (Entity entity : MC.mc.world.getOtherEntities((Entity)MC.mc.player, box)) {
                 block10: {
                     boolean bl3 = false;
                     block12: {
@@ -319,10 +319,10 @@ extends Module {
 
     private Hand getObj14() {
         boolean bl = false;
-        if (MC.client3.player.getMainHandStack().getItem() instanceof BlockItem) {
+        if (MC.mc.player.getMainHandStack().getItem() instanceof BlockItem) {
             return Hand.MAIN_HAND;
         }
-        if (MC.client3.player.getOffHandStack().getItem() instanceof BlockItem) {
+        if (MC.mc.player.getOffHandStack().getItem() instanceof BlockItem) {
             return Hand.OFF_HAND;
         }
         return null;
@@ -338,23 +338,23 @@ extends Module {
                     boolean bl;
                     block2: {
                         n = AutoArmor.getInt66();
-                        bl = MC.client3.player.isOnGround();
+                        bl = MC.mc.player.isOnGround();
                         if (n == 0) break block2;
                         if (!bl) break block3;
-                        clientPlayerEntity = MC.client3.player;
+                        clientPlayerEntity = MC.mc.player;
                         if (n == 0) break block4;
                         bl = clientPlayerEntity.input.playerInput.sneak();
                     }
                     if (bl) break block3;
-                    clientPlayerEntity = MC.client3.player;
+                    clientPlayerEntity = MC.mc.player;
                 }
-                BlockPos blockPos = BlockPos.ofFloored((double)clientPlayerEntity.getX(), (double)(MC.client3.player.getY() - 1.0), (double)MC.client3.player.getZ());
-                minecraftClient = MC.client3;
+                BlockPos blockPos = BlockPos.ofFloored((double)clientPlayerEntity.getX(), (double)(MC.mc.player.getY() - 1.0), (double)MC.mc.player.getZ());
+                minecraftClient = MC.mc;
                 if (n == 0) break block5;
                 if (!minecraftClient.world.getBlockState(blockPos).isAir()) break block3;
-                minecraftClient = MC.client3;
+                minecraftClient = MC.mc;
             }
-            minecraftClient.player.setVelocity(MC.client3.player.getVelocity().x * 0.7, MC.client3.player.getVelocity().y, MC.client3.player.getVelocity().z * 0.7);
+            minecraftClient.player.setVelocity(MC.mc.player.getVelocity().x * 0.7, MC.mc.player.getVelocity().y, MC.mc.player.getVelocity().z * 0.7);
         }
     }
 
@@ -364,7 +364,7 @@ extends Module {
     private ClientSetting.RotateMode getRotateMode13() {
         ClientSetting.RotateMode rotateMode;
         int n = AutoArmor.getInt66();
-        Object object = this.rotateMode.getObj();
+        Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {
                 ClientSetting.RotateMode rotateMode2;
@@ -374,12 +374,12 @@ extends Module {
                         rotateMode2 = ClientSetting.RotateMode.NONE;
                         return rotateMode2;
                     }
-                    object2 = ClientSetting.INSTANCE.rotateMode.getObj();
+                    object2 = ClientSetting.INSTANCE.rotateMode.getValue();
                 }
                 rotateMode2 = (ClientSetting.RotateMode)((Object)object2);
                 return rotateMode2;
             }
-            object = this.rotateMode.getObj();
+            object = this.rotateMode.getValue();
         }
         switch (((RotateMode)((Object)object)).ordinal()) {
             case 1: {
@@ -406,17 +406,17 @@ extends Module {
     private float getFloat4() {
         boolean bl = false;
         if (ClientSetting.INSTANCE != null) {
-            return ClientSetting.INSTANCE.rotateSpeed.getFloat35();
+            return ClientSetting.INSTANCE.rotateSpeed.getFloat();
         }
         return 45.0f;
     }
 
     private ClientSetting.SwitchMode getSwitchMode11() {
         boolean bl = false;
-        if (this.switchMode.getObj() == EMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+        if (this.switchMode.getValue() == EMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
-        return switch (((EMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((EMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

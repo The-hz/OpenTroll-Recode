@@ -33,17 +33,17 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class StashLogger
 extends Module {
-    private final BooleanSetting chat = (BooleanSetting)this.m28(new BooleanSetting("Chat", true));
-    private final BooleanSetting sound = (BooleanSetting)this.m28(new BooleanSetting("Sound", true));
-    private final BooleanSetting chests = (BooleanSetting)this.m28(new BooleanSetting("Chests", true));
-    private final NumberSetting minChests = (NumberSetting)this.m28(new NumberSetting("MinChests", 5.0, 1.0, 20.0, 1.0));
-    private final BooleanSetting shulkers = (BooleanSetting)this.m28(new BooleanSetting("Shulkers", true));
-    private final NumberSetting minShulkers = (NumberSetting)this.m28(new NumberSetting("MinShulkers", 1.0, 1.0, 20.0, 1.0));
-    private final BooleanSetting hoppers = (BooleanSetting)this.m28(new BooleanSetting("Hoppers", true));
-    private final NumberSetting minHoppers = (NumberSetting)this.m28(new NumberSetting("MinHoppers", 5.0, 1.0, 20.0, 1.0));
-    private final BooleanSetting dispensers = (BooleanSetting)this.m28(new BooleanSetting("Dispensers", true));
-    private final NumberSetting minDispensers = (NumberSetting)this.m28(new NumberSetting("MinDispensers", 5.0, 1.0, 20.0, 1.0));
-    private final NumberSetting scanDelay = (NumberSetting)this.m28(new NumberSetting("ScanDelay", 3.0, 1.0, 30.0, 1.0));
+    private final BooleanSetting chat = (BooleanSetting)this.registerSetting(new BooleanSetting("Chat", true));
+    private final BooleanSetting sound = (BooleanSetting)this.registerSetting(new BooleanSetting("Sound", true));
+    private final BooleanSetting chests = (BooleanSetting)this.registerSetting(new BooleanSetting("Chests", true));
+    private final NumberSetting minChests = (NumberSetting)this.registerSetting(new NumberSetting("MinChests", 5.0, 1.0, 20.0, 1.0));
+    private final BooleanSetting shulkers = (BooleanSetting)this.registerSetting(new BooleanSetting("Shulkers", true));
+    private final NumberSetting minShulkers = (NumberSetting)this.registerSetting(new NumberSetting("MinShulkers", 1.0, 1.0, 20.0, 1.0));
+    private final BooleanSetting hoppers = (BooleanSetting)this.registerSetting(new BooleanSetting("Hoppers", true));
+    private final NumberSetting minHoppers = (NumberSetting)this.registerSetting(new NumberSetting("MinHoppers", 5.0, 1.0, 20.0, 1.0));
+    private final BooleanSetting dispensers = (BooleanSetting)this.registerSetting(new BooleanSetting("Dispensers", true));
+    private final NumberSetting minDispensers = (NumberSetting)this.registerSetting(new NumberSetting("MinDispensers", 5.0, 1.0, 20.0, 1.0));
+    private final NumberSetting scanDelay = (NumberSetting)this.registerSetting(new NumberSetting("ScanDelay", 3.0, 1.0, 30.0, 1.0));
     private final Helper7 helper738 = new Helper7();
     private final Set set2 = new HashSet();
     private final Map map6 = new HashMap();
@@ -53,23 +53,23 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.set2.clear();
         this.map6.clear();
     }
 
     @EventHandler
     private void setEvent2Inner232(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || !this.helper738.m114((Double)this.scanDelay.getObj())) {
+        if (Module.isNotInGame() || !this.helper738.hasPassedSeconds((Double)this.scanDelay.getValue())) {
             return;
         }
-        this.helper738.m533();
-        int n = (Integer)MC.client3.options.getViewDistance().getValue();
-        ChunkPos chunkPos = MC.client3.player.getChunkPos();
+        this.helper738.resetTimer();
+        int n = (Integer)MC.mc.options.getViewDistance().getValue();
+        ChunkPos chunkPos = MC.mc.player.getChunkPos();
         for (int i = chunkPos.x - n; i <= chunkPos.x + n; ++i) {
             for (int j = chunkPos.z - n; j <= chunkPos.z + n; ++j) {
-                if (!MC.client3.world.isChunkLoaded(i, j)) continue;
-                for (BlockEntity blockEntity : MC.client3.world.getChunk(i, j).getBlockEntities().values()) {
+                if (!MC.mc.world.isChunkLoaded(i, j)) continue;
+                for (BlockEntity blockEntity : MC.mc.world.getChunk(i, j).getBlockEntities().values()) {
                     this.log(blockEntity);
                 }
             }
@@ -99,16 +99,16 @@ extends Module {
                 if (string == null) break block5;
                 if (!bl) break block6;
                 blockUtil.flag169 = false;
-                bl = (Boolean)this.chat.getObj();
+                bl = (Boolean)this.chat.getValue();
             }
             if (string != null) {
                 if (bl) {
-                    CommandManager.setObj21(blockPos.toShortString() + " " + String.valueOf(blockUtil));
+                    CommandManager.sendFeedback(blockPos.toShortString() + " " + String.valueOf(blockUtil));
                 }
-                bl = (Boolean)this.sound.getObj();
+                bl = (Boolean)this.sound.getValue();
             }
             if (bl) {
-                MC.client3.player.playSoundIfNotSilent(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP);
+                MC.mc.player.playSoundIfNotSilent(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP);
             }
         }
     }
@@ -132,16 +132,16 @@ extends Module {
         private void setObj66(Object var1_1) {
             BlockEntity blockEntity = (BlockEntity)var1_1;
             net.minecraft.block.Block block = blockEntity.getCachedState().getBlock();
-            if (((Boolean)this.stashLogger.chests.getObj()).booleanValue() && (block instanceof ChestBlock || block instanceof BarrelBlock)) {
+            if (((Boolean)this.stashLogger.chests.getValue()).booleanValue() && (block instanceof ChestBlock || block instanceof BarrelBlock)) {
                 ++this.count190;
-            } else if (((Boolean)this.stashLogger.shulkers.getObj()).booleanValue() && block instanceof ShulkerBoxBlock) {
+            } else if (((Boolean)this.stashLogger.shulkers.getValue()).booleanValue() && block instanceof ShulkerBoxBlock) {
                 ++this.count73;
-            } else if (((Boolean)this.stashLogger.hoppers.getObj()).booleanValue() && block instanceof HopperBlock) {
+            } else if (((Boolean)this.stashLogger.hoppers.getValue()).booleanValue() && block instanceof HopperBlock) {
                 ++this.count182;
-            } else if (((Boolean)this.stashLogger.dispensers.getObj()).booleanValue() && (block instanceof DispenserBlock || block instanceof DropperBlock)) {
+            } else if (((Boolean)this.stashLogger.dispensers.getValue()).booleanValue() && (block instanceof DispenserBlock || block instanceof DropperBlock)) {
                 ++this.count154;
             }
-            this.flag169 = this.count190 >= this.stashLogger.minChests.getInt50() || this.count73 >= this.stashLogger.minShulkers.getInt50() || this.count182 >= this.stashLogger.minHoppers.getInt50() || this.count154 >= this.stashLogger.minDispensers.getInt50();
+            this.flag169 = this.count190 >= this.stashLogger.minChests.getInt() || this.count73 >= this.stashLogger.minShulkers.getInt() || this.count182 >= this.stashLogger.minHoppers.getInt() || this.count154 >= this.stashLogger.minDispensers.getInt();
         }
 
         public String toString() {

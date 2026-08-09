@@ -20,9 +20,9 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class ChatTimestamp
 extends Module {
-    private final EnumSetting separator = (EnumSetting)this.m28(new EnumSetting("Separator", SeparatorMode.Arrows));
-    private final EnumSetting time = (EnumSetting)this.m28(new EnumSetting("Time", TimeMode.HHMM));
-    private final EnumSetting unit = (EnumSetting)this.m28(new EnumSetting("Unit", UnitMode.unitMode2));
+    private final EnumSetting separator = (EnumSetting)this.registerSetting(new EnumSetting("Separator", SeparatorMode.Arrows));
+    private final EnumSetting time = (EnumSetting)this.registerSetting(new EnumSetting("Time", TimeMode.HHMM));
+    private final EnumSetting unit = (EnumSetting)this.registerSetting(new EnumSetting("Unit", UnitMode.unitMode2));
     private static int[] counts25;
 
     public ChatTimestamp() {
@@ -35,8 +35,8 @@ extends Module {
         if (string == null) {
             return;
         }
-        packetEventInner.m209();
-        Util2.setObj10(this.getText64() + string);
+        packetEventInner.cancel();
+        Util2.sendClientMessage(this.getText64() + string);
     }
 
     /*
@@ -85,18 +85,18 @@ extends Module {
             Object object;
             block4: {
                 int[] nArray = ChatTimestamp.getIntArray2();
-                object = (TimeMode)((Object)this.time.getObj());
+                object = (TimeMode)((Object)this.time.getValue());
                 if (nArray == null) break block4;
                 switch (((TimeMode)object).ordinal()) {
                     default: {
                         throw new MatchException(null, null);
                     }
                     case 0: {
-                        string = this.unit.getObj() == UnitMode.unitMode ? "hh:mm a" : "HH:mm";
+                        string = this.unit.getValue() == UnitMode.unitMode ? "hh:mm a" : "HH:mm";
                         break block5;
                     }
                     case 1: {
-                        object = this.unit.getObj();
+                        object = this.unit.getValue();
                     }
                 }
             }
@@ -104,7 +104,7 @@ extends Module {
         }
         String string2 = string;
         String string3 = LocalTime.now().format(DateTimeFormatter.ofPattern(string2));
-        SeparatorMode separatorMode = (SeparatorMode)((Object)this.separator.getObj());
+        SeparatorMode separatorMode = (SeparatorMode)((Object)this.separator.getValue());
         return separatorMode.text648 + string3 + separatorMode.text888 + " ";
     }
 

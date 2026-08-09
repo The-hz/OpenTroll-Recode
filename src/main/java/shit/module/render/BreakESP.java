@@ -33,15 +33,15 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class BreakESP
 extends Module {
-    private final BooleanSetting self = (BooleanSetting)this.m28(new BooleanSetting("Self", true));
-    private final BooleanSetting other = (BooleanSetting)this.m28(new BooleanSetting("Other", true));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -3756020));
-    private final ColorSetting friendColor = (ColorSetting)this.m28(new ColorSetting("FriendColor", -14799447));
-    private final NumberSetting filledAlpha = (NumberSetting)this.m28(new NumberSetting("FilledAlpha", 50.0, 0.0, 255.0, 1.0));
-    private final NumberSetting outlineAlpha = (NumberSetting)this.m28(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0));
-    private final BooleanSetting throughWall = (BooleanSetting)this.m28(new BooleanSetting("ThroughWall", true));
-    private final BooleanSetting showName = (BooleanSetting)this.m28(new BooleanSetting("ShowName", true));
-    private final BooleanSetting showProgress = (BooleanSetting)this.m28(new BooleanSetting("ShowProgress", true));
+    private final BooleanSetting self = (BooleanSetting)this.registerSetting(new BooleanSetting("Self", true));
+    private final BooleanSetting other = (BooleanSetting)this.registerSetting(new BooleanSetting("Other", true));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -3756020));
+    private final ColorSetting friendColor = (ColorSetting)this.registerSetting(new ColorSetting("FriendColor", -14799447));
+    private final NumberSetting filledAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FilledAlpha", 50.0, 0.0, 255.0, 1.0));
+    private final NumberSetting outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0));
+    private final BooleanSetting throughWall = (BooleanSetting)this.registerSetting(new BooleanSetting("ThroughWall", true));
+    private final BooleanSetting showName = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowName", true));
+    private final BooleanSetting showProgress = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowProgress", true));
     private final DecimalFormat decimalFormat = new DecimalFormat("0");
     private Matrix4f matrix4f9;
     private Matrix4f matrix4f3;
@@ -51,49 +51,49 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
-        if (MC.client3.worldRenderer == null) {
+        if (MC.mc.worldRenderer == null) {
             return null;
         }
-        return Integer.toString(((LevelRendererAccessor)MC.client3.worldRenderer).getDestroyingBlocks().size());
+        return Integer.toString(((LevelRendererAccessor)MC.mc.worldRenderer).getDestroyingBlocks().size());
     }
 
     @EventHandler
     private void setRenderLevelEvent8(RenderLevelEvent renderLevelEvent) {
-        if (Module.isSet37() || MC.client3.worldRenderer == null) {
+        if (Module.isNotInGame() || MC.mc.worldRenderer == null) {
             return;
         }
         this.matrix4f9 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f3());
         this.matrix4f3 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f());
-        for (BlockBreakingInfo blockBreakingInfo : (java.util.Collection<BlockBreakingInfo>)((LevelRendererAccessor)MC.client3.worldRenderer).getDestroyingBlocks().values()) {
+        for (BlockBreakingInfo blockBreakingInfo : (java.util.Collection<BlockBreakingInfo>)((LevelRendererAccessor)MC.mc.worldRenderer).getDestroyingBlocks().values()) {
             if (this.m173(blockBreakingInfo)) continue;
             BlockPos blockPos = blockBreakingInfo.getPos();
             double d = Math.max(0.05, Math.min(1.0, (double)(blockBreakingInfo.getStage() + 1) / 10.0));
             Box box = this.m91(blockPos, d);
             int n = this.m41(blockBreakingInfo);
-            EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.filledAlpha.getInt50()), (Boolean)this.throughWall.getObj());
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.outlineAlpha.getInt50()), (Boolean)this.throughWall.getObj());
+            EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
+            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, BreakESP.m832(n, this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
         }
         EspRenderLayers.m125();
     }
 
     @EventHandler
     private void setObj69(Render2DEvent render2DEvent) {
-        if (Module.isSet37() || MC.client3.worldRenderer == null) {
+        if (Module.isNotInGame() || MC.mc.worldRenderer == null) {
             return;
         }
-        if (!((Boolean)this.showName.getObj()).booleanValue() && !((Boolean)this.showProgress.getObj()).booleanValue()) {
+        if (!((Boolean)this.showName.getValue()).booleanValue() && !((Boolean)this.showProgress.getValue()).booleanValue()) {
             return;
         }
         if (this.matrix4f9 == null || this.matrix4f3 == null) {
             return;
         }
-        Vec3d vec3d = MC.client3.gameRenderer.getCamera().getCameraPos();
+        Vec3d vec3d = MC.mc.gameRenderer.getCamera().getCameraPos();
         Matrix4f matrix4f = new Matrix4f((Matrix4fc)this.matrix4f3).mul((Matrix4fc)this.matrix4f9);
-        int n = MC.client3.getWindow().getScaledWidth();
-        int n2 = MC.client3.getWindow().getScaledHeight();
-        for (BlockBreakingInfo blockBreakingInfo : (java.util.Collection<BlockBreakingInfo>)((LevelRendererAccessor)MC.client3.worldRenderer).getDestroyingBlocks().values()) {
+        int n = MC.mc.getWindow().getScaledWidth();
+        int n2 = MC.mc.getWindow().getScaledHeight();
+        for (BlockBreakingInfo blockBreakingInfo : (java.util.Collection<BlockBreakingInfo>)((LevelRendererAccessor)MC.mc.worldRenderer).getDestroyingBlocks().values()) {
             int n3;
             Object object;
             Entity entity;
@@ -102,50 +102,50 @@ extends Module {
             if (this.m173(blockBreakingInfo) || (nArray = BreakESP.m313((double)(blockPos = blockBreakingInfo.getPos()).getX() + 0.5, (double)blockPos.getY() + 1.25, (double)blockPos.getZ() + 0.5, vec3d, matrix4f, n, n2)) == null) continue;
             int n4 = nArray[0];
             int n5 = nArray[1];
-            if (((Boolean)this.showName.getObj()).booleanValue() && (entity = MC.client3.world.getEntityById(blockBreakingInfo.getActorId())) instanceof PlayerEntity) {
+            if (((Boolean)this.showName.getValue()).booleanValue() && (entity = MC.mc.world.getEntityById(blockBreakingInfo.getActorId())) instanceof PlayerEntity) {
                 object = (PlayerEntity)entity;
                 String string = ((PlayerEntity)object).getName().getString();
-                n3 = Client.manager.m258(string) ? -11184641 : -1;
-                int n6 = Client.fontManager.renderer2().m277(string);
-                Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), string, n4 - n6 / 2, n5, n3, true);
-                n5 += Client.fontManager.renderer2().getInt19() + 1;
+                n3 = Client.manager.isFriend(string) ? -11184641 : -1;
+                int n6 = Client.fontManager.renderer2().getStringWidth(string);
+                Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), string, n4 - n6 / 2, n5, n3, true);
+                n5 += Client.fontManager.renderer2().getFontHeight() + 1;
             }
-            if (!((Boolean)this.showProgress.getObj()).booleanValue()) continue;
+            if (!((Boolean)this.showProgress.getValue()).booleanValue()) continue;
             int n7 = (int)((double)(blockBreakingInfo.getStage() + 1) / 10.0 * 100.0);
             n7 = Math.min(100, Math.max(1, n7));
             object = n7 + "%";
-            int n8 = Client.fontManager.renderer2().m277(object);
+            int n8 = Client.fontManager.renderer2().getStringWidth(object);
             n3 = BreakESP.m819(n7);
-            Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), object, n4 - n8 / 2, n5, n3, true);
+            Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), object, n4 - n8 / 2, n5, n3, true);
         }
     }
 
     private boolean m173(Object object) {
         BlockBreakingInfo blockBreakingInfo = (BlockBreakingInfo)object;
         Object var4_3 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return true;
         }
-        if (blockBreakingInfo.getActorId() == MC.client3.player.getId()) {
-            return (Boolean)this.self.getObj() == false;
+        if (blockBreakingInfo.getActorId() == MC.mc.player.getId()) {
+            return (Boolean)this.self.getValue() == false;
         }
-        return (Boolean)this.other.getObj() == false;
+        return (Boolean)this.other.getValue() == false;
     }
 
     private int m41(Object object) {
         BlockBreakingInfo blockBreakingInfo = (BlockBreakingInfo)object;
         Object var4_3 = null;
-        if (MC.client3.player == null) {
-            return (Integer)this.color.getObj();
+        if (MC.mc.player == null) {
+            return (Integer)this.color.getValue();
         }
-        Entity entity = MC.client3.world.getEntityById(blockBreakingInfo.getActorId());
+        Entity entity = MC.mc.world.getEntityById(blockBreakingInfo.getActorId());
         if (entity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity)entity;
-            if (Client.manager.m258(playerEntity.getName().getString())) {
-                return (Integer)this.friendColor.getObj();
+            if (Client.manager.isFriend(playerEntity.getName().getString())) {
+                return (Integer)this.friendColor.getValue();
             }
         }
-        return (Integer)this.color.getObj();
+        return (Integer)this.color.getValue();
     }
 
     private Box m91(Object object, double d) {
@@ -159,7 +159,7 @@ extends Module {
                     block4: {
                         blockPos = (BlockPos)object;
                         d2 = d;
-                        voxelShape = MC.client3.world.getBlockState(blockPos).getOutlineShape((BlockView)MC.client3.world, blockPos);
+                        voxelShape = MC.mc.world.getBlockState(blockPos).getOutlineShape((BlockView)MC.mc.world, blockPos);
                         Object var8_6 = null;
                         if (!voxelShape.isEmpty()) break block4;
                         box = new Box(blockPos);

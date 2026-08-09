@@ -378,7 +378,7 @@ public final class RenderPipelines {
                             renderPass.setUniform("DynamicTransforms", uniforms);
                             renderPass.setVertexBuffer(0, this.gpuManager6.getGpuBuffer());
                             if (this.field28 != null) {
-                                net.minecraft.client.texture.AbstractTexture texture = MC.client3.getTextureManager().getTexture(this.field28);
+                                net.minecraft.client.texture.AbstractTexture texture = MC.mc.getTextureManager().getTexture(this.field28);
                                 renderPass.bindTexture("Sampler0", texture.getGlTextureView(), texture.getSampler());
                             }
                             switch (Lambda.counts11[this.field17.ordinal()]) {

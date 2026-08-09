@@ -86,14 +86,14 @@ public class Blur {
                 f11 = f8;
                 f10 = f9;
                 Object var20_19 = null;
-                if (MC.client3.currentScreen != null) {
+                if (MC.mc.currentScreen != null) {
                     return;
                 }
                 this.m288();
                 if (f16 <= 0.0f || f15 <= 0.0f) {
                     return;
                 }
-                Framebuffer framebuffer = MC.client3.getFramebuffer();
+                Framebuffer framebuffer = MC.mc.getFramebuffer();
                 RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
                 gpuTexture = autoCloseableImpl == null ? framebuffer.getColorAttachment() : (GpuTexture)(Object)autoCloseableImpl.getGpuTextureView();
                 gpuTextureView = autoCloseableImpl == null ? framebuffer.getColorAttachmentView() : autoCloseableImpl.getGpuTextureView();
@@ -154,7 +154,7 @@ public class Blur {
         BufferBuilder bufferBuilder = (BufferBuilder)object;
         Matrix4f matrix4f = (Matrix4f)object2;
         Box box = (Box)object3;
-        Vec3d vec3d = MC.client3.gameRenderer.getCamera().getCameraPos();
+        Vec3d vec3d = MC.mc.gameRenderer.getCamera().getCameraPos();
         float f = (float)(box.minX - vec3d.x);
         float f2 = (float)(box.minY - vec3d.y);
         float f3 = (float)(box.minZ - vec3d.z);

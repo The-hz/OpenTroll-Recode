@@ -19,11 +19,11 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         boolean bl = true;
-        if (MC.client3.getServer() != null) {
+        if (MC.mc.getServer() != null) {
             return List.of("Brand integrated");
         }
-        if (MC.client3.getCurrentServerEntry() != null) {
-            return List.of("Brand " + MC.client3.getCurrentServerEntry().address);
+        if (MC.mc.getCurrentServerEntry() != null) {
+            return List.of("Brand " + MC.mc.getCurrentServerEntry().address);
         }
         return List.of("Brand N/A");
     }

@@ -16,7 +16,7 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AntiBookKick
 extends Module {
-    private final BooleanSetting notify = (BooleanSetting)this.m28(new BooleanSetting("Notify", true));
+    private final BooleanSetting notify = (BooleanSetting)this.registerSetting(new BooleanSetting("Notify", true));
 
     public AntiBookKick() {
         super("AntiBookKick", "Cancels book edit packets to avoid book kick exploits.", Category.MISC);
@@ -25,9 +25,9 @@ extends Module {
     @EventHandler(priority=1000)
     private void setPacketEventInner216(PacketEvent.PacketEventInner2 packetEventInner2) {
         if (packetEventInner2.getPacket() instanceof BookUpdateC2SPacket) {
-            packetEventInner2.m209();
-            if (((Boolean)this.notify.getObj()).booleanValue()) {
-                Util2.setObj10("[AntiBookKick] Cancelled book edit packet.");
+            packetEventInner2.cancel();
+            if (((Boolean)this.notify.getValue()).booleanValue()) {
+                Util2.sendClientMessage("[AntiBookKick] Cancelled book edit packet.");
             }
         }
     }

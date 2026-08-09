@@ -27,7 +27,7 @@ public final class Outline {
         ClientSetting clientSetting = ClientSetting.INSTANCE;
         Object var1_1 = null;
         if (clientSetting == null) return false;
-        if ((Boolean)clientSetting.chinese.getObj() == false) return false;
+        if ((Boolean)clientSetting.chinese.getValue() == false) return false;
         return true;
     }
 

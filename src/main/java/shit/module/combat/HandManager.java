@@ -31,17 +31,17 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class HandManager
 extends Module {
-    private final EnumSetting item = (EnumSetting)this.m28(new EnumSetting("Item", ItemMode.Totem));
-    private final BooleanSetting safe = (BooleanSetting)this.m28(new BooleanSetting("Safe", true));
-    private final NumberSetting health = (NumberSetting)this.m28(new NumberSetting("Health", 16.0, 0.0, 36.0, 0.1, 0.1, () -> (Boolean)this.safe.getObj(), null, "", false));
-    private final BooleanSetting lethalCrystal = (BooleanSetting)this.m28(new BooleanSetting("LethalCrystal", true, () -> (Boolean)this.safe.getObj(), null, "", false));
-    private final BooleanSetting gapSwitch = (BooleanSetting)this.m28(new BooleanSetting("GapSwitch", true));
-    private final BooleanSetting always = (BooleanSetting)this.m28(new BooleanSetting("Always", false, () -> (Boolean)this.gapSwitch.getObj(), null, "", false));
-    private final BooleanSetting gapTotem = (BooleanSetting)this.m28(new BooleanSetting("Gap-Totem", false, () -> (Boolean)this.gapSwitch.getObj(), null, "", false));
-    private final BooleanSetting gapSword = (BooleanSetting)this.m28(new BooleanSetting("Gap-Sword", true, () -> (Boolean)this.gapSwitch.getObj(), null, "", false));
-    private final BooleanSetting gapPickaxe = (BooleanSetting)this.m28(new BooleanSetting("Gap-Pickaxe", false, () -> (Boolean)this.gapSwitch.getObj(), null, "", false));
-    private final EnumSetting swapMode = (EnumSetting)this.m28(new EnumSetting("SwapMode", SwapMode.OffhandSwap));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 50.0, 0.0, 500.0, 1.0));
+    private final EnumSetting item = (EnumSetting)this.registerSetting(new EnumSetting("Item", ItemMode.Totem));
+    private final BooleanSetting safe = (BooleanSetting)this.registerSetting(new BooleanSetting("Safe", true));
+    private final NumberSetting health = (NumberSetting)this.registerSetting(new NumberSetting("Health", 16.0, 0.0, 36.0, 0.1, 0.1, () -> (Boolean)this.safe.getValue(), null, "", false));
+    private final BooleanSetting lethalCrystal = (BooleanSetting)this.registerSetting(new BooleanSetting("LethalCrystal", true, () -> (Boolean)this.safe.getValue(), null, "", false));
+    private final BooleanSetting gapSwitch = (BooleanSetting)this.registerSetting(new BooleanSetting("GapSwitch", true));
+    private final BooleanSetting always = (BooleanSetting)this.registerSetting(new BooleanSetting("Always", false, () -> (Boolean)this.gapSwitch.getValue(), null, "", false));
+    private final BooleanSetting gapTotem = (BooleanSetting)this.registerSetting(new BooleanSetting("Gap-Totem", false, () -> (Boolean)this.gapSwitch.getValue(), null, "", false));
+    private final BooleanSetting gapSword = (BooleanSetting)this.registerSetting(new BooleanSetting("Gap-Sword", true, () -> (Boolean)this.gapSwitch.getValue(), null, "", false));
+    private final BooleanSetting gapPickaxe = (BooleanSetting)this.registerSetting(new BooleanSetting("Gap-Pickaxe", false, () -> (Boolean)this.gapSwitch.getValue(), null, "", false));
+    private final EnumSetting swapMode = (EnumSetting)this.registerSetting(new EnumSetting("SwapMode", SwapMode.OffhandSwap));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 50.0, 0.0, 500.0, 1.0));
     private final Helper7 helper746 = new Helper7();
 
     public HandManager() {
@@ -49,8 +49,8 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
-        return ((ItemMode)((Object)this.item.getObj())).name();
+    public String getInfo() {
+        return ((ItemMode)((Object)this.item.getValue())).name();
     }
 
     @EventHandler
@@ -67,33 +67,33 @@ extends Module {
      * Unable to fully structure code
      */
     private void m986() {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.interactionManager == null) {
+        if (MC.mc.interactionManager == null) {
             return;
         }
-        if (!this.helper746.m432(((Double)this.delay.getObj()).doubleValue())) {
+        if (!this.helper746.hasPassedMs(((Double)this.delay.getValue()).doubleValue())) {
             return;
         }
         if (!ItemUtil.isSet84()) {
             return;
         }
-        boolean bl = ((Boolean)this.safe.getObj()).booleanValue() && ((double)ItemUtil.m158(MC.client3.player) < ((Double)this.health.getObj()).doubleValue() || this.isSet140());
+        boolean bl = ((Boolean)this.safe.getValue()).booleanValue() && ((double)ItemUtil.m158(MC.mc.player) < ((Double)this.health.getValue()).doubleValue() || this.isSet140());
         if (bl) {
             if (this.m291(Items.TOTEM_OF_UNDYING)) {
-                this.helper746.m533();
+                this.helper746.resetTimer();
             }
             return;
         }
         if (this.isSet124()) {
             if (this.m291(Items.GOLDEN_APPLE)) {
-                this.helper746.m533();
+                this.helper746.resetTimer();
             }
             return;
         }
         Item item = null;
-        switch ((ItemMode)((Object)this.item.getObj())) {
+        switch ((ItemMode)((Object)this.item.getValue())) {
             case None: {
                 item = null;
                 break;
@@ -120,7 +120,7 @@ extends Module {
             }
         }
         if (item != null && this.m291(item)) {
-            this.helper746.m533();
+            this.helper746.resetTimer();
         }
     }
 
@@ -130,22 +130,22 @@ extends Module {
      */
     private boolean isSet124() {
         Object var2_1 = null;
-        if ((Boolean)this.gapSwitch.getObj() == false) return false;
-        if (!MC.client3.options.useKey.isPressed()) {
+        if ((Boolean)this.gapSwitch.getValue() == false) return false;
+        if (!MC.mc.options.useKey.isPressed()) {
             return false;
         }
-        ItemStack itemStack = MC.client3.player.getMainHandStack();
+        ItemStack itemStack = MC.mc.player.getMainHandStack();
         Item item = itemStack.getItem();
-        if (((Boolean)this.gapSword.getObj()).booleanValue()) {
+        if (((Boolean)this.gapSword.getValue()).booleanValue()) {
             if (itemStack.isIn(ItemTags.SWORDS)) return true;
         }
-        if (((Boolean)this.gapPickaxe.getObj()).booleanValue()) {
+        if (((Boolean)this.gapPickaxe.getValue()).booleanValue()) {
             if (itemStack.isIn(ItemTags.PICKAXES)) return true;
         }
-        if (((Boolean)this.gapTotem.getObj()).booleanValue()) {
+        if (((Boolean)this.gapTotem.getValue()).booleanValue()) {
             if (item == Items.TOTEM_OF_UNDYING) return true;
         }
-        if ((Boolean)this.always.getObj() == false) return false;
+        if ((Boolean)this.always.getValue() == false) return false;
         if (item == Items.GOLDEN_APPLE) return false;
         if (item == Items.ENCHANTED_GOLDEN_APPLE) return false;
         return true;
@@ -155,14 +155,14 @@ extends Module {
         block6: {
             block5: {
                 Object var2_1 = null;
-                if (!((Boolean)this.lethalCrystal.getObj()).booleanValue()) break block5;
-                if (MC.client3.world != null) break block6;
+                if (!((Boolean)this.lethalCrystal.getValue()).booleanValue()) break block5;
+                if (MC.mc.world != null) break block6;
             }
             return false;
         }
-        double d = ItemUtil.m158(MC.client3.player);
-        for (EndCrystalEntity endCrystalEntity : MC.client3.world.getNonSpectatingEntities(EndCrystalEntity.class, MC.client3.player.getBoundingBox().expand(12.0))) {
-            double d2 = Math.sqrt(MC.client3.player.squaredDistanceTo((Entity)endCrystalEntity));
+        double d = ItemUtil.m158(MC.mc.player);
+        for (EndCrystalEntity endCrystalEntity : MC.mc.world.getNonSpectatingEntities(EndCrystalEntity.class, MC.mc.player.getBoundingBox().expand(12.0))) {
+            double d2 = Math.sqrt(MC.mc.player.squaredDistanceTo((Entity)endCrystalEntity));
             double d3 = Math.max(0.0, 12.0 - d2) * 1.6;
             if (d3 >= d) {
                 return true;
@@ -183,15 +183,15 @@ extends Module {
         if (n == -1) {
             return false;
         }
-        switch (((SwapMode)((Object)this.swapMode.getObj())).ordinal()) {
+        switch (((SwapMode)((Object)this.swapMode.getValue())).ordinal()) {
             case 0: {
-                MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, 45, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
+                MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, 45, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, n, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
                 if (null == null) return true;
             }
             case 1: {
-                MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, n, 40, SlotActionType.SWAP, (PlayerEntity)MC.client3.player);
+                MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, n, 40, SlotActionType.SWAP, (PlayerEntity)MC.mc.player);
                 if (null == null) return true;
             }
             case 2: {
@@ -205,10 +205,10 @@ extends Module {
                 if (n3 > 8) {
                     return false;
                 }
-                int n4 = MC.client3.player.getInventory().getSelectedSlot();
-                MC.client3.player.getInventory().setSelectedSlot(n3);
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
-                MC.client3.player.getInventory().setSelectedSlot(n4);
+                int n4 = MC.mc.player.getInventory().getSelectedSlot();
+                MC.mc.player.getInventory().setSelectedSlot(n3);
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
+                MC.mc.player.getInventory().setSelectedSlot(n4);
             }
         }
         return true;
@@ -222,7 +222,7 @@ extends Module {
 
     private int m478(Object object) {
         Item item = (Item)object;
-        Item item2 = MC.client3.player.getOffHandStack().getItem();
+        Item item2 = MC.mc.player.getOffHandStack().getItem();
         Object var4_4 = null;
         if (item == item2) {
             return -1;
@@ -231,7 +231,7 @@ extends Module {
             return -1;
         }
         for (int i = 35; i >= 0; --i) {
-            ItemStack itemStack = MC.client3.player.getInventory().getStack(i);
+            ItemStack itemStack = MC.mc.player.getInventory().getStack(i);
             if (itemStack.getItem() != item) continue;
             return i < 9 ? i + 36 : i;
         }

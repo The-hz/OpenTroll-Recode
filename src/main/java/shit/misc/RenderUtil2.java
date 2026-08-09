@@ -67,8 +67,8 @@ public class RenderUtil2 {
         } else {
             FontManager2 fm = Client.fontManager.renderer2();
             int n4 = Math.round(Client.fontManager.getFloat47());
-            fm.m5(drawContext, string2, n2, n + n4, -1663446, true);
-            fm.m5(drawContext, string, n2 + fm.m277(string2), n + n4, -1, true);
+            fm.drawText(drawContext, string2, n2, n + n4, -1663446, true);
+            fm.drawText(drawContext, string, n2 + fm.getStringWidth(string2), n + n4, -1, true);
         }
     }
 
@@ -78,7 +78,7 @@ public class RenderUtil2 {
     public boolean m49(double var1_1, double var3_2) {
         double x = var1_1;
         double y = var3_2;
-        float lineH = Client.fontManager.isSet89() ? 9.0f : (float) Client.fontManager.renderer2().getInt19();
+        float lineH = Client.fontManager.isSet89() ? 9.0f : (float) Client.fontManager.renderer2().getFontHeight();
         float h = 6.0f + lineH;
         return x >= (double) this.value117 && x <= (double) (this.value117 + this.value186)
             && y >= (double) this.value180 && y <= (double) (this.value180 + h);

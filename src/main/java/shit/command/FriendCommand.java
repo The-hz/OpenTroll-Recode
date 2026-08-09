@@ -36,7 +36,7 @@ extends Command {
                 if (!string.equals("remove")) break block4;
             }
             String string = stringArray.length > 2 ? stringArray[2].toLowerCase() : "";
-            return (String[])Client.manager.getSet2().stream().filter(string2 -> ((String)string2).toLowerCase().startsWith(string)).toArray(String[]::new);
+            return (String[])Client.manager.getFriends().stream().filter(string2 -> ((String)string2).toLowerCase().startsWith(string)).toArray(String[]::new);
         }
         return new String[0];
     }
@@ -45,19 +45,19 @@ extends Command {
     public void run(Object object) {
         String[] args = (String[])object;
         if (args.length < 1) {
-            CommandManager.setObj21("Usage: " + Client.commandManager.getText10() + this.getText31());
+            CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());
         } else if (args[0].equalsIgnoreCase("list")) {
-            CommandManager.setObj21("Friends: " + String.join(", ", Client.manager.getSet2()));
+            CommandManager.sendFeedback("Friends: " + String.join(", ", Client.manager.getFriends()));
         } else if (args.length < 2) {
-            CommandManager.setObj21("Missing name.");
+            CommandManager.sendFeedback("Missing name.");
         } else if (args[0].equalsIgnoreCase("add")) {
-            Client.manager.m151(args[1]);
-            CommandManager.setObj21("Added friend " + args[1] + ".");
+            Client.manager.addFriend(args[1]);
+            CommandManager.sendFeedback("Added friend " + args[1] + ".");
         } else if (args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("remove")) {
-            Client.manager.m933(args[1]);
-            CommandManager.setObj21("Removed friend " + args[1] + ".");
+            Client.manager.removeFriend(args[1]);
+            CommandManager.sendFeedback("Removed friend " + args[1] + ".");
         } else {
-            CommandManager.setObj21("Usage: " + Client.commandManager.getText10() + this.getText31());
+            CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());
         }
     }
 }

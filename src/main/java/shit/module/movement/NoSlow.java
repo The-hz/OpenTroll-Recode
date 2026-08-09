@@ -32,13 +32,13 @@ import shit.util.MC;
 public class NoSlow
 extends Module {
     public static NoSlow INSTANCE;
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Vanilla));
-    private final BooleanSetting soulSand = (BooleanSetting)this.m28(new BooleanSetting("SoulSand", true));
-    private final BooleanSetting sneak = (BooleanSetting)this.m28(new BooleanSetting("Sneak", false));
-    private final EnumSetting gTSpeed = (EnumSetting)this.m28(new EnumSetting("GT Speed", EMode.NORMAL, () -> this.mode.getObj() == Mode.GrimTick, null, "", false));
-    private final BooleanSetting gTFood = (BooleanSetting)this.m28(new BooleanSetting("GT Food", true, () -> this.mode.getObj() == Mode.GrimTick, null, "", false));
-    private final BooleanSetting gTBow = (BooleanSetting)this.m28(new BooleanSetting("GT Bow", true, () -> this.mode.getObj() == Mode.GrimTick, null, "", false));
-    private final BooleanSetting gTCrossbow = (BooleanSetting)this.m28(new BooleanSetting("GT Crossbow", true, () -> this.mode.getObj() == Mode.GrimTick, null, "", false));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Vanilla));
+    private final BooleanSetting soulSand = (BooleanSetting)this.registerSetting(new BooleanSetting("SoulSand", true));
+    private final BooleanSetting sneak = (BooleanSetting)this.registerSetting(new BooleanSetting("Sneak", false));
+    private final EnumSetting gTSpeed = (EnumSetting)this.registerSetting(new EnumSetting("GT Speed", EMode.NORMAL, () -> this.mode.getValue() == Mode.GrimTick, null, "", false));
+    private final BooleanSetting gTFood = (BooleanSetting)this.registerSetting(new BooleanSetting("GT Food", true, () -> this.mode.getValue() == Mode.GrimTick, null, "", false));
+    private final BooleanSetting gTBow = (BooleanSetting)this.registerSetting(new BooleanSetting("GT Bow", true, () -> this.mode.getValue() == Mode.GrimTick, null, "", false));
+    private final BooleanSetting gTCrossbow = (BooleanSetting)this.registerSetting(new BooleanSetting("GT Crossbow", true, () -> this.mode.getValue() == Mode.GrimTick, null, "", false));
     private boolean flag72 = false;
     private Type2 type22 = Type2.NONE;
     private int count140 = 0;
@@ -54,8 +54,8 @@ extends Module {
     }
 
     @Override
-    public void m709() {
-        super.m709();
+    public void onDisable() {
+        super.onDisable();
         this.type22 = Type2.NONE;
         this.count140 = 0;
         this.m1021();
@@ -74,13 +74,13 @@ extends Module {
         while (!this.queue2.isEmpty()) {
             Packet packet = (Packet)this.queue2.poll();
             if (packet == null) continue;
-            if (MC.client3.player == null) continue;
-            MC.client3.player.networkHandler.sendPacket(packet);
+            if (MC.mc.player == null) continue;
+            MC.mc.player.networkHandler.sendPacket(packet);
             if (null == null) continue;
             break;
         }
-        if (MC.client3.player != null) {
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
+        if (MC.mc.player != null) {
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
         }
     }
 
@@ -90,34 +90,34 @@ extends Module {
                 block12: {
                     block11: {
                         Object var2_1 = null;
-                        if (MC.client3.player == null) break block11;
-                        if (!MC.client3.player.getActiveItem().isEmpty()) break block12;
+                        if (MC.mc.player == null) break block11;
+                        if (!MC.mc.player.getActiveItem().isEmpty()) break block12;
                     }
                     return false;
                 }
-                UseAction useAction = MC.client3.player.getActiveItem().getUseAction();
+                UseAction useAction = MC.mc.player.getActiveItem().getUseAction();
                 if (!this.m609(useAction)) break block13;
-                if (MC.client3.player.getItemUseTimeLeft() > 0) break block14;
+                if (MC.mc.player.getItemUseTimeLeft() > 0) break block14;
             }
             return false;
         }
-        Hand hand = MC.client3.player.getActiveHand() == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
-        if (this.m609(MC.client3.player.getStackInHand(hand).getUseAction())) {
+        Hand hand = MC.mc.player.getActiveHand() == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
+        if (this.m609(MC.mc.player.getStackInHand(hand).getUseAction())) {
             return false;
         }
         if (this.type22 != Type2.EATING) {
-            MC.client3.options.useKey.setPressed(false);
+            MC.mc.options.useKey.setPressed(false);
         }
         if (this.type22 == Type2.NONE) {
             this.type22 = Type2.CANCEL_C0F;
-            boolean bl = MC.client3.player.currentScreenHandler != MC.client3.player.playerScreenHandler;
+            boolean bl = MC.mc.player.currentScreenHandler != MC.mc.player.playerScreenHandler;
             if (bl) {
-                MC.client3.player.networkHandler.sendPacket((Packet)new CloseHandledScreenC2SPacket(MC.client3.player.currentScreenHandler.syncId));
+                MC.mc.player.networkHandler.sendPacket((Packet)new CloseHandledScreenC2SPacket(MC.mc.player.currentScreenHandler.syncId));
             }
             return false;
         }
         if (this.type22 == Type2.EATING) {
-            MC.client3.player.setSprinting(true);
+            MC.mc.player.setSprinting(true);
             return true;
         }
         return false;
@@ -129,11 +129,11 @@ extends Module {
      */
     private boolean isSet121() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
-        ItemStack itemStack = MC.client3.player.getMainHandStack();
-        ItemStack itemStack2 = MC.client3.player.getOffHandStack();
+        ItemStack itemStack = MC.mc.player.getMainHandStack();
+        ItemStack itemStack2 = MC.mc.player.getOffHandStack();
         if (itemStack.isOf(Items.GOLDEN_APPLE)) return true;
         if (itemStack2.isOf(Items.GOLDEN_APPLE)) return true;
         if (itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) return true;
@@ -150,11 +150,11 @@ extends Module {
     private boolean m967(Object object) {
         Item item = (Item)object;
         Object var4_3 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
-        ItemStack itemStack = MC.client3.player.getMainHandStack();
-        ItemStack itemStack2 = MC.client3.player.getOffHandStack();
+        ItemStack itemStack = MC.mc.player.getMainHandStack();
+        ItemStack itemStack2 = MC.mc.player.getOffHandStack();
         if (itemStack.isOf(item)) return true;
         if (!itemStack2.isOf(item)) return false;
         return true;
@@ -168,34 +168,34 @@ extends Module {
 
     public boolean isSet13() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
-        if (!MC.client3.player.isUsingItem()) {
+        if (!MC.mc.player.isUsingItem()) {
             return false;
         }
-        if (!((Boolean)this.gTFood.getObj()).booleanValue()) {
+        if (!((Boolean)this.gTFood.getValue()).booleanValue()) {
             if (this.isSet121()) {
                 return false;
             }
         }
-        if (!((Boolean)this.gTBow.getObj()).booleanValue()) {
+        if (!((Boolean)this.gTBow.getValue()).booleanValue()) {
             if (this.m967(Items.BOW)) {
                 return false;
             }
         }
-        if (!((Boolean)this.gTCrossbow.getObj()).booleanValue()) {
+        if (!((Boolean)this.gTCrossbow.getValue()).booleanValue()) {
             if (this.m967(Items.CROSSBOW)) {
                 return false;
             }
         }
         if (this.isSet121()) {
-            if (MC.client3.player.getItemUseTimeLeft() > 30) {
+            if (MC.mc.player.getItemUseTimeLeft() > 30) {
                 return false;
             }
         }
-        int n = MC.client3.player.getItemUseTimeLeft();
-        boolean bl = ((EMode)((Object)this.gTSpeed.getObj())).m675(n);
+        int n = MC.mc.player.getItemUseTimeLeft();
+        boolean bl = ((EMode)((Object)this.gTSpeed.getValue())).m675(n);
         if (bl) {
             if (!this.flag32) {
                 this.flag86 = true;
@@ -207,12 +207,12 @@ extends Module {
                 --this.count63;
                 if (this.count63 <= 0) {
                     this.flag86 = false;
-                    MC.client3.player.setSprinting(true);
+                    MC.mc.player.setSprinting(true);
                     return true;
                 }
                 return false;
             }
-            MC.client3.player.setSprinting(true);
+            MC.mc.player.setSprinting(true);
             return true;
         }
         this.flag32 = false;
@@ -223,14 +223,14 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner17(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        this.flag72 = MC.client3.player.isUsingItem();
-        if (this.mode.getObj() == Mode.Grim) {
+        this.flag72 = MC.mc.player.isUsingItem();
+        if (this.mode.getValue() == Mode.Grim) {
             if (this.type22 != Type2.EATING) {
                 this.count140 = 0;
-            } else if (MC.client3.player.isUsingItem()) {
+            } else if (MC.mc.player.isUsingItem()) {
                 this.count140 = 0;
             } else {
                 ++this.count140;
@@ -239,25 +239,25 @@ extends Module {
                 }
             }
         }
-        if (this.mode.getObj() == Mode.GrimTick && !MC.client3.player.isUsingItem()) {
+        if (this.mode.getValue() == Mode.GrimTick && !MC.mc.player.isUsingItem()) {
             this.m447();
         }
     }
 
     @EventHandler
     public void setPacketEventInner220(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.mode.getObj() == Mode.Grim) {
+        if (this.mode.getValue() == Mode.Grim) {
             PlayerActionC2SPacket playerActionC2SPacket;
             Packet packet = packetEventInner2.getPacket();
             if (packet instanceof CommonPongC2SPacket && this.type22 != Type2.NONE) {
-                packetEventInner2.m209();
+                packetEventInner2.cancel();
                 this.queue2.add(packet);
                 if (this.type22 == Type2.CANCEL_C0F) {
                     this.type22 = Type2.SWAP_HANDS;
-                    MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
+                    MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN));
                 }
             }
             if (packet instanceof PlayerActionC2SPacket && (playerActionC2SPacket = (PlayerActionC2SPacket)packet).getAction() == PlayerActionC2SPacket.Action.RELEASE_USE_ITEM && this.type22 == Type2.EATING) {
@@ -268,24 +268,24 @@ extends Module {
 
     @EventHandler
     public void setPacketEventInner(PacketEvent.PacketEventInner packetEventInner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.mode.getObj() == Mode.Grim && packetEventInner.getPacket() instanceof ScreenHandlerSlotUpdateS2CPacket && this.type22 == Type2.SWAP_HANDS) {
-            MC.client3.options.useKey.setPressed(true);
+        if (this.mode.getValue() == Mode.Grim && packetEventInner.getPacket() instanceof ScreenHandlerSlotUpdateS2CPacket && this.type22 == Type2.SWAP_HANDS) {
+            MC.mc.options.useKey.setPressed(true);
             this.type22 = Type2.EATING;
         }
     }
 
     public boolean isSet64() {
         Object var2_1 = null;
-        if (!this.isSet19()) {
+        if (!this.isEnabled()) {
             return false;
         }
-        if (this.mode.getObj() == Mode.None) {
+        if (this.mode.getValue() == Mode.None) {
             return false;
         }
-        return switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        return switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             case 1 -> this.isSet105();
             case 2 -> this.isSet13();
             case 0 -> true;
@@ -299,8 +299,8 @@ extends Module {
      */
     public boolean isSet87() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.soulSand.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.soulSand.getValue() == false) return false;
         return true;
     }
 
@@ -310,8 +310,8 @@ extends Module {
      */
     public boolean isSet72() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.sneak.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.sneak.getValue() == false) return false;
         return true;
     }
 

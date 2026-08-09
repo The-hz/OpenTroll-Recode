@@ -35,18 +35,18 @@ import shit.util.MC;
 public class AutoPot
 extends Module {
     public static AutoPot INSTANCE;
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 5.0, 0.0, 60.0, 0.1));
-    private final BooleanSetting speed = (BooleanSetting)this.m28(new BooleanSetting("Speed", false));
-    private final BooleanSetting resistance = (BooleanSetting)this.m28(new BooleanSetting("Resistance", false));
-    private final BooleanSetting strength = (BooleanSetting)this.m28(new BooleanSetting("Strength", false));
-    private final BooleanSetting slowFalling = (BooleanSetting)this.m28(new BooleanSetting("SlowFalling", false));
-    private final NumberSetting frontTick = (NumberSetting)this.m28(new NumberSetting("FrontTick", 20.0, 1.0, 100.0, 1.0));
-    private final BooleanSetting usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", true));
-    private final BooleanSetting onlyGround = (BooleanSetting)this.m28(new BooleanSetting("OnlyGround", false));
-    private final BooleanSetting inventorySwap = (BooleanSetting)this.m28(new BooleanSetting("InventorySwap", true));
-    private final BooleanSetting delayCast = (BooleanSetting)this.m28(new BooleanSetting("DelayCast", true));
-    private final NumberSetting castDelay = (NumberSetting)this.m28(new NumberSetting("CastDelay", 2.0, 1.0, 10.0, 1.0));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 5.0, 0.0, 60.0, 0.1));
+    private final BooleanSetting speed = (BooleanSetting)this.registerSetting(new BooleanSetting("Speed", false));
+    private final BooleanSetting resistance = (BooleanSetting)this.registerSetting(new BooleanSetting("Resistance", false));
+    private final BooleanSetting strength = (BooleanSetting)this.registerSetting(new BooleanSetting("Strength", false));
+    private final BooleanSetting slowFalling = (BooleanSetting)this.registerSetting(new BooleanSetting("SlowFalling", false));
+    private final NumberSetting frontTick = (NumberSetting)this.registerSetting(new NumberSetting("FrontTick", 20.0, 1.0, 100.0, 1.0));
+    private final BooleanSetting usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", true));
+    private final BooleanSetting onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", false));
+    private final BooleanSetting inventorySwap = (BooleanSetting)this.registerSetting(new BooleanSetting("InventorySwap", true));
+    private final BooleanSetting delayCast = (BooleanSetting)this.registerSetting(new BooleanSetting("DelayCast", true));
+    private final NumberSetting castDelay = (NumberSetting)this.registerSetting(new NumberSetting("CastDelay", 2.0, 1.0, 10.0, 1.0));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
     private final Helper7 helper748 = new Helper7();
     private boolean flag77 = false;
     private RegistryEntry field66 = null;
@@ -58,7 +58,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.field66 = null;
         this.count135 = 0;
         this.flag77 = false;
@@ -67,7 +67,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner52(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         this.flag77 = false;
@@ -81,28 +81,28 @@ extends Module {
             this.field66 = null;
             return;
         }
-        if (!this.helper748.m432((Double)this.delay.getObj() * 1000.0)) {
+        if (!this.helper748.hasPassedMs((Double)this.delay.getValue() * 1000.0)) {
             return;
         }
         if (!ItemUtil.isSet84()) {
             return;
         }
-        if (((Boolean)this.onlyGround.getObj()).booleanValue() && !MC.client3.player.isOnGround()) {
+        if (((Boolean)this.onlyGround.getValue()).booleanValue() && !MC.mc.player.isOnGround()) {
             return;
         }
-        if (((Boolean)this.usingPause.getObj()).booleanValue() && MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.usingPause.getValue()).booleanValue() && MC.mc.player.isUsingItem()) {
             return;
         }
-        if (((Boolean)this.resistance.getObj()).booleanValue() && this.m259(StatusEffects.RESISTANCE, true, 2) && this.m18(StatusEffects.RESISTANCE)) {
+        if (((Boolean)this.resistance.getValue()).booleanValue() && this.m259(StatusEffects.RESISTANCE, true, 2) && this.m18(StatusEffects.RESISTANCE)) {
             return;
         }
-        if (((Boolean)this.speed.getObj()).booleanValue() && this.m259(StatusEffects.SPEED, false, 0) && this.m18(StatusEffects.SPEED)) {
+        if (((Boolean)this.speed.getValue()).booleanValue() && this.m259(StatusEffects.SPEED, false, 0) && this.m18(StatusEffects.SPEED)) {
             return;
         }
-        if (((Boolean)this.strength.getObj()).booleanValue() && this.m259(StatusEffects.STRENGTH, false, 0) && this.m18(StatusEffects.STRENGTH)) {
+        if (((Boolean)this.strength.getValue()).booleanValue() && this.m259(StatusEffects.STRENGTH, false, 0) && this.m18(StatusEffects.STRENGTH)) {
             return;
         }
-        if (((Boolean)this.slowFalling.getObj()).booleanValue() && this.m259(StatusEffects.SLOW_FALLING, false, 0) && this.m18(StatusEffects.SLOW_FALLING)) {
+        if (((Boolean)this.slowFalling.getValue()).booleanValue() && this.m259(StatusEffects.SLOW_FALLING, false, 0) && this.m18(StatusEffects.SLOW_FALLING)) {
             return;
         }
     }
@@ -111,7 +111,7 @@ extends Module {
         RegistryEntry registryEntry = (RegistryEntry)object;
         boolean bl2 = bl;
         int n2 = n;
-        StatusEffectInstance statusEffectInstance = MC.client3.player.getStatusEffect(registryEntry);
+        StatusEffectInstance statusEffectInstance = MC.mc.player.getStatusEffect(registryEntry);
         boolean bl3 = false;
         if (statusEffectInstance == null) {
             return true;
@@ -121,7 +121,7 @@ extends Module {
                 return true;
             }
         }
-        return statusEffectInstance.getDuration() <= this.frontTick.getInt50() + 2;
+        return statusEffectInstance.getDuration() <= this.frontTick.getInt() + 2;
     }
 
     private boolean m18(Object object) {
@@ -133,14 +133,14 @@ extends Module {
                         registryEntry = (RegistryEntry)object;
                         boolean bl = false;
                         if (AutoPot.m760(registryEntry) != -1) break block4;
-                        if (!((Boolean)this.inventorySwap.getObj()).booleanValue()) break block5;
+                        if (!((Boolean)this.inventorySwap.getValue()).booleanValue()) break block5;
                         if (AutoPot.m264(registryEntry) != -1) break block4;
                     }
                     return false;
                 }
-                if (!((Boolean)this.delayCast.getObj()).booleanValue()) break block6;
+                if (!((Boolean)this.delayCast.getValue()).booleanValue()) break block6;
                 this.field66 = registryEntry;
-                this.count135 = this.castDelay.getInt50();
+                this.count135 = this.castDelay.getInt();
                 this.flag77 = true;
                 if (!false) break block7;
             }
@@ -155,7 +155,7 @@ extends Module {
     private void executeThrow(Object var1_1) {
         RegistryEntry var3 = (RegistryEntry)var1_1;
         ClientSetting.RotateMode var5 = this.getRotateMode4();
-        float var6 = MC.client3.player.getYaw();
+        float var6 = MC.mc.player.getYaw();
         switch (Lambda.counts22[var5.ordinal()]) {
             case 1: {
                 Client.mathUtil.m303(var6, 90.0f);
@@ -170,22 +170,22 @@ extends Module {
                 break;
             }
         }
-        if (((Boolean)this.inventorySwap.getObj()).booleanValue()) {
+        if (((Boolean)this.inventorySwap.getValue()).booleanValue()) {
             int var7 = AutoPot.m264(var3);
             if (var7 != -1 && Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.INVENTORY)) {
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
                 Client.renderUtil3.m608();
                 this.setObj91(var5);
-                this.helper748.m533();
+                this.helper748.resetTimer();
                 return;
             }
         }
         if (AutoPot.m760(var3) != -1 && Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.SILENT)) {
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
             Client.renderUtil3.m608();
         }
         this.setObj91(var5);
-        this.helper748.m533();
+        this.helper748.resetTimer();
     }
 
     /*
@@ -214,7 +214,7 @@ extends Module {
     private ClientSetting.RotateMode getRotateMode4() {
         ClientSetting.RotateMode rotateMode;
         int n = AutoArmor.getInt66();
-        Object object = this.rotateMode.getObj();
+        Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {
                 ClientSetting.RotateMode rotateMode2;
@@ -224,12 +224,12 @@ extends Module {
                         rotateMode2 = ClientSetting.RotateMode.NONE;
                         return rotateMode2;
                     }
-                    object2 = ClientSetting.INSTANCE.rotateMode.getObj();
+                    object2 = ClientSetting.INSTANCE.rotateMode.getValue();
                 }
                 rotateMode2 = (ClientSetting.RotateMode)((Object)object2);
                 return rotateMode2;
             }
-            object = this.rotateMode.getObj();
+            object = this.rotateMode.getValue();
         }
         switch (((RotateMode)((Object)object)).ordinal()) {
             case 1: {
@@ -278,7 +278,7 @@ extends Module {
         RegistryEntry registryEntry = (RegistryEntry)object;
         boolean bl = false;
         for (int i = 0; i < 9; ++i) {
-            ItemStack itemStack = MC.client3.player.getInventory().getStack(i);
+            ItemStack itemStack = MC.mc.player.getInventory().getStack(i);
             if (!AutoPot.m489(itemStack, registryEntry)) continue;
             return i;
         }
@@ -292,7 +292,7 @@ extends Module {
             int n2 = 35;
             int n3 = AutoArmor.getInt66();
             while (n2 >= 9) {
-                ItemStack itemStack = MC.client3.player.getInventory().getStack(n2);
+                ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 if (n3 != 0) {
                     n = AutoPot.m489(itemStack, registryEntry) ? 1 : 0;
                     if (n3 == 0) break block4;
@@ -309,7 +309,7 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         int n = AutoArmor.getInt66();
         AutoPot autoPot = this;
         if (n != 0) {

@@ -20,7 +20,7 @@ import shit.module.render.NoRender;
 public class EquipmentLayerRendererMixin {
     @Redirect(method={"render(Lnet/minecraft/client/render/entity/equipment/EquipmentModel$LayerType;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;ILnet/minecraft/util/Identifier;II)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/item/ItemStack;hasGlint()Z"))
     private boolean trollhack$noArmorGlint(ItemStack itemStack) {
-        if (ArmorHide.isSet136() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.armorGlint.getObj()).booleanValue()) {
+        if (ArmorHide.isSet136() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.armorGlint.getValue()).booleanValue()) {
             return false;
         }
         return itemStack.hasGlint();
@@ -28,7 +28,7 @@ public class EquipmentLayerRendererMixin {
 
     @Redirect(method={"render(Lnet/minecraft/client/render/entity/equipment/EquipmentModel$LayerType;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;ILnet/minecraft/util/Identifier;II)V"}, at=@At(value="INVOKE", target="Lnet/minecraft/item/ItemStack;get(Lnet/minecraft/component/ComponentType;)Ljava/lang/Object;"))
     private Object trollhack$noArmorTrim(ItemStack itemStack, ComponentType componentType) {
-        if (componentType == DataComponentTypes.TRIM && (ArmorHide.isSet158() || NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.armorTrim.getObj()).booleanValue())) {
+        if (componentType == DataComponentTypes.TRIM && (ArmorHide.isSet158() || NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.armorTrim.getValue()).booleanValue())) {
             return null;
         }
         return itemStack.get(componentType);

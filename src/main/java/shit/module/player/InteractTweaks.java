@@ -93,30 +93,30 @@ extends Module {
 
         public InteractTweaks() {
         super("InteractTweaks", "Various interaction tweaks.", Category.PLAYER);
-        this.noEntityTrace = (BooleanSetting)this.m28(new BooleanSetting("NoEntityTrace", true));
-        this.onlyPickaxe = (BooleanSetting)this.m28(new BooleanSetting("OnlyPickaxe", true));
-        this.multiTask = (BooleanSetting)this.m28(new BooleanSetting("MultiTask", true));
-        this.respawn = (BooleanSetting)this.m28(new BooleanSetting("Respawn", true));
-        this.ignoreBedrock = (BooleanSetting)this.m28(new BooleanSetting("IgnoreBedrock", false));
-        this.noMineAbort = (BooleanSetting)this.m28(new BooleanSetting("NoMineAbort", false));
-        this.noMineReset = (BooleanSetting)this.m28(new BooleanSetting("NoMineReset", false));
-        this.noMineDelay = (BooleanSetting)this.m28(new BooleanSetting("NoMineDelay", false));
-        this.noInteract = (BooleanSetting)this.m28(new BooleanSetting("NoInteract", false));
-        this.switchEat = (BooleanSetting)this.m28(new BooleanSetting("SwitchEat", false));
-        this.sword = (BooleanSetting)this.m28(new BooleanSetting("Sword", true));
-        this.pickaxe = (BooleanSetting)this.m28(new BooleanSetting("Pickaxe", true));
-        this.crystal = (BooleanSetting)this.m28(new BooleanSetting("Crystal", true));
-        this.totem = (BooleanSetting)this.m28(new BooleanSetting("Totem", true));
-        this.reach = (BooleanSetting)this.m28(new BooleanSetting("Reach", false));
-        this.blockRange = (NumberSetting)this.m28(new NumberSetting("BlockRange", 5.0, 0.0, 15.0, 0.1));
-        this.entityRange = (NumberSetting)this.m28(new NumberSetting("EntityRange", 5.0, 0.0, 15.0, 0.1));
-        this.useDelay = (NumberSetting)this.m28(new NumberSetting("UseDelay", 4.0, 0.0, 4.0, 1.0));
-        this.autoGapple = (BooleanSetting)this.m28(new BooleanSetting("AutoGapple", false));
-        this.health = (NumberSetting)this.m28(new NumberSetting("Health", 10.0, 1.0, 20.0, 0.5));
-        this.offhand = (BooleanSetting)this.m28(new BooleanSetting("Offhand", true));
-        this.cooldown = (NumberSetting)this.m28(new NumberSetting("Cooldown", 20.0, 0.0, 60.0, 1.0));
-        this.timeout = (NumberSetting)this.m28(new NumberSetting("Timeout", 60.0, 30.0, 100.0, 1.0));
-        this.effectWait = (NumberSetting)this.m28(new NumberSetting("EffectWait", 5.0, 0.0, 20.0, 1.0));
+        this.noEntityTrace = (BooleanSetting)this.registerSetting(new BooleanSetting("NoEntityTrace", true));
+        this.onlyPickaxe = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyPickaxe", true));
+        this.multiTask = (BooleanSetting)this.registerSetting(new BooleanSetting("MultiTask", true));
+        this.respawn = (BooleanSetting)this.registerSetting(new BooleanSetting("Respawn", true));
+        this.ignoreBedrock = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnoreBedrock", false));
+        this.noMineAbort = (BooleanSetting)this.registerSetting(new BooleanSetting("NoMineAbort", false));
+        this.noMineReset = (BooleanSetting)this.registerSetting(new BooleanSetting("NoMineReset", false));
+        this.noMineDelay = (BooleanSetting)this.registerSetting(new BooleanSetting("NoMineDelay", false));
+        this.noInteract = (BooleanSetting)this.registerSetting(new BooleanSetting("NoInteract", false));
+        this.switchEat = (BooleanSetting)this.registerSetting(new BooleanSetting("SwitchEat", false));
+        this.sword = (BooleanSetting)this.registerSetting(new BooleanSetting("Sword", true));
+        this.pickaxe = (BooleanSetting)this.registerSetting(new BooleanSetting("Pickaxe", true));
+        this.crystal = (BooleanSetting)this.registerSetting(new BooleanSetting("Crystal", true));
+        this.totem = (BooleanSetting)this.registerSetting(new BooleanSetting("Totem", true));
+        this.reach = (BooleanSetting)this.registerSetting(new BooleanSetting("Reach", false));
+        this.blockRange = (NumberSetting)this.registerSetting(new NumberSetting("BlockRange", 5.0, 0.0, 15.0, 0.1));
+        this.entityRange = (NumberSetting)this.registerSetting(new NumberSetting("EntityRange", 5.0, 0.0, 15.0, 0.1));
+        this.useDelay = (NumberSetting)this.registerSetting(new NumberSetting("UseDelay", 4.0, 0.0, 4.0, 1.0));
+        this.autoGapple = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoGapple", false));
+        this.health = (NumberSetting)this.registerSetting(new NumberSetting("Health", 10.0, 1.0, 20.0, 0.5));
+        this.offhand = (BooleanSetting)this.registerSetting(new BooleanSetting("Offhand", true));
+        this.cooldown = (NumberSetting)this.registerSetting(new NumberSetting("Cooldown", 20.0, 0.0, 60.0, 1.0));
+        this.timeout = (NumberSetting)this.registerSetting(new NumberSetting("Timeout", 60.0, 30.0, 100.0, 1.0));
+        this.effectWait = (NumberSetting)this.registerSetting(new NumberSetting("EffectWait", 5.0, 0.0, 20.0, 1.0));
         this.flag99 = false;
         this.count164 = 0;
         this.flag155 = false;
@@ -131,7 +131,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         block6: {
             block5: {
                 boolean bl = false;
@@ -141,8 +141,8 @@ extends Module {
             this.setFlag4(false);
         }
         if (this.flag99) {
-            if (MC.client3.player != null) {
-                MC.client3.player.getInventory().setSelectedSlot(this.count164);
+            if (MC.mc.player != null) {
+                MC.mc.player.getInventory().setSelectedSlot(this.count164);
                 this.flag99 = false;
             }
         }
@@ -151,19 +151,19 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner60(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (this.count60 > 0) {
             --this.count60;
         }
-        if (((Boolean)this.respawn.getObj()).booleanValue() && MC.client3.currentScreen instanceof DeathScreen) {
-            MC.client3.player.requestRespawn();
-            MC.client3.setScreen(null);
+        if (((Boolean)this.respawn.getValue()).booleanValue() && MC.mc.currentScreen instanceof DeathScreen) {
+            MC.mc.player.requestRespawn();
+            MC.mc.setScreen(null);
         }
-        int n = 4 - this.useDelay.getInt50();
-        if (((MinecraftAccessor)MC.client3).getInt82() <= n) {
-            ((MinecraftAccessor)MC.client3).setInt15(0);
+        int n = 4 - this.useDelay.getInt();
+        if (((MinecraftAccessor)MC.mc).getInt82() <= n) {
+            ((MinecraftAccessor)MC.mc).setInt15(0);
         }
         if (this.isSet11()) {
             return;
@@ -174,15 +174,15 @@ extends Module {
     @EventHandler
     private void setPacketEventInner22(PacketEvent.PacketEventInner2 packetEventInner2) {
         Packet packet;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.noInteract.getObj()).booleanValue() && (packet = packetEventInner2.getPacket()) instanceof PlayerInteractBlockC2SPacket) {
+        if (((Boolean)this.noInteract.getValue()).booleanValue() && (packet = packetEventInner2.getPacket()) instanceof PlayerInteractBlockC2SPacket) {
             PlayerInteractBlockC2SPacket playerInteractBlockC2SPacket = (PlayerInteractBlockC2SPacket)packet;
             BlockPos blockPos = playerInteractBlockC2SPacket.getBlockHitResult().getBlockPos();
-            Block block = MC.client3.world.getBlockState(blockPos).getBlock();
-            if (!MC.client3.player.isSneaking() && (block instanceof ChestBlock || block instanceof EnderChestBlock || block instanceof ShulkerBoxBlock || block instanceof AnvilBlock)) {
-                packetEventInner2.m209();
+            Block block = MC.mc.world.getBlockState(blockPos).getBlock();
+            if (!MC.mc.player.isSneaking() && (block instanceof ChestBlock || block instanceof EnderChestBlock || block instanceof ShulkerBoxBlock || block instanceof AnvilBlock)) {
+                packetEventInner2.cancel();
             }
         }
     }
@@ -193,7 +193,7 @@ extends Module {
      */
     private boolean isSet11() {
         int n = AutoArmor.getInt66();
-        int n2 = ((Boolean)this.autoGapple.getObj()).booleanValue() ? 1 : 0;
+        int n2 = ((Boolean)this.autoGapple.getValue()).booleanValue() ? 1 : 0;
         if (n != 0) {
             if (n2 == 0) {
                 InteractTweaks interactTweaks = this;
@@ -214,10 +214,10 @@ extends Module {
             if (n2 != 0) {
                 int n3 = ++this.count110;
                 if (n == 0) return n3 != 0;
-                if (n3 < this.effectWait.getInt50()) return 1 != 0;
+                if (n3 < this.effectWait.getInt()) return 1 != 0;
                 this.flag163 = false;
-                float f = MC.client3.player.getHealth() + MC.client3.player.getAbsorptionAmount();
-                double d2 = (double)f - (Double)this.health.getObj();
+                float f = MC.mc.player.getHealth() + MC.mc.player.getAbsorptionAmount();
+                double d2 = (double)f - (Double)this.health.getValue();
                 d2 = d2 == 0.0 ? 0 : (d2 < 0.0 ? -1 : 1);
                 if (n == 0) return d2 != 0;
                 if (d2 <= 0) {
@@ -245,8 +245,8 @@ extends Module {
         if (n2 > 0) {
             return 0 != 0;
         }
-        float f = MC.client3.player.getHealth() + MC.client3.player.getAbsorptionAmount();
-        double d3 = (double)f - (Double)this.health.getObj();
+        float f = MC.mc.player.getHealth() + MC.mc.player.getAbsorptionAmount();
+        double d3 = (double)f - (Double)this.health.getValue();
         d3 = d3 == 0.0 ? 0 : (d3 < 0.0 ? -1 : 1);
         if (n == 0) return d3 != 0;
         if (d3 <= 0) {
@@ -264,33 +264,33 @@ extends Module {
      * Unable to fully structure code
      */
     private boolean isSet165() {
-        this.flag14 = MC.client3.player.hasStatusEffect(StatusEffects.ABSORPTION);
-        this.value152 = MC.client3.player.getAbsorptionAmount();
-        this.flag177 = MC.client3.options.useKey.isPressed();
+        this.flag14 = MC.mc.player.hasStatusEffect(StatusEffects.ABSORPTION);
+        this.value152 = MC.mc.player.getAbsorptionAmount();
+        this.flag177 = MC.mc.options.useKey.isPressed();
         this.count173 = 0;
-        if (((Boolean)this.offhand.getObj()).booleanValue() && this.m499(MC.client3.player.getOffHandStack().getItem())) {
+        if (((Boolean)this.offhand.getValue()).booleanValue() && this.m499(MC.mc.player.getOffHandStack().getItem())) {
             this.flag155 = true;
             this.count70 = -1;
-            MC.client3.options.useKey.setPressed(true);
-            MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, Hand.OFF_HAND);
+            MC.mc.options.useKey.setPressed(true);
+            MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, Hand.OFF_HAND);
             return true;
         }
-        if (this.m499(MC.client3.player.getMainHandStack().getItem())) {
+        if (this.m499(MC.mc.player.getMainHandStack().getItem())) {
             this.flag155 = true;
             this.count70 = -1;
-            MC.client3.options.useKey.setPressed(true);
-            MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, Hand.MAIN_HAND);
+            MC.mc.options.useKey.setPressed(true);
+            MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, Hand.MAIN_HAND);
             return true;
         }
         int var3 = this.getInt14();
         if (var3 == -1) {
             return false;
         }
-        this.count70 = MC.client3.player.getInventory().getSelectedSlot();
-        MC.client3.player.getInventory().setSelectedSlot(var3);
+        this.count70 = MC.mc.player.getInventory().getSelectedSlot();
+        MC.mc.player.getInventory().setSelectedSlot(var3);
         this.flag155 = true;
-        MC.client3.options.useKey.setPressed(true);
-        MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, Hand.MAIN_HAND);
+        MC.mc.options.useKey.setPressed(true);
+        MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, Hand.MAIN_HAND);
         return true;
     }
 
@@ -303,28 +303,28 @@ extends Module {
             this.flag155 = false;
             this.flag163 = true;
             this.count110 = 0;
-            MC.client3.options.useKey.setPressed(false);
-            if (this.count70 != -1 && this.count70 != MC.client3.player.getInventory().getSelectedSlot()) {
-                MC.client3.player.getInventory().setSelectedSlot(this.count70);
+            MC.mc.options.useKey.setPressed(false);
+            if (this.count70 != -1 && this.count70 != MC.mc.player.getInventory().getSelectedSlot()) {
+                MC.mc.player.getInventory().setSelectedSlot(this.count70);
                 this.count70 = -1;
             }
-        } else if (this.count173 >= this.timeout.getInt50()) {
+        } else if (this.count173 >= this.timeout.getInt()) {
             this.setFlag4(true);
         } else {
-            boolean var3 = this.m499(MC.client3.player.getMainHandStack().getItem());
-            boolean var4 = ((Boolean)this.offhand.getObj()).booleanValue() && this.m499(MC.client3.player.getOffHandStack().getItem());
+            boolean var3 = this.m499(MC.mc.player.getMainHandStack().getItem());
+            boolean var4 = ((Boolean)this.offhand.getValue()).booleanValue() && this.m499(MC.mc.player.getOffHandStack().getItem());
             if (!var3 && !var4) {
                 int var5 = this.getInt14();
                 if (var5 == -1) {
                     this.setFlag4(false);
                     return;
                 }
-                MC.client3.player.getInventory().setSelectedSlot(var5);
+                MC.mc.player.getInventory().setSelectedSlot(var5);
             }
-            MC.client3.options.useKey.setPressed(true);
-            if (!MC.client3.player.isUsingItem()) {
+            MC.mc.options.useKey.setPressed(true);
+            if (!MC.mc.player.isUsingItem()) {
                 Hand var6 = var4 ? Hand.OFF_HAND : Hand.MAIN_HAND;
-                MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, var6);
+                MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, var6);
             }
         }
     }
@@ -336,8 +336,8 @@ extends Module {
         if (this.count173 < 10) {
             return false;
         }
-        boolean var3 = MC.client3.player.hasStatusEffect(StatusEffects.ABSORPTION);
-        float var4 = MC.client3.player.getAbsorptionAmount();
+        boolean var3 = MC.mc.player.hasStatusEffect(StatusEffects.ABSORPTION);
+        float var4 = MC.mc.player.getAbsorptionAmount();
         if (!this.flag14 && var3) {
             return true;
         }
@@ -351,15 +351,15 @@ extends Module {
         boolean bl2 = bl;
         boolean bl3 = false;
         if (bl2) {
-            this.count60 = this.cooldown.getInt50();
+            this.count60 = this.cooldown.getInt();
         }
-        if (this.count70 != -1 && MC.client3.player != null) {
-            if (this.count70 != MC.client3.player.getInventory().getSelectedSlot()) {
-                MC.client3.player.getInventory().setSelectedSlot(this.count70);
+        if (this.count70 != -1 && MC.mc.player != null) {
+            if (this.count70 != MC.mc.player.getInventory().getSelectedSlot()) {
+                MC.mc.player.getInventory().setSelectedSlot(this.count70);
             }
         }
         if (!this.flag177) {
-            MC.client3.options.useKey.setPressed(false);
+            MC.mc.options.useKey.setPressed(false);
         }
         this.flag155 = false;
         this.flag163 = false;
@@ -376,7 +376,7 @@ extends Module {
         block3: {
             int n2 = AutoArmor.getInt66();
             for (int i = 0; i < 9; ++i) {
-                n = this.m499(MC.client3.player.getInventory().getStack(i).getItem()) ? 1 : 0;
+                n = this.m499(MC.mc.player.getInventory().getStack(i).getItem()) ? 1 : 0;
                 if (n2 != 0) {
                     int n3 = 0;
                     if (n2 != 0) {
@@ -414,10 +414,10 @@ extends Module {
      * Unable to fully structure code
      */
     private boolean isSet93() {
-        if (((Boolean)this.offhand.getObj()).booleanValue() && this.m499(MC.client3.player.getOffHandStack().getItem())) {
+        if (((Boolean)this.offhand.getValue()).booleanValue() && this.m499(MC.mc.player.getOffHandStack().getItem())) {
             return true;
         }
-        if (this.m499(MC.client3.player.getMainHandStack().getItem())) {
+        if (this.m499(MC.mc.player.getMainHandStack().getItem())) {
             return true;
         }
         return this.getInt14() != -1;
@@ -428,54 +428,54 @@ extends Module {
      * Could not resolve type clashes
      */
     private void m944() {
-        if (!((Boolean)this.switchEat.getObj()).booleanValue()) {
+        if (!((Boolean)this.switchEat.getValue()).booleanValue()) {
             if (this.flag99) {
-                MC.client3.player.getInventory().setSelectedSlot(this.count164);
+                MC.mc.player.getInventory().setSelectedSlot(this.count164);
                 this.flag99 = false;
             }
             return;
         }
         if (!this.flag99) {
-            Item var7 = MC.client3.player.getMainHandStack().getItem();
-            ItemStack var4 = MC.client3.player.getMainHandStack();
-            boolean var5 = var4.isIn(ItemTags.PICKAXES) && ((Boolean)this.pickaxe.getObj()).booleanValue() || var4.isIn(ItemTags.SWORDS) && ((Boolean)this.sword.getObj()).booleanValue() || var7 == Items.END_CRYSTAL && ((Boolean)this.crystal.getObj()).booleanValue() || var7 == Items.TOTEM_OF_UNDYING && ((Boolean)this.totem.getObj()).booleanValue();
+            Item var7 = MC.mc.player.getMainHandStack().getItem();
+            ItemStack var4 = MC.mc.player.getMainHandStack();
+            boolean var5 = var4.isIn(ItemTags.PICKAXES) && ((Boolean)this.pickaxe.getValue()).booleanValue() || var4.isIn(ItemTags.SWORDS) && ((Boolean)this.sword.getValue()).booleanValue() || var7 == Items.END_CRYSTAL && ((Boolean)this.crystal.getValue()).booleanValue() || var7 == Items.TOTEM_OF_UNDYING && ((Boolean)this.totem.getValue()).booleanValue();
             if (!var5) {
                 return;
             }
-            if (!MC.client3.options.useKey.isPressed()) {
+            if (!MC.mc.options.useKey.isPressed()) {
                 return;
             }
-            if (this.m499(MC.client3.player.getOffHandStack().getItem())) {
+            if (this.m499(MC.mc.player.getOffHandStack().getItem())) {
                 return;
             }
             int var6 = this.getInt14();
             if (var6 == -1) {
                 return;
             }
-            this.count164 = MC.client3.player.getInventory().getSelectedSlot();
+            this.count164 = MC.mc.player.getInventory().getSelectedSlot();
             this.flag99 = true;
-            MC.client3.player.getInventory().setSelectedSlot(var6);
+            MC.mc.player.getInventory().setSelectedSlot(var6);
             return;
         }
-        if (MC.client3.options.useKey.isPressed()) {
-            if (this.m499(MC.client3.player.getMainHandStack().getItem())) {
+        if (MC.mc.options.useKey.isPressed()) {
+            if (this.m499(MC.mc.player.getMainHandStack().getItem())) {
                 return;
             }
             int var3 = this.getInt14();
             if (var3 != -1) {
-                MC.client3.player.getInventory().setSelectedSlot(var3);
+                MC.mc.player.getInventory().setSelectedSlot(var3);
             } else {
-                MC.client3.player.getInventory().setSelectedSlot(this.count164);
+                MC.mc.player.getInventory().setSelectedSlot(this.count164);
                 this.flag99 = false;
             }
             return;
         }
-        MC.client3.player.getInventory().setSelectedSlot(this.count164);
+        MC.mc.player.getInventory().setSelectedSlot(this.count164);
         this.flag99 = false;
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         block8: {
             int n;
             block7: {
@@ -489,7 +489,7 @@ extends Module {
                 }
                 if (n2 != 0) {
                     if (n != 0) {
-                        return "Wait " + this.count110 + "/" + this.effectWait.getInt50();
+                        return "Wait " + this.count110 + "/" + this.effectWait.getInt();
                     }
                     n = this.count60;
                 }

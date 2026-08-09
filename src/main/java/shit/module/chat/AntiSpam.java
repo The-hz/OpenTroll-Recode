@@ -57,24 +57,24 @@ extends Module {
 
         public AntiSpam() {
         super("AntiSpam", "Filters spam, advertisements and duplicate chat messages.", Category.CHAT);
-        this.mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Hide));
-        this.replace = (EnumSetting)this.m28(new EnumSetting("Replace", EMode.Asterisks));
-        this.duplicates = (BooleanSetting)this.m28(new BooleanSetting("Duplicates", true));
-        this.dupeTimeout = (NumberSetting)this.m28(new NumberSetting("DupeTimeout", 30.0, 1.0, 600.0, 1.0));
-        this.discord = (BooleanSetting)this.m28(new BooleanSetting("Discord", true));
-        this.serverIps = (BooleanSetting)this.m28(new BooleanSetting("ServerIps", true));
-        this.automated = (BooleanSetting)this.m28(new BooleanSetting("Automated", true));
-        this.specialStart = (BooleanSetting)this.m28(new BooleanSetting("SpecialStart", true));
-        this.specialEnd = (BooleanSetting)this.m28(new BooleanSetting("SpecialEnd", true));
-        this.greenText = (BooleanSetting)this.m28(new BooleanSetting("GreenText", false));
-        this.filterOwn = (BooleanSetting)this.m28(new BooleanSetting("FilterOwn", false));
-        this.filterDMs = (BooleanSetting)this.m28(new BooleanSetting("FilterDMs", false));
-        this.showBlocked = (BooleanSetting)this.m28(new BooleanSetting("ShowBlocked", false));
+        this.mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Hide));
+        this.replace = (EnumSetting)this.registerSetting(new EnumSetting("Replace", EMode.Asterisks));
+        this.duplicates = (BooleanSetting)this.registerSetting(new BooleanSetting("Duplicates", true));
+        this.dupeTimeout = (NumberSetting)this.registerSetting(new NumberSetting("DupeTimeout", 30.0, 1.0, 600.0, 1.0));
+        this.discord = (BooleanSetting)this.registerSetting(new BooleanSetting("Discord", true));
+        this.serverIps = (BooleanSetting)this.registerSetting(new BooleanSetting("ServerIps", true));
+        this.automated = (BooleanSetting)this.registerSetting(new BooleanSetting("Automated", true));
+        this.specialStart = (BooleanSetting)this.registerSetting(new BooleanSetting("SpecialStart", true));
+        this.specialEnd = (BooleanSetting)this.registerSetting(new BooleanSetting("SpecialEnd", true));
+        this.greenText = (BooleanSetting)this.registerSetting(new BooleanSetting("GreenText", false));
+        this.filterOwn = (BooleanSetting)this.registerSetting(new BooleanSetting("FilterOwn", false));
+        this.filterDMs = (BooleanSetting)this.registerSetting(new BooleanSetting("FilterDMs", false));
+        this.showBlocked = (BooleanSetting)this.registerSetting(new BooleanSetting("ShowBlocked", false));
         this.map23 = new LinkedHashMap();
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.map23.clear();
     }
 
@@ -85,49 +85,49 @@ extends Module {
             return;
         }
         this.m133();
-        if (!((Boolean)this.filterOwn.getObj()).booleanValue() && this.m508(string)) {
+        if (!((Boolean)this.filterOwn.getValue()).booleanValue() && this.m508(string)) {
             return;
         }
-        if (!((Boolean)this.filterDMs.getObj()).booleanValue() && AntiSpam.m800(string)) {
+        if (!((Boolean)this.filterDMs.getValue()).booleanValue() && AntiSpam.m800(string)) {
             return;
         }
         String string2 = AntiSpam.m557(string);
         String string3 = null;
         Pattern pattern = null;
-        if (((Boolean)this.duplicates.getObj()).booleanValue() && this.m739(string)) {
+        if (((Boolean)this.duplicates.getValue()).booleanValue() && this.m739(string)) {
             string3 = "Duplicate";
         }
-        if (string3 == null && ((Boolean)this.discord.getObj()).booleanValue() && pattern7.matcher(string2).find()) {
+        if (string3 == null && ((Boolean)this.discord.getValue()).booleanValue() && pattern7.matcher(string2).find()) {
             string3 = "Discord";
             pattern = pattern7;
         }
-        if (string3 == null && ((Boolean)this.serverIps.getObj()).booleanValue() && pattern2.matcher(string2).find()) {
+        if (string3 == null && ((Boolean)this.serverIps.getValue()).booleanValue() && pattern2.matcher(string2).find()) {
             string3 = "ServerIp";
             pattern = pattern2;
         }
-        if (string3 == null && ((Boolean)this.automated.getObj()).booleanValue() && pattern6.matcher(string2).find()) {
+        if (string3 == null && ((Boolean)this.automated.getValue()).booleanValue() && pattern6.matcher(string2).find()) {
             string3 = "Automated";
             pattern = pattern6;
         }
-        if (string3 == null && ((Boolean)this.specialStart.getObj()).booleanValue() && pattern5.matcher(string2).matches()) {
+        if (string3 == null && ((Boolean)this.specialStart.getValue()).booleanValue() && pattern5.matcher(string2).matches()) {
             string3 = "SpecialStart";
         }
-        if (string3 == null && ((Boolean)this.specialEnd.getObj()).booleanValue() && pattern4.matcher(string2).matches()) {
+        if (string3 == null && ((Boolean)this.specialEnd.getValue()).booleanValue() && pattern4.matcher(string2).matches()) {
             string3 = "SpecialEnd";
         }
-        if (string3 == null && ((Boolean)this.greenText.getObj()).booleanValue() && AntiSpam.pattern.matcher(string2).matches()) {
+        if (string3 == null && ((Boolean)this.greenText.getValue()).booleanValue() && AntiSpam.pattern.matcher(string2).matches()) {
             string3 = "GreenText";
         }
         if (string3 == null) {
             return;
         }
-        packetEventInner.m209();
-        if (((Boolean)this.showBlocked.getObj()).booleanValue()) {
-            Util2.setObj10("[AntiSpam] " + string3 + ": " + string);
+        packetEventInner.cancel();
+        if (((Boolean)this.showBlocked.getValue()).booleanValue()) {
+            Util2.sendClientMessage("[AntiSpam] " + string3 + ": " + string);
         }
-        if (this.mode.getObj() == Mode.Replace) {
+        if (this.mode.getValue() == Mode.Replace) {
             String string4 = pattern == null ? this.getText41() : pattern.matcher(string).replaceAll(this.getText41());
-            Util2.setObj10(string4);
+            Util2.sendClientMessage(string4);
         }
     }
 
@@ -181,7 +181,7 @@ extends Module {
         int[] nArray = ChatTimestamp.getIntArray2();
         Long l2 = (Long)this.map23.put(string, l);
         if (l2 == null) return 0 != 0;
-        double d = (double)(l - l2) - (Double)this.dupeTimeout.getObj() * 1000.0;
+        double d = (double)(l - l2) - (Double)this.dupeTimeout.getValue() * 1000.0;
         int n = d == 0.0 ? 0 : (d < 0.0 ? -1 : 1);
         if (nArray == null) return n != 0;
         if (n >= 0) return 0 != 0;
@@ -214,8 +214,8 @@ extends Module {
     private boolean m508(Object object) {
         String string = (String)object;
         int[] nArray = ChatTimestamp.getIntArray2();
-        if (MC.client3.player == null) return false;
-        boolean bl = string.toLowerCase(Locale.ROOT).startsWith("<" + MC.client3.player.getName().getString().toLowerCase(Locale.ROOT) + ">");
+        if (MC.mc.player == null) return false;
+        boolean bl = string.toLowerCase(Locale.ROOT).startsWith("<" + MC.mc.player.getName().getString().toLowerCase(Locale.ROOT) + ">");
         if (nArray == null) return bl;
         if (!bl) return false;
         return true;
@@ -250,7 +250,7 @@ extends Module {
     }
 
     private String getText41() {
-        return this.replace.getObj() == EMode.Redacted ? "[redacted]" : "****";
+        return this.replace.getValue() == EMode.Redacted ? "[redacted]" : "****";
     }
 
     /*

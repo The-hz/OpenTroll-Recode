@@ -29,7 +29,7 @@ import shit.util.MC;
 public class ShulkerViewer
 extends Module {
     public static ShulkerViewer INSTANCE;
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 8.0, 2.0, 32.0, 0.5));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 8.0, 2.0, 32.0, 0.5));
 
     public ShulkerViewer() {
         super("ShulkerViewer", "Previews the contents of shulker boxes held by nearby players.", Category.MISC);
@@ -38,20 +38,20 @@ extends Module {
 
     @EventHandler
     private void setObj111(Render2DEvent render2DEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         int n = 5;
-        int n2 = MC.client3.getWindow().getScaledHeight() / 2;
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
+        int n2 = MC.mc.getWindow().getScaledHeight() / 2;
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
             ContainerComponent containerComponent;
             ItemStack itemStack;
-            if (playerEntity == MC.client3.player || (double)playerEntity.distanceTo((Entity)MC.client3.player) > (Double)this.range.getObj() || (itemStack = this.m131(playerEntity)) == null || (containerComponent = (ContainerComponent)itemStack.get(DataComponentTypes.CONTAINER)) == null) continue;
-            Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), playerEntity.getName().getString() + "'s Shulker:", n, n2, -1, true);
+            if (playerEntity == MC.mc.player || (double)playerEntity.distanceTo((Entity)MC.mc.player) > (Double)this.range.getValue() || (itemStack = this.m131(playerEntity)) == null || (containerComponent = (ContainerComponent)itemStack.get(DataComponentTypes.CONTAINER)) == null) continue;
+            Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), playerEntity.getName().getString() + "'s Shulker:", n, n2, -1, true);
             n2 += 9;
             for (ItemStack itemStack2 : containerComponent.iterateNonEmpty()) {
                 String string = "  " + itemStack2.getCount() + "x " + itemStack2.getName().getString();
-                Client.fontManager.renderer2().m5(render2DEvent.getDrawContext(), string, n, n2, -5592406, true);
+                Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), string, n, n2, -5592406, true);
                 n2 += 9;
             }
             n2 += 4;
@@ -113,7 +113,7 @@ extends Module {
             if (shulkerViewer2 == null) return false;
             shulkerViewer2 = shulkerViewer;
         }
-        boolean bl = shulkerViewer2.isSet19();
+        boolean bl = shulkerViewer2.isEnabled();
         if (string == null) return bl;
         if (!bl) return false;
         Object object3 = shulkerViewer;
@@ -130,7 +130,7 @@ extends Module {
         int n9 = 61;
         drawContext.fill(n6 - 3, n7 - 13, n6 + n8, n7 + n9, -535818224);
         drawContext.drawStrokedRectangle(n6 - 3, n7 - 13, n8 + 3, n9 + 13, -8367873);
-        Client.fontManager.renderer2().m5(drawContext, itemStack.getName().getString(), n6, n7 - 10, -1, true);
+        Client.fontManager.renderer2().drawText(drawContext, itemStack.getName().getString(), n6, n7 - 10, -1, true);
         int n10 = 0;
         ContainerComponent containerComponent2 = containerComponent;
         if (string != null) {
@@ -144,7 +144,7 @@ extends Module {
             int n11 = n6 + n10 % 9 * 18;
             int n12 = n7 + n10 / 9 * 18;
             drawContext.drawItem(itemStack2, n11, n12);
-            drawContext.drawStackOverlay(MC.client3.textRenderer, itemStack2, n11, n12);
+            drawContext.drawStackOverlay(MC.mc.textRenderer, itemStack2, n11, n12);
             n3 = ++n10;
             if (string == null) return n3 != 0;
         } while (n3 < 27 && string != null);

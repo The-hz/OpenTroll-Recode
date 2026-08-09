@@ -29,13 +29,13 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class VClip
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Jump));
-    private final NumberSetting height = (NumberSetting)this.m28(new NumberSetting("Height", 3.0, 1.0, 5.0, 1.0));
-    private final BooleanSetting useWindCharge = (BooleanSetting)this.m28(new BooleanSetting("UseWindCharge", false));
-    private final NumberSetting windChargeDelay = (NumberSetting)this.m28(new NumberSetting("WindChargeDelay", 1.0, 0.0, 10.0, 1.0));
-    private final BooleanSetting auto = (BooleanSetting)this.m28(new BooleanSetting("Auto", false));
-    private final NumberSetting checkRange = (NumberSetting)this.m28(new NumberSetting("CheckRange", 1.0, 1.0, 3.0, 1.0));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 20.0, 0.0, 100.0, 5.0));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Jump));
+    private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 3.0, 1.0, 5.0, 1.0));
+    private final BooleanSetting useWindCharge = (BooleanSetting)this.registerSetting(new BooleanSetting("UseWindCharge", false));
+    private final NumberSetting windChargeDelay = (NumberSetting)this.registerSetting(new NumberSetting("WindChargeDelay", 1.0, 0.0, 10.0, 1.0));
+    private final BooleanSetting auto = (BooleanSetting)this.registerSetting(new BooleanSetting("Auto", false));
+    private final NumberSetting checkRange = (NumberSetting)this.registerSetting(new NumberSetting("CheckRange", 1.0, 1.0, 3.0, 1.0));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 20.0, 0.0, 100.0, 5.0));
     private int count203;
     private boolean flag116;
     private boolean flag82;
@@ -54,7 +54,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag116 = false;
         this.flag82 = false;
         this.count202 = -1;
@@ -63,14 +63,14 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
-        return (Boolean)this.auto.getObj() != false ? "Auto" : ((Mode)((Object)this.mode.getObj())).name();
+        return (Boolean)this.auto.getValue() != false ? "Auto" : ((Mode)((Object)this.mode.getValue())).name();
     }
 
     @EventHandler
     private void setEvent2Inner16(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (this.count202 >= 0) {
@@ -80,8 +80,8 @@ extends Module {
             }
             return;
         }
-        if (((Boolean)this.auto.getObj()).booleanValue()) {
-            if (this.count203++ < this.delay.getInt50()) {
+        if (((Boolean)this.auto.getValue()).booleanValue()) {
+            if (this.count203++ < this.delay.getInt()) {
                 return;
             }
             this.count203 = 0;
@@ -102,9 +102,9 @@ extends Module {
         block3: {
             block2: {
                 Object var2_1 = null;
-                if (!((Boolean)this.useWindCharge.getObj()).booleanValue()) break block2;
+                if (!((Boolean)this.useWindCharge.getValue()).booleanValue()) break block2;
                 if (!this.isSet125()) break block2;
-                this.count202 = this.windChargeDelay.getInt50();
+                this.count202 = this.windChargeDelay.getInt();
                 if (this.count202 > 0) break block3;
                 this.m190();
                 this.count202 = -1;
@@ -115,13 +115,13 @@ extends Module {
     }
 
     private boolean isSet125() {
-        float f = MC.client3.player.getYaw();
+        float f = MC.mc.player.getYaw();
         Client.mathUtil.m303(f, 90.0f);
         Object var2_2 = null;
         boolean bl = Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)this::m588, (Object)ClientSetting.SwitchMode.INVENTORY);
         if (bl) {
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, 90.0f));
-            MC.client3.player.swingHand(Hand.MAIN_HAND, false);
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, 90.0f));
+            MC.mc.player.swingHand(Hand.MAIN_HAND, false);
         }
         Client.renderUtil3.m608();
         Client.mathUtil.m370();
@@ -130,15 +130,15 @@ extends Module {
 
     private boolean isSet41() {
         int n;
-        BlockPos blockPos = MC.client3.player.getBlockPos();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
         Object var2_2 = null;
-        int n2 = this.checkRange.getInt50();
-        if (!this.m674(MC.client3.world.getBlockState(blockPos.up(2)))) {
+        int n2 = this.checkRange.getInt();
+        if (!this.m674(MC.mc.world.getBlockState(blockPos.up(2)))) {
             return false;
         }
         boolean bl = false;
         for (n = 1; n <= n2; ++n) {
-            if (!this.m674(MC.client3.world.getBlockState(blockPos.up(n)))) continue;
+            if (!this.m674(MC.mc.world.getBlockState(blockPos.up(n)))) continue;
             bl = true;
             if (null == null) break;
             if (null == null) continue;
@@ -148,7 +148,7 @@ extends Module {
             return false;
         }
         for (n = n2 + 1; n <= n2 + 2; ++n) {
-            if (this.m105(MC.client3.world.getBlockState(blockPos.up(n)))) continue;
+            if (this.m105(MC.mc.world.getBlockState(blockPos.up(n)))) continue;
             return false;
         }
         return true;
@@ -205,17 +205,17 @@ extends Module {
     private void m190() {
         this.m298();
         Object var2_1 = null;
-        if (!((Boolean)this.auto.getObj()).booleanValue()) {
-            this.setFlag3(false);
+        if (!((Boolean)this.auto.getValue()).booleanValue()) {
+            this.setEnabled(false);
         }
     }
 
     private void m298() {
         Object var2_1 = null;
-        if (MC.client3.getNetworkHandler() == null) {
+        if (MC.mc.getNetworkHandler() == null) {
             return;
         }
-        switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             case 0: {
                 this.m1043();
                 if (null == null) break;
@@ -240,36 +240,36 @@ extends Module {
     }
 
     private void m1043() {
-        double d = MC.client3.player.getX();
-        double d2 = MC.client3.player.getZ();
-        double d3 = Math.round(MC.client3.player.getY());
-        boolean bl = MC.client3.player.isOnGround();
+        double d = MC.mc.player.getX();
+        double d2 = MC.mc.player.getZ();
+        double d3 = Math.round(MC.mc.player.getY());
+        boolean bl = MC.mc.player.isOnGround();
         this.m689(d, d3, d2, bl);
-        MC.client3.player.setPosition(d, d3 -= 0.005, d2);
+        MC.mc.player.setPosition(d, d3 -= 0.005, d2);
         this.m689(d, d3, d2, bl);
-        MC.client3.player.setPosition(d, d3 -= 1.5, d2);
+        MC.mc.player.setPosition(d, d3 -= 1.5, d2);
         this.m689(d, d3, d2, bl);
     }
 
     private void m458() {
-        this.m456(MC.client3.player.getX(), MC.client3.player.getY() + 3.0, MC.client3.player.getZ());
+        this.m456(MC.mc.player.getX(), MC.mc.player.getY() + 3.0, MC.mc.player.getZ());
     }
 
     private void m81() {
-        double d = MC.client3.player.getX();
-        double d2 = MC.client3.player.getZ();
-        double d3 = MC.client3.player.getY();
+        double d = MC.mc.player.getX();
+        double d2 = MC.mc.player.getZ();
+        double d3 = MC.mc.player.getY();
         this.m689(d, d3 + 0.4199999868869781, d2, false);
         this.m689(d, d3 + 0.7531999805212017, d2, false);
         this.m456(d, d3 + 1.0, d2);
     }
 
     private void m224() {
-        this.m456(MC.client3.player.getX(), MC.client3.player.getY() + (Double)this.height.getObj(), MC.client3.player.getZ());
+        this.m456(MC.mc.player.getX(), MC.mc.player.getY() + (Double)this.height.getValue(), MC.mc.player.getZ());
     }
 
     private void m785() {
-        BlockPos blockPos = MC.client3.player.getBlockPos();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
         BlockPos blockPos2 = blockPos.up(2);
         ArrayList<BlockPos> arrayList = new ArrayList<BlockPos>();
         Object var2_4 = null;
@@ -304,7 +304,7 @@ extends Module {
         double d4 = d;
         double d5 = d2;
         double d6 = d3;
-        MC.client3.player.setPosition(d4, d5, d6);
+        MC.mc.player.setPosition(d4, d5, d6);
         this.m689(d4, d5, d6, true);
     }
 
@@ -313,13 +313,13 @@ extends Module {
         double d5 = d2;
         double d6 = d3;
         boolean bl2 = bl;
-        MC.client3.getNetworkHandler().sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, MC.client3.player.horizontalCollision));
+        MC.mc.getNetworkHandler().sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, MC.mc.player.horizontalCollision));
     }
 
     private boolean m807(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        return !MC.client3.world.getBlockState(blockPos).isAir();
+        return !MC.mc.world.getBlockState(blockPos).isAir();
     }
 
     private boolean m588(ItemStack itemStack) {

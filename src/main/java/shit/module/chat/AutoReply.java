@@ -19,8 +19,8 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class AutoReply
 extends Module {
-    private final BooleanSetting customMessage = (BooleanSetting)this.m28(new BooleanSetting("CustomMessage", false));
-    private final StringSetting customText = (StringSetting)this.m28(new StringSetting("CustomText", "unchanged"));
+    private final BooleanSetting customMessage = (BooleanSetting)this.registerSetting(new BooleanSetting("CustomMessage", false));
+    private final StringSetting customText = (StringSetting)this.registerSetting(new StringSetting("CustomText", "unchanged"));
     private String x = "";
     private long time36 = 0L;
 
@@ -29,7 +29,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.x = "";
         this.time36 = 0L;
     }
@@ -62,8 +62,8 @@ extends Module {
         }
         this.x = string;
         this.time36 = l;
-        String string3 = (Boolean)this.customMessage.getObj() != false ? (String)this.customText.getObj() : "I just automatically replied, thanks to TrollHack's AutoReply module!";
-        Util2.setObj14("r " + string3);
+        String string3 = (Boolean)this.customMessage.getValue() != false ? (String)this.customText.getValue() : "I just automatically replied, thanks to TrollHack's AutoReply module!";
+        Util2.sendChatCommand("r " + string3);
     }
 }
 

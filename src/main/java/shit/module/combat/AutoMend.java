@@ -28,13 +28,13 @@ import shit.util.Util3;
 public class AutoMend
 extends Module {
     public static AutoMend INSTANCE;
-    private final BooleanSetting onlyBroken = (BooleanSetting)this.m28(new BooleanSetting("OnlyBroken", true));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 3.0, 0.0, 20.0, 1.0));
-    private final BooleanSetting usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", true));
-    private final BooleanSetting onlyGround = (BooleanSetting)this.m28(new BooleanSetting("OnlyGround", true));
-    private final BooleanSetting autoDisable = (BooleanSetting)this.m28(new BooleanSetting("AutoDisable", true));
-    private final EnumSetting rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final EnumSetting switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+    private final BooleanSetting onlyBroken = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyBroken", true));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 3.0, 0.0, 20.0, 1.0));
+    private final BooleanSetting usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", true));
+    private final BooleanSetting onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", true));
+    private final BooleanSetting autoDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoDisable", true));
+    private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+    private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
     private int count176;
 
     public AutoMend() {
@@ -45,36 +45,36 @@ extends Module {
     @Override
     public void onEnable() {
         Object var2_1 = null;
-        if (Module.isSet37()) {
-            this.setFlag3(false);
+        if (Module.isNotInGame()) {
+            this.setEnabled(false);
             return;
         }
         this.count176 = 0;
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.renderUtil3.m608();
         Client.mathUtil.m370();
     }
 
     @EventHandler
     private void onTick(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.usingPause.getObj()).booleanValue() && MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.usingPause.getValue()).booleanValue() && MC.mc.player.isUsingItem()) {
             return;
         }
-        if (((Boolean)this.onlyGround.getObj()).booleanValue() && !MC.client3.player.isOnGround()) {
+        if (((Boolean)this.onlyGround.getValue()).booleanValue() && !MC.mc.player.isOnGround()) {
             return;
         }
-        if (MC.client3.currentScreen != null) {
+        if (MC.mc.currentScreen != null) {
             return;
         }
         if (!this.shouldThrow()) {
-            if (((Boolean)this.autoDisable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+            if (((Boolean)this.autoDisable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
             return;
         }
@@ -83,7 +83,7 @@ extends Module {
             return;
         }
         ClientSetting.RotateMode rotateMode = this.getRotateMode11();
-        float f = MC.client3.player.getYaw();
+        float f = MC.mc.player.getYaw();
         float f2 = 88.0f;
         switch (Lambda.counts29[rotateMode.ordinal()]) {
             case 1: {
@@ -110,7 +110,7 @@ extends Module {
             return;
         }
         float f3 = f;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f3, f2));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f3, f2));
         ItemUtil.setObj25(Hand.MAIN_HAND);
         Client.renderUtil3.m608();
         if (rotateMode == ClientSetting.RotateMode.rotateMode) {
@@ -120,7 +120,7 @@ extends Module {
         } else if (rotateMode != ClientSetting.RotateMode.SMOOTH) {
             Client.mathUtil.m370();
         }
-        this.count176 = this.delay.getInt50();
+        this.count176 = this.delay.getInt();
     }
 
     private boolean shouldThrow() {
@@ -130,11 +130,11 @@ extends Module {
         if (!bl) {
             return false;
         }
-        if (!((Boolean)this.onlyBroken.getObj()).booleanValue()) {
+        if (!((Boolean)this.onlyBroken.getValue()).booleanValue()) {
             return true;
         }
         for (EquipmentSlot equipmentSlot : equipmentSlotArray = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
-            ItemStack itemStack2 = MC.client3.player.getEquippedStack(equipmentSlot);
+            ItemStack itemStack2 = MC.mc.player.getEquippedStack(equipmentSlot);
             if (itemStack2.isEmpty()) continue;
             if (!itemStack2.isDamaged()) continue;
             return true;
@@ -144,10 +144,10 @@ extends Module {
 
     private ClientSetting.RotateMode getRotateMode11() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.ONTICK;
+        if (this.rotateMode.getValue() == RotateMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.ONTICK;
         }
-        return switch (((RotateMode)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((RotateMode)((Object)this.rotateMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
             case 2 -> ClientSetting.RotateMode.SMOOTH;
             case 3 -> ClientSetting.RotateMode.ONTICK;
@@ -158,15 +158,15 @@ extends Module {
 
     private float getFloat52() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f;
+        return ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f;
     }
 
     private ClientSetting.SwitchMode getSwitchMode5() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.SILENT;
+        if (this.switchMode.getValue() == SwitchMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.SILENT;
         }
-        return switch (((SwitchMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((SwitchMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

@@ -69,7 +69,7 @@ implements MC {
         BlockPos blockPos = (BlockPos)object;
         Hand hand = (Hand)object2;
         BlockHitResult blockHitResult = (BlockHitResult)object3;
-        MinecraftClient minecraftClient = MC.client3;
+        MinecraftClient minecraftClient = MC.mc;
         if (minecraftClient.player == null || minecraftClient.interactionManager == null || minecraftClient.world == null) {
             return;
         }
@@ -98,13 +98,13 @@ implements MC {
         Data data = (Data)object2;
         Hand hand = (Hand)object3;
         boolean bl = false;
-        MinecraftClient minecraftClient = MC.client3;
+        MinecraftClient minecraftClient = MC.mc;
         if (minecraftClient.interactionManager == null) {
             return;
         }
         boolean bl2 = data.flag();
         boolean bl3 = bl2;
-        PlayerInput playerInput = MC.client3.player.input.playerInput;
+        PlayerInput playerInput = MC.mc.player.input.playerInput;
         boolean bl4 = bl3;
         if (!bl4) return;
         BlockUtil.setObj50(playerInput);
@@ -114,14 +114,14 @@ implements MC {
         PlayerInput playerInput = (PlayerInput)object;
         boolean bl2 = bl;
         PlayerInput playerInput2 = new PlayerInput(playerInput.forward(), playerInput.backward(), playerInput.left(), playerInput.right(), playerInput.jump(), bl2, playerInput.sprint());
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInputC2SPacket(playerInput2));
-        MC.client3.player.input.playerInput = playerInput2;
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInputC2SPacket(playerInput2));
+        MC.mc.player.input.playerInput = playerInput2;
     }
 
     private static void setObj50(Object object) {
         PlayerInput playerInput = (PlayerInput)object;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInputC2SPacket(playerInput));
-        MC.client3.player.input.playerInput = playerInput;
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInputC2SPacket(playerInput));
+        MC.mc.player.input.playerInput = playerInput;
     }
 
     public static Data m573(Object object) {
@@ -163,7 +163,7 @@ implements MC {
             boolean bl5 = BlockUtil.m572(blockPos2);
             if (!bl3) {
                 if (!bl5) continue;
-                bl5 = BlockUtil.m32(MC.client3.world.getBlockState(blockPos2));
+                bl5 = BlockUtil.m32(MC.mc.world.getBlockState(blockPos2));
             }
             if ((bl4 = bl5) != bl2) continue;
             return new Data(blockPos2, direction.getOpposite(), bl4);
@@ -200,7 +200,7 @@ implements MC {
                         bl5 = BlockUtil.m572(blockPos3);
                         if (!false) break block7;
                         if (!bl5) break block6;
-                        bl5 = BlockUtil.m32(MC.client3.world.getBlockState(blockPos3));
+                        bl5 = BlockUtil.m32(MC.mc.world.getBlockState(blockPos3));
                     }
                     if ((bl4 = bl5) == bl2) {
                         return new Data(blockPos3, direction3.getOpposite(), bl4);
@@ -220,7 +220,7 @@ implements MC {
      */
     public static boolean m572(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         boolean bl = Util2.isSet69();
         boolean bl2 = blockState.isAir();
         if (!bl) {
@@ -246,7 +246,7 @@ implements MC {
      */
     public static boolean m57(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         boolean bl = Util2.isSet69();
         boolean bl2 = blockState.isAir();
         if (bl) return bl2;
@@ -359,13 +359,13 @@ implements MC {
         float rotateSpeed = var3_3;
         ClientSetting.SwitchMode switchMode = (ClientSetting.SwitchMode)((Object)var4_4);
         double maxReach = var5_5;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
-        if (MC.client3.interactionManager == null) {
+        if (MC.mc.interactionManager == null) {
             return false;
         }
-        if (MC.client3.world == null) {
+        if (MC.mc.world == null) {
             return false;
         }
         if (!BlockUtil.m57(blockPos)) {
@@ -376,7 +376,7 @@ implements MC {
             return false;
         }
         Vec3d vec3d = data.getVec3d5();
-        if (MC.client3.player.getEyePos().distanceTo(vec3d) - maxReach > 0.0) {
+        if (MC.mc.player.getEyePos().distanceTo(vec3d) - maxReach > 0.0) {
             return false;
         }
         if (rotateMode != ClientSetting.RotateMode.NONE && !BlockUtil.m262(vec3d, rotateMode, rotateSpeed)) {
@@ -404,7 +404,7 @@ implements MC {
         Vec3d vec3d = (Vec3d)object;
         ClientSetting.RotateMode rotateMode = (ClientSetting.RotateMode)((Object)object2);
         float f2 = f;
-        float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
         boolean bl = false;
         int bl2 = Lambda.counts26[rotateMode.ordinal()];
         if (false) {

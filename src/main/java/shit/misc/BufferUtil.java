@@ -42,7 +42,7 @@ public class BufferUtil {
         GpuSampler gpuSampler = RenderSystem.getDevice().createSampler(AddressMode.CLAMP_TO_EDGE, AddressMode.CLAMP_TO_EDGE, FilterMode.LINEAR, FilterMode.LINEAR, 1, OptionalDouble.empty());
         this.texture2 = new Texture(gpuTexture, gpuTextureView, gpuSampler);
         BufferUtil.setObj72(gpuTexture);
-        MC.client3.getTextureManager().registerTexture(this.field50, (AbstractTexture)this.texture2);
+        MC.mc.getTextureManager().registerTexture(this.field50, (AbstractTexture)this.texture2);
     }
 
     private static void setObj72(Object object) {
@@ -105,7 +105,7 @@ public class BufferUtil {
     }
 
     public void m453() {
-        MC.client3.getTextureManager().destroyTexture(this.field50);
+        MC.mc.getTextureManager().destroyTexture(this.field50);
     }
 
     /*

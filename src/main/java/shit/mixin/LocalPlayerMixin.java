@@ -66,7 +66,7 @@ public class LocalPlayerMixin {
 
     @Inject(method={"shouldStopSprinting()Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void setCallbackInfoReturnable6(CallbackInfoReturnable callbackInfoReturnable) {
-        if (InMove.INSTANCE != null && InMove.INSTANCE.isSet19() && MinecraftClient.getInstance().currentScreen != null && this.isSet159()) {
+        if (InMove.INSTANCE != null && InMove.INSTANCE.isEnabled() && MinecraftClient.getInstance().currentScreen != null && this.isSet159()) {
             callbackInfoReturnable.setReturnValue((Object)false);
         }
     }
@@ -74,8 +74,8 @@ public class LocalPlayerMixin {
     @ModifyVariable(method={"move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"}, at=@At(value="HEAD"), argsOnly=true)
     private Vec3d trollhack$onMove(Vec3d vec3d, MovementType movementType) {
         MoveEvent moveEvent = new MoveEvent(vec3d.x, vec3d.y, vec3d.z);
-        Client.eventBus.m287(moveEvent);
-        if (moveEvent.isSet85()) {
+        Client.eventBus.post(moveEvent);
+        if (moveEvent.isCancelled()) {
             return Vec3d.ZERO;
         }
         if (moveEvent.flag112) {

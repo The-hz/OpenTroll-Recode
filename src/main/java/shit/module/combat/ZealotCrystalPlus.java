@@ -204,60 +204,60 @@ extends Module {
 
         public ZealotCrystalPlus() {
         super("ZealotCrystalPlus", "High performance Crystal Aura with fixed Sync/Both.", Category.COMBAT);
-        this.page = (EnumSetting)this.m28(new EnumSetting("Page", PageMode.Place));
-        this.placeDelay = (NumberSetting)this.m28(new NumberSetting("PlaceDelay", 50.0, 0.0, 1000.0, 10.0));
-        this.placeMode = (EnumSetting)this.m28(new EnumSetting("PlaceMode", EMode5.Strong));
-        this.placeRange = (NumberSetting)this.m28(new NumberSetting("PlaceRange", 5.0, 0.0, 6.0, 0.1));
-        this.minDamage = (NumberSetting)this.m28(new NumberSetting("MinDamage", 5.0, 0.0, 36.0, 0.5));
-        this.maxSelfDmg = (NumberSetting)this.m28(new NumberSetting("MaxSelfDmg", 12.0, 0.0, 36.0, 0.5));
-        this.reserve = (NumberSetting)this.m28(new NumberSetting("Reserve", 2.0, 0.0, 10.0, 0.1));
-        this.breakDelay = (NumberSetting)this.m28(new NumberSetting("BreakDelay", 50.0, 0.0, 1000.0, 10.0));
-        this.explodeMode = (EnumSetting)this.m28(new EnumSetting("ExplodeMode", EMode.Both));
-        this.packetSync = (BooleanSetting)this.m28(new BooleanSetting("PacketSync", false));
-        this.packetDelay = (NumberSetting)this.m28(new NumberSetting("PacketDelay", 35.0, 0.0, 50.0, 1.0));
-        this.predictAttack = (BooleanSetting)this.m28(new BooleanSetting("PredictAttack", true));
-        this.breakRange = (NumberSetting)this.m28(new NumberSetting("BreakRange", 4.0, 0.0, 6.0, 0.1));
-        this.remove = (BooleanSetting)this.m28(new BooleanSetting("Remove", false));
-        this.minExisted = (NumberSetting)this.m28(new NumberSetting("MinExisted", 0.0, 0.0, 10.0, 1.0));
-        this.basePlace = (BooleanSetting)this.m28(new BooleanSetting("BasePlace", true));
-        this.basePlaceRange = (NumberSetting)this.m28(new NumberSetting("BasePlaceRange", 5.0, 0.0, 6.0, 0.1));
-        this.baseDelay = (NumberSetting)this.m28(new NumberSetting("BaseDelay", 3000.0, 0.0, 10000.0, 100.0));
-        this.baseMin = (NumberSetting)this.m28(new NumberSetting("BaseMin", 6.0, 0.0, 36.0, 0.1));
-        this.baseMax = (NumberSetting)this.m28(new NumberSetting("BaseMax", 12.0, 0.0, 36.0, 0.1));
-        this.overrideMax = (NumberSetting)this.m28(new NumberSetting("OverrideMax", 8.0, 0.0, 36.0, 0.1));
-        this.baseBalance = (BooleanSetting)this.m28(new BooleanSetting("BaseBalance", true));
-        this.onlyBelow = (BooleanSetting)this.m28(new BooleanSetting("OnlyBelow", true));
-        this.onPlace = (BooleanSetting)this.m28(new BooleanSetting("OnPlace", true));
-        this.onBreak = (BooleanSetting)this.m28(new BooleanSetting("OnBreak", true));
-        this.rotationBypass = (EnumSetting)this.m28(new EnumSetting("RotationBypass", EMode2.Off));
-        this.hitboxExpand = (NumberSetting)this.m28(new NumberSetting("HitboxExpand", 0.5, 0.1, 2.0, 0.1));
-        this.rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", EMode3.DEFAULT));
-        this.switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", EMode4.DEFAULT));
-        this.placeTWall = (BooleanSetting)this.m28(new BooleanSetting("PlaceTWall", false));
-        this.pWallRange = (NumberSetting)this.m28(new NumberSetting("PWallRange", 3.0, 0.0, 6.0, 0.1));
-        this.breakTWall = (BooleanSetting)this.m28(new BooleanSetting("BreakTWall", false));
-        this.bWallRange = (NumberSetting)this.m28(new NumberSetting("BWallRange", 3.0, 0.0, 6.0, 0.1));
-        this.extrapolate = (NumberSetting)this.m28(new NumberSetting("Extrapolate", 0.0, 0.0, 10.0, 1.0));
-        this.maxMotionXZ = (NumberSetting)this.m28(new NumberSetting("MaxMotionXZ", 0.6, 0.0, 2.0, 0.01));
-        this.maxMotionY = (NumberSetting)this.m28(new NumberSetting("MaxMotionY", 0.34, 0.0, 2.0, 0.01));
-        this.selfPredTicks = (NumberSetting)this.m28(new NumberSetting("SelfPredTicks", 0.0, 0.0, 10.0, 1.0));
-        this.placePosMode = (EnumSetting)this.m28(new EnumSetting("PlacePosMode", EMode6.Single));
-        this.posUpdateDelay = (NumberSetting)this.m28(new NumberSetting("PosUpdateDelay", 50.0, 0.0, 5000.0, 10.0));
-        this.targetRange = (NumberSetting)this.m28(new NumberSetting("TargetRange", 12.0, 0.0, 20.0, 0.1));
-        this.balance = (BooleanSetting)this.m28(new BooleanSetting("Balance", true));
-        this.balanceOffset = (NumberSetting)this.m28(new NumberSetting("BalanceOffset", 0.0, -20.0, 20.0, 0.1));
-        this.eatingPause = (BooleanSetting)this.m28(new BooleanSetting("EatingPause", true));
-        this.guiPause = (BooleanSetting)this.m28(new BooleanSetting("GuiPause", true));
-        this.ignoreTerrain = (BooleanSetting)this.m28(new BooleanSetting("IgnoreTerrain", false));
-        this.render = (BooleanSetting)this.m28(new BooleanSetting("Render", true));
-        this.shrink = (BooleanSetting)this.m28(new BooleanSetting("Shrink", true));
-        this.fill = (ColorSetting)this.m28(new ColorSetting("Fill", 0x64FFFFFF));
-        this.box = (ColorSetting)this.m28(new ColorSetting("Box", -1));
-        this.sliderSpeed = (NumberSetting)this.m28(new NumberSetting("SliderSpeed", 0.2, 0.01, 1.0, 0.01));
-        this.startFade = (NumberSetting)this.m28(new NumberSetting("StartFade", 0.3, 0.0, 2.0, 0.01));
-        this.fadeSpeed = (NumberSetting)this.m28(new NumberSetting("FadeSpeed", 0.2, 0.01, 1.0, 0.01));
-        this.damageText = (BooleanSetting)this.m28(new BooleanSetting("DamageText", true));
-        this.textColor = (ColorSetting)this.m28(new ColorSetting("TextColor", -1));
+        this.page = (EnumSetting)this.registerSetting(new EnumSetting("Page", PageMode.Place));
+        this.placeDelay = (NumberSetting)this.registerSetting(new NumberSetting("PlaceDelay", 50.0, 0.0, 1000.0, 10.0));
+        this.placeMode = (EnumSetting)this.registerSetting(new EnumSetting("PlaceMode", EMode5.Strong));
+        this.placeRange = (NumberSetting)this.registerSetting(new NumberSetting("PlaceRange", 5.0, 0.0, 6.0, 0.1));
+        this.minDamage = (NumberSetting)this.registerSetting(new NumberSetting("MinDamage", 5.0, 0.0, 36.0, 0.5));
+        this.maxSelfDmg = (NumberSetting)this.registerSetting(new NumberSetting("MaxSelfDmg", 12.0, 0.0, 36.0, 0.5));
+        this.reserve = (NumberSetting)this.registerSetting(new NumberSetting("Reserve", 2.0, 0.0, 10.0, 0.1));
+        this.breakDelay = (NumberSetting)this.registerSetting(new NumberSetting("BreakDelay", 50.0, 0.0, 1000.0, 10.0));
+        this.explodeMode = (EnumSetting)this.registerSetting(new EnumSetting("ExplodeMode", EMode.Both));
+        this.packetSync = (BooleanSetting)this.registerSetting(new BooleanSetting("PacketSync", false));
+        this.packetDelay = (NumberSetting)this.registerSetting(new NumberSetting("PacketDelay", 35.0, 0.0, 50.0, 1.0));
+        this.predictAttack = (BooleanSetting)this.registerSetting(new BooleanSetting("PredictAttack", true));
+        this.breakRange = (NumberSetting)this.registerSetting(new NumberSetting("BreakRange", 4.0, 0.0, 6.0, 0.1));
+        this.remove = (BooleanSetting)this.registerSetting(new BooleanSetting("Remove", false));
+        this.minExisted = (NumberSetting)this.registerSetting(new NumberSetting("MinExisted", 0.0, 0.0, 10.0, 1.0));
+        this.basePlace = (BooleanSetting)this.registerSetting(new BooleanSetting("BasePlace", true));
+        this.basePlaceRange = (NumberSetting)this.registerSetting(new NumberSetting("BasePlaceRange", 5.0, 0.0, 6.0, 0.1));
+        this.baseDelay = (NumberSetting)this.registerSetting(new NumberSetting("BaseDelay", 3000.0, 0.0, 10000.0, 100.0));
+        this.baseMin = (NumberSetting)this.registerSetting(new NumberSetting("BaseMin", 6.0, 0.0, 36.0, 0.1));
+        this.baseMax = (NumberSetting)this.registerSetting(new NumberSetting("BaseMax", 12.0, 0.0, 36.0, 0.1));
+        this.overrideMax = (NumberSetting)this.registerSetting(new NumberSetting("OverrideMax", 8.0, 0.0, 36.0, 0.1));
+        this.baseBalance = (BooleanSetting)this.registerSetting(new BooleanSetting("BaseBalance", true));
+        this.onlyBelow = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyBelow", true));
+        this.onPlace = (BooleanSetting)this.registerSetting(new BooleanSetting("OnPlace", true));
+        this.onBreak = (BooleanSetting)this.registerSetting(new BooleanSetting("OnBreak", true));
+        this.rotationBypass = (EnumSetting)this.registerSetting(new EnumSetting("RotationBypass", EMode2.Off));
+        this.hitboxExpand = (NumberSetting)this.registerSetting(new NumberSetting("HitboxExpand", 0.5, 0.1, 2.0, 0.1));
+        this.rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", EMode3.DEFAULT));
+        this.switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", EMode4.DEFAULT));
+        this.placeTWall = (BooleanSetting)this.registerSetting(new BooleanSetting("PlaceTWall", false));
+        this.pWallRange = (NumberSetting)this.registerSetting(new NumberSetting("PWallRange", 3.0, 0.0, 6.0, 0.1));
+        this.breakTWall = (BooleanSetting)this.registerSetting(new BooleanSetting("BreakTWall", false));
+        this.bWallRange = (NumberSetting)this.registerSetting(new NumberSetting("BWallRange", 3.0, 0.0, 6.0, 0.1));
+        this.extrapolate = (NumberSetting)this.registerSetting(new NumberSetting("Extrapolate", 0.0, 0.0, 10.0, 1.0));
+        this.maxMotionXZ = (NumberSetting)this.registerSetting(new NumberSetting("MaxMotionXZ", 0.6, 0.0, 2.0, 0.01));
+        this.maxMotionY = (NumberSetting)this.registerSetting(new NumberSetting("MaxMotionY", 0.34, 0.0, 2.0, 0.01));
+        this.selfPredTicks = (NumberSetting)this.registerSetting(new NumberSetting("SelfPredTicks", 0.0, 0.0, 10.0, 1.0));
+        this.placePosMode = (EnumSetting)this.registerSetting(new EnumSetting("PlacePosMode", EMode6.Single));
+        this.posUpdateDelay = (NumberSetting)this.registerSetting(new NumberSetting("PosUpdateDelay", 50.0, 0.0, 5000.0, 10.0));
+        this.targetRange = (NumberSetting)this.registerSetting(new NumberSetting("TargetRange", 12.0, 0.0, 20.0, 0.1));
+        this.balance = (BooleanSetting)this.registerSetting(new BooleanSetting("Balance", true));
+        this.balanceOffset = (NumberSetting)this.registerSetting(new NumberSetting("BalanceOffset", 0.0, -20.0, 20.0, 0.1));
+        this.eatingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("EatingPause", true));
+        this.guiPause = (BooleanSetting)this.registerSetting(new BooleanSetting("GuiPause", true));
+        this.ignoreTerrain = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnoreTerrain", false));
+        this.render = (BooleanSetting)this.registerSetting(new BooleanSetting("Render", true));
+        this.shrink = (BooleanSetting)this.registerSetting(new BooleanSetting("Shrink", true));
+        this.fill = (ColorSetting)this.registerSetting(new ColorSetting("Fill", 0x64FFFFFF));
+        this.box = (ColorSetting)this.registerSetting(new ColorSetting("Box", -1));
+        this.sliderSpeed = (NumberSetting)this.registerSetting(new NumberSetting("SliderSpeed", 0.2, 0.01, 1.0, 0.01));
+        this.startFade = (NumberSetting)this.registerSetting(new NumberSetting("StartFade", 0.3, 0.0, 2.0, 0.01));
+        this.fadeSpeed = (NumberSetting)this.registerSetting(new NumberSetting("FadeSpeed", 0.2, 0.01, 1.0, 0.01));
+        this.damageText = (BooleanSetting)this.registerSetting(new BooleanSetting("DamageText", true));
+        this.textColor = (ColorSetting)this.registerSetting(new ColorSetting("TextColor", -1));
         this.flag68 = false;
         this.helper724 = new Helper7();
         this.helper79 = new Helper7();
@@ -282,13 +282,13 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
         return this.value162 > 0.0f ? this.decimalFormat2.format(this.value162) : null;
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Client.renderUtil3.m608();
         this.blockPos6 = null;
@@ -308,14 +308,14 @@ extends Module {
 
     private boolean isSet153() {
         Object var2_1 = null;
-        if (((Boolean)this.eatingPause.getObj()).booleanValue()) {
-            if (MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.eatingPause.getValue()).booleanValue()) {
+            if (MC.mc.player.isUsingItem()) {
                 return true;
             }
         }
-        if (((Boolean)this.guiPause.getObj()).booleanValue()) {
-            if (MC.client3.currentScreen instanceof HandledScreen) {
-                if (!(MC.client3.currentScreen instanceof InventoryScreen)) {
+        if (((Boolean)this.guiPause.getValue()).booleanValue()) {
+            if (MC.mc.currentScreen instanceof HandledScreen) {
+                if (!(MC.mc.currentScreen instanceof InventoryScreen)) {
                     return true;
                 }
             }
@@ -326,7 +326,7 @@ extends Module {
     @EventHandler
     private void setEvent2Inner54(Event2.Event2Inner event2Inner) {
         long l;
-        if (Module.isSet37() || MC.client3.player.isSpectator()) {
+        if (Module.isNotInGame() || MC.mc.player.isSpectator()) {
             return;
         }
         if (this.isSet153()) {
@@ -337,11 +337,11 @@ extends Module {
             this.vec3d12 = null;
             return;
         }
-        if ((this.explodeMode.getObj() == EMode.Sync || this.explodeMode.getObj() == EMode.Both) && ((Boolean)this.packetSync.getObj()).booleanValue() && this.helper724.m432(this.packetDelay.getLong())) {
+        if ((this.explodeMode.getValue() == EMode.Sync || this.explodeMode.getValue() == EMode.Both) && ((Boolean)this.packetSync.getValue()).booleanValue() && this.helper724.hasPassedMs(this.packetDelay.getLong())) {
             this.flag68 = true;
-            this.helper724.m533();
+            this.helper724.resetTimer();
         }
-        if ((double)((l = System.currentTimeMillis()) - this.time9) >= (Double)this.posUpdateDelay.getObj()) {
+        if ((double)((l = System.currentTimeMillis()) - this.time9) >= (Double)this.posUpdateDelay.getValue()) {
             this.time9 = l;
             this.m426();
             if (this.blockPos6 != null) {
@@ -360,7 +360,7 @@ extends Module {
         double d2;
         boolean bl;
         boolean bl2;
-        if (Module.isSet37() || this.isSet153() || this.blockPos13 != null) {
+        if (Module.isNotInGame() || this.isSet153() || this.blockPos13 != null) {
             return;
         }
         Packet packet = packetEventInner.getPacket();
@@ -371,14 +371,14 @@ extends Module {
         if (entitySpawnS2CPacket.getEntityType() != EntityType.END_CRYSTAL) {
             return;
         }
-        if (this.explodeMode.getObj() == EMode.Normal) {
+        if (this.explodeMode.getValue() == EMode.Normal) {
             return;
         }
-        boolean bl3 = bl2 = this.explodeMode.getObj() == EMode.Sync || this.explodeMode.getObj() == EMode.Both;
+        boolean bl3 = bl2 = this.explodeMode.getValue() == EMode.Sync || this.explodeMode.getValue() == EMode.Both;
         if (!bl2) {
             return;
         }
-        boolean bl4 = bl = (Boolean)this.packetSync.getObj() == false && this.helper79.m432(this.packetDelay.getLong()) || (Boolean)this.packetSync.getObj() != false && this.flag68;
+        boolean bl4 = bl = (Boolean)this.packetSync.getValue() == false && this.helper79.hasPassedMs(this.packetDelay.getLong()) || (Boolean)this.packetSync.getValue() != false && this.flag68;
         if (!bl) {
             return;
         }
@@ -391,27 +391,27 @@ extends Module {
             return;
         }
         Vec3d vec3d = new Vec3d((double)blockPos.getX() + 0.5, (double)blockPos.getY(), (double)blockPos.getZ() + 0.5);
-        float f2 = this.maxMotionXZ.getFloat35();
-        float f3 = this.maxMotionY.getFloat35();
-        Vec3d vec3d2 = this.m1020(MC.client3.player, f2, f3, this.selfPredTicks.getInt50());
-        Box box = this.m448(MC.client3.player.getBoundingBox(), vec3d2, MC.client3.player.getEntityPos());
-        Vec4f vec4f = this.m1014(MC.client3.player);
-        float f4 = f = MC.client3.player.isCreative() ? 0.0f : this.m877(vec3d, vec3d2, box, vec4f, (Boolean)this.ignoreTerrain.getObj(), MC.client3.world.getDifficulty());
-        if ((double)f > (Double)this.maxSelfDmg.getObj()) {
+        float f2 = this.maxMotionXZ.getFloat();
+        float f3 = this.maxMotionY.getFloat();
+        Vec3d vec3d2 = this.m1020(MC.mc.player, f2, f3, this.selfPredTicks.getInt());
+        Box box = this.m448(MC.mc.player.getBoundingBox(), vec3d2, MC.mc.player.getEntityPos());
+        Vec4f vec4f = this.m1014(MC.mc.player);
+        float f4 = f = MC.mc.player.isCreative() ? 0.0f : this.m877(vec3d, vec3d2, box, vec4f, (Boolean)this.ignoreTerrain.getValue(), MC.mc.world.getDifficulty());
+        if ((double)f > (Double)this.maxSelfDmg.getValue()) {
             return;
         }
-        if ((Double)this.reserve.getObj() > 0.0 && (double)f > (double)ItemUtil.m158(MC.client3.player) - (Double)this.reserve.getObj()) {
+        if ((Double)this.reserve.getValue() > 0.0 && (double)f > (double)ItemUtil.m158(MC.mc.player) - (Double)this.reserve.getValue()) {
             return;
         }
-        EndCrystalEntity endCrystalEntity = new EndCrystalEntity((World)MC.client3.world, d3, d2, d);
+        EndCrystalEntity endCrystalEntity = new EndCrystalEntity((World)MC.mc.world, d3, d2, d);
         endCrystalEntity.setId(entitySpawnS2CPacket.getEntityId());
-        MC.client3.player.networkHandler.sendPacket((Packet)PlayerInteractEntityC2SPacket.attack((Entity)endCrystalEntity, (boolean)MC.client3.player.isSneaking()));
-        MC.client3.player.swingHand(this.getObj7(), false);
+        MC.mc.player.networkHandler.sendPacket((Packet)PlayerInteractEntityC2SPacket.attack((Entity)endCrystalEntity, (boolean)MC.mc.player.isSneaking()));
+        MC.mc.player.swingHand(this.getObj7(), false);
         this.time26 = System.currentTimeMillis();
-        if (((Boolean)this.packetSync.getObj()).booleanValue()) {
+        if (((Boolean)this.packetSync.getValue()).booleanValue()) {
             this.flag68 = false;
         }
-        this.helper79.m533();
+        this.helper79.resetTimer();
     }
 
     /*
@@ -440,26 +440,26 @@ extends Module {
                 endCrystalEntity = this.field61;
                 Object var2_4 = null;
                 if (blockPos2 != null) {
-                    if (((Boolean)this.onPlace.getObj()).booleanValue()) {
+                    if (((Boolean)this.onPlace.getValue()).booleanValue()) {
                         this.setObj101(this.m4(blockPos2));
                     }
                     this.setObj65(blockPos2);
                     return;
                 }
                 if (endCrystalEntity == null) break block13;
-                if (this.explodeMode.getObj() == EMode.Normal) break block14;
-                if (this.explodeMode.getObj() != EMode.Both) break block13;
+                if (this.explodeMode.getValue() == EMode.Normal) break block14;
+                if (this.explodeMode.getValue() != EMode.Both) break block13;
             }
-            if (((Boolean)this.onBreak.getObj()).booleanValue()) {
+            if (((Boolean)this.onBreak.getValue()).booleanValue()) {
                 this.m551(this.m949(endCrystalEntity), endCrystalEntity);
             }
             this.setObj112(endCrystalEntity);
-            if (this.placePosMode.getObj() == EMode6.Double) {
+            if (this.placePosMode.getValue() == EMode6.Double) {
                 this.flag81 = !this.flag81;
             }
         }
         BlockPos blockPos3 = blockPos;
-        if (this.placePosMode.getObj() == EMode6.Double) {
+        if (this.placePosMode.getValue() == EMode6.Double) {
             if (this.flag81) {
                 if (this.blockPos11 != null) {
                     blockPos3 = this.blockPos11;
@@ -470,7 +470,7 @@ extends Module {
             if (this.m758(blockPos3)) {
                 return;
             }
-            if (((Boolean)this.onPlace.getObj()).booleanValue()) {
+            if (((Boolean)this.onPlace.getValue()).booleanValue()) {
                 this.setObj101(this.m240(blockPos3));
             }
             this.setObj33(blockPos3);
@@ -495,10 +495,10 @@ extends Module {
     private boolean m386(Object object, Object object2) {
         BlockPos blockPos = (BlockPos)object;
         Direction direction = (Direction)object2;
-        Vec3d vec3d = MC.client3.player.getEyePos();
+        Vec3d vec3d = MC.mc.player.getEyePos();
         Vec3d vec3d2 = this.m997(blockPos, direction);
         Object var6_7 = null;
-        BlockHitResult blockHitResult = MC.client3.world.raycast(new RaycastContext(vec3d, vec3d2, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.client3.player));
+        BlockHitResult blockHitResult = MC.mc.world.raycast(new RaycastContext(vec3d, vec3d2, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.mc.player));
         if (blockHitResult.getType() != HitResult.Type.BLOCK) return false;
         if (!blockHitResult.getBlockPos().equals((Object)blockPos)) return false;
         return true;
@@ -508,7 +508,7 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         Direction direction = null;
         double d = Double.MAX_VALUE;
-        Vec3d vec3d = MC.client3.player.getEyePos();
+        Vec3d vec3d = MC.mc.player.getEyePos();
         Direction[] directionArray = Direction.values();
         int n = directionArray.length;
         Object var4_9 = null;
@@ -529,7 +529,7 @@ extends Module {
         double d2 = d;
         Direction direction = null;
         double d3 = Double.MAX_VALUE;
-        Vec3d vec3d = MC.client3.player.getEyePos();
+        Vec3d vec3d = MC.mc.player.getEyePos();
         double d4 = d2 * d2;
         Direction[] directionArray = Direction.values();
         Object var8_10 = null;
@@ -537,7 +537,7 @@ extends Module {
         for (int i = 0; i < n; ++i) {
             Direction direction2 = directionArray[i];
             BlockPos blockPos2 = blockPos.offset(direction2);
-            BlockState blockState = MC.client3.world.getBlockState(blockPos2);
+            BlockState blockState = MC.mc.world.getBlockState(blockPos2);
             if (blockState.isAir() || blockState.isReplaceable()) continue;
             Direction direction3 = direction2.getOpposite();
             Vec3d vec3d2 = this.m997(blockPos2, direction3);
@@ -558,21 +558,21 @@ extends Module {
         if (direction == null) {
             return false;
         }
-        return MC.client3.player.getEyePos().distanceTo(this.m997(blockPos, direction)) <= d2;
+        return MC.mc.player.getEyePos().distanceTo(this.m997(blockPos, direction)) <= d2;
     }
 
     private boolean m269(Object object, Object object2) {
         BlockPos blockPos = (BlockPos)object;
         Vec3d vec3d = (Vec3d)object2;
-        Vec3d vec3d2 = MC.client3.player.getEyePos();
+        Vec3d vec3d2 = MC.mc.player.getEyePos();
         Object var6_6 = null;
         Vec3d vec3d3 = new Vec3d((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 1.7, (double)blockPos.getZ() + 0.5);
-        BlockHitResult blockHitResult = MC.client3.world.raycast(new RaycastContext(vec3d2, vec3d3, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.client3.player));
+        BlockHitResult blockHitResult = MC.mc.world.raycast(new RaycastContext(vec3d2, vec3d3, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.mc.player));
         if (blockHitResult.getType() == HitResult.Type.MISS) {
             return false;
         }
-        if (((Boolean)this.placeTWall.getObj()).booleanValue()) {
-            return vec3d2.distanceTo(vec3d) > (Double)this.pWallRange.getObj();
+        if (((Boolean)this.placeTWall.getValue()).booleanValue()) {
+            return vec3d2.distanceTo(vec3d) > (Double)this.pWallRange.getValue();
         }
         return true;
     }
@@ -596,12 +596,12 @@ extends Module {
                 d2 = d3 * d3;
                 n4 = MathHelper.floor((double)(vec3d.x - d3));
                 n2 = MathHelper.floor((double)(vec3d.x + d3));
-                n = Math.max(MC.client3.world.getBottomY(), MathHelper.floor((double)(vec3d.y - d3)));
+                n = Math.max(MC.mc.world.getBottomY(), MathHelper.floor((double)(vec3d.y - d3)));
                 if (!bl2) break block5;
-                n3 = Math.min(MC.client3.world.getBottomY() + MC.client3.world.getHeight(), MathHelper.floor((double)(vec3d.y + d3)));
+                n3 = Math.min(MC.mc.world.getBottomY() + MC.mc.world.getHeight(), MathHelper.floor((double)(vec3d.y + d3)));
                 if (null == null) break block6;
             }
-            n3 = Math.min(MC.client3.world.getBottomY() + MC.client3.world.getHeight() - 1, MathHelper.floor((double)(vec3d.y + d3)));
+            n3 = Math.min(MC.mc.world.getBottomY() + MC.mc.world.getHeight() - 1, MathHelper.floor((double)(vec3d.y + d3)));
         }
         int n5 = MathHelper.floor((double)(vec3d.z - d3));
         int n6 = MathHelper.floor((double)(vec3d.z + d3));
@@ -623,7 +623,7 @@ extends Module {
     private boolean m40(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockPos blockPos2 = blockPos.down();
-        BlockState blockState = MC.client3.world.getBlockState(blockPos2);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos2);
         Object var4_5 = null;
         if (!blockState.isOf(Blocks.OBSIDIAN)) {
             if (!blockState.isOf(Blocks.BEDROCK)) {
@@ -633,7 +633,7 @@ extends Module {
         if (this.m779(blockPos2) == null) {
             return false;
         }
-        BlockState blockState2 = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState2 = MC.mc.world.getBlockState(blockPos);
         if (!blockState2.isAir()) {
             if (!blockState2.isOf(Blocks.FIRE)) {
                 return false;
@@ -647,7 +647,7 @@ extends Module {
 
     private boolean m205(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         Object var4_4 = null;
         if (!blockState.isAir()) {
             if (!blockState.isOf(Blocks.FIRE)) {
@@ -662,23 +662,23 @@ extends Module {
 
     private boolean m662(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         Object var4_4 = null;
         if (!blockState.isAir()) {
             if (!blockState.isReplaceable()) {
                 return false;
             }
         }
-        for (Entity entity : MC.client3.world.getOtherEntities(null, new Box(blockPos))) {
+        for (Entity entity : MC.mc.world.getOtherEntities(null, new Box(blockPos))) {
             if (!entity.isAlive() || entity instanceof ItemEntity) continue;
             return false;
         }
-        return this.m999(blockPos, (Double)this.basePlaceRange.getObj()) != null;
+        return this.m999(blockPos, (Double)this.basePlaceRange.getValue()) != null;
     }
 
     private boolean m925(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        Iterator iterator = MC.client3.world.getOtherEntities(null, new Box(blockPos)).iterator();
+        Iterator iterator = MC.mc.world.getOtherEntities(null, new Box(blockPos)).iterator();
         Object var4_4 = null;
         while (iterator.hasNext()) {
             Entity entity = (Entity)iterator.next();
@@ -692,7 +692,7 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         Box box = new Box((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), (double)(blockPos.getX() + 1), (double)(blockPos.getY() + 2), (double)(blockPos.getZ() + 1));
         Object var4_4 = null;
-        for (Entity entity : MC.client3.world.getOtherEntities(null, box)) {
+        for (Entity entity : MC.mc.world.getOtherEntities(null, box)) {
             if (entity instanceof EndCrystalEntity) {
                 EndCrystalEntity endCrystalEntity = (EndCrystalEntity)entity;
                 if (endCrystalEntity.isAlive()) {
@@ -708,15 +708,15 @@ extends Module {
         double d2 = d;
         ArrayList<PlayerEntity> arrayList = new ArrayList<PlayerEntity>();
         Object var6_4 = null;
-        if (MC.client3.world == null || MC.client3.player == null) {
+        if (MC.mc.world == null || MC.mc.player == null) {
             return arrayList;
         }
         double d3 = d2 * d2;
-        for (Entity entity : MC.client3.world.getOtherEntities((Entity)MC.client3.player, MC.client3.player.getBoundingBox().expand(d2))) {
+        for (Entity entity : MC.mc.world.getOtherEntities((Entity)MC.mc.player, MC.mc.player.getBoundingBox().expand(d2))) {
             if (!(entity instanceof PlayerEntity)) continue;
             PlayerEntity playerEntity = (PlayerEntity)entity;
-            if (playerEntity == MC.client3.player || !playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.m258(playerEntity.getName().getString()) || MC.client3.player.squaredDistanceTo((Entity)playerEntity) > d3) continue;
+            if (playerEntity == MC.mc.player || !playerEntity.isAlive()) continue;
+            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d3) continue;
             arrayList.add(playerEntity);
             if (null == null) continue;
         }
@@ -758,7 +758,7 @@ extends Module {
                     double d12 = box.minX + (box.maxX - box.minX) * d9 + d7 * d5;
                     double d13 = box.minY + (box.maxY - box.minY) * d10;
                     double d14 = box.minZ + (box.maxZ - box.minZ) * d11 + d8 * d4;
-                    BlockHitResult blockHitResult = MC.client3.world.raycast(new RaycastContext(new Vec3d(d12, d13, d14), vec3d, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.client3.player));
+                    BlockHitResult blockHitResult = MC.mc.world.raycast(new RaycastContext(new Vec3d(d12, d13, d14), vec3d, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, (Entity)MC.mc.player));
                     if (blockHitResult.getType() == HitResult.Type.MISS) {
                         ++n2;
                     }
@@ -785,7 +785,7 @@ extends Module {
         float placeDmg = 0.0f;
         float crystalDmg = 0.0f;
         float baseDmg = 0.0f;
-        List list = this.m679((Double)this.targetRange.getObj());
+        List list = this.m679((Double)this.targetRange.getValue());
         if (list.isEmpty()) {
             this.blockPos6 = null;
             this.blockPos11 = null;
@@ -794,74 +794,74 @@ extends Module {
             this.value162 = 0.0f;
             return;
         }
-        Vec3d eyePos = MC.client3.player.getEyePos();
-        Difficulty difficulty = MC.client3.world.getDifficulty();
-        float mmXZ = this.maxMotionXZ.getFloat35();
-        float mmY = this.maxMotionY.getFloat35();
-        Vec3d selfVec = this.m1020(MC.client3.player, mmXZ, mmY, this.selfPredTicks.getInt50());
-        Box selfBox = this.m448(MC.client3.player.getBoundingBox(), selfVec, MC.client3.player.getEntityPos());
-        Vec4f selfArmor = this.m1014(MC.client3.player);
+        Vec3d eyePos = MC.mc.player.getEyePos();
+        Difficulty difficulty = MC.mc.world.getDifficulty();
+        float mmXZ = this.maxMotionXZ.getFloat();
+        float mmY = this.maxMotionY.getFloat();
+        Vec3d selfVec = this.m1020(MC.mc.player, mmXZ, mmY, this.selfPredTicks.getInt());
+        Box selfBox = this.m448(MC.mc.player.getBoundingBox(), selfVec, MC.mc.player.getEntityPos());
+        Vec4f selfArmor = this.m1014(MC.mc.player);
         ArrayList<PositionData> targets = new ArrayList<PositionData>();
         for (Object o : list) {
             PlayerEntity target = (PlayerEntity)o;
-            Vec3d tVec = this.m1020(target, mmXZ, mmY, this.extrapolate.getInt50());
+            Vec3d tVec = this.m1020(target, mmXZ, mmY, this.extrapolate.getInt());
             Box tBox = this.m448(target.getBoundingBox(), tVec, target.getEntityPos());
             targets.add(new PositionData(target, tVec, tBox, this.m1014(target)));
         }
-        Box searchBox = MC.client3.player.getBoundingBox().expand((Double)this.breakRange.getObj() + 1.0);
-        for (Entity entity : MC.client3.world.getOtherEntities((Entity)MC.client3.player, searchBox)) {
+        Box searchBox = MC.mc.player.getBoundingBox().expand((Double)this.breakRange.getValue() + 1.0);
+        for (Entity entity : MC.mc.world.getOtherEntities((Entity)MC.mc.player, searchBox)) {
             if (!(entity instanceof EndCrystalEntity)) continue;
             EndCrystalEntity crystal = (EndCrystalEntity)entity;
-            if (!crystal.isAlive() || crystal.age < this.minExisted.getInt50()) continue;
-            Vec3d hitVec = this.m129(crystal.getEntityPos(), eyePos, (Double)this.breakRange.getObj());
+            if (!crystal.isAlive() || crystal.age < this.minExisted.getInt()) continue;
+            Vec3d hitVec = this.m129(crystal.getEntityPos(), eyePos, (Double)this.breakRange.getValue());
             if (hitVec == null) continue;
             double distSq = eyePos.squaredDistanceTo(hitVec);
-            if (distSq > (Double)this.breakRange.getObj() * (Double)this.breakRange.getObj()) continue;
-            if (!MC.client3.player.canSee((Entity)crystal) && (!((Boolean)this.breakTWall.getObj()).booleanValue() || distSq > (Double)this.bWallRange.getObj() * (Double)this.bWallRange.getObj())) continue;
-            float selfDmg = MC.client3.player.isCreative() ? 0.0f : this.m877(crystal.getEntityPos(), selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-            if ((double)selfDmg > (Double)this.maxSelfDmg.getObj()) continue;
-            if ((Double)this.reserve.getObj() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.client3.player) - (Double)this.reserve.getObj()) continue;
+            if (distSq > (Double)this.breakRange.getValue() * (Double)this.breakRange.getValue()) continue;
+            if (!MC.mc.player.canSee((Entity)crystal) && (!((Boolean)this.breakTWall.getValue()).booleanValue() || distSq > (Double)this.bWallRange.getValue() * (Double)this.bWallRange.getValue())) continue;
+            float selfDmg = MC.mc.player.isCreative() ? 0.0f : this.m877(crystal.getEntityPos(), selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+            if ((double)selfDmg > (Double)this.maxSelfDmg.getValue()) continue;
+            if ((Double)this.reserve.getValue() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.mc.player) - (Double)this.reserve.getValue()) continue;
             for (PositionData pd : targets) {
-                float dmg = this.m877(crystal.getEntityPos(), pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-                if (dmg > crystalDmg && dmg >= (Double)this.minDamage.getObj() && (!((Boolean)this.balance.getObj()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getObj())) {
+                float dmg = this.m877(crystal.getEntityPos(), pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+                if (dmg > crystalDmg && dmg >= (Double)this.minDamage.getValue() && (!((Boolean)this.balance.getValue()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getValue())) {
                     crystalDmg = dmg;
                     bestCrystal = crystal;
                 }
             }
         }
-        for (Object o : this.m86((Double)this.placeRange.getObj() + 1.5, eyePos, true)) {
+        for (Object o : this.m86((Double)this.placeRange.getValue() + 1.5, eyePos, true)) {
             BlockPos pos = (BlockPos)o;
             if (!this.m40(pos)) continue;
             Vec3d placeVec = this.m783(pos);
-            Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getObj());
-            if (hitVec == null || this.m269(pos, hitVec) || !this.m957(pos.down(), (Double)this.placeRange.getObj())) continue;
-            float selfDmg = MC.client3.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-            if ((double)selfDmg > (Double)this.maxSelfDmg.getObj()) continue;
-            if ((Double)this.reserve.getObj() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.client3.player) - (Double)this.reserve.getObj()) continue;
+            Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getValue());
+            if (hitVec == null || this.m269(pos, hitVec) || !this.m957(pos.down(), (Double)this.placeRange.getValue())) continue;
+            float selfDmg = MC.mc.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+            if ((double)selfDmg > (Double)this.maxSelfDmg.getValue()) continue;
+            if ((Double)this.reserve.getValue() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.mc.player) - (Double)this.reserve.getValue()) continue;
             for (PositionData pd : targets) {
-                float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-                if (dmg > placeDmg && dmg >= (Double)this.minDamage.getObj() && (!((Boolean)this.balance.getObj()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getObj())) {
+                float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+                if (dmg > placeDmg && dmg >= (Double)this.minDamage.getValue() && (!((Boolean)this.balance.getValue()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getValue())) {
                     placeDmg = dmg;
                     placePos = pos;
                 }
             }
         }
-        if (((Boolean)this.basePlace.getObj()).booleanValue() && placeDmg <= (Double)this.overrideMax.getObj()) {
-            for (Object o : this.m86((Double)this.basePlaceRange.getObj() + 1.5, eyePos, true)) {
+        if (((Boolean)this.basePlace.getValue()).booleanValue() && placeDmg <= (Double)this.overrideMax.getValue()) {
+            for (Object o : this.m86((Double)this.basePlaceRange.getValue() + 1.5, eyePos, true)) {
                 BlockPos pos = (BlockPos)o;
                 BlockPos below = pos.down();
                 if (!this.m662(below) || !this.m205(pos)) continue;
                 Vec3d placeVec = this.m783(pos);
-                Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getObj());
+                Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getValue());
                 if (hitVec == null || this.m269(pos, hitVec)) continue;
-                float selfDmg = MC.client3.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-                if ((double)selfDmg > (Double)this.baseMax.getObj()) continue;
-                if ((Double)this.reserve.getObj() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.client3.player) - (Double)this.reserve.getObj()) continue;
+                float selfDmg = MC.mc.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+                if ((double)selfDmg > (Double)this.baseMax.getValue()) continue;
+                if ((Double)this.reserve.getValue() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.mc.player) - (Double)this.reserve.getValue()) continue;
                 for (PositionData pd : targets) {
-                    if (((Boolean)this.onlyBelow.getObj()).booleanValue() && (double)pos.getY() - 0.5 > pd.player().getY()) continue;
-                    float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
+                    if (((Boolean)this.onlyBelow.getValue()).booleanValue() && (double)pos.getY() - 0.5 > pd.player().getY()) continue;
+                    float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
                     boolean cond1 = dmg >= ItemUtil.m158(pd.player());
-                    boolean cond2 = dmg >= (Double)this.baseMin.getObj() && (!((Boolean)this.baseBalance.getObj()).booleanValue() || dmg >= selfDmg);
+                    boolean cond2 = dmg >= (Double)this.baseMin.getValue() && (!((Boolean)this.baseBalance.getValue()).booleanValue() || dmg >= selfDmg);
                     if (dmg > placeDmg && dmg > baseDmg && (cond1 || cond2)) {
                         baseDmg = dmg;
                         basePos = below;
@@ -871,21 +871,21 @@ extends Module {
                 }
             }
         }
-        if (this.placePosMode.getObj() == EMode6.Double && placePos != null) {
+        if (this.placePosMode.getValue() == EMode6.Double && placePos != null) {
             BlockPos firstPos = placePos;
             block_double:
-            for (Object o : this.m86((Double)this.placeRange.getObj() + 1.5, eyePos, true)) {
+            for (Object o : this.m86((Double)this.placeRange.getValue() + 1.5, eyePos, true)) {
                 BlockPos pos = (BlockPos)o;
                 if (pos.equals((Object)firstPos) || !this.m40(pos)) continue;
                 Vec3d placeVec = this.m783(pos);
-                Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getObj());
-                if (hitVec == null || this.m269(pos, hitVec) || !this.m957(pos.down(), (Double)this.placeRange.getObj())) continue;
-                float selfDmg = MC.client3.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-                if ((double)selfDmg > (Double)this.maxSelfDmg.getObj()) continue;
-                if ((Double)this.reserve.getObj() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.client3.player) - (Double)this.reserve.getObj()) continue;
+                Vec3d hitVec = this.m129(placeVec, eyePos, (Double)this.breakRange.getValue());
+                if (hitVec == null || this.m269(pos, hitVec) || !this.m957(pos.down(), (Double)this.placeRange.getValue())) continue;
+                float selfDmg = MC.mc.player.isCreative() ? 0.0f : this.m877(placeVec, selfVec, selfBox, selfArmor, ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+                if ((double)selfDmg > (Double)this.maxSelfDmg.getValue()) continue;
+                if ((Double)this.reserve.getValue() > 0.0 && (double)selfDmg > (double)ItemUtil.m158(MC.mc.player) - (Double)this.reserve.getValue()) continue;
                 for (PositionData pd : targets) {
-                    float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getObj()).booleanValue(), difficulty);
-                    if (dmg >= (Double)this.minDamage.getObj() && (!((Boolean)this.balance.getObj()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getObj())) {
+                    float dmg = this.m877(placeVec, pd.getVec3d(), pd.box3(), pd.vec4f(), ((Boolean)this.ignoreTerrain.getValue()).booleanValue(), difficulty);
+                    if (dmg >= (Double)this.minDamage.getValue() && (!((Boolean)this.balance.getValue()).booleanValue() || dmg >= selfDmg + (Double)this.balanceOffset.getValue())) {
                         doublePos = pos;
                         break block_double;
                     }
@@ -912,35 +912,35 @@ extends Module {
                     }
                     return;
                 }
-                if ((double)(System.currentTimeMillis() - this.time26) < (Double)this.breakDelay.getObj()) {
+                if ((double)(System.currentTimeMillis() - this.time26) < (Double)this.breakDelay.getValue()) {
                     return;
                 }
                 Vec3d vec3d = this.m949(endCrystalEntity);
-                double d = MC.client3.player.getEyePos().distanceTo(vec3d);
-                if (d > (Double)this.breakRange.getObj()) {
+                double d = MC.mc.player.getEyePos().distanceTo(vec3d);
+                if (d > (Double)this.breakRange.getValue()) {
                     return;
                 }
-                if (this.rotationBypass.getObj() == EMode2.ExtraHitbox) {
+                if (this.rotationBypass.getValue() == EMode2.ExtraHitbox) {
                     if (this.vec3d5 != null) {
                         if (!this.m563(endCrystalEntity, this.vec3d5)) {
                             return;
                         }
                     }
                 }
-                if (MC.client3.player.canSee((Entity)endCrystalEntity)) break block17;
-                if (!((Boolean)this.breakTWall.getObj()).booleanValue()) break block18;
-                if (!(d > (Double)this.bWallRange.getObj())) break block17;
+                if (MC.mc.player.canSee((Entity)endCrystalEntity)) break block17;
+                if (!((Boolean)this.breakTWall.getValue()).booleanValue()) break block18;
+                if (!(d > (Double)this.bWallRange.getValue())) break block17;
             }
             return;
         }
-        MC.client3.interactionManager.attackEntity((PlayerEntity)MC.client3.player, (Entity)endCrystalEntity);
-        MC.client3.player.swingHand(this.getObj7(), false);
-        if (((Boolean)this.remove.getObj()).booleanValue()) {
-            MC.client3.world.removeEntity(endCrystalEntity.getId(), Entity.RemovalReason.KILLED);
+        MC.mc.interactionManager.attackEntity((PlayerEntity)MC.mc.player, (Entity)endCrystalEntity);
+        MC.mc.player.swingHand(this.getObj7(), false);
+        if (((Boolean)this.remove.getValue()).booleanValue()) {
+            MC.mc.world.removeEntity(endCrystalEntity.getId(), Entity.RemovalReason.KILLED);
         }
         this.time26 = System.currentTimeMillis();
-        this.helper79.m533();
-        if (this.placeMode.getObj() == EMode5.Strong) {
+        this.helper79.resetTimer();
+        if (this.placeMode.getValue() == EMode5.Strong) {
             if (this.blockPos6 != null) {
                 BlockPos blockPos = this.blockPos6;
                 if (this.m532(blockPos, endCrystalEntity.getX(), endCrystalEntity.getY(), endCrystalEntity.getZ())) {
@@ -971,7 +971,7 @@ extends Module {
             if (null == null) continue;
         }
         ArrayList<EndCrystalEntity> arrayList2 = new ArrayList<EndCrystalEntity>();
-        for (Entity entity : MC.client3.world.getOtherEntities(null, new Box(blockPos2).expand(2.0))) {
+        for (Entity entity : MC.mc.world.getOtherEntities(null, new Box(blockPos2).expand(2.0))) {
             EndCrystalEntity endCrystalEntity;
             if (!(entity instanceof EndCrystalEntity) || !(endCrystalEntity = (EndCrystalEntity)entity).isAlive()) continue;
             for (Box box : arrayList) {
@@ -988,21 +988,21 @@ extends Module {
         if (arrayList2.isEmpty()) {
             return false;
         }
-        Vec3d vec3d = MC.client3.player.getEyePos();
+        Vec3d vec3d = MC.mc.player.getEyePos();
         Entity entityBest = null;
         double d = Double.MAX_VALUE;
         for (EndCrystalEntity endCrystalEntity : arrayList2) {
             double d2;
-            Vec3d vec3d2 = this.m129(endCrystalEntity.getEntityPos(), vec3d, (Double)this.breakRange.getObj());
-            if (vec3d2 == null || (d2 = vec3d.distanceTo(vec3d2)) > (Double)this.breakRange.getObj()) continue;
-            if (this.rotationBypass.getObj() == EMode2.ExtraHitbox) {
+            Vec3d vec3d2 = this.m129(endCrystalEntity.getEntityPos(), vec3d, (Double)this.breakRange.getValue());
+            if (vec3d2 == null || (d2 = vec3d.distanceTo(vec3d2)) > (Double)this.breakRange.getValue()) continue;
+            if (this.rotationBypass.getValue() == EMode2.ExtraHitbox) {
                 if (this.vec3d5 != null) {
                     if (!this.m563(endCrystalEntity, this.vec3d5)) continue;
                 }
             }
-            if (!MC.client3.player.canSee((Entity)endCrystalEntity)) {
-                if (!((Boolean)this.breakTWall.getObj()).booleanValue()) continue;
-                if (d2 > (Double)this.bWallRange.getObj()) continue;
+            if (!MC.mc.player.canSee((Entity)endCrystalEntity)) {
+                if (!((Boolean)this.breakTWall.getValue()).booleanValue()) continue;
+                if (d2 > (Double)this.bWallRange.getValue()) continue;
             }
             if (d2 < d) {
                 d = d2;
@@ -1012,16 +1012,16 @@ extends Module {
             break;
         }
         if (entityBest != null) {
-            if (((Boolean)this.onBreak.getObj()).booleanValue()) {
+            if (((Boolean)this.onBreak.getValue()).booleanValue()) {
                 this.m551(this.m949(entityBest), entityBest);
             }
-            MC.client3.interactionManager.attackEntity((PlayerEntity)MC.client3.player, (Entity)entityBest);
-            MC.client3.player.swingHand(this.getObj7(), false);
-            if (((Boolean)this.remove.getObj()).booleanValue()) {
-                MC.client3.world.removeEntity(entityBest.getId(), Entity.RemovalReason.KILLED);
+            MC.mc.interactionManager.attackEntity((PlayerEntity)MC.mc.player, (Entity)entityBest);
+            MC.mc.player.swingHand(this.getObj7(), false);
+            if (((Boolean)this.remove.getValue()).booleanValue()) {
+                MC.mc.world.removeEntity(entityBest.getId(), Entity.RemovalReason.KILLED);
             }
             this.time26 = System.currentTimeMillis();
-            this.helper79.m533();
+            this.helper79.resetTimer();
             return true;
         }
         return false;
@@ -1031,23 +1031,23 @@ extends Module {
         Hand hand = (Hand)object;
         BlockHitResult blockHitResult = (BlockHitResult)object2;
         Object var6_5 = null;
-        if (((Boolean)this.onPlace.getObj()).booleanValue()) {
+        if (((Boolean)this.onPlace.getValue()).booleanValue()) {
             if (this.vec3d7 != null) {
-                float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), this.vec3d7);
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(fArray[0], fArray[1], MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+                float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), this.vec3d7);
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(fArray[0], fArray[1], MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
             }
         }
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractBlockC2SPacket(hand, blockHitResult, 0));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractBlockC2SPacket(hand, blockHitResult, 0));
     }
 
     private void setObj33(Object object) {
         block13: {
             BlockPos blockPos = (BlockPos)object;
             Object var4_3 = null;
-            if (this.placeMode.getObj() == EMode5.None) {
+            if (this.placeMode.getValue() == EMode5.None) {
                 return;
             }
-            if ((double)(System.currentTimeMillis() - this.time41) < (Double)this.placeDelay.getObj()) {
+            if ((double)(System.currentTimeMillis() - this.time41) < (Double)this.placeDelay.getValue()) {
                 return;
             }
             if (!this.m40(blockPos)) {
@@ -1067,14 +1067,14 @@ extends Module {
             }
             Vec3d vec3d = this.m997(blockPos2, direction);
             BlockHitResult blockHitResult = new BlockHitResult(vec3d, direction, blockPos2, false);
-            if (((Boolean)this.onPlace.getObj()).booleanValue()) {
+            if (((Boolean)this.onPlace.getValue()).booleanValue()) {
                 this.vec3d7 = vec3d;
             }
             this.m564(hand, blockHitResult);
-            MC.client3.player.swingHand(hand, false);
-            if (!((Boolean)this.predictAttack.getObj()).booleanValue()) break block13;
+            MC.mc.player.swingHand(hand, false);
+            if (!((Boolean)this.predictAttack.getValue()).booleanValue()) break block13;
             Entity entity = null;
-            for (Entity entity2 : MC.client3.world.getEntities()) {
+            for (Entity entity2 : MC.mc.world.getEntities()) {
                 block15: {
                     block14: {
                         if (entity == null) break block14;
@@ -1087,9 +1087,9 @@ extends Module {
             if (entity != null) {
                 for (int i = 1; i <= 3; ++i) {
                     Entity entity2;
-                    entity2 = new EndCrystalEntity((World)MC.client3.world, (double)blockPos.getX() + 0.5, (double)blockPos.getY(), (double)blockPos.getZ() + 0.5);
+                    entity2 = new EndCrystalEntity((World)MC.mc.world, (double)blockPos.getX() + 0.5, (double)blockPos.getY(), (double)blockPos.getZ() + 0.5);
                     entity2.setId(entity.getId() + i);
-                    MC.client3.player.networkHandler.sendPacket((Packet)PlayerInteractEntityC2SPacket.attack((Entity)entity2, (boolean)MC.client3.player.isSneaking()));
+                    MC.mc.player.networkHandler.sendPacket((Packet)PlayerInteractEntityC2SPacket.attack((Entity)entity2, (boolean)MC.mc.player.isSneaking()));
                     if (null == null) continue;
                 }
             }
@@ -1104,10 +1104,10 @@ extends Module {
             block8: {
                 blockPos = (BlockPos)object;
                 Object var4_3 = null;
-                if ((double)(System.currentTimeMillis() - this.time8) < (Double)this.baseDelay.getObj()) {
+                if ((double)(System.currentTimeMillis() - this.time8) < (Double)this.baseDelay.getValue()) {
                     return;
                 }
-                BlockState blockState = MC.client3.world.getBlockState(blockPos);
+                BlockState blockState = MC.mc.world.getBlockState(blockPos);
                 if (blockState.isOf(Blocks.OBSIDIAN)) break block8;
                 if (!blockState.isOf(Blocks.BEDROCK)) break block9;
             }
@@ -1120,7 +1120,7 @@ extends Module {
         if (hand == null) {
             return;
         }
-        Direction direction = this.m999(blockPos, (Double)this.basePlaceRange.getObj());
+        Direction direction = this.m999(blockPos, (Double)this.basePlaceRange.getValue());
         if (direction == null) {
             return;
         }
@@ -1128,11 +1128,11 @@ extends Module {
         Direction direction2 = direction.getOpposite();
         Vec3d vec3d = this.m997(blockPos2, direction2);
         BlockHitResult blockHitResult = new BlockHitResult(vec3d, direction2, blockPos2, false);
-        if (((Boolean)this.onPlace.getObj()).booleanValue()) {
+        if (((Boolean)this.onPlace.getValue()).booleanValue()) {
             this.vec3d7 = vec3d;
         }
         this.m564(hand, blockHitResult);
-        MC.client3.player.swingHand(hand, false);
+        MC.mc.player.swingHand(hand, false);
         this.m350();
         this.time8 = System.currentTimeMillis();
     }
@@ -1149,7 +1149,7 @@ extends Module {
 
     private Vec3d m4(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        Direction direction = this.m999(blockPos, (Double)this.basePlaceRange.getObj());
+        Direction direction = this.m999(blockPos, (Double)this.basePlaceRange.getValue());
         if (direction == null) {
             return Vec3d.ofCenter((Vec3i)blockPos);
         }
@@ -1163,7 +1163,7 @@ extends Module {
         if (vec3d == null) {
             return;
         }
-        float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
         ClientSetting.RotateMode rotateMode = this.getRotateMode9();
         switch (rotateMode) {
             case NONE: {
@@ -1171,7 +1171,7 @@ extends Module {
             }
             case SMOOTH: {
                 Client.mathUtil.m355(fArray[0], fArray[1]);
-                Client.mathUtil.setFloat6(ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat35() : 45.0f);
+                Client.mathUtil.setFloat6(ClientSetting.INSTANCE != null ? ClientSetting.INSTANCE.rotateSpeed.getFloat() : 45.0f);
                 if (null == null) break;
             }
             case ONTICK: {
@@ -1191,7 +1191,7 @@ extends Module {
         if (vec3d == null) {
             return;
         }
-        switch (((EMode2)((Object)this.rotationBypass.getObj())).ordinal()) {
+        switch (((EMode2)((Object)this.rotationBypass.getValue())).ordinal()) {
             case 0: {
                 this.setObj106(vec3d);
                 if (null == null) break;
@@ -1218,7 +1218,7 @@ extends Module {
         Vec3d vec3d = (Vec3d)object;
         EndCrystalEntity endCrystalEntity = (EndCrystalEntity)object2;
         Object var6_5 = null;
-        switch (((EMode2)((Object)this.rotationBypass.getObj())).ordinal()) {
+        switch (((EMode2)((Object)this.rotationBypass.getValue())).ordinal()) {
             case 0: {
                 this.setObj106(vec3d);
                 if (null == null) break;
@@ -1228,7 +1228,7 @@ extends Module {
                     this.setObj106(this.vec3d5);
                     if (null == null) break;
                 }
-                this.setObj106(new Vec3d(endCrystalEntity.getX(), endCrystalEntity.getY() - (Double)this.hitboxExpand.getObj(), endCrystalEntity.getZ()));
+                this.setObj106(new Vec3d(endCrystalEntity.getX(), endCrystalEntity.getY() - (Double)this.hitboxExpand.getValue(), endCrystalEntity.getZ()));
                 if (null == null) break;
             }
             case 2: {
@@ -1253,12 +1253,12 @@ extends Module {
         EndCrystalEntity endCrystalEntity = (EndCrystalEntity)object;
         Vec3d vec3d = (Vec3d)object2;
         Object var6_5 = null;
-        if (this.rotationBypass.getObj() != EMode2.ExtraHitbox) {
+        if (this.rotationBypass.getValue() != EMode2.ExtraHitbox) {
             return true;
         }
-        double d = (Double)this.hitboxExpand.getObj();
+        double d = (Double)this.hitboxExpand.getValue();
         Box box = endCrystalEntity.getBoundingBox().stretch(0.0, d, 0.0).offset(0.0, -d, 0.0);
-        Vec3d vec3d2 = MC.client3.player.getEyePos();
+        Vec3d vec3d2 = MC.mc.player.getEyePos();
         float[] fArray = MathUtil.m547(vec3d2, vec3d);
         float f = fArray[1];
         float f2 = fArray[0];
@@ -1267,16 +1267,16 @@ extends Module {
         float f5 = -MathHelper.cos((double)(-f * ((float)Math.PI / 180)));
         float f6 = MathHelper.sin((double)(-f * ((float)Math.PI / 180)));
         Vec3d vec3d3 = new Vec3d((double)(f4 * f5), (double)f6, (double)(f3 * f5));
-        Vec3d vec3d4 = vec3d2.add(vec3d3.multiply(((Double)this.breakRange.getObj()).doubleValue()));
+        Vec3d vec3d4 = vec3d2.add(vec3d3.multiply(((Double)this.breakRange.getValue()).doubleValue()));
         return box.raycast(vec3d2, vec3d4).isPresent();
     }
 
     private ClientSetting.RotateMode getRotateMode9() {
         Object var2_1 = null;
-        if (this.rotateMode.getObj() == EMode3.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+        if (this.rotateMode.getValue() == EMode3.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
-        return switch (((EMode3)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((EMode3)((Object)this.rotateMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
             case 2 -> ClientSetting.RotateMode.SMOOTH;
             case 3 -> ClientSetting.RotateMode.ONTICK;
@@ -1288,10 +1288,10 @@ extends Module {
     private Hand prepareHand(Object object) {
         Item item = (Item)object;
         Object var4_3 = null;
-        if (MC.client3.player.getOffHandStack().isOf(item)) {
+        if (MC.mc.player.getOffHandStack().isOf(item)) {
             return Hand.OFF_HAND;
         }
-        if (MC.client3.player.getMainHandStack().isOf(item)) {
+        if (MC.mc.player.getMainHandStack().isOf(item)) {
             return Hand.MAIN_HAND;
         }
         ClientSetting.SwitchMode switchMode = this.getSwitchMode12();
@@ -1303,10 +1303,10 @@ extends Module {
 
     private Hand getObj22() {
         Object var2_1 = null;
-        if (this.m994(MC.client3.player.getOffHandStack())) {
+        if (this.m994(MC.mc.player.getOffHandStack())) {
             return Hand.OFF_HAND;
         }
-        if (this.m994(MC.client3.player.getMainHandStack())) {
+        if (this.m994(MC.mc.player.getMainHandStack())) {
             return Hand.MAIN_HAND;
         }
         ClientSetting.SwitchMode switchMode = this.getSwitchMode12();
@@ -1324,7 +1324,7 @@ extends Module {
     }
 
     private Hand getObj7() {
-        return MC.client3.player.getOffHandStack().isOf(Items.END_CRYSTAL) ? Hand.OFF_HAND : Hand.MAIN_HAND;
+        return MC.mc.player.getOffHandStack().isOf(Items.END_CRYSTAL) ? Hand.OFF_HAND : Hand.MAIN_HAND;
     }
 
     private void m350() {
@@ -1338,10 +1338,10 @@ extends Module {
 
     private ClientSetting.SwitchMode getSwitchMode12() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == EMode4.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+        if (this.switchMode.getValue() == EMode4.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
-        return switch (((EMode4)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((EMode4)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;
@@ -1475,7 +1475,7 @@ extends Module {
 
     private Vec3d m949(Object object) {
         EndCrystalEntity endCrystalEntity = (EndCrystalEntity)object;
-        Vec3d vec3d = this.m129(endCrystalEntity.getEntityPos(), MC.client3.player.getEyePos(), (Double)this.breakRange.getObj());
+        Vec3d vec3d = this.m129(endCrystalEntity.getEntityPos(), MC.mc.player.getEyePos(), (Double)this.breakRange.getValue());
         Object var4_4 = null;
         return vec3d != null ? vec3d : endCrystalEntity.getEntityPos();
     }
@@ -1489,7 +1489,7 @@ extends Module {
         Vec3d vec3d;
         this.matrix4f8 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f3());
         this.matrix4f13 = new Matrix4f((Matrix4fc)renderLevelEvent.getMatrix4f());
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         BlockPos blockPos = this.blockPos6;
@@ -1502,31 +1502,31 @@ extends Module {
         if (vec3d2 == null && vec3d == null && this.value157 <= 0.001) {
             return;
         }
-        boolean bl2 = bl = (double)(System.currentTimeMillis() - this.time39) < (Double)this.startFade.getObj() * 1000.0;
-        this.value157 = (Double)this.fadeSpeed.getObj() >= 1.0 ? (bl ? 1.0 : 0.0) : (this.value157 += ((bl ? 1.0 : 0.0) - this.value157) * ((Double)this.fadeSpeed.getObj() / 10.0));
+        boolean bl2 = bl = (double)(System.currentTimeMillis() - this.time39) < (Double)this.startFade.getValue() * 1000.0;
+        this.value157 = (Double)this.fadeSpeed.getValue() >= 1.0 ? (bl ? 1.0 : 0.0) : (this.value157 += ((bl ? 1.0 : 0.0) - this.value157) * ((Double)this.fadeSpeed.getValue() / 10.0));
         if (this.value157 <= 0.001) {
             this.vec3d8 = null;
             this.vec3d11 = null;
             return;
         }
-        double d2 = d = (Double)this.sliderSpeed.getObj() < 1.0 ? (Double)this.sliderSpeed.getObj() / 10.0 : 1.0;
+        double d2 = d = (Double)this.sliderSpeed.getValue() < 1.0 ? (Double)this.sliderSpeed.getValue() / 10.0 : 1.0;
         if (vec3d2 != null) {
             Vec3d vec3d4 = this.vec3d8 = this.vec3d8 == null ? vec3d2 : new Vec3d(this.vec3d8.x + (vec3d2.x - this.vec3d8.x) * d, this.vec3d8.y + (vec3d2.y - this.vec3d8.y) * d, this.vec3d8.z + (vec3d2.z - this.vec3d8.z) * d);
         }
         if (vec3d != null) {
             Vec3d vec3d5 = this.vec3d11 = this.vec3d11 == null ? vec3d : new Vec3d(this.vec3d11.x + (vec3d.x - this.vec3d11.x) * d, this.vec3d11.y + (vec3d.y - this.vec3d11.y) * d, this.vec3d11.z + (vec3d.z - this.vec3d11.z) * d);
         }
-        if (!((Boolean)this.render.getObj()).booleanValue()) {
+        if (!((Boolean)this.render.getValue()).booleanValue()) {
             return;
         }
         boolean bl3 = false;
-        int n2 = (Integer)this.fill.getObj() >>> 24 & 0xFF;
-        int n3 = (Integer)this.box.getObj() >>> 24 & 0xFF;
-        int n4 = n2 > 0 ? RenderUtil3.m517((Integer)this.fill.getObj(), (int)((double)n2 * this.value157)) : 0;
-        int n5 = n = n3 > 0 ? RenderUtil3.m517((Integer)this.box.getObj(), (int)((double)n3 * this.value157)) : 0;
+        int n2 = (Integer)this.fill.getValue() >>> 24 & 0xFF;
+        int n3 = (Integer)this.box.getValue() >>> 24 & 0xFF;
+        int n4 = n2 > 0 ? RenderUtil3.m517((Integer)this.fill.getValue(), (int)((double)n2 * this.value157)) : 0;
+        int n5 = n = n3 > 0 ? RenderUtil3.m517((Integer)this.box.getValue(), (int)((double)n3 * this.value157)) : 0;
         if (this.vec3d8 != null) {
             box = new Box(this.vec3d8.subtract(0.5, 0.5, 0.5), this.vec3d8.add(0.5, 0.5, 0.5));
-            if (((Boolean)this.shrink.getObj()).booleanValue()) {
+            if (((Boolean)this.shrink.getValue()).booleanValue()) {
                 box = box.expand((this.value157 - 1.0) * 0.5);
             }
             if (n4 != 0) {
@@ -1556,7 +1556,7 @@ extends Module {
 
     @EventHandler
     private void setObj102(Render2DEvent render2DEvent) {
-        if (Module.isSet37() || !((Boolean)this.render.getObj()).booleanValue() || !((Boolean)this.damageText.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || !((Boolean)this.render.getValue()).booleanValue() || !((Boolean)this.damageText.getValue()).booleanValue()) {
             return;
         }
         if (this.value162 <= 0.0f || this.vec3d8 == null) {
@@ -1565,10 +1565,10 @@ extends Module {
         if (this.matrix4f8 == null || this.matrix4f13 == null) {
             return;
         }
-        Vec3d vec3d = MC.client3.gameRenderer.getCamera().getCameraPos();
+        Vec3d vec3d = MC.mc.gameRenderer.getCamera().getCameraPos();
         Matrix4f matrix4f = new Matrix4f((Matrix4fc)this.matrix4f13).mul((Matrix4fc)this.matrix4f8);
-        int n = MC.client3.getWindow().getScaledWidth();
-        int n2 = MC.client3.getWindow().getScaledHeight();
+        int n = MC.mc.getWindow().getScaledWidth();
+        int n2 = MC.mc.getWindow().getScaledHeight();
         Vector4f vector4f = new Vector4f((float)(this.vec3d8.x - vec3d.x), (float)(this.vec3d8.y - vec3d.y), (float)(this.vec3d8.z - vec3d.z), 1.0f).mul((Matrix4fc)matrix4f);
         if (vector4f.w() <= 0.05f) {
             return;
@@ -1582,12 +1582,12 @@ extends Module {
         int n4 = (int)((1.0f - (f2 * 0.5f + 0.5f)) * (float)n2);
         String string = this.decimalFormat2.format(this.value162);
         FontManager2 fontManager2 = Client.fontManager.renderer2();
-        int n5 = fontManager2.m277(string);
+        int n5 = fontManager2.getStringWidth(string);
         int n6 = n3 - n5 / 2;
-        int n7 = n4 - fontManager2.getInt19() / 2;
+        int n7 = n4 - fontManager2.getFontHeight() / 2;
         int n8 = (int)(255.0 * this.value157);
         if (n8 > 5) {
-            fontManager2.m5(render2DEvent.getDrawContext(), string, n6, n7, RenderUtil3.m517((Integer)this.textColor.getObj(), n8), true);
+            fontManager2.drawText(render2DEvent.getDrawContext(), string, n6, n7, RenderUtil3.m517((Integer)this.textColor.getValue(), n8), true);
         }
     }
 

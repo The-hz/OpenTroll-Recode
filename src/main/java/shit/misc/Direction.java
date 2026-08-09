@@ -31,10 +31,10 @@ extends AbstractHudModule {
                                     block5: {
                                         block4: {
                                             boolean bl = true;
-                                            if (MC.client3.player == null) {
+                                            if (MC.mc.player == null) {
                                                 return List.of("Direction N/A");
                                             }
-                                            f = MC.client3.player.getYaw();
+                                            f = MC.mc.player.getYaw();
                                             f = (f % 360.0f + 360.0f) % 360.0f;
                                             if ((double)f >= 337.5) break block4;
                                             if (!((double)f < 22.5)) break block5;

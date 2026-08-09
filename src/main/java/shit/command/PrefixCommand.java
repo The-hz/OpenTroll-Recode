@@ -21,11 +21,11 @@ extends Command {
         String[] stringArray = (String[])object;
         boolean bl = false;
         if (stringArray.length < 1) {
-            CommandManager.setObj21("Current prefix: " + Client.commandManager.getText10());
+            CommandManager.sendFeedback("Current prefix: " + Client.commandManager.getPrefix());
             return;
         }
         Client.commandManager.setObj8(stringArray[0]);
-        CommandManager.setObj21("Prefix set to " + stringArray[0]);
+        CommandManager.sendFeedback("Prefix set to " + stringArray[0]);
     }
 }
 

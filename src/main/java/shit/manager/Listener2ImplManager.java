@@ -300,7 +300,7 @@ implements AutoCloseable {
                         break block10;
                     }
                     case 7: {
-                        n = ((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getObj()).booleanValue() ? 1 : 0;
+                        n = ((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue()).booleanValue() ? 1 : 0;
                     }
                 }
             }

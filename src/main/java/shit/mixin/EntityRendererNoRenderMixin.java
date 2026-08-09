@@ -36,13 +36,13 @@ public class EntityRendererNoRenderMixin {
         if (NameTags.m254(entity)) {
             entityRenderState.displayName = null;
         }
-        if ((noRender = NoRender.INSTANCE) == null || !noRender.isSet19()) {
+        if ((noRender = NoRender.INSTANCE) == null || !noRender.isEnabled()) {
             return;
         }
-        if (((Boolean)noRender.entityFire.getObj()).booleanValue()) {
+        if (((Boolean)noRender.entityFire.getValue()).booleanValue()) {
             entityRenderState.onFire = false;
         }
-        if (((Boolean)noRender.invisible.getObj()).booleanValue()) {
+        if (((Boolean)noRender.invisible.getValue()).booleanValue()) {
             entityRenderState.invisible = false;
         }
     }
@@ -70,10 +70,10 @@ public class EntityRendererNoRenderMixin {
             return;
         }
         object = NoRender.INSTANCE;
-        if (object == null || !((Module)object).isSet19()) {
+        if (object == null || !((Module)object).isEnabled()) {
             return;
         }
-        boolean bl2 = bl = (Boolean)((NoRender)object).potions.getObj() != false && entity instanceof PotionEntity || (Boolean)((NoRender)object).xP.getObj() != false && entity instanceof ExperienceBottleEntity || (Boolean)((NoRender)object).arrows.getObj() != false && entity instanceof PersistentProjectileEntity || (Boolean)((NoRender)object).eggs.getObj() != false && entity instanceof EggEntity || (Boolean)((NoRender)object).items.getObj() != false && entity instanceof ItemEntity;
+        boolean bl2 = bl = (Boolean)((NoRender)object).potions.getValue() != false && entity instanceof PotionEntity || (Boolean)((NoRender)object).xP.getValue() != false && entity instanceof ExperienceBottleEntity || (Boolean)((NoRender)object).arrows.getValue() != false && entity instanceof PersistentProjectileEntity || (Boolean)((NoRender)object).eggs.getValue() != false && entity instanceof EggEntity || (Boolean)((NoRender)object).items.getValue() != false && entity instanceof ItemEntity;
         if (bl) {
             callbackInfoReturnable.setReturnValue((Object)false);
         }

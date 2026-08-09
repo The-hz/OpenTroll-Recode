@@ -76,10 +76,10 @@ implements MC {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
-        int n = MC.client3.player.age;
+        int n = MC.mc.player.age;
         if (n != this.count59) {
             this.count59 = n;
             this.value197 = this.value182;
@@ -102,9 +102,9 @@ implements MC {
                     block10: {
                         f5 = f;
                         f4 = f6 = f2;
-                        double d = MC.client3.player.getX() - MC.client3.player.lastRenderX;
+                        double d = MC.mc.player.getX() - MC.mc.player.lastRenderX;
                         Object var6_7 = null;
-                        double d2 = MC.client3.player.getZ() - MC.client3.player.lastRenderZ;
+                        double d2 = MC.mc.player.getZ() - MC.mc.player.lastRenderZ;
                         if (!(d * d + d2 * d2 > (double)0.0025f)) break block9;
                         f3 = (float)Math.toDegrees(Math.atan2(d2, d)) - 90.0f;
                         float f7 = Math.abs(MathHelper.wrapDegrees((float)f5) - f3);
@@ -115,7 +115,7 @@ implements MC {
                     }
                     f4 = f3;
                 }
-                if (MC.client3.player.handSwinging) {
+                if (MC.mc.player.handSwinging) {
                     f4 = f5;
                 }
                 f4 = f6 + MathHelper.wrapDegrees((float)(f4 - f6)) * 0.3f;
@@ -139,12 +139,12 @@ implements MC {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
         this.type2 = Type.CUSTOM;
         this.flag142 = true;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3, f4, MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3, f4, MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
         this.flag142 = false;
         this.value136 = f3;
         this.value163 = f4;
@@ -156,11 +156,11 @@ implements MC {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
         this.flag142 = true;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3, f4, MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(f3, f4, MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
         this.flag142 = false;
         this.value136 = f3;
         this.value163 = f4;
@@ -183,12 +183,12 @@ implements MC {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
         this.type2 = Type.CUSTOM;
         this.flag142 = true;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.Full(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), f3, f4, MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.Full(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), f3, f4, MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
         this.flag142 = false;
         this.value136 = f3;
         this.value163 = f4;
@@ -199,7 +199,7 @@ implements MC {
     public void setFloat6(float f) {
         float f2 = f;
         Object var4_3 = null;
-        if (!this.flag19 || MC.client3.player == null) {
+        if (!this.flag19 || MC.mc.player == null) {
             return;
         }
         this.type2 = Type.CUSTOM;
@@ -232,21 +232,21 @@ implements MC {
     }
 
     public void m844() {
-        if (!this.flag19 || MC.client3.player == null) {
+        if (!this.flag19 || MC.mc.player == null) {
             return;
         }
         this.type2 = Type.NONE;
-        this.m303(MC.client3.player.getYaw(), MC.client3.player.getPitch());
+        this.m303(MC.mc.player.getYaw(), MC.mc.player.getPitch());
         this.flag19 = false;
         this.count218 = 0;
     }
 
     public void m2() {
-        if (!this.flag19 || MC.client3.player == null) {
+        if (!this.flag19 || MC.mc.player == null) {
             return;
         }
         this.type2 = Type.NONE;
-        this.m468(MC.client3.player.getYaw(), MC.client3.player.getPitch());
+        this.m468(MC.mc.player.getYaw(), MC.mc.player.getPitch());
         this.flag19 = false;
         this.count218 = 0;
     }

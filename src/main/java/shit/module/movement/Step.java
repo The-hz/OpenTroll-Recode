@@ -22,22 +22,22 @@ import shit.util.MathUtil;
 @Environment(value=EnvType.CLIENT)
 public class Step
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Vanilla));
-    private final NumberSetting height = (NumberSetting)this.m28(new NumberSetting("Height", 1.0, 0.0, 5.0, 0.5));
-    private final BooleanSetting timer = (BooleanSetting)this.m28(new BooleanSetting("Timer", true, () -> {
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Vanilla));
+    private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 1.0, 0.0, 5.0, 0.5));
+    private final BooleanSetting timer = (BooleanSetting)this.registerSetting(new BooleanSetting("Timer", true, () -> {
         Object var1_1 = null;
-        return this.mode.getObj() == Mode.OldNCP || this.mode.getObj() == Mode.NCP;
+        return this.mode.getValue() == Mode.OldNCP || this.mode.getValue() == Mode.NCP;
     }, null, "", false));
-    private final BooleanSetting fast = (BooleanSetting)this.m28(new BooleanSetting("Fast", true, () -> {
+    private final BooleanSetting fast = (BooleanSetting)this.registerSetting(new BooleanSetting("Fast", true, () -> {
         Object var1_1 = null;
-        if (this.mode.getObj() != Mode.NCP) return false;
-        if ((Boolean)this.timer.getObj() == false) return false;
+        if (this.mode.getValue() != Mode.NCP) return false;
+        if ((Boolean)this.timer.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final BooleanSetting onlyMoving = (BooleanSetting)this.m28(new BooleanSetting("OnlyMoving", true));
-    private final BooleanSetting inWebPause = (BooleanSetting)this.m28(new BooleanSetting("InWebPause", true));
-    private final BooleanSetting inBlockPause = (BooleanSetting)this.m28(new BooleanSetting("InBlockPause", true));
-    private final BooleanSetting sneakingPause = (BooleanSetting)this.m28(new BooleanSetting("SneakingPause", true));
+    private final BooleanSetting onlyMoving = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyMoving", true));
+    private final BooleanSetting inWebPause = (BooleanSetting)this.registerSetting(new BooleanSetting("InWebPause", true));
+    private final BooleanSetting inBlockPause = (BooleanSetting)this.registerSetting(new BooleanSetting("InBlockPause", true));
+    private final BooleanSetting sneakingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("SneakingPause", true));
     private boolean flag15;
     private int count127 = 0;
 
@@ -48,47 +48,47 @@ extends Module {
     public static void setFloat8(float f) {
         float f2 = f;
         Object var3_2 = null;
-        if (MC.client3.player != null) {
-            if (MC.client3.player.getAttributeInstance(EntityAttributes.STEP_HEIGHT) != null) {
-                MC.client3.player.getAttributeInstance(EntityAttributes.STEP_HEIGHT).setBaseValue((double)f2);
+        if (MC.mc.player != null) {
+            if (MC.mc.player.getAttributeInstance(EntityAttributes.STEP_HEIGHT) != null) {
+                MC.mc.player.getAttributeInstance(EntityAttributes.STEP_HEIGHT).setBaseValue((double)f2);
             }
         }
     }
 
     @Override
-    public void m709() {
-        super.m709();
+    public void onDisable() {
+        super.onDisable();
         Step.setFloat8(0.6f);
     }
 
     @EventHandler
     public void setEvent2Inner30(Event2.Event2Inner event2Inner) {
         boolean bl;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (!(((Boolean)this.sneakingPause.getObj()).booleanValue() && MC.client3.player.isInSneakingPose() || ((Boolean)this.inBlockPause.getObj()).booleanValue() && ItemUtil.isSet26() || MC.client3.player.isInLava() || MC.client3.player.isTouchingWater() || ((Boolean)this.inWebPause.getObj()).booleanValue() && MC.client3.player.isClimbing() || !MC.client3.player.isOnGround() || ((Boolean)this.onlyMoving.getObj()).booleanValue() && !MathUtil.isSet7())) {
-            Step.setFloat8(((Double)this.height.getObj()).floatValue());
+        if (!(((Boolean)this.sneakingPause.getValue()).booleanValue() && MC.mc.player.isInSneakingPose() || ((Boolean)this.inBlockPause.getValue()).booleanValue() && ItemUtil.isSet26() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || ((Boolean)this.inWebPause.getValue()).booleanValue() && MC.mc.player.isClimbing() || !MC.mc.player.isOnGround() || ((Boolean)this.onlyMoving.getValue()).booleanValue() && !MathUtil.isSet7())) {
+            Step.setFloat8(((Double)this.height.getValue()).floatValue());
         } else {
             Step.setFloat8(0.6f);
         }
         if (this.flag15 && this.count127 <= 0) {
             this.flag15 = false;
         }
-        boolean bl2 = bl = this.mode.getObj() == Mode.NCP;
-        if (this.mode.getObj() == Mode.OldNCP || bl) {
-            double d = MC.client3.player.getY() - MC.client3.player.lastY;
-            if (d <= 0.75 || d > (Double)this.height.getObj()) {
+        boolean bl2 = bl = this.mode.getValue() == Mode.NCP;
+        if (this.mode.getValue() == Mode.OldNCP || bl) {
+            double d = MC.mc.player.getY() - MC.mc.player.lastY;
+            if (d <= 0.75 || d > (Double)this.height.getValue()) {
                 return;
             }
             double[] dArray = this.m420(d);
             if (dArray != null && dArray.length > 1) {
-                if (((Boolean)this.timer.getObj()).booleanValue()) {
+                if (((Boolean)this.timer.getValue()).booleanValue()) {
                     this.flag15 = true;
                     this.count127 = 2;
                 }
                 for (double d2 : dArray) {
-                    MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.client3.player.lastX, MC.client3.player.lastY + d2, MC.client3.player.lastZ, false, false));
+                    MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(MC.mc.player.lastX, MC.mc.player.lastY + d2, MC.mc.player.lastZ, false, false));
                 }
             }
         }
@@ -96,7 +96,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner211(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         --this.count127;
@@ -106,7 +106,7 @@ extends Module {
         double[] dArray;
         double d2 = d;
         Object var6_3 = null;
-        boolean bl = this.mode.getObj() == Mode.NCP;
+        boolean bl = this.mode.getValue() == Mode.NCP;
         if (d2 == 0.75) {
             double[] dArray2;
             if (bl) {

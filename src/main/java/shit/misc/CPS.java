@@ -27,7 +27,7 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         boolean bl = true;
-        long l = MC.client3.getWindow() == null ? 0L : MC.client3.getWindow().getHandle();
+        long l = MC.mc.getWindow() == null ? 0L : MC.mc.getWindow().getHandle();
         long l2 = System.currentTimeMillis();
         if (l != 0L) {
             this.m695(l2, GLFW.glfwGetMouseButton((long)l, (int)0) == 1, this.deque3, true);

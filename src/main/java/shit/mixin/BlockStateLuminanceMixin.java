@@ -18,8 +18,8 @@ public class BlockStateLuminanceMixin {
     @Inject(method={"getLuminance()I"}, at={@At(value="RETURN")}, cancellable=true)
     private void trollhack$customLuminance(CallbackInfoReturnable callbackInfoReturnable) {
         Ambience ambience = Ambience.INSTANCE;
-        if (ambience != null && ambience.isSet19() && ((Boolean)ambience.customLuminance.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue((Object)ambience.luminance.getInt50());
+        if (ambience != null && ambience.isEnabled() && ((Boolean)ambience.customLuminance.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue((Object)ambience.luminance.getInt());
         }
     }
 }

@@ -24,7 +24,7 @@ import shit.event.RenderLevelEvent;
 public class LevelRendererMixin {
     @Inject(method={"render(Lnet/minecraft/client/util/memory/ObjectAllocator;Lnet/minecraft/client/render/RenderTickCounter;ZLnet/minecraft/client/render/Camera;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Vector4f;Z)V"}, at={@At(value="TAIL")})
     private void trollhack$renderLevel(ObjectAllocator objectAllocator, RenderTickCounter renderTickCounter, boolean bl, Camera camera, Matrix4f matrix4f, Matrix4f matrix4f2, Matrix4f matrix4f3, GpuBufferSlice gpuBufferSlice, Vector4f vector4f, boolean bl2, CallbackInfo callbackInfo) {
-        Client.eventBus.m287(new RenderLevelEvent(renderTickCounter, camera, matrix4f, matrix4f2));
+        Client.eventBus.post(new RenderLevelEvent(renderTickCounter, camera, matrix4f, matrix4f2));
     }
 }
 

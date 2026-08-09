@@ -28,24 +28,24 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class HoleESP
 extends Module {
-    private final BooleanSetting obbyHole = (BooleanSetting)this.m28(new BooleanSetting("ObbyHole", true));
-    private final BooleanSetting _2BlocksHole = (BooleanSetting)this.m28(new BooleanSetting("2BlocksHole", true));
-    private final BooleanSetting _4BlocksHole = (BooleanSetting)this.m28(new BooleanSetting("4BlocksHole", true));
-    private final BooleanSetting trappedHole = (BooleanSetting)this.m28(new BooleanSetting("TrappedHole", true));
-    private final ColorSetting bedrockColor = (ColorSetting)this.m28(new ColorSetting("BedrockColor", -1440743649));
-    private final ColorSetting obbyColor = (ColorSetting)this.m28(new ColorSetting("ObbyColor", -1426063585));
-    private final ColorSetting _2BlocksColor = (ColorSetting)this.m28(new ColorSetting("2BlocksColor", -1426096353));
-    private final ColorSetting _4BlocksColor = (ColorSetting)this.m28(new ColorSetting("4BlocksColor", -1426096353));
-    private final ColorSetting trappedColor = (ColorSetting)this.m28(new ColorSetting("TrappedColor", -1426120929));
-    private final EnumSetting renderMode = (EnumSetting)this.m28(new EnumSetting("RenderMode", RenderMode.Glow));
-    private final BooleanSetting filled = (BooleanSetting)this.m28(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.m28(new BooleanSetting("Outline", true));
-    private final NumberSetting filledAlpha = (NumberSetting)this.m28(new NumberSetting("FilledAlpha", 63.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.filled.getObj(), null, "", false));
-    private final NumberSetting outlineAlpha = (NumberSetting)this.m28(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.outline.getObj(), null, "", false));
-    private final NumberSetting glowHeight = (NumberSetting)this.m28(new NumberSetting("GlowHeight", 1.0, 0.25, 4.0, 0.25, 0.25, () -> this.renderMode.getObj() == RenderMode.Glow, null, "", false));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 16.0, 4.0, 32.0, 1.0));
-    private final NumberSetting verticalRange = (NumberSetting)this.m28(new NumberSetting("VerticalRange", 8.0, 4.0, 16.0, 1.0));
-    private final BooleanSetting throughWall = (BooleanSetting)this.m28(new BooleanSetting("ThroughWall", true));
+    private final BooleanSetting obbyHole = (BooleanSetting)this.registerSetting(new BooleanSetting("ObbyHole", true));
+    private final BooleanSetting _2BlocksHole = (BooleanSetting)this.registerSetting(new BooleanSetting("2BlocksHole", true));
+    private final BooleanSetting _4BlocksHole = (BooleanSetting)this.registerSetting(new BooleanSetting("4BlocksHole", true));
+    private final BooleanSetting trappedHole = (BooleanSetting)this.registerSetting(new BooleanSetting("TrappedHole", true));
+    private final ColorSetting bedrockColor = (ColorSetting)this.registerSetting(new ColorSetting("BedrockColor", -1440743649));
+    private final ColorSetting obbyColor = (ColorSetting)this.registerSetting(new ColorSetting("ObbyColor", -1426063585));
+    private final ColorSetting _2BlocksColor = (ColorSetting)this.registerSetting(new ColorSetting("2BlocksColor", -1426096353));
+    private final ColorSetting _4BlocksColor = (ColorSetting)this.registerSetting(new ColorSetting("4BlocksColor", -1426096353));
+    private final ColorSetting trappedColor = (ColorSetting)this.registerSetting(new ColorSetting("TrappedColor", -1426120929));
+    private final EnumSetting renderMode = (EnumSetting)this.registerSetting(new EnumSetting("RenderMode", RenderMode.Glow));
+    private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final NumberSetting filledAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FilledAlpha", 63.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.filled.getValue(), null, "", false));
+    private final NumberSetting outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.outline.getValue(), null, "", false));
+    private final NumberSetting glowHeight = (NumberSetting)this.registerSetting(new NumberSetting("GlowHeight", 1.0, 0.25, 4.0, 0.25, 0.25, () -> this.renderMode.getValue() == RenderMode.Glow, null, "", false));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 16.0, 4.0, 32.0, 1.0));
+    private final NumberSetting verticalRange = (NumberSetting)this.registerSetting(new NumberSetting("VerticalRange", 8.0, 4.0, 16.0, 1.0));
+    private final BooleanSetting throughWall = (BooleanSetting)this.registerSetting(new BooleanSetting("ThroughWall", true));
     private final List list10 = new ArrayList();
     private int count101;
 
@@ -54,7 +54,7 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         return Integer.toString(this.list10.size());
     }
 
@@ -68,13 +68,13 @@ extends Module {
 
     @EventHandler
     private void setRenderLevelEvent12(RenderLevelEvent renderLevelEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         for (Object dataObj : this.list10) {
             Data data = (Data)dataObj;
             Box box = null;
-            switch (((RenderMode)((Object)this.renderMode.getObj())).ordinal()) {
+            switch (((RenderMode)((Object)this.renderMode.getValue())).ordinal()) {
                 default: {
                     throw new MatchException(null, null);
                 }
@@ -91,14 +91,14 @@ extends Module {
                     break;
                 }
                 case 0: {
-                    Box box2 = box = new Box(data.box4.minX, data.box4.minY, data.box4.minZ, data.box4.maxX, data.box4.minY + (Double)this.glowHeight.getObj(), data.box4.maxZ);
+                    Box box2 = box = new Box(data.box4.minX, data.box4.minY, data.box4.minZ, data.box4.maxX, data.box4.minY + (Double)this.glowHeight.getValue(), data.box4.maxZ);
                 }
             }
-            if (((Boolean)this.filled.getObj()).booleanValue()) {
-                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, this.m827(data.count8, this.filledAlpha.getInt50()), (Boolean)this.throughWall.getObj());
+            if (((Boolean)this.filled.getValue()).booleanValue()) {
+                EspRenderLayers.m69(renderLevelEvent.getMatrix4f3(), box, this.m827(data.count8, this.filledAlpha.getInt()), (Boolean)this.throughWall.getValue());
             }
-            if (!((Boolean)this.outline.getObj()).booleanValue()) continue;
-            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, this.m827(data.count8, this.outlineAlpha.getInt50()), (Boolean)this.throughWall.getObj());
+            if (!((Boolean)this.outline.getValue()).booleanValue()) continue;
+            EspRenderLayers.m688(renderLevelEvent.getMatrix4f3(), box, this.m827(data.count8, this.outlineAlpha.getInt()), (Boolean)this.throughWall.getValue());
         }
         EspRenderLayers.m125();
     }
@@ -106,18 +106,18 @@ extends Module {
     private void m383() {
         this.list10.clear();
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        int n = this.range.getInt50();
-        int n2 = this.verticalRange.getInt50();
-        BlockPos blockPos = MC.client3.player.getBlockPos();
+        int n = this.range.getInt();
+        int n2 = this.verticalRange.getInt();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
         HashSet<BlockPos> hashSet = new HashSet<BlockPos>();
         for (int i = -n; i <= n; ++i) {
             for (int j = -n2; j <= n2; ++j) {
                 for (int k = -n; k <= n; ++k) {
                     BlockPos blockPos2 = blockPos.add(i, j, k);
-                    if (MC.client3.player.squaredDistanceTo((double)blockPos2.getX() + 0.5, (double)blockPos2.getY() + 0.5, (double)blockPos2.getZ() + 0.5) > (double)(n * n) || hashSet.contains(blockPos2)) continue;
+                    if (MC.mc.player.squaredDistanceTo((double)blockPos2.getX() + 0.5, (double)blockPos2.getY() + 0.5, (double)blockPos2.getZ() + 0.5) > (double)(n * n) || hashSet.contains(blockPos2)) continue;
                     Data data = this.m67(blockPos2);
                     if (data != null) {
                         this.list10.add(data);
@@ -158,17 +158,17 @@ extends Module {
             return null;
         }
         if (type == Type.Obby) {
-            if (!((Boolean)this.obbyHole.getObj()).booleanValue()) {
+            if (!((Boolean)this.obbyHole.getValue()).booleanValue()) {
                 return null;
             }
         }
         boolean bl = !this.m440(blockPos.up(2));
         if (bl) {
-            if (!((Boolean)this.trappedHole.getObj()).booleanValue()) {
+            if (!((Boolean)this.trappedHole.getValue()).booleanValue()) {
                 return null;
             }
         }
-        int n = bl ? (Integer)this.trappedColor.getObj() : (type == Type.Bedrock ? (Integer)this.bedrockColor.getObj() : (Integer)this.obbyColor.getObj());
+        int n = bl ? (Integer)this.trappedColor.getValue() : (type == Type.Bedrock ? (Integer)this.bedrockColor.getValue() : (Integer)this.obbyColor.getValue());
         return new Data(new Box(blockPos), n);
     }
 
@@ -180,7 +180,7 @@ extends Module {
                 blockPos = (BlockPos)object;
                 set = (Set)object2;
                 Object var6_5 = null;
-                if (!((Boolean)this._2BlocksHole.getObj()).booleanValue()) break block3;
+                if (!((Boolean)this._2BlocksHole.getValue()).booleanValue()) break block3;
                 if (this.m665(blockPos)) break block4;
             }
             return null;
@@ -189,7 +189,7 @@ extends Module {
             Box box;
             if (set.contains(blockPos2)) continue;
             if (!this.m665(blockPos2) || !this.m480(box = this.m160(blockPos, blockPos2))) continue;
-            return new Data(box, (Integer)this._2BlocksColor.getObj());
+            return new Data(box, (Integer)this._2BlocksColor.getValue());
         }
         return null;
     }
@@ -207,7 +207,7 @@ extends Module {
                         blockPos = (BlockPos)object;
                         Set set = (Set)object2;
                         Object var6_5 = null;
-                        if (!((Boolean)this._4BlocksHole.getObj()).booleanValue()) {
+                        if (!((Boolean)this._4BlocksHole.getValue()).booleanValue()) {
                             return null;
                         }
                         blockPos5 = blockPos;
@@ -227,7 +227,7 @@ extends Module {
             return null;
         }
         Box box = new Box((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), (double)blockPos.getX() + 2.0, (double)blockPos.getY() + 1.0, (double)blockPos.getZ() + 2.0);
-        return this.m480(box) ? new Data(box, (Integer)this._4BlocksColor.getObj()) : null;
+        return this.m480(box) ? new Data(box, (Integer)this._4BlocksColor.getValue()) : null;
     }
 
     private boolean m480(Object object) {
@@ -282,8 +282,8 @@ extends Module {
     private boolean m440(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.world == null) return false;
-        if (!MC.client3.world.getBlockState(blockPos).isAir()) return false;
+        if (MC.mc.world == null) return false;
+        if (!MC.mc.world.getBlockState(blockPos).isAir()) return false;
         return true;
     }
 
@@ -293,7 +293,7 @@ extends Module {
         BlockPos[] blockPosArray2 = blockPosArray;
         Object var4_5 = null;
         for (BlockPos blockPos : blockPosArray2) {
-            Block block = MC.client3.world.getBlockState(blockPos).getBlock();
+            Block block = MC.mc.world.getBlockState(blockPos).getBlock();
             if (!this.m65(block)) {
                 return Type.None;
             }
@@ -306,7 +306,7 @@ extends Module {
 
     private boolean m663(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        return this.m65(MC.client3.world.getBlockState(blockPos).getBlock());
+        return this.m65(MC.mc.world.getBlockState(blockPos).getBlock());
     }
 
     /*

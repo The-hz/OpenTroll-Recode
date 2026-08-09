@@ -19,8 +19,8 @@ import shit.util.MathUtil;
 public class Strafe
 extends Module {
     public static Strafe INSTANCE;
-    private final BooleanSetting airStop = (BooleanSetting)this.m28(new BooleanSetting("AirStop", true));
-    private final BooleanSetting slowCheck = (BooleanSetting)this.m28(new BooleanSetting("SlowCheck", true));
+    private final BooleanSetting airStop = (BooleanSetting)this.registerSetting(new BooleanSetting("AirStop", true));
+    private final BooleanSetting slowCheck = (BooleanSetting)this.registerSetting(new BooleanSetting("SlowCheck", true));
 
     public Strafe() {
         super("Strafe", "Modifies movement to allow sharp strafing in mid-air.", Category.MOVEMENT);
@@ -29,12 +29,12 @@ extends Module {
 
     @EventHandler
     public void setMoveEvent(MoveEvent moveEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (!(MC.client3.player.isInSneakingPose() || MC.client3.player.isGliding() || ItemUtil.isSet26() || MC.client3.player.isInLava() || MC.client3.player.isTouchingWater() || MC.client3.player.getAbilities().flying)) {
+        if (!(MC.mc.player.isInSneakingPose() || MC.mc.player.isGliding() || ItemUtil.isSet26() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || MC.mc.player.getAbilities().flying)) {
             if (!MathUtil.isSet7()) {
-                if (((Boolean)this.airStop.getObj()).booleanValue()) {
+                if (((Boolean)this.airStop.getValue()).booleanValue()) {
                     MathUtil.setDouble8(0.0);
                     MathUtil.setDouble9(0.0);
                 }
@@ -52,12 +52,12 @@ extends Module {
             block3: {
                 d = 0.2873;
                 Object var2_2 = null;
-                if (MC.client3.player == null) break block2;
-                if (!MC.client3.player.hasStatusEffect(StatusEffects.SPEED)) break block2;
-                if (!((Boolean)this.slowCheck.getObj()).booleanValue()) break block3;
-                if (MC.client3.player.hasStatusEffect(StatusEffects.SLOWNESS)) break block2;
+                if (MC.mc.player == null) break block2;
+                if (!MC.mc.player.hasStatusEffect(StatusEffects.SPEED)) break block2;
+                if (!((Boolean)this.slowCheck.getValue()).booleanValue()) break block3;
+                if (MC.mc.player.hasStatusEffect(StatusEffects.SLOWNESS)) break block2;
             }
-            int n = MC.client3.player.getStatusEffect(StatusEffects.SPEED).getAmplifier();
+            int n = MC.mc.player.getStatusEffect(StatusEffects.SPEED).getAmplifier();
             d *= 1.0 + 0.2 * (double)(n + 1);
         }
         return d;

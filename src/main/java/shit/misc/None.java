@@ -39,7 +39,7 @@ extends ModuleState {
     }
 
     public boolean isSet66() {
-        return this.setting.isSet152();
+        return this.setting.isVisible();
     }
 
     /*
@@ -81,35 +81,35 @@ extends ModuleState {
                                 Object var4_7 = null;
                                 if (!(object2 instanceof BooleanSetting)) break block2;
                                 BooleanSetting booleanSetting = (BooleanSetting)object2;
-                                int n = (Boolean)booleanSetting.getObj() != false ? -1439005464 : -2005897104;
+                                int n = (Boolean)booleanSetting.getValue() != false ? -1439005464 : -2005897104;
                                 drawContext.fill(this.count108 + this.count141 - 13, this.count103 + 3, this.count108 + this.count141 - 3, this.count103 + 10, n);
-                                FontUtil2.m640(this.field27, drawContext, this.setting.getText51(), this.count108 + 2, this.count103 + 3, -1184275);
+                                FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName(), this.count108 + 2, this.count103 + 3, -1184275);
                                 break block3;
                             }
                             object2 = this.setting;
                             if (!(object2 instanceof NumberSetting)) break block4;
                             NumberSetting numberSetting = (NumberSetting)object2;
-                            double d = numberSetting.getDouble22() - numberSetting.getDouble16();
-                            double d2 = d <= 0.0 ? 0.0 : ((Double)numberSetting.getObj() - numberSetting.getDouble16()) / d;
+                            double d = numberSetting.getMax() - numberSetting.getMin();
+                            double d2 = d <= 0.0 ? 0.0 : ((Double)numberSetting.getValue() - numberSetting.getMin()) / d;
                             int n = (int)((double)this.count141 * this.m94(d2));
                             drawContext.fill(this.count108, this.count103, this.count108 + n, this.count103 + 13, -1439005464);
-                            FontUtil2.m640(this.field27, drawContext, this.setting.getText51() + " " + this.m961((Double)numberSetting.getObj()), this.count108 + 2, this.count103 + 3, -1);
+                            FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m961((Double)numberSetting.getValue()), this.count108 + 2, this.count103 + 3, -1);
                             break block3;
                         }
                         object2 = this.setting;
                         if (!(object2 instanceof ColorSetting)) break block5;
                         ColorSetting colorSetting = (ColorSetting)object2;
-                        int n = (Integer)colorSetting.getObj();
+                        int n = (Integer)colorSetting.getValue();
                         drawContext.fill(this.count108 + this.count141 - 18, this.count103 + 2, this.count108 + this.count141 - 3, this.count103 + 11, -15394784);
                         drawContext.fill(this.count108 + this.count141 - 17, this.count103 + 3, this.count108 + this.count141 - 4, this.count103 + 10, n);
-                        FontUtil2.m640(this.field27, drawContext, this.setting.getText51() + " " + this.m482(colorSetting), this.count108 + 2, this.count103 + 3, -1184275);
+                        FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.m482(colorSetting), this.count108 + 2, this.count103 + 3, -1184275);
                         break block3;
                     }
                     object2 = this.setting;
                     if (!(object2 instanceof ColorSetting2)) break block6;
                     ColorSetting2 colorSetting2 = (ColorSetting2)object2;
-                    object2 = this.flag48 ? Outline.m14("Press key/mouse...") : colorSetting2.getText51();
-                    String string = this.setting.getText51() + " " + (String)object2;
+                    object2 = this.flag48 ? Outline.m14("Press key/mouse...") : colorSetting2.getDisplayName();
+                    String string = this.setting.getDisplayName() + " " + (String)object2;
                     FontUtil2.m640(this.field27, drawContext, string, this.count108 + 2, this.count103 + 3, -1184275);
                     String string2 = "[" + Outline.m14(colorSetting2.getType().name()) + "]";
                     int n = this.count108 + this.count141 - this.field27.getWidth(string2) - 5;
@@ -117,17 +117,17 @@ extends ModuleState {
                     break block3;
                 }
                 if (!(this.setting instanceof StringSetting)) break block7;
-                FontUtil2.m640(this.field27, drawContext, this.setting.getText51() + " " + String.valueOf(this.setting.getObj()) + (this.flag62 ? "_" : ""), this.count108 + 2, this.count103 + 3, -1184275);
+                FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + String.valueOf(this.setting.getValue()) + (this.flag62 ? "_" : ""), this.count108 + 2, this.count103 + 3, -1184275);
                 if (null == null) break block3;
             }
-            FontUtil2.m640(this.field27, drawContext, this.setting.getText51() + " " + this.getText21(), this.count108 + 2, this.count103 + 3, -1184275);
+            FontUtil2.m640(this.field27, drawContext, this.setting.getDisplayName() + " " + this.getText21(), this.count108 + 2, this.count103 + 3, -1184275);
         }
     }
 
     private void m397(Object object, Object object2) {
         DrawContext drawContext = (DrawContext)object;
         EnumSetting enumSetting = (EnumSetting)object2;
-        Enum enum_ = (Enum)enumSetting.getObj();
+        Enum enum_ = (Enum)enumSetting.getValue();
         Enum[] enumArray = (Enum[])enum_.getDeclaringClass().getEnumConstants();
         int n = this.count103 + 13;
         Enum[] enumArray2 = enumArray;
@@ -163,7 +163,7 @@ extends ModuleState {
         int n15 = n11;
         Object var6_13 = null;
         int n16 = n14 + 8;
-        int n17 = (Integer)colorSetting.getObj();
+        int n17 = (Integer)colorSetting.getValue();
         float[] fArray = Color.RGBtoHSB(n17 >>> 16 & 0xFF, n17 >>> 8 & 0xFF, n17 & 0xFF, null);
         int n18 = 12;
         int n19 = n11 / n18;
@@ -224,7 +224,7 @@ extends ModuleState {
             if (setting2 instanceof ColorSetting2) {
                 setting = (ColorSetting2)setting2;
                 if (n2 != 1) {
-                    setting.setObj94(ColorSetting2.m559(n2));
+                    setting.setValueInternal(ColorSetting2.m559(n2));
                     this.flag48 = false;
                     return true;
                 }
@@ -311,7 +311,7 @@ extends ModuleState {
         if (this.flag48 && this.setting instanceof ColorSetting2) {
             ColorSetting2 cs = (ColorSetting2) this.setting;
             int v0 = (key == 256 || key == 261) ? -1 : key;
-            cs.setObj94(v0);
+            cs.setValueInternal(v0);
             this.flag48 = false;
             return true;
         }
@@ -322,9 +322,9 @@ extends ModuleState {
                 return true;
             }
             if (key == 259) {
-                String s = (String) ss.getObj();
+                String s = (String) ss.getValue();
                 if (!s.isEmpty()) {
-                    ss.setObj94(s.substring(0, s.length() - 1));
+                    ss.setValueInternal(s.substring(0, s.length() - 1));
                     return true;
                 }
             }
@@ -342,7 +342,7 @@ extends ModuleState {
                 StringSetting stringSetting = (StringSetting)setting;
                 if (c >= ' ') {
                     if (c != '\u007f') {
-                        stringSetting.setObj94((String)stringSetting.getObj() + c);
+                        stringSetting.setValueInternal((String)stringSetting.getValue() + c);
                         return true;
                     }
                 }
@@ -372,7 +372,7 @@ extends ModuleState {
                                             Object var8_6 = null;
                                             if (!(setting instanceof BooleanSetting)) break block4;
                                             BooleanSetting booleanSetting = (BooleanSetting)setting;
-                                            booleanSetting.setObj94((Boolean)booleanSetting.getObj() == false);
+                                            booleanSetting.setValueInternal((Boolean)booleanSetting.getValue() == false);
                                             if (null == null) break block5;
                                         }
                                         setting = this.setting;
@@ -382,7 +382,7 @@ extends ModuleState {
                                         boolean bl = this.flag109 = !this.flag109;
                                         if (null == null) break block5;
                                     }
-                                    enumSetting.m788();
+                                    enumSetting.cycle();
                                     if (null == null) break block5;
                                 }
                                 setting = this.setting;
@@ -393,7 +393,7 @@ extends ModuleState {
                                 this.m685(numberSetting, d2);
                                 if (null == null) break block5;
                             }
-                            numberSetting.setObj85((Double)numberSetting.getObj() - numberSetting.getDouble20());
+                            numberSetting.setDouble((Double)numberSetting.getValue() - numberSetting.getStep());
                             if (null == null) break block5;
                         }
                         if (!(this.setting instanceof ColorSetting)) break block10;
@@ -421,12 +421,12 @@ extends ModuleState {
     private void m954(Object object, double d) {
         EnumSetting enumSetting = (EnumSetting)object;
         double d2 = d;
-        Enum enum_ = (Enum)enumSetting.getObj();
+        Enum enum_ = (Enum)enumSetting.getValue();
         Enum[] enumArray = (Enum[])enum_.getDeclaringClass().getEnumConstants();
         Object var8_7 = null;
         int n = (int)((d2 - (double)(this.count103 + 13)) / 13.0);
         if (n >= 0 && n < enumArray.length) {
-            enumSetting.setObj94(enumArray[n]);
+            enumSetting.setValueInternal(enumArray[n]);
         }
         this.flag109 = false;
         this.m874();
@@ -436,13 +436,13 @@ extends ModuleState {
         NumberSetting numberSetting = (NumberSetting)object;
         double d2 = d;
         double d3 = (d2 - (double)this.count108) / Math.max(1.0, (double)this.count141);
-        double d4 = numberSetting.getDouble16() + (numberSetting.getDouble22() - numberSetting.getDouble16()) * this.m94(d3);
+        double d4 = numberSetting.getMin() + (numberSetting.getMax() - numberSetting.getMin()) * this.m94(d3);
         Object var8_7 = null;
-        double d5 = numberSetting.getDouble20();
+        double d5 = numberSetting.getStep();
         if (d5 > 0.0) {
             d4 = (double)Math.round(d4 / d5) * d5;
         }
-        numberSetting.setObj85(d4);
+        numberSetting.setDouble(d4);
     }
 
     private void m312(Object object, double d, double d2) {
@@ -503,7 +503,7 @@ extends ModuleState {
                     n3 = this.count108 + 4;
                     int cfr_ignored_0 = n6 + n8 + 3;
                     n2 = n7;
-                    int n9 = (Integer)colorSetting.getObj();
+                    int n9 = (Integer)colorSetting.getValue();
                     n = n9 >>> 24 & 0xFF;
                     int n10 = n9 >>> 16 & 0xFF;
                     Object var12_17 = null;
@@ -536,7 +536,7 @@ extends ModuleState {
                     Object object = this.setting;
                     if (!(object instanceof EnumSetting)) break block2;
                     EnumSetting enumSetting = (EnumSetting)object;
-                    object = (Enum)enumSetting.getObj();
+                    object = (Enum)enumSetting.getValue();
                     this.count119 = 13 + ((Enum[])((Enum)object).getDeclaringClass().getEnumConstants()).length * 13;
                     if (null == null) break block3;
                 }
@@ -554,19 +554,19 @@ extends ModuleState {
         Object var2_2 = null;
         if (object instanceof ColorSetting2) {
             ColorSetting2 colorSetting2 = (ColorSetting2)object;
-            return colorSetting2.isSet148() ? Integer.toString((Integer)colorSetting2.getObj()) : "none";
+            return colorSetting2.isSet148() ? Integer.toString((Integer)colorSetting2.getValue()) : "none";
         }
         object = this.setting;
         if (object instanceof NumberSetting) {
             NumberSetting numberSetting = (NumberSetting)object;
-            return this.m961((Double)numberSetting.getObj());
+            return this.m961((Double)numberSetting.getValue());
         }
-        object = this.setting.getObj();
+        object = this.setting.getValue();
         if (object instanceof Enum) {
             Enum enum_ = (Enum)object;
             return this.m983(enum_);
         }
-        return String.valueOf(this.setting.getObj());
+        return String.valueOf(this.setting.getValue());
     }
 
     private String m983(Object object) {
@@ -589,7 +589,7 @@ extends ModuleState {
 
     private String m482(Object object) {
         ColorSetting colorSetting = (ColorSetting)object;
-        int n = (Integer)colorSetting.getObj();
+        int n = (Integer)colorSetting.getValue();
         Object var4_4 = null;
         Object[] objectArray = new Object[1];
         objectArray[0] = colorSetting.isSet30() ? n : n & 0xFFFFFF;

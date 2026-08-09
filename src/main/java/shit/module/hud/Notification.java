@@ -27,29 +27,29 @@ public class Notification
 extends Module
 implements Listener3 {
     private static Notification INSTANCE;
-    private final BooleanSetting moduleToggle = (BooleanSetting)this.m28(new BooleanSetting("ModuleToggle", true));
-    private final NumberSetting displayTime = (NumberSetting)this.m28(new NumberSetting("DisplayTime", 1000.0, 500.0, 5000.0, 100.0));
-    private final NumberSetting width = (NumberSetting)this.m28(new NumberSetting("Width", 170.0, 100.0, 300.0, 5.0));
-    private final NumberSetting height = (NumberSetting)this.m28(new NumberSetting("Height", 28.0, 20.0, 48.0, 1.0));
-    private final NumberSetting rectWidth = (NumberSetting)this.m28(new NumberSetting("RectWidth", 2.0, 1.0, 8.0, 1.0));
-    private final NumberSetting scale = (NumberSetting)this.m28(new NumberSetting("Scale", 1.0, 0.5, 2.0, 0.1));
-    private final ColorSetting enableColor = (ColorSetting)this.m28(new ColorSetting("EnableColor", -13573454));
-    private final ColorSetting disableColor = (ColorSetting)this.m28(new ColorSetting("DisableColor", -2346446));
-    private final ColorSetting infoColor = (ColorSetting)this.m28(new ColorSetting("InfoColor", -10250607));
-    private final ColorSetting backgroundColor = (ColorSetting)this.m28(new ColorSetting("BackgroundColor", -1273752556));
-    private final ColorSetting titleColor = (ColorSetting)this.m28(new ColorSetting("TitleColor", -1));
-    private final ColorSetting messageColor = (ColorSetting)this.m28(new ColorSetting("MessageColor", -4868683));
-    private final BooleanSetting blur = (BooleanSetting)this.m28(new BooleanSetting("Blur", true));
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 2.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final BooleanSetting moduleToggle = (BooleanSetting)this.registerSetting(new BooleanSetting("ModuleToggle", true));
+    private final NumberSetting displayTime = (NumberSetting)this.registerSetting(new NumberSetting("DisplayTime", 1000.0, 500.0, 5000.0, 100.0));
+    private final NumberSetting width = (NumberSetting)this.registerSetting(new NumberSetting("Width", 170.0, 100.0, 300.0, 5.0));
+    private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 28.0, 20.0, 48.0, 1.0));
+    private final NumberSetting rectWidth = (NumberSetting)this.registerSetting(new NumberSetting("RectWidth", 2.0, 1.0, 8.0, 1.0));
+    private final NumberSetting scale = (NumberSetting)this.registerSetting(new NumberSetting("Scale", 1.0, 0.5, 2.0, 0.1));
+    private final ColorSetting enableColor = (ColorSetting)this.registerSetting(new ColorSetting("EnableColor", -13573454));
+    private final ColorSetting disableColor = (ColorSetting)this.registerSetting(new ColorSetting("DisableColor", -2346446));
+    private final ColorSetting infoColor = (ColorSetting)this.registerSetting(new ColorSetting("InfoColor", -10250607));
+    private final ColorSetting backgroundColor = (ColorSetting)this.registerSetting(new ColorSetting("BackgroundColor", -1273752556));
+    private final ColorSetting titleColor = (ColorSetting)this.registerSetting(new ColorSetting("TitleColor", -1));
+    private final ColorSetting messageColor = (ColorSetting)this.registerSetting(new ColorSetting("MessageColor", -4868683));
+    private final BooleanSetting blur = (BooleanSetting)this.registerSetting(new BooleanSetting("Blur", true));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 2.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y;
     private final CopyOnWriteArrayList<Inner> copyOnWriteArrayList3;
 
     public Notification() {
         super("Notification", "Client notifications with staged animation.", Category.HUD);
         boolean bl = true;
-        this.y = (NumberSetting)this.m28(new NumberSetting("Y", 2.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+        this.y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 2.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
         this.copyOnWriteArrayList3 = new CopyOnWriteArrayList();
-        this.setFlag3(true);
+        this.setEnabled(true);
         INSTANCE = this;
         if (Module.getTextArray9() == null) {
             AbstractHudModule.setFlag16(false);
@@ -58,27 +58,27 @@ implements Listener3 {
 
     @EventHandler
     private void setModuleToggleEvent(ModuleToggleEvent moduleToggleEvent) {
-        if (!((Boolean)this.moduleToggle.getObj()).booleanValue() || moduleToggleEvent.getModule() == this) {
+        if (!((Boolean)this.moduleToggle.getValue()).booleanValue() || moduleToggleEvent.getModule() == this) {
             return;
         }
-        if (!moduleToggleEvent.getModule().isSet36()) {
+        if (!moduleToggleEvent.getModule().isDrawn()) {
             return;
         }
         String string = Outline.m168((Object)moduleToggleEvent.getModule().getCategory());
         String string2 = Outline.m14(moduleToggleEvent.isSet168() ? "Enabled" : "Disabled");
-        String string3 = moduleToggleEvent.getModule().getText43() + " " + string2;
+        String string3 = moduleToggleEvent.getModule().getDisplayName() + " " + string2;
         Type type = moduleToggleEvent.isSet168() ? Type.ENABLE : Type.DISABLE;
         this.copyOnWriteArrayList3.add(new Inner(string, string3, type, this.getLong13()));
     }
 
     @Override
-    public int getInt12() {
-        return Math.max(0, MC.client3.getWindow().getScaledWidth() - this.getInt51() - this.x.getInt50());
+    public int getHudX() {
+        return Math.max(0, MC.mc.getWindow().getScaledWidth() - this.getInt51() - this.x.getInt());
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
@@ -87,29 +87,29 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt28() {
+    public int getHudHeight() {
         return this.getInt54();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(Math.max(0, MC.client3.getWindow().getScaledWidth() - this.getInt51() - n3));
-        this.y.setObj85(Math.max(0, n4));
+        this.x.setDouble(Math.max(0, MC.mc.getWindow().getScaledWidth() - this.getInt51() - n3));
+        this.y.setDouble(Math.max(0, n4));
     }
 
     /*
      * Unable to fully structure code
      */
     @Override
-    public void m368(Object var1_1, boolean var2_2) {
+    public void renderHud(Object var1_1, boolean var2_2) {
         DrawContext ctx = (DrawContext) var1_1;
         boolean editing = var2_2;
-        float y = this.getInt5();
-        float scale = this.scale.getFloat35();
+        float y = this.getHudY();
+        float scale = this.scale.getFloat();
         if (editing && this.copyOnWriteArrayList3.isEmpty()) {
-            this.m201(ctx, "Example", "Example Notification", Type.INFO, this.getInt12(), y, scale, 1.0f, 1.0f, 1.0f);
+            this.m201(ctx, "Example", "Example Notification", Type.INFO, this.getHudX(), y, scale, 1.0f, 1.0f, 1.0f);
             return;
         }
         for (Inner inner : this.copyOnWriteArrayList3) {
@@ -124,7 +124,7 @@ implements Listener3 {
             float alpha = inner.getFloat22();
             float scaleX = inner.getFloat50();
             float scaleY = inner.getFloat14();
-            int x = MC.client3.getWindow().getScaledWidth() - this.getInt51() - this.x.getInt50();
+            int x = MC.mc.getWindow().getScaledWidth() - this.getInt51() - this.x.getInt();
             this.m201(ctx, inner.text2196, inner.text3188, inner.type8, x, inner.value147, scale, scaleX, alpha, scaleY);
             y += (float) (this.getInt54() + 4) * alpha;
         }
@@ -155,7 +155,7 @@ implements Listener3 {
                 int n10 = this.getInt51();
                 n6 = this.getInt54();
                 boolean bl = true;
-                n5 = this.rectWidth.getInt50();
+                n5 = this.rectWidth.getInt();
                 n8 = Math.max(1, Math.round((float)n10 * f8));
                 n4 = n9 + n10 - n8;
                 n3 = Math.round(f7);
@@ -164,10 +164,10 @@ implements Listener3 {
                     RenderUtil3.m526(drawContext, n4, n3, n8, n6, n2);
                     return;
                 }
-                int n11 = (Integer)this.backgroundColor.getObj();
+                int n11 = (Integer)this.backgroundColor.getValue();
                 int n12 = (int)((float)(n11 >>> 24 & 0xFF) * f6);
                 n7 = n12 << 24 | n11 & 0xFFFFFF;
-                if (!((Boolean)this.blur.getObj()).booleanValue()) break block4;
+                if (!((Boolean)this.blur.getValue()).booleanValue()) break block4;
                 Passthrough.m990(drawContext, 6, n4, n3, n8, n6, n7, false);
                 if (true) break block5;
             }
@@ -176,15 +176,15 @@ implements Listener3 {
         RenderUtil3.m526(drawContext, n4, n3, n5, n6, n2);
         int n13 = n4 + n5 + 6;
         int n14 = n3 + 4;
-        int n15 = n3 + 4 + Client.fontManager.renderer2().getInt19() + 2;
-        int n16 = (Integer)this.titleColor.getObj();
-        int n17 = (Integer)this.messageColor.getObj();
+        int n15 = n3 + 4 + Client.fontManager.renderer2().getFontHeight() + 2;
+        int n16 = (Integer)this.titleColor.getValue();
+        int n17 = (Integer)this.messageColor.getValue();
         int n18 = Math.round((float)(n16 >>> 24 & 0xFF) * f6);
         int n19 = Math.round((float)(n17 >>> 24 & 0xFF) * f6);
         n16 = n18 << 24 | n16 & 0xFFFFFF;
         n17 = n19 << 24 | n17 & 0xFFFFFF;
-        RenderUtil3.m454(MC.client3.textRenderer, drawContext, string2, n13, n14, n16, true);
-        RenderUtil3.m454(MC.client3.textRenderer, drawContext, string, n13, n15, n17, false);
+        RenderUtil3.m454(MC.mc.textRenderer, drawContext, string2, n13, n14, n16, true);
+        RenderUtil3.m454(MC.mc.textRenderer, drawContext, string, n13, n15, n17, false);
     }
 
     private int m646(Object object) {
@@ -192,22 +192,22 @@ implements Listener3 {
         boolean bl = true;
         return switch (type.ordinal()) {
             default -> throw new MatchException(null, null);
-            case 0 -> (Integer)this.enableColor.getObj();
-            case 1 -> (Integer)this.disableColor.getObj();
-            case 2 -> (Integer)this.infoColor.getObj();
+            case 0 -> (Integer)this.enableColor.getValue();
+            case 1 -> (Integer)this.disableColor.getValue();
+            case 2 -> (Integer)this.infoColor.getValue();
         };
     }
 
     private int getInt51() {
-        return Math.round(this.width.getFloat35() * this.scale.getFloat35());
+        return Math.round(this.width.getFloat() * this.scale.getFloat());
     }
 
     private int getInt54() {
-        return Math.round(this.height.getFloat35() * this.scale.getFloat35());
+        return Math.round(this.height.getFloat() * this.scale.getFloat());
     }
 
     private long getLong13() {
-        return ((Double)this.displayTime.getObj()).longValue() + 600L;
+        return ((Double)this.displayTime.getValue()).longValue() + 600L;
     }
 
     @Environment(value=EnvType.CLIENT)

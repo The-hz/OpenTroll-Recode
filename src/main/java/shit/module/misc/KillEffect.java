@@ -68,26 +68,26 @@ extends Module {
 
         public KillEffect() {
         super("KillEffect", "Plays local kill, pop and mace effects.", Category.MISC);
-        this.removeCorpse = (BooleanSetting)this.m28(new BooleanSetting("RemoveCorpse", false));
-        this.lightning = (BooleanSetting)this.m28(new BooleanSetting("Lightning", true));
-        this.fireWork = (BooleanSetting)this.m28(new BooleanSetting("FireWork", false));
-        this.fireworkHeight = (NumberSetting)this.m28(new NumberSetting("FireworkHeight", 4.0, 1.0, 12.0, 0.1));
-        this.levelUp = (BooleanSetting)this.m28(new BooleanSetting("LevelUp", true));
-        this.lMaxPitch = (NumberSetting)this.m28(new NumberSetting("LMaxPitch", 1.0, 0.0, 2.0, 0.1));
-        this.lMinPitch = (NumberSetting)this.m28(new NumberSetting("LMinPitch", 1.0, 0.0, 2.0, 0.1));
-        this.trident = (BooleanSetting)this.m28(new BooleanSetting("Trident", false));
-        this.tMaxPitch = (NumberSetting)this.m28(new NumberSetting("TMaxPitch", 1.0, 0.0, 2.0, 0.1));
-        this.tMinPitch = (NumberSetting)this.m28(new NumberSetting("TMinPitch", 1.0, 0.0, 2.0, 0.1));
-        this.maceSound = (BooleanSetting)this.m28(new BooleanSetting("MaceSound", true));
-        this.factor = (NumberSetting)this.m28(new NumberSetting("Factor", 1.0, 1.0, 10.0, 1.0));
-        this.popLightning = (BooleanSetting)this.m28(new BooleanSetting("PopLightning", true));
+        this.removeCorpse = (BooleanSetting)this.registerSetting(new BooleanSetting("RemoveCorpse", false));
+        this.lightning = (BooleanSetting)this.registerSetting(new BooleanSetting("Lightning", true));
+        this.fireWork = (BooleanSetting)this.registerSetting(new BooleanSetting("FireWork", false));
+        this.fireworkHeight = (NumberSetting)this.registerSetting(new NumberSetting("FireworkHeight", 4.0, 1.0, 12.0, 0.1));
+        this.levelUp = (BooleanSetting)this.registerSetting(new BooleanSetting("LevelUp", true));
+        this.lMaxPitch = (NumberSetting)this.registerSetting(new NumberSetting("LMaxPitch", 1.0, 0.0, 2.0, 0.1));
+        this.lMinPitch = (NumberSetting)this.registerSetting(new NumberSetting("LMinPitch", 1.0, 0.0, 2.0, 0.1));
+        this.trident = (BooleanSetting)this.registerSetting(new BooleanSetting("Trident", false));
+        this.tMaxPitch = (NumberSetting)this.registerSetting(new NumberSetting("TMaxPitch", 1.0, 0.0, 2.0, 0.1));
+        this.tMinPitch = (NumberSetting)this.registerSetting(new NumberSetting("TMinPitch", 1.0, 0.0, 2.0, 0.1));
+        this.maceSound = (BooleanSetting)this.registerSetting(new BooleanSetting("MaceSound", true));
+        this.factor = (NumberSetting)this.registerSetting(new NumberSetting("Factor", 1.0, 1.0, 10.0, 1.0));
+        this.popLightning = (BooleanSetting)this.registerSetting(new BooleanSetting("PopLightning", true));
         this.map31 = new HashMap();
         this.copyOnWriteArrayList = new CopyOnWriteArrayList();
         this.random8 = new Random();
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.map31.clear();
         this.copyOnWriteArrayList.clear();
     }
@@ -105,10 +105,10 @@ extends Module {
             block5: {
                 livingEntity2 = (LivingEntity)object;
                 string = IRC.getText7();
-                bl = this.isSet19();
+                bl = this.isEnabled();
                 if (string != null) {
                     if (!bl) return false;
-                    bl = (Boolean)this.removeCorpse.getObj();
+                    bl = (Boolean)this.removeCorpse.getValue();
                 }
                 if (string == null) break block5;
                 if (!bl) return false;
@@ -120,7 +120,7 @@ extends Module {
             livingEntity = livingEntity2;
         }
         if (string != null) {
-            if (livingEntity == MC.client3.player) return false;
+            if (livingEntity == MC.mc.player) return false;
             livingEntity = livingEntity2;
         }
         boolean bl = livingEntity.isAlive();
@@ -131,7 +131,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner2(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         this.m552();
@@ -140,17 +140,17 @@ extends Module {
 
     @EventHandler
     private void setPacketEventInner23(PacketEvent.PacketEventInner2 packetEventInner2) {
-        if (Module.isSet37() || !((Boolean)this.maceSound.getObj()).booleanValue()) {
+        if (Module.isNotInGame() || !((Boolean)this.maceSound.getValue()).booleanValue()) {
             return;
         }
-        if (packetEventInner2.getPacket() instanceof PlayerInteractEntityC2SPacket && MC.client3.player.getMainHandStack().isOf(Items.MACE)) {
-            MC.client3.world.playSoundClient(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), this.random8.nextBoolean() ? SoundEvents.ITEM_MACE_SMASH_GROUND : SoundEvents.ITEM_MACE_SMASH_GROUND_HEAVY, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
+        if (packetEventInner2.getPacket() instanceof PlayerInteractEntityC2SPacket && MC.mc.player.getMainHandStack().isOf(Items.MACE)) {
+            MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), this.random8.nextBoolean() ? SoundEvents.ITEM_MACE_SMASH_GROUND : SoundEvents.ITEM_MACE_SMASH_GROUND_HEAVY, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
         }
     }
 
     @EventHandler
     private void setPlayerEvent(PlayerEvent playerEvent) {
-        if (Module.isSet37() || !((Boolean)this.popLightning.getObj()).booleanValue() || playerEvent.getPlayer4() == MC.client3.player) {
+        if (Module.isNotInGame() || !((Boolean)this.popLightning.getValue()).booleanValue() || playerEvent.getPlayer4() == MC.mc.player) {
             return;
         }
         this.m294(playerEvent.getPlayer4().getX(), playerEvent.getPlayer4().getY(), playerEvent.getPlayer4().getZ());
@@ -163,7 +163,7 @@ extends Module {
         block8: {
             hashSet = new HashSet<UUID>();
             string = IRC.getText7();
-            iterator = MC.client3.world.getPlayers().iterator();
+            iterator = MC.mc.world.getPlayers().iterator();
             block0: while (iterator.hasNext()) {
                 block10: {
                     int n = 0;
@@ -179,7 +179,7 @@ extends Module {
                                 if (string == null) break block8;
                                 PlayerEntity playerEntity2 = playerEntity;
                                 if (string != null) {
-                                    if (playerEntity2 == MC.client3.player) continue;
+                                    if (playerEntity2 == MC.mc.player) continue;
                                     hashSet.add(playerEntity.getUuid());
                                     playerEntity2 = playerEntity;
                                 }
@@ -198,7 +198,7 @@ extends Module {
                         if (n2 != 0) break block10;
                         n2 = n = 0;
                     }
-                    while (n < this.factor.getInt50()) {
+                    while (n < this.factor.getInt()) {
                         this.setObj61(playerEntity);
                         ++n;
                         if (string == null) continue block0;
@@ -230,27 +230,27 @@ extends Module {
             double d2 = playerEntity.getY();
             double d3 = playerEntity.getZ();
             String string = IRC.getText7();
-            boolean bl = (Boolean)this.lightning.getObj();
+            boolean bl = (Boolean)this.lightning.getValue();
             if (string != null) {
                 if (bl) {
                     this.m294(d, d2, d3);
                 }
-                bl = (Boolean)this.fireWork.getObj();
+                bl = (Boolean)this.fireWork.getValue();
             }
             if (string != null) {
                 if (bl) {
-                    this.copyOnWriteArrayList.add(new KillEffectHolder(this, d, d2, d3, (Double)this.fireworkHeight.getObj()));
+                    this.copyOnWriteArrayList.add(new KillEffectHolder(this, d, d2, d3, (Double)this.fireworkHeight.getValue()));
                 }
-                bl = (Boolean)this.levelUp.getObj();
+                bl = (Boolean)this.levelUp.getValue();
             }
             if (string != null) {
                 if (bl) {
-                    MC.client3.world.playSoundClient(d, d2, d3, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 100.0f, this.m924((Double)this.lMinPitch.getObj(), (Double)this.lMaxPitch.getObj()), false);
+                    MC.mc.world.playSoundClient(d, d2, d3, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 100.0f, this.m924((Double)this.lMinPitch.getValue(), (Double)this.lMaxPitch.getValue()), false);
                 }
-                bl = (Boolean)this.trident.getObj();
+                bl = (Boolean)this.trident.getValue();
             }
             if (!bl) break block6;
-            MC.client3.world.playSoundClient(d, d2, d3, (SoundEvent)SoundEvents.ITEM_TRIDENT_THUNDER.value(), SoundCategory.MASTER, 999.0f, this.m924((Double)this.tMinPitch.getObj(), (Double)this.tMaxPitch.getObj()), false);
+            MC.mc.world.playSoundClient(d, d2, d3, (SoundEvent)SoundEvents.ITEM_TRIDENT_THUNDER.value(), SoundCategory.MASTER, 999.0f, this.m924((Double)this.tMinPitch.getValue(), (Double)this.tMaxPitch.getValue()), false);
         }
     }
 
@@ -259,11 +259,11 @@ extends Module {
         double d5 = d2;
         double d6 = d3;
         String string = IRC.getText7();
-        MC.client3.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 10000.0f, 0.8f + this.random8.nextFloat() * 0.2f, false);
-        MC.client3.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.WEATHER, 2.0f, 0.5f + this.random8.nextFloat() * 0.2f, false);
+        MC.mc.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 10000.0f, 0.8f + this.random8.nextFloat() * 0.2f, false);
+        MC.mc.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.WEATHER, 2.0f, 0.5f + this.random8.nextFloat() * 0.2f, false);
         String string2 = string;
         for (int i = 0; i < 20; ++i) {
-            MC.client3.world.addParticleClient((ParticleEffect)ParticleTypes.ELECTRIC_SPARK, d4, d5 + this.random8.nextDouble() * 2.0, d6, this.random8.nextGaussian() * 0.08, this.random8.nextDouble() * 0.2, this.random8.nextGaussian() * 0.08);
+            MC.mc.world.addParticleClient((ParticleEffect)ParticleTypes.ELECTRIC_SPARK, d4, d5 + this.random8.nextDouble() * 2.0, d6, this.random8.nextGaussian() * 0.08, this.random8.nextDouble() * 0.2, this.random8.nextGaussian() * 0.08);
             if (string2 != null) continue;
         }
     }
@@ -291,7 +291,7 @@ extends Module {
             this.value141 = d2;
             this.value159 = d3;
             this.value195 = d4;
-            MC.client3.world.playSoundClient(d, d2, d3, SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
+            MC.mc.world.playSoundClient(d, d2, d3, SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH, SoundCategory.PLAYERS, 1.0f, 1.0f, false);
         }
 
         /*
@@ -299,17 +299,17 @@ extends Module {
          */
         private boolean isSet24() {
             double d = this.value141 + (double)this.count153 * 0.28;
-            MC.client3.world.addParticleClient((ParticleEffect)ParticleTypes.FIREWORK, this.value122, d, this.value159, 0.0, 0.28, 0.0);
+            MC.mc.world.addParticleClient((ParticleEffect)ParticleTypes.FIREWORK, this.value122, d, this.value159, 0.0, 0.28, 0.0);
             ++this.count153;
             if (d - this.value141 - this.value195 < 0.0 && (double)this.count153 - Math.ceil(this.value195 / 0.28) < 0.0) {
                 return false;
             }
-            MC.client3.world.addParticleClient((ParticleEffect)ParticleTypes.EXPLOSION_EMITTER, this.value122, d, this.value159, 0.0, 0.0, 0.0);
+            MC.mc.world.addParticleClient((ParticleEffect)ParticleTypes.EXPLOSION_EMITTER, this.value122, d, this.value159, 0.0, 0.0, 0.0);
             for (int i = 0; i < 80; ++i) {
-                MC.client3.world.addParticleClient((ParticleEffect)ParticleTypes.FIREWORK, this.value122, d, this.value159, (this.killEffect.random8.nextDouble() - 0.5) * 0.7, (this.killEffect.random8.nextDouble() - 0.15) * 0.7, (this.killEffect.random8.nextDouble() - 0.5) * 0.7);
+                MC.mc.world.addParticleClient((ParticleEffect)ParticleTypes.FIREWORK, this.value122, d, this.value159, (this.killEffect.random8.nextDouble() - 0.5) * 0.7, (this.killEffect.random8.nextDouble() - 0.15) * 0.7, (this.killEffect.random8.nextDouble() - 0.5) * 0.7);
             }
-            MC.client3.world.playSoundClient(this.value122, d, this.value159, SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.PLAYERS, 2.0f, 1.0f, false);
-            MC.client3.world.playSoundClient(this.value122, d, this.value159, SoundEvents.ENTITY_FIREWORK_ROCKET_TWINKLE, SoundCategory.PLAYERS, 1.5f, 1.0f, false);
+            MC.mc.world.playSoundClient(this.value122, d, this.value159, SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.PLAYERS, 2.0f, 1.0f, false);
+            MC.mc.world.playSoundClient(this.value122, d, this.value159, SoundEvents.ENTITY_FIREWORK_ROCKET_TWINKLE, SoundCategory.PLAYERS, 1.5f, 1.0f, false);
             return true;
         }
     }

@@ -33,10 +33,10 @@ implements Listener4 {
     @Inject(method={"hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$onHasEffect(RegistryEntry registryEntry, CallbackInfoReturnable callbackInfoReturnable) {
         AntiEffects antiEffects = AntiEffects.INSTANCE;
-        if (antiEffects != null && antiEffects.isSet19() && (Object) this instanceof ClientPlayerEntity) {
-            if (registryEntry.value() == StatusEffects.SLOW_FALLING.value() && ((Boolean)antiEffects.slowFalling.getObj()).booleanValue()) {
+        if (antiEffects != null && antiEffects.isEnabled() && (Object) this instanceof ClientPlayerEntity) {
+            if (registryEntry.value() == StatusEffects.SLOW_FALLING.value() && ((Boolean)antiEffects.slowFalling.getValue()).booleanValue()) {
                 callbackInfoReturnable.setReturnValue((Object)false);
-            } else if (registryEntry.value() == StatusEffects.LEVITATION.value() && ((Boolean)antiEffects.levitation.getObj()).booleanValue()) {
+            } else if (registryEntry.value() == StatusEffects.LEVITATION.value() && ((Boolean)antiEffects.levitation.getValue()).booleanValue()) {
                 callbackInfoReturnable.setReturnValue((Object)false);
             }
         }
@@ -66,7 +66,7 @@ implements Listener4 {
 
     @Inject(method={"setSprinting(Z)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$onSetSprinting(boolean bl, CallbackInfo callbackInfo) {
-        if ((Object) this instanceof ClientPlayerEntity && !bl && InMove.INSTANCE != null && InMove.INSTANCE.isSet19() && MinecraftClient.getInstance().currentScreen != null && this.isSet159()) {
+        if ((Object) this instanceof ClientPlayerEntity && !bl && InMove.INSTANCE != null && InMove.INSTANCE.isEnabled() && MinecraftClient.getInstance().currentScreen != null && this.isSet159()) {
             callbackInfo.cancel();
         }
     }
@@ -91,7 +91,7 @@ implements Listener4 {
     @Inject(method={"isClimbing()Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noClimb(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         Velocity velocity = Velocity.INSTANCE;
-        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isSet19() && (Boolean) velocity.noClimb.getObj()) {
+        if ((Object) this instanceof ClientPlayerEntity && velocity != null && velocity.isEnabled() && (Boolean) velocity.noClimb.getValue()) {
             callbackInfoReturnable.setReturnValue(false);
         }
     }

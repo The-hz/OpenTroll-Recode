@@ -22,9 +22,9 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoEat
 extends Module {
-    private final NumberSetting hunger = (NumberSetting)this.m28(new NumberSetting("Hunger", 14.0, 1.0, 20.0, 1.0));
-    private final NumberSetting health = (NumberSetting)this.m28(new NumberSetting("Health", 10.0, 1.0, 20.0, 0.5));
-    private final BooleanSetting gapples = (BooleanSetting)this.m28(new BooleanSetting("Gapples", false));
+    private final NumberSetting hunger = (NumberSetting)this.registerSetting(new NumberSetting("Hunger", 14.0, 1.0, 20.0, 1.0));
+    private final NumberSetting health = (NumberSetting)this.registerSetting(new NumberSetting("Health", 10.0, 1.0, 20.0, 0.5));
+    private final BooleanSetting gapples = (BooleanSetting)this.registerSetting(new BooleanSetting("Gapples", false));
     private int count165 = -1;
     private boolean flag105;
 
@@ -33,20 +33,20 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.m722();
     }
 
     @EventHandler
     private void setEvent2Inner31(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (this.flag105) {
-            if (this.isSet114() && this.m423(MC.client3.player.getMainHandStack())) {
-                MC.client3.options.useKey.setPressed(true);
-                if (!MC.client3.player.isUsingItem()) {
-                    MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, Hand.MAIN_HAND);
+            if (this.isSet114() && this.m423(MC.mc.player.getMainHandStack())) {
+                MC.mc.options.useKey.setPressed(true);
+                if (!MC.mc.player.isUsingItem()) {
+                    MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, Hand.MAIN_HAND);
                 }
                 return;
             }
@@ -60,11 +60,11 @@ extends Module {
         if (n == -1) {
             return;
         }
-        this.count165 = MC.client3.player.getInventory().getSelectedSlot();
-        MC.client3.player.getInventory().setSelectedSlot(n);
+        this.count165 = MC.mc.player.getInventory().getSelectedSlot();
+        MC.mc.player.getInventory().setSelectedSlot(n);
         this.flag105 = true;
-        MC.client3.options.useKey.setPressed(true);
-        MC.client3.interactionManager.interactItem((PlayerEntity)MC.client3.player, Hand.MAIN_HAND);
+        MC.mc.options.useKey.setPressed(true);
+        MC.mc.interactionManager.interactItem((PlayerEntity)MC.mc.player, Hand.MAIN_HAND);
     }
 
     /*
@@ -73,8 +73,8 @@ extends Module {
      */
     private boolean isSet114() {
         boolean bl = false;
-        if ((double)MC.client3.player.getHungerManager().getFoodLevel() <= (Double)this.hunger.getObj()) return true;
-        if (!((double)(MC.client3.player.getHealth() + MC.client3.player.getAbsorptionAmount()) <= (Double)this.health.getObj())) return false;
+        if ((double)MC.mc.player.getHungerManager().getFoodLevel() <= (Double)this.hunger.getValue()) return true;
+        if (!((double)(MC.mc.player.getHealth() + MC.mc.player.getAbsorptionAmount()) <= (Double)this.health.getValue())) return false;
         return true;
     }
 
@@ -83,11 +83,11 @@ extends Module {
         int n2 = -1;
         boolean bl = false;
         for (int i = 0; i < 9; ++i) {
-            ItemStack itemStack = MC.client3.player.getInventory().getStack(i);
+            ItemStack itemStack = MC.mc.player.getInventory().getStack(i);
             FoodComponent foodComponent = (FoodComponent)itemStack.get(DataComponentTypes.FOOD);
             if (foodComponent == null) continue;
             int n3 = foodComponent.nutrition();
-            if (((Boolean)this.gapples.getObj()).booleanValue()) {
+            if (((Boolean)this.gapples.getValue()).booleanValue()) {
                 if (itemStack.getItem().toString().contains("golden")) {
                     n3 += 100;
                 }
@@ -118,12 +118,12 @@ extends Module {
 
     private void m722() {
         boolean bl = false;
-        if (MC.client3.options != null) {
-            MC.client3.options.useKey.setPressed(false);
+        if (MC.mc.options != null) {
+            MC.mc.options.useKey.setPressed(false);
         }
         if (this.count165 != -1) {
-            if (MC.client3.player != null) {
-                MC.client3.player.getInventory().setSelectedSlot(this.count165);
+            if (MC.mc.player != null) {
+                MC.mc.player.getInventory().setSelectedSlot(this.count165);
             }
         }
         this.count165 = -1;

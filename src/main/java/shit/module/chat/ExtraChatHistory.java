@@ -14,7 +14,7 @@ import shit.setting.NumberSetting;
 public class ExtraChatHistory
 extends Module {
     public static ExtraChatHistory INSTANCE;
-    public final NumberSetting maxMessages = (NumberSetting)this.m28(new NumberSetting("MaxMessages", 1000.0, 100.0, 5000.0, 100.0));
+    public final NumberSetting maxMessages = (NumberSetting)this.registerSetting(new NumberSetting("MaxMessages", 1000.0, 100.0, 5000.0, 100.0));
 
     public ExtraChatHistory() {
         super("ExtraChatHistory", "Show more messages in the chat history.", Category.CHAT);
@@ -22,7 +22,7 @@ extends Module {
     }
 
     public int getInt33() {
-        return this.isSet19() ? this.maxMessages.getInt50() : 100;
+        return this.isEnabled() ? this.maxMessages.getInt() : 100;
     }
 }
 

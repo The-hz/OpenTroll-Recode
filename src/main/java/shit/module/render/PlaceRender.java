@@ -30,38 +30,38 @@ public class PlaceRender
 extends Module {
     public static final Map map47 = new java.util.LinkedHashMap<>();
     public static PlaceRender INSTANCE;
-    private final NumberSetting placeRender = (NumberSetting)this.m28(new NumberSetting("FadeTime", 500.0, 0.0, 3000.0, 1.0));
-    private final NumberSetting timeOut = (NumberSetting)this.m28(new NumberSetting("TimeOut", 500.0, 0.0, 3000.0, 1.0));
-    private final ColorSetting box = (ColorSetting)this.m28(new ColorSetting("Box", -1));
-    private final BooleanSetting boxDraw = (BooleanSetting)this.m28(new BooleanSetting("BoxDraw", true));
-    private final ColorSetting fill = (ColorSetting)this.m28(new ColorSetting("Fill", 0x64FFFFFF));
-    private final BooleanSetting fillDraw = (BooleanSetting)this.m28(new BooleanSetting("FillDraw", true));
-    private final ColorSetting tryPlaceBox = (ColorSetting)this.m28(new ColorSetting("TryPlaceBox", -5066062));
-    private final BooleanSetting tryBoxDraw = (BooleanSetting)this.m28(new BooleanSetting("TryBoxDraw", true));
-    private final ColorSetting tryPlaceFill = (ColorSetting)this.m28(new ColorSetting("TryPlaceFill", -1644202121));
-    private final BooleanSetting tryFillDraw = (BooleanSetting)this.m28(new BooleanSetting("TryFillDraw", true));
-    private final BooleanSetting noFail = (BooleanSetting)this.m28(new BooleanSetting("NoFail", false));
-    private final BooleanSetting through = (BooleanSetting)this.m28(new BooleanSetting("Through", true));
-    private final EnumSetting ease = (EnumSetting)this.m28(new EnumSetting("Ease", EaseMode.CubicInOut));
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.All));
+    private final NumberSetting placeRender = (NumberSetting)this.registerSetting(new NumberSetting("FadeTime", 500.0, 0.0, 3000.0, 1.0));
+    private final NumberSetting timeOut = (NumberSetting)this.registerSetting(new NumberSetting("TimeOut", 500.0, 0.0, 3000.0, 1.0));
+    private final ColorSetting box = (ColorSetting)this.registerSetting(new ColorSetting("Box", -1));
+    private final BooleanSetting boxDraw = (BooleanSetting)this.registerSetting(new BooleanSetting("BoxDraw", true));
+    private final ColorSetting fill = (ColorSetting)this.registerSetting(new ColorSetting("Fill", 0x64FFFFFF));
+    private final BooleanSetting fillDraw = (BooleanSetting)this.registerSetting(new BooleanSetting("FillDraw", true));
+    private final ColorSetting tryPlaceBox = (ColorSetting)this.registerSetting(new ColorSetting("TryPlaceBox", -5066062));
+    private final BooleanSetting tryBoxDraw = (BooleanSetting)this.registerSetting(new BooleanSetting("TryBoxDraw", true));
+    private final ColorSetting tryPlaceFill = (ColorSetting)this.registerSetting(new ColorSetting("TryPlaceFill", -1644202121));
+    private final BooleanSetting tryFillDraw = (BooleanSetting)this.registerSetting(new BooleanSetting("TryFillDraw", true));
+    private final BooleanSetting noFail = (BooleanSetting)this.registerSetting(new BooleanSetting("NoFail", false));
+    private final BooleanSetting through = (BooleanSetting)this.registerSetting(new BooleanSetting("Through", true));
+    private final EnumSetting ease = (EnumSetting)this.registerSetting(new EnumSetting("Ease", EaseMode.CubicInOut));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.All));
 
     public PlaceRender() {
         super("PlaceRender", "Renders recently placed blocks.", Category.RENDER);
         INSTANCE = this;
-        this.setFlag3(true);
+        this.setEnabled(true);
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         map47.clear();
-        super.m709();
+        super.onDisable();
     }
 
     public static void setObj20(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var3_2 = null;
         if (INSTANCE != null) {
-            if (INSTANCE.isSet19()) {
+            if (INSTANCE.isEnabled()) {
                 INSTANCE.setObj98(blockPos);
             }
         }
@@ -69,7 +69,7 @@ extends Module {
 
     @EventHandler
     private void onRender3D(RenderLevelEvent renderLevelEvent) {
-        if (Module.isSet37() || map47.isEmpty()) {
+        if (Module.isNotInGame() || map47.isEmpty()) {
             return;
         }
         Matrix4f matrix4f = renderLevelEvent.getMatrix4f3();
@@ -112,7 +112,7 @@ extends Module {
 
         public MathUtil(PlaceRender placeRender, BlockPos blockPos) {
             this.placeRender = placeRender;
-            this.timer = new Timer(((Double)this.placeRender.placeRender.getObj()).longValue());
+            this.timer = new Timer(((Double)this.placeRender.placeRender.getValue()).longValue());
             this.helper723 = new Helper7();
             this.flag27 = true;
             this.blockPos19 = blockPos;
@@ -123,16 +123,16 @@ extends Module {
             Matrix4f matrix4f = (Matrix4f)object;
             Object var4_3 = null;
             if (this.flag27) {
-                if (!((Boolean)this.placeRender.noFail.getObj()).booleanValue()) {
-                    if (MC.client3.world.getBlockState(this.blockPos19).isAir()) {
-                        if (!this.helper723.m432((Double)this.placeRender.timeOut.getObj())) {
+                if (!((Boolean)this.placeRender.noFail.getValue()).booleanValue()) {
+                    if (MC.mc.world.getBlockState(this.blockPos19).isAir()) {
+                        if (!this.helper723.hasPassedMs((Double)this.placeRender.timeOut.getValue())) {
                             this.timer.m136();
                             Box box = new Box(this.blockPos19);
-                            if (((Boolean)this.placeRender.tryFillDraw.getObj()).booleanValue()) {
-                                EspRenderLayers.m69(matrix4f, box, (Integer)this.placeRender.tryPlaceFill.getObj(), (Boolean)this.placeRender.through.getObj());
+                            if (((Boolean)this.placeRender.tryFillDraw.getValue()).booleanValue()) {
+                                EspRenderLayers.m69(matrix4f, box, (Integer)this.placeRender.tryPlaceFill.getValue(), (Boolean)this.placeRender.through.getValue());
                             }
-                            if (((Boolean)this.placeRender.tryBoxDraw.getObj()).booleanValue()) {
-                                EspRenderLayers.m688(matrix4f, box, (Integer)this.placeRender.tryPlaceBox.getObj(), (Boolean)this.placeRender.through.getObj());
+                            if (((Boolean)this.placeRender.tryBoxDraw.getValue()).booleanValue()) {
+                                EspRenderLayers.m688(matrix4f, box, (Integer)this.placeRender.tryPlaceBox.getValue(), (Boolean)this.placeRender.through.getValue());
                             }
                         }
                         return false;
@@ -140,20 +140,20 @@ extends Module {
                 }
                 this.flag27 = false;
             }
-            double d = this.timer.m1037((Object)((EaseMode)((Object)this.placeRender.ease.getObj())));
+            double d = this.timer.m1037((Object)((EaseMode)((Object)this.placeRender.ease.getValue())));
             if (d == 1.0) {
                 return true;
             }
-            double d2 = this.placeRender.mode.getObj() != Mode.Fade && this.placeRender.mode.getObj() != Mode.All ? 1.0 : 1.0 - d;
-            double d3 = this.placeRender.mode.getObj() != Mode.Shrink && this.placeRender.mode.getObj() != Mode.All ? 0.0 : d;
+            double d2 = this.placeRender.mode.getValue() != Mode.Fade && this.placeRender.mode.getValue() != Mode.All ? 1.0 : 1.0 - d;
+            double d3 = this.placeRender.mode.getValue() != Mode.Shrink && this.placeRender.mode.getValue() != Mode.All ? 0.0 : d;
             Box box = new Box(this.blockPos19).expand(-d3 * 0.5);
-            if (((Boolean)this.placeRender.fillDraw.getObj()).booleanValue()) {
-                n = (Integer)this.placeRender.fill.getObj();
-                EspRenderLayers.m69(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getObj());
+            if (((Boolean)this.placeRender.fillDraw.getValue()).booleanValue()) {
+                n = (Integer)this.placeRender.fill.getValue();
+                EspRenderLayers.m69(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
-            if (((Boolean)this.placeRender.boxDraw.getObj()).booleanValue()) {
-                n = (Integer)this.placeRender.box.getObj();
-                EspRenderLayers.m688(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getObj());
+            if (((Boolean)this.placeRender.boxDraw.getValue()).booleanValue()) {
+                n = (Integer)this.placeRender.box.getValue();
+                EspRenderLayers.m688(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
             return false;
         }

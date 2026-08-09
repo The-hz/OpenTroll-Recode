@@ -42,7 +42,7 @@ public class ModelFeatureRendererChamsMixin {
         Object object = modelCommand.state();
         Chams chams = Chams.INSTANCE;
         if (chams != null && chams.m681(object) && chams.m703(object, modelCommand.model())) {
-            this.renderChamsGeometry(modelCommand, immediate, chams.isSet15(), chams.isSet96(), (Boolean)chams.throughWall.getObj(), chams.getInt30(), chams.getInt83(), chams.getFloat60(), false);
+            this.renderChamsGeometry(modelCommand, immediate, chams.isSet15(), chams.isSet96(), (Boolean)chams.throughWall.getValue(), chams.getInt30(), chams.getInt83(), chams.getFloat60(), false);
             if (chams.isSet171()) {
                 callbackInfo.cancel();
             }

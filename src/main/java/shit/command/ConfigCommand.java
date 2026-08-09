@@ -32,34 +32,34 @@ extends Command {
         switch (sub) {
             case "save": {
                 if (args.length < 2 || args[1].isBlank()) {
-                    CommandManager.setObj21("Usage: .config save <name> - saves current modules/settings to trollhack-recode/configs/<name>.txt");
+                    CommandManager.sendFeedback("Usage: .config save <name> - saves current modules/settings to trollhack-recode/configs/<name>.txt");
                     return;
                 }
                 if (Client.configManager.m309(args[1])) {
-                    CommandManager.setObj21("Saved config '" + args[1] + "'.");
+                    CommandManager.sendFeedback("Saved config '" + args[1] + "'.");
                 } else {
-                    CommandManager.setObj21("Invalid config name. Use letters, numbers, dot, dash, or underscore.");
+                    CommandManager.sendFeedback("Invalid config name. Use letters, numbers, dot, dash, or underscore.");
                 }
                 return;
             }
             case "load": {
                 if (args.length < 2 || args[1].isBlank()) {
-                    CommandManager.setObj21("Usage: .config load <name> - loads trollhack-recode/configs/<name>.txt");
+                    CommandManager.sendFeedback("Usage: .config load <name> - loads trollhack-recode/configs/<name>.txt");
                     return;
                 }
                 if (Client.configManager.m575(args[1])) {
-                    CommandManager.setObj21("Loaded config '" + args[1] + "'.");
+                    CommandManager.sendFeedback("Loaded config '" + args[1] + "'.");
                 } else {
-                    CommandManager.setObj21("Config '" + args[1] + "' was not found.");
+                    CommandManager.sendFeedback("Config '" + args[1] + "' was not found.");
                 }
                 return;
             }
             case "list": {
                 java.util.List profiles = Client.configManager.listProfiles();
                 if (profiles.isEmpty()) {
-                    CommandManager.setObj21("No named configs found. Save one with .config save <name>.");
+                    CommandManager.sendFeedback("No named configs found. Save one with .config save <name>.");
                 } else {
-                    CommandManager.setObj21("Configs: " + String.join(", ", profiles));
+                    CommandManager.sendFeedback("Configs: " + String.join(", ", profiles));
                 }
                 return;
             }
@@ -87,10 +87,10 @@ extends Command {
     }
 
     private void m619() {
-        CommandManager.setObj21("Config commands:");
-        CommandManager.setObj21(".config save <name> - save current modules/settings as a named config.");
-        CommandManager.setObj21(".config load <name> - load a named config and apply module states.");
-        CommandManager.setObj21(".config list - show saved named configs.");
+        CommandManager.sendFeedback("Config commands:");
+        CommandManager.sendFeedback(".config save <name> - save current modules/settings as a named config.");
+        CommandManager.sendFeedback(".config load <name> - load a named config and apply module states.");
+        CommandManager.sendFeedback(".config list - show saved named configs.");
     }
 }
 

@@ -22,8 +22,8 @@ import shit.util.Util3;
 @Environment(value=EnvType.CLIENT)
 public class AutoEject
 extends Module {
-    private final StringSetting items = (StringSetting)this.m28(new StringSetting("Items", "minecraft:egg,minecraft:snowball"));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
+    private final StringSetting items = (StringSetting)this.registerSetting(new StringSetting("Items", "minecraft:egg,minecraft:snowball"));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
     private final Helper7 helper72 = new Helper7();
 
     public AutoEject() {
@@ -32,14 +32,14 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner220(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isSet37() || !this.helper72.m432((Double)this.delay.getObj())) {
+        if (Module.isNotInGame() || !this.helper72.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
-        for (int i = 0; i < MC.client3.player.currentScreenHandler.slots.size(); ++i) {
-            Slot slot = (Slot)MC.client3.player.currentScreenHandler.slots.get(i);
-            if (slot.inventory != MC.client3.player.getInventory() || !slot.hasStack() || !this.m208(slot.getStack())) continue;
+        for (int i = 0; i < MC.mc.player.currentScreenHandler.slots.size(); ++i) {
+            Slot slot = (Slot)MC.mc.player.currentScreenHandler.slots.get(i);
+            if (slot.inventory != MC.mc.player.getInventory() || !slot.hasStack() || !this.m208(slot.getStack())) continue;
             Util3.m235(i, 1, SlotActionType.THROW);
-            this.helper72.m533();
+            this.helper72.resetTimer();
             return;
         }
     }
@@ -47,7 +47,7 @@ extends Module {
     private boolean m208(Object object) {
         ItemStack itemStack = (ItemStack)object;
         String string = Registries.ITEM.getId(itemStack.getItem()).toString();
-        String[] stringArray = ((String)this.items.getObj()).split(",");
+        String[] stringArray = ((String)this.items.getValue()).split(",");
         boolean bl = false;
         for (String string2 : stringArray) {
             if (!string.equalsIgnoreCase(string2.trim())) continue;

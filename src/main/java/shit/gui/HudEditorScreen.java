@@ -41,10 +41,10 @@ extends Screen {
 
     public void render(DrawContext drawContext, int n, int n2, float f) {
         for (Module module : Client.moduleManager.getByCategory(Category.HUD)) {
-            if (module instanceof Listener3 && module.isSet19()) {
+            if (module instanceof Listener3 && module.isEnabled()) {
                 Listener3 listener3 = (Listener3) module;
                 try {
-                    listener3.m368(drawContext, true);
+                    listener3.renderHud(drawContext, true);
                     this.m969(drawContext, listener3);
                 } catch (RuntimeException e) {
                 }
@@ -59,12 +59,12 @@ extends Screen {
         java.util.List<Module> hud = Client.moduleManager.getByCategory(Category.HUD);
         for (int i = hud.size() - 1; i >= 0; --i) {
             Module module = hud.get(i);
-            if (module instanceof Listener3 && module.isSet19()) {
+            if (module instanceof Listener3 && module.isEnabled()) {
                 Listener3 listener3 = (Listener3) module;
                 if (this.m55(click.x(), click.y(), listener3)) {
                     this.listener3 = listener3;
-                    this.count221 = (int) click.x() - listener3.getInt12();
-                    this.count126 = (int) click.y() - listener3.getInt5();
+                    this.count221 = (int) click.x() - listener3.getHudX();
+                    this.count126 = (int) click.y() - listener3.getHudY();
                     return true;
                 }
             }
@@ -102,7 +102,7 @@ extends Screen {
     public boolean mouseDragged(Click click, double d, double d2) {
         if (this.renderManager.m479(click.x(), click.y(), click.button(), d, d2)) return true;
         if (this.listener3 != null) {
-            this.listener3.m274((int) click.x() - this.count221, (int) click.y() - this.count126);
+            this.listener3.setHudPosition((int) click.x() - this.count221, (int) click.y() - this.count126);
             return true;
         }
         if (this.renderManager.m855(click.x(), click.y(), click.button(), d, d2)) return true;
@@ -141,12 +141,12 @@ extends Screen {
     private void m969(Object object, Object object2) {
         DrawContext drawContext = (DrawContext)object;
         Listener3 listener3 = (Listener3)object2;
-        int n = listener3.getInt12();
-        int n2 = listener3.getInt5();
+        int n = listener3.getHudX();
+        int n2 = listener3.getHudY();
         drawContext.fill(n - 1, n2 - 1, n + listener3.hudWidth() + 1, n2, -1439005464);
-        drawContext.fill(n - 1, n2 + listener3.getInt28(), n + listener3.hudWidth() + 1, n2 + listener3.getInt28() + 1, -1439005464);
-        drawContext.fill(n - 1, n2 - 1, n, n2 + listener3.getInt28() + 1, -1439005464);
-        drawContext.fill(n + listener3.hudWidth(), n2 - 1, n + listener3.hudWidth() + 1, n2 + listener3.getInt28() + 1, -1439005464);
+        drawContext.fill(n - 1, n2 + listener3.getHudHeight(), n + listener3.hudWidth() + 1, n2 + listener3.getHudHeight() + 1, -1439005464);
+        drawContext.fill(n - 1, n2 - 1, n, n2 + listener3.getHudHeight() + 1, -1439005464);
+        drawContext.fill(n + listener3.hudWidth(), n2 - 1, n + listener3.hudWidth() + 1, n2 + listener3.getHudHeight() + 1, -1439005464);
     }
 
     /*
@@ -154,8 +154,8 @@ extends Screen {
      */
     private boolean m55(double d, double d2, Object object) {
         Listener3 listener3 = (Listener3) object;
-        return d >= listener3.getInt12() && d <= (double) (listener3.getInt12() + listener3.hudWidth())
-            && d2 >= listener3.getInt5() && d2 <= (double) (listener3.getInt5() + listener3.getInt28());
+        return d >= listener3.getHudX() && d <= (double) (listener3.getHudX() + listener3.hudWidth())
+            && d2 >= listener3.getHudY() && d2 <= (double) (listener3.getHudY() + listener3.getHudHeight());
     }
 
     public static void setText8(String string) {

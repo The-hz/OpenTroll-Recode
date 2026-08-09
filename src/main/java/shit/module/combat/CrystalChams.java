@@ -23,18 +23,18 @@ import shit.util.MC;
 public class CrystalChams
 extends Module {
     public static CrystalChams INSTANCE;
-    private final NumberSetting scale = (NumberSetting)this.m28(new NumberSetting("Scale", 1.0, 0.1, 4.0, 0.1));
-    private final BooleanSetting cancelVanilla = (BooleanSetting)this.m28(new BooleanSetting("CancelVanilla", true));
-    private final NumberSetting modelAlpha = (NumberSetting)this.m28(new NumberSetting("ModelAlpha", 255.0, 0.0, 255.0, 1.0));
-    private final BooleanSetting filled = (BooleanSetting)this.m28(new BooleanSetting("Filled", true));
-    private final BooleanSetting filledDepth = (BooleanSetting)this.m28(new BooleanSetting("FilledDepth", true));
-    private final BooleanSetting outline = (BooleanSetting)this.m28(new BooleanSetting("Outline", true));
-    private final BooleanSetting outlineDepth = (BooleanSetting)this.m28(new BooleanSetting("OutlineDepth", false));
-    private final ColorSetting filledColor = (ColorSetting)this.m28(new ColorSetting("FilledColor", 1065746376));
-    private final ColorSetting outlineColor = (ColorSetting)this.m28(new ColorSetting("OutlineColor", -930742328));
-    private final NumberSetting lineWidth = (NumberSetting)this.m28(new NumberSetting("LineWidth", 2.0, 0.25, 8.0, 0.25));
-    private final BooleanSetting throughWall = (BooleanSetting)this.m28(new BooleanSetting("ThroughWall", true));
-    private final NumberSetting range = (NumberSetting)this.m28(new NumberSetting("Range", 16.0, 0.0, 64.0, 0.5));
+    private final NumberSetting scale = (NumberSetting)this.registerSetting(new NumberSetting("Scale", 1.0, 0.1, 4.0, 0.1));
+    private final BooleanSetting cancelVanilla = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelVanilla", true));
+    private final NumberSetting modelAlpha = (NumberSetting)this.registerSetting(new NumberSetting("ModelAlpha", 255.0, 0.0, 255.0, 1.0));
+    private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
+    private final BooleanSetting filledDepth = (BooleanSetting)this.registerSetting(new BooleanSetting("FilledDepth", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outlineDepth = (BooleanSetting)this.registerSetting(new BooleanSetting("OutlineDepth", false));
+    private final ColorSetting filledColor = (ColorSetting)this.registerSetting(new ColorSetting("FilledColor", 1065746376));
+    private final ColorSetting outlineColor = (ColorSetting)this.registerSetting(new ColorSetting("OutlineColor", -930742328));
+    private final NumberSetting lineWidth = (NumberSetting)this.registerSetting(new NumberSetting("LineWidth", 2.0, 0.25, 8.0, 0.25));
+    private final BooleanSetting throughWall = (BooleanSetting)this.registerSetting(new BooleanSetting("ThroughWall", true));
+    private final NumberSetting range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 16.0, 0.0, 64.0, 0.5));
     private final Set set4 = Collections.newSetFromMap(new WeakHashMap());
     private final Map map16 = Collections.synchronizedMap(new WeakHashMap());
 
@@ -54,16 +54,16 @@ extends Module {
             block4: {
                 endCrystalEntity = (EndCrystalEntity)object;
                 Object var4_3 = null;
-                if (!this.isSet19()) break block4;
-                if (!Module.isSet37()) break block5;
+                if (!this.isEnabled()) break block4;
+                if (!Module.isNotInGame()) break block5;
             }
             return false;
         }
         if (!endCrystalEntity.isAlive()) {
             return false;
         }
-        double d = (Double)this.range.getObj() * (Double)this.range.getObj();
-        return endCrystalEntity.squaredDistanceTo((Entity)MC.client3.player) <= d;
+        double d = (Double)this.range.getValue() * (Double)this.range.getValue();
+        return endCrystalEntity.squaredDistanceTo((Entity)MC.mc.player) <= d;
     }
 
     public void m938(Object object, Object object2) {
@@ -127,23 +127,23 @@ extends Module {
      */
     public boolean isSet31() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.outline.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.outline.getValue() == false) return false;
         return true;
     }
 
     public int getInt55() {
         Object var2_1 = null;
-        return (Boolean)this.filled.getObj() != false ? (Integer)this.filledColor.getObj() : (Integer)this.filledColor.getObj() & 0xFFFFFF;
+        return (Boolean)this.filled.getValue() != false ? (Integer)this.filledColor.getValue() : (Integer)this.filledColor.getValue() & 0xFFFFFF;
     }
 
     public int getInt3() {
         Object var2_1 = null;
-        return (Boolean)this.outline.getObj() != false ? (Integer)this.outlineColor.getObj() : 0;
+        return (Boolean)this.outline.getValue() != false ? (Integer)this.outlineColor.getValue() : 0;
     }
 
     public float getFloat9() {
-        return this.scale.getFloat35();
+        return this.scale.getFloat();
     }
 
     /*
@@ -152,25 +152,25 @@ extends Module {
      */
     public boolean isSet55() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if ((Boolean)this.filled.getObj() == false) return false;
+        if (!this.isEnabled()) return false;
+        if ((Boolean)this.filled.getValue() == false) return false;
         return true;
     }
 
     public float getFloat45() {
-        return this.lineWidth.getFloat35();
+        return this.lineWidth.getFloat();
     }
 
     public boolean isSet83() {
-        return (Boolean)this.throughWall.getObj();
+        return (Boolean)this.throughWall.getValue();
     }
 
     public boolean isSet47() {
-        return (Boolean)this.cancelVanilla.getObj();
+        return (Boolean)this.cancelVanilla.getValue();
     }
 
     public int getInt65() {
-        return this.modelAlpha.getInt50() << 24 | 0xFFFFFF;
+        return this.modelAlpha.getInt() << 24 | 0xFFFFFF;
     }
 }
 

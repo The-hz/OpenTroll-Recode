@@ -19,11 +19,11 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Anchor
 extends Module {
-    private final BooleanSetting autoCenter = (BooleanSetting)this.m28(new BooleanSetting("AutoCenter", true));
-    private final BooleanSetting stopY = (BooleanSetting)this.m28(new BooleanSetting("StopY", true));
-    private final BooleanSetting pitchTrigger = (BooleanSetting)this.m28(new BooleanSetting("PitchTrigger", true));
-    private final NumberSetting pitch = (NumberSetting)this.m28(new NumberSetting("Pitch", 75.0, 0.0, 90.0, 1.0));
-    private final NumberSetting yRange = (NumberSetting)this.m28(new NumberSetting("YRange", 3.0, 1.0, 5.0, 1.0));
+    private final BooleanSetting autoCenter = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoCenter", true));
+    private final BooleanSetting stopY = (BooleanSetting)this.registerSetting(new BooleanSetting("StopY", true));
+    private final BooleanSetting pitchTrigger = (BooleanSetting)this.registerSetting(new BooleanSetting("PitchTrigger", true));
+    private final NumberSetting pitch = (NumberSetting)this.registerSetting(new NumberSetting("Pitch", 75.0, 0.0, 90.0, 1.0));
+    private final NumberSetting yRange = (NumberSetting)this.registerSetting(new NumberSetting("YRange", 3.0, 1.0, 5.0, 1.0));
 
     public Anchor() {
         super("Anchor", "Stops horizontal movement above small holes.", Category.MOVEMENT);
@@ -31,10 +31,10 @@ extends Module {
 
     @EventHandler
     private void setMoveEvent4(MoveEvent moveEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.pitchTrigger.getObj()).booleanValue() && (double)MC.client3.player.getPitch() < (Double)this.pitch.getObj()) {
+        if (((Boolean)this.pitchTrigger.getValue()).booleanValue() && (double)MC.mc.player.getPitch() < (Double)this.pitch.getValue()) {
             return;
         }
         BlockPos blockPos = this.getBlockPos9();
@@ -43,8 +43,8 @@ extends Module {
         }
         double d = (double)blockPos.getX() + 0.5;
         double d2 = (double)blockPos.getZ() + 0.5;
-        double d3 = Math.hypot(d - MC.client3.player.getX(), d2 - MC.client3.player.getZ());
-        if (d3 > 0.18 && ((Boolean)this.autoCenter.getObj()).booleanValue()) {
+        double d3 = Math.hypot(d - MC.mc.player.getX(), d2 - MC.mc.player.getZ());
+        if (d3 > 0.18 && ((Boolean)this.autoCenter.getValue()).booleanValue()) {
             if (AutoCenter.INSTANCE != null) {
                 AutoCenter.INSTANCE.m47();
             }
@@ -52,15 +52,15 @@ extends Module {
         }
         moveEvent.setDouble2(0.0);
         moveEvent.setDouble(0.0);
-        if (((Boolean)this.stopY.getObj()).booleanValue() && MC.client3.player.isOnGround()) {
+        if (((Boolean)this.stopY.getValue()).booleanValue() && MC.mc.player.isOnGround()) {
             moveEvent.setDouble4(-0.08);
         }
     }
 
     private BlockPos getBlockPos9() {
-        BlockPos blockPos = MC.client3.player.getBlockPos();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
         Object var2_3 = null;
-        for (int i = 0; i <= this.yRange.getInt50(); ++i) {
+        for (int i = 0; i <= this.yRange.getInt(); ++i) {
             BlockPos blockPos2 = blockPos.down(i);
             if (!this.m281(blockPos2)) continue;
             return blockPos2;
@@ -75,10 +75,10 @@ extends Module {
     private boolean m281(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (!MC.client3.world.getBlockState(blockPos).isAir()) {
+        if (!MC.mc.world.getBlockState(blockPos).isAir()) {
             return false;
         }
-        if (!MC.client3.world.getBlockState(blockPos.up()).isAir()) {
+        if (!MC.mc.world.getBlockState(blockPos.up()).isAir()) {
             return false;
         }
         if (!this.m812(blockPos.down())) return false;
@@ -92,7 +92,7 @@ extends Module {
     private boolean m812(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        return !MC.client3.world.getBlockState(blockPos).getCollisionShape((BlockView)MC.client3.world, blockPos).isEmpty();
+        return !MC.mc.world.getBlockState(blockPos).getCollisionShape((BlockView)MC.mc.world, blockPos).isEmpty();
     }
 }
 

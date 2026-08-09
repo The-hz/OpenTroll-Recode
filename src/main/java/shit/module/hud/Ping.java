@@ -22,47 +22,47 @@ import shit.util.MC;
 public class Ping
 extends Module
 implements Listener3 {
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting y = (NumberSetting)this.m28(new NumberSetting("Y", 42.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final BooleanSetting shadow = (BooleanSetting)this.m28(new BooleanSetting("Shadow", true));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1184275));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 42.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1184275));
 
     public Ping() {
         super("Ping", "Shows server latency.", Category.HUD);
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
     public int hudWidth() {
-        return Client.fontManager.renderer2().m277(this.getText13());
+        return Client.fontManager.renderer2().getStringWidth(this.getText13());
     }
 
     @Override
-    public int getInt28() {
-        return Client.fontManager.renderer2().getInt19();
+    public int getHudHeight() {
+        return Client.fontManager.renderer2().getFontHeight();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     @Override
-    public void m368(Object object, boolean bl) {
+    public void renderHud(Object object, boolean bl) {
         DrawContext drawContext = (DrawContext)object;
-        Client.fontManager.renderer2().m5(drawContext, this.getText13(), this.x.getInt50(), this.y.getInt50(), (Integer)this.color.getObj(), (Boolean)this.shadow.getObj());
+        Client.fontManager.renderer2().drawText(drawContext, this.getText13(), this.x.getInt(), this.y.getInt(), (Integer)this.color.getValue(), (Boolean)this.shadow.getValue());
     }
 
     private String getText13() {
@@ -75,22 +75,22 @@ implements Listener3 {
                     block4: {
                         block2: {
                             bl = AbstractHudModule.isSet32();
-                            minecraftClient = MC.client3;
+                            minecraftClient = MC.mc;
                             if (bl) break block2;
                             if (minecraftClient.getNetworkHandler() == null) break block3;
-                            minecraftClient = MC.client3;
+                            minecraftClient = MC.mc;
                         }
                         if (bl) break block4;
                         if (minecraftClient.player == null) break block3;
-                        minecraftClient = MC.client3;
+                        minecraftClient = MC.mc;
                     }
-                    playerListEntry = minecraftClient.getNetworkHandler().getPlayerListEntry(MC.client3.player.getUuid());
+                    playerListEntry = minecraftClient.getNetworkHandler().getPlayerListEntry(MC.mc.player.getUuid());
                     if (bl) break block5;
                     if (playerListEntry != null) break block6;
                 }
                 return "Ping 0ms";
             }
-            playerListEntry = MC.client3.getNetworkHandler().getPlayerListEntry(MC.client3.player.getUuid());
+            playerListEntry = MC.mc.getNetworkHandler().getPlayerListEntry(MC.mc.player.getUuid());
         }
         return "Ping " + playerListEntry.getLatency() + "ms";
     }

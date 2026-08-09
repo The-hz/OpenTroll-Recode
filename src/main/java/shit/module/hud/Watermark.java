@@ -21,61 +21,61 @@ import shit.setting.StringSetting;
 public class Watermark
 extends Module
 implements Listener3 {
-    private final StringSetting text = (StringSetting)this.m28(new StringSetting("Text", "TrollHack-Recode"));
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.CLIENT_VERSION));
-    private final BooleanSetting info = (BooleanSetting)this.m28(new BooleanSetting("Info", false));
-    private final BooleanSetting shadow = (BooleanSetting)this.m28(new BooleanSetting("Shadow", true));
-    private final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1));
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting y = (NumberSetting)this.m28(new NumberSetting("Y", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final StringSetting text = (StringSetting)this.registerSetting(new StringSetting("Text", "TrollHack-Recode"));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.CLIENT_VERSION));
+    private final BooleanSetting info = (BooleanSetting)this.registerSetting(new BooleanSetting("Info", false));
+    private final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));
+    private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
 
     public Watermark() {
         super("Watermark", "Draws the client name.", Category.HUD);
-        this.setFlag3(true);
+        this.setEnabled(true);
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
     public int hudWidth() {
-        return Client.fontManager.renderer2().m277(this.getText62());
+        return Client.fontManager.renderer2().getStringWidth(this.getText62());
     }
 
     @Override
-    public int getInt28() {
-        return Client.fontManager.renderer2().getInt19();
+    public int getHudHeight() {
+        return Client.fontManager.renderer2().getFontHeight();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     @Override
-    public void m368(Object object, boolean bl) {
+    public void renderHud(Object object, boolean bl) {
         DrawContext drawContext = (DrawContext)object;
-        Client.fontManager.renderer2().m5(drawContext, this.getText62(), this.x.getInt50(), this.y.getInt50(), (Integer)this.color.getObj(), (Boolean)this.shadow.getObj());
+        Client.fontManager.renderer2().drawText(drawContext, this.getText62(), this.x.getInt(), this.y.getInt(), (Integer)this.color.getValue(), (Boolean)this.shadow.getValue());
     }
 
     private String getText62() {
         String string = "";
-        switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             default: {
                 throw new MatchException(null, null);
             }
             case 0: {
-                String string2 = (String)this.text.getObj();
+                String string2 = (String)this.text.getValue();
                 break;
             }
             case 1: {
@@ -86,7 +86,7 @@ implements Listener3 {
                 String string2 = string = "TrollHack-Recode 1.0.0";
             }
         }
-        if (!((Boolean)this.info.getObj()).booleanValue()) {
+        if (!((Boolean)this.info.getValue()).booleanValue()) {
             return string;
         }
         return string + " | " + MinecraftAccessor.trollhack$getFps() + " FPS";

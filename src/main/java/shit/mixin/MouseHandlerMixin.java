@@ -21,20 +21,20 @@ public class MouseHandlerMixin {
     @Inject(method={"onMouseButton(JLnet/minecraft/client/input/MouseInput;I)V"}, at={@At(value="HEAD")})
     private void trollhack$onMousePress(long l, MouseInput mouseInput, int n, CallbackInfo callbackInfo) {
         int n2 = ColorSetting2.m559(mouseInput.button());
-        for (Module module : Client.moduleManager.getList6()) {
-            ColorSetting2 colorSetting2 = module.getColorSetting2();
-            if ((Integer)colorSetting2.getObj() != n2) continue;
+        for (Module module : Client.moduleManager.getModules()) {
+            ColorSetting2 colorSetting2 = module.getKeyBindSetting();
+            if ((Integer)colorSetting2.getValue() != n2) continue;
             if (n == 1) {
                 if (colorSetting2.getType() == ColorSetting2.Type.Toggle) {
-                    module.m84();
+                    module.toggle();
                     continue;
                 }
                 if (colorSetting2.getType() != ColorSetting2.Type.Hold) continue;
-                module.setFlag3(true);
+                module.setEnabled(true);
                 continue;
             }
             if (n != 0 || colorSetting2.getType() != ColorSetting2.Type.Hold) continue;
-            module.setFlag3(false);
+            module.setEnabled(false);
         }
     }
 }

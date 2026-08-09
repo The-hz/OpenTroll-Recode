@@ -31,7 +31,7 @@ extends Command {
         String[] stringArray = (String[])var2_2;
         if (var1_1 == 1) {
             String string = stringArray.length > 1 ? stringArray[1].toLowerCase() : "";
-            return (String[])Client.moduleManager.getList6().stream().map(Module::getText69).filter(string2 -> string2.toLowerCase().startsWith(string)).toArray(String[]::new);
+            return (String[])Client.moduleManager.getModules().stream().map(Module::getName).filter(string2 -> string2.toLowerCase().startsWith(string)).toArray(String[]::new);
         }
         return var1_1 == 2 ? new String[]{"none", "y", "r", "right_shift", "mouse4"} : new String[0];
     }
@@ -57,36 +57,36 @@ extends Command {
                                         if (!bl) break block10;
                                         if (stringArray.length >= 2) break block11;
                                         String string = this.getText31();
-                                        String string2 = Client.commandManager.getText10();
-                                        CommandManager.setObj21("Usage: " + string2 + string);
+                                        String string2 = Client.commandManager.getPrefix();
+                                        CommandManager.sendFeedback("Usage: " + string2 + string);
                                     }
                                     return;
                                 }
-                                module2 = Client.moduleManager.m979(stringArray[0]);
+                                module2 = Client.moduleManager.getModule(stringArray[0]);
                                 if (!bl) break block12;
                                 if (module2 != null) break block13;
-                                CommandManager.setObj21("Module not found: " + stringArray[0]);
+                                CommandManager.sendFeedback("Module not found: " + stringArray[0]);
                             }
                             return;
                         }
                         n = n2 = ColorSetting2.m911(stringArray[1]);
                         if (!bl) break block14;
                         if (n == null) {
-                            CommandManager.setObj21("Use a key name, mouse button, GLFW key code, or none.");
+                            CommandManager.sendFeedback("Use a key name, mouse button, GLFW key code, or none.");
                             return;
                         }
                         module = module2;
                         if (!bl) break block15;
-                        module.getColorSetting2().setObj94(n2);
+                        module.getKeyBindSetting().setValueInternal(n2);
                         n = n2;
                     }
                     if (n != -1) break block16;
-                    CommandManager.setObj21(module2.getText69() + " unbound.");
+                    CommandManager.sendFeedback(module2.getName() + " unbound.");
                     if (bl) break block17;
                 }
                 module = module2;
             }
-            CommandManager.setObj21(module.getText69() + " bound to " + module2.getColorSetting2().getText51() + ".");
+            CommandManager.sendFeedback(module.getName() + " bound to " + module2.getKeyBindSetting().getDisplayName() + ".");
         }
     }
 

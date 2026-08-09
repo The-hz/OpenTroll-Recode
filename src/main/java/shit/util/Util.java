@@ -100,7 +100,7 @@ public final class Util {
         if (autoCloseableImpl != null) {
             return autoCloseableImpl.getInt25();
         }
-        return MC.client3.getWindow().getFramebufferWidth();
+        return MC.mc.getWindow().getFramebufferWidth();
     }
 
     private static int getInt58() {
@@ -109,7 +109,7 @@ public final class Util {
         if (autoCloseableImpl != null) {
             return autoCloseableImpl.getInt87();
         }
-        return MC.client3.getWindow().getFramebufferHeight();
+        return MC.mc.getWindow().getFramebufferHeight();
     }
 }
 

@@ -29,13 +29,13 @@ import shit.util.MathUtil;
 public class FastWeb
 extends Module {
     public static FastWeb INSTANCE;
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Vanilla));
-    private final BooleanSetting onlySneak = (BooleanSetting)this.m28(new BooleanSetting("OnlySneak", true));
-    private final BooleanSetting grim = (BooleanSetting)this.m28(new BooleanSetting("Grim", false));
-    private final BooleanSetting abortPacket = (BooleanSetting)this.m28(new BooleanSetting("AbortPacket", true));
-    private final NumberSetting xZSpeed = (NumberSetting)this.m28(new NumberSetting("XZSpeed", 25.0, 0.0, 100.0, 0.1));
-    private final NumberSetting ySpeed = (NumberSetting)this.m28(new NumberSetting("YSpeed", 100.0, 0.0, 100.0, 0.1));
-    private final NumberSetting speed = (NumberSetting)this.m28(new NumberSetting("Speed", 3.0, 0.0, 8.0, 0.1));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Vanilla));
+    private final BooleanSetting onlySneak = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlySneak", true));
+    private final BooleanSetting grim = (BooleanSetting)this.registerSetting(new BooleanSetting("Grim", false));
+    private final BooleanSetting abortPacket = (BooleanSetting)this.registerSetting(new BooleanSetting("AbortPacket", true));
+    private final NumberSetting xZSpeed = (NumberSetting)this.registerSetting(new NumberSetting("XZSpeed", 25.0, 0.0, 100.0, 0.1));
+    private final NumberSetting ySpeed = (NumberSetting)this.registerSetting(new NumberSetting("YSpeed", 100.0, 0.0, 100.0, 0.1));
+    private final NumberSetting speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 3.0, 0.0, 8.0, 0.1));
     private boolean flag94;
 
     public FastWeb() {
@@ -44,18 +44,18 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag94 = false;
         Client.helper4.m64();
     }
 
     @Override
-    public String getText57() {
-        return ((Mode)((Object)this.mode.getObj())).name();
+    public String getInfo() {
+        return ((Mode)((Object)this.mode.getValue())).name();
     }
 
     public Mode getMode2() {
-        return (Mode)((Object)this.mode.getObj());
+        return (Mode)((Object)this.mode.getValue());
     }
 
     /*
@@ -64,28 +64,28 @@ extends Module {
      */
     public boolean isSet116() {
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return false;
         }
-        if ((Boolean)this.onlySneak.getObj() == false) return true;
-        if (!MC.client3.player.isInSneakingPose()) return false;
+        if ((Boolean)this.onlySneak.getValue() == false) return true;
+        if (!MC.mc.player.isInSneakingPose()) return false;
         return true;
     }
 
     public double getDouble() {
-        return (Double)this.xZSpeed.getObj() / 100.0;
+        return (Double)this.xZSpeed.getValue() / 100.0;
     }
 
     public double getDouble17() {
-        return (Double)this.ySpeed.getObj() / 100.0;
+        return (Double)this.ySpeed.getValue() / 100.0;
     }
 
     private boolean isSet88() {
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return false;
         }
-        if (MC.client3.player.isOnGround()) {
+        if (MC.mc.player.isOnGround()) {
             return false;
         }
         if (!this.isSet116()) {
@@ -96,23 +96,23 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner42(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         this.flag94 = this.isSet88();
         if (!this.flag94) {
             Client.helper4.m64();
-        } else if (this.mode.getObj() == Mode.Vanilla) {
-            MathUtil.setDouble7(-((Double)this.speed.getObj()).doubleValue());
-        } else if (this.mode.getObj() == Mode.Strict) {
-            Client.helper4.setFloat5(this.speed.getFloat35());
+        } else if (this.mode.getValue() == Mode.Vanilla) {
+            MathUtil.setDouble7(-((Double)this.speed.getValue()).doubleValue());
+        } else if (this.mode.getValue() == Mode.Strict) {
+            Client.helper4.setFloat5(this.speed.getFloat());
         }
-        if (((Boolean)this.grim.getObj()).booleanValue() && this.isSet116()) {
+        if (((Boolean)this.grim.getValue()).booleanValue() && this.isSet116()) {
             for (BlockPos blockPos : this.getList5()) {
-                if (((Boolean)this.abortPacket.getObj()).booleanValue()) {
-                    MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, blockPos, Direction.DOWN));
+                if (((Boolean)this.abortPacket.getValue()).booleanValue()) {
+                    MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, blockPos, Direction.DOWN));
                 }
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, blockPos, Direction.DOWN));
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, blockPos, Direction.DOWN));
             }
         }
     }
@@ -124,12 +124,12 @@ extends Module {
         for (int i = n = 2; i > -2; --i) {
             for (int j = n; j > -2; --j) {
                 for (int k = n; k > -2; --k) {
-                    BlockPos blockPos = BlockPos.ofFloored((double)(MC.client3.player.getX() + (double)i), (double)(MC.client3.player.getY() + (double)j), (double)(MC.client3.player.getZ() + (double)k));
+                    BlockPos blockPos = BlockPos.ofFloored((double)(MC.mc.player.getX() + (double)i), (double)(MC.mc.player.getY() + (double)j), (double)(MC.mc.player.getZ() + (double)k));
                     Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
-                    if (MC.client3.player.getEntityPos().distanceTo(vec3d) > 1.0) {
-                        if (MC.client3.player.getEyePos().distanceTo(vec3d) > 1.0) continue;
+                    if (MC.mc.player.getEntityPos().distanceTo(vec3d) > 1.0) {
+                        if (MC.mc.player.getEyePos().distanceTo(vec3d) > 1.0) continue;
                     }
-                    if (!MC.client3.world.getBlockState(blockPos).isOf(Blocks.COBWEB)) continue;
+                    if (!MC.mc.world.getBlockState(blockPos).isOf(Blocks.COBWEB)) continue;
                     arrayList.add(blockPos);
                     if (null == null) continue;
                 }
@@ -141,7 +141,7 @@ extends Module {
     }
 
     private boolean isInWeb2() {
-        return MC.client3.world.getStatesInBox(MC.client3.player.getBoundingBox()).anyMatch(blockState -> blockState.isOf(Blocks.COBWEB));
+        return MC.mc.world.getStatesInBox(MC.mc.player.getBoundingBox()).anyMatch(blockState -> blockState.isOf(Blocks.COBWEB));
     }
 
     @Environment(value=EnvType.CLIENT)

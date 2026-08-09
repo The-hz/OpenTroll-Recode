@@ -24,8 +24,8 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class NoFall
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Packet));
-    private final NumberSetting distance = (NumberSetting)this.m28(new NumberSetting("Distance", 3.0, 0.0, 8.0, 0.1));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Packet));
+    private final NumberSetting distance = (NumberSetting)this.registerSetting(new NumberSetting("Distance", 3.0, 0.0, 8.0, 0.1));
     private boolean flag55;
     private int count163;
 
@@ -34,34 +34,34 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.flag55 = false;
         this.count163 = 0;
-        super.m709();
+        super.onDisable();
     }
 
     @Override
-    public String getText57() {
-        return ((Mode)((Object)this.mode.getObj())).name();
+    public String getInfo() {
+        return ((Mode)((Object)this.mode.getValue())).name();
     }
 
     @EventHandler
     private void setEvent2Inner8(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.mode.getObj() == Mode.Exploit && !MC.client3.player.isOnGround()) {
-            this.count163 = MC.client3.player.fallDistance > (double)((Double)this.distance.getObj()).floatValue() ? (this.count163 = this.count163 + 1) : 0;
+        if (this.mode.getValue() == Mode.Exploit && !MC.mc.player.isOnGround()) {
+            this.count163 = MC.mc.player.fallDistance > (double)((Double)this.distance.getValue()).floatValue() ? (this.count163 = this.count163 + 1) : 0;
         }
     }
 
     @EventHandler
     private void setInputTickEvent2(InputTickEvent inputTickEvent) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.mode.getObj() == Mode.Exploit && this.flag55) {
-            MC.client3.player.input.jump();
+        if (this.mode.getValue() == Mode.Exploit && this.flag55) {
+            MC.mc.player.input.jump();
             this.flag55 = false;
         }
     }
@@ -70,27 +70,27 @@ extends Module {
     public void setPacketEventInner215(PacketEvent.PacketEventInner2 packetEventInner2) {
         PlayerMoveC2SPacket playerMoveC2SPacket;
         Packet packet;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        ItemStack itemStack = MC.client3.player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack itemStack = MC.mc.player.getEquippedStack(EquipmentSlot.CHEST);
         if (itemStack != null && itemStack.isOf(Items.ELYTRA)) {
             return;
         }
-        if (this.mode.getObj() == Mode.Packet && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
+        if (this.mode.getValue() == Mode.Packet && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
             playerMoveC2SPacket = (PlayerMoveC2SPacket)packet;
-            if (MC.client3.player.fallDistance >= (double)((Double)this.distance.getObj()).floatValue()) {
+            if (MC.mc.player.fallDistance >= (double)((Double)this.distance.getValue()).floatValue()) {
                 ((Listener7)playerMoveC2SPacket).setOnGround(true);
             }
         }
-        if (this.mode.getObj() == Mode.Exploit && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
+        if (this.mode.getValue() == Mode.Exploit && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
             playerMoveC2SPacket = (PlayerMoveC2SPacket)packet;
             if (this.flag55 && this.count163 == 0) {
-                packetEventInner2.m209();
+                packetEventInner2.cancel();
                 return;
             }
-            if (MC.client3.player.isOnGround() && this.count163 > 0 && !this.flag55) {
-                ((Listener7)playerMoveC2SPacket).setY(MC.client3.player.getY() + 10.0);
+            if (MC.mc.player.isOnGround() && this.count163 > 0 && !this.flag55) {
+                ((Listener7)playerMoveC2SPacket).setY(MC.mc.player.getY() + 10.0);
                 this.flag55 = true;
             }
         }

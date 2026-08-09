@@ -25,13 +25,13 @@ public class LivingEntitySwingMixin {
             return;
         }
         SwingLimiter swingLimiter = SwingLimiter.INSTANCE;
-        if (swingLimiter != null && swingLimiter.isSet19()) {
+        if (swingLimiter != null && swingLimiter.isEnabled()) {
             callbackInfoReturnable.setReturnValue((Object)swingLimiter.getInt2());
             return;
         }
         ViewModel viewModel = ViewModel.INSTANCE;
-        if (viewModel != null && viewModel.isSet19() && ((Boolean)viewModel.swingSpeed.getObj()).booleanValue()) {
-            callbackInfoReturnable.setReturnValue((Object)viewModel.value.getInt50());
+        if (viewModel != null && viewModel.isEnabled() && ((Boolean)viewModel.swingSpeed.getValue()).booleanValue()) {
+            callbackInfoReturnable.setReturnValue((Object)viewModel.value.getInt());
         }
     }
 }

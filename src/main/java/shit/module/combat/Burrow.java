@@ -120,39 +120,39 @@ extends Module {
 
         public Burrow() {
         super("Burrow", "Clips into obsidian (\u5361\u9ed1\u66dc\u77f3).", Category.COMBAT);
-        this.rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.BYPASS));
-        this.lagMode = (EnumSetting)this.m28(new EnumSetting("LagMode", LagMode.TrollHack));
-        this.moveLagMode = (EnumSetting)this.m28(new EnumSetting("MoveLagMode", LagMode.Smart));
-        this.disable = (BooleanSetting)this.m28(new BooleanSetting("Disable", true));
-        this.jumpDisable = (BooleanSetting)this.m28(new BooleanSetting("JumpDisable", true));
-        this.delay = (NumberSetting)this.m28(new NumberSetting("Delay", 500.0, 0.0, 1000.0, 1.0));
-        this.webTime = (NumberSetting)this.m28(new NumberSetting("WebTime", 0.0, 0.0, 500.0));
-        this.enderChest = (BooleanSetting)this.m28(new BooleanSetting("EnderChest", true));
-        this.cuiCanHeight = (NumberSetting)this.m28(new NumberSetting("CuiCanHeight", 4.0, -10.0, 10.0, 0.1));
-        this.antiLag = (BooleanSetting)this.m28(new BooleanSetting("AntiLag", false));
-        this.singleBlock = (BooleanSetting)this.m28(new BooleanSetting("SingleBlock", false));
-        this.detectMining = (BooleanSetting)this.m28(new BooleanSetting("DetectMining", false));
-        this.headFill = (BooleanSetting)this.m28(new BooleanSetting("HeadFill", false));
-        this.usingPause = (BooleanSetting)this.m28(new BooleanSetting("UsingPause", false));
-        this.down = (BooleanSetting)this.m28(new BooleanSetting("Down", true));
-        this.noSelfPos = (BooleanSetting)this.m28(new BooleanSetting("NoSelfPos", false));
-        this.sound = (BooleanSetting)this.m28(new BooleanSetting("Sound", true));
-        this.blocksPer = (NumberSetting)this.m28(new NumberSetting("BlocksPer", 4.0, 1.0, 4.0, 1.0));
-        this.offset = (NumberSetting)this.m28(new NumberSetting("Offset", 0.3, 0.0, 0.5, 0.01));
-        this.break_ = (BooleanSetting)this.m28(new BooleanSetting("Break", true));
-        this.wait = (BooleanSetting)this.m28(new BooleanSetting("Wait", true));
-        this.fakeMove = (BooleanSetting)this.m28(new BooleanSetting("FakeMove", true));
-        this.allowCenter = (BooleanSetting)this.m28(new BooleanSetting("AllowCenter", true));
-        this.preCorrect = (NumberSetting)this.m28(new NumberSetting("PreCorrect", 0.25, 0.0, 1.0, 0.001));
-        this.moveDis = (NumberSetting)this.m28(new NumberSetting("MoveDis", 0.25, 0.0, 1.0, 0.001));
-        this.moveDis2 = (NumberSetting)this.m28(new NumberSetting("MoveDis2", 0.25, 0.0, 1.0, 0.001));
-        this.correct = (NumberSetting)this.m28(new NumberSetting("Correct", 0.25, 0.0, 1.0, 0.001));
-        this.yOffset = (NumberSetting)this.m28(new NumberSetting("YOffset", 0.01, 0.0, 1.0, 0.001));
-        this.switchMode = (EnumSetting)this.m28(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
-        this.smartXZ = (NumberSetting)this.m28(new NumberSetting("SmartXZ", 3.0, 0.0, 10.0, 0.1));
-        this.smartUp = (NumberSetting)this.m28(new NumberSetting("SmartUp", 3.0, 0.0, 10.0, 0.1));
-        this.smartDown = (NumberSetting)this.m28(new NumberSetting("SmartDown", 3.0, 0.0, 10.0, 0.1));
-        this.smartDistance = (NumberSetting)this.m28(new NumberSetting("SmartDistance", 2.0, 0.0, 10.0, 0.1));
+        this.rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.BYPASS));
+        this.lagMode = (EnumSetting)this.registerSetting(new EnumSetting("LagMode", LagMode.TrollHack));
+        this.moveLagMode = (EnumSetting)this.registerSetting(new EnumSetting("MoveLagMode", LagMode.Smart));
+        this.disable = (BooleanSetting)this.registerSetting(new BooleanSetting("Disable", true));
+        this.jumpDisable = (BooleanSetting)this.registerSetting(new BooleanSetting("JumpDisable", true));
+        this.delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 500.0, 0.0, 1000.0, 1.0));
+        this.webTime = (NumberSetting)this.registerSetting(new NumberSetting("WebTime", 0.0, 0.0, 500.0));
+        this.enderChest = (BooleanSetting)this.registerSetting(new BooleanSetting("EnderChest", true));
+        this.cuiCanHeight = (NumberSetting)this.registerSetting(new NumberSetting("CuiCanHeight", 4.0, -10.0, 10.0, 0.1));
+        this.antiLag = (BooleanSetting)this.registerSetting(new BooleanSetting("AntiLag", false));
+        this.singleBlock = (BooleanSetting)this.registerSetting(new BooleanSetting("SingleBlock", false));
+        this.detectMining = (BooleanSetting)this.registerSetting(new BooleanSetting("DetectMining", false));
+        this.headFill = (BooleanSetting)this.registerSetting(new BooleanSetting("HeadFill", false));
+        this.usingPause = (BooleanSetting)this.registerSetting(new BooleanSetting("UsingPause", false));
+        this.down = (BooleanSetting)this.registerSetting(new BooleanSetting("Down", true));
+        this.noSelfPos = (BooleanSetting)this.registerSetting(new BooleanSetting("NoSelfPos", false));
+        this.sound = (BooleanSetting)this.registerSetting(new BooleanSetting("Sound", true));
+        this.blocksPer = (NumberSetting)this.registerSetting(new NumberSetting("BlocksPer", 4.0, 1.0, 4.0, 1.0));
+        this.offset = (NumberSetting)this.registerSetting(new NumberSetting("Offset", 0.3, 0.0, 0.5, 0.01));
+        this.break_ = (BooleanSetting)this.registerSetting(new BooleanSetting("Break", true));
+        this.wait = (BooleanSetting)this.registerSetting(new BooleanSetting("Wait", true));
+        this.fakeMove = (BooleanSetting)this.registerSetting(new BooleanSetting("FakeMove", true));
+        this.allowCenter = (BooleanSetting)this.registerSetting(new BooleanSetting("AllowCenter", true));
+        this.preCorrect = (NumberSetting)this.registerSetting(new NumberSetting("PreCorrect", 0.25, 0.0, 1.0, 0.001));
+        this.moveDis = (NumberSetting)this.registerSetting(new NumberSetting("MoveDis", 0.25, 0.0, 1.0, 0.001));
+        this.moveDis2 = (NumberSetting)this.registerSetting(new NumberSetting("MoveDis2", 0.25, 0.0, 1.0, 0.001));
+        this.correct = (NumberSetting)this.registerSetting(new NumberSetting("Correct", 0.25, 0.0, 1.0, 0.001));
+        this.yOffset = (NumberSetting)this.registerSetting(new NumberSetting("YOffset", 0.01, 0.0, 1.0, 0.001));
+        this.switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
+        this.smartXZ = (NumberSetting)this.registerSetting(new NumberSetting("SmartXZ", 3.0, 0.0, 10.0, 0.1));
+        this.smartUp = (NumberSetting)this.registerSetting(new NumberSetting("SmartUp", 3.0, 0.0, 10.0, 0.1));
+        this.smartDown = (NumberSetting)this.registerSetting(new NumberSetting("SmartDown", 3.0, 0.0, 10.0, 0.1));
+        this.smartDistance = (NumberSetting)this.registerSetting(new NumberSetting("SmartDistance", 2.0, 0.0, 10.0, 0.1));
         this.count79 = 0;
         this.list16 = new ArrayList();
         this.vec3d10 = Vec3d.ZERO;
@@ -161,7 +161,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Client.renderUtil3.m608();
     }
@@ -170,50 +170,50 @@ extends Module {
     private void setEvent2Inner13(Event2.Event2Inner event2Inner) {
         boolean bl;
         Object object;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (!((Boolean)this.disable.getObj()).booleanValue() && ((Boolean)this.jumpDisable.getObj()).booleanValue() && MC.client3.player.input.playerInput.jump()) {
-            this.setFlag3(false);
+        if (!((Boolean)this.disable.getValue()).booleanValue() && ((Boolean)this.jumpDisable.getValue()).booleanValue() && MC.mc.player.input.playerInput.jump()) {
+            this.setEnabled(false);
             return;
         }
         if (this.isSet119()) {
-            this.helper732.m533();
+            this.helper732.resetTimer();
             return;
         }
-        if (((Boolean)this.usingPause.getObj()).booleanValue() && MC.client3.player.isUsingItem()) {
+        if (((Boolean)this.usingPause.getValue()).booleanValue() && MC.mc.player.isUsingItem()) {
             return;
         }
-        if (!this.helper732.m432((Double)this.webTime.getObj())) {
+        if (!this.helper732.hasPassedMs((Double)this.webTime.getValue())) {
             return;
         }
-        if (!((Boolean)this.disable.getObj()).booleanValue() && !this.helper745.m432((Double)this.delay.getObj())) {
+        if (!((Boolean)this.disable.getValue()).booleanValue() && !this.helper745.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
-        if (!MC.client3.player.isOnGround()) {
+        if (!MC.mc.player.isOnGround()) {
             return;
         }
-        if (((Boolean)this.antiLag.getObj()).booleanValue() && (((BlockState)(object = MC.client3.world.getBlockState(MC.client3.player.getBlockPos().down()))).isAir() || ((BlockState)object).isReplaceable())) {
+        if (((Boolean)this.antiLag.getValue()).booleanValue() && (((BlockState)(object = MC.mc.world.getBlockState(MC.mc.player.getBlockPos().down()))).isAir() || ((BlockState)object).isReplaceable())) {
             return;
         }
-        if (((Boolean)this.singleBlock.getObj()).booleanValue() && this.isSet97()) {
-            if (((Boolean)this.disable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+        if (((Boolean)this.singleBlock.getValue()).booleanValue() && this.isSet97()) {
+            if (((Boolean)this.disable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
             return;
         }
         object = this.getSwitchMode3();
         if (!Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)this::m718, object)) {
-            this.setFlag3(false);
+            this.setEnabled(false);
             return;
         }
         boolean bl2 = object == ClientSetting.SwitchMode.SILENT || object == ClientSetting.SwitchMode.INVENTORY;
         this.count79 = 0;
         this.list16.clear();
-        double d = MC.client3.player.getX();
-        double d2 = MC.client3.player.getY();
-        double d3 = MC.client3.player.getZ();
-        double d4 = (Boolean)this.singleBlock.getObj() != false ? 0.0 : (Double)this.offset.getObj();
+        double d = MC.mc.player.getX();
+        double d2 = MC.mc.player.getY();
+        double d3 = MC.mc.player.getZ();
+        double d4 = (Boolean)this.singleBlock.getValue() != false ? 0.0 : (Double)this.offset.getValue();
         BlockPos blockPos = BlockPos.ofFloored((double)(d + d4), (double)(d2 + 0.5), (double)(d3 + d4));
         BlockPos blockPos2 = BlockPos.ofFloored((double)(d - d4), (double)(d2 + 0.5), (double)(d3 + d4));
         BlockPos blockPos3 = BlockPos.ofFloored((double)(d + d4), (double)(d2 + 0.5), (double)(d3 - d4));
@@ -226,16 +226,16 @@ extends Module {
         BlockPos blockPos10 = BlockPos.ofFloored((double)(d - d4), (double)(d2 - 1.0), (double)(d3 + d4));
         BlockPos blockPos11 = BlockPos.ofFloored((double)(d + d4), (double)(d2 - 1.0), (double)(d3 - d4));
         BlockPos blockPos12 = BlockPos.ofFloored((double)(d - d4), (double)(d2 - 1.0), (double)(d3 - d4));
-        BlockPos blockPos13 = MC.client3.player.getBlockPos();
+        BlockPos blockPos13 = MC.mc.player.getBlockPos();
         boolean bl3 = false;
         if (!(this.m1026(blockPos) || this.m1026(blockPos2) || this.m1026(blockPos3) || this.m1026(blockPos4))) {
             boolean bl4;
-            bl = (Boolean)this.headFill.getObj() == false || !this.m1026(blockPos5) && !this.m1026(blockPos6) && !this.m1026(blockPos7) && !this.m1026(blockPos8);
-            boolean bl5 = bl4 = (Boolean)this.down.getObj() == false || !this.m1026(blockPos9) && !this.m1026(blockPos10) && !this.m1026(blockPos11) && !this.m1026(blockPos12);
+            bl = (Boolean)this.headFill.getValue() == false || !this.m1026(blockPos5) && !this.m1026(blockPos6) && !this.m1026(blockPos7) && !this.m1026(blockPos8);
+            boolean bl5 = bl4 = (Boolean)this.down.getValue() == false || !this.m1026(blockPos9) && !this.m1026(blockPos10) && !this.m1026(blockPos11) && !this.m1026(blockPos12);
             if (bl) {
                 if (bl4) {
-                    if (!((Boolean)this.wait.getObj()).booleanValue() && ((Boolean)this.disable.getObj()).booleanValue()) {
-                        this.setFlag3(false);
+                    if (!((Boolean)this.wait.getValue()).booleanValue() && ((Boolean)this.disable.getValue()).booleanValue()) {
+                        this.setEnabled(false);
                     }
                     if (bl2) {
                         Client.renderUtil3.m608();
@@ -252,7 +252,7 @@ extends Module {
         this.setObj24(blockPos4);
         bl = false;
         BlockPos blockPos14 = blockPos13.up(2);
-        if (!(bl3 || MC.client3.player.getPose() == EntityPose.SWIMMING || this.m1053(blockPos14) || this.m1053(blockPos14.east()) || this.m1053(blockPos14.west()) || this.m1053(blockPos14.south()) || this.m1053(blockPos14.north()) || this.m1053(blockPos14.east().south()) || this.m1053(blockPos14.west().south()) || this.m1053(blockPos14.east().north()) || this.m1053(blockPos14.west().north()))) {
+        if (!(bl3 || MC.mc.player.getPose() == EntityPose.SWIMMING || this.m1053(blockPos14) || this.m1053(blockPos14.east()) || this.m1053(blockPos14.west()) || this.m1053(blockPos14.south()) || this.m1053(blockPos14.north()) || this.m1053(blockPos14.east().south()) || this.m1053(blockPos14.west().south()) || this.m1053(blockPos14.east().north()) || this.m1053(blockPos14.west().north()))) {
             this.m92(d, d2 + 0.4199999868869781, d3, false);
             this.m92(d, d2 + 0.7531999805212017, d3, false);
             this.m92(d, d2 + 0.9999957640154541, d3, false);
@@ -260,9 +260,9 @@ extends Module {
             this.vec3d10 = new Vec3d(d, d2 + 1.1661092609382138, d3);
         } else {
             bl = true;
-            if (!((Boolean)this.fakeMove.getObj()).booleanValue()) {
-                if (!((Boolean)this.wait.getObj()).booleanValue() && ((Boolean)this.disable.getObj()).booleanValue()) {
-                    this.setFlag3(false);
+            if (!((Boolean)this.fakeMove.getValue()).booleanValue()) {
+                if (!((Boolean)this.wait.getValue()).booleanValue() && ((Boolean)this.disable.getValue()).booleanValue()) {
+                    this.setEnabled(false);
                 }
                 if (bl2) {
                     Client.renderUtil3.m608();
@@ -276,15 +276,15 @@ extends Module {
                 return;
             }
         }
-        this.helper745.m533();
+        this.helper745.resetTimer();
         Type type = this.getType4();
         if (type == Type.BYPASS) {
             if (bl) {
-                Vec3d vec3d = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.client3.player.getEyeHeight(MC.client3.player.getPose()), this.vec3d10.z);
-                float[] fArray = MathUtil.m547(vec3d, MC.client3.player.getEntityPos());
+                Vec3d vec3d = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose()), this.vec3d10.z);
+                float[] fArray = MathUtil.m547(vec3d, MC.mc.player.getEntityPos());
                 Client.mathUtil.m303(fArray[0], fArray[1]);
             } else {
-                Client.mathUtil.m303(MC.client3.player.getYaw(), 90.0f);
+                Client.mathUtil.m303(MC.mc.player.getYaw(), 90.0f);
             }
         }
         int n = 0;
@@ -293,25 +293,25 @@ extends Module {
         n += this.m848(blockPos2, (Object)type) ? 1 : 0;
         n += this.m848(blockPos3, (Object)type) ? 1 : 0;
         n += this.m848(blockPos4, (Object)type) ? 1 : 0;
-        if (((Boolean)this.down.getObj()).booleanValue()) {
+        if (((Boolean)this.down.getValue()).booleanValue()) {
             n += this.m848(blockPos9, (Object)type) ? 1 : 0;
             n += this.m848(blockPos10, (Object)type) ? 1 : 0;
             n += this.m848(blockPos11, (Object)type) ? 1 : 0;
             n += this.m848(blockPos12, (Object)type) ? 1 : 0;
         }
-        if (((Boolean)this.headFill.getObj()).booleanValue() && bl) {
+        if (((Boolean)this.headFill.getValue()).booleanValue() && bl) {
             n += this.m848(blockPos5, (Object)type) ? 1 : 0;
             n += this.m848(blockPos6, (Object)type) ? 1 : 0;
             n += this.m848(blockPos7, (Object)type) ? 1 : 0;
             n += this.m848(blockPos8, (Object)type) ? 1 : 0;
         }
         if (n > 0) {
-            this.m632((Object)(bl ? (LagMode)((Object)this.moveLagMode.getObj()) : (LagMode)((Object)this.lagMode.getObj())), d, d2, d3);
+            this.m632((Object)(bl ? (LagMode)((Object)this.moveLagMode.getValue()) : (LagMode)((Object)this.lagMode.getValue())), d, d2, d3);
             if (bl2) {
                 Client.renderUtil3.m608();
             }
-            if (((Boolean)this.disable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+            if (((Boolean)this.disable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
         }
     }
@@ -328,7 +328,7 @@ extends Module {
                 if (null == null) break;
             }
             case 1: {
-                this.m92(d4, d5 - (Double)this.cuiCanHeight.getObj(), d6, false);
+                this.m92(d4, d5 - (Double)this.cuiCanHeight.getValue(), d6, false);
                 if (null == null) break;
             }
             case 3: {
@@ -347,10 +347,10 @@ extends Module {
             double d4 = d;
             double d5 = d2;
             double d6 = d3;
-            double d7 = (Double)this.smartXZ.getObj();
-            double d8 = (Double)this.smartUp.getObj();
-            double d9 = (Double)this.smartDown.getObj();
-            double d10 = (Double)this.smartDistance.getObj();
+            double d7 = (Double)this.smartXZ.getValue();
+            double d8 = (Double)this.smartUp.getValue();
+            double d9 = (Double)this.smartDown.getValue();
+            double d10 = (Double)this.smartDistance.getValue();
             double d11 = Double.MAX_VALUE;
             Object var14_12 = null;
             BlockPos blockPos = null;
@@ -360,9 +360,9 @@ extends Module {
                         BlockPos blockPos2 = BlockPos.ofFloored((double)d12, (double)d14, (double)d13);
                         if (!this.m1048(blockPos2)) continue;
                         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos2).add(0.0, -0.5, 0.0);
-                        double d15 = vec3d.distanceTo(MC.client3.player.getEntityPos());
+                        double d15 = vec3d.distanceTo(MC.mc.player.getEntityPos());
                         if (d15 < d10) continue;
-                        double d16 = MC.client3.player.squaredDistanceTo(vec3d.x, vec3d.y, vec3d.z);
+                        double d16 = MC.mc.player.squaredDistanceTo(vec3d.x, vec3d.y, vec3d.z);
                         if (blockPos != null) {
                             if (!(d16 < d11)) continue;
                         }
@@ -389,7 +389,7 @@ extends Module {
         if (this.list16.contains(blockPos)) {
             return false;
         }
-        if (this.count79 >= this.blocksPer.getInt50()) {
+        if (this.count79 >= this.blocksPer.getInt()) {
             return false;
         }
         Direction direction = this.m124(blockPos);
@@ -399,10 +399,10 @@ extends Module {
         BlockPos blockPos2 = blockPos.offset(direction);
         Direction direction2 = direction.getOpposite();
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos2).add((double)direction2.getOffsetX() * 0.5, (double)direction2.getOffsetY() * 0.5, (double)direction2.getOffsetZ() * 0.5);
-        if (((Boolean)this.sound.getObj()).booleanValue()) {
-            MC.client3.world.playSoundClient((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0f, 0.8f, false);
+        if (((Boolean)this.sound.getValue()).booleanValue()) {
+            MC.mc.world.playSoundClient((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0f, 0.8f, false);
         }
-        Vec3d vec3d2 = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.client3.player.getEyeHeight(MC.client3.player.getPose()), this.vec3d10.z);
+        Vec3d vec3d2 = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose()), this.vec3d10.z);
         float[] fArray = MathUtil.m547(vec3d2, vec3d);
         BlockHitResult blockHitResult = new BlockHitResult(vec3d, direction2, blockPos2, false);
         switch (type.ordinal()) {
@@ -432,10 +432,10 @@ extends Module {
             double[] dArray = new double[]{1.0, 0.0, -1.0};
             Object var2_2 = null;
             ArrayList<BlockPos> arrayList = new ArrayList<BlockPos>();
-            BlockPos blockPos = MC.client3.player.getBlockPos();
+            BlockPos blockPos = MC.mc.player.getBlockPos();
             for (double d : dArray) {
                 for (double d2 : dArray) {
-                    arrayList.add(BlockPos.ofFloored((double)(MC.client3.player.getX() + d), (double)MC.client3.player.getY(), (double)(MC.client3.player.getZ() + d2)));
+                    arrayList.add(BlockPos.ofFloored((double)(MC.mc.player.getX() + d), (double)MC.mc.player.getY(), (double)(MC.mc.player.getZ() + d2)));
                     if (null == null) continue;
                 }
                 if (null == null) continue;
@@ -448,7 +448,7 @@ extends Module {
                         blockPos2 = (BlockPos)iterator.next();
                         if (!this.m76(blockPos2)) break block20;
                         if (this.m102(blockPos2)) break block20;
-                        if (!((Boolean)this.headFill.getObj()).booleanValue()) break block21;
+                        if (!((Boolean)this.headFill.getValue()).booleanValue()) break block21;
                         if (this.m102(blockPos2.up())) break block20;
                     }
                     this.setObj5(blockPos2);
@@ -486,8 +486,8 @@ extends Module {
                 this.setObj5(this.m792(arrayList2));
                 return true;
             }
-            if (((Boolean)this.allowCenter.getObj()).booleanValue()) {
-                List<BlockPos> list = List.of(BlockPos.ofFloored((double)(MC.client3.player.getX() + 1.0), (double)MC.client3.player.getY(), (double)MC.client3.player.getZ()), BlockPos.ofFloored((double)(MC.client3.player.getX() - 1.0), (double)MC.client3.player.getY(), (double)MC.client3.player.getZ()), BlockPos.ofFloored((double)MC.client3.player.getX(), (double)MC.client3.player.getY(), (double)(MC.client3.player.getZ() - 1.0)), BlockPos.ofFloored((double)MC.client3.player.getX(), (double)MC.client3.player.getY(), (double)(MC.client3.player.getZ() + 1.0)));
+            if (((Boolean)this.allowCenter.getValue()).booleanValue()) {
+                List<BlockPos> list = List.of(BlockPos.ofFloored((double)(MC.mc.player.getX() + 1.0), (double)MC.mc.player.getY(), (double)MC.mc.player.getZ()), BlockPos.ofFloored((double)(MC.mc.player.getX() - 1.0), (double)MC.mc.player.getY(), (double)MC.mc.player.getZ()), BlockPos.ofFloored((double)MC.mc.player.getX(), (double)MC.mc.player.getY(), (double)(MC.mc.player.getZ() - 1.0)), BlockPos.ofFloored((double)MC.mc.player.getX(), (double)MC.mc.player.getY(), (double)(MC.mc.player.getZ() + 1.0)));
                 Iterator iterator9 = list.iterator();
                 while (iterator9.hasNext()) {
                     BlockPos blockPos5 = (BlockPos)iterator9.next();
@@ -499,9 +499,9 @@ extends Module {
                     break;
                 }
             }
-            if (((Boolean)this.wait.getObj()).booleanValue()) break block22;
-            if (((Boolean)this.disable.getObj()).booleanValue()) {
-                this.setFlag3(false);
+            if (((Boolean)this.wait.getValue()).booleanValue()) break block22;
+            if (((Boolean)this.disable.getValue()).booleanValue()) {
+                this.setEnabled(false);
             }
         }
         return false;
@@ -513,11 +513,11 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         double d3 = (double)blockPos.getX() + 0.5;
         double d4 = (double)blockPos.getZ() + 0.5;
-        double d5 = MC.client3.player.getX();
-        double d6 = MC.client3.player.getZ();
+        double d5 = MC.mc.player.getX();
+        double d6 = MC.mc.player.getZ();
         Object var4_7 = null;
-        double d7 = MC.client3.player.getY() + (Double)this.yOffset.getObj();
-        double d8 = (Double)this.preCorrect.getObj();
+        double d7 = MC.mc.player.getY() + (Double)this.yOffset.getValue();
+        double d8 = (Double)this.preCorrect.getValue();
         if (d8 > 0.0) {
             d2 = Math.abs(d5 - d3);
             d = Math.abs(d6 - d4);
@@ -528,7 +528,7 @@ extends Module {
                 this.m92(d5, d7, d6 += d6 > d4 ? -d8 : d8, false);
             }
         }
-        d8 = (Double)this.moveDis.getObj();
+        d8 = (Double)this.moveDis.getValue();
         if (d8 > 0.0) {
             d2 = Math.abs(d5 - d3);
             while (d2 > d8) {
@@ -543,7 +543,7 @@ extends Module {
                 if (null == null) continue;
             }
         }
-        d8 = (Double)this.moveDis2.getObj();
+        d8 = (Double)this.moveDis2.getValue();
         if (d8 > 0.0) {
             d2 = Math.abs(d5 - d3);
             while (d2 > d8) {
@@ -558,7 +558,7 @@ extends Module {
                 if (null == null) continue;
             }
         }
-        d8 = (Double)this.correct.getObj();
+        d8 = (Double)this.correct.getValue();
         if (d8 > 0.0) {
             d2 = Math.abs(d5 - d3);
             d = Math.abs(d6 - d4);
@@ -577,7 +577,7 @@ extends Module {
         double d5 = d2;
         double d6 = d3;
         boolean bl2 = bl;
-        MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, false));
+        MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.PositionAndOnGround(d4, d5, d6, bl2, false));
     }
 
     /*
@@ -587,8 +587,8 @@ extends Module {
     private boolean m1048(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (!MC.client3.world.getBlockState(blockPos).isAir()) return false;
-        if (!MC.client3.world.getBlockState(blockPos.up()).isAir()) return false;
+        if (!MC.mc.world.getBlockState(blockPos).isAir()) return false;
+        if (!MC.mc.world.getBlockState(blockPos.up()).isAir()) return false;
         return true;
     }
 
@@ -598,7 +598,7 @@ extends Module {
      */
     private boolean m102(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         Object var4_4 = null;
         if (blockState.isAir()) return true;
         if (!blockState.isReplaceable()) return false;
@@ -611,7 +611,7 @@ extends Module {
      */
     private boolean m922(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         Object var4_4 = null;
         if (blockState.isAir()) return false;
         if (blockState.isReplaceable()) return false;
@@ -635,8 +635,8 @@ extends Module {
     private boolean m1026(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (((Boolean)this.noSelfPos.getObj()).booleanValue()) {
-            if (blockPos.equals((Object)MC.client3.player.getBlockPos())) {
+        if (((Boolean)this.noSelfPos.getValue()).booleanValue()) {
+            if (blockPos.equals((Object)MC.mc.player.getBlockPos())) {
                 return false;
             }
         }
@@ -651,7 +651,7 @@ extends Module {
 
     private boolean m76(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        return MC.client3.player.getBoundingBox().intersects(new Box(blockPos));
+        return MC.mc.player.getBoundingBox().intersects(new Box(blockPos));
     }
 
     /*
@@ -659,7 +659,7 @@ extends Module {
      */
     private boolean m1053(Object var1_1) {
         BlockPos blockPos = (BlockPos)var1_1;
-        BlockState blockState = MC.client3.world.getBlockState(blockPos);
+        BlockState blockState = MC.mc.world.getBlockState(blockPos);
         boolean bl = !blockState.isAir() && !blockState.isReplaceable() && blockState.getFluidState().isEmpty();
         boolean bl2 = blockState.isOf(Blocks.COBWEB);
         return (bl || bl2) && this.m76(blockPos.down(2));
@@ -669,33 +669,33 @@ extends Module {
         block3: {
             block2: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block2;
-                if (MC.client3.world != null) break block3;
+                if (MC.mc.player == null) break block2;
+                if (MC.mc.world != null) break block3;
             }
             return false;
         }
-        return MC.client3.world.getBlockState(MC.client3.player.getBlockPos()).isOf(Blocks.COBWEB);
+        return MC.mc.world.getBlockState(MC.mc.player.getBlockPos()).isOf(Blocks.COBWEB);
     }
 
     private boolean isSet97() {
         block3: {
             block2: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block2;
-                if (MC.client3.world != null) break block3;
+                if (MC.mc.player == null) break block2;
+                if (MC.mc.world != null) break block3;
             }
             return false;
         }
-        return !MC.client3.world.isSpaceEmpty((Entity)MC.client3.player, MC.client3.player.getBoundingBox());
+        return !MC.mc.world.isSpaceEmpty((Entity)MC.mc.player, MC.mc.player.getBoundingBox());
     }
 
     private boolean m163(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        Iterator iterator = MC.client3.world.getOtherEntities(null, new Box(blockPos)).iterator();
+        Iterator iterator = MC.mc.world.getOtherEntities(null, new Box(blockPos)).iterator();
         Object var4_4 = null;
         while (iterator.hasNext()) {
             Entity entity = (Entity)iterator.next();
-            if (entity == MC.client3.player) continue;
+            if (entity == MC.mc.player) continue;
             if (!entity.isAlive() || entity instanceof ItemEntity) continue;
             if (entity instanceof ExperienceOrbEntity) continue;
             if (entity instanceof ExperienceBottleEntity) continue;
@@ -703,7 +703,7 @@ extends Module {
                 if (null == null) continue;
             }
             if (entity instanceof EndCrystalEntity) {
-                if (((Boolean)this.break_.getObj()).booleanValue()) continue;
+                if (((Boolean)this.break_.getValue()).booleanValue()) continue;
             }
             return true;
         }
@@ -712,13 +712,13 @@ extends Module {
 
     private void setObj24(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        Iterator iterator = MC.client3.world.getOtherEntities(null, new Box(blockPos)).iterator();
+        Iterator iterator = MC.mc.world.getOtherEntities(null, new Box(blockPos)).iterator();
         Object var4_4 = null;
         while (iterator.hasNext()) {
             Entity entity = (Entity)iterator.next();
             if (!(entity instanceof EndCrystalEntity) || !entity.isAlive()) continue;
-            MC.client3.interactionManager.attackEntity((PlayerEntity)MC.client3.player, entity);
-            MC.client3.player.swingHand(Hand.MAIN_HAND);
+            MC.mc.interactionManager.attackEntity((PlayerEntity)MC.mc.player, entity);
+            MC.mc.player.swingHand(Hand.MAIN_HAND);
             if (null == null) continue;
         }
     }
@@ -728,7 +728,7 @@ extends Module {
         BlockPos blockPos = null;
         Object var4_4 = null;
         double d = Double.MAX_VALUE;
-        Vec3d vec3d = MC.client3.player.getEntityPos();
+        Vec3d vec3d = MC.mc.player.getEntityPos();
         for (Object listElem : list) {
             BlockPos blockPos2 = (BlockPos)listElem;
             block4: {
@@ -758,11 +758,11 @@ extends Module {
             }
             return false;
         }
-        return blockItem.getBlock() == Blocks.OBSIDIAN || (Boolean)this.enderChest.getObj() != false && blockItem.getBlock() == Blocks.ENDER_CHEST;
+        return blockItem.getBlock() == Blocks.OBSIDIAN || (Boolean)this.enderChest.getValue() != false && blockItem.getBlock() == Blocks.ENDER_CHEST;
     }
 
     private Type getType4() {
-        return switch (((RotateMode)((Object)this.rotateMode.getObj())).ordinal()) {
+        return switch (((RotateMode)((Object)this.rotateMode.getValue())).ordinal()) {
             default -> throw new MatchException(null, null);
             case 2 -> Type.NONE;
             case 1, 4, 5 -> Type.NORMAL;
@@ -773,10 +773,10 @@ extends Module {
 
     private ClientSetting.SwitchMode getSwitchMode3() {
         Object var2_1 = null;
-        if (this.switchMode.getObj() == SwitchMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getObj()) : ClientSetting.SwitchMode.NONE;
+        if (this.switchMode.getValue() == SwitchMode.DEFAULT) {
+            return ClientSetting.INSTANCE != null ? (ClientSetting.SwitchMode)((Object)ClientSetting.INSTANCE.switchMode.getValue()) : ClientSetting.SwitchMode.NONE;
         }
-        return switch (((SwitchMode)((Object)this.switchMode.getObj())).ordinal()) {
+        return switch (((SwitchMode)((Object)this.switchMode.getValue())).ordinal()) {
             case 1 -> ClientSetting.SwitchMode.NONE;
             case 2 -> ClientSetting.SwitchMode.NORMAL;
             case 3 -> ClientSetting.SwitchMode.SILENT;

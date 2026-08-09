@@ -13,7 +13,7 @@ import shit.setting.NumberSetting;
 public class Fullbright
 extends Module {
     public static Fullbright INSTANCE;
-    public final NumberSetting gamma = (NumberSetting)this.m28(new NumberSetting("Brightness", 1.0, 0.1, 1.0, 0.05));
+    public final NumberSetting gamma = (NumberSetting)this.registerSetting(new NumberSetting("Brightness", 1.0, 0.1, 1.0, 0.05));
 
     public Fullbright() {
         super("Fullbright", "Fully brightens the world (forces the lightmap).", Category.RENDER);

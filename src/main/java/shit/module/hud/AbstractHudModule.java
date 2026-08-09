@@ -22,25 +22,25 @@ extends Module
 implements Listener3 {
     private final NumberSetting x;
     private final NumberSetting y;
-    protected final BooleanSetting shadow = (BooleanSetting)this.m28(new BooleanSetting("Shadow", true));
-    protected final ColorSetting color = (ColorSetting)this.m28(new ColorSetting("Color", -1184275));
-    protected final ColorSetting accent = (ColorSetting)this.m28(new ColorSetting("Accent", -9971969));
+    protected final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));
+    protected final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1184275));
+    protected final ColorSetting accent = (ColorSetting)this.registerSetting(new ColorSetting("Accent", -9971969));
     private static boolean flag22;
 
     protected AbstractHudModule(String string, String string2, int n, int n2) {
         super(string, string2, Category.HUD);
-        this.x = (NumberSetting)this.m28(new NumberSetting("X", n, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-        this.y = (NumberSetting)this.m28(new NumberSetting("Y", n2, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+        this.x = (NumberSetting)this.registerSetting(new NumberSetting("X", n, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+        this.y = (NumberSetting)this.registerSetting(new NumberSetting("Y", n2, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
@@ -52,7 +52,7 @@ implements Listener3 {
             boolean bl = AbstractHudModule.isSet32();
             while (iterator.hasNext()) {
                 String string = (String)iterator.next();
-                n = Math.max(n2, Client.fontManager.renderer2().m277(string));
+                n = Math.max(n2, Client.fontManager.renderer2().getStringWidth(string));
                 if (!bl) {
                     n2 = n;
                     if (!bl) continue;
@@ -65,20 +65,20 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt28() {
-        return Math.max(1, this.lines().size()) * this.getInt75();
+    public int getHudHeight() {
+        return Math.max(1, this.lines().size()) * this.getLineHeight();
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     @Override
-    public void m368(Object object, boolean n) {
+    public void renderHud(Object object, boolean n) {
         int n2;
         boolean bl;
         List<String> list;
@@ -95,21 +95,21 @@ implements Listener3 {
                 n2 = n3;
                 if (bl) break block5;
                 if (n2 != 0) {
-                    list = List.of(this.getText43());
+                    list = List.of(this.getDisplayName());
                 }
             }
-            n2 = this.y.getInt50();
+            n2 = this.y.getInt();
         }
         int n4 = n2;
         for (String string : list) {
-            Client.fontManager.renderer2().m5(drawContext, string, this.x.getInt50(), n4, (Integer)this.color.getObj(), (Boolean)this.shadow.getObj());
-            n4 += this.getInt75();
+            Client.fontManager.renderer2().drawText(drawContext, string, this.x.getInt(), n4, (Integer)this.color.getValue(), (Boolean)this.shadow.getValue());
+            n4 += this.getLineHeight();
             if (!bl) continue;
         }
     }
 
-    protected int getInt75() {
-        return Client.fontManager.renderer2().getInt19() + 1;
+    protected int getLineHeight() {
+        return Client.fontManager.renderer2().getFontHeight() + 1;
     }
 
     protected abstract List lines();

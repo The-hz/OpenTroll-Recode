@@ -27,10 +27,10 @@ import shit.util.Util2;
 @Environment(value=EnvType.CLIENT)
 public class Spammer
 extends Module {
-    private final EnumSetting order = (EnumSetting)this.m28(new EnumSetting("Order", OrderMode.RANDOM));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 10.0, 1.0, 180.0, 1.0));
-    private final BooleanSetting loadFromURL = (BooleanSetting)this.m28(new BooleanSetting("LoadFromURL", false));
-    private final StringSetting remoteURL = (StringSetting)this.m28(new StringSetting("RemoteURL", "unchanged"));
+    private final EnumSetting order = (EnumSetting)this.registerSetting(new EnumSetting("Order", OrderMode.RANDOM));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 10.0, 1.0, 180.0, 1.0));
+    private final BooleanSetting loadFromURL = (BooleanSetting)this.registerSetting(new BooleanSetting("LoadFromURL", false));
+    private final StringSetting remoteURL = (StringSetting)this.registerSetting(new StringSetting("RemoteURL", "unchanged"));
     private final List list27 = new ArrayList();
     private final Random random2 = new Random();
     private int count226 = 0;
@@ -49,11 +49,11 @@ extends Module {
     public void onEnable() {
         this.list27.clear();
         this.count226 = 0;
-        if (((Boolean)this.loadFromURL.getObj()).booleanValue()) {
-            String url = (String)this.remoteURL.getObj();
+        if (((Boolean)this.loadFromURL.getValue()).booleanValue()) {
+            String url = (String)this.remoteURL.getValue();
             if (url.equals("unchanged")) {
-                Util2.setObj10("\u00a7c[Spammer] Change RemoteURL in ClickGUI first!");
-                this.setFlag3(false);
+                Util2.sendClientMessage("\u00a7c[Spammer] Change RemoteURL in ClickGUI first!");
+                this.setEnabled(false);
                 return;
             }
             Thread thread = new Thread(() -> this.cfrlam$onEnable$0(url), "spammer-loader");
@@ -66,8 +66,8 @@ extends Module {
                 file.createNewFile();
             }
             catch (IOException iOException) {}
-            Util2.setObj10("\u00a7c[Spammer] spammer.txt not found, created empty file. Add messages to it.");
-            this.setFlag3(false);
+            Util2.sendClientMessage("\u00a7c[Spammer] spammer.txt not found, created empty file. Add messages to it.");
+            this.setEnabled(false);
             return;
         }
         try {
@@ -77,20 +77,20 @@ extends Module {
                 this.list27.add(string2);
             }
             if (this.list27.isEmpty()) {
-                Util2.setObj10("\u00a7c[Spammer] spammer.txt is empty!");
-                this.setFlag3(false);
+                Util2.sendClientMessage("\u00a7c[Spammer] spammer.txt is empty!");
+                this.setEnabled(false);
                 return;
             }
-            Util2.setObj10("\u00a7a[Spammer] Loaded " + this.list27.size() + " messages.");
+            Util2.sendClientMessage("\u00a7a[Spammer] Loaded " + this.list27.size() + " messages.");
         }
         catch (IOException iOException) {
-            Util2.setObj10("\u00a7c[Spammer] Failed to read spammer.txt: " + iOException.getMessage());
-            this.setFlag3(false);
+            Util2.sendClientMessage("\u00a7c[Spammer] Failed to read spammer.txt: " + iOException.getMessage());
+            this.setEnabled(false);
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.list27.clear();
         this.count226 = 0;
     }
@@ -99,19 +99,19 @@ extends Module {
     private void setEvent2Inner28(Event2.Event2Inner2 event2Inner2) {
         String string;
         long l;
-        if (Module.isSet37() || this.list27.isEmpty()) {
+        if (Module.isNotInGame() || this.list27.isEmpty()) {
             return;
         }
         long l2 = System.currentTimeMillis();
-        if (l2 - this.time60 < (l = (long)((Double)this.delay.getObj() * 1000.0))) {
+        if (l2 - this.time60 < (l = (long)((Double)this.delay.getValue() * 1000.0))) {
             return;
         }
         this.time60 = l2;
-        String string2 = string = this.order.getObj() == OrderMode.IN_ORDER ? this.getText49() : this.getText12();
+        String string2 = string = this.order.getValue() == OrderMode.IN_ORDER ? this.getText49() : this.getText12();
         if (string.startsWith("/")) {
-            Util2.setObj14(string.substring(1));
+            Util2.sendChatCommand(string.substring(1));
         } else {
-            Util2.setObj62(string);
+            Util2.sendChatMessage(string);
         }
     }
 
@@ -172,11 +172,11 @@ extends Module {
                 }
                 n = this.list27.size();
             }
-            Util2.setObj10("\u00a7a[Spammer] Loaded " + n + " remote messages.");
+            Util2.sendClientMessage("\u00a7a[Spammer] Loaded " + n + " remote messages.");
         }
         catch (Exception exception) {
-            Util2.setObj10("\u00a7c[Spammer] Failed to load URL: " + exception.getMessage());
-            this.setFlag3(false);
+            Util2.sendClientMessage("\u00a7c[Spammer] Failed to load URL: " + exception.getMessage());
+            this.setEnabled(false);
         }
     }
 

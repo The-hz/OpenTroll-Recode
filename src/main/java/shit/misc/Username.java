@@ -20,12 +20,12 @@ extends AbstractHudModule {
     @Override
     protected List lines() {
         boolean bl = AbstractHudModule.isSet32();
-        ClientPlayerEntity clientPlayerEntity = MC.client3.player;
+        ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (!bl) {
             if (clientPlayerEntity == null) {
                 return List.of("Username Player");
             }
-            clientPlayerEntity = MC.client3.player;
+            clientPlayerEntity = MC.mc.player;
         }
         return List.of("Username " + clientPlayerEntity.getName().getString());
     }

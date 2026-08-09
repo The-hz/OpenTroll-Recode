@@ -21,8 +21,8 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner32(Event2.Event2Inner event2Inner) {
-        if (!Module.isSet37()) {
-            MC.client3.player.removeStatusEffect(StatusEffects.LEVITATION);
+        if (!Module.isNotInGame()) {
+            MC.mc.player.removeStatusEffect(StatusEffects.LEVITATION);
         }
     }
 }

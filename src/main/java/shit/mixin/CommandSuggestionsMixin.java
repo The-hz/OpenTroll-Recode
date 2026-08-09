@@ -35,7 +35,7 @@ public abstract class CommandSuggestionsMixin {
 
     @Inject(method={"refresh()V"}, at={@At(value="HEAD")}, cancellable=true)
     private void setCallbackInfo4(CallbackInfo callbackInfo) {
-        String string = Client.commandManager.getText10();
+        String string = Client.commandManager.getPrefix();
         String string2 = this.textField.getText();
         if (!string2.startsWith(string)) {
             return;

@@ -100,84 +100,84 @@ extends Module {
 
         public Shaders() {
         super("Shaders", "Renders outline shaders over entities", Category.RENDER);
-        this.range = (NumberSetting)this.m28(new NumberSetting("Range", 30.0, 0.0, 250.0));
-        this.players = (BooleanSetting)this.m28(new BooleanSetting("Players", true));
-        this.self = (BooleanSetting)this.m28(new BooleanSetting("Self", true));
-        this.hostiles = (BooleanSetting)this.m28(new BooleanSetting("Hostiles", true));
-        this.passives = (BooleanSetting)this.m28(new BooleanSetting("Passives", true));
-        this.crystals = (BooleanSetting)this.m28(new BooleanSetting("Crystals", true));
-        this.items = (BooleanSetting)this.m28(new BooleanSetting("Items", true));
-        this.xP = (BooleanSetting)this.m28(new BooleanSetting("XP", true));
-        this.pearls = (BooleanSetting)this.m28(new BooleanSetting("Pearls", true));
-        this.width = (NumberSetting)this.m28(new NumberSetting("Width", 1.0, 0.0, 5.0, 0.1));
-        this.outlineAlpha = (NumberSetting)this.m28(new NumberSetting("OutlineAlpha", 1.0, 0.01, 1.0, 0.01));
-        this.fillMode = (EnumSetting)this.m28(new EnumSetting("FillMode", FillMode.DEFAULT));
-        this.fillAlpha = (NumberSetting)this.m28(new NumberSetting("FillAlpha", 0.5, 0.0, 1.0, 0.01));
-        this.color = (ColorSetting)this.m28(new ColorSetting("Color", -12285697));
-        this.gradientFactor = (NumberSetting)this.m28(new NumberSetting("GradientFactor", 5.0, 0.1, 10.0, 0.1));
-        this.gradientColor = (ColorSetting)this.m28(new ColorSetting("GradientColor", -1));
-        this.flowLayers = (NumberSetting)this.m28(new NumberSetting("FlowLayers", 10.0, 1.0, 10.0, 1.0));
-        this.flowFactor = (NumberSetting)this.m28(new NumberSetting("FlowFactor", 0.6, 0.1, 1.0, 0.05));
-        this.liquidLayers = (NumberSetting)this.m28(new NumberSetting("LiquidLayers", 5.0, 1.0, 10.0, 1.0));
-        this.liquidFactor = (NumberSetting)this.m28(new NumberSetting("LiquidFactor", 5.0, 1.0, 10.0, 0.5));
-        this.quality = (NumberSetting)this.m28(new NumberSetting("Quality", 1.0, 0.1, 3.0, 0.1));
-        this.octaves = (NumberSetting)this.m28(new NumberSetting("Octaves", 4.0, 1.0, 8.0, 1.0));
-        this.noiseScale = (NumberSetting)this.m28(new NumberSetting("NoiseScale", 1.0, 0.1, 10.0, 0.1));
-        this.secondaryAlpha = (NumberSetting)this.m28(new NumberSetting("SecondaryAlpha", 0.5, 0.0, 1.0, 0.01));
-        this.smokeGlow = (BooleanSetting)this.m28(new BooleanSetting("SmokeGlow", false));
-        this.smokeOutlineColor1 = (ColorSetting)this.m28(new ColorSetting("SmokeOutlineColor1", -5592406));
-        this.smokeOutlineColor2 = (ColorSetting)this.m28(new ColorSetting("SmokeOutlineColor2", -12303292));
-        this.fillColor2 = (ColorSetting)this.m28(new ColorSetting("FillColor2", -3355444));
-        this.fillColor3 = (ColorSetting)this.m28(new ColorSetting("FillColor3", -10066330));
+        this.range = (NumberSetting)this.registerSetting(new NumberSetting("Range", 30.0, 0.0, 250.0));
+        this.players = (BooleanSetting)this.registerSetting(new BooleanSetting("Players", true));
+        this.self = (BooleanSetting)this.registerSetting(new BooleanSetting("Self", true));
+        this.hostiles = (BooleanSetting)this.registerSetting(new BooleanSetting("Hostiles", true));
+        this.passives = (BooleanSetting)this.registerSetting(new BooleanSetting("Passives", true));
+        this.crystals = (BooleanSetting)this.registerSetting(new BooleanSetting("Crystals", true));
+        this.items = (BooleanSetting)this.registerSetting(new BooleanSetting("Items", true));
+        this.xP = (BooleanSetting)this.registerSetting(new BooleanSetting("XP", true));
+        this.pearls = (BooleanSetting)this.registerSetting(new BooleanSetting("Pearls", true));
+        this.width = (NumberSetting)this.registerSetting(new NumberSetting("Width", 1.0, 0.0, 5.0, 0.1));
+        this.outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 1.0, 0.01, 1.0, 0.01));
+        this.fillMode = (EnumSetting)this.registerSetting(new EnumSetting("FillMode", FillMode.DEFAULT));
+        this.fillAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FillAlpha", 0.5, 0.0, 1.0, 0.01));
+        this.color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -12285697));
+        this.gradientFactor = (NumberSetting)this.registerSetting(new NumberSetting("GradientFactor", 5.0, 0.1, 10.0, 0.1));
+        this.gradientColor = (ColorSetting)this.registerSetting(new ColorSetting("GradientColor", -1));
+        this.flowLayers = (NumberSetting)this.registerSetting(new NumberSetting("FlowLayers", 10.0, 1.0, 10.0, 1.0));
+        this.flowFactor = (NumberSetting)this.registerSetting(new NumberSetting("FlowFactor", 0.6, 0.1, 1.0, 0.05));
+        this.liquidLayers = (NumberSetting)this.registerSetting(new NumberSetting("LiquidLayers", 5.0, 1.0, 10.0, 1.0));
+        this.liquidFactor = (NumberSetting)this.registerSetting(new NumberSetting("LiquidFactor", 5.0, 1.0, 10.0, 0.5));
+        this.quality = (NumberSetting)this.registerSetting(new NumberSetting("Quality", 1.0, 0.1, 3.0, 0.1));
+        this.octaves = (NumberSetting)this.registerSetting(new NumberSetting("Octaves", 4.0, 1.0, 8.0, 1.0));
+        this.noiseScale = (NumberSetting)this.registerSetting(new NumberSetting("NoiseScale", 1.0, 0.1, 10.0, 0.1));
+        this.secondaryAlpha = (NumberSetting)this.registerSetting(new NumberSetting("SecondaryAlpha", 0.5, 0.0, 1.0, 0.01));
+        this.smokeGlow = (BooleanSetting)this.registerSetting(new BooleanSetting("SmokeGlow", false));
+        this.smokeOutlineColor1 = (ColorSetting)this.registerSetting(new ColorSetting("SmokeOutlineColor1", -5592406));
+        this.smokeOutlineColor2 = (ColorSetting)this.registerSetting(new ColorSetting("SmokeOutlineColor2", -12303292));
+        this.fillColor2 = (ColorSetting)this.registerSetting(new ColorSetting("FillColor2", -3355444));
+        this.fillColor3 = (ColorSetting)this.registerSetting(new ColorSetting("FillColor3", -10066330));
         this.passthrough2 = new Passthrough2();
         this.flag126 = false;
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         this.passthrough2.m1012();
         this.flag126 = false;
     }
 
     public boolean m459(Object object) {
         Entity entity = (Entity)object;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return false;
         }
-        double range = (Double)this.range.getObj() * (Double)this.range.getObj();
-        if (entity.squaredDistanceTo(MC.client3.player) > range) {
+        double range = (Double)this.range.getValue() * (Double)this.range.getValue();
+        if (entity.squaredDistanceTo(MC.mc.player) > range) {
             return false;
         }
         if (entity instanceof PlayerEntity) {
-            if (entity == MC.client3.player) {
-                return (Boolean)this.self.getObj();
+            if (entity == MC.mc.player) {
+                return (Boolean)this.self.getValue();
             }
-            return (Boolean)this.players.getObj();
+            return (Boolean)this.players.getValue();
         }
         if (entity instanceof HostileEntity) {
-            return (Boolean)this.hostiles.getObj();
+            return (Boolean)this.hostiles.getValue();
         }
         if (entity instanceof AnimalEntity) {
-            return (Boolean)this.passives.getObj();
+            return (Boolean)this.passives.getValue();
         }
         if (entity instanceof ItemEntity) {
-            return (Boolean)this.items.getObj();
+            return (Boolean)this.items.getValue();
         }
         if (entity instanceof ExperienceBottleEntity) {
-            return (Boolean)this.xP.getObj();
+            return (Boolean)this.xP.getValue();
         }
         if (entity instanceof EnderPearlEntity) {
-            return (Boolean)this.pearls.getObj();
+            return (Boolean)this.pearls.getValue();
         }
         if (entity instanceof EndCrystalEntity) {
-            return (Boolean)this.crystals.getObj();
+            return (Boolean)this.crystals.getValue();
         }
         return false;
     }
 
     public int m743(Object object) {
         Entity cfr_ignored_0 = (Entity)object;
-        return (Integer)this.color.getObj() | 0xFF000000;
+        return (Integer)this.color.getValue() | 0xFF000000;
     }
 
     @EventHandler
@@ -185,11 +185,11 @@ extends Module {
         Object object;
         boolean bl = this.flag126;
         this.flag126 = false;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         if (!bl) {
-            interceptEntityOutlineEvent.m209();
+            interceptEntityOutlineEvent.cancel();
             return;
         }
         LevelRendererAccessor levelRendererAccessor = (LevelRendererAccessor)interceptEntityOutlineEvent.getObj17();
@@ -197,7 +197,7 @@ extends Module {
         if (framebuffer == null) {
             return;
         }
-        FillMode fillMode = (FillMode)((Object)this.fillMode.getObj());
+        FillMode fillMode = (FillMode)((Object)this.fillMode.getValue());
         if (Shaders.m473((Object)fillMode)) {
             object = switch (fillMode.ordinal()) {
                 case 5 -> ShaderEffect.Type.Smoke;
@@ -205,35 +205,35 @@ extends Module {
                 case 7 -> ShaderEffect.Type.Fade;
                 default -> ShaderEffect.Type.Default;
             };
-            ShaderEffect.Data data = new ShaderEffect.Data(this.quality.getFloat35(), this.width.getFloat35(), (Boolean)this.smokeGlow.getObj(), this.fillAlpha.getFloat35() * 255.0f, this.secondaryAlpha.getFloat35() * 255.0f, this.gradientFactor.getFloat35(), this.noiseScale.getFloat35(), this.octaves.getFloat35());
-            ShaderEffect.Data4 data4 = new ShaderEffect.Data4(Shaders.m1008((Integer)this.color.getObj()), Shaders.m1008((Integer)this.smokeOutlineColor1.getObj()), Shaders.m1008((Integer)this.smokeOutlineColor2.getObj()), Shaders.m1008((Integer)this.color.getObj()), Shaders.m1008((Integer)this.fillColor2.getObj()), Shaders.m1008((Integer)this.fillColor3.getObj()));
+            ShaderEffect.Data data = new ShaderEffect.Data(this.quality.getFloat(), this.width.getFloat(), (Boolean)this.smokeGlow.getValue(), this.fillAlpha.getFloat() * 255.0f, this.secondaryAlpha.getFloat() * 255.0f, this.gradientFactor.getFloat(), this.noiseScale.getFloat(), this.octaves.getFloat());
+            ShaderEffect.Data4 data4 = new ShaderEffect.Data4(Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor1.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor2.getValue()), Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.fillColor2.getValue()), Shaders.m1008((Integer)this.fillColor3.getValue()));
             ShaderEffect.shaderEffect.m987(framebuffer, object, data, data4);
         } else {
             ShadersUtil shadersUtil = new ShadersUtil();
             shadersUtil.value204 = System.currentTimeMillis() - time77;
-            shadersUtil.value192 = this.width.getFloat35();
-            shadersUtil.value111 = this.outlineAlpha.getFloat35();
+            shadersUtil.value192 = this.width.getFloat();
+            shadersUtil.value111 = this.outlineAlpha.getFloat();
             shadersUtil.count83 = fillMode.ordinal();
-            shadersUtil.value183 = this.fillAlpha.getFloat35();
-            shadersUtil.value176 = MC.client3.getWindow().getFramebufferWidth();
-            shadersUtil.value148 = MC.client3.getWindow().getFramebufferHeight();
-            int n = (Integer)this.gradientColor.getObj();
+            shadersUtil.value183 = this.fillAlpha.getFloat();
+            shadersUtil.value176 = MC.mc.getWindow().getFramebufferWidth();
+            shadersUtil.value148 = MC.mc.getWindow().getFramebufferHeight();
+            int n = (Integer)this.gradientColor.getValue();
             shadersUtil.value115 = (float)ColorHelper.getRed((int)n) / 255.0f;
             shadersUtil.value133 = (float)ColorHelper.getGreen((int)n) / 255.0f;
             shadersUtil.value116 = (float)ColorHelper.getBlue((int)n) / 255.0f;
             shadersUtil.value138 = (float)ColorHelper.getAlpha((int)n) / 255.0f;
-            shadersUtil.value134 = this.gradientFactor.getFloat35() * 16.0f;
-            shadersUtil.value131 = this.flowLayers.getFloat35();
-            shadersUtil.value135 = this.flowFactor.getFloat35();
-            shadersUtil.value128 = this.liquidLayers.getFloat35();
-            shadersUtil.value156 = this.liquidFactor.getFloat35();
+            shadersUtil.value134 = this.gradientFactor.getFloat() * 16.0f;
+            shadersUtil.value131 = this.flowLayers.getFloat();
+            shadersUtil.value135 = this.flowFactor.getFloat();
+            shadersUtil.value128 = this.liquidLayers.getFloat();
+            shadersUtil.value156 = this.liquidFactor.getFloat();
             this.passthrough2.m487(framebuffer, interceptEntityOutlineEvent.getObj5(), shadersUtil, false);
         }
         Framebuffer framebuffer2 = MinecraftClient.getInstance().getFramebuffer();
         if (framebuffer2 != null) {
             framebuffer.drawBlit(framebuffer2.getColorAttachmentView());
         }
-        interceptEntityOutlineEvent.m209();
+        interceptEntityOutlineEvent.cancel();
     }
 
     private static Color m1008(int n) {

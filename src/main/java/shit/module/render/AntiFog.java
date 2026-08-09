@@ -25,7 +25,7 @@ extends Module {
     public static boolean isSet25() {
         Object var1 = null;
         if (INSTANCE == null) return false;
-        if (!INSTANCE.isSet19()) return false;
+        if (!INSTANCE.isEnabled()) return false;
         return true;
     }
 }

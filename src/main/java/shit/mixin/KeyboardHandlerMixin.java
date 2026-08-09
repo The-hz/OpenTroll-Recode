@@ -22,8 +22,8 @@ import shit.setting.ColorSetting2;
 public class KeyboardHandlerMixin {
     @Inject(method={"onKey(JILnet/minecraft/client/input/KeyInput;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$keyPress(long l, int n, KeyInput keyInput, CallbackInfo callbackInfo) {
-        KeyPressEvent keyPressEvent = (KeyPressEvent)Client.eventBus.m287(new KeyPressEvent(n, keyInput));
-        if (keyPressEvent.isSet85()) {
+        KeyPressEvent keyPressEvent = (KeyPressEvent)Client.eventBus.post(new KeyPressEvent(n, keyInput));
+        if (keyPressEvent.isCancelled()) {
             callbackInfo.cancel();
             return;
         }
@@ -33,20 +33,20 @@ public class KeyboardHandlerMixin {
         if (MinecraftClient.getInstance().currentScreen != null) {
             return;
         }
-        for (Module module : Client.moduleManager.getList6()) {
-            ColorSetting2 colorSetting2 = module.getColorSetting2();
-            if (((Integer)colorSetting2.getObj()).intValue() != keyInput.key()) continue;
+        for (Module module : Client.moduleManager.getModules()) {
+            ColorSetting2 colorSetting2 = module.getKeyBindSetting();
+            if (((Integer)colorSetting2.getValue()).intValue() != keyInput.key()) continue;
             if (n == 1) {
                 if (colorSetting2.getType() == ColorSetting2.Type.Toggle) {
-                    module.m84();
+                    module.toggle();
                     continue;
                 }
                 if (colorSetting2.getType() != ColorSetting2.Type.Hold) continue;
-                module.setFlag3(true);
+                module.setEnabled(true);
                 continue;
             }
             if (n != 0 || colorSetting2.getType() != ColorSetting2.Type.Hold) continue;
-            module.setFlag3(false);
+            module.setEnabled(false);
         }
     }
 }

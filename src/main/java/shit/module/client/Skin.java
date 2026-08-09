@@ -25,10 +25,10 @@ import shit.setting.StringSetting;
 public class Skin
 extends Module {
     public static Skin INSTANCE;
-    private final StringSetting name = (StringSetting)this.m28(new StringSetting("Name", "Notch"));
-    private final EnumSetting model = (EnumSetting)this.m28(new EnumSetting("Model", Model.AUTO));
-    private final BooleanSetting cape = (BooleanSetting)this.m28(new BooleanSetting("Cape", true));
-    private final EnumSetting capeType = (EnumSetting)this.m28(new EnumSetting("CapeType", EMode.MELON));
+    private final StringSetting name = (StringSetting)this.registerSetting(new StringSetting("Name", "Notch"));
+    private final EnumSetting model = (EnumSetting)this.registerSetting(new EnumSetting("Model", Model.AUTO));
+    private final BooleanSetting cape = (BooleanSetting)this.registerSetting(new BooleanSetting("Cape", true));
+    private final EnumSetting capeType = (EnumSetting)this.registerSetting(new EnumSetting("CapeType", EMode.MELON));
     private final ExecutorService executorService2 = Executors.newSingleThreadExecutor(runnable -> {
         Thread thread = new Thread(runnable, "TrollHack-SkinFetcher");
         thread.setDaemon(true);
@@ -49,7 +49,7 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         int[] nArray = ClientSetting.getIntArray();
         Skin skin = this;
         if (nArray != null) {
@@ -67,7 +67,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     @Override
-    public String getText57() {
+    public String getInfo() {
         int[] nArray = ClientSetting.getIntArray();
         switch (this.type10.ordinal()) {
             default: {
@@ -102,7 +102,7 @@ extends Module {
         int[] nArray = ClientSetting.getIntArray();
         Skin skin = this;
         if (nArray != null) {
-            if (!skin.isSet19()) return false;
+            if (!skin.isEnabled()) return false;
             skin = this;
         }
         if (skin.resourceEntry == null) return false;
@@ -156,7 +156,7 @@ extends Module {
                     Object object;
                     block9: {
                         nArray = ClientSetting.getIntArray();
-                        object = this.model.getObj();
+                        object = this.model.getValue();
                         model = Model.SLIM;
                         if (nArray == null) break block9;
                         if (object == model) {
@@ -164,7 +164,7 @@ extends Module {
                         }
                         skin = this;
                         if (nArray == null) break block10;
-                        object = skin.model.getObj();
+                        object = skin.model.getValue();
                         model = Model.DEFAULT;
                     }
                     if (object == model) {
@@ -192,10 +192,10 @@ extends Module {
      */
     public boolean isSet162() {
         int[] nArray = ClientSetting.getIntArray();
-        boolean bl = this.isSet19();
+        boolean bl = this.isEnabled();
         if (nArray != null) {
             if (!bl) return false;
-            bl = (Boolean)this.cape.getObj();
+            bl = (Boolean)this.cape.getValue();
         }
         if (nArray == null) return bl;
         if (!bl) return false;
@@ -203,7 +203,7 @@ extends Module {
     }
 
     public AssetInfo.TextureAsset getObj10() {
-        String string = ((EMode)((Object)this.capeType.getObj())).text2996;
+        String string = ((EMode)((Object)this.capeType.getValue())).text2996;
         Identifier identifier = Identifier.of((String)"trollhack-recode", (String)("cape/" + string));
         Identifier identifier2 = Identifier.of((String)"trollhack-recode", (String)("cape/" + string));
         return new AssetInfo.TextureAssetInfo(identifier, identifier2);
@@ -214,7 +214,7 @@ extends Module {
         String string;
         block8: {
             block7: {
-                string = ((String)this.name.getObj()).trim();
+                string = ((String)this.name.getValue()).trim();
                 nArray = ClientSetting.getIntArray();
                 String string2 = string;
                 if (nArray != null) {

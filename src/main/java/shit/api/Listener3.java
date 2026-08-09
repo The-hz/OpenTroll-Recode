@@ -8,16 +8,16 @@ import net.fabricmc.api.Environment;
 
 @Environment(value=EnvType.CLIENT)
 public interface Listener3 {
-    public int getInt12();
+    public int getHudX();
 
-    public int getInt5();
+    public int getHudY();
 
     public int hudWidth();
 
-    public int getInt28();
+    public int getHudHeight();
 
-    public void m274(int var1, int var2);
+    public void setHudPosition(int var1, int var2);
 
-    public void m368(Object var1, boolean var2);
+    public void renderHud(Object var1, boolean var2);
 }
 

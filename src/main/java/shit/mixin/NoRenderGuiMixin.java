@@ -19,21 +19,21 @@ import shit.module.render.NoRender;
 public class NoRenderGuiMixin {
     @Inject(method={"renderStatusEffectOverlay(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noPotionsIcon(DrawContext drawContext, RenderTickCounter renderTickCounter, CallbackInfo callbackInfo) {
-        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.potionsIcon.getObj()).booleanValue()) {
+        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.potionsIcon.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }
 
     @Inject(method={"renderPortalOverlay(Lnet/minecraft/client/gui/DrawContext;F)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noPortal(DrawContext drawContext, float f, CallbackInfo callbackInfo) {
-        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.portal.getObj()).booleanValue()) {
+        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.portal.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }
 
     @Inject(method={"renderNauseaOverlay(Lnet/minecraft/client/gui/DrawContext;F)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$noNausea(DrawContext drawContext, float f, CallbackInfo callbackInfo) {
-        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isSet19() && ((Boolean)NoRender.INSTANCE.nausea.getObj()).booleanValue()) {
+        if (NoRender.INSTANCE != null && NoRender.INSTANCE.isEnabled() && ((Boolean)NoRender.INSTANCE.nausea.getValue()).booleanValue()) {
             callbackInfo.cancel();
         }
     }

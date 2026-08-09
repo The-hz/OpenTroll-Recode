@@ -22,8 +22,8 @@ public class AutoRegearHud
 extends Module
 implements Listener3 {
     public static AutoRegearHud INSTANCE;
-    private final NumberSetting x = (NumberSetting)this.m28(new NumberSetting("X", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
-    private final NumberSetting y = (NumberSetting)this.m28(new NumberSetting("Y", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
+    private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
 
     public AutoRegearHud() {
         super("AutoRegearHud", "Draggable silent container display for AutoRegear.", Category.HUD);
@@ -31,13 +31,13 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt12() {
-        return this.x.getInt50();
+    public int getHudX() {
+        return this.x.getInt();
     }
 
     @Override
-    public int getInt5() {
-        return this.y.getInt50();
+    public int getHudY() {
+        return this.y.getInt();
     }
 
     @Override
@@ -46,17 +46,17 @@ implements Listener3 {
     }
 
     @Override
-    public int getInt28() {
-        int n = Client.fontManager.renderer2().getInt19() + 6;
+    public int getHudHeight() {
+        int n = Client.fontManager.renderer2().getFontHeight() + 6;
         return n + 54 + 4;
     }
 
     @Override
-    public void m274(int n, int n2) {
+    public void setHudPosition(int n, int n2) {
         int n3 = n;
         int n4 = n2;
-        this.x.setObj85(n3);
-        this.y.setObj85(n4);
+        this.x.setDouble(n3);
+        this.y.setDouble(n4);
     }
 
     /*
@@ -64,38 +64,38 @@ implements Listener3 {
      * Could not resolve type clashes
      */
     @Override
-    public void m368(Object var1_1, boolean var2_2) {
+    public void renderHud(Object var1_1, boolean var2_2) {
         DrawContext ctx = (DrawContext) var1_1;
         boolean editing = var2_2;
-        int x = this.x.getInt50();
-        int y = this.y.getInt50();
-        int titleH = Client.fontManager.renderer2().getInt19() + 6;
-        int totalH = this.getInt28();
+        int x = this.x.getInt();
+        int y = this.y.getInt();
+        int titleH = Client.fontManager.renderer2().getFontHeight() + 6;
+        int totalH = this.getHudHeight();
         if (editing && !this.isSet118()) {
             drawBox(ctx, x, y, totalH, titleH);
-            Client.fontManager.renderer2().m5(ctx, "AutoRegear", x + 6, y + 4, -9971969, true);
+            Client.fontManager.renderer2().drawText(ctx, "AutoRegear", x + 6, y + 4, -9971969, true);
             return;
         }
         if (!this.isSet118()) {
             return;
         }
         String title;
-        if (MC.client3.player.currentScreenHandler instanceof net.minecraft.screen.GenericContainerScreenHandler) {
+        if (MC.mc.player.currentScreenHandler instanceof net.minecraft.screen.GenericContainerScreenHandler) {
             title = "Ender Chest";
-        } else if (MC.client3.player.currentScreenHandler instanceof net.minecraft.screen.ShulkerBoxScreenHandler) {
+        } else if (MC.mc.player.currentScreenHandler instanceof net.minecraft.screen.ShulkerBoxScreenHandler) {
             title = "Shulker Box";
         } else {
             return;
         }
         drawBox(ctx, x, y, totalH, titleH);
-        Client.fontManager.renderer2().m5(ctx, title, x + 6, y + 4, -9971969, true);
+        Client.fontManager.renderer2().drawText(ctx, title, x + 6, y + 4, -9971969, true);
         for (int i = 0; i < 27; ++i) {
-            net.minecraft.item.ItemStack stack = MC.client3.player.currentScreenHandler.getSlot(i).getStack();
+            net.minecraft.item.ItemStack stack = MC.mc.player.currentScreenHandler.getSlot(i).getStack();
             if (stack.isEmpty()) continue;
             int sx = x + 1 + i % 9 * 18;
             int sy = y + titleH + i / 9 * 18;
             ctx.drawItem(stack, sx, sy);
-            ctx.drawStackOverlay(MC.client3.textRenderer, stack, sx, sy);
+            ctx.drawStackOverlay(MC.mc.textRenderer, stack, sx, sy);
         }
     }
 
@@ -114,13 +114,13 @@ implements Listener3 {
      */
     private boolean isSet118() {
         boolean bl = AbstractHudModule.isSet32();
-        if (MC.client3.player == null) return false;
+        if (MC.mc.player == null) return false;
         AutoRegear autoRegear = AutoRegear.INSTANCE;
         if (!bl) {
             if (autoRegear == null) return false;
             autoRegear = AutoRegear.INSTANCE;
         }
-        boolean bl2 = autoRegear.isSet19();
+        boolean bl2 = autoRegear.isEnabled();
         if (!bl) {
             if (!bl2) return false;
             bl2 = AutoRegear.INSTANCE.flag39;

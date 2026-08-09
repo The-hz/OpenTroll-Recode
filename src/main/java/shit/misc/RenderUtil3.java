@@ -29,14 +29,14 @@ implements MC {
         Predicate predicate = (Predicate)object;
         ClientSetting.SwitchMode switchMode = (ClientSetting.SwitchMode)((Object)object2);
         Object var6_5 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return false;
         }
         if (this.isSet82()) {
             return true;
         }
-        int n = MC.client3.player.getInventory().getSelectedSlot();
-        if (predicate.test(MC.client3.player.getInventory().getStack(n))) {
+        int n = MC.mc.player.getInventory().getSelectedSlot();
+        if (predicate.test(MC.mc.player.getInventory().getStack(n))) {
             return true;
         }
         if (switchMode == ClientSetting.SwitchMode.NONE) {
@@ -50,7 +50,7 @@ implements MC {
             this.count100 = n;
             this.count220 = this.m126(n2);
             this.flag36 = true;
-            MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, this.count220, n, SlotActionType.SWAP, (PlayerEntity)MC.client3.player);
+            MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, this.count220, n, SlotActionType.SWAP, (PlayerEntity)MC.mc.player);
             return true;
         }
         int n3 = this.m144(predicate, 0, 9);
@@ -59,8 +59,8 @@ implements MC {
         }
         this.count100 = n;
         this.flag36 = false;
-        MC.client3.player.getInventory().setSelectedSlot(n3);
-        MC.client3.player.networkHandler.sendPacket((Packet)new UpdateSelectedSlotC2SPacket(n3));
+        MC.mc.player.getInventory().setSelectedSlot(n3);
+        MC.mc.player.networkHandler.sendPacket((Packet)new UpdateSelectedSlotC2SPacket(n3));
         return true;
     }
 
@@ -68,16 +68,16 @@ implements MC {
         block5: {
             block4: {
                 Object var2_1 = null;
-                if (!this.isSet82() || MC.client3.player == null) {
+                if (!this.isSet82() || MC.mc.player == null) {
                     return;
                 }
                 if (!this.flag36) break block4;
-                int n = MC.client3.player.getInventory().getSelectedSlot();
-                MC.client3.interactionManager.clickSlot(MC.client3.player.playerScreenHandler.syncId, this.count220, n, SlotActionType.SWAP, (PlayerEntity)MC.client3.player);
+                int n = MC.mc.player.getInventory().getSelectedSlot();
+                MC.mc.interactionManager.clickSlot(MC.mc.player.playerScreenHandler.syncId, this.count220, n, SlotActionType.SWAP, (PlayerEntity)MC.mc.player);
                 if (null == null) break block5;
             }
-            MC.client3.player.getInventory().setSelectedSlot(this.count100);
-            MC.client3.player.networkHandler.sendPacket((Packet)new UpdateSelectedSlotC2SPacket(this.count100));
+            MC.mc.player.getInventory().setSelectedSlot(this.count100);
+            MC.mc.player.networkHandler.sendPacket((Packet)new UpdateSelectedSlotC2SPacket(this.count100));
         }
         this.count100 = -1;
         this.count220 = -1;
@@ -96,7 +96,7 @@ implements MC {
         int n4 = n2;
         Object var8_8 = null;
         for (int i = n3; i < n4; ++i) {
-            if (!predicate.test(MC.client3.player.getInventory().getStack(i))) continue;
+            if (!predicate.test(MC.mc.player.getInventory().getStack(i))) continue;
             return i;
         }
         return -1;

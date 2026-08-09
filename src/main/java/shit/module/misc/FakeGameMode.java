@@ -17,7 +17,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class FakeGameMode
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.CREATIVE));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.CREATIVE));
     private GameMode field20;
 
     public FakeGameMode() {
@@ -27,24 +27,24 @@ extends Module {
     @Override
     public void onEnable() {
         block0: {
-            if (MC.client3.interactionManager == null) break block0;
-            this.field20 = MC.client3.interactionManager.getCurrentGameMode();
+            if (MC.mc.interactionManager == null) break block0;
+            this.field20 = MC.mc.interactionManager.getCurrentGameMode();
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         block4: {
             block6: {
                 FakeGameMode fakeGameMode;
                 block5: {
                     String string = IRC.getText7();
                     if (string == null) break block4;
-                    if (MC.client3.interactionManager == null) break block5;
+                    if (MC.mc.interactionManager == null) break block5;
                     fakeGameMode = this;
                     if (string == null) break block6;
                     if (fakeGameMode.field20 != null) {
-                        MC.client3.interactionManager.setGameMode(this.field20);
+                        MC.mc.interactionManager.setGameMode(this.field20);
                     }
                 }
                 fakeGameMode = this;
@@ -55,14 +55,14 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner50(Event2.Event2Inner event2Inner) {
-        if (MC.client3.interactionManager != null) {
-            MC.client3.interactionManager.setGameMode(((Mode)((Object)this.mode.getObj())).field22);
+        if (MC.mc.interactionManager != null) {
+            MC.mc.interactionManager.setGameMode(((Mode)((Object)this.mode.getValue())).field22);
         }
     }
 
     @Override
-    public String getText57() {
-        return ((Mode)((Object)this.mode.getObj())).name();
+    public String getInfo() {
+        return ((Mode)((Object)this.mode.getValue())).name();
     }
 
     @Environment(value=EnvType.CLIENT)

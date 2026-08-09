@@ -13,7 +13,7 @@ import shit.setting.NumberSetting;
 public class SwingLimiter
 extends Module {
     public static SwingLimiter INSTANCE;
-    private final NumberSetting duration = (NumberSetting)this.m28(new NumberSetting("Duration", 6.0, 1.0, 50.0, 1.0));
+    private final NumberSetting duration = (NumberSetting)this.registerSetting(new NumberSetting("Duration", 6.0, 1.0, 50.0, 1.0));
 
     public SwingLimiter() {
         super("SwingLimiter", "Limits the hand swing animation duration.", Category.PLAYER);
@@ -21,7 +21,7 @@ extends Module {
     }
 
     public int getInt2() {
-        return this.duration.getInt50();
+        return this.duration.getInt();
     }
 }
 

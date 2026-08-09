@@ -135,27 +135,27 @@ extends Module {
         super("AntiRegear", "Steals or wastes gear from nearby enemy shulker boxes.", Category.COMBAT);
         this.flag38 = false;
         this.mode = new EnumSetting("Mode", Mode.SMART);
-        this.profile = (StringSetting)this.m28(new StringSetting("Profile", "default"));
-        this.rotateMode = (EnumSetting)this.m28(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-        this.searchRadius = (NumberSetting)this.m28(new NumberSetting("SearchRadius", 6.0, 1.0, 10.0, 0.5));
-        this.interactRange = (NumberSetting)this.m28(new NumberSetting("InteractRange", 4.5, 2.0, 6.0, 0.1));
-        this.friendRange = (NumberSetting)this.m28(new NumberSetting("FriendRange", 8.0, 0.0, 20.0, 0.5));
-        this.safeTime = (NumberSetting)this.m28(new NumberSetting("SafeTime", 10.0, 1.0, 60.0, 1.0));
-        this.actionInterval = (NumberSetting)this.m28(new NumberSetting("ActionInterval", 50.0, 0.0, 1000.0, 10.0));
-        this.batchActions = (NumberSetting)this.m28(new NumberSetting("BatchActions", 1.0, 1.0, 10.0, 1.0));
-        this.closeDelay = (NumberSetting)this.m28(new NumberSetting("CloseDelay", 1000.0, 100.0, 3000.0, 50.0));
-        this.weaponCoin = (NumberSetting)this.m28(new NumberSetting("WeaponCoin", 100.0, 1.0, 1000.0, 1.0));
-        this.armorCoin = (NumberSetting)this.m28(new NumberSetting("ArmorCoin", 50.0, 1.0, 1000.0, 1.0));
-        this.potCoin = (NumberSetting)this.m28(new NumberSetting("PotCoin", 10.0, 1.0, 1000.0, 1.0));
-        this.itemCoin = (NumberSetting)this.m28(new NumberSetting("ItemCoin", 1.0, 1.0, 1000.0, 1.0));
-        this.stealThreshold = (NumberSetting)this.m28(new NumberSetting("StealThreshold", 200.0, 0.0, 5000.0, 10.0));
-        this.regearArmor = (BooleanSetting)this.m28(new BooleanSetting("RegearArmor", true));
-        this.returnExtras = (BooleanSetting)this.m28(new BooleanSetting("ReturnExtras", true));
-        this.mineAfter = (BooleanSetting)this.m28(new BooleanSetting("MineAfter", true));
-        this.continuous = (BooleanSetting)this.m28(new BooleanSetting("Continuous", true));
-        this.requireEnemyNearby = (BooleanSetting)this.m28(new BooleanSetting("RequireEnemyNearby", true));
-        this.enemyRange = (NumberSetting)this.m28(new NumberSetting("EnemyRange", 15.0, 5.0, 50.0, 0.5));
-        this.silentDisplay = (BooleanSetting)this.m28(new BooleanSetting("SilentDisplay", true));
+        this.profile = (StringSetting)this.registerSetting(new StringSetting("Profile", "default"));
+        this.rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
+        this.searchRadius = (NumberSetting)this.registerSetting(new NumberSetting("SearchRadius", 6.0, 1.0, 10.0, 0.5));
+        this.interactRange = (NumberSetting)this.registerSetting(new NumberSetting("InteractRange", 4.5, 2.0, 6.0, 0.1));
+        this.friendRange = (NumberSetting)this.registerSetting(new NumberSetting("FriendRange", 8.0, 0.0, 20.0, 0.5));
+        this.safeTime = (NumberSetting)this.registerSetting(new NumberSetting("SafeTime", 10.0, 1.0, 60.0, 1.0));
+        this.actionInterval = (NumberSetting)this.registerSetting(new NumberSetting("ActionInterval", 50.0, 0.0, 1000.0, 10.0));
+        this.batchActions = (NumberSetting)this.registerSetting(new NumberSetting("BatchActions", 1.0, 1.0, 10.0, 1.0));
+        this.closeDelay = (NumberSetting)this.registerSetting(new NumberSetting("CloseDelay", 1000.0, 100.0, 3000.0, 50.0));
+        this.weaponCoin = (NumberSetting)this.registerSetting(new NumberSetting("WeaponCoin", 100.0, 1.0, 1000.0, 1.0));
+        this.armorCoin = (NumberSetting)this.registerSetting(new NumberSetting("ArmorCoin", 50.0, 1.0, 1000.0, 1.0));
+        this.potCoin = (NumberSetting)this.registerSetting(new NumberSetting("PotCoin", 10.0, 1.0, 1000.0, 1.0));
+        this.itemCoin = (NumberSetting)this.registerSetting(new NumberSetting("ItemCoin", 1.0, 1.0, 1000.0, 1.0));
+        this.stealThreshold = (NumberSetting)this.registerSetting(new NumberSetting("StealThreshold", 200.0, 0.0, 5000.0, 10.0));
+        this.regearArmor = (BooleanSetting)this.registerSetting(new BooleanSetting("RegearArmor", true));
+        this.returnExtras = (BooleanSetting)this.registerSetting(new BooleanSetting("ReturnExtras", true));
+        this.mineAfter = (BooleanSetting)this.registerSetting(new BooleanSetting("MineAfter", true));
+        this.continuous = (BooleanSetting)this.registerSetting(new BooleanSetting("Continuous", true));
+        this.requireEnemyNearby = (BooleanSetting)this.registerSetting(new BooleanSetting("RequireEnemyNearby", true));
+        this.enemyRange = (NumberSetting)this.registerSetting(new NumberSetting("EnemyRange", 15.0, 5.0, 50.0, 0.5));
+        this.silentDisplay = (BooleanSetting)this.registerSetting(new BooleanSetting("SilentDisplay", true));
         this.list23 = new ArrayList();
         this.set6 = new HashSet();
         this.set7 = new HashSet();
@@ -170,8 +170,8 @@ extends Module {
     public static boolean isSet81() {
         Object var1 = null;
         if (INSTANCE == null) return false;
-        if (!INSTANCE.isSet19()) return false;
-        if ((Boolean)AntiRegear.INSTANCE.silentDisplay.getObj() == false) return false;
+        if (!INSTANCE.isEnabled()) return false;
+        if ((Boolean)AntiRegear.INSTANCE.silentDisplay.getValue() == false) return false;
         if (!AntiRegear.INSTANCE.flag38) return false;
         return true;
     }
@@ -179,26 +179,26 @@ extends Module {
     @Override
     public void onEnable() {
         Object var2_1 = null;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         this.m580();
-        if (this.mode.getObj() != Mode.THROW) {
-            if (!this.m362((String)this.profile.getObj())) {
-                this.setObj12("\u00a7cFailed to load profile: " + (String)this.profile.getObj() + ".kit");
-                this.setFlag3(false);
+        if (this.mode.getValue() != Mode.THROW) {
+            if (!this.m362((String)this.profile.getValue())) {
+                this.setObj12("\u00a7cFailed to load profile: " + (String)this.profile.getValue() + ".kit");
+                this.setEnabled(false);
             }
         }
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         Client.mathUtil.m370();
         Object var2_1 = null;
         this.flag38 = false;
-        if (MC.client3.player != null) {
+        if (MC.mc.player != null) {
             if (this.flag152) {
-                MC.client3.player.closeHandledScreen();
+                MC.mc.player.closeHandledScreen();
             }
         }
         this.m580();
@@ -224,18 +224,18 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner57(Event2.Event2Inner event2Inner) {
-        if (MC.client3.player == null || MC.client3.world == null || MC.client3.getNetworkHandler() == null || MC.client3.interactionManager == null) {
+        if (MC.mc.player == null || MC.mc.world == null || MC.mc.getNetworkHandler() == null || MC.mc.interactionManager == null) {
             return;
         }
         this.updateSafeBoxes();
-        if (((Boolean)this.requireEnemyNearby.getObj()).booleanValue() && !this.isSet21()) {
-            if (this.flag152 && MC.client3.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
-                MC.client3.player.closeHandledScreen();
+        if (((Boolean)this.requireEnemyNearby.getValue()).booleanValue() && !this.isSet21()) {
+            if (this.flag152 && MC.mc.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
+                MC.mc.player.closeHandledScreen();
             }
             this.flag38 = false;
             return;
         }
-        ScreenHandler screenHandler = MC.client3.player.currentScreenHandler;
+        ScreenHandler screenHandler = MC.mc.player.currentScreenHandler;
         if (screenHandler instanceof ShulkerBoxScreenHandler) {
             ShulkerBoxScreenHandler shulkerBoxScreenHandler = (ShulkerBoxScreenHandler)screenHandler;
             this.setObj95(shulkerBoxScreenHandler);
@@ -255,7 +255,7 @@ extends Module {
                             shulkerBoxScreenHandler = (ShulkerBoxScreenHandler)object;
                             this.flag152 = true;
                             Object var4_3 = null;
-                            if (((Boolean)this.silentDisplay.getObj()).booleanValue()) {
+                            if (((Boolean)this.silentDisplay.getValue()).booleanValue()) {
                                 this.flag38 = true;
                             }
                             if (this.blockPos8 != null) {
@@ -265,24 +265,24 @@ extends Module {
                             this.time5 = System.currentTimeMillis();
                             this.time70 = System.currentTimeMillis();
                             this.flag156 = true;
-                            if (this.mode.getObj() != Mode.SMART) break block11;
+                            if (this.mode.getValue() != Mode.SMART) break block11;
                             this.mode2 = mode = this.getMode();
                             this.flag115 = mode == Mode.STEALER;
                             this.flag122 = false;
                             if (null == null) break block10;
                         }
-                        this.mode2 = (Mode)((Object)this.mode.getObj());
+                        this.mode2 = (Mode)((Object)this.mode.getValue());
                         this.flag115 = false;
                         this.flag122 = false;
                     }
-                    if ((double)(System.currentTimeMillis() - this.time5) > (Double)this.closeDelay.getObj()) {
+                    if ((double)(System.currentTimeMillis() - this.time5) > (Double)this.closeDelay.getValue()) {
                         this.m305();
                         return;
                     }
-                    if (System.currentTimeMillis() - this.time50 < (long)this.actionInterval.getInt50()) {
+                    if (System.currentTimeMillis() - this.time50 < (long)this.actionInterval.getInt()) {
                         return;
                     }
-                    Mode mode3 = mode = this.mode2 != null ? this.mode2 : (Mode)((Object)this.mode.getObj());
+                    Mode mode3 = mode = this.mode2 != null ? this.mode2 : (Mode)((Object)this.mode.getValue());
                     if (mode == Mode.THROW) break block12;
                     if (!this.flag122) break block13;
                 }
@@ -312,10 +312,10 @@ extends Module {
                     this.blockPos16 = this.blockPos8;
                     this.set6.add(this.blockPos8);
                     this.set7.add(this.blockPos8);
-                    if (((Boolean)this.mineAfter.getObj()).booleanValue()) {
-                        if (MC.client3.world.getBlockState(this.blockPos8).getBlock() instanceof ShulkerBoxBlock) {
+                    if (((Boolean)this.mineAfter.getValue()).booleanValue()) {
+                        if (MC.mc.world.getBlockState(this.blockPos8).getBlock() instanceof ShulkerBoxBlock) {
                             if (SpeedMine.INSTANCE != null) {
-                                if (SpeedMine.INSTANCE.isSet19()) {
+                                if (SpeedMine.INSTANCE.isEnabled()) {
                                     SpeedMine.INSTANCE.setObj84(this.blockPos8);
                                 }
                             }
@@ -323,7 +323,7 @@ extends Module {
                     }
                 }
                 this.m382();
-                if (!((Boolean)this.continuous.getObj()).booleanValue()) break block12;
+                if (!((Boolean)this.continuous.getValue()).booleanValue()) break block12;
                 this.blockPos8 = null;
                 this.blockPos16 = null;
                 this.mode2 = null;
@@ -331,21 +331,21 @@ extends Module {
                 this.flag122 = false;
                 if (null == null) break block11;
             }
-            this.setFlag3(false);
+            this.setEnabled(false);
             return;
         }
         if ((blockPos = this.getBlockPos8()) == null) {
             return;
         }
-        double d = MC.client3.player.squaredDistanceTo((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5);
-        if (d > (Double)this.interactRange.getObj() * (Double)this.interactRange.getObj()) {
+        double d = MC.mc.player.squaredDistanceTo((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5);
+        if (d > (Double)this.interactRange.getValue() * (Double)this.interactRange.getValue()) {
             return;
         }
         this.blockPos8 = blockPos;
         this.setObj48(blockPos);
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos).add(0.0, 0.5, 0.0);
-        MC.client3.interactionManager.interactBlock(MC.client3.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, Direction.UP, blockPos, false));
-        MC.client3.player.swingHand(Hand.MAIN_HAND, false);
+        MC.mc.interactionManager.interactBlock(MC.mc.player, Hand.MAIN_HAND, new BlockHitResult(vec3d, Direction.UP, blockPos, false));
+        MC.mc.player.swingHand(Hand.MAIN_HAND, false);
         this.m382();
         this.time50 = System.currentTimeMillis();
     }
@@ -356,7 +356,7 @@ extends Module {
             ShulkerBoxScreenHandler shulkerBoxScreenHandler = (ShulkerBoxScreenHandler)object;
             Object var4_4 = null;
             bl = false;
-            for (int i = 0; i < this.batchActions.getInt50(); ++i) {
+            for (int i = 0; i < this.batchActions.getInt(); ++i) {
                 int n = -1;
                 for (int j = 0; j < 27; ++j) {
                     if (shulkerBoxScreenHandler.getSlot(j).getStack().isEmpty()) continue;
@@ -383,14 +383,14 @@ extends Module {
             block8: {
                 ShulkerBoxScreenHandler shulkerBoxScreenHandler = (ShulkerBoxScreenHandler)object;
                 Object var4_3 = null;
-                if (((Boolean)this.regearArmor.getObj()).booleanValue()) {
+                if (((Boolean)this.regearArmor.getValue()).booleanValue()) {
                     if (!this.flag118) {
                         this.setObj107(shulkerBoxScreenHandler);
                         return;
                     }
                 }
                 boolean bl = false;
-                if (((Boolean)this.returnExtras.getObj()).booleanValue()) {
+                if (((Boolean)this.returnExtras.getValue()).booleanValue()) {
                     bl |= this.m745(shulkerBoxScreenHandler);
                 }
                 if (!bl) {
@@ -413,7 +413,7 @@ extends Module {
                     return;
                 }
             }
-            if ((double)(System.currentTimeMillis() - this.time70) > (Double)this.closeDelay.getObj() / 2.0) {
+            if ((double)(System.currentTimeMillis() - this.time70) > (Double)this.closeDelay.getValue() / 2.0) {
                 this.m305();
             }
         }
@@ -438,7 +438,7 @@ extends Module {
             this.time70 = System.currentTimeMillis();
             return;
         }
-        for (int i = 0; i < this.batchActions.getInt50(); ++i) {
+        for (int i = 0; i < this.batchActions.getInt(); ++i) {
             if (this.count146 >= this.list23.size()) break;
             ((Runnable)this.list23.get(this.count146)).run();
             ++this.count146;
@@ -457,7 +457,7 @@ extends Module {
             ItemStack itemStack;
             if (!this.map14.containsKey(i)) continue;
             Item item = (Item)this.map14.get(i);
-            if (item == null || item == Items.AIR || (itemStack = MC.client3.player.getInventory().getStack(i)).getItem() == item) continue;
+            if (item == null || item == Items.AIR || (itemStack = MC.mc.player.getInventory().getStack(i)).getItem() == item) continue;
             int n2 = -1;
             for (n = 0; n < 27; ++n) {
                 if (shulkerBoxScreenHandler.getSlot(n).getStack().getItem() != item) continue;
@@ -469,11 +469,11 @@ extends Module {
             if (n2 == -1) continue;
             n = n2;
             int n4 = n;
-            int n3 = MC.client3.player.getInventory().getSelectedSlot();
+            int n3 = MC.mc.player.getInventory().getSelectedSlot();
             this.list23.add((Runnable)(() -> this.m16(shulkerBoxScreenHandler.syncId, n4, n3, SlotActionType.SWAP)));
             this.list23.add((Runnable)(() -> {
                 float[] fArray = new float[]{Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58()};
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, fArray[0], fArray[1]));
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, fArray[0], fArray[1]));
             }));
             this.list23.add((Runnable)(() -> this.m16(shulkerBoxScreenHandler.syncId, n4, n3, SlotActionType.SWAP)));
             if (null == null) continue;
@@ -571,7 +571,7 @@ extends Module {
                     int n2 = (Integer)entry.getKey();
                     item = (Item)entry.getValue();
                     if (item == null || item == Items.AIR || n2 >= 40) continue;
-                    itemStack = MC.client3.player.getInventory().getStack(n2);
+                    itemStack = MC.mc.player.getInventory().getStack(n2);
                     if (this.m507(itemStack.getItem(), item)) break block7;
                     n += this.m627(item);
                     if (null == null) break block8;
@@ -584,27 +584,27 @@ extends Module {
             }
             if (null == null) continue;
         }
-        return n >= this.stealThreshold.getInt50() ? Mode.STEALER : Mode.THROW;
+        return n >= this.stealThreshold.getInt() ? Mode.STEALER : Mode.THROW;
     }
 
     private int m627(Object object) {
         Item item = (Item)object;
         Object var4_3 = null;
         if (this.m965(item)) {
-            return this.weaponCoin.getInt50();
+            return this.weaponCoin.getInt();
         }
         if (this.m1049(item)) {
-            return this.armorCoin.getInt50();
+            return this.armorCoin.getInt();
         }
         if (this.m1036(item)) {
-            return this.potCoin.getInt50();
+            return this.potCoin.getInt();
         }
-        return this.itemCoin.getInt50();
+        return this.itemCoin.getInt();
     }
 
     private void updateSafeBoxes() {
         long l = System.currentTimeMillis();
-        long l2 = (long)((Double)this.safeTime.getObj() * 1000.0);
+        long l2 = (long)((Double)this.safeTime.getValue() * 1000.0);
         Object var2_3 = null;
         if (AutoRegear.INSTANCE != null) {
             if (AutoRegear.INSTANCE.blockPos15 != null) {
@@ -618,14 +618,14 @@ extends Module {
         this.map21.entrySet().removeIf(entry -> {
             Object var5_3 = null;
             boolean bl = l - (Long)((Map.Entry)entry).getValue() > l2;
-            boolean bl2 = !(MC.client3.world.getBlockState((BlockPos)((Map.Entry)entry).getKey()).getBlock() instanceof ShulkerBoxBlock);
+            boolean bl2 = !(MC.mc.world.getBlockState((BlockPos)((Map.Entry)entry).getKey()).getBlock() instanceof ShulkerBoxBlock);
             if (bl) return true;
             if (!bl2) return false;
             return true;
         });
         this.set7.removeIf(blockPos -> {
             Object var1_1 = null;
-            return !(MC.client3.world.getBlockState((BlockPos)blockPos).getBlock() instanceof ShulkerBoxBlock);
+            return !(MC.mc.world.getBlockState((BlockPos)blockPos).getBlock() instanceof ShulkerBoxBlock);
         });
     }
 
@@ -633,22 +633,22 @@ extends Module {
         block8: {
             block7: {
                 Object var2_1 = null;
-                if (MC.client3.world == null) break block7;
-                if (MC.client3.player != null) break block8;
+                if (MC.mc.world == null) break block7;
+                if (MC.mc.player != null) break block8;
             }
             return false;
         }
-        double d = (Double)this.enemyRange.getObj() * (Double)this.enemyRange.getObj();
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
-            if (playerEntity == MC.client3.player) continue;
+        double d = (Double)this.enemyRange.getValue() * (Double)this.enemyRange.getValue();
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
+            if (playerEntity == MC.mc.player) continue;
             if (!playerEntity.isAlive()) continue;
             if (playerEntity.isSpectator()) continue;
             try {
-                if (Client.manager.m258(playerEntity.getName().getString()) && null == null) continue;
+                if (Client.manager.isFriend(playerEntity.getName().getString()) && null == null) continue;
             }
             catch (Exception exception) {
             }
-            if (MC.client3.player.squaredDistanceTo((Entity)playerEntity) <= d) {
+            if (MC.mc.player.squaredDistanceTo((Entity)playerEntity) <= d) {
                 return true;
             }
             if (null == null) continue;
@@ -660,25 +660,25 @@ extends Module {
         block8: {
             block7: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block7;
-                if (MC.client3.world != null) break block8;
+                if (MC.mc.player == null) break block7;
+                if (MC.mc.world != null) break block8;
             }
             return null;
         }
-        BlockPos blockPos = MC.client3.player.getBlockPos();
-        int n = this.searchRadius.getInt50();
+        BlockPos blockPos = MC.mc.player.getBlockPos();
+        int n = this.searchRadius.getInt();
         BlockPos blockPos2 = null;
         double d = Double.MAX_VALUE;
         for (int i = -n; i <= n; ++i) {
             for (int j = -n; j <= n; ++j) {
                 for (int k = -n; k <= n; ++k) {
                     BlockPos blockPos3 = blockPos.add(i, j, k);
-                    if (!(MC.client3.world.getBlockState(blockPos3).getBlock() instanceof ShulkerBoxBlock) || !MC.client3.world.getBlockState(blockPos3.up()).isAir() || this.map21.containsKey(blockPos3) || this.set7.contains(blockPos3) || this.set6.contains(blockPos3)) continue;
+                    if (!(MC.mc.world.getBlockState(blockPos3).getBlock() instanceof ShulkerBoxBlock) || !MC.mc.world.getBlockState(blockPos3.up()).isAir() || this.map21.containsKey(blockPos3) || this.set7.contains(blockPos3) || this.set6.contains(blockPos3)) continue;
                     if (AutoRegear.INSTANCE != null) {
                         if (blockPos3.equals((Object)AutoRegear.INSTANCE.blockPos15)) continue;
                     }
                     if (this.m30(blockPos3)) continue;
-                    double d2 = MC.client3.player.squaredDistanceTo((double)blockPos3.getX() + 0.5, (double)blockPos3.getY() + 0.5, (double)blockPos3.getZ() + 0.5);
+                    double d2 = MC.mc.player.squaredDistanceTo((double)blockPos3.getX() + 0.5, (double)blockPos3.getY() + 0.5, (double)blockPos3.getZ() + 0.5);
                     if (!(d2 < d)) continue;
                     d = d2;
                     blockPos2 = blockPos3;
@@ -694,14 +694,14 @@ extends Module {
     private boolean m30(Object object) {
         BlockPos blockPos = (BlockPos)object;
         Object var4_3 = null;
-        if (MC.client3.world == null) {
+        if (MC.mc.world == null) {
             return false;
         }
-        double d = (Double)this.friendRange.getObj() * (Double)this.friendRange.getObj();
-        for (PlayerEntity playerEntity : MC.client3.world.getPlayers()) {
-            if (playerEntity == MC.client3.player) continue;
+        double d = (Double)this.friendRange.getValue() * (Double)this.friendRange.getValue();
+        for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
+            if (playerEntity == MC.mc.player) continue;
             try {
-                if (!Client.manager.m258(playerEntity.getName().getString()) && null == null) continue;
+                if (!Client.manager.isFriend(playerEntity.getName().getString()) && null == null) continue;
             }
             catch (Exception exception) {
                 if (null == null) continue;
@@ -721,10 +721,10 @@ extends Module {
                 if (this.blockPos8 != null) {
                     this.set6.add(this.blockPos8);
                     this.set7.add(this.blockPos8);
-                    if (((Boolean)this.mineAfter.getObj()).booleanValue()) {
-                        if (MC.client3.world.getBlockState(this.blockPos8).getBlock() instanceof ShulkerBoxBlock) {
+                    if (((Boolean)this.mineAfter.getValue()).booleanValue()) {
+                        if (MC.mc.world.getBlockState(this.blockPos8).getBlock() instanceof ShulkerBoxBlock) {
                             if (SpeedMine.INSTANCE != null) {
-                                if (SpeedMine.INSTANCE.isSet19()) {
+                                if (SpeedMine.INSTANCE.isEnabled()) {
                                     SpeedMine.INSTANCE.setObj84(this.blockPos8);
                                 }
                             }
@@ -732,14 +732,14 @@ extends Module {
                     }
                 }
                 this.flag38 = false;
-                if (MC.client3.player != null) {
-                    if (MC.client3.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
-                        MC.client3.player.closeHandledScreen();
+                if (MC.mc.player != null) {
+                    if (MC.mc.player.currentScreenHandler instanceof ShulkerBoxScreenHandler) {
+                        MC.mc.player.closeHandledScreen();
                     }
                 }
                 this.m382();
-                if (((Boolean)this.continuous.getObj()).booleanValue()) break block10;
-                this.setFlag3(false);
+                if (((Boolean)this.continuous.getValue()).booleanValue()) break block10;
+                this.setEnabled(false);
                 if (null == null) break block11;
             }
             this.flag152 = false;
@@ -763,7 +763,7 @@ extends Module {
             return;
         }
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
-        float[] fArray = MathUtil.m547(MC.client3.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts24[rotateMode.ordinal()]) {
             case 1: {
                 Client.mathUtil.m355(fArray[0], fArray[1]);
@@ -797,10 +797,10 @@ extends Module {
     }
 
     private ClientSetting.RotateMode getRotateMode14() {
-        RotateMode rotateMode = (RotateMode)((Object)this.rotateMode.getObj());
+        RotateMode rotateMode = (RotateMode)((Object)this.rotateMode.getValue());
         Object var2_2 = null;
         if (rotateMode == RotateMode.DEFAULT) {
-            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getObj()) : ClientSetting.RotateMode.NONE;
+            return ClientSetting.INSTANCE != null ? (ClientSetting.RotateMode)((Object)ClientSetting.INSTANCE.rotateMode.getValue()) : ClientSetting.RotateMode.NONE;
         }
         return switch (rotateMode.ordinal()) {
             case 1 -> ClientSetting.RotateMode.NONE;
@@ -813,7 +813,7 @@ extends Module {
 
     private double getDouble15() {
         Object var2_1 = null;
-        return ClientSetting.INSTANCE != null ? (Double)ClientSetting.INSTANCE.rotateSpeed.getObj() : 45.0;
+        return ClientSetting.INSTANCE != null ? (Double)ClientSetting.INSTANCE.rotateSpeed.getValue() : 45.0;
     }
 
     /*
@@ -969,9 +969,9 @@ extends Module {
         int n6 = n3;
         SlotActionType slotActionType = (SlotActionType)object;
         Object var10_9 = null;
-        if (MC.client3.player != null) {
-            if (MC.client3.interactionManager != null) {
-                MC.client3.interactionManager.clickSlot(n4, n5, n6, slotActionType, (PlayerEntity)MC.client3.player);
+        if (MC.mc.player != null) {
+            if (MC.mc.interactionManager != null) {
+                MC.mc.interactionManager.clickSlot(n4, n5, n6, slotActionType, (PlayerEntity)MC.mc.player);
             }
         }
     }
@@ -982,7 +982,7 @@ extends Module {
         Object var4_3 = null;
         try {
             String string2;
-            File file = new File(MC.client3.runDirectory, "kissoo/kits/" + string + ".kit");
+            File file = new File(MC.mc.runDirectory, "kissoo/kits/" + string + ".kit");
             if (!file.exists()) {
                 return false;
             }
@@ -1003,7 +1003,7 @@ extends Module {
                 if (null == null) continue;
             }
             bufferedReader.close();
-            return !this.map14.isEmpty() || this.mode.getObj() == Mode.THROW;
+            return !this.map14.isEmpty() || this.mode.getValue() == Mode.THROW;
         }
         catch (Exception exception) {
             return false;
@@ -1012,7 +1012,7 @@ extends Module {
 
     private void setObj12(Object object) {
         String string = (String)object;
-        CommandManager.setObj21("\u00a7b[AntiRegear] \u00a77" + string);
+        CommandManager.sendFeedback("\u00a7b[AntiRegear] \u00a77" + string);
     }
 
     @Environment(value=EnvType.CLIENT)

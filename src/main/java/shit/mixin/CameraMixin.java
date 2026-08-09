@@ -24,7 +24,7 @@ public abstract class CameraMixin {
     private void trollhack$clipDistance(float f, CallbackInfoReturnable callbackInfoReturnable) {
         Camera camera = Camera.INSTANCE;
         if (camera != null && camera.isSet131()) {
-            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera.clipDistance.getFloat35()));
+            callbackInfoReturnable.setReturnValue((Object)Float.valueOf(camera.clipDistance.getFloat()));
         }
     }
 
@@ -32,7 +32,7 @@ public abstract class CameraMixin {
     private void setArgs(Args args) {
         Camera camera = Camera.INSTANCE;
         if (camera != null && camera.isSet131()) {
-            args.set(0, (Object)Float.valueOf(-camera.clipDistance.getFloat35()));
+            args.set(0, (Object)Float.valueOf(-camera.clipDistance.getFloat()));
         }
     }
 

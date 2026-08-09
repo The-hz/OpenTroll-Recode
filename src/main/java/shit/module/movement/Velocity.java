@@ -81,42 +81,42 @@ extends Module {
 
         public Velocity() {
         super("Velocity", "Reduces or cancels knockback.", Category.MOVEMENT);
-        this.mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.Modify));
-        this.lagPause = (NumberSetting)this.m28(new NumberSetting("LagPause", 50.0, 0.0, 500.0, 10.0));
-        this.ignorePearlLag = (BooleanSetting)this.m28(new BooleanSetting("IgnorePearlLag", true));
-        this.phaseTime = (NumberSetting)this.m28(new NumberSetting("PhaseTime", 250.0, 0.0, 1000.0, 50.0));
-        this.noRotation = (BooleanSetting)this.m28(new BooleanSetting("NoRotation", false));
-        this.flagInWall = (BooleanSetting)this.m28(new BooleanSetting("FlagInWall", false));
-        this.whilePushOut = (BooleanSetting)this.m28(new BooleanSetting("WhilePushOut", false));
-        this.static_ = (BooleanSetting)this.m28(new BooleanSetting("Static", false));
-        this.cancelAll = (BooleanSetting)this.m28(new BooleanSetting("CancelAll", false));
-        this.horizontal = (NumberSetting)this.m28(new NumberSetting("Horizontal", 0.0, 0.0, 100.0, 1.0));
-        this.vertical = (NumberSetting)this.m28(new NumberSetting("Vertical", 0.0, 0.0, 100.0, 1.0));
-        this.whileLiquid = (BooleanSetting)this.m28(new BooleanSetting("WhileLiquid", false));
-        this.fallFlying = (BooleanSetting)this.m28(new BooleanSetting("FallFlying", false));
-        this.noClimb = (BooleanSetting)this.m28(new BooleanSetting("NoClimb", false));
-        this.noWaterPush = (BooleanSetting)this.m28(new BooleanSetting("NoWaterPush", false));
-        this.noEntityPush = (BooleanSetting)this.m28(new BooleanSetting("NoEntityPush", true));
-        this.noBlockPush = (BooleanSetting)this.m28(new BooleanSetting("NoBlockPush", true));
-        this.noFishBob = (BooleanSetting)this.m28(new BooleanSetting("NoFishBob", true));
+        this.mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.Modify));
+        this.lagPause = (NumberSetting)this.registerSetting(new NumberSetting("LagPause", 50.0, 0.0, 500.0, 10.0));
+        this.ignorePearlLag = (BooleanSetting)this.registerSetting(new BooleanSetting("IgnorePearlLag", true));
+        this.phaseTime = (NumberSetting)this.registerSetting(new NumberSetting("PhaseTime", 250.0, 0.0, 1000.0, 50.0));
+        this.noRotation = (BooleanSetting)this.registerSetting(new BooleanSetting("NoRotation", false));
+        this.flagInWall = (BooleanSetting)this.registerSetting(new BooleanSetting("FlagInWall", false));
+        this.whilePushOut = (BooleanSetting)this.registerSetting(new BooleanSetting("WhilePushOut", false));
+        this.static_ = (BooleanSetting)this.registerSetting(new BooleanSetting("Static", false));
+        this.cancelAll = (BooleanSetting)this.registerSetting(new BooleanSetting("CancelAll", false));
+        this.horizontal = (NumberSetting)this.registerSetting(new NumberSetting("Horizontal", 0.0, 0.0, 100.0, 1.0));
+        this.vertical = (NumberSetting)this.registerSetting(new NumberSetting("Vertical", 0.0, 0.0, 100.0, 1.0));
+        this.whileLiquid = (BooleanSetting)this.registerSetting(new BooleanSetting("WhileLiquid", false));
+        this.fallFlying = (BooleanSetting)this.registerSetting(new BooleanSetting("FallFlying", false));
+        this.noClimb = (BooleanSetting)this.registerSetting(new BooleanSetting("NoClimb", false));
+        this.noWaterPush = (BooleanSetting)this.registerSetting(new BooleanSetting("NoWaterPush", false));
+        this.noEntityPush = (BooleanSetting)this.registerSetting(new BooleanSetting("NoEntityPush", true));
+        this.noBlockPush = (BooleanSetting)this.registerSetting(new BooleanSetting("NoBlockPush", true));
+        this.noFishBob = (BooleanSetting)this.registerSetting(new BooleanSetting("NoFishBob", true));
         this.helper711 = new Helper7();
         this.helper735 = new Helper7();
     }
 
     @Override
-    public String getText57() {
+    public String getInfo() {
         Object var2_1 = null;
-        if (this.mode.getObj() == Mode.None) {
+        if (this.mode.getValue() == Mode.None) {
             return null;
         }
-        String string = ((Mode)((Object)this.mode.getObj())).name();
-        String string2 = (Boolean)this.cancelAll.getObj() != false ? "Cancel" : this.horizontal.getInt50() + "%, " + this.vertical.getInt50() + "%";
+        String string = ((Mode)((Object)this.mode.getValue())).name();
+        String string2 = (Boolean)this.cancelAll.getValue() != false ? "Cancel" : this.horizontal.getInt() + "%, " + this.vertical.getInt() + "%";
         return string + ", " + string2;
     }
 
     @Override
-    public void m709() {
-        super.m709();
+    public void onDisable() {
+        super.onDisable();
         this.flag26 = false;
         this.flag130 = false;
     }
@@ -124,12 +124,12 @@ extends Module {
     public boolean m402(Object object) {
         Entity entity = (Entity)object;
         Object var4_3 = null;
-        return MC.client3.player != null && entity == MC.client3.player;
+        return MC.mc.player != null && entity == MC.mc.player;
     }
 
     public boolean isSet16() {
         Object var2_1 = null;
-        return this.isSet19() && this.mode.getObj() != Mode.None;
+        return this.isEnabled() && this.mode.getValue() != Mode.None;
     }
 
     /*
@@ -139,35 +139,35 @@ extends Module {
     public Vec3d m601(Object object, boolean bl) {
         Vec3d vec3d = (Vec3d)object;
         Object var6_4 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return vec3d;
         }
         if (!this.isSet16()) {
             return vec3d;
         }
-        if (this.mode.getObj() == Mode.None) {
+        if (this.mode.getValue() == Mode.None) {
             return vec3d;
         }
-        if (MC.client3.player.isInFluid()) {
-            if (!((Boolean)this.whileLiquid.getObj()).booleanValue()) {
+        if (MC.mc.player.isInFluid()) {
+            if (!((Boolean)this.whileLiquid.getValue()).booleanValue()) {
                 return vec3d;
             }
         }
-        if (MC.client3.player.isGliding()) {
-            if (!((Boolean)this.fallFlying.getObj()).booleanValue()) {
+        if (MC.mc.player.isGliding()) {
+            if (!((Boolean)this.fallFlying.getValue()).booleanValue()) {
                 return vec3d;
             }
         }
-        switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+        switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
             case 1: {
-                if (!this.helper735.m432((Double)this.lagPause.getObj())) {
+                if (!this.helper735.hasPassedMs((Double)this.lagPause.getValue())) {
                     return vec3d;
                 }
                 boolean bl2 = ItemUtil.isSet26();
                 boolean bl3 = this.getBlockPos5() != null;
                 if (!bl2) {
                     if (!bl3) {
-                        if (!((Boolean)this.static_.getObj()).booleanValue()) return vec3d;
+                        if (!((Boolean)this.static_.getValue()).booleanValue()) return vec3d;
                         if (!MathUtil.isSet132()) {
                             return vec3d;
                         }
@@ -179,7 +179,7 @@ extends Module {
                 if (null == null) break;
             }
             case 2: {
-                if (!this.helper735.m432((Double)this.lagPause.getObj())) {
+                if (!this.helper735.hasPassedMs((Double)this.lagPause.getValue())) {
                     return vec3d;
                 }
                 if (!ItemUtil.isSet26()) {
@@ -192,11 +192,11 @@ extends Module {
                 break;
             }
         }
-        if (((Boolean)this.cancelAll.getObj()).booleanValue()) {
+        if (((Boolean)this.cancelAll.getValue()).booleanValue()) {
             return null;
         }
-        double d = (Double)this.horizontal.getObj() / 100.0;
-        double d2 = (Double)this.vertical.getObj() / 100.0;
+        double d = (Double)this.horizontal.getValue() / 100.0;
+        double d2 = (Double)this.vertical.getValue() / 100.0;
         return new Vec3d(vec3d.x * d, vec3d.y * d2, vec3d.z * d);
     }
 
@@ -205,46 +205,46 @@ extends Module {
         Entity entity;
         EntityStatusS2CPacket entityStatusS2CPacket;
         Packet packet;
-        if (packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket && (!((Boolean)this.ignorePearlLag.getObj()).booleanValue() || this.helper711.m432((Double)this.phaseTime.getObj()))) {
-            this.helper735.m533();
+        if (packetEventInner.getPacket() instanceof PlayerPositionLookS2CPacket && (!((Boolean)this.ignorePearlLag.getValue()).booleanValue() || this.helper711.hasPassedMs((Double)this.phaseTime.getValue()))) {
+            this.helper735.resetTimer();
         }
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (((Boolean)this.noFishBob.getObj()).booleanValue() && (packet = packetEventInner.getPacket()) instanceof EntityStatusS2CPacket && (entityStatusS2CPacket = (EntityStatusS2CPacket)packet).getStatus() == 31 && MC.client3.world != null && (entity = entityStatusS2CPacket.getEntity((World)MC.client3.world)) instanceof FishingBobberEntity && ((FishingBobberEntity)entity).getHookedEntity() == MC.client3.player) {
-            packetEventInner.m209();
+        if (((Boolean)this.noFishBob.getValue()).booleanValue() && (packet = packetEventInner.getPacket()) instanceof EntityStatusS2CPacket && (entityStatusS2CPacket = (EntityStatusS2CPacket)packet).getStatus() == 31 && MC.mc.world != null && (entity = entityStatusS2CPacket.getEntity((World)MC.mc.world)) instanceof FishingBobberEntity && ((FishingBobberEntity)entity).getHookedEntity() == MC.mc.player) {
+            packetEventInner.cancel();
         }
     }
 
     @EventHandler
     public void setEvent2Inner21(Event2.Event2Inner event2Inner) {
         boolean bl;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.mode.getObj() != Mode.Grim && this.mode.getObj() != Mode.Wall) {
+        if (this.mode.getValue() != Mode.Grim && this.mode.getValue() != Mode.Wall) {
             return;
         }
-        if (((Boolean)this.flagInWall.getObj()).booleanValue()) {
+        if (((Boolean)this.flagInWall.getValue()).booleanValue()) {
             this.flag130 = false;
-            double d = (double)MC.client3.player.getWidth() * 0.35;
-            this.m410(MC.client3.player.getX() - d, MC.client3.player.getZ() + d);
-            this.m410(MC.client3.player.getX() - d, MC.client3.player.getZ() - d);
-            this.m410(MC.client3.player.getX() + d, MC.client3.player.getZ() - d);
-            this.m410(MC.client3.player.getX() + d, MC.client3.player.getZ() + d);
+            double d = (double)MC.mc.player.getWidth() * 0.35;
+            this.m410(MC.mc.player.getX() - d, MC.mc.player.getZ() + d);
+            this.m410(MC.mc.player.getX() - d, MC.mc.player.getZ() - d);
+            this.m410(MC.mc.player.getX() + d, MC.mc.player.getZ() - d);
+            this.m410(MC.mc.player.getX() + d, MC.mc.player.getZ() + d);
         }
         if (!this.flag26) {
             return;
         }
-        boolean bl2 = this.helper735.m432((Double)this.lagPause.getObj());
-        boolean bl3 = bl = (Boolean)this.flagInWall.getObj() == false || !this.flag130 || (Boolean)this.whilePushOut.getObj() != false || !ItemUtil.isSet26();
+        boolean bl2 = this.helper735.hasPassedMs((Double)this.lagPause.getValue());
+        boolean bl3 = bl = (Boolean)this.flagInWall.getValue() == false || !this.flag130 || (Boolean)this.whilePushOut.getValue() != false || !ItemUtil.isSet26();
         if (bl2 && bl) {
-            float f = MC.client3.player.getYaw();
-            float f2 = this.isSet173() ? 89.0f : MC.client3.player.getPitch();
-            MC.client3.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.Full(MC.client3.player.getX(), MC.client3.player.getY(), MC.client3.player.getZ(), f, f2, MC.client3.player.isOnGround(), MC.client3.player.horizontalCollision));
+            float f = MC.mc.player.getYaw();
+            float f2 = this.isSet173() ? 89.0f : MC.mc.player.getPitch();
+            MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.Full(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), f, f2, MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
             BlockPos blockPos = this.getBlockPos5();
             if (blockPos != null) {
-                MC.client3.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, blockPos, MC.client3.player.getHorizontalFacing().getOpposite()));
+                MC.mc.player.networkHandler.sendPacket((Packet)new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, blockPos, MC.mc.player.getHorizontalFacing().getOpposite()));
             }
             this.flag26 = false;
         }
@@ -254,13 +254,13 @@ extends Module {
         block3: {
             block2: {
                 Object var2_1 = null;
-                if (MC.client3.player == null) break block2;
-                if (MC.client3.world != null) break block3;
+                if (MC.mc.player == null) break block2;
+                if (MC.mc.world != null) break block3;
             }
             return null;
         }
-        BlockPos blockPos = MC.client3.player.getBlockPos().down();
-        return MC.client3.world.getBlockState(blockPos).isOf(Blocks.OBSIDIAN) ? blockPos : null;
+        BlockPos blockPos = MC.mc.player.getBlockPos().down();
+        return MC.mc.world.getBlockState(blockPos).isOf(Blocks.OBSIDIAN) ? blockPos : null;
     }
 
     /*
@@ -269,12 +269,12 @@ extends Module {
      */
     public boolean isSet173() {
         Object var2_1 = null;
-        if (!this.isSet19()) return false;
-        if (this.mode.getObj() != Mode.Grim) {
-            if (this.mode.getObj() != Mode.Wall) return false;
+        if (!this.isEnabled()) return false;
+        if (this.mode.getValue() != Mode.Grim) {
+            if (this.mode.getValue() != Mode.Wall) return false;
         }
         if (!ItemUtil.isSet26()) return false;
-        if ((Boolean)this.noRotation.getObj() == false) return false;
+        if ((Boolean)this.noRotation.getValue() == false) return false;
         return true;
     }
 
@@ -283,10 +283,10 @@ extends Module {
             double d3 = d;
             double d4 = d2;
             Object var10_5 = null;
-            if (MC.client3.player == null || MC.client3.world == null) {
+            if (MC.mc.player == null || MC.mc.world == null) {
                 return;
             }
-            BlockPos blockPos = BlockPos.ofFloored((double)d3, (double)MC.client3.player.getY(), (double)d4);
+            BlockPos blockPos = BlockPos.ofFloored((double)d3, (double)MC.mc.player.getY(), (double)d4);
             if (!this.m433(blockPos)) {
                 return;
             }
@@ -313,14 +313,14 @@ extends Module {
             block2: {
                 blockPos = (BlockPos)object;
                 Object var4_3 = null;
-                if (MC.client3.player == null) break block2;
-                if (MC.client3.world != null) break block3;
+                if (MC.mc.player == null) break block2;
+                if (MC.mc.world != null) break block3;
             }
             return false;
         }
-        Box box = MC.client3.player.getBoundingBox();
+        Box box = MC.mc.player.getBoundingBox();
         Box box2 = new Box((double)blockPos.getX(), box.minY, (double)blockPos.getZ(), (double)blockPos.getX() + 1.0, box.maxY, (double)blockPos.getZ() + 1.0).contract(1.0E-7);
-        return !MC.client3.world.isBlockSpaceEmpty((Entity)MC.client3.player, box2);
+        return !MC.mc.world.isBlockSpaceEmpty((Entity)MC.mc.player, box2);
     }
 
     @Environment(value=EnvType.CLIENT)

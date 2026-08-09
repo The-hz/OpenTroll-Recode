@@ -20,7 +20,7 @@ extends Command {
     public void run(Object object) {
         String[] cfr_ignored_0 = (String[])object;
         Client.configManager.m1042();
-        CommandManager.setObj21("Config saved.");
+        CommandManager.sendFeedback("Config saved.");
     }
 }
 

@@ -20,11 +20,11 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Replenish
 extends Module {
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.QuickMove));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 2.0, 0.0, 5.0, 0.01));
-    private final NumberSetting min = (NumberSetting)this.m28(new NumberSetting("Min", 50.0, 1.0, 100.0, 1.0));
-    private final NumberSetting forceDelay = (NumberSetting)this.m28(new NumberSetting("ForceDelay", 0.2, 0.0, 4.0, 0.01));
-    private final NumberSetting forceMin = (NumberSetting)this.m28(new NumberSetting("ForceMin", 16.0, 1.0, 100.0, 1.0));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.QuickMove));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 2.0, 0.0, 5.0, 0.01));
+    private final NumberSetting min = (NumberSetting)this.registerSetting(new NumberSetting("Min", 50.0, 1.0, 100.0, 1.0));
+    private final NumberSetting forceDelay = (NumberSetting)this.registerSetting(new NumberSetting("ForceDelay", 0.2, 0.0, 4.0, 0.01));
+    private final NumberSetting forceMin = (NumberSetting)this.registerSetting(new NumberSetting("ForceMin", 16.0, 1.0, 100.0, 1.0));
     private long time22 = 0L;
 
     public Replenish() {
@@ -38,7 +38,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner58(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
         for (int i = 0; i < 9; ++i) {
@@ -53,7 +53,7 @@ extends Module {
      */
     private boolean m34(int var1_1) {
         int var3 = var1_1;
-        ItemStack var5 = MC.client3.player.getInventory().getStack(var3);
+        ItemStack var5 = MC.mc.player.getInventory().getStack(var3);
         if (var5.isEmpty()) {
             return false;
         }
@@ -61,30 +61,30 @@ extends Module {
             return false;
         }
         int var6 = (int)((double)var5.getCount() / (double)var5.getMaxCount() * 100.0);
-        if ((double)var6 > (Double)this.min.getObj()) {
+        if ((double)var6 > (Double)this.min.getValue()) {
             return false;
         }
         for (int var7 = 9; var7 < 36; ++var7) {
-            ItemStack var8 = MC.client3.player.getInventory().getStack(var7);
+            ItemStack var8 = MC.mc.player.getInventory().getStack(var7);
             if (var8.isEmpty() || !Replenish.m395(var5, var8)) continue;
             long var9 = System.currentTimeMillis();
-            if ((double)var6 > (Double)this.forceMin.getObj()) {
-                if (var9 - this.time22 - (long)((Double)this.delay.getObj() * 1000.0) < 0L) {
+            if ((double)var6 > (Double)this.forceMin.getValue()) {
+                if (var9 - this.time22 - (long)((Double)this.delay.getValue() * 1000.0) < 0L) {
                     return false;
                 }
-            } else if (var9 - this.time22 - (long)((Double)this.forceDelay.getObj() * 1000.0) < 0L) {
+            } else if (var9 - this.time22 - (long)((Double)this.forceDelay.getValue() * 1000.0) < 0L) {
                 return false;
             }
-            int var11 = MC.client3.player.playerScreenHandler.syncId;
-            switch (((Mode)((Object)this.mode.getObj())).ordinal()) {
+            int var11 = MC.mc.player.playerScreenHandler.syncId;
+            switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
                 case 0: {
-                    MC.client3.interactionManager.clickSlot(var11, var7, 0, SlotActionType.QUICK_MOVE, (PlayerEntity)MC.client3.player);
+                    MC.mc.interactionManager.clickSlot(var11, var7, 0, SlotActionType.QUICK_MOVE, (PlayerEntity)MC.mc.player);
                     break;
                 }
                 case 1: {
-                    MC.client3.interactionManager.clickSlot(var11, var7, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                    MC.client3.interactionManager.clickSlot(var11, var3 + 36, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
-                    MC.client3.interactionManager.clickSlot(var11, var7, 0, SlotActionType.PICKUP, (PlayerEntity)MC.client3.player);
+                    MC.mc.interactionManager.clickSlot(var11, var7, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                    MC.mc.interactionManager.clickSlot(var11, var3 + 36, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
+                    MC.mc.interactionManager.clickSlot(var11, var7, 0, SlotActionType.PICKUP, (PlayerEntity)MC.mc.player);
                     break;
                 }
             }

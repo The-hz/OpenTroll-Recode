@@ -13,26 +13,26 @@ import net.fabricmc.api.Environment;
 public class Manager {
     private final Set set8 = new TreeSet(String.CASE_INSENSITIVE_ORDER);
 
-    public boolean m151(Object object) {
+    public boolean addFriend(Object object) {
         String string = (String)object;
         return this.set8.add(string);
     }
 
-    public boolean m933(Object object) {
+    public boolean removeFriend(Object object) {
         String string = (String)object;
         return this.set8.remove(string);
     }
 
-    public boolean m258(Object object) {
+    public boolean isFriend(Object object) {
         String string = (String)object;
         return this.set8.contains(string);
     }
 
-    public Set getSet2() {
+    public Set getFriends() {
         return Collections.unmodifiableSet(this.set8);
     }
 
-    public void m624() {
+    public void clearFriends() {
         this.set8.clear();
     }
 }

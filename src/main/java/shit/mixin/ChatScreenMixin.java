@@ -31,13 +31,13 @@ public class ChatScreenMixin {
         ChatSuffix chatSuffix;
         FancyChat fancyChat;
         Emoji emoji = Emoji.INSTANCE;
-        if (emoji != null && emoji.isSet19()) {
+        if (emoji != null && emoji.isEnabled()) {
             string = emoji.m528(string);
         }
-        if ((fancyChat = FancyChat.INSTANCE) != null && fancyChat.isSet19()) {
+        if ((fancyChat = FancyChat.INSTANCE) != null && fancyChat.isEnabled()) {
             string = fancyChat.m342(string);
         }
-        if ((chatSuffix = ChatSuffix.INSTANCE) != null && chatSuffix.isSet19()) {
+        if ((chatSuffix = ChatSuffix.INSTANCE) != null && chatSuffix.isEnabled()) {
             return chatSuffix.m778(string);
         }
         return string;

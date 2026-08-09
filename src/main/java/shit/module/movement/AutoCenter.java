@@ -17,8 +17,8 @@ import shit.util.MC;
 public class AutoCenter
 extends Module {
     public static AutoCenter INSTANCE;
-    private final NumberSetting timeout = (NumberSetting)this.m28(new NumberSetting("Timeout", 5.0, 1.0, 40.0, 1.0));
-    private final NumberSetting speed = (NumberSetting)this.m28(new NumberSetting("Speed", 0.2873, 0.05, 1.0, 0.01));
+    private final NumberSetting timeout = (NumberSetting)this.registerSetting(new NumberSetting("Timeout", 5.0, 1.0, 40.0, 1.0));
+    private final NumberSetting speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 0.2873, 0.05, 1.0, 0.01));
     private double value185;
     private double value146;
     private int count121;
@@ -30,13 +30,13 @@ extends Module {
 
     public void m47() {
         Object var2_1 = null;
-        if (MC.client3.player == null) {
+        if (MC.mc.player == null) {
             return;
         }
-        this.value185 = Math.floor(MC.client3.player.getX()) + 0.5;
-        this.value146 = Math.floor(MC.client3.player.getZ()) + 0.5;
+        this.value185 = Math.floor(MC.mc.player.getX()) + 0.5;
+        this.value146 = Math.floor(MC.mc.player.getZ()) + 0.5;
         this.count121 = 0;
-        this.setFlag3(true);
+        this.setEnabled(true);
     }
 
     @Override
@@ -46,34 +46,34 @@ extends Module {
 
     @EventHandler
     private void setInputTickEvent(InputTickEvent inputTickEvent) {
-        if (MC.client3.options == null) {
+        if (MC.mc.options == null) {
             return;
         }
-        MC.client3.options.forwardKey.setPressed(false);
-        MC.client3.options.backKey.setPressed(false);
-        MC.client3.options.leftKey.setPressed(false);
-        MC.client3.options.rightKey.setPressed(false);
-        MC.client3.options.jumpKey.setPressed(false);
-        MC.client3.options.sneakKey.setPressed(false);
+        MC.mc.options.forwardKey.setPressed(false);
+        MC.mc.options.backKey.setPressed(false);
+        MC.mc.options.leftKey.setPressed(false);
+        MC.mc.options.rightKey.setPressed(false);
+        MC.mc.options.jumpKey.setPressed(false);
+        MC.mc.options.sneakKey.setPressed(false);
     }
 
     @EventHandler
     private void setMoveEvent6(MoveEvent moveEvent) {
         double d;
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (this.count121++ > this.timeout.getInt50()) {
-            this.setFlag3(false);
+        if (this.count121++ > this.timeout.getInt()) {
+            this.setEnabled(false);
             return;
         }
-        double d2 = this.value185 - MC.client3.player.getX();
-        double d3 = Math.hypot(d2, d = this.value146 - MC.client3.player.getZ());
+        double d2 = this.value185 - MC.mc.player.getX();
+        double d3 = Math.hypot(d2, d = this.value146 - MC.mc.player.getZ());
         if (d3 < 0.05) {
-            this.setFlag3(false);
+            this.setEnabled(false);
             return;
         }
-        double d4 = Math.min((Double)this.speed.getObj(), d3);
+        double d4 = Math.min((Double)this.speed.getValue(), d3);
         moveEvent.setDouble2(d2 / d3 * d4);
         moveEvent.setDouble(d / d3 * d4);
     }

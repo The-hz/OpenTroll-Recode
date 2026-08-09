@@ -21,15 +21,15 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class SkinBlinker
 extends Module {
-    private final BooleanSetting cape = (BooleanSetting)this.m28(new BooleanSetting("Cape", false));
-    private final BooleanSetting jacket = (BooleanSetting)this.m28(new BooleanSetting("Jacket", true));
-    private final BooleanSetting leftSleeve = (BooleanSetting)this.m28(new BooleanSetting("LeftSleeve", true));
-    private final BooleanSetting rightSleeve = (BooleanSetting)this.m28(new BooleanSetting("RightSleeve", true));
-    private final BooleanSetting leftPants = (BooleanSetting)this.m28(new BooleanSetting("LeftPants", true));
-    private final BooleanSetting rightPants = (BooleanSetting)this.m28(new BooleanSetting("RightPants", true));
-    private final BooleanSetting hat = (BooleanSetting)this.m28(new BooleanSetting("Hat", true));
-    private final EnumSetting mode = (EnumSetting)this.m28(new EnumSetting("Mode", Mode.HORIZONTAL));
-    private final NumberSetting delay = (NumberSetting)this.m28(new NumberSetting("Delay", 100.0, 0.0, 500.0, 5.0));
+    private final BooleanSetting cape = (BooleanSetting)this.registerSetting(new BooleanSetting("Cape", false));
+    private final BooleanSetting jacket = (BooleanSetting)this.registerSetting(new BooleanSetting("Jacket", true));
+    private final BooleanSetting leftSleeve = (BooleanSetting)this.registerSetting(new BooleanSetting("LeftSleeve", true));
+    private final BooleanSetting rightSleeve = (BooleanSetting)this.registerSetting(new BooleanSetting("RightSleeve", true));
+    private final BooleanSetting leftPants = (BooleanSetting)this.registerSetting(new BooleanSetting("LeftPants", true));
+    private final BooleanSetting rightPants = (BooleanSetting)this.registerSetting(new BooleanSetting("RightPants", true));
+    private final BooleanSetting hat = (BooleanSetting)this.registerSetting(new BooleanSetting("Hat", true));
+    private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.HORIZONTAL));
+    private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 500.0, 5.0));
     private final Helper7 helper75 = new Helper7();
     private final Random random6 = new Random();
     private int count231;
@@ -41,13 +41,13 @@ extends Module {
     }
 
     @Override
-    public void m709() {
+    public void onDisable() {
         PlayerModelPart[] playerModelPartArray = PlayerModelPart.values();
         int n = playerModelPartArray.length;
         String string = IRC.getText7();
         for (int i = 0; i < n; ++i) {
             PlayerModelPart playerModelPart = playerModelPartArray[i];
-            MC.client3.options.setPlayerModelPart(playerModelPart, true);
+            MC.mc.options.setPlayerModelPart(playerModelPart, true);
             if (string != null) continue;
         }
     }
@@ -55,15 +55,15 @@ extends Module {
     @EventHandler
     private void setEvent2Inner215(Event2.Event2Inner2 event2Inner2) {
         PlayerModelPart playerModelPart;
-        if (!this.helper75.m432((Double)this.delay.getObj())) {
+        if (!this.helper75.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
-        PlayerModelPart[] playerModelPartArray = this.mode.getObj() == Mode.VERTICAL ? fields2 : fields18;
-        PlayerModelPart playerModelPart2 = playerModelPart = this.mode.getObj() == Mode.RANDOM ? PlayerModelPart.values()[this.random6.nextInt(PlayerModelPart.values().length)] : playerModelPartArray[this.count231++ % playerModelPartArray.length];
+        PlayerModelPart[] playerModelPartArray = this.mode.getValue() == Mode.VERTICAL ? fields2 : fields18;
+        PlayerModelPart playerModelPart2 = playerModelPart = this.mode.getValue() == Mode.RANDOM ? PlayerModelPart.values()[this.random6.nextInt(PlayerModelPart.values().length)] : playerModelPartArray[this.count231++ % playerModelPartArray.length];
         if (this.m698(playerModelPart)) {
-            MC.client3.options.setPlayerModelPart(playerModelPart, !MC.client3.options.isPlayerModelPartEnabled(playerModelPart));
+            MC.mc.options.setPlayerModelPart(playerModelPart, !MC.mc.options.isPlayerModelPartEnabled(playerModelPart));
         }
-        this.helper75.m533();
+        this.helper75.resetTimer();
     }
 
     private boolean m698(Object object) {
@@ -80,31 +80,31 @@ extends Module {
                         throw new MatchException(null, null);
                     }
                     case 1: {
-                        bl = (Boolean)this.cape.getObj();
+                        bl = (Boolean)this.cape.getValue();
                         break block10;
                     }
                     case 2: {
-                        bl = (Boolean)this.jacket.getObj();
+                        bl = (Boolean)this.jacket.getValue();
                         break block10;
                     }
                     case 3: {
-                        bl = (Boolean)this.leftSleeve.getObj();
+                        bl = (Boolean)this.leftSleeve.getValue();
                         break block10;
                     }
                     case 4: {
-                        bl = (Boolean)this.rightSleeve.getObj();
+                        bl = (Boolean)this.rightSleeve.getValue();
                         break block10;
                     }
                     case 5: {
-                        bl = (Boolean)this.leftPants.getObj();
+                        bl = (Boolean)this.leftPants.getValue();
                         break block10;
                     }
                     case 6: {
-                        bl = (Boolean)this.rightPants.getObj();
+                        bl = (Boolean)this.rightPants.getValue();
                         break block10;
                     }
                     case 7: {
-                        bl = (Boolean)this.hat.getObj();
+                        bl = (Boolean)this.hat.getValue();
                         break block10;
                     }
                 }

@@ -24,8 +24,8 @@ public abstract class TotemParticleMixin {
     private void m893(ClientWorld clientWorld, double d, double d2, double d3, double d4, double d5, double d6, SpriteProvider spriteProvider, CallbackInfo callbackInfo) {
         ParticleAccessor particleAccessor = (ParticleAccessor)((Object)this);
         HookTotemParticleInitEvent hookTotemParticleInitEvent = new HookTotemParticleInitEvent(particleAccessor.trollhack$getXd(), particleAccessor.trollhack$getYd(), particleAccessor.trollhack$getZd());
-        Client.eventBus.m287(hookTotemParticleInitEvent);
-        if (!hookTotemParticleInitEvent.isSet85()) {
+        Client.eventBus.post(hookTotemParticleInitEvent);
+        if (!hookTotemParticleInitEvent.isCancelled()) {
             return;
         }
         particleAccessor.trollhack$setXd(hookTotemParticleInitEvent.value129);

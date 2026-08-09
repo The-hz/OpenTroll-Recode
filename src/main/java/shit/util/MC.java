@@ -9,6 +9,6 @@ import net.minecraft.client.MinecraftClient;
 
 @Environment(value=EnvType.CLIENT)
 public interface MC {
-    public static final MinecraftClient client3 = MinecraftClient.getInstance();
+    public static final MinecraftClient mc = MinecraftClient.getInstance();
 }
 

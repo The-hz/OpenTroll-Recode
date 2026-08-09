@@ -22,7 +22,7 @@ import shit.module.movement.AutoSprint;
 @Mixin(value={PlayerEntity.class})
 public class PlayerMixin {
     private boolean shouldMovementSync() {
-        boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getObj() != false;
+        boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getValue() != false;
         boolean bl2 = AutoSprint.INSTANCE != null && AutoSprint.INSTANCE.isSet160();
         return (bl || bl2) && Client.mathUtil.isSet111();
     }
@@ -41,8 +41,8 @@ public class PlayerMixin {
         boolean bl = clientPlayerEntity.input != null && clientPlayerEntity.input.playerInput.jump();
         boolean bl2 = clientPlayerEntity.input != null && clientPlayerEntity.input.playerInput.sneak();
         TravelHeadEvent travelHeadEvent = new TravelHeadEvent(vec3d, bl, bl2, ((Vec3d)playerMixin).x, ((Vec3d)playerMixin).y, ((Vec3d)playerMixin).z);
-        Client.eventBus.m287(travelHeadEvent);
-        if (travelHeadEvent.isSet85()) {
+        Client.eventBus.post(travelHeadEvent);
+        if (travelHeadEvent.isCancelled()) {
             clientPlayerEntity.setVelocity(travelHeadEvent.getDouble3(), travelHeadEvent.getDouble5(), travelHeadEvent.getDouble11());
             clientPlayerEntity.move(MovementType.SELF, clientPlayerEntity.getVelocity());
             callbackInfo.cancel();

@@ -59,8 +59,8 @@ public class FontManager {
     public FontManager2 renderer2() {
         Fonts fonts = this.getFonts();
         Object var2_2 = null;
-        Fonts.Mode mode = fonts == null ? Fonts.Mode.MISANS : (Fonts.Mode)((Object)fonts.mode.getObj());
-        float f = fonts == null ? 9.0f : ((Fonts.SizeMode)((Object)fonts.sizeMode.getObj())).m842(fonts.customSize.getFloat35());
+        Fonts.Mode mode = fonts == null ? Fonts.Mode.MISANS : (Fonts.Mode)((Object)fonts.mode.getValue());
+        float f = fonts == null ? 9.0f : ((Fonts.SizeMode)((Object)fonts.sizeMode.getValue())).m842(fonts.customSize.getFloat());
         String string = mode.getText50();
         int n = this.m581(f);
         String string3 = mode.name().toLowerCase() + "_" + n;
@@ -75,7 +75,7 @@ public class FontManager {
         float f2 = f;
         Fonts fonts = this.getFonts();
         Object var4_4 = null;
-        Fonts.Mode mode = fonts == null ? Fonts.Mode.MISANS : (Fonts.Mode)((Object)fonts.mode.getObj());
+        Fonts.Mode mode = fonts == null ? Fonts.Mode.MISANS : (Fonts.Mode)((Object)fonts.mode.getValue());
         String string = mode.getText50();
         int n = this.m581(f2);
         String string3 = mode.name().toLowerCase() + "_" + n;
@@ -93,7 +93,7 @@ public class FontManager {
     public float getFloat47() {
         Fonts fonts = this.getFonts();
         Object var2_2 = null;
-        return fonts == null ? 0.0f : fonts.offset.getFloat35();
+        return fonts == null ? 0.0f : fonts.offset.getFloat();
     }
 
     private Fonts getFonts() {
@@ -102,7 +102,7 @@ public class FontManager {
         if (Client.moduleManager == null) {
             return null;
         }
-        Module module = Client.moduleManager.m979("Fonts");
+        Module module = Client.moduleManager.getModule("Fonts");
         return module instanceof Fonts ? (fonts = (Fonts)module) : null;
     }
 

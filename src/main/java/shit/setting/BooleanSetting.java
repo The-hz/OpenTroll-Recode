@@ -23,14 +23,14 @@ extends Setting {
     }
 
     @Override
-    public String getText29() {
-        return Boolean.toString((Boolean)this.getObj());
+    public String getValueString() {
+        return Boolean.toString((Boolean)this.getValue());
     }
 
     @Override
-    public void setObj58(Object object) {
+    public void setValueFromString(Object object) {
         String string = (String)object;
-        this.setObj94(Boolean.parseBoolean(string));
+        this.setValueInternal(Boolean.parseBoolean(string));
     }
 
     public static void setText13(String string) {

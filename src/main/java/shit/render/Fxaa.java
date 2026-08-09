@@ -60,7 +60,7 @@ public class Fxaa {
     }
 
     public void m869() {
-        this.render5(MC.client3.getFramebuffer());
+        this.render5(MC.mc.getFramebuffer());
     }
 
     public void render5(Object object) {

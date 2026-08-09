@@ -75,9 +75,9 @@ public class ClientPacketListenerMixin {
         boolean bl;
         Disabler disabler = Disabler.INSTANCE;
         NoRotate noRotate = NoRotate.INSTANCE;
-        boolean bl2 = bl = noRotate != null && noRotate.isSet19();
+        boolean bl2 = bl = noRotate != null && noRotate.isEnabled();
         if (!bl) {
-            boolean bl3 = bl = disabler != null && disabler.isSet19() && (Boolean)disabler.s2CRotate.getObj() != false;
+            boolean bl3 = bl = disabler != null && disabler.isEnabled() && (Boolean)disabler.s2CRotate.getValue() != false;
         }
         if (!bl) {
             return;
@@ -103,7 +103,7 @@ public class ClientPacketListenerMixin {
             clientPlayerEntity.setPitch(f2);
             clientPlayerEntity.setLastPositionAndAngles(entityPosition4.position(), f3, f4);
         }
-        boolean bl4 = disabler != null && disabler.isSet19() && (Boolean)disabler.applyYaw.getObj() != false;
+        boolean bl4 = disabler != null && disabler.isEnabled() && (Boolean)disabler.applyYaw.getValue() != false;
         float f5 = bl4 ? entityPosition2.yaw() : f;
         float f6 = bl4 ? entityPosition2.pitch() : f2;
         ClientPlayNetworkHandler clientPlayNetworkHandler = (ClientPlayNetworkHandler)(Object)this;

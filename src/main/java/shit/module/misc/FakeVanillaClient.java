@@ -25,7 +25,7 @@ extends Module {
         CustomPayloadC2SPacket customPayloadC2SPacket;
         Packet packet = packetEventInner2.getPacket();
         if (packet instanceof CustomPayloadC2SPacket && (customPayloadC2SPacket = (CustomPayloadC2SPacket)packet).payload() instanceof BrandCustomPayload) {
-            packetEventInner2.m209();
+            packetEventInner2.cancel();
         }
     }
 }

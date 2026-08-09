@@ -36,34 +36,34 @@ public abstract class Setting {
         this.flag133 = bl;
     }
 
-    public String getText26() {
+    public String getName() {
         return this.text265;
     }
 
-    public String getText51() {
+    public String getDisplayName() {
         return Outline.m14(this.text265);
     }
 
-    public Object getObj20() {
+    public Object getDefaultValue() {
         return this.field47;
     }
 
-    public boolean isSet152() {
+    public boolean isVisible() {
         return this.booleanSupplier.getAsBoolean();
     }
 
-    public Object getObj() {
+    public Object getValue() {
         return this.field48;
     }
 
-    public void setObj94(Object object) {
+    public void setValueInternal(Object object) {
         Object object2 = object;
         this.field48 = this.biFunction.apply(this.field48, object2);
     }
 
-    public abstract String getText29();
+    public abstract String getValueString();
 
-    public abstract void setObj58(Object var1);
+    public abstract void setValueFromString(Object var1);
 
     public static void setText14(String string) {
         text508 = string;

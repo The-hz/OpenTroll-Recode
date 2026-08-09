@@ -20,7 +20,7 @@ import shit.util.MC;
 public class InMove
 extends Module {
     public static InMove INSTANCE;
-    private final BooleanSetting allowSneak = (BooleanSetting)this.m28(new BooleanSetting("AllowSneak", false));
+    private final BooleanSetting allowSneak = (BooleanSetting)this.registerSetting(new BooleanSetting("AllowSneak", false));
 
     public InMove() {
         super("InMove", "Allows moving while in any container GUI.", Category.MOVEMENT);
@@ -29,18 +29,18 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner48(Event2.Event2Inner event2Inner) {
-        if (Module.isSet37()) {
+        if (Module.isNotInGame()) {
             return;
         }
-        if (MC.client3.currentScreen != null && !(MC.client3.currentScreen instanceof ChatScreen)) {
-            for (KeyBinding keyBinding : new KeyBinding[]{MC.client3.options.backKey, MC.client3.options.leftKey, MC.client3.options.rightKey}) {
+        if (MC.mc.currentScreen != null && !(MC.mc.currentScreen instanceof ChatScreen)) {
+            for (KeyBinding keyBinding : new KeyBinding[]{MC.mc.options.backKey, MC.mc.options.leftKey, MC.mc.options.rightKey}) {
                 keyBinding.setPressed(this.m920(keyBinding));
             }
-            MC.client3.options.jumpKey.setPressed(this.m920(MC.client3.options.jumpKey));
-            MC.client3.options.forwardKey.setPressed(this.m920(MC.client3.options.forwardKey));
-            MC.client3.options.sprintKey.setPressed(this.m920(MC.client3.options.sprintKey));
-            if (((Boolean)this.allowSneak.getObj()).booleanValue()) {
-                MC.client3.options.sneakKey.setPressed(this.m920(MC.client3.options.sneakKey));
+            MC.mc.options.jumpKey.setPressed(this.m920(MC.mc.options.jumpKey));
+            MC.mc.options.forwardKey.setPressed(this.m920(MC.mc.options.forwardKey));
+            MC.mc.options.sprintKey.setPressed(this.m920(MC.mc.options.sprintKey));
+            if (((Boolean)this.allowSneak.getValue()).booleanValue()) {
+                MC.mc.options.sneakKey.setPressed(this.m920(MC.mc.options.sneakKey));
             }
         }
     }
@@ -48,7 +48,7 @@ extends Module {
     private boolean m920(Object object) {
         KeyBinding keyBinding = (KeyBinding)object;
         Object var4_3 = null;
-        if (MC.client3.getWindow() == null) {
+        if (MC.mc.getWindow() == null) {
             return false;
         }
         InputUtil.Key key = keyBinding.getDefaultKey();
@@ -56,7 +56,7 @@ extends Module {
         if (n == -1 || key == InputUtil.UNKNOWN_KEY) {
             return false;
         }
-        return InputUtil.isKeyPressed((Window)MC.client3.getWindow(), (int)n);
+        return InputUtil.isKeyPressed((Window)MC.mc.getWindow(), (int)n);
     }
 }
 

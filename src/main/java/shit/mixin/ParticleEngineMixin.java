@@ -25,10 +25,10 @@ public class ParticleEngineMixin {
     private void trollhack$noParticle(Particle particle, CallbackInfo callbackInfo) {
         boolean bl;
         NoRender noRender = NoRender.INSTANCE;
-        if (noRender == null || !noRender.isSet19() || particle == null) {
+        if (noRender == null || !noRender.isEnabled() || particle == null) {
             return;
         }
-        boolean bl2 = bl = (Boolean)noRender.effect.getObj() != false && particle instanceof SpellParticle || (Boolean)noRender.guardian.getObj() != false && particle instanceof ElderGuardianParticle || (Boolean)noRender.explosions.getObj() != false && particle instanceof ExplosionLargeParticle || (Boolean)noRender.campFire.getObj() != false && particle instanceof CampfireSmokeParticle || (Boolean)noRender.fireworks.getObj() != false && particle.getClass().getEnclosingClass() == FireworksSparkParticle.class;
+        boolean bl2 = bl = (Boolean)noRender.effect.getValue() != false && particle instanceof SpellParticle || (Boolean)noRender.guardian.getValue() != false && particle instanceof ElderGuardianParticle || (Boolean)noRender.explosions.getValue() != false && particle instanceof ExplosionLargeParticle || (Boolean)noRender.campFire.getValue() != false && particle instanceof CampfireSmokeParticle || (Boolean)noRender.fireworks.getValue() != false && particle.getClass().getEnclosingClass() == FireworksSparkParticle.class;
         if (bl) {
             callbackInfo.cancel();
         }

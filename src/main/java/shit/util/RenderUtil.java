@@ -23,10 +23,10 @@ public final class RenderUtil {
         if (MinecraftClient.getInstance().currentScreen instanceof HudEditorScreen) {
             return;
         }
-        for (Module module : Client.moduleManager.getList6()) {
-            if (module instanceof Listener3 && module.isSet19()) {
+        for (Module module : Client.moduleManager.getModules()) {
+            if (module instanceof Listener3 && module.isEnabled()) {
                 try {
-                    ((Listener3) module).m368(drawContext, false);
+                    ((Listener3) module).renderHud(drawContext, false);
                 } catch (UnsupportedOperationException stub) {
                 } catch (RuntimeException e) {
                 }

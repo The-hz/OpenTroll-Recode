@@ -60,7 +60,7 @@ public class ScreenQuad {
 
     public void setObj3(Object object) {
         Color color = (Color)object;
-        this.render2(MC.client3.getFramebuffer(), color);
+        this.render2(MC.mc.getFramebuffer(), color);
     }
 
     public void render2(Object object, Object object2) {

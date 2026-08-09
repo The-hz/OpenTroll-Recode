@@ -21,9 +21,9 @@ import shit.setting.NumberSetting;
 @Environment(value=EnvType.CLIENT)
 public class PacketLimiter
 extends Module {
-    private final NumberSetting packetsPerSecond = (NumberSetting)this.m28(new NumberSetting("PacketsPerSecond", 80.0, 1.0, 300.0, 1.0));
-    private final BooleanSetting movement = (BooleanSetting)this.m28(new BooleanSetting("Movement", true));
-    private final BooleanSetting actions = (BooleanSetting)this.m28(new BooleanSetting("Actions", false));
+    private final NumberSetting packetsPerSecond = (NumberSetting)this.registerSetting(new NumberSetting("PacketsPerSecond", 80.0, 1.0, 300.0, 1.0));
+    private final BooleanSetting movement = (BooleanSetting)this.registerSetting(new BooleanSetting("Movement", true));
+    private final BooleanSetting actions = (BooleanSetting)this.registerSetting(new BooleanSetting("Actions", false));
     private final Helper7 helper78 = new Helper7();
     private int count209;
 
@@ -34,7 +34,7 @@ extends Module {
     @Override
     public void onEnable() {
         this.count209 = 0;
-        this.helper78.m533();
+        this.helper78.resetTimer();
     }
 
     @EventHandler(priority=900)
@@ -42,12 +42,12 @@ extends Module {
         if (!this.m322(packetEventInner2.getPacket())) {
             return;
         }
-        if (this.helper78.m114(1.0)) {
+        if (this.helper78.hasPassedSeconds(1.0)) {
             this.count209 = 0;
-            this.helper78.m533();
+            this.helper78.resetTimer();
         }
-        if (++this.count209 > this.packetsPerSecond.getInt50()) {
-            packetEventInner2.m209();
+        if (++this.count209 > this.packetsPerSecond.getInt()) {
+            packetEventInner2.cancel();
         }
     }
 
@@ -58,12 +58,12 @@ extends Module {
     private boolean m322(Object object) {
         Packet packet = (Packet)object;
         boolean bl = false;
-        if (((Boolean)this.movement.getObj()).booleanValue()) {
+        if (((Boolean)this.movement.getValue()).booleanValue()) {
             if (packet instanceof PlayerMoveC2SPacket) {
                 return true;
             }
         }
-        if ((Boolean)this.actions.getObj() == false) return false;
+        if ((Boolean)this.actions.getValue() == false) return false;
         if (packet instanceof PlayerActionC2SPacket) return true;
         if (packet instanceof PlayerInteractItemC2SPacket) return true;
         if (!(packet instanceof PlayerInteractBlockC2SPacket)) return false;
@@ -71,8 +71,8 @@ extends Module {
     }
 
     @Override
-    public String getText57() {
-        return this.count209 + "/" + this.packetsPerSecond.getInt50();
+    public String getInfo() {
+        return this.count209 + "/" + this.packetsPerSecond.getInt();
     }
 }
 
