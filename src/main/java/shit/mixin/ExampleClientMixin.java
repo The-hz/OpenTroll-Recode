@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shit.Client;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.SetScreenEvent;
 import shit.event.StartAttackEvent;
 import shit.event.StartUseItemEvent;
@@ -29,12 +29,12 @@ import shit.util.AuthUtil;
 public class ExampleClientMixin {
     @Inject(method={"tick()V"}, at={@At(value="HEAD")})
     private void trollhack$preTick(CallbackInfo callbackInfo) {
-        Client.eventBus.post(new Event2.Event2Inner());
+        Client.eventBus.post(new TickEvent.PreTick());
     }
 
     @Inject(method={"tick()V"}, at={@At(value="TAIL")})
     private void trollhack$postTick(CallbackInfo callbackInfo) {
-        Client.eventBus.post(new Event2.Event2Inner2());
+        Client.eventBus.post(new TickEvent.PostTick());
     }
 
     @Inject(method={"setScreen(Lnet/minecraft/client/gui/screen/Screen;)V"}, at={@At(value="HEAD")}, cancellable=true)

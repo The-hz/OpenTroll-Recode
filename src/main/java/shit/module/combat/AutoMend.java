@@ -12,7 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.util.Hand;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -59,7 +59,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick(Event2.Event2Inner event2Inner) {
+    private void onTick(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

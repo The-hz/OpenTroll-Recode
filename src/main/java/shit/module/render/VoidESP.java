@@ -9,7 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.RenderLevelEvent;
 import shit.module.Category;
@@ -45,7 +45,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner46(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner46(TickEvent.PreTick event2Inner) {
         if (++this.count233 < 10) {
             return;
         }

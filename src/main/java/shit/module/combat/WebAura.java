@@ -18,9 +18,9 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
@@ -49,7 +49,7 @@ extends Module {
     private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
     private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
     private final EnumSetting timing = (EnumSetting)this.registerSetting(new EnumSetting("Timing", TimingMode.ALL));
-    private final Helper7 helper734 = new Helper7();
+    private final Stopwatch helper734 = new Stopwatch();
     private final List list36 = new ArrayList();
     private int count183;
 
@@ -65,7 +65,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner14(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner14(TickEvent.PreTick event2Inner) {
         if (this.timing.getValue() == TimingMode.POST) {
             return;
         }
@@ -73,7 +73,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner229(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner229(TickEvent.PostTick event2Inner2) {
         if (this.timing.getValue() == TimingMode.PRE) {
             return;
         }

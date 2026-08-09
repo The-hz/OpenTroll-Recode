@@ -11,14 +11,14 @@ import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.chat.ChatTimestamp;
 import shit.setting.BooleanSetting;
 import shit.util.MathUtil;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class LoginMessage
@@ -52,7 +52,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner29(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner29(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || this.flag97) {
             return;
         }
@@ -64,10 +64,10 @@ extends Module {
         }
         for (String string : this.list12) {
             if (string.startsWith("/")) {
-                Util2.sendChatCommand(string.substring(1));
+                ChatUtils.sendChatCommand(string.substring(1));
                 continue;
             }
-            Util2.sendChatMessage(string);
+            ChatUtils.sendChatMessage(string);
         }
         this.flag97 = true;
     }
@@ -81,7 +81,7 @@ extends Module {
             if (nArray2 != null) {
                 if (!file.exists()) {
                     file3.createNewFile();
-                    Util2.sendClientMessage("[LoginMessage] Created loginmsg.txt. Add messages before enabling again.");
+                    ChatUtils.sendClientMessage("[LoginMessage] Created loginmsg.txt. Add messages before enabling again.");
                     return;
                 }
                 file = file3;
@@ -99,7 +99,7 @@ extends Module {
             }
         }
         catch (IOException iOException) {
-            Util2.sendClientMessage("[LoginMessage] Failed to load loginmsg.txt: " + iOException.getMessage());
+            ChatUtils.sendClientMessage("[LoginMessage] Failed to load loginmsg.txt: " + iOException.getMessage());
         }
     }
 

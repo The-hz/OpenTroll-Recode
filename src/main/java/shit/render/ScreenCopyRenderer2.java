@@ -10,14 +10,14 @@ import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.texture.GlTexture;
 import net.minecraft.client.util.memory.ObjectAllocator;
 import shit.misc.ShaderProgram;
-import shit.render.Blur2;
+import shit.render.StandaloneBlurHelper;
 import shit.util.ShadersUtil;
 
 @Environment(value=EnvType.CLIENT)
 public class ScreenCopyRenderer2 {
     private ShaderProgram shaderProgram2;
     private ShaderProgram shaderProgram3;
-    private Blur2 blur22;
+    private StandaloneBlurHelper blur22;
     private static final String[] a = new String[0];
     private static final String[] b = new String[0];
     private static final long[] c = new long[0];
@@ -32,7 +32,7 @@ public class ScreenCopyRenderer2 {
 
     public void m1012() {
         block3: {
-            Blur2 blur2;
+            StandaloneBlurHelper blur2;
             block2: {
                 boolean bl = ShadersUtil.isSet178();
                 blur2 = this.blur22;
@@ -88,7 +88,7 @@ public class ScreenCopyRenderer2 {
                 if (passthrough2.blur22 != null) break block11;
                 passthrough2 = this;
             }
-            this.blur22 = new Blur2(1.0);
+            this.blur22 = new StandaloneBlurHelper(1.0);
         }
     }
 

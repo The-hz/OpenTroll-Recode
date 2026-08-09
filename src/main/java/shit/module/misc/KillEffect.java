@@ -34,7 +34,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.PlayerEvent;
@@ -130,7 +130,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner2(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner2(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

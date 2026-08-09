@@ -9,9 +9,9 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.chat.ChatTimestamp;
@@ -19,7 +19,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoQMain
@@ -27,7 +27,7 @@ extends Module {
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 5.0, 0.0, 15.0, 0.1));
     private final BooleanSetting _2BCheck = (BooleanSetting)this.registerSetting(new BooleanSetting("2BCheck", true));
     private final StringSetting command = (StringSetting)this.registerSetting(new StringSetting("Command", "/queue main"));
-    private final Helper7 helper718 = new Helper7();
+    private final Stopwatch helper718 = new Stopwatch();
 
     public AutoQMain() {
         super("AutoQMain", "Automatically runs the main queue command in end queue worlds.", Category.CHAT);
@@ -39,7 +39,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner4(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner4(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -57,9 +57,9 @@ extends Module {
         }
         String string = (String)this.command.getValue();
         if (string.startsWith("/")) {
-            Util2.sendChatCommand(string.substring(1));
+            ChatUtils.sendChatCommand(string.substring(1));
         } else {
-            Util2.sendChatMessage(string);
+            ChatUtils.sendChatMessage(string);
         }
         this.helper718.resetTimer();
     }

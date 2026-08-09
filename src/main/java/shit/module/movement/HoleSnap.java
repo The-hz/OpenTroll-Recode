@@ -17,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.MoveEvent;
 import shit.event.PacketEvent;
@@ -99,7 +99,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner51(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner51(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

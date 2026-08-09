@@ -11,7 +11,7 @@ import shit.event.PacketEvent;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AntiBookKick
@@ -27,7 +27,7 @@ extends Module {
         if (packetEventInner2.getPacket() instanceof BookUpdateC2SPacket) {
             packetEventInner2.cancel();
             if (((Boolean)this.notify.getValue()).booleanValue()) {
-                Util2.sendClientMessage("[AntiBookKick] Cancelled book edit packet.");
+                ChatUtils.sendClientMessage("[AntiBookKick] Cancelled book edit packet.");
             }
         }
     }

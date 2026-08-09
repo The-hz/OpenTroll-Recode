@@ -7,9 +7,9 @@ import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerModelPart;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
@@ -30,7 +30,7 @@ extends Module {
     private final BooleanSetting hat = (BooleanSetting)this.registerSetting(new BooleanSetting("Hat", true));
     private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.HORIZONTAL));
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 500.0, 5.0));
-    private final Helper7 helper75 = new Helper7();
+    private final Stopwatch helper75 = new Stopwatch();
     private final Random random6 = new Random();
     private int count231;
     private static final PlayerModelPart[] fields18 = new PlayerModelPart[0];
@@ -53,7 +53,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner215(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner215(TickEvent.PostTick event2Inner2) {
         PlayerModelPart playerModelPart;
         if (!this.helper75.hasPassedMs((Double)this.delay.getValue())) {
             return;

@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -37,7 +37,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner58(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner58(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

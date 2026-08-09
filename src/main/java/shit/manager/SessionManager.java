@@ -13,7 +13,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ServerInfo;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.util.ApiEndpoints2;
 import shit.util.ApiEndpoints3;
@@ -42,7 +42,7 @@ public final class SessionManager {
     }
 
     @EventHandler
-    public void setEvent2Inner23(Event2.Event2Inner2 event2Inner2) {
+    public void setEvent2Inner23(TickEvent.PostTick event2Inner2) {
         throw new UnsupportedOperationException("deobf: reconstruct from bytecode");
     }
 

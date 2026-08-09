@@ -33,12 +33,12 @@ import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import shit.Client;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.Render2DEvent;
 import shit.event.RenderLevelEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
@@ -75,7 +75,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick8(Event2.Event2Inner event2Inner) {
+    private void onTick8(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -135,7 +135,7 @@ extends Module {
             string3 = MC.mc.player.getName().getString();
         }
         String string4 = string3;
-        this.concurrentHashMap.put(string4, new Data(string4, blockPos, n, new Helper7()));
+        this.concurrentHashMap.put(string4, new Data(string4, blockPos, n, new Stopwatch()));
         if (string2 != null) {
             if (((Boolean)this.sound.getValue()).booleanValue()) {
                 this.m702();
@@ -202,7 +202,7 @@ extends Module {
         if (name.isEmpty()) {
             name = "unknown";
         }
-        this.concurrentHashMap.put(name, new Data(name, new BlockPos(x, y, z), color, new Helper7()));
+        this.concurrentHashMap.put(name, new Data(name, new BlockPos(x, y, z), color, new Stopwatch()));
         if (((Boolean)this.sound.getValue()).booleanValue()) {
             this.m702();
         }
@@ -503,9 +503,9 @@ extends Module {
         private final String text13;
         private final BlockPos blockPos4;
         private final int count15;
-        private final Helper7 helper7;
+        private final Stopwatch helper7;
 
-        public Data(String string, BlockPos blockPos, int n, Helper7 helper7) {
+        public Data(String string, BlockPos blockPos, int n, Stopwatch helper7) {
             this.text13 = string;
             this.blockPos4 = blockPos;
             this.count15 = n;
@@ -524,7 +524,7 @@ extends Module {
             return this.count15;
         }
 
-        public Helper7 getHelper7() {
+        public Stopwatch getHelper7() {
             return this.helper7;
         }
     }

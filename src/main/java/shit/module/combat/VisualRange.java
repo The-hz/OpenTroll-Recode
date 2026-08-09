@@ -13,7 +13,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import shit.Client;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -46,7 +46,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner213(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner213(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

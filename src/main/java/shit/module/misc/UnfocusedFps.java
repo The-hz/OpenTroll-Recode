@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.mixin.OptionInstanceAccessor;
 import shit.module.Category;
@@ -32,7 +32,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner216(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner216(TickEvent.PostTick event2Inner2) {
         if (MC.mc.getWindow() == null) {
             return;
         }

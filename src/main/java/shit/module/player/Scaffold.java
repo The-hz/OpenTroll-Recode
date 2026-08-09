@@ -18,7 +18,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.misc.MathUtil;
 import shit.module.Category;
@@ -66,7 +66,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick5(Event2.Event2Inner event2Inner) {
+    private void onTick5(TickEvent.PreTick event2Inner) {
         Hand hand;
         Data data;
         if (Module.isNotInGame()) {

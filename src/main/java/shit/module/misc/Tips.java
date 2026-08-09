@@ -38,12 +38,12 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import shit.Client;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.PlayerEvent;
 import shit.event.Render2DEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
@@ -75,8 +75,8 @@ extends Module {
     private final BooleanSetting shadowText;
     private final NumberSetting iconSize;
     private final DecimalFormat decimalFormat2;
-    private final Helper7 helper713;
-    private final Helper7 helper743;
+    private final Stopwatch helper713;
+    private final Stopwatch helper743;
     private final Map map44;
     private final Map map37;
     private final Set set;
@@ -104,8 +104,8 @@ extends Module {
         this.shadowText = (BooleanSetting)this.registerSetting(new BooleanSetting("ShadowText", true));
         this.iconSize = (NumberSetting)this.registerSetting(new NumberSetting("IconSize", 32.0, 16.0, 64.0, 1.0));
         this.decimalFormat2 = new DecimalFormat("0.0");
-        this.helper713 = new Helper7();
-        this.helper743 = new Helper7();
+        this.helper713 = new Stopwatch();
+        this.helper743 = new Stopwatch();
         this.map44 = new HashMap();
         this.map37 = new HashMap();
         this.set = new HashSet();
@@ -134,7 +134,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner15(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner15(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

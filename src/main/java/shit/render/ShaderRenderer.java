@@ -30,7 +30,7 @@ import shit.misc.RenderPipelines;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
 import shit.util.GpuPipelineFactory;
-import shit.util.Util;
+import shit.util.RenderScissorHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class ShaderRenderer
@@ -400,7 +400,7 @@ implements RenderListener {
         if (colorView == null) {
             return;
         }
-        if (this.flag12 && !Util.isPositiveArea(this.count214, this.count236)) {
+        if (this.flag12 && !RenderScissorHelper.isPositiveArea(this.count214, this.count236)) {
             return;
         }
         int indexCount = this.getInt29();
@@ -412,7 +412,7 @@ implements RenderListener {
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Lumin TTF Draws", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             renderPass.setPipeline(((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue()).booleanValue() ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18);
             if (this.flag12) {
-                Util.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236);
+                RenderScissorHelper.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", dynamicTransforms);
@@ -428,7 +428,7 @@ implements RenderListener {
         if (this.map33.isEmpty()) {
             return false;
         }
-        if (this.flag12 && !Util.isPositiveArea(this.count214, this.count236)) {
+        if (this.flag12 && !RenderScissorHelper.isPositiveArea(this.count214, this.count236)) {
             return false;
         }
         this.count206 = this.getInt29();
@@ -492,7 +492,7 @@ implements RenderListener {
     private void setObj34(Object var1_1) {
         RenderPass renderPass = (RenderPass)var1_1;
         if (this.flag12) {
-            if (!Util.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236)) {
+            if (!RenderScissorHelper.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236)) {
                 return;
             }
         } else {
@@ -591,7 +591,7 @@ implements RenderListener {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = RenderScissorHelper.m1033(n5, n6, n7, n8);
         this.flag12 = true;
         this.count48 = colorData.count30();
         this.count90 = colorData.count31();

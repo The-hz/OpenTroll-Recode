@@ -9,7 +9,7 @@ import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.Render2DEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -22,7 +22,7 @@ extends Module {
     public static boolean flag53;
     private final NumberSetting timeout = (NumberSetting)this.registerSetting(new NumberSetting("Timeout", 1.4, 0.5, 10.0, 0.1));
     private final BooleanSetting pauseAutoWalk = (BooleanSetting)this.registerSetting(new BooleanSetting("PauseAutoWalk", true));
-    private final Helper7 helper74 = new Helper7();
+    private final Stopwatch helper74 = new Stopwatch();
 
     public LagNotifier() {
         super("LagNotifier", "Shows server lag and lagback warnings.", Category.PLAYER);

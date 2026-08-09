@@ -11,17 +11,17 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.ChatMessageS2CPacket;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.util.Hand;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
 import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AntiAFK
@@ -34,8 +34,8 @@ extends Module {
     private final BooleanSetting jump = (BooleanSetting)this.registerSetting(new BooleanSetting("Jump", true));
     private final BooleanSetting turn = (BooleanSetting)this.registerSetting(new BooleanSetting("Turn", true));
     private final BooleanSetting walk = (BooleanSetting)this.registerSetting(new BooleanSetting("Walk", false));
-    private final Helper7 helper717 = new Helper7();
-    private final Helper7 helper741 = new Helper7();
+    private final Stopwatch helper717 = new Stopwatch();
+    private final Stopwatch helper741 = new Stopwatch();
     private final Random random3 = new Random();
     private int count72 = 50;
     private int count151;
@@ -88,12 +88,12 @@ extends Module {
         }
         String string2 = string.toLowerCase(Locale.ROOT);
         if (string2.contains(" whispers") || string2.contains(" tells you") || string2.contains(" -> ")) {
-            Util2.sendChatCommand("r I am currently AFK.");
+            ChatUtils.sendChatCommand("r I am currently AFK.");
         }
     }
 
     @EventHandler
-    private void setEvent2Inner222(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner222(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

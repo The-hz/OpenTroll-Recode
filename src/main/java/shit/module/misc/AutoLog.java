@@ -16,7 +16,7 @@ import net.minecraft.text.Text;
 import shit.Client;
 import shit.command.CommandManager;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PlayerEvent;
 import shit.module.Category;
@@ -26,7 +26,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.ItemUtil;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoLog
@@ -67,7 +67,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner3(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner3(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -154,7 +154,7 @@ extends Module {
         if (string2 != null) {
             if (((Boolean)autoLog.sendMessage.getValue()).booleanValue()) {
                 try {
-                    Util2.sendChatMessage("@" + string + " tried to mace me " + this.m694(this.msgRandomLen.getInt()));
+                    ChatUtils.sendChatMessage("@" + string + " tried to mace me " + this.m694(this.msgRandomLen.getInt()));
                 }
                 catch (Exception exception) {}
             }

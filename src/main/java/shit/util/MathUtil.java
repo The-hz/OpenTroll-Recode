@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class MathUtil
@@ -18,7 +18,7 @@ implements MC {
      */
     public static boolean isMoving() {
         float f;
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (!bl) {
             if (clientPlayerEntity == null) {
@@ -88,7 +88,7 @@ implements MC {
                                         d2 = d;
                                         f7 = f;
                                         f6 = f2;
-                                        bl = Util2.isAlwaysTrue();
+                                        bl = ChatUtils.isAlwaysTrue();
                                         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                                         if (!bl) {
                                             if (clientPlayerEntity == null) {
@@ -158,7 +158,7 @@ implements MC {
             double d2;
             block2: {
                 d2 = d;
-                boolean bl = Util2.isAlwaysTrue();
+                boolean bl = ChatUtils.isAlwaysTrue();
                 clientPlayerEntity = MC.mc.player;
                 if (bl) break block2;
                 if (clientPlayerEntity == null) break block3;
@@ -208,7 +208,7 @@ implements MC {
                 int n;
                 boolean bl3 = bl;
                 d2 = d;
-                boolean bl4 = Util2.isAlwaysTrue();
+                boolean bl4 = ChatUtils.isAlwaysTrue();
                 ClientPlayerEntity clientPlayerEntity = MC.mc.player;
                 if (!bl4) {
                     if (clientPlayerEntity == null) {

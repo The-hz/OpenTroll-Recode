@@ -10,8 +10,8 @@ import shit.util.MC;
 import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
-public final class Util {
-    private Util() {
+public final class RenderScissorHelper {
+    private RenderScissorHelper() {
     }
 
     public static GpuPipelineFactory.ColorData m74(float f, float f2, float f3, float f4) {
@@ -20,12 +20,12 @@ public final class Util {
         float f7 = f3;
         float f8 = f4;
         double d = GpuPipelineFactory.getDouble18();
-        int n = Util.getInt58();
+        int n = RenderScissorHelper.getInt58();
         int n2 = (int)Math.round((double)f5 * d);
         int n3 = (int)Math.round((double)n - (double)(f6 + f8) * d);
         int n4 = Math.max(0, (int)Math.round((double)f7 * d));
         int n5 = Math.max(0, (int)Math.round((double)f8 * d));
-        return Util.m1033(n2, n3, n4, n5);
+        return RenderScissorHelper.m1033(n2, n3, n4, n5);
     }
 
     public static GpuPipelineFactory.ColorData m830(float f, float f2, float f3, float f4, float f5) {
@@ -39,7 +39,7 @@ public final class Util {
         int n2 = (int)Math.round((double)(f10 - f7 - f9) * d);
         int n3 = Math.max(0, (int)Math.round((double)f8 * d));
         int n4 = Math.max(0, (int)Math.round((double)f9 * d));
-        return Util.m1033(n, n2, n3, n4);
+        return RenderScissorHelper.m1033(n, n2, n3, n4);
     }
 
     public static GpuPipelineFactory.ColorData m1033(int n, int n2, int n3, int n4) {
@@ -47,8 +47,8 @@ public final class Util {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        int n9 = Util.getInt63();
-        int n10 = Util.getInt58();
+        int n9 = RenderScissorHelper.getInt63();
+        int n10 = RenderScissorHelper.getInt58();
         int n11 = Math.clamp((long)n5, 0, n9);
         int n12 = Math.clamp((long)n6, 0, n10);
         int n13 = Math.clamp((long)(n5 + n7), 0, n9);
@@ -58,7 +58,7 @@ public final class Util {
 
     public static boolean hasPositiveArea(Object object) {
         GpuPipelineFactory.ColorData colorData = (GpuPipelineFactory.ColorData)object;
-        return Util.isPositiveArea(colorData.count32(), colorData.count33());
+        return RenderScissorHelper.isPositiveArea(colorData.count32(), colorData.count33());
     }
 
     /*
@@ -81,7 +81,7 @@ public final class Util {
         int n7 = n3;
         int n8 = n4;
         Object var11_10 = null;
-        if (!Util.isPositiveArea(n7, n8)) {
+        if (!RenderScissorHelper.isPositiveArea(n7, n8)) {
             return false;
         }
         renderPass.enableScissor(n5, n6, n7, n8);
@@ -91,7 +91,7 @@ public final class Util {
     public static boolean enableScissorFromColorData(Object object, Object object2) {
         RenderPass renderPass = (RenderPass)object;
         GpuPipelineFactory.ColorData colorData = (GpuPipelineFactory.ColorData)object2;
-        return Util.enableScissor(renderPass, colorData.count30(), colorData.count31(), colorData.count32(), colorData.count33());
+        return RenderScissorHelper.enableScissor(renderPass, colorData.count30(), colorData.count31(), colorData.count32(), colorData.count33());
     }
 
     private static int getInt63() {

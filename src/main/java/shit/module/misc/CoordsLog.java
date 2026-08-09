@@ -10,15 +10,15 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.FileAttribute;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class CoordsLog
@@ -26,7 +26,7 @@ extends Module {
     private final BooleanSetting death = (BooleanSetting)this.registerSetting(new BooleanSetting("Death", true));
     private final BooleanSetting autoLog = (BooleanSetting)this.registerSetting(new BooleanSetting("AutoLog", false));
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 15.0, 1.0, 300.0, 1.0));
-    private final Helper7 helper714 = new Helper7();
+    private final Stopwatch helper714 = new Stopwatch();
     private String x = "";
     private boolean flag114;
 
@@ -42,7 +42,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner217(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner217(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -68,7 +68,7 @@ extends Module {
 
     static void setObj67(Object object) {
         String string = (String)object;
-        Util2.sendClientMessage("[CoordsLog] " + string);
+        ChatUtils.sendClientMessage("[CoordsLog] " + string);
         CoordsLog.setObj42(string);
     }
 

@@ -6,7 +6,7 @@ package shit.module.movement;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.effect.StatusEffects;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -20,7 +20,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner32(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner32(TickEvent.PreTick event2Inner) {
         if (!Module.isNotInGame()) {
             MC.mc.player.removeStatusEffect(StatusEffects.LEVITATION);
         }

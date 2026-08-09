@@ -321,8 +321,8 @@ implements AutoCloseable {
         Object var5_5 = null;
         int n = 0;
         RenderCommand vec4fListener4 = vec4fListener3;
-        RenderCommand.Vec4fData5 record = (RenderCommand.Vec4fData5)vec4fListener4;
-        autoCloseableImpl.getListener2Impl().m321(((RenderCommand.Vec4fData5)record).getText17(), ((RenderCommand.Vec4fData5)record).getFloat11(), ((RenderCommand.Vec4fData5)record).value16(), ((RenderCommand.Vec4fData5)record).value17(), ((RenderCommand.Vec4fData5)record).color12());
+        RenderCommand.TextCommand record = (RenderCommand.TextCommand)vec4fListener4;
+        autoCloseableImpl.getListener2Impl().m321(((RenderCommand.TextCommand)record).getText17(), ((RenderCommand.TextCommand)record).getFloat11(), ((RenderCommand.TextCommand)record).value16(), ((RenderCommand.TextCommand)record).value17(), ((RenderCommand.TextCommand)record).color12());
     }
 
     @Override
@@ -1105,7 +1105,7 @@ implements AutoCloseable {
             float f17 = f8;
             float f18 = f9;
             Color color = (Color)object;
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData6(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f10, f11, f12, f13), this.colorData, f14, f15, f16, f17, f18, color));
+            this.listener2ImplManager.setObj82(new RenderCommand.ShadowCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f10, f11, f12, f13), this.colorData, f14, f15, f16, f17, f18, color));
         }
 
         public void m10(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, Object object) {
@@ -1134,7 +1134,7 @@ implements AutoCloseable {
             Color color2 = (Color)object2;
             Color color3 = (Color)object3;
             Color color4 = (Color)object4;
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData7(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f9, f10, f11, f12), this.colorData, f13, f14, f15, f16, color, color2, color3, color4));
+            this.listener2ImplManager.setObj82(new RenderCommand.RoundRectCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f9, f10, f11, f12), this.colorData, f13, f14, f15, f16, color, color2, color3, color4));
         }
 
         public void m835(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, Object object) {
@@ -1148,7 +1148,7 @@ implements AutoCloseable {
             float f17 = f8;
             float f18 = f9;
             Color color = (Color)object;
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData3(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f10, f11, f12, f13), this.colorData, f14, f15, f16, f17, f18, color));
+            this.listener2ImplManager.setObj82(new RenderCommand.RoundRectOutlineCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f10, f11, f12, f13), this.colorData, f14, f15, f16, f17, f18, color));
         }
 
         public void m759(float f, float f2, float f3, float f4, Object object) {
@@ -1169,7 +1169,7 @@ implements AutoCloseable {
             Color color2 = (Color)object2;
             Color color3 = (Color)object3;
             Color color4 = (Color)object4;
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData2(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f5, f6, f7, f8), this.colorData, color, color2, color3, color4));
+            this.listener2ImplManager.setObj82(new RenderCommand.RectCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f5, f6, f7, f8), this.colorData, color, color2, color3, color4));
         }
 
         public void m653(Object object, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, Object object2) {
@@ -1202,7 +1202,7 @@ implements AutoCloseable {
             float f23 = f11;
             float f24 = f12;
             Color color = (Color)object2;
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f13, f14, f15, f16), this.colorData, listener6, f17, f18, f19, f20, f21, f22, f23, f24, color));
+            this.listener2ImplManager.setObj82(new RenderCommand.TextureCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186(f13, f14, f15, f16), this.colorData, listener6, f17, f18, f19, f20, f21, f22, f23, f24, color));
         }
 
         public void m442(Object object, Object object2, Object object3, Object object4, Object object5, Object object6) {
@@ -1216,7 +1216,7 @@ implements AutoCloseable {
             Object var14_14 = null;
             float f = bufferUtilDataManager != null ? listener2Impl.m1019(string, (float)object9, bufferUtilDataManager) : listener2Impl.m494(string, (float)object9);
             float f2 = bufferUtilDataManager != null ? listener2Impl.m540((float)object9, bufferUtilDataManager) : listener2Impl.m567((float)object9);
-            this.listener2ImplManager.setObj82(new RenderCommand.Vec4fData5(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186((float)object7, (float)object8, f, f2), this.colorData, string, (float)object7, (float)object8, (float)object9, color, bufferUtilDataManager));
+            this.listener2ImplManager.setObj82(new RenderCommand.TextCommand(this.count235, this.listener2ImplManager.getLong6(), Vec4f.m186((float)object7, (float)object8, f, f2), this.colorData, string, (float)object7, (float)object8, (float)object9, color, bufferUtilDataManager));
             Module.setTextArray9(new String[5]);
         }
     }

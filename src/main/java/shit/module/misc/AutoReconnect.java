@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.ConnectScreen;
 import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.network.ServerInfo;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.Render2DEvent;
 import shit.module.Category;
@@ -38,7 +38,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner214(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner214(TickEvent.PostTick event2Inner2) {
         ServerInfo serverInfo = MC.mc.getCurrentServerEntry();
         if (serverInfo != null) {
             this.field18 = serverInfo;

@@ -15,7 +15,7 @@ import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class NoPacketKick
@@ -33,7 +33,7 @@ extends Module {
 
     @Override
     public void onEnable() {
-        Util2.sendClientMessage("[NoPacketKick] Active. Cancelling: disconnect=" + (Boolean)this.cancelDisconnect.getValue() + ", resourcePack=" + (Boolean)this.cancelResourcePack.getValue() + ", closeScreen=" + (Boolean)this.cancelCloseScreen.getValue());
+        ChatUtils.sendClientMessage("[NoPacketKick] Active. Cancelling: disconnect=" + (Boolean)this.cancelDisconnect.getValue() + ", resourcePack=" + (Boolean)this.cancelResourcePack.getValue() + ", closeScreen=" + (Boolean)this.cancelCloseScreen.getValue());
     }
 
     @EventHandler(priority=2000)
@@ -49,14 +49,14 @@ extends Module {
             DisconnectS2CPacket disconnectS2CPacket = (DisconnectS2CPacket)packet;
             String string = disconnectS2CPacket.reason() != null ? disconnectS2CPacket.reason().getString() : "(no reason)";
             if (((Boolean)this.logToChat.getValue()).booleanValue()) {
-                Util2.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server disconnect: " + string);
+                ChatUtils.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server disconnect: " + string);
             }
             packetEventInner.cancel();
             return;
         }
         if (((Boolean)this.cancelResourcePack.getValue()).booleanValue() && packet instanceof ResourcePackSendS2CPacket) {
             if (((Boolean)this.logToChat.getValue()).booleanValue()) {
-                Util2.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server resource pack prompt.");
+                ChatUtils.sendClientMessage("\u00a7c[NoPacketKick] \u00a7fBlocked server resource pack prompt.");
             }
             packetEventInner.cancel();
             return;

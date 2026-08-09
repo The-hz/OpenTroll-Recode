@@ -40,7 +40,7 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.mixin.MinecraftAccessor;
@@ -150,7 +150,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner60(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner60(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

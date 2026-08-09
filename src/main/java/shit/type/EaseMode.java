@@ -5,7 +5,7 @@ package shit.type;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Module;
 
 @Environment(value=EnvType.CLIENT)

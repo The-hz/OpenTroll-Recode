@@ -61,9 +61,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.misc.MathUtil;
 import shit.module.Category;
 import shit.module.Module;
@@ -115,8 +115,8 @@ extends Module {
     private int count79;
     private final List list16;
     private Vec3d vec3d10;
-    private final Helper7 helper745;
-    private final Helper7 helper732;
+    private final Stopwatch helper745;
+    private final Stopwatch helper732;
 
         public Burrow() {
         super("Burrow", "Clips into obsidian (\u5361\u9ed1\u66dc\u77f3).", Category.COMBAT);
@@ -156,8 +156,8 @@ extends Module {
         this.count79 = 0;
         this.list16 = new ArrayList();
         this.vec3d10 = Vec3d.ZERO;
-        this.helper745 = new Helper7();
-        this.helper732 = new Helper7();
+        this.helper745 = new Stopwatch();
+        this.helper732 = new Stopwatch();
     }
 
     @Override
@@ -167,7 +167,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner13(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner13(TickEvent.PreTick event2Inner) {
         boolean bl;
         Object object;
         if (Module.isNotInGame()) {

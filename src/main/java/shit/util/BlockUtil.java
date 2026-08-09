@@ -50,7 +50,7 @@ import shit.misc.MathUtil;
 import shit.module.client.ClientSetting;
 import shit.module.render.PlaceRender;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public final class BlockUtil
@@ -156,7 +156,7 @@ implements MC {
         BlockPos blockPos = (BlockPos)object;
         boolean bl2 = bl;
         Direction[] directionArray = Direction.values();
-        boolean bl3 = Util2.isAlwaysTrue();
+        boolean bl3 = ChatUtils.isAlwaysTrue();
         for (Direction direction : directionArray) {
             boolean bl4;
             BlockPos blockPos2 = blockPos.offset(direction);
@@ -221,7 +221,7 @@ implements MC {
     public static boolean m572(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockState blockState = MC.mc.world.getBlockState(blockPos);
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         boolean bl2 = blockState.isAir();
         if (!bl) {
             if (bl2) return false;
@@ -247,7 +247,7 @@ implements MC {
     public static boolean m57(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockState blockState = MC.mc.world.getBlockState(blockPos);
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         boolean bl2 = blockState.isAir();
         if (bl) return bl2;
         if (bl2) return true;
@@ -264,7 +264,7 @@ implements MC {
     public static boolean m32(Object object) {
         BlockState blockState = (BlockState)object;
         Block block = blockState.getBlock();
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         boolean bl2 = block instanceof AbstractChestBlock;
         if (bl) return bl2;
         if (bl2) return true;

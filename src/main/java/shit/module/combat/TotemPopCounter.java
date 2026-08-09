@@ -12,7 +12,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import shit.command.CommandManager;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PlayerEvent;
 import shit.module.Category;
@@ -52,7 +52,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner26(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner26(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || !((Boolean)this.death.getValue()).booleanValue()) {
             return;
         }

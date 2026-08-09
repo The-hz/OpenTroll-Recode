@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -27,7 +27,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner19(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner19(TickEvent.PreTick event2Inner) {
         double d = 0.0;
         if (Module.isNotInGame() || !MC.mc.player.hasVehicle()) {
             return;

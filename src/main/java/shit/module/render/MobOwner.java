@@ -14,7 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.text.Text;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -39,7 +39,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick2(Event2.Event2Inner2 event2Inner2) {
+    private void onTick2(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

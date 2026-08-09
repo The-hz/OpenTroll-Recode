@@ -20,7 +20,7 @@ import net.minecraft.network.packet.s2c.play.HealthUpdateS2CPacket;
 import net.minecraft.util.Hand;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.chat.ChatTimestamp;
@@ -28,7 +28,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.EnumSetting;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoCope
@@ -39,7 +39,7 @@ extends Module {
     private static final File file2 = null;
     private static final String[] texts = new String[0];
     private final Random random7 = new Random();
-    private final Helper7 helper719 = new Helper7();
+    private final Stopwatch helper719 = new Stopwatch();
     private List list29 = List.of(texts);
 
     public AutoCope() {
@@ -65,7 +65,7 @@ extends Module {
         if (object instanceof HealthUpdateS2CPacket) {
             HealthUpdateS2CPacket healthUpdateS2CPacket = (HealthUpdateS2CPacket)object;
             if (healthUpdateS2CPacket.getHealth() <= 0.0f && this.helper719.hasPassedSeconds(3.0) && !this.isSet49()) {
-                Util2.sendChatMessage(this.getText53());
+                ChatUtils.sendChatMessage(this.getText53());
                 this.helper719.resetTimer();
             }
             return;
@@ -85,7 +85,7 @@ extends Module {
             return;
         }
         String string3 = AutoCope.m773(string2);
-        Util2.sendChatMessage(((String)this.copeReply.getValue()).replace("$NAME", string3));
+        ChatUtils.sendChatMessage(((String)this.copeReply.getValue()).replace("$NAME", string3));
     }
 
     /*

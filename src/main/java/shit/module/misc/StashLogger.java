@@ -20,9 +20,9 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
@@ -44,7 +44,7 @@ extends Module {
     private final BooleanSetting dispensers = (BooleanSetting)this.registerSetting(new BooleanSetting("Dispensers", true));
     private final NumberSetting minDispensers = (NumberSetting)this.registerSetting(new NumberSetting("MinDispensers", 5.0, 1.0, 20.0, 1.0));
     private final NumberSetting scanDelay = (NumberSetting)this.registerSetting(new NumberSetting("ScanDelay", 3.0, 1.0, 30.0, 1.0));
-    private final Helper7 helper738 = new Helper7();
+    private final Stopwatch helper738 = new Stopwatch();
     private final Set set2 = new HashSet();
     private final Map map6 = new HashMap();
 
@@ -59,7 +59,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner232(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner232(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || !this.helper738.hasPassedSeconds((Double)this.scanDelay.getValue())) {
             return;
         }

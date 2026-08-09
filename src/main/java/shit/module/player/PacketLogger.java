@@ -10,7 +10,7 @@ import shit.event.PacketEvent;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class PacketLogger
@@ -52,7 +52,7 @@ extends Module {
             String string3 = "[PacketLogger/" + string + "] " + string2;
             System.out.println(string3);
             if (!((Boolean)this.chat.getValue()).booleanValue()) break block0;
-            Util2.sendClientMessage(string3);
+            ChatUtils.sendClientMessage(string3);
         }
     }
 }

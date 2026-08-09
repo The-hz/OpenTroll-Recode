@@ -53,12 +53,12 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.BlockView;
 import org.joml.Matrix4f;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.RenderLevelEvent;
 import shit.event.StartAttackEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.misc.MathUtil;
 import shit.misc.Timer;
 import shit.module.Category;
@@ -129,22 +129,22 @@ extends Module {
     public boolean flag180;
     public boolean flag128;
     public long time10;
-    private final Helper7 helper729;
+    private final Stopwatch helper729;
     private boolean flag24;
-    private final Helper7 helper730;
+    private final Stopwatch helper730;
     private boolean flag168;
-    private final Helper7 helper715;
+    private final Stopwatch helper715;
     private boolean flag131;
-    private final Helper7 helper736;
+    private final Stopwatch helper736;
     private boolean flag91;
     private BlockPos blockPos14;
     private Direction direction6;
     private BlockPos blockPos9;
     private Direction direction5;
-    private final Helper7 helper733;
-    private final Helper7 helper740;
-    private final Helper7 helper716;
-    private final Helper7 helper727;
+    private final Stopwatch helper733;
+    private final Stopwatch helper740;
+    private final Stopwatch helper716;
+    private final Stopwatch helper727;
     private final Timer timer4;
     private final Timer timer2;
     private final DecimalFormat decimalFormat2;
@@ -198,22 +198,22 @@ extends Module {
         this.flag180 = false;
         this.flag128 = false;
         this.time10 = 0L;
-        this.helper729 = new Helper7();
+        this.helper729 = new Stopwatch();
         this.flag24 = false;
-        this.helper730 = new Helper7();
+        this.helper730 = new Stopwatch();
         this.flag168 = false;
-        this.helper715 = new Helper7();
+        this.helper715 = new Stopwatch();
         this.flag131 = false;
-        this.helper736 = new Helper7();
+        this.helper736 = new Stopwatch();
         this.flag91 = false;
         this.blockPos14 = null;
         this.direction6 = null;
         this.blockPos9 = null;
         this.direction5 = null;
-        this.helper733 = new Helper7();
-        this.helper740 = new Helper7();
-        this.helper716 = new Helper7();
-        this.helper727 = new Helper7();
+        this.helper733 = new Stopwatch();
+        this.helper740 = new Stopwatch();
+        this.helper716 = new Stopwatch();
+        this.helper727 = new Stopwatch();
         this.timer4 = new Timer(1000L);
         this.timer2 = new Timer(1000L);
         this.decimalFormat2 = new DecimalFormat("0.0");
@@ -415,7 +415,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick3(Event2.Event2Inner event2Inner) {
+    private void onTick3(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

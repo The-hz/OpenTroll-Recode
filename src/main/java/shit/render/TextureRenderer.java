@@ -41,7 +41,7 @@ import shit.manager.FrameListenerManager;
 import shit.misc.RenderPipelines;
 import shit.util.MC;
 import shit.util.GpuPipelineFactory;
-import shit.util.Util;
+import shit.util.RenderScissorHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class TextureRenderer
@@ -68,7 +68,7 @@ implements FrameListener {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = RenderScissorHelper.m1033(n5, n6, n7, n8);
         this.flag117 = true;
         this.count193 = colorData.count30();
         this.count88 = colorData.count31();
@@ -240,7 +240,7 @@ implements FrameListener {
         if (view == null) {
             return;
         }
-        if (this.flag117 && !Util.isPositiveArea(this.count116, this.count148)) {
+        if (this.flag117 && !RenderScissorHelper.isPositiveArea(this.count116, this.count148)) {
             return;
         }
         int indexCount = this.getInt61();
@@ -252,7 +252,7 @@ implements FrameListener {
                 () -> "Rounded Texture Draws", view, OptionalInt.empty(), null, OptionalDouble.empty())) {
             renderPass.setPipeline(RenderPipelines.renderPipeline16);
             if (this.flag117) {
-                Util.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148);
+                RenderScissorHelper.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", slice);
@@ -268,7 +268,7 @@ implements FrameListener {
         if (this.map34.isEmpty()) {
             return false;
         }
-        if (this.flag117 && !Util.isPositiveArea(this.count116, this.count148)) {
+        if (this.flag117 && !RenderScissorHelper.isPositiveArea(this.count116, this.count148)) {
             return false;
         }
         this.count180 = this.getInt61();
@@ -379,7 +379,7 @@ implements FrameListener {
     private void setObj52(Object object) {
         RenderPass renderPass = (RenderPass)object;
         if (this.flag117) {
-            if (!Util.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148)) {
+            if (!RenderScissorHelper.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148)) {
                 return;
             }
         } else {

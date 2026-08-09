@@ -10,9 +10,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
@@ -29,14 +29,14 @@ extends Module {
     private final NumberSetting blocks = (NumberSetting)this.registerSetting(new NumberSetting("Blocks", 1.0, 1.0, 8.0, 1.0));
     private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
     private final EnumSetting switchMode = (EnumSetting)this.registerSetting(new EnumSetting("SwitchMode", SwitchMode.DEFAULT));
-    private final Helper7 helper710 = new Helper7();
+    private final Stopwatch helper710 = new Stopwatch();
 
     public AutoHoleFill() {
         super("AutoHoleFill", "Fills nearby safe holes with obsidian.", Category.COMBAT);
     }
 
     @EventHandler
-    private void onTick4(Event2.Event2Inner event2Inner) {
+    private void onTick4(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame() || !this.helper710.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }

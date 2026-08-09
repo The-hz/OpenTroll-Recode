@@ -5,7 +5,7 @@ package shit.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.type.EaseMode;
 
 @Environment(value=EnvType.CLIENT)
@@ -23,7 +23,7 @@ public class Timer {
     }
 
     public boolean isSet45() {
-        String[] stringArray = Helper7.getTextArray10();
+        String[] stringArray = Stopwatch.getTextArray10();
         long l = this.getLong2() - this.time30;
         long l2 = l == 0L ? 0 : (l < 0L ? -1 : 1);
         if (stringArray == null) {
@@ -46,7 +46,7 @@ public class Timer {
      * Lifted jumps to return sites
      */
     public double getDouble4() {
-        String[] stringArray = Helper7.getTextArray10();
+        String[] stringArray = Stopwatch.getTextArray10();
         Timer timer = this;
         if (stringArray == null) {
             if (timer.isSet45()) {

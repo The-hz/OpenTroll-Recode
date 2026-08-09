@@ -13,12 +13,12 @@ import net.minecraft.client.gl.GlBackend;
 import net.minecraft.client.texture.GlTexture;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11C;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.misc.ShaderProgram;
 import shit.module.Category;
 import shit.module.Module;
-import shit.render.Blur2;
+import shit.render.StandaloneBlurHelper;
 import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
@@ -50,7 +50,7 @@ extends Module {
     public final NumberSetting blurAmount = (NumberSetting)this.registerSetting(new NumberSetting("BlurAmount", 50.0, 0.0, 99.0, 1.0, 1.0, () -> (Boolean)this.motionBlur.getValue(), null, "", false));
     private ShaderProgram shaderProgram6;
     private ShaderProgram shaderProgram7;
-    private Blur2 blur23;
+    private StandaloneBlurHelper blur23;
     private boolean flag51 = false;
 
     public Camera() {
@@ -79,7 +79,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner225(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner225(TickEvent.PostTick event2Inner2) {
         if (this.isSet98()) {
             return;
         }
@@ -175,7 +175,7 @@ extends Module {
         try {
             this.shaderProgram6 = new ShaderProgram("passthrough.vert", "motion_blur.frag");
             this.shaderProgram7 = new ShaderProgram("passthrough.vert", "passthrough.frag");
-            this.blur23 = new Blur2(1.0);
+            this.blur23 = new StandaloneBlurHelper(1.0);
             this.flag51 = true;
         }
         catch (Throwable throwable) {

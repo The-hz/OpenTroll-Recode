@@ -36,7 +36,7 @@ import shit.module.Module;
 import shit.module.client.ClientSetting;
 import shit.util.ResourceLoader;
 import shit.util.MC;
-import shit.util.Util;
+import shit.util.RenderScissorHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class GpuPipelineFactory {
@@ -97,7 +97,7 @@ public class GpuPipelineFactory {
         float f6 = f2;
         float f7 = f3;
         float f8 = f4;
-        return Util.m74(f5, f6, f7, f8);
+        return RenderScissorHelper.m74(f5, f6, f7, f8);
     }
 
     public static ColorData m797(float f, float f2, float f3, float f4, float f5) {
@@ -106,7 +106,7 @@ public class GpuPipelineFactory {
         float f8 = f3;
         float f9 = f4;
         float f10 = f5;
-        return Util.m830(f6, f7, f8, f9, f10);
+        return RenderScissorHelper.m830(f6, f7, f8, f9, f10);
     }
 
     public static void m486() {

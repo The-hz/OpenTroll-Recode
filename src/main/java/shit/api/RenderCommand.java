@@ -29,7 +29,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData3 
+    public static final class RoundRectOutlineCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -42,7 +42,7 @@ public interface RenderCommand {
         private final float value5;
         private final Color color;
 
-        public Vec4fData3(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, float f5, Color color) {
+        public RoundRectOutlineCommand(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, float f5, Color color) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -112,7 +112,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData2 
+    public static final class RectCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -123,7 +123,7 @@ public interface RenderCommand {
         private final Color color4;
         private final Color color5;
 
-        public Vec4fData2(int n, long l, Vec4f vec4f, ColorData colorData, Color color, Color color2, Color color3, Color color4) {
+        public RectCommand(int n, long l, Vec4f vec4f, ColorData colorData, Color color, Color color2, Color color3, Color color4) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -177,7 +177,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData5 
+    public static final class TextCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -190,7 +190,7 @@ public interface RenderCommand {
         private final Color color12;
         private final GlyphBufferManager bufferUtilDataManager;
 
-        public Vec4fData5(int n, long l, Vec4f vec4f, ColorData colorData, String string, float f, float f2, float f3, Color color, GlyphBufferManager bufferUtilDataManager) {
+        public TextCommand(int n, long l, Vec4f vec4f, ColorData colorData, String string, float f, float f2, float f3, Color color, GlyphBufferManager bufferUtilDataManager) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -254,7 +254,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData6 
+    public static final class ShadowCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -267,7 +267,7 @@ public interface RenderCommand {
         private final float value33;
         private final Color color13;
 
-        public Vec4fData6(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, float f5, Color color) {
+        public ShadowCommand(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, float f5, Color color) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -337,7 +337,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData 
+    public static final class TextureCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -354,7 +354,7 @@ public interface RenderCommand {
         private final float value65;
         private final Color color20;
 
-        public Vec4fData(int n, long l, Vec4f vec4f, ColorData colorData, TextureResource listener6, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, Color color) {
+        public TextureCommand(int n, long l, Vec4f vec4f, ColorData colorData, TextureResource listener6, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, Color color) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -438,7 +438,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData7 
+    public static final class RoundRectCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -453,7 +453,7 @@ public interface RenderCommand {
         private final Color color23;
         private final Color color24;
 
-        public Vec4fData7(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, Color color, Color color2, Color color3, Color color4) {
+        public RoundRectCommand(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, Color color, Color color2, Color color3, Color color4) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;
@@ -527,7 +527,7 @@ public interface RenderCommand {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class Vec4fData4 
+    public static final class TriangleCommand 
     implements RenderCommand {
         private final int layer;
         private final long sequence;
@@ -539,7 +539,7 @@ public interface RenderCommand {
         private final float value85;
         private final Color color25;
 
-        public Vec4fData4(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, Color color) {
+        public TriangleCommand(int n, long l, Vec4f vec4f, ColorData colorData, float f, float f2, float f3, float f4, Color color) {
             this.layer = n;
             this.sequence = l;
             this.bounds = vec4f;

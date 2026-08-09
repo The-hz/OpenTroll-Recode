@@ -12,7 +12,7 @@ import net.minecraft.util.math.Box;
 import org.joml.Matrix4f;
 import shit.event.EventHandler;
 import shit.event.RenderLevelEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.misc.NumberSetting;
 import shit.misc.Timer;
 import shit.module.Category;
@@ -106,14 +106,14 @@ extends Module {
     public static class MathUtil {
         private final Timer timer;
         private final BlockPos blockPos19;
-        private final Helper7 helper723;
+        private final Stopwatch helper723;
         private boolean flag27;
         final PlaceRender placeRender;
 
         public MathUtil(PlaceRender placeRender, BlockPos blockPos) {
             this.placeRender = placeRender;
             this.timer = new Timer(((Double)this.placeRender.placeRender.getValue()).longValue());
-            this.helper723 = new Helper7();
+            this.helper723 = new Stopwatch();
             this.flag27 = true;
             this.blockPos19 = blockPos;
         }

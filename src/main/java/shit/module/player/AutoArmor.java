@@ -27,7 +27,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.Render2DEvent;
 import shit.module.Category;
@@ -185,7 +185,7 @@ extends Module {
     }
 
     @EventHandler
-    public void setEvent2Inner(Event2.Event2Inner event2Inner) {
+    public void setEvent2Inner(TickEvent.PreTick event2Inner) {
         if (MC.mc.player == null || MC.mc.world == null) {
             return;
         }

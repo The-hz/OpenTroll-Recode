@@ -17,9 +17,9 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -42,7 +42,7 @@ extends Module {
     private final BooleanSetting gapPickaxe = (BooleanSetting)this.registerSetting(new BooleanSetting("Gap-Pickaxe", false, () -> (Boolean)this.gapSwitch.getValue(), null, "", false));
     private final EnumSetting swapMode = (EnumSetting)this.registerSetting(new EnumSetting("SwapMode", SwapMode.OffhandSwap));
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 50.0, 0.0, 500.0, 1.0));
-    private final Helper7 helper746 = new Helper7();
+    private final Stopwatch helper746 = new Stopwatch();
 
     public HandManager() {
         super("HandManager", "Manages offhand items using Forever Offhand logic.", Category.COMBAT);
@@ -54,12 +54,12 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner43(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner43(TickEvent.PreTick event2Inner) {
         this.m986();
     }
 
     @EventHandler
-    private void setEvent2Inner212(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner212(TickEvent.PostTick event2Inner2) {
         this.m986();
     }
 

@@ -19,7 +19,7 @@ import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.module.Category;
@@ -222,7 +222,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner17(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner17(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

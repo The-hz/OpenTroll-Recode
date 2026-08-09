@@ -11,7 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import shit.Client;
 import shit.api.HudModule;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -39,7 +39,7 @@ implements HudModule {
     }
 
     @EventHandler
-    private void setEvent2Inner18(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner18(TickEvent.PreTick event2Inner) {
         if (MC.mc.player == null) {
             this.flag150 = false;
             this.value165 = 0.0f;

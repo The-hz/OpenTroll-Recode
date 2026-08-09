@@ -15,7 +15,7 @@ import shit.event.PacketEvent;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.EnumSetting;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class ChatTimestamp
@@ -36,7 +36,7 @@ extends Module {
             return;
         }
         packetEventInner.cancel();
-        Util2.sendClientMessage(this.getText64() + string);
+        ChatUtils.sendClientMessage(this.getText64() + string);
     }
 
     /*

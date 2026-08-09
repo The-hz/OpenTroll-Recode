@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -22,7 +22,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.setting.StringSetting;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class Spammer
@@ -52,7 +52,7 @@ extends Module {
         if (((Boolean)this.loadFromURL.getValue()).booleanValue()) {
             String url = (String)this.remoteURL.getValue();
             if (url.equals("unchanged")) {
-                Util2.sendClientMessage("\u00a7c[Spammer] Change RemoteURL in ClickGUI first!");
+                ChatUtils.sendClientMessage("\u00a7c[Spammer] Change RemoteURL in ClickGUI first!");
                 this.setEnabled(false);
                 return;
             }
@@ -66,7 +66,7 @@ extends Module {
                 file.createNewFile();
             }
             catch (IOException iOException) {}
-            Util2.sendClientMessage("\u00a7c[Spammer] spammer.txt not found, created empty file. Add messages to it.");
+            ChatUtils.sendClientMessage("\u00a7c[Spammer] spammer.txt not found, created empty file. Add messages to it.");
             this.setEnabled(false);
             return;
         }
@@ -77,14 +77,14 @@ extends Module {
                 this.list27.add(string2);
             }
             if (this.list27.isEmpty()) {
-                Util2.sendClientMessage("\u00a7c[Spammer] spammer.txt is empty!");
+                ChatUtils.sendClientMessage("\u00a7c[Spammer] spammer.txt is empty!");
                 this.setEnabled(false);
                 return;
             }
-            Util2.sendClientMessage("\u00a7a[Spammer] Loaded " + this.list27.size() + " messages.");
+            ChatUtils.sendClientMessage("\u00a7a[Spammer] Loaded " + this.list27.size() + " messages.");
         }
         catch (IOException iOException) {
-            Util2.sendClientMessage("\u00a7c[Spammer] Failed to read spammer.txt: " + iOException.getMessage());
+            ChatUtils.sendClientMessage("\u00a7c[Spammer] Failed to read spammer.txt: " + iOException.getMessage());
             this.setEnabled(false);
         }
     }
@@ -96,7 +96,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner28(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner28(TickEvent.PostTick event2Inner2) {
         String string;
         long l;
         if (Module.isNotInGame() || this.list27.isEmpty()) {
@@ -109,9 +109,9 @@ extends Module {
         this.time60 = l2;
         String string2 = string = this.order.getValue() == OrderMode.IN_ORDER ? this.getText49() : this.getText12();
         if (string.startsWith("/")) {
-            Util2.sendChatCommand(string.substring(1));
+            ChatUtils.sendChatCommand(string.substring(1));
         } else {
-            Util2.sendChatMessage(string);
+            ChatUtils.sendChatMessage(string);
         }
     }
 
@@ -172,10 +172,10 @@ extends Module {
                 }
                 n = this.list27.size();
             }
-            Util2.sendClientMessage("\u00a7a[Spammer] Loaded " + n + " remote messages.");
+            ChatUtils.sendClientMessage("\u00a7a[Spammer] Loaded " + n + " remote messages.");
         }
         catch (Exception exception) {
-            Util2.sendClientMessage("\u00a7c[Spammer] Failed to load URL: " + exception.getMessage());
+            ChatUtils.sendClientMessage("\u00a7c[Spammer] Failed to load URL: " + exception.getMessage());
             this.setEnabled(false);
         }
     }

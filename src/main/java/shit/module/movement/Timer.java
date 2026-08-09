@@ -8,10 +8,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.player.AutoArmor;
@@ -68,8 +68,8 @@ extends Module {
         if ((Boolean)this.tickShift.getValue() == false) return false;
         return true;
     }, null, "", false));
-    private final Helper7 helper726 = new Helper7();
-    private final Helper7 helper712 = new Helper7();
+    private final Stopwatch helper726 = new Stopwatch();
+    private final Stopwatch helper712 = new Stopwatch();
     private final shit.misc.Timer timer3 = new shit.misc.Timer(500L);
     private long time42 = 0L;
     private boolean flag46 = false;
@@ -104,7 +104,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner39(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner39(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

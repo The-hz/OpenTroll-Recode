@@ -17,7 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import shit.Client;
 import shit.api.PlayerMovePacketAccessor;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.mixin.ServerboundInteractPacketAccessor;
@@ -161,7 +161,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner35(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner35(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

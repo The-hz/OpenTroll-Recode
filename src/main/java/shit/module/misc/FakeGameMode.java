@@ -6,7 +6,7 @@ package shit.module.misc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.GameMode;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -54,7 +54,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner50(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner50(TickEvent.PreTick event2Inner) {
         if (MC.mc.interactionManager != null) {
             MC.mc.interactionManager.setGameMode(((Mode)((Object)this.mode.getValue())).field22);
         }

@@ -7,11 +7,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(value=EnvType.CLIENT)
-public class Helper7 {
+public class Stopwatch {
     private long lastResetTime = -1L;
     private static String[] texts10;
 
-    public Helper7() {
+    public Stopwatch() {
         this.resetTimer();
     }
 
@@ -52,8 +52,8 @@ public class Helper7 {
 
     static {
         block0: {
-            if (Helper7.getTextArray10() == null) break block0;
-            Helper7.setTextArray3(new String[3]);
+            if (Stopwatch.getTextArray10() == null) break block0;
+            Stopwatch.setTextArray3(new String[3]);
         }
     }
 }

@@ -37,7 +37,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.TravelHeadEvent;
 import shit.module.Category;
@@ -154,7 +154,7 @@ extends Module {
     }
 
     @EventHandler
-    public void setEvent2Inner47(Event2.Event2Inner event2Inner) {
+    public void setEvent2Inner47(TickEvent.PreTick event2Inner) {
         if (MC.mc.player == null || MC.mc.world == null) {
             return;
         }

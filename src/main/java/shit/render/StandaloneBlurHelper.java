@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11C;
 import shit.util.Pos;
 
 @Environment(value=EnvType.CLIENT)
-public class Blur2 {
+public class StandaloneBlurHelper {
     private int count111 = -1;
     private GpuTexture gpuTexture2;
     public int count170 = -1;
@@ -25,7 +25,7 @@ public class Blur2 {
     public int count174;
     public int count162;
 
-    public Blur2(double d) {
+    public StandaloneBlurHelper(double d) {
         this.value167 = d;
         this.init2();
     }
@@ -85,7 +85,7 @@ public class Blur2 {
 
     public void m216() {
         String string = Pos.getText67();
-        Blur2 blur2 = this;
+        StandaloneBlurHelper blur2 = this;
         if (string == null) {
             if (blur2.gpuTexture2 != null) {
                 this.gpuTexture2.close();
@@ -100,7 +100,7 @@ public class Blur2 {
 
     public void m485() {
         String string = Pos.getText67();
-        Blur2 blur2 = this;
+        StandaloneBlurHelper blur2 = this;
         if (string == null) {
             if (blur2.gpuTexture2 != null) {
                 this.gpuTexture2.close();

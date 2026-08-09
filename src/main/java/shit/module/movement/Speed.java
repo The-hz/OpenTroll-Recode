@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.util.MathUtil;
@@ -42,7 +42,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner15(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner15(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

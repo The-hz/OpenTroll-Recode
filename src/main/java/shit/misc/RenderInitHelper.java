@@ -12,7 +12,7 @@ import shit.util.GpuPipelineFactory;
 import shit.util.Timer;
 
 @Environment(value=EnvType.CLIENT)
-public class Helper {
+public class RenderInitHelper {
     private boolean flag167;
 
     public void init() {

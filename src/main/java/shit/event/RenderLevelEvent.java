@@ -9,7 +9,7 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.RenderTickCounter;
 import org.joml.Matrix4f;
 import shit.event.Event;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.module.Module;
 
 @Environment(value=EnvType.CLIENT)
@@ -21,14 +21,14 @@ extends Event {
     private final Matrix4f matrix4f11;
 
     public RenderLevelEvent(RenderTickCounter renderTickCounter, Camera camera, Matrix4f matrix4f, Matrix4f matrix4f2) {
-        boolean bl = Event2.isSet103();
+        boolean bl = TickEvent.isSet103();
         boolean bl2 = bl;
         this.field39 = renderTickCounter;
         this.field49 = camera;
         this.matrix4f6 = matrix4f;
         this.matrix4f11 = matrix4f2;
         if (Module.getTextArray9() == null) {
-            Event2.setFlag9(!bl2);
+            TickEvent.setFlag9(!bl2);
         }
     }
 

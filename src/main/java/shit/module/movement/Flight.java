@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.TravelHeadEvent;
 import shit.module.Category;
@@ -61,7 +61,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner6(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner6(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame() || !((Boolean)this.antiKick.getValue()).booleanValue() || MC.mc.player.isOnGround()) {
             return;
         }

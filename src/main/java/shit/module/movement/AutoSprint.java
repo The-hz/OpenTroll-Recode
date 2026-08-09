@@ -10,7 +10,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.math.MathHelper;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.misc.MathUtil;
@@ -57,7 +57,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner44(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner44(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -85,7 +85,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner223(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner223(TickEvent.PostTick event2Inner2) {
         this.flag121 = false;
     }
 

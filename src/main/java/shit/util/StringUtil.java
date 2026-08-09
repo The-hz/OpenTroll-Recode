@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public final class StringUtil {
@@ -170,7 +170,7 @@ public final class StringUtil {
         block13: {
             String string = (String)object;
             String string2 = (String)object2;
-            boolean bl = Util2.isAlwaysTrue();
+            boolean bl = ChatUtils.isAlwaysTrue();
             try {
                 String string3;
                 CharSequence charSequence;

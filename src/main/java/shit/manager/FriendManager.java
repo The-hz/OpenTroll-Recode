@@ -10,7 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(value=EnvType.CLIENT)
-public class Manager {
+public class FriendManager {
     private final Set set8 = new TreeSet(String.CASE_INSENSITIVE_ORDER);
 
     public boolean addFriend(Object object) {

@@ -12,10 +12,10 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
@@ -30,7 +30,7 @@ extends Module {
     private final NumberSetting castDelay = (NumberSetting)this.registerSetting(new NumberSetting("CastDelay", 5.0, 1.0, 20.0, 1.0));
     private final NumberSetting catchDelay = (NumberSetting)this.registerSetting(new NumberSetting("CatchDelay", 300.0, 50.0, 2000.0, 50.0));
     private final NumberSetting recastDelay = (NumberSetting)this.registerSetting(new NumberSetting("RecastDelay", 450.0, 50.0, 2000.0, 50.0));
-    private final Helper7 helper742 = new Helper7();
+    private final Stopwatch helper742 = new Stopwatch();
     private Type type9 = Type.Idle;
 
     public AutoFish() {
@@ -59,7 +59,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner221(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner221(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

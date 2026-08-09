@@ -16,7 +16,7 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -69,7 +69,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner16(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner16(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

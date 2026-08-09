@@ -14,9 +14,9 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.Friend;
@@ -38,7 +38,7 @@ extends Module {
     private final BooleanSetting skipCrystals = (BooleanSetting)this.registerSetting(new BooleanSetting("SkipCrystals", true));
     private final BooleanSetting pauseIfUsing = (BooleanSetting)this.registerSetting(new BooleanSetting("PauseIfUsing", true));
     private final BooleanSetting onlyGround = (BooleanSetting)this.registerSetting(new BooleanSetting("OnlyGround", false));
-    private final Helper7 helper711 = new Helper7();
+    private final Stopwatch helper711 = new Stopwatch();
 
     public KillAura() {
         super("KillAura", "Attacks nearby entities within range with cooldown and optional rotation.", Category.COMBAT);
@@ -56,7 +56,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner25(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner25(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame() || MC.mc.interactionManager == null) {
             return;
         }

@@ -14,7 +14,7 @@ import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
 import shit.setting.StringSetting;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoReply
@@ -63,7 +63,7 @@ extends Module {
         this.x = string;
         this.time36 = l;
         String string3 = (Boolean)this.customMessage.getValue() != false ? (String)this.customText.getValue() : "I just automatically replied, thanks to TrollHack's AutoReply module!";
-        Util2.sendChatCommand("r " + string3);
+        ChatUtils.sendChatCommand("r " + string3);
     }
 }
 

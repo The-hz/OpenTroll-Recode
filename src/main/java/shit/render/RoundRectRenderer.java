@@ -21,7 +21,7 @@ import shit.manager.FrameListenerManager;
 import shit.misc.RenderPipelines;
 import shit.render.TextureRenderer;
 import shit.util.GpuPipelineFactory;
-import shit.util.Util;
+import shit.util.RenderScissorHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class RoundRectRenderer
@@ -128,7 +128,7 @@ implements FrameListener {
         if (data.getGpuTextureView3() == null) {
             return;
         }
-        if (this.flag124 && !Util.isPositiveArea(this.count128, this.count219)) {
+        if (this.flag124 && !RenderScissorHelper.isPositiveArea(this.count128, this.count219)) {
             return;
         }
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(
@@ -136,7 +136,7 @@ implements FrameListener {
                 data.getGpuTextureView2(), OptionalDouble.empty())) {
             renderPass.setPipeline(RenderPipelines.renderPipeline17);
             if (this.flag124) {
-                Util.enableScissor(renderPass, this.count91, this.count47, this.count128, this.count219);
+                RenderScissorHelper.enableScissor(renderPass, this.count91, this.count47, this.count128, this.count219);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", data.gpuBufferSlice3());
@@ -153,7 +153,7 @@ implements FrameListener {
         if (this.gpuManager5.isMapped()) {
             this.gpuManager5.unmap();
         }
-        if (this.flag124 && !Util.isPositiveArea(this.count128, this.count219)) {
+        if (this.flag124 && !RenderScissorHelper.isPositiveArea(this.count128, this.count219)) {
             return false;
         }
         this.data5 = GpuPipelineFactory.m369(this.count124, false);
@@ -203,7 +203,7 @@ implements FrameListener {
                         n2 = this.count128;
                         n = this.count219;
                         if (stringArray == null) break block3;
-                        bl = Util.enableScissor(renderPass, n4, n3, n2, n);
+                        bl = RenderScissorHelper.enableScissor(renderPass, n4, n3, n2, n);
                     }
                     if (!bl) {
                         return;
@@ -256,7 +256,7 @@ implements FrameListener {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = RenderScissorHelper.m1033(n5, n6, n7, n8);
         this.flag124 = true;
         this.count91 = colorData.count30();
         this.count47 = colorData.count31();

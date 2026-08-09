@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.NumberSetting;
@@ -24,14 +24,14 @@ public class AutoEject
 extends Module {
     private final StringSetting items = (StringSetting)this.registerSetting(new StringSetting("Items", "minecraft:egg,minecraft:snowball"));
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 100.0, 0.0, 1000.0, 10.0));
-    private final Helper7 helper72 = new Helper7();
+    private final Stopwatch helper72 = new Stopwatch();
 
     public AutoEject() {
         super("AutoEject", "Drops configured items from your inventory.", Category.PLAYER);
     }
 
     @EventHandler
-    private void setEvent2Inner220(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner220(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || !this.helper72.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }

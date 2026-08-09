@@ -13,7 +13,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.math.BlockPos;
 import shit.Client;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -21,7 +21,7 @@ import shit.module.misc.CoordsLog;
 import shit.setting.BooleanSetting;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class LogoutLogger
@@ -51,7 +51,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner235(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner235(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || MC.mc.getNetworkHandler() == null) {
             return;
         }
@@ -74,10 +74,10 @@ extends Module {
             String string = data.text() + " logged out at " + n3 + ", " + n2 + ", " + n;
             CoordsLog.setObj30(string);
             if (((Boolean)this.print.getValue()).booleanValue()) {
-                Util2.sendClientMessage("[LogoutLogger] " + string);
+                ChatUtils.sendClientMessage("[LogoutLogger] " + string);
             }
             if (((Boolean)this.eZLog.getValue()).booleanValue()) {
-                Util2.sendChatMessage(String.format((String)this.eZMessage.getValue(), data.text()));
+                ChatUtils.sendChatMessage(String.format((String)this.eZMessage.getValue(), data.text()));
             }
             iterator.remove();
         }

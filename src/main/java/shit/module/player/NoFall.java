@@ -11,7 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import shit.api.PlayerMovePacketAccessor;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.InputTickEvent;
 import shit.event.PacketEvent;
@@ -46,7 +46,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner8(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner8(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

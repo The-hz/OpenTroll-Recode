@@ -11,9 +11,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -28,7 +28,7 @@ extends Module {
     private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.TOGGLE));
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 250.0, 0.0, 1000.0, 25.0));
     private final BooleanSetting shulkersOnly = (BooleanSetting)this.registerSetting(new BooleanSetting("ShulkersOnly", false));
-    private final Helper7 helper725 = new Helper7();
+    private final Stopwatch helper725 = new Stopwatch();
     private boolean flag83;
 
     public ChestStealer() {
@@ -47,7 +47,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner27(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner27(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || !InventoryClickHelper.isSet48()) {
             return;
         }

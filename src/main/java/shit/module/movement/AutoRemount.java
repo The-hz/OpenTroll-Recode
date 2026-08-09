@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -33,7 +33,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner226(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner226(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }

@@ -20,7 +20,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.BlockView;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.RenderLevelEvent;
 import shit.module.Category;
@@ -52,7 +52,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner53(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner53(TickEvent.PreTick event2Inner) {
         if (++this.count159 < 20) {
             return;
         }

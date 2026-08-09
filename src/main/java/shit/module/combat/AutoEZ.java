@@ -8,14 +8,14 @@ import java.util.Set;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoEZ
@@ -39,7 +39,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner22(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner22(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -50,7 +50,7 @@ extends Module {
                 continue;
             }
             if (!this.set3.remove(playerEntity.getUuid())) continue;
-            Util2.sendChatMessage(String.format((String)this.message.getValue(), playerEntity.getName().getString()));
+            ChatUtils.sendChatMessage(String.format((String)this.message.getValue(), playerEntity.getName().getString()));
         }
     }
 }

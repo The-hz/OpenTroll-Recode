@@ -17,7 +17,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.util.Hand;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.mixin.MinecraftAccessor;
@@ -62,7 +62,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner234(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner234(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame() || MC.mc.interactionManager == null) {
             return;
         }

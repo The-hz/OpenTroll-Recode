@@ -29,7 +29,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AntiSpam
@@ -123,11 +123,11 @@ extends Module {
         }
         packetEventInner.cancel();
         if (((Boolean)this.showBlocked.getValue()).booleanValue()) {
-            Util2.sendClientMessage("[AntiSpam] " + string3 + ": " + string);
+            ChatUtils.sendClientMessage("[AntiSpam] " + string3 + ": " + string);
         }
         if (this.mode.getValue() == Mode.Replace) {
             String string4 = pattern == null ? this.getText41() : pattern.matcher(string).replaceAll(this.getText41());
-            Util2.sendClientMessage(string4);
+            ChatUtils.sendClientMessage(string4);
         }
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.text.Text;
 import shit.util.MC;
 
 @Environment(value=EnvType.CLIENT)
-public class Util2
+public class ChatUtils
 implements MC {
     private static boolean flag100;
 
@@ -26,7 +26,7 @@ implements MC {
                         MinecraftClient minecraftClient;
                         block4: {
                             string = (String)object;
-                            bl = Util2.isAlwaysTrue();
+                            bl = ChatUtils.isAlwaysTrue();
                             minecraftClient = MC.mc;
                             if (bl) break block4;
                             if (minecraftClient.player == null) break block5;

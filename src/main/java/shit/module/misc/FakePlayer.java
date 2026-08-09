@@ -31,7 +31,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import shit.api.DamagePredicate;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.mixin.ServerboundInteractPacketAccessor;
@@ -78,7 +78,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner11(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner11(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

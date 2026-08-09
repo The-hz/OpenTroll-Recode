@@ -11,9 +11,9 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.sound.SoundEvents;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -29,7 +29,7 @@ extends Module {
     private final NumberSetting delay = (NumberSetting)this.registerSetting(new NumberSetting("Delay", 250.0, 0.0, 1000.0, 10.0));
     private final BooleanSetting warn = (BooleanSetting)this.registerSetting(new BooleanSetting("Warn", true));
     private final BooleanSetting sound = (BooleanSetting)this.registerSetting(new BooleanSetting("Sound", false));
-    private final Helper7 helper739 = new Helper7();
+    private final Stopwatch helper739 = new Stopwatch();
     private boolean flag132 = true;
     private int count117;
 
@@ -44,7 +44,7 @@ extends Module {
     }
 
     @EventHandler
-    private void onTick7(Event2.Event2Inner event2Inner) {
+    private void onTick7(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame() || !this.helper739.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }

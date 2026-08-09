@@ -6,13 +6,13 @@ package shit.module.combat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import shit.event.DisconnectEvent;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoKit
@@ -48,7 +48,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner228(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner228(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             this.flag140 = false;
             return;
@@ -66,7 +66,7 @@ extends Module {
         }
         String string = (String)this.kitName.getValue();
         if (string != null && !string.isBlank()) {
-            Util2.sendChatCommand("kit " + string.trim());
+            ChatUtils.sendChatCommand("kit " + string.trim());
         }
         this.flag40 = false;
     }

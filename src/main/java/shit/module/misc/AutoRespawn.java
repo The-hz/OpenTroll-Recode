@@ -5,7 +5,7 @@ package shit.module.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -22,7 +22,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner218(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner218(TickEvent.PostTick event2Inner2) {
         if (!((Boolean)this.deathScreen.getValue()).booleanValue() && MC.mc.player != null && MC.mc.player.isDead()) {
             MC.mc.player.requestRespawn();
         }

@@ -11,7 +11,7 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.util.MC;
@@ -59,7 +59,7 @@ implements MC {
     }
 
     @EventHandler(priority=100)
-    private void setEvent2Inner24(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner24(TickEvent.PostTick event2Inner2) {
         if (this.flag19) {
             this.m19(this.value136, this.value163);
             if (this.count218 > 0) {

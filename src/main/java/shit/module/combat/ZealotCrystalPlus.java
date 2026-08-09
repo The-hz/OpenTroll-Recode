@@ -99,13 +99,13 @@ import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
 import org.joml.Vector4f;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.Render2DEvent;
 import shit.event.RenderLevelEvent;
 import shit.manager.FontManager2;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.misc.MathUtil;
 import shit.module.Category;
 import shit.module.Module;
@@ -178,8 +178,8 @@ extends Module {
     private final BooleanSetting damageText;
     private final ColorSetting textColor;
     private boolean flag68;
-    private final Helper7 helper724;
-    private final Helper7 helper79;
+    private final Stopwatch helper724;
+    private final Stopwatch helper79;
     private volatile BlockPos blockPos6;
     private volatile BlockPos blockPos13;
     private volatile BlockPos blockPos11;
@@ -259,8 +259,8 @@ extends Module {
         this.damageText = (BooleanSetting)this.registerSetting(new BooleanSetting("DamageText", true));
         this.textColor = (ColorSetting)this.registerSetting(new ColorSetting("TextColor", -1));
         this.flag68 = false;
-        this.helper724 = new Helper7();
-        this.helper79 = new Helper7();
+        this.helper724 = new Stopwatch();
+        this.helper79 = new Stopwatch();
         this.blockPos6 = null;
         this.blockPos13 = null;
         this.blockPos11 = null;
@@ -324,7 +324,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner54(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner54(TickEvent.PreTick event2Inner) {
         long l;
         if (Module.isNotInGame() || MC.mc.player.isSpectator()) {
             return;

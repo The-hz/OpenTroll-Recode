@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import shit.event.Event;
 
 @Environment(value=EnvType.CLIENT)
-public class Event2
+public class TickEvent
 extends Event {
     private static boolean flag79;
 
@@ -26,12 +26,12 @@ extends Event {
     }
 
     static {
-        Event2.setFlag9(true);
+        TickEvent.setFlag9(true);
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static class Event2Inner
-    extends Event2 {
+    public static class PreTick
+    extends TickEvent {
         private static boolean flag181;
 
         public static void setFlag2(boolean bl) {
@@ -48,15 +48,15 @@ extends Event {
         }
 
         static {
-            if (!Event2Inner.isSet5()) {
-                Event2Inner.setFlag2(true);
+            if (!PreTick.isSet5()) {
+                PreTick.setFlag2(true);
             }
         }
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static class Event2Inner2
-    extends Event2 {
+    public static class PostTick
+    extends TickEvent {
     }
 }
 

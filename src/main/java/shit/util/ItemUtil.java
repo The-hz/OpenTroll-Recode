@@ -23,7 +23,7 @@ import net.minecraft.item.TridentItem;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Hand;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class ItemUtil
@@ -111,7 +111,7 @@ implements MC {
      */
     public static int m239(Object object) {
         ItemStack itemStack = (ItemStack)object;
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         int n = itemStack.getDamage();
         int n2 = itemStack.getMaxDamage();
         if (!bl) {
@@ -131,7 +131,7 @@ implements MC {
         int n2 = n;
         EquipmentSlot[] equipmentSlotArray2 = equipmentSlotArray = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
         int n3 = equipmentSlotArray2.length;
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         for (int i = 0; i < n3; ++i) {
             int n4;
             block7: {

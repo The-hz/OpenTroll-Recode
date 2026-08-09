@@ -13,7 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.RenderLevelEvent;
 import shit.module.Category;
@@ -59,7 +59,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner45(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner45(TickEvent.PreTick event2Inner) {
         if (++this.count101 >= 10) {
             this.count101 = 0;
             this.m383();

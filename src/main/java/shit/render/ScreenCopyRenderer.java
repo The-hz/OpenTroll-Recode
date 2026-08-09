@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL30C;
 import shit.misc.Logger;
 import shit.misc.ShaderProgram;
 import shit.module.Module;
-import shit.render.Blur2;
+import shit.render.StandaloneBlurHelper;
 import shit.render.StringDecryptor;
 import shit.util.Pos;
 import shit.util.GlBufferHelper;
@@ -32,9 +32,9 @@ public final class ScreenCopyRenderer {
     private static ShaderProgram shaderProgram5;
     private static ShaderProgram shaderProgram;
     private static ShaderProgram shaderProgram4;
-    private static Blur2 blur2;
-    private static Blur2 blur25;
-    private static Blur2 blur24;
+    private static StandaloneBlurHelper blur2;
+    private static StandaloneBlurHelper blur25;
+    private static StandaloneBlurHelper blur24;
     private static long time21;
     private static long time27;
     private static boolean flag71;
@@ -177,9 +177,9 @@ public final class ScreenCopyRenderer {
             shaderProgram = new ShaderProgram("passthrough.vert", "screen_passthrough.frag");
         }
         shaderProgram4 = shaderProgram;
-        blur2 = new Blur2(1.0);
-        blur25 = new Blur2(0.5);
-        blur24 = new Blur2(0.5);
+        blur2 = new StandaloneBlurHelper(1.0);
+        blur25 = new StandaloneBlurHelper(0.5);
+        blur24 = new StandaloneBlurHelper(0.5);
     }
 
     private static void m(int n, int n2, int n3, int n4, int n5, int n6, boolean bl) {
@@ -221,7 +221,7 @@ public final class ScreenCopyRenderer {
 
     private static void m683(int n, Object object) {
         int n2 = n;
-        Blur2 blur2 = (Blur2)object;
+        StandaloneBlurHelper blur2 = (StandaloneBlurHelper)object;
         blur2.m554();
         blur2.m78();
         GlStateManager._disableDepthTest();
@@ -236,7 +236,7 @@ public final class ScreenCopyRenderer {
     }
 
     private static void m657(Object object, int n, int n2, int n3, float f) {
-        Blur2 blur2 = (Blur2)object;
+        StandaloneBlurHelper blur2 = (StandaloneBlurHelper)object;
         int n4 = n;
         int n5 = n2;
         int n6 = n3;
@@ -289,7 +289,7 @@ public final class ScreenCopyRenderer {
 
     private static void m110(int n, Object object) {
         int n2 = n;
-        Blur2 blur2 = (Blur2)object;
+        StandaloneBlurHelper blur2 = (StandaloneBlurHelper)object;
         int n3 = GL30C.glGetInteger((int)36010);
         int n4 = GL30C.glGetInteger((int)36006);
         GL30C.glBindFramebuffer((int)36008, (int)n2);
@@ -378,7 +378,7 @@ public final class ScreenCopyRenderer {
     }
 
     private static String m495(Object object) {
-        Blur2 blur2 = (Blur2)object;
+        StandaloneBlurHelper blur2 = (StandaloneBlurHelper)object;
         String string = ScreenCopyRenderer.m711(blur2.count170);
         int n = blur2.count162;
         int n2 = blur2.count174;

@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
 import shit.event.Render2DEvent;
@@ -92,7 +92,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner49(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner49(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

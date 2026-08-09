@@ -68,7 +68,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import shit.Client;
 import shit.command.CommandManager;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.misc.MathUtil;
 import shit.module.Category;
@@ -223,7 +223,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner57(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner57(TickEvent.PreTick event2Inner) {
         if (MC.mc.player == null || MC.mc.world == null || MC.mc.getNetworkHandler() == null || MC.mc.interactionManager == null) {
             return;
         }

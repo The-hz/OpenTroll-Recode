@@ -8,10 +8,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.NumberSetting;
@@ -22,7 +22,7 @@ public class ReverseStep
 extends Module {
     private final NumberSetting height = (NumberSetting)this.registerSetting(new NumberSetting("Height", 2.0, 0.25, 8.0, 0.1));
     private final NumberSetting speed = (NumberSetting)this.registerSetting(new NumberSetting("Speed", 1.0, 0.1, 8.0, 0.1));
-    private final Helper7 helper731 = new Helper7();
+    private final Stopwatch helper731 = new Stopwatch();
 
     public ReverseStep() {
         super("ReverseStep", "Pulls you down block edges faster.", Category.MOVEMENT);
@@ -36,7 +36,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner10(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner10(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

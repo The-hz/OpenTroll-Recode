@@ -12,7 +12,7 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -24,7 +24,7 @@ extends Module {
     private final NumberSetting packetsPerSecond = (NumberSetting)this.registerSetting(new NumberSetting("PacketsPerSecond", 80.0, 1.0, 300.0, 1.0));
     private final BooleanSetting movement = (BooleanSetting)this.registerSetting(new BooleanSetting("Movement", true));
     private final BooleanSetting actions = (BooleanSetting)this.registerSetting(new BooleanSetting("Actions", false));
-    private final Helper7 helper78 = new Helper7();
+    private final Stopwatch helper78 = new Stopwatch();
     private int count209;
 
     public PacketLimiter() {

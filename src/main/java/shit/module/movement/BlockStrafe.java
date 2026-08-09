@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.MoveEvent;
 import shit.module.Category;
@@ -119,7 +119,7 @@ extends Module {
     }
 
     @EventHandler
-    public void setEvent2Inner12(Event2.Event2Inner event2Inner) {
+    public void setEvent2Inner12(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame() || !((Boolean)this.antiSlowFalling.getValue()).booleanValue()) {
             return;
         }

@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -21,7 +21,7 @@ import shit.module.misc.CoordsLog;
 import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class TeleportLogger
@@ -43,7 +43,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner230(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner230(TickEvent.PostTick event2Inner2) {
         if (Module.isNotInGame()) {
             return;
         }
@@ -57,7 +57,7 @@ extends Module {
             }
             if (!((Boolean)this.removeInRange.getValue()).booleanValue() || !((double)playerEntity.distanceTo((Entity)MC.mc.player) < (Double)this.removeDistance.getValue())) continue;
             if (((Boolean)this.printRemove.getValue()).booleanValue()) {
-                Util2.sendClientMessage("[TeleportLogger] Removed " + playerEntity.getName().getString() + ", now in range.");
+                ChatUtils.sendClientMessage("[TeleportLogger] Removed " + playerEntity.getName().getString() + ", now in range.");
             }
             iterator.remove();
         }
@@ -71,7 +71,7 @@ extends Module {
             String string = playerEntity.getName().getString() + " teleported at " + n3 + ", " + n2 + ", " + n;
             CoordsLog.setObj67(string);
             if (!((Boolean)this.printAdd.getValue()).booleanValue()) continue;
-            Util2.sendClientMessage("[TeleportLogger] " + string);
+            ChatUtils.sendClientMessage("[TeleportLogger] " + string);
         }
     }
 }

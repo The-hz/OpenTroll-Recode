@@ -11,7 +11,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.util.Hand;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
@@ -58,7 +58,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner59(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner59(TickEvent.PreTick event2Inner) {
         if (this.timing.getValue() == TimingMode.POST) {
             return;
         }
@@ -66,7 +66,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner210(Event2.Event2Inner2 event2Inner2) {
+    private void setEvent2Inner210(TickEvent.PostTick event2Inner2) {
         if (this.timing.getValue() == TimingMode.PRE) {
             return;
         }

@@ -18,9 +18,9 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Hand;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
@@ -47,7 +47,7 @@ extends Module {
     private final BooleanSetting delayCast = (BooleanSetting)this.registerSetting(new BooleanSetting("DelayCast", true));
     private final NumberSetting castDelay = (NumberSetting)this.registerSetting(new NumberSetting("CastDelay", 2.0, 1.0, 10.0, 1.0));
     private final EnumSetting rotateMode = (EnumSetting)this.registerSetting(new EnumSetting("RotateMode", RotateMode.DEFAULT));
-    private final Helper7 helper748 = new Helper7();
+    private final Stopwatch helper748 = new Stopwatch();
     private boolean flag77 = false;
     private RegistryEntry field66 = null;
     private int count135 = 0;
@@ -66,7 +66,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner52(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner52(TickEvent.PreTick event2Inner) {
         if (Module.isNotInGame()) {
             return;
         }

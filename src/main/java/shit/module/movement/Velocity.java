@@ -38,10 +38,10 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
-import shit.misc.Helper7;
+import shit.misc.Stopwatch;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.movement.NoSlow;
@@ -74,8 +74,8 @@ extends Module {
     public final BooleanSetting noEntityPush;
     public final BooleanSetting noBlockPush;
     private final BooleanSetting noFishBob;
-    public final Helper7 helper711;
-    private final Helper7 helper735;
+    public final Stopwatch helper711;
+    private final Stopwatch helper735;
     private boolean flag26;
     private boolean flag130;
 
@@ -99,8 +99,8 @@ extends Module {
         this.noEntityPush = (BooleanSetting)this.registerSetting(new BooleanSetting("NoEntityPush", true));
         this.noBlockPush = (BooleanSetting)this.registerSetting(new BooleanSetting("NoBlockPush", true));
         this.noFishBob = (BooleanSetting)this.registerSetting(new BooleanSetting("NoFishBob", true));
-        this.helper711 = new Helper7();
-        this.helper735 = new Helper7();
+        this.helper711 = new Stopwatch();
+        this.helper735 = new Stopwatch();
     }
 
     @Override
@@ -217,7 +217,7 @@ extends Module {
     }
 
     @EventHandler
-    public void setEvent2Inner21(Event2.Event2Inner event2Inner) {
+    public void setEvent2Inner21(TickEvent.PreTick event2Inner) {
         boolean bl;
         if (Module.isNotInGame()) {
             return;

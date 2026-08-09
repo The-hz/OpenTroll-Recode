@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public final class InventoryClickHelper
@@ -25,7 +25,7 @@ implements MC {
     public static int m189(Object object, boolean n) {
         Predicate predicate = (Predicate)object;
         int n2 = n ? 1 : 0;
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         int n3 = n2;
         if (!bl) {
             n3 = n3 != 0 ? 0 : 9;
@@ -39,7 +39,7 @@ implements MC {
             Predicate predicate = (Predicate)object;
             int n4 = n;
             int n5 = n2;
-            boolean bl = Util2.isAlwaysTrue();
+            boolean bl = ChatUtils.isAlwaysTrue();
             if (MC.mc.player == null) {
                 return -1;
             }
@@ -67,7 +67,7 @@ implements MC {
     public static int m589(int n) {
         int n2;
         int n3 = n;
-        boolean bl = Util2.isAlwaysTrue();
+        boolean bl = ChatUtils.isAlwaysTrue();
         int n4 = n3;
         int n5 = 9;
         if (!bl) {
@@ -156,7 +156,7 @@ implements MC {
         block5: {
             boolean bl;
             block4: {
-                boolean bl2 = Util2.isAlwaysTrue();
+                boolean bl2 = ChatUtils.isAlwaysTrue();
                 MinecraftClient minecraftClient2 = MC.mc;
                 if (!bl2) {
                     if (minecraftClient2.player == null) return false;

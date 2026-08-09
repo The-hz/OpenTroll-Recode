@@ -11,14 +11,14 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import shit.Client;
-import shit.event.Event2;
+import shit.event.TickEvent;
 import shit.event.EventHandler;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
 import shit.setting.BooleanSetting;
 import shit.util.MC;
-import shit.util.Util2;
+import shit.util.ChatUtils;
 
 @Environment(value=EnvType.CLIENT)
 public class Friend
@@ -76,7 +76,7 @@ extends Module {
     }
 
     @EventHandler
-    private void setEvent2Inner7(Event2.Event2Inner event2Inner) {
+    private void setEvent2Inner7(TickEvent.PreTick event2Inner) {
         EntityHitResult entityHitResult;
         Object object;
         if (Module.isNotInGame()) {
@@ -92,7 +92,7 @@ extends Module {
         if (((Boolean)this.mCF.getValue()).booleanValue() && MC.mc.options.pickItemKey.wasPressed() && MC.mc.currentScreen == null && (object = MC.mc.crosshairTarget) instanceof EntityHitResult && (object = (entityHitResult = (EntityHitResult)object).getEntity()) instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity)object;
             if (Friend.m913(object = playerEntity.getGameProfile().name())) {
-                Util2.sendClientMessage("\u00a7d\u273f \u00a7f\u8fd9\u662f\u732b\u732b\u7684\u7279\u522b\u597d\u53cb\u54e6~ \u4e0d\u80fd\u79fb\u9664\u7684\u55b5~ \u00a7d\u273f");
+                ChatUtils.sendClientMessage("\u00a7d\u273f \u00a7f\u8fd9\u662f\u732b\u732b\u7684\u7279\u522b\u597d\u53cb\u54e6~ \u4e0d\u80fd\u79fb\u9664\u7684\u55b5~ \u00a7d\u273f");
                 if (((Boolean)this.sound.getValue()).booleanValue()) {
                     MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_CAT_AMBIENT, SoundCategory.PLAYERS, 1.0f, 1.5f, false);
                 }
@@ -101,13 +101,13 @@ extends Module {
             boolean bl = Client.friendManager.isFriend(object);
             if (bl) {
                 Client.friendManager.removeFriend(object);
-                Util2.sendClientMessage("\u00a77\u2716 \u00a7c\u5df2\u79fb\u9664\u597d\u53cb\u00a7f: " + (String)object + " \u00a77\u2716 \u545c\u545c...");
+                ChatUtils.sendClientMessage("\u00a77\u2716 \u00a7c\u5df2\u79fb\u9664\u597d\u53cb\u00a7f: " + (String)object + " \u00a77\u2716 \u545c\u545c...");
                 if (((Boolean)this.sound.getValue()).booleanValue()) {
                     MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), (SoundEvent)SoundEvents.ENTITY_ITEM_BREAK.value(), SoundCategory.PLAYERS, 1.0f, 0.8f, false);
                 }
             } else {
                 Client.friendManager.addFriend(object);
-                Util2.sendClientMessage("\u00a7d\u2661 \u00a7a\u5df2\u6dfb\u52a0\u597d\u53cb\u00a7f: " + (String)object + " \u00a7d\u2661 \uff90\u30e3~");
+                ChatUtils.sendClientMessage("\u00a7d\u2661 \u00a7a\u5df2\u6dfb\u52a0\u597d\u53cb\u00a7f: " + (String)object + " \u00a7d\u2661 \uff90\u30e3~");
                 if (((Boolean)this.sound.getValue()).booleanValue()) {
                     MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.2f, false);
                 }
@@ -127,11 +127,11 @@ extends Module {
                 return;
             }
             try {
-                Util2.sendChatCommand("w " + string + " I Just Add you as friend on TrollHack-Recode!");
-                Util2.sendClientMessage("\u00a7d\u2709 \u00a7f\u5df2\u5411 \u00a7a" + string + " \u00a7f\u53d1\u9001\u4e86\u52a0\u597d\u53cb\u79c1\u4fe1~ \u00a7d\u55b5\u2661");
+                ChatUtils.sendChatCommand("w " + string + " I Just Add you as friend on TrollHack-Recode!");
+                ChatUtils.sendClientMessage("\u00a7d\u2709 \u00a7f\u5df2\u5411 \u00a7a" + string + " \u00a7f\u53d1\u9001\u4e86\u52a0\u597d\u53cb\u79c1\u4fe1~ \u00a7d\u55b5\u2661");
             }
             catch (Exception exception) {
-                Util2.sendClientMessage("\u00a7c\u81ea\u52a8\u53d1\u9001\u79c1\u4fe1\u5931\u8d25\u4e86\u55b5... (\u0e51\u2022\u0301 \u2083 \u2022\u0300\u0e51)");
+                ChatUtils.sendClientMessage("\u00a7c\u81ea\u52a8\u53d1\u9001\u79c1\u4fe1\u5931\u8d25\u4e86\u55b5... (\u0e51\u2022\u0301 \u2083 \u2022\u0300\u0e51)");
             }
         }
     }

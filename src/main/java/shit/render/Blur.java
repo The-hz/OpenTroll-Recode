@@ -34,7 +34,7 @@ import shit.module.Module;
 import shit.util.ResourceLoader;
 import shit.util.MC;
 import shit.util.GpuPipelineFactory;
-import shit.util.Util;
+import shit.util.RenderScissorHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class Blur {
@@ -114,7 +114,7 @@ public class Blur {
             return;
         }
         GpuPipelineFactory.ColorData colorData = GpuPipelineFactory.m13(f18, f17, f16, f15);
-        if (!Util.hasPositiveArea(colorData)) {
+        if (!RenderScissorHelper.hasPositiveArea(colorData)) {
             return;
         }
         float f19 = (float)GpuPipelineFactory.getDouble18();
@@ -132,7 +132,7 @@ public class Blur {
         GpuBufferSlice gpuBufferSlice = GpuPipelineFactory.m1027("blur_uniforms", "Lumin Blur UBO", count74, 16, new Vec11f(n2, n, f28, f22, f23, f20, f21, f24, f25, f26, f27));
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin Blur", gpuTextureView, OptionalInt.empty());){
             renderPass.setPipeline(this.renderPipeline10);
-            Util.enableScissorFromColorData(renderPass, colorData);
+            RenderScissorHelper.enableScissorFromColorData(renderPass, colorData);
             RenderSystem.bindDefaultUniforms((RenderPass)renderPass);
             renderPass.setUniform("BlurUniforms", gpuBufferSlice);
             renderPass.bindTexture("InputSampler", this.field57.getColorAttachmentView(), RenderSystem.getSamplerCache().get(FilterMode.LINEAR));
