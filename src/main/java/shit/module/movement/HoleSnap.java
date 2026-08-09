@@ -95,7 +95,7 @@ extends Module {
             }
         }
         this.setFloat2(0.6f);
-        Client.helper4.m502();
+        Client.timerScale.m502();
     }
 
     @EventHandler
@@ -114,7 +114,7 @@ extends Module {
             return;
         }
         if (this.speedMode.getValue() == SpeedMode.Timer) {
-            Client.helper4.setFloat5(this.timerSpeed.getFloat());
+            Client.timerScale.setFloat5(this.timerSpeed.getFloat());
         }
         if (((Boolean)this.step.getValue()).booleanValue()) {
             this.setFloat2(this.stepHeight.getFloat());
@@ -214,7 +214,7 @@ extends Module {
             return null;
         }
         Type type = this.m719(blockPos);
-        if (type != Type.None) {
+        if (type != Type.EmptySettingRenderer) {
             int n = type == Type.Bedrock ? 100 : 60;
             int n2 = type == Type.Bedrock ? (Integer)this.bedrockColor.getValue() : (Integer)this.mixedColor.getValue();
             return new PositionData(blockPos, Vec3d.ofBottomCenter((Vec3i)blockPos), n, n2);
@@ -222,7 +222,7 @@ extends Module {
         for (Direction direction : Direction.Type.HORIZONTAL) {
             BlockPos blockPos2 = blockPos.offset(direction);
             if (!this.m153(blockPos2)) continue;
-            if (this.m719(blockPos2) == Type.None || !this.m810(blockPos, blockPos2)) continue;
+            if (this.m719(blockPos2) == Type.EmptySettingRenderer || !this.m810(blockPos, blockPos2)) continue;
             Vec3d vec3d = new Vec3d(((double)(blockPos.getX() + blockPos2.getX()) + 1.0) / 2.0, (double)blockPos.getY(), ((double)(blockPos.getZ() + blockPos2.getZ()) + 1.0) / 2.0);
             return new PositionData(blockPos, vec3d, 40, (Integer)this.doubleColor.getValue());
         }
@@ -257,7 +257,7 @@ extends Module {
         for (BlockPos blockPos2 : blockPosArray2) {
             Block block = MC.mc.world.getBlockState(blockPos2).getBlock();
             if (!this.m549(block)) {
-                return Type.None;
+                return Type.EmptySettingRenderer;
             }
             if (block == Blocks.BEDROCK) continue;
             bl = false;
@@ -340,14 +340,14 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     static enum Type {
-      None, Mixed, Bedrock;
+      EmptySettingRenderer, Mixed, Bedrock;
 
       private Type() {}
 
 
 
         private static Type[] getTypeArray13() {
-            return new Type[]{None, Mixed, Bedrock};
+            return new Type[]{EmptySettingRenderer, Mixed, Bedrock};
         }
     
    }

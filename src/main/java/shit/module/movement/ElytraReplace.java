@@ -20,7 +20,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.ItemUtil;
 import shit.util.MC;
-import shit.util.Util3;
+import shit.util.InventoryClickHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class ElytraReplace
@@ -53,7 +53,7 @@ extends Module {
         if (!this.m461(itemStack2)) {
             return;
         }
-        int n = Util3.m189((java.util.function.Predicate<ItemStack>)(itemStack -> {
+        int n = InventoryClickHelper.m189((java.util.function.Predicate<ItemStack>)(itemStack -> {
             Object var2_2 = null;
             if (!itemStack.isOf(Items.ELYTRA)) return false;
             if (this.m461(itemStack)) return false;
@@ -69,8 +69,8 @@ extends Module {
             }
             return;
         }
-        Util3.m235(6, 0, SlotActionType.QUICK_MOVE);
-        Util3.m235(Util3.m589(n), 0, SlotActionType.QUICK_MOVE);
+        InventoryClickHelper.m235(6, 0, SlotActionType.QUICK_MOVE);
+        InventoryClickHelper.m235(InventoryClickHelper.m589(n), 0, SlotActionType.QUICK_MOVE);
         if (((Boolean)this.warn.getValue()).booleanValue()) {
             CommandManager.sendFeedback("Equipped replacement elytra. Remaining: " + Math.max(0, this.count117 - 1));
         }

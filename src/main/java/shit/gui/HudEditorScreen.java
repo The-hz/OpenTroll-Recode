@@ -13,16 +13,16 @@ import net.minecraft.client.input.CharInput;
 import net.minecraft.client.input.KeyInput;
 import net.minecraft.text.Text;
 import shit.Client;
-import shit.api.Listener3;
-import shit.manager.RenderManager;
+import shit.api.HudModule;
+import shit.manager.ModuleListRenderer;
 import shit.module.Category;
 import shit.module.Module;
 
 @Environment(value=EnvType.CLIENT)
 public class HudEditorScreen
 extends Screen {
-    private final RenderManager renderManager;
-    private Listener3 listener3;
+    private final ModuleListRenderer renderManager;
+    private HudModule listener3;
     private int count221;
     private int count126;
     private static String text721;
@@ -30,7 +30,7 @@ extends Screen {
 
     public HudEditorScreen() {
         super((Text) Text.literal("HUD Editor"));
-        this.renderManager = new RenderManager(net.minecraft.client.MinecraftClient.getInstance().textRenderer, Category.HUD, 0, 0);
+        this.renderManager = new ModuleListRenderer(net.minecraft.client.MinecraftClient.getInstance().textRenderer, Category.HUD, 0, 0);
     }
 
     protected void init() {
@@ -41,8 +41,8 @@ extends Screen {
 
     public void render(DrawContext drawContext, int n, int n2, float f) {
         for (Module module : Client.moduleManager.getByCategory(Category.HUD)) {
-            if (module instanceof Listener3 && module.isEnabled()) {
-                Listener3 listener3 = (Listener3) module;
+            if (module instanceof HudModule && module.isEnabled()) {
+                HudModule listener3 = (HudModule) module;
                 try {
                     listener3.renderHud(drawContext, true);
                     this.m969(drawContext, listener3);
@@ -59,8 +59,8 @@ extends Screen {
         java.util.List<Module> hud = Client.moduleManager.getByCategory(Category.HUD);
         for (int i = hud.size() - 1; i >= 0; --i) {
             Module module = hud.get(i);
-            if (module instanceof Listener3 && module.isEnabled()) {
-                Listener3 listener3 = (Listener3) module;
+            if (module instanceof HudModule && module.isEnabled()) {
+                HudModule listener3 = (HudModule) module;
                 if (this.m55(click.x(), click.y(), listener3)) {
                     this.listener3 = listener3;
                     this.count221 = (int) click.x() - listener3.getHudX();
@@ -140,7 +140,7 @@ extends Screen {
 
     private void m969(Object object, Object object2) {
         DrawContext drawContext = (DrawContext)object;
-        Listener3 listener3 = (Listener3)object2;
+        HudModule listener3 = (HudModule)object2;
         int n = listener3.getHudX();
         int n2 = listener3.getHudY();
         drawContext.fill(n - 1, n2 - 1, n + listener3.hudWidth() + 1, n2, -1439005464);
@@ -153,7 +153,7 @@ extends Screen {
      * Enabled aggressive block sorting
      */
     private boolean m55(double d, double d2, Object object) {
-        Listener3 listener3 = (Listener3) object;
+        HudModule listener3 = (HudModule) object;
         return d >= listener3.getHudX() && d <= (double) (listener3.getHudX() + listener3.hudWidth())
             && d2 >= listener3.getHudY() && d2 <= (double) (listener3.getHudY() + listener3.getHudHeight());
     }

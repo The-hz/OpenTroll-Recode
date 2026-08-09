@@ -117,7 +117,7 @@ import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.util.ItemUtil;
 import shit.util.MC;
-import shit.util.RenderUtil3;
+import shit.util.VanillaTextHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class ZealotCrystalPlus
@@ -1044,7 +1044,7 @@ extends Module {
         block13: {
             BlockPos blockPos = (BlockPos)object;
             Object var4_3 = null;
-            if (this.placeMode.getValue() == EMode5.None) {
+            if (this.placeMode.getValue() == EMode5.EmptySettingRenderer) {
                 return;
             }
             if ((double)(System.currentTimeMillis() - this.time41) < (Double)this.placeDelay.getValue()) {
@@ -1522,8 +1522,8 @@ extends Module {
         boolean bl3 = false;
         int n2 = (Integer)this.fill.getValue() >>> 24 & 0xFF;
         int n3 = (Integer)this.box.getValue() >>> 24 & 0xFF;
-        int n4 = n2 > 0 ? RenderUtil3.m517((Integer)this.fill.getValue(), (int)((double)n2 * this.value157)) : 0;
-        int n5 = n = n3 > 0 ? RenderUtil3.m517((Integer)this.box.getValue(), (int)((double)n3 * this.value157)) : 0;
+        int n4 = n2 > 0 ? VanillaTextHelper.m517((Integer)this.fill.getValue(), (int)((double)n2 * this.value157)) : 0;
+        int n5 = n = n3 > 0 ? VanillaTextHelper.m517((Integer)this.box.getValue(), (int)((double)n3 * this.value157)) : 0;
         if (this.vec3d8 != null) {
             box = new Box(this.vec3d8.subtract(0.5, 0.5, 0.5), this.vec3d8.add(0.5, 0.5, 0.5));
             if (((Boolean)this.shrink.getValue()).booleanValue()) {
@@ -1587,7 +1587,7 @@ extends Module {
         int n7 = n4 - fontManager2.getFontHeight() / 2;
         int n8 = (int)(255.0 * this.value157);
         if (n8 > 5) {
-            fontManager2.drawText(render2DEvent.getDrawContext(), string, n6, n7, RenderUtil3.m517((Integer)this.textColor.getValue(), n8), true);
+            fontManager2.drawText(render2DEvent.getDrawContext(), string, n6, n7, VanillaTextHelper.m517((Integer)this.textColor.getValue(), n8), true);
         }
     }
 
@@ -1679,13 +1679,13 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum EMode5 {
-        None,
+        EmptySettingRenderer,
         Weak,
         Strong;
 
 
         private static EMode5[] getObjArray7() {
-            return new EMode5[]{None, Weak, Strong};
+            return new EMode5[]{EmptySettingRenderer, Weak, Strong};
         }
     }
 

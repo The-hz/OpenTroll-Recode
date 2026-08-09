@@ -9,8 +9,8 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexFormats;
-import shit.render.Outline2;
-import shit.util.BufferUtil2;
+import shit.render.CustomVertexFormats;
+import shit.util.ResourceLoader;
 
 @Environment(value=EnvType.CLIENT)
 public class RenderPipelines {

@@ -5,7 +5,7 @@ package shit.module.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.manager.ShaderProgramManager;
+import shit.manager.ShaderProgramHolder;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
@@ -21,9 +21,9 @@ extends Module {
     private final BooleanSetting customButtons = (BooleanSetting)this.registerSetting(new BooleanSetting("CustomButtons", true));
     private final EnumSetting title = (EnumSetting)this.registerSetting(new EnumSetting("Title", EMode.TROLL_HACK));
     private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.SET));
-    private final EnumSetting backgroundShader = (EnumSetting)this.registerSetting(new EnumSetting("BackgroundShader", ShaderProgramManager.EMode.eMode));
+    private final EnumSetting backgroundShader = (EnumSetting)this.registerSetting(new EnumSetting("BackgroundShader", ShaderProgramHolder.EMode.eMode));
     private final NumberSetting fpsLimit = (NumberSetting)this.registerSetting(new NumberSetting("FpsLimit", 60.0, 10.0, 240.0, 10.0));
-    private ShaderProgramManager.EMode field13 = null;
+    private ShaderProgramHolder.EMode field13 = null;
 
     public MainMenu() {
         super("MainMenu", "1122-style shader main menu background.", Category.CLIENT);
@@ -41,15 +41,15 @@ extends Module {
 
     public void m590() {
         block4: {
-            ShaderProgramManager.EMode eMode;
+            ShaderProgramHolder.EMode eMode;
             block5: {
-                ShaderProgramManager.EMode eMode2;
+                ShaderProgramHolder.EMode eMode2;
                 block6: {
                     int[] nArray = ClientSetting.getIntArray();
                     if (this.mode.getValue() != Mode.RANDOM) {
                         return;
                     }
-                    ShaderProgramManager.EMode[] eModeArray = ShaderProgramManager.EMode.values();
+                    ShaderProgramHolder.EMode[] eModeArray = ShaderProgramHolder.EMode.values();
                     eMode = eModeArray[(int)(Math.random() * (double)eModeArray.length)];
                     if (nArray == null) break block4;
                     if (eModeArray.length <= 1) break block5;
@@ -61,16 +61,16 @@ extends Module {
                 eMode = eMode2;
             }
             this.field13 = eMode;
-            ShaderProgramManager.m884();
+            ShaderProgramHolder.m884();
         }
     }
 
-    public ShaderProgramManager.EMode getObj8() {
+    public ShaderProgramHolder.EMode getObj8() {
         int[] nArray = ClientSetting.getIntArray();
         Object object = this.mode.getValue();
         if (nArray != null) {
             if (object == Mode.RANDOM) {
-                ShaderProgramManager.EMode eMode = this.field13;
+                ShaderProgramHolder.EMode eMode = this.field13;
                 if (nArray != null) {
                     if (eMode == null) {
                         this.m590();
@@ -81,7 +81,7 @@ extends Module {
             }
             object = this.backgroundShader.getValue();
         }
-        return (ShaderProgramManager.EMode)((Object)object);
+        return (ShaderProgramHolder.EMode)((Object)object);
     }
 
     public String getText45() {

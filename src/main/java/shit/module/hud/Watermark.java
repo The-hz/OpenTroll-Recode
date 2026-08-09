@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.mixin.MinecraftAccessor;
 import shit.module.Category;
 import shit.module.Module;
@@ -20,7 +20,7 @@ import shit.setting.StringSetting;
 @Environment(value=EnvType.CLIENT)
 public class Watermark
 extends Module
-implements Listener3 {
+implements HudModule {
     private final StringSetting text = (StringSetting)this.registerSetting(new StringSetting("Text", "TrollHack-Recode"));
     private final EnumSetting mode = (EnumSetting)this.registerSetting(new EnumSetting("Mode", Mode.CLIENT_VERSION));
     private final BooleanSetting info = (BooleanSetting)this.registerSetting(new BooleanSetting("Info", false));

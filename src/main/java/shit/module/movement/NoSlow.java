@@ -282,7 +282,7 @@ extends Module {
         if (!this.isEnabled()) {
             return false;
         }
-        if (this.mode.getValue() == Mode.None) {
+        if (this.mode.getValue() == Mode.EmptySettingRenderer) {
             return false;
         }
         return switch (((Mode)((Object)this.mode.getValue())).ordinal()) {
@@ -332,14 +332,14 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum Mode {
-      Vanilla, Grim, GrimTick, None;
+      Vanilla, Grim, GrimTick, EmptySettingRenderer;
 
       private Mode() {}
 
 
 
         private static Mode[] getModeArray17() {
-            return new Mode[]{Vanilla, Grim, GrimTick, None};
+            return new Mode[]{Vanilla, Grim, GrimTick, EmptySettingRenderer};
         }
     
    }

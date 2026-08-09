@@ -28,7 +28,7 @@ extends Module {
     private final NumberSetting modelAlpha = (NumberSetting)this.registerSetting(new NumberSetting("ModelAlpha", 255.0, 0.0, 255.0, 1.0));
     private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
     private final BooleanSetting filledDepth = (BooleanSetting)this.registerSetting(new BooleanSetting("FilledDepth", true));
-    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
     private final BooleanSetting outlineDepth = (BooleanSetting)this.registerSetting(new BooleanSetting("OutlineDepth", false));
     private final ColorSetting filledColor = (ColorSetting)this.registerSetting(new ColorSetting("FilledColor", 1065746376));
     private final ColorSetting outlineColor = (ColorSetting)this.registerSetting(new ColorSetting("OutlineColor", -930742328));

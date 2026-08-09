@@ -94,7 +94,7 @@ extends Module {
         }
         Item item = null;
         switch ((ItemMode)((Object)this.item.getValue())) {
-            case None: {
+            case EmptySettingRenderer: {
                 item = null;
                 break;
             }
@@ -240,14 +240,14 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum ItemMode {
-      None, Totem, Crystal, Gapple, Shield, Chorus;
+      EmptySettingRenderer, Totem, Crystal, Gapple, Shield, Chorus;
 
       private ItemMode() {}
 
 
 
         private static ItemMode[] getItemModeArray() {
-            return new ItemMode[]{None, Totem, Crystal, Gapple, Shield, Chorus};
+            return new ItemMode[]{EmptySettingRenderer, Totem, Crystal, Gapple, Shield, Chorus};
         }
     
    }

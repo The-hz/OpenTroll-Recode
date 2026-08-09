@@ -34,7 +34,7 @@ extends Module {
     private final BooleanSetting animals = (BooleanSetting)this.registerSetting(new BooleanSetting("Animals", true));
     private final BooleanSetting slimes = (BooleanSetting)this.registerSetting(new BooleanSetting("Slimes", true));
     private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
     private final NumberSetting lineWidth = (NumberSetting)this.registerSetting(new NumberSetting("LineWidth", 1.5, 0.5, 8.0, 0.1));
     public final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1426063361));
     public final ColorSetting fillColor = (ColorSetting)this.registerSetting(new ColorSetting("FillColor", 0x40FFFFFF));

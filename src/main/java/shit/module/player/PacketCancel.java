@@ -15,8 +15,8 @@ import shit.setting.StringSetting;
 @Environment(value=EnvType.CLIENT)
 public class PacketCancel
 extends Module {
-    private final StringSetting sendContains = (StringSetting)this.registerSetting(new StringSetting("SendContains", "None"));
-    private final StringSetting receiveContains = (StringSetting)this.registerSetting(new StringSetting("ReceiveContains", "None"));
+    private final StringSetting sendContains = (StringSetting)this.registerSetting(new StringSetting("SendContains", "EmptySettingRenderer"));
+    private final StringSetting receiveContains = (StringSetting)this.registerSetting(new StringSetting("ReceiveContains", "EmptySettingRenderer"));
 
     public PacketCancel() {
         super("PacketCancel", "Cancels packets whose class names contain configured text.", Category.PLAYER);
@@ -52,7 +52,7 @@ extends Module {
         boolean bl = string3.isBlank();
         if (n != 0) {
             if (bl) return false;
-            bl = "None".equalsIgnoreCase(string);
+            bl = "EmptySettingRenderer".equalsIgnoreCase(string);
         }
         if (n != 0) {
             if (bl) return false;

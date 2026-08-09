@@ -82,7 +82,7 @@ extends Module {
     @Override
     public void onDisable() {
         super.onDisable();
-        Client.helper4.m502();
+        Client.timerScale.m502();
     }
 
     @Override
@@ -100,7 +100,7 @@ extends Module {
     @Override
     public void onEnable() {
         super.onEnable();
-        Client.helper4.m502();
+        Client.timerScale.m502();
     }
 
     @EventHandler
@@ -108,7 +108,7 @@ extends Module {
         if (Module.isNotInGame()) {
             return;
         }
-        Client.helper4.m64();
+        Client.timerScale.m64();
     }
 
     @EventHandler

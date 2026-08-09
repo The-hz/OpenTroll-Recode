@@ -26,8 +26,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import shit.Client;
 import shit.manager.FontManager2;
-import shit.manager.ShaderProgramManager;
-import shit.misc.RenderUtil2;
+import shit.manager.ShaderProgramHolder;
+import shit.misc.AnimationWidgetRenderer;
 import shit.mixin.ScreenAccessor;
 import shit.module.client.MainMenu;
 
@@ -35,7 +35,7 @@ import shit.module.client.MainMenu;
 @Mixin(value={TitleScreen.class})
 public class TitleScreenMainMenuMixin {
     @Unique
-    private final List<shit.misc.RenderUtil2> trollhack$buttons = new ArrayList<>();
+    private final List<shit.misc.AnimationWidgetRenderer> trollhack$buttons = new ArrayList<>();
 
     @Inject(method={"init()V"}, at={@At(value="TAIL")})
     private void trollhack$onInit(CallbackInfo callbackInfo) {
@@ -50,17 +50,17 @@ public class TitleScreenMainMenuMixin {
         this.trollhack$buttons.clear();
         ((ScreenAccessor)((Object)this)).trollhack$clearWidgets();
         TitleScreen titleScreen = (TitleScreen)(Object)this;
-        this.trollhack$buttons.add(new RenderUtil2("Singleplayer", 30.0f, () -> minecraftClient.setScreen((Screen)new SelectWorldScreen((Screen)titleScreen))));
-        this.trollhack$buttons.add(new RenderUtil2("Multiplayer", 30.0f, () -> minecraftClient.setScreen((Screen)new MultiplayerScreen((Screen)titleScreen))));
-        this.trollhack$buttons.add(new RenderUtil2("Options", 30.0f, () -> minecraftClient.setScreen((Screen)new OptionsScreen((Screen)titleScreen, minecraftClient.options))));
-        this.trollhack$buttons.add(new RenderUtil2("Exit", 30.0f, () -> ((MinecraftClient)minecraftClient).scheduleStop()));
+        this.trollhack$buttons.add(new AnimationWidgetRenderer("Singleplayer", 30.0f, () -> minecraftClient.setScreen((Screen)new SelectWorldScreen((Screen)titleScreen))));
+        this.trollhack$buttons.add(new AnimationWidgetRenderer("Multiplayer", 30.0f, () -> minecraftClient.setScreen((Screen)new MultiplayerScreen((Screen)titleScreen))));
+        this.trollhack$buttons.add(new AnimationWidgetRenderer("Options", 30.0f, () -> minecraftClient.setScreen((Screen)new OptionsScreen((Screen)titleScreen, minecraftClient.options))));
+        this.trollhack$buttons.add(new AnimationWidgetRenderer("Exit", 30.0f, () -> ((MinecraftClient)minecraftClient).scheduleStop()));
         this.trollhack$layoutButtons(minecraftClient);
         this.setClient(minecraftClient);
         ScreenMouseEvents.afterMouseClick((Screen)titleScreen).register((screen, click, bl) -> {
             if (!mainMenu.isSet110()) {
                 return bl;
             }
-            for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
+            for (AnimationWidgetRenderer renderUtil2 : this.trollhack$buttons) {
                 renderUtil2.m421(click.x(), click.y(), click.button());
             }
             return bl;
@@ -69,7 +69,7 @@ public class TitleScreenMainMenuMixin {
             if (!mainMenu.isSet110()) {
                 return bl;
             }
-            for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
+            for (AnimationWidgetRenderer renderUtil2 : this.trollhack$buttons) {
                 renderUtil2.m946(click.x(), click.y(), click.button());
             }
             return bl;
@@ -80,20 +80,20 @@ public class TitleScreenMainMenuMixin {
     private void setClient(MinecraftClient minecraftClient) {
         float f = 0.0f;
         if (Client.fontManager.isSet89()) {
-            for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
+            for (AnimationWidgetRenderer renderUtil2 : this.trollhack$buttons) {
                 float f2 = minecraftClient.textRenderer.getWidth(renderUtil2.getText71());
                 if (!(f2 > f)) continue;
                 f = f2;
             }
         } else {
             FontManager2 fontManager2 = Client.fontManager.renderer2();
-            for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
+            for (AnimationWidgetRenderer renderUtil2 : this.trollhack$buttons) {
                 float f3 = fontManager2.getStringWidth(renderUtil2.getText71());
                 if (!(f3 > f)) continue;
                 f = f3;
             }
         }
-        RenderUtil2.value172 = f + 12.0f;
+        AnimationWidgetRenderer.value172 = f + 12.0f;
     }
 
     @Unique
@@ -113,7 +113,7 @@ public class TitleScreenMainMenuMixin {
         float f9 = (f3 - f8) / 2.0f;
         float f10 = f4 - f7;
         for (int i = 0; i < n3; ++i) {
-            ((RenderUtil2)(Object)this.trollhack$buttons.get(i)).m803(f9 + (float)i * (f5 + f6), f10, f5);
+            ((AnimationWidgetRenderer)(Object)this.trollhack$buttons.get(i)).m803(f9 + (float)i * (f5 + f6), f10, f5);
         }
     }
 
@@ -126,7 +126,7 @@ public class TitleScreenMainMenuMixin {
         }
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         try {
-            ShaderProgramManager.render4((Object)mainMenu.getObj8(), minecraftClient.getWindow().getFramebufferWidth(), minecraftClient.getWindow().getFramebufferHeight(), (double)drawContext.getScaledWindowWidth() / 2.0, (double)drawContext.getScaledWindowHeight() / 2.0);
+            ShaderProgramHolder.render4((Object)mainMenu.getObj8(), minecraftClient.getWindow().getFramebufferWidth(), minecraftClient.getWindow().getFramebufferHeight(), (double)drawContext.getScaledWindowWidth() / 2.0, (double)drawContext.getScaledWindowHeight() / 2.0);
         }
         catch (Throwable throwable) {
             ((ScreenAccessor)titleScreen).trollhack$renderPanorama(drawContext, f);
@@ -169,7 +169,7 @@ public class TitleScreenMainMenuMixin {
             int n4 = Math.round(Client.fontManager.getFloat47());
             fontManager2.drawText(drawContext, string, Math.round(f2), Math.round(f3) + n4, -1, true);
         }
-        for (RenderUtil2 renderUtil2 : this.trollhack$buttons) {
+        for (AnimationWidgetRenderer renderUtil2 : this.trollhack$buttons) {
             renderUtil2.m194(n, n2);
             renderUtil2.setObj113(drawContext);
         }

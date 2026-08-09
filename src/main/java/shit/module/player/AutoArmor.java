@@ -1186,14 +1186,14 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum EMode2 {
-      Chat, Hud, None;
+      Chat, Hud, EmptySettingRenderer;
 
       private EMode2() {}
 
 
 
         private static EMode2[] getObjArray19() {
-            return new EMode2[]{Chat, Hud, None};
+            return new EMode2[]{Chat, Hud, EmptySettingRenderer};
         }
     
    }

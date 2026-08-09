@@ -30,7 +30,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import shit.api.Listener4;
+import shit.api.DamagePredicate;
 import shit.event.Event2;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
@@ -249,7 +249,7 @@ extends Module {
                     if (!bl) break block12;
                     playerUtil = FakePlayer.playerUtil;
                     if (string == null) break block13;
-                    bl = ((Listener4)((Object)playerUtil)).m642(MC.mc.world.getDamageSources().generic());
+                    bl = ((DamagePredicate)((Object)playerUtil)).m642(MC.mc.world.getDamageSources().generic());
                 }
                 if (!bl) break block12;
                 playerUtil = FakePlayer.playerUtil;

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import shit.Client;
 import shit.event.Render2DEvent;
-import shit.util.RenderUtil;
+import shit.util.HudRenderHelper;
 
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={InGameHud.class})
@@ -23,7 +23,7 @@ public class GuiMixin {
     private void trollhack$render2D(DrawContext drawContext, RenderTickCounter renderTickCounter, CallbackInfo callbackInfo) {
         Client.helper.m818();
         Client.eventBus.post(new Render2DEvent(drawContext, renderTickCounter));
-        RenderUtil.setObj31(drawContext);
+        HudRenderHelper.setObj31(drawContext);
     }
 }
 

@@ -11,7 +11,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.hud.AbstractHudModule;
@@ -22,7 +22,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class CombatItemCount
 extends Module
-implements Listener3 {
+implements HudModule {
     private static final Data[] datas = new Data[]{
         new Data("Arrow", Items.ARROW), new Data("Crystal", Items.END_CRYSTAL),
         new Data("Gapple", Items.GOLDEN_APPLE), new Data("Totem", Items.TOTEM_OF_UNDYING),

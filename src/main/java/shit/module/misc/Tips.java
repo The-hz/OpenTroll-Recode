@@ -47,7 +47,7 @@ import shit.misc.Helper7;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.misc.IRC;
-import shit.render.LineRenderer2;
+import shit.render.StringDecryptor;
 import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;

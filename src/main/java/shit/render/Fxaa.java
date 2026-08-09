@@ -21,9 +21,9 @@ import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gl.SimpleFramebuffer;
 import net.minecraft.client.gl.UniformType;
 import net.minecraft.util.Identifier;
-import shit.util.BufferUtil2;
+import shit.util.ResourceLoader;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public class Fxaa {
@@ -36,7 +36,7 @@ public class Fxaa {
     private void m1030() {
         Object var2_1 = null;
         if (this.renderPipeline4 == null) {
-            this.renderPipeline4 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(BufferUtil2.m52("pipeline/fxaa")).withVertexShader(field19).withFragmentShader(field15).withUniform("FxaaInfo", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withCull(false).build();
+            this.renderPipeline4 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(ResourceLoader.m52("pipeline/fxaa")).withVertexShader(field19).withFragmentShader(field15).withUniform("FxaaInfo", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withCull(false).build();
         }
     }
 
@@ -89,7 +89,7 @@ public class Fxaa {
         }
         CommandEncoder commandEncoder = RenderSystem.getDevice().createCommandEncoder();
         commandEncoder.copyTextureToTexture(framebuffer.getColorAttachment(), this.field31.getColorAttachment(), 0, 0, 0, 0, 0, framebuffer.textureWidth, framebuffer.textureHeight);
-        GpuBufferSlice gpuBufferSlice = RenderUtil4.m1027("fxaa_info", "Lumin FXAA UBO", count129, 4, new Vec2f(framebuffer.textureWidth, framebuffer.textureHeight));
+        GpuBufferSlice gpuBufferSlice = GpuPipelineFactory.m1027("fxaa_info", "Lumin FXAA UBO", count129, 4, new Vec2f(framebuffer.textureWidth, framebuffer.textureHeight));
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin FXAA", framebuffer.getColorAttachmentView(), OptionalInt.empty());){
             renderPass.setPipeline(this.renderPipeline4);
             RenderSystem.bindDefaultUniforms((RenderPass)renderPass);

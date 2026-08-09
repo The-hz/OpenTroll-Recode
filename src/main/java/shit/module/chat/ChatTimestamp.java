@@ -123,7 +123,7 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     public static enum SeparatorMode {
-      Arrows, Square, Curly, Round, None;
+      Arrows, Square, Curly, Round, EmptySettingRenderer;
 
       private SeparatorMode() {}
 
@@ -136,7 +136,7 @@ extends Module {
          */
 
         private static SeparatorMode[] getSeparatorModeArray2() {
-            return new SeparatorMode[]{Arrows, Square, Curly, Round, None};
+            return new SeparatorMode[]{Arrows, Square, Curly, Round, EmptySettingRenderer};
         }
     
    }

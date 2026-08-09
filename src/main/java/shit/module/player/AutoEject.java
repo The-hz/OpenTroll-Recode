@@ -17,7 +17,7 @@ import shit.module.Module;
 import shit.setting.NumberSetting;
 import shit.setting.StringSetting;
 import shit.util.MC;
-import shit.util.Util3;
+import shit.util.InventoryClickHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoEject
@@ -38,7 +38,7 @@ extends Module {
         for (int i = 0; i < MC.mc.player.currentScreenHandler.slots.size(); ++i) {
             Slot slot = (Slot)MC.mc.player.currentScreenHandler.slots.get(i);
             if (slot.inventory != MC.mc.player.getInventory() || !slot.hasStack() || !this.m208(slot.getStack())) continue;
-            Util3.m235(i, 1, SlotActionType.THROW);
+            InventoryClickHelper.m235(i, 1, SlotActionType.THROW);
             this.helper72.resetTimer();
             return;
         }

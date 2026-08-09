@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.event.Event2;
 import shit.event.EventHandler;
 import shit.module.Category;
@@ -23,7 +23,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class PlayerModel
 extends Module
-implements Listener3 {
+implements HudModule {
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 350.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 112.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting width = (NumberSetting)this.registerSetting(new NumberSetting("Width", 50.0, 30.0, 160.0, 1.0));

@@ -9,7 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -19,7 +19,7 @@ import shit.setting.NumberSetting;
 @Environment(value=EnvType.CLIENT)
 public abstract class AbstractHudModule
 extends Module
-implements Listener3 {
+implements HudModule {
     private final NumberSetting x;
     private final NumberSetting y;
     protected final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));

@@ -39,7 +39,7 @@ extends Module {
     private final ColorSetting trappedColor = (ColorSetting)this.registerSetting(new ColorSetting("TrappedColor", -1426120929));
     private final EnumSetting renderMode = (EnumSetting)this.registerSetting(new EnumSetting("RenderMode", RenderMode.Glow));
     private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
     private final NumberSetting filledAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FilledAlpha", 63.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.filled.getValue(), null, "", false));
     private final NumberSetting outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0, 1.0, () -> (Boolean)this.outline.getValue(), null, "", false));
     private final NumberSetting glowHeight = (NumberSetting)this.registerSetting(new NumberSetting("GlowHeight", 1.0, 0.25, 4.0, 0.25, 0.25, () -> this.renderMode.getValue() == RenderMode.Glow, null, "", false));
@@ -154,7 +154,7 @@ extends Module {
         }
         BlockPos[] blockPosArray = new BlockPos[]{blockPos.down(), blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west()};
         Type type = this.m738(blockPosArray);
-        if (type == Type.None) {
+        if (type == Type.EmptySettingRenderer) {
             return null;
         }
         if (type == Type.Obby) {
@@ -295,7 +295,7 @@ extends Module {
         for (BlockPos blockPos : blockPosArray2) {
             Block block = MC.mc.world.getBlockState(blockPos).getBlock();
             if (!this.m65(block)) {
-                return Type.None;
+                return Type.EmptySettingRenderer;
             }
             if (block == Blocks.BEDROCK) continue;
             bl = false;
@@ -359,14 +359,14 @@ extends Module {
 
     @Environment(value=EnvType.CLIENT)
     static enum Type {
-      None, Obby, Bedrock;
+      EmptySettingRenderer, Obby, Bedrock;
 
       private Type() {}
 
 
 
         private static Type[] getTypeArray9() {
-            return new Type[]{None, Obby, Bedrock};
+            return new Type[]{EmptySettingRenderer, Obby, Bedrock};
         }
     
    }

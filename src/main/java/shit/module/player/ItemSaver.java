@@ -16,7 +16,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.ItemUtil;
 import shit.util.MC;
-import shit.util.Util3;
+import shit.util.InventoryClickHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class ItemSaver
@@ -40,7 +40,7 @@ extends Module {
             return;
         }
         int n = MC.mc.player.getInventory().getSelectedSlot();
-        int n2 = Util3.m189((java.util.function.Predicate<ItemStack>)(itemStack2 -> {
+        int n2 = InventoryClickHelper.m189((java.util.function.Predicate<ItemStack>)(itemStack2 -> {
             boolean bl = false;
             if (itemStack2.isEmpty()) return false;
             if (itemStack2.getItem() != itemStack.getItem()) return false;
@@ -48,13 +48,13 @@ extends Module {
             return true;
         }), false);
         if (n2 != -1) {
-            Util3.m334(n2, n);
+            InventoryClickHelper.m334(n2, n);
             this.helper722.resetTimer();
             return;
         }
-        int n3 = Util3.m189((java.util.function.Predicate<ItemStack>)ItemStack::isEmpty, false);
+        int n3 = InventoryClickHelper.m189((java.util.function.Predicate<ItemStack>)ItemStack::isEmpty, false);
         if (n3 != -1) {
-            Util3.m334(n3, n);
+            InventoryClickHelper.m334(n3, n);
             this.helper722.resetTimer();
         } else if (((Boolean)this.dropIfFull.getValue()).booleanValue()) {
             MC.mc.player.dropSelectedItem(false);

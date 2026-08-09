@@ -21,20 +21,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.math.ColorHelper;
 import org.lwjgl.system.MemoryUtil;
-import shit.api.Listener;
-import shit.data.BufferUtilData;
-import shit.manager.BufferUtilDataManager;
+import shit.api.RenderListener;
+import shit.data.GlyphBufferUploadData;
+import shit.manager.GlyphBufferManager;
 import shit.manager.GpuManager;
-import shit.misc.BufferUtil;
+import shit.misc.MiscGlyphBufferUtil;
 import shit.misc.RenderPipelines;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 import shit.util.Util;
 
 @Environment(value=EnvType.CLIENT)
 public class ShaderRenderer
-implements Listener {
+implements RenderListener {
     private final long time71;
     private final Map map33 = new LinkedHashMap();
     private final Map map28 = new Cache(this, 64, 0.75f, true);
@@ -58,7 +58,7 @@ implements Listener {
 
     @Override
     public void render(Object object, float f, float f2, float f3, Object object2, Object object3) {
-        BufferUtilDataManager bufferUtilDataManager;
+        GlyphBufferManager bufferUtilDataManager;
         Color color;
         float f4;
         float f5;
@@ -73,7 +73,7 @@ implements Listener {
                     f5 = f2;
                     f4 = f3;
                     color = (Color)object2;
-                    bufferUtilDataManager = (BufferUtilDataManager)object3;
+                    bufferUtilDataManager = (GlyphBufferManager)object3;
                     Module[] moduleArray = ShaderRenderer.getModuleArray();
                     n = string.isEmpty() ? 1 : 0;
                     if (moduleArray == null) break block2;
@@ -99,7 +99,7 @@ implements Listener {
         float scale = var4_4;
         Color startColor = (Color)var5_5;
         Color endColor = (Color)var6_6;
-        BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)var7_7;
+        GlyphBufferManager bufferUtilDataManager = (GlyphBufferManager)var7_7;
         if (string.isEmpty()) {
             return;
         }
@@ -118,7 +118,7 @@ implements Listener {
         block2: {
             long l;
             long l2;
-            BufferUtilDataManager bufferUtilDataManager;
+            GlyphBufferManager bufferUtilDataManager;
             String string;
             block3: {
                 Inner inner2;
@@ -126,7 +126,7 @@ implements Listener {
                     Inner inner3;
                     block5: {
                         string = (String)object;
-                        bufferUtilDataManager = (BufferUtilDataManager)object2;
+                        bufferUtilDataManager = (GlyphBufferManager)object2;
                         l2 = bufferUtilDataManager.getLong15();
                         l = bufferUtilDataManager.getLong14();
                         bufferUtilDataManagerData = new BufferUtilDataManagerData(bufferUtilDataManager, string);
@@ -162,15 +162,15 @@ implements Listener {
         boolean bl;
         Module[] moduleArray;
         float f;
-        LinkedHashMap<shit.misc.BufferUtil, BufferUtilHolder> linkedHashMap;
+        LinkedHashMap<shit.misc.MiscGlyphBufferUtil, BufferUtilHolder> linkedHashMap;
         long l3;
         long l4;
         block8: {
             String string = (String)object;
-            BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)object2;
+            GlyphBufferManager bufferUtilDataManager = (GlyphBufferManager)object2;
             l4 = l;
             l3 = l2;
-            linkedHashMap = new LinkedHashMap<shit.misc.BufferUtil, BufferUtilHolder>();
+            linkedHashMap = new LinkedHashMap<shit.misc.MiscGlyphBufferUtil, BufferUtilHolder>();
             float f2 = 0.0f;
             float f3 = 0.0f;
             f = 0.0f;
@@ -180,7 +180,7 @@ implements Listener {
             bl = true;
             n3 = 0;
             for (int i = 0; i < string.length(); ++i) {
-                BufferUtilData bufferUtilData;
+                GlyphBufferUploadData bufferUtilData;
                 block10: {
                     block9: {
                         int n4 = 0;
@@ -250,7 +250,7 @@ implements Listener {
         while (n4 < n3) {
             block5: {
                 BufferUtilHolder2 bufferUtilHolder2 = bufferUtilHolder2Array[n4];
-                BufferUtil bufferUtil = this.batchFor(bufferUtilHolder2.bufferUtil2);
+                BufferHolder bufferUtil = this.batchFor(bufferUtilHolder2.bufferUtil2);
                 long l = bufferUtil.m673(bufferUtilHolder2.count43);
                 float[] fArray = bufferUtilHolder2.values2;
                 for (int i = 0; i < bufferUtilHolder2.count43; ++i) {
@@ -286,7 +286,7 @@ implements Listener {
         while (n6 < n5) {
             block4: {
                 BufferUtilHolder2 bufferUtilHolder2 = bufferUtilHolder2Array[n6];
-                BufferUtil bufferUtil = this.batchFor(bufferUtilHolder2.bufferUtil2);
+                BufferHolder bufferUtil = this.batchFor(bufferUtilHolder2.bufferUtil2);
                 long l = bufferUtil.m673(bufferUtilHolder2.count43);
                 float[] fArray = bufferUtilHolder2.values2;
                 for (int i = 0; i < bufferUtilHolder2.count43; ++i) {
@@ -306,9 +306,9 @@ implements Listener {
         }
     }
 
-    private BufferUtil batchFor(Object object) {
-        shit.misc.BufferUtil bufferUtil2 = (shit.misc.BufferUtil)object;
-        return (BufferUtil)this.map33.computeIfAbsent(bufferUtil2, bufferUtil -> new BufferUtil(new GpuManager(this.time71, 32)));
+    private BufferHolder batchFor(Object object) {
+        shit.misc.MiscGlyphBufferUtil bufferUtil2 = (shit.misc.MiscGlyphBufferUtil)object;
+        return (BufferHolder)this.map33.computeIfAbsent(bufferUtil2, bufferUtil -> new BufferHolder(new GpuManager(this.time71, 32)));
     }
 
     private static void m307(long l, float f, float f2, float f3, Object object, int n, int n2, int n3) {
@@ -328,23 +328,23 @@ implements Listener {
         float f12 = fArray[n4 + 5];
         float f13 = fArray[n4 + 6];
         float f14 = fArray[n4 + 7];
-        shit.util.BufferUtil.m514(l2, f7, f8, f11, f12, n5);
-        shit.util.BufferUtil.m514(l2 + 24L, f7, f10, f11, f14, n5);
-        shit.util.BufferUtil.m514(l2 + 48L, f9, f10, f13, f14, n6);
-        shit.util.BufferUtil.m514(l2 + 72L, f9, f8, f13, f12, n6);
+        shit.util.MemoryWriteHelper.m514(l2, f7, f8, f11, f12, n5);
+        shit.util.MemoryWriteHelper.m514(l2 + 24L, f7, f10, f11, f14, n5);
+        shit.util.MemoryWriteHelper.m514(l2 + 48L, f9, f10, f13, f14, n6);
+        shit.util.MemoryWriteHelper.m514(l2 + 72L, f9, f8, f13, f12, n6);
     }
 
     private float m393(Object object, Object object2) {
         Module[] moduleArray;
         BufferUtilDataManagerData bufferUtilDataManagerData;
-        BufferUtilDataManager bufferUtilDataManager;
+        GlyphBufferManager bufferUtilDataManager;
         String string;
         block8: {
             Float f;
             block7: {
                 Float f2;
                 string = (String)object;
-                bufferUtilDataManager = (BufferUtilDataManager)object2;
+                bufferUtilDataManager = (GlyphBufferManager)object2;
                 bufferUtilDataManagerData = new BufferUtilDataManagerData(bufferUtilDataManager, string);
                 moduleArray = ShaderRenderer.getModuleArray();
                 f = f2 = (Float)this.map2.get(bufferUtilDataManagerData);
@@ -394,9 +394,9 @@ implements Listener {
         if (this.map33.isEmpty()) {
             return;
         }
-        RenderUtil4.m486();
-        com.mojang.blaze3d.textures.GpuTextureView colorView = RenderUtil4.getGpuTextureView6();
-        com.mojang.blaze3d.textures.GpuTextureView depthView = RenderUtil4.getGpuTextureView4();
+        GpuPipelineFactory.m486();
+        com.mojang.blaze3d.textures.GpuTextureView colorView = GpuPipelineFactory.getGpuTextureView6();
+        com.mojang.blaze3d.textures.GpuTextureView depthView = GpuPipelineFactory.getGpuTextureView4();
         if (colorView == null) {
             return;
         }
@@ -407,8 +407,8 @@ implements Listener {
         if (indexCount == 0) {
             return;
         }
-        GpuBufferSlice dynamicTransforms = RenderUtil4.getGpuBufferSlice2();
-        GpuBuffer indexBuffer = RenderUtil4.m577(indexCount);
+        GpuBufferSlice dynamicTransforms = GpuPipelineFactory.getGpuBufferSlice2();
+        GpuBuffer indexBuffer = GpuPipelineFactory.m577(indexCount);
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Lumin TTF Draws", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             renderPass.setPipeline(((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue()).booleanValue() ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18);
             if (this.flag12) {
@@ -416,7 +416,7 @@ implements Listener {
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-            renderPass.setIndexBuffer(indexBuffer, RenderUtil4.getIndexType());
+            renderPass.setIndexBuffer(indexBuffer, GpuPipelineFactory.getIndexType());
             this.setObj34(renderPass);
         }
     }
@@ -435,8 +435,8 @@ implements Listener {
         if (this.count206 == 0) {
             return false;
         }
-        RenderUtil4.m577(this.count206);
-        this.gpuBufferSlice4 = RenderUtil4.getGpuBufferSlice2();
+        GpuPipelineFactory.m577(this.count206);
+        this.gpuBufferSlice4 = GpuPipelineFactory.getGpuBufferSlice2();
         return this.gpuBufferSlice4 != null;
     }
 
@@ -465,8 +465,8 @@ implements Listener {
             }
             n = this.count206;
         }
-        GpuBuffer gpuBuffer = RenderUtil4.m577(n);
-        renderPass.setIndexBuffer(gpuBuffer, RenderUtil4.getIndexType());
+        GpuBuffer gpuBuffer = GpuPipelineFactory.m577(n);
+        renderPass.setIndexBuffer(gpuBuffer, GpuPipelineFactory.getIndexType());
         renderPass.setUniform("DynamicTransforms", this.gpuBufferSlice4);
         this.setObj34(renderPass);
     }
@@ -475,7 +475,7 @@ implements Listener {
         int max = 0;
         Iterator iterator = this.map33.values().iterator();
         while (iterator.hasNext()) {
-            BufferUtil bufferUtil = (BufferUtil)iterator.next();
+            BufferHolder bufferUtil = (BufferHolder)iterator.next();
             if (bufferUtil.time65 == 0L) {
                 continue;
             }
@@ -501,8 +501,8 @@ implements Listener {
         Iterator iterator = this.map33.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry)iterator.next();
-            shit.misc.BufferUtil bufferUtil = (shit.misc.BufferUtil)entry.getKey();
-            BufferUtil bufferUtil2 = (BufferUtil)entry.getValue();
+            shit.misc.MiscGlyphBufferUtil bufferUtil = (shit.misc.MiscGlyphBufferUtil)entry.getKey();
+            BufferHolder bufferUtil2 = (BufferHolder)entry.getValue();
             if (bufferUtil2.time65 == 0L) {
                 continue;
             }
@@ -520,9 +520,9 @@ implements Listener {
             Iterator iterator = this.map33.values().iterator();
             Module[] moduleArray = ShaderRenderer.getModuleArray();
             while (iterator.hasNext()) {
-                BufferUtil bufferUtil = (BufferUtil)iterator.next();
+                BufferHolder bufferUtil = (BufferHolder)iterator.next();
                 if (moduleArray != null) {
-                    BufferUtil bufferUtil2 = bufferUtil;
+                    BufferHolder bufferUtil2 = bufferUtil;
                     if (moduleArray != null) {
                         if (bufferUtil2.time65 > 0L) {
                             GpuManager gpuManager = bufferUtil.gpuManager;
@@ -554,7 +554,7 @@ implements Listener {
             Iterator iterator = this.map33.values().iterator();
             Module[] moduleArray = ShaderRenderer.getModuleArray();
             while (iterator.hasNext()) {
-                BufferUtil bufferUtil = (BufferUtil)iterator.next();
+                BufferHolder bufferUtil = (BufferHolder)iterator.next();
                 bufferUtil.gpuManager.flush();
                 if (moduleArray != null) {
                     if (moduleArray != null) continue;
@@ -570,7 +570,7 @@ implements Listener {
     @Override
     public float m542(float f, Object object) {
         float f2 = f;
-        BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)object;
+        GlyphBufferManager bufferUtilDataManager = (GlyphBufferManager)object;
         return (float)bufferUtilDataManager.bufferUtil2.count69 * 0.35f * f2;
     }
 
@@ -578,7 +578,7 @@ implements Listener {
     public float m858(Object object, float f, Object object2) {
         String string = (String)object;
         float f2 = f;
-        BufferUtilDataManager bufferUtilDataManager = (BufferUtilDataManager)object2;
+        GlyphBufferManager bufferUtilDataManager = (GlyphBufferManager)object2;
         if (string.isEmpty()) {
             return 0.0f;
         }
@@ -591,7 +591,7 @@ implements Listener {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        RenderUtil4.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
         this.flag12 = true;
         this.count48 = colorData.count30();
         this.count90 = colorData.count31();
@@ -622,12 +622,12 @@ implements Listener {
     }
 
     @Environment(value=EnvType.CLIENT)
-    static final class BufferUtil {
+    static final class BufferHolder {
         final GpuManager gpuManager;
         long time65 = 0L;
         long time38 = 0L;
 
-        private BufferUtil(GpuManager gpuManager) {
+        private BufferHolder(GpuManager gpuManager) {
             this.gpuManager = gpuManager;
         }
 
@@ -692,11 +692,11 @@ implements Listener {
 
     @Environment(value=EnvType.CLIENT)
     static final class BufferUtilHolder2 {
-        final shit.misc.BufferUtil bufferUtil2;
+        final shit.misc.MiscGlyphBufferUtil bufferUtil2;
         final float[] values2;
         final int count43;
 
-        private BufferUtilHolder2(shit.misc.BufferUtil bufferUtil, float[] fArray, int n) {
+        private BufferUtilHolder2(shit.misc.MiscGlyphBufferUtil bufferUtil, float[] fArray, int n) {
             this.bufferUtil2 = bufferUtil;
             this.values2 = fArray;
             this.count43 = n;
@@ -705,15 +705,15 @@ implements Listener {
 
     @Environment(value=EnvType.CLIENT)
     static final class BufferUtilDataManagerData  {
-        private final BufferUtilDataManager bufferUtilDataManager2;
+        private final GlyphBufferManager bufferUtilDataManager2;
         private final String text11;
 
-        private BufferUtilDataManagerData(BufferUtilDataManager bufferUtilDataManager, String string) {
+        private BufferUtilDataManagerData(GlyphBufferManager bufferUtilDataManager, String string) {
             this.bufferUtilDataManager2 = bufferUtilDataManager;
             this.text11 = string;
         }
 
-        public BufferUtilDataManager bufferUtilDataManager2() {
+        public GlyphBufferManager bufferUtilDataManager2() {
             return this.bufferUtilDataManager2;
         }
 
@@ -743,11 +743,11 @@ implements Listener {
 
     @Environment(value=EnvType.CLIENT)
     static final class BufferUtilHolder {
-        private final shit.misc.BufferUtil bufferUtil3;
+        private final shit.misc.MiscGlyphBufferUtil bufferUtil3;
         private float[] values4 = new float[160];
         private int count97;
 
-        private BufferUtilHolder(shit.misc.BufferUtil bufferUtil) {
+        private BufferUtilHolder(shit.misc.MiscGlyphBufferUtil bufferUtil) {
             this.bufferUtil3 = bufferUtil;
         }
 
@@ -756,7 +756,7 @@ implements Listener {
             float f8 = f2;
             float f9 = f3;
             float f10 = f4;
-            shit.misc.BufferUtil.Vec4f vec4f = (shit.misc.BufferUtil.Vec4f)object;
+            shit.misc.MiscGlyphBufferUtil.Vec4f vec4f = (shit.misc.MiscGlyphBufferUtil.Vec4f)object;
             float f11 = f5;
             float f12 = f6;
             this.setInt10(this.count97 + 1);

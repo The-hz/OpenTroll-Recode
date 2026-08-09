@@ -11,7 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.setting.BooleanSetting;
@@ -22,7 +22,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Radar
 extends Module
-implements Listener3 {
+implements HudModule {
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 350.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting size = (NumberSetting)this.registerSetting(new NumberSetting("Size", 100.0, 60.0, 240.0, 1.0));

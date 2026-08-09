@@ -32,7 +32,7 @@ import org.lwjgl.system.MemoryUtil;
 import shit.manager.GpuManager;
 import shit.module.Module;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public final class RenderPipelines {
@@ -57,13 +57,13 @@ public final class RenderPipelines {
         return new ImmediateRendererHolder2(immediateRenderer6.m347(objectArray2[0], objectArray2[1]));
     }
 
-    public static RenderUtil m90(Object object) {
+    public static HudRenderHelper m90(Object object) {
         RenderPipeline renderPipeline = (RenderPipeline)object;
         Object[] objectArray = new Object[2];
         objectArray[1] = null;
         objectArray[0] = renderPipeline;
         Object[] objectArray2 = objectArray;
-        return new RenderUtil(immediateRenderer2.m347(objectArray2[0], objectArray2[1]));
+        return new HudRenderHelper(immediateRenderer2.m347(objectArray2[0], objectArray2[1]));
     }
 
     static {
@@ -363,8 +363,8 @@ public final class RenderPipelines {
                     if (this.gpuManager6.isMapped()) {
                         this.gpuManager6.unmap();
                     }
-                    com.mojang.blaze3d.textures.GpuTextureView colorView = RenderUtil4.getGpuTextureView6();
-                    com.mojang.blaze3d.textures.GpuTextureView depthView = RenderUtil4.getGpuTextureView4();
+                    com.mojang.blaze3d.textures.GpuTextureView colorView = GpuPipelineFactory.getGpuTextureView6();
+                    com.mojang.blaze3d.textures.GpuTextureView depthView = GpuPipelineFactory.getGpuTextureView4();
                     if (colorView != null) {
                         com.mojang.blaze3d.buffers.GpuBufferSlice uniforms = RenderSystem.getDynamicUniforms().write(
                                 RenderSystem.getModelViewMatrix(),
@@ -473,11 +473,11 @@ public final class RenderPipelines {
     }
 
     @Environment(value=EnvType.CLIENT)
-    public static final class RenderUtil {
+    public static final class HudRenderHelper {
         private final ImmediateRenderer immediateRenderer3;
         private final Vector3f vector3f2 = new Vector3f();
 
-        private RenderUtil(ImmediateRenderer immediateRenderer) {
+        private HudRenderHelper(ImmediateRenderer immediateRenderer) {
             this.immediateRenderer3 = immediateRenderer;
         }
 

@@ -17,18 +17,18 @@ import net.minecraft.client.input.KeyInput;
 import net.minecraft.text.Text;
 import shit.Client;
 import shit.manager.FontManager2;
-import shit.manager.RenderManager;
+import shit.manager.ModuleListRenderer;
 import shit.module.Category;
 import shit.module.Module;
-import shit.render.Outline;
+import shit.render.I18nHelper;
 import shit.util.ClickGUI;
 import shit.util.FontUtil2;
 
 @Environment(value=EnvType.CLIENT)
 public class ClickGUIScreen
 extends Screen {
-    private static final List<shit.manager.RenderManager> list28 = new java.util.ArrayList<>();
-    private final List<shit.manager.RenderManager> list19 = list28;
+    private static final List<shit.manager.ModuleListRenderer> list28 = new java.util.ArrayList<>();
+    private final List<shit.manager.ModuleListRenderer> list19 = list28;
     private String text2036 = "";
     private long time3;
     private static final String a = null;
@@ -45,7 +45,7 @@ extends Screen {
                 if (category == Category.HUD) {
                     continue;
                 }
-                this.list19.add(new RenderManager(net.minecraft.client.MinecraftClient.getInstance().textRenderer, category, n2, 0));
+                this.list19.add(new ModuleListRenderer(net.minecraft.client.MinecraftClient.getInstance().textRenderer, category, n2, 0));
                 n2 += 80;
             }
         }
@@ -56,10 +56,10 @@ extends Screen {
         if (n4 >>> 24 > 0) {
             drawContext.fill(0, 0, this.width, this.height, n4);
         }
-        for (RenderManager renderManager : this.list19) {
+        for (ModuleListRenderer renderManager : this.list19) {
             renderManager.m213(drawContext, n, n2);
         }
-        for (RenderManager renderManager : this.list19) {
+        for (ModuleListRenderer renderManager : this.list19) {
             renderManager.m147(drawContext, n, n2);
         }
         this.setObj49(drawContext);
@@ -133,7 +133,7 @@ extends Screen {
                                         n = this.list19.size() - 1;
                                         boolean bl4 = false;
                                         if (n < 0) break block4;
-                                        n2 = ((RenderManager)this.list19.get(n)).m865(d, d2, d4) ? '\u0001' : '\u0000';
+                                        n2 = ((ModuleListRenderer)this.list19.get(n)).m865(d, d2, d4) ? '\u0001' : '\u0000';
                                         if (!false) break block5;
                                         if (!false) break block6;
                                         if (n2 == 0) break block7;
@@ -146,7 +146,7 @@ extends Screen {
                             n2 = this.list19.size() - 1;
                         }
                         if ((n = n2) < 0) break block8;
-                        bl = ((RenderManager)this.list19.get(n)).m117(d, d2, d4);
+                        bl = ((ModuleListRenderer)this.list19.get(n)).m117(d, d2, d4);
                         if (!false) break block9;
                         if (!false) break block10;
                         if (!bl) break block11;
@@ -166,7 +166,7 @@ extends Screen {
      */
     public boolean keyPressed(KeyInput keyInput) {
         int n = this.list19.size() - 1;
-        if (n >= 0 && ((RenderManager) this.list19.get(n)).m121(keyInput.key(), keyInput.scancode(), keyInput.modifiers())) {
+        if (n >= 0 && ((ModuleListRenderer) this.list19.get(n)).m121(keyInput.key(), keyInput.scancode(), keyInput.modifiers())) {
             return true;
         }
         return super.keyPressed(keyInput);
@@ -179,7 +179,7 @@ extends Screen {
         }
         char c3 = string.charAt(0);
         for (int i = this.list19.size() - 1; i >= 0; --i) {
-            if (((RenderManager) this.list19.get(i)).m650(c3, charInput.modifiers())) {
+            if (((ModuleListRenderer) this.list19.get(i)).m650(c3, charInput.modifiers())) {
                 return true;
             }
         }
@@ -204,7 +204,7 @@ extends Screen {
 
     private String m669(int n, int n2) {
         for (int n3 = this.list19.size() - 1; n3 >= 0; --n3) {
-            String string = ((RenderManager)this.list19.get(n3)).m329(n, n2);
+            String string = ((ModuleListRenderer)this.list19.get(n3)).m329(n, n2);
             if (string != null && !string.isEmpty()) {
                 return string;
             }
@@ -224,7 +224,7 @@ extends Screen {
         String string3 = this.m406(this.text2036);
         Iterator iterator = this.list19.iterator();
         if (iterator.hasNext()) {
-            RenderManager renderManager = (RenderManager)iterator.next();
+            ModuleListRenderer renderManager = (ModuleListRenderer)iterator.next();
             renderManager.setObj87(string3);
         }
     }

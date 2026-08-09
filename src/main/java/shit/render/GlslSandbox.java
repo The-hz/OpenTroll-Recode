@@ -25,9 +25,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import shit.module.Module;
 import shit.render.Blur;
-import shit.util.BufferUtil2;
+import shit.util.ResourceLoader;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public class GlslSandbox
@@ -55,12 +55,12 @@ implements AutoCloseable {
                 d4 = d;
                 d3 = d2;
                 l2 = l;
-                gpuTextureView = RenderUtil4.getGpuTextureView6();
+                gpuTextureView = GpuPipelineFactory.getGpuTextureView6();
                 Object var16_10 = null;
                 if (gpuTextureView == null) {
                     return;
                 }
-                RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
+                GpuPipelineFactory.AutoCloseableImpl autoCloseableImpl = GpuPipelineFactory.getAutoCloseableImpl2();
                 n2 = autoCloseableImpl != null ? autoCloseableImpl.getInt25() : MC.mc.getFramebuffer().textureWidth;
                 n = autoCloseableImpl != null ? autoCloseableImpl.getInt87() : MC.mc.getFramebuffer().textureHeight;
                 if (n2 <= 0) break block11;
@@ -68,16 +68,16 @@ implements AutoCloseable {
             }
             return;
         }
-        float f = (float)n2 / RenderUtil4.getFloat57();
-        float f2 = (float)n / RenderUtil4.getFloat53();
+        float f = (float)n2 / GpuPipelineFactory.getFloat57();
+        float f2 = (float)n / GpuPipelineFactory.getFloat53();
         float f3 = (float)d4 * f;
         float f4 = (float)d3 * f2;
         float f5 = f3 / (float)n2;
         float f6 = ((float)n - 1.0f - f4) / (float)n;
         float f7 = (float)(Util.getMeasuringTimeMs() - l2) / 1000.0f;
-        GpuBufferSlice gpuBufferSlice = RenderUtil4.m1027("glsl_sandbox_info", "Lumin GLSL Sandbox UBO", count185, 4, new Vec7f(n2, n, f7, f5, f6, f3, f4));
+        GpuBufferSlice gpuBufferSlice = GpuPipelineFactory.m1027("glsl_sandbox_info", "Lumin GLSL Sandbox UBO", count185, 4, new Vec7f(n2, n, f7, f5, f6, f3, f4));
         CommandEncoder commandEncoder = RenderSystem.getDevice().createCommandEncoder();
-        try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin GLSL Sandbox", gpuTextureView, OptionalInt.empty(), RenderUtil4.getGpuTextureView4(), OptionalDouble.empty());){
+        try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin GLSL Sandbox", gpuTextureView, OptionalInt.empty(), GpuPipelineFactory.getGpuTextureView4(), OptionalDouble.empty());){
             renderPass.setPipeline(this.getOrCreatePipeline(identifier));
             RenderSystem.bindDefaultUniforms((RenderPass)renderPass);
             renderPass.setUniform("GlslSandboxInfo", gpuBufferSlice);

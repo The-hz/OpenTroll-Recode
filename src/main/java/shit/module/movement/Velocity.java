@@ -106,7 +106,7 @@ extends Module {
     @Override
     public String getInfo() {
         Object var2_1 = null;
-        if (this.mode.getValue() == Mode.None) {
+        if (this.mode.getValue() == Mode.EmptySettingRenderer) {
             return null;
         }
         String string = ((Mode)((Object)this.mode.getValue())).name();
@@ -129,7 +129,7 @@ extends Module {
 
     public boolean isSet16() {
         Object var2_1 = null;
-        return this.isEnabled() && this.mode.getValue() != Mode.None;
+        return this.isEnabled() && this.mode.getValue() != Mode.EmptySettingRenderer;
     }
 
     /*
@@ -145,7 +145,7 @@ extends Module {
         if (!this.isSet16()) {
             return vec3d;
         }
-        if (this.mode.getValue() == Mode.None) {
+        if (this.mode.getValue() == Mode.EmptySettingRenderer) {
             return vec3d;
         }
         if (MC.mc.player.isInFluid()) {
@@ -328,11 +328,11 @@ extends Module {
         Modify,
         Grim,
         Wall,
-        None;
+        EmptySettingRenderer;
 
 
         private static Mode[] getModeArray14() {
-            return new Mode[]{Modify, Grim, Wall, None};
+            return new Mode[]{Modify, Grim, Wall, EmptySettingRenderer};
         }
     }
 }

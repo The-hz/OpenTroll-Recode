@@ -9,7 +9,7 @@ import java.util.HexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
-import shit.manager.SystemManager;
+import shit.manager.SystemInfoCollector;
 
 @Environment(value=EnvType.CLIENT)
 public final class SystemUtil {
@@ -30,7 +30,7 @@ public final class SystemUtil {
     }
 
     private static String getText59() {
-        return String.join((CharSequence)"|", SystemManager.m849("user.name"), SystemManager.m849("os.name"), SystemManager.m849("os.arch"), SystemManager.m576("COMPUTERNAME"), SystemManager.m576("PROCESSOR_IDENTIFIER"), SystemManager.m576("PROCESSOR_ARCHITECTURE"));
+        return String.join((CharSequence)"|", SystemInfoCollector.m849("user.name"), SystemInfoCollector.m849("os.name"), SystemInfoCollector.m849("os.arch"), SystemInfoCollector.m576("COMPUTERNAME"), SystemInfoCollector.m576("PROCESSOR_IDENTIFIER"), SystemInfoCollector.m576("PROCESSOR_ARCHITECTURE"));
     }
 
     private static String getText36() {

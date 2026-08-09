@@ -66,7 +66,7 @@ import shit.module.Module;
 import shit.module.client.ClientSetting;
 import shit.module.player.AutoArmor;
 import shit.render.EspRenderLayers;
-import shit.render.LineRenderer2;
+import shit.render.StringDecryptor;
 import shit.setting.BooleanSetting;
 import shit.setting.ColorSetting;
 import shit.setting.EnumSetting;
@@ -179,7 +179,7 @@ extends Module {
         this.ease = (EnumSetting)this.registerSetting(new EnumSetting("Ease", EaseMode.CubicInOut));
         this.fadeEase = (EnumSetting)this.registerSetting(new EnumSetting("FadeEase", EaseMode.CubicInOut));
         this.box = (BooleanSetting)this.registerSetting(new BooleanSetting("Box", true));
-        this.outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+        this.outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
         this.through = (BooleanSetting)this.registerSetting(new BooleanSetting("Through", false));
         this.startFill = (ColorSetting)this.registerSetting(new ColorSetting("StartFill", 0x64FFFFFF));
         this.startOutline = (ColorSetting)this.registerSetting(new ColorSetting("StartOutline", -1));
@@ -1334,11 +1334,11 @@ extends Module {
         Up,
         Down,
         Oscillation,
-        None;
+        EmptySettingRenderer;
 
 
         private static AnimationMode[] getAnimationModeArray2() {
-            return new AnimationMode[]{Center, Grow, Up, Down, Oscillation, None};
+            return new AnimationMode[]{Center, Grow, Up, Down, Oscillation, EmptySettingRenderer};
         }
     }
 

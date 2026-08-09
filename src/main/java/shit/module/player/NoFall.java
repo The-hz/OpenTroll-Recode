@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import shit.api.Listener7;
+import shit.api.PlayerMovePacketAccessor;
 import shit.event.Event2;
 import shit.event.EventHandler;
 import shit.event.InputTickEvent;
@@ -80,7 +80,7 @@ extends Module {
         if (this.mode.getValue() == Mode.Packet && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
             playerMoveC2SPacket = (PlayerMoveC2SPacket)packet;
             if (MC.mc.player.fallDistance >= (double)((Double)this.distance.getValue()).floatValue()) {
-                ((Listener7)playerMoveC2SPacket).setOnGround(true);
+                ((PlayerMovePacketAccessor)playerMoveC2SPacket).setOnGround(true);
             }
         }
         if (this.mode.getValue() == Mode.Exploit && (packet = packetEventInner2.getPacket()) instanceof PlayerMoveC2SPacket) {
@@ -90,7 +90,7 @@ extends Module {
                 return;
             }
             if (MC.mc.player.isOnGround() && this.count163 > 0 && !this.flag55) {
-                ((Listener7)playerMoveC2SPacket).setY(MC.mc.player.getY() + 10.0);
+                ((PlayerMovePacketAccessor)playerMoveC2SPacket).setY(MC.mc.player.getY() + 10.0);
                 this.flag55 = true;
             }
         }

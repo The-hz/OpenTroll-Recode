@@ -27,7 +27,7 @@ extends Module {
     private final BooleanSetting entity = (BooleanSetting)this.registerSetting(new BooleanSetting("Entity", true));
     private final BooleanSetting depth = (BooleanSetting)this.registerSetting(new BooleanSetting("Depth", false));
     private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
     private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -1));
     private final NumberSetting filledAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FilledAlpha", 63.0, 0.0, 255.0, 1.0));
     private final NumberSetting outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 200.0, 0.0, 255.0, 1.0));

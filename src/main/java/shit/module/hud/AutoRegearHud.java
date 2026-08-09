@@ -9,7 +9,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.combat.AutoRegear;
@@ -20,7 +20,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class AutoRegearHud
 extends Module
-implements Listener3 {
+implements HudModule {
     public static AutoRegearHud INSTANCE;
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 100.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));

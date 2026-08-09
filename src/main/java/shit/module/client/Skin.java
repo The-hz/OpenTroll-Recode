@@ -16,7 +16,7 @@ import shit.data.ResourceEntry;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
-import shit.render.TextureRenderer2;
+import shit.render.TextureLoader;
 import shit.setting.BooleanSetting;
 import shit.setting.EnumSetting;
 import shit.setting.StringSetting;
@@ -224,7 +224,7 @@ extends Module {
                     }
                     string2 = string;
                 }
-                ResourceEntry resourceEntry = TextureRenderer2.m481(string2);
+                ResourceEntry resourceEntry = TextureLoader.m481(string2);
                 if (nArray == null) break block7;
                 if (resourceEntry == null) break block8;
                 this.resourceEntry = resourceEntry;
@@ -245,7 +245,7 @@ extends Module {
                 block1: {
                     int[] nArray2;
                     block0: {
-                        ResourceEntry resourceEntry = TextureRenderer2.fetchSkin(string);
+                        ResourceEntry resourceEntry = TextureLoader.fetchSkin(string);
                         nArray2 = ClientSetting.getIntArray();
                         if (nArray2 == null) break block0;
                         if (resourceEntry == null) break block1;

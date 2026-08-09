@@ -17,7 +17,7 @@ public class TimerMixin {
     @Redirect(method={"beginRenderTick(J)I"}, at=@At(value="INVOKE", target="Lit/unimi/dsi/fastutil/floats/FloatUnaryOperator;apply(F)F"))
     private float trollhack$modifyMspt(FloatUnaryOperator floatUnaryOperator, float f) {
         float f2 = floatUnaryOperator.apply(f);
-        return f2 / Client.helper4.getFloat62();
+        return f2 / Client.timerScale.getFloat62();
     }
 }
 

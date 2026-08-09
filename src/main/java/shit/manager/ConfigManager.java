@@ -25,7 +25,7 @@ import shit.misc.Logger;
 import shit.module.Module;
 import shit.setting.ColorSetting2;
 import shit.setting.Setting;
-import shit.util.Util4;
+import shit.util.AuthGate;
 
 @Environment(value=EnvType.CLIENT)
 public class ConfigManager {
@@ -150,7 +150,7 @@ public class ConfigManager {
 
     public void m598() {
         Object var2_1 = null;
-        if (!Util4.isSet51()) {
+        if (!AuthGate.isSet51()) {
             return;
         }
         for (Module module : Client.moduleManager.getModules()) {
@@ -207,7 +207,7 @@ public class ConfigManager {
                     }
                 }
             }
-            boolean bl11 = Util4.isSet51();
+            boolean bl11 = AuthGate.isSet51();
             for (Module module : Client.moduleManager.getModules()) {
                 block10: {
                     block11: {
@@ -259,7 +259,7 @@ public class ConfigManager {
             Files.createDirectories(this.path3, new FileAttribute[0]);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("client_prefix:").append(Client.commandManager.getPrefix()).append('\n');
-            boolean bl3 = Util4.isSet51();
+            boolean bl3 = AuthGate.isSet51();
             for (Module module : Client.moduleManager.getModules()) {
                 boolean bl4;
                 block11: {

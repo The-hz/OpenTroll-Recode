@@ -12,7 +12,7 @@ import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.lwjgl.system.MemoryUtil;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public class GpuManager {
@@ -183,7 +183,7 @@ public class GpuManager {
     }
 
     private void m560() {
-        long l = RenderUtil4.getLong4();
+        long l = GpuPipelineFactory.getLong4();
         boolean bl = GpuManager.isSet62();
         GpuManager gpuManager = this;
         if (bl) {

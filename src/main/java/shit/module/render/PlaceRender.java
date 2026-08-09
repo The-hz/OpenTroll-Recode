@@ -23,7 +23,7 @@ import shit.setting.ColorSetting;
 import shit.setting.EnumSetting;
 import shit.type.EaseMode;
 import shit.util.MC;
-import shit.util.RenderUtil3;
+import shit.util.VanillaTextHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class PlaceRender
@@ -149,11 +149,11 @@ extends Module {
             Box box = new Box(this.blockPos19).expand(-d3 * 0.5);
             if (((Boolean)this.placeRender.fillDraw.getValue()).booleanValue()) {
                 n = (Integer)this.placeRender.fill.getValue();
-                EspRenderLayers.drawBoxFilled(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
+                EspRenderLayers.drawBoxFilled(matrix4f, box, VanillaTextHelper.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
             if (((Boolean)this.placeRender.boxDraw.getValue()).booleanValue()) {
                 n = (Integer)this.placeRender.box.getValue();
-                EspRenderLayers.drawBoxOutline(matrix4f, box, RenderUtil3.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
+                EspRenderLayers.drawBoxOutline(matrix4f, box, VanillaTextHelper.m517(n, (int)((double)(n >>> 24 & 0xFF) * d2)), (Boolean)this.placeRender.through.getValue());
             }
             return false;
         }

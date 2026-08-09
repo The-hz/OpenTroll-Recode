@@ -9,7 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.PlayerListEntry;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.hud.AbstractHudModule;
@@ -21,7 +21,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class Ping
 extends Module
-implements Listener3 {
+implements HudModule {
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 42.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));

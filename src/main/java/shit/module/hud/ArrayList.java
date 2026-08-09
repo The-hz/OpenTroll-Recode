@@ -18,7 +18,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.hud.AbstractHudModule;
@@ -31,7 +31,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class ArrayList
 extends Module
-implements Listener3 {
+implements HudModule {
     private final EnumSetting side;
     private final EnumSetting mode;
     private final EnumSetting sortingMode;

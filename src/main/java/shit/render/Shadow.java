@@ -15,18 +15,18 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.math.ColorHelper;
 import org.lwjgl.system.MemoryUtil;
-import shit.api.Listener2;
+import shit.api.FrameListener;
 import shit.manager.GpuManager;
-import shit.manager.Manager4;
+import shit.manager.FrameListenerManager;
 import shit.misc.RenderPipelines;
 import shit.module.Module;
 import shit.render.TextureRenderer;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 import shit.util.Util;
 
 @Environment(value=EnvType.CLIENT)
 public class Shadow
-implements Listener2 {
+implements FrameListener {
     private final GpuManager gpuManager7 = new GpuManager(16384L, 32);
     private boolean flag89 = false;
     private int count210;
@@ -35,13 +35,13 @@ implements Listener2 {
     private int count43;
     private long time37 = 0L;
     private int count94 = 0;
-    private RenderUtil4.Data data;
+    private GpuPipelineFactory.Data data;
 
     private Shadow() {
     }
 
     public static Shadow getShadow2() {
-        return (Shadow)Manager4.manager4.addListener(new Shadow());
+        return (Shadow)FrameListenerManager.manager4.addListener(new Shadow());
     }
 
     public void m536(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, Object object) {
@@ -111,7 +111,7 @@ implements Listener2 {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        RenderUtil4.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
         this.flag89 = true;
         this.count210 = colorData.count30();
         this.count168 = colorData.count31();
@@ -131,7 +131,7 @@ implements Listener2 {
         if (this.gpuManager7.isMapped()) {
             this.gpuManager7.unmap();
         }
-        RenderUtil4.Data data = RenderUtil4.m1023(this.count94);
+        GpuPipelineFactory.Data data = GpuPipelineFactory.m1023(this.count94);
         if (data == null) {
             return;
         }
@@ -166,7 +166,7 @@ implements Listener2 {
         if (this.flag89 && !Util.isPositiveArea(this.count169, this.count43)) {
             return false;
         }
-        this.data = RenderUtil4.m369(this.count94, false);
+        this.data = GpuPipelineFactory.m369(this.count94, false);
         if (this.data == null) {
             return false;
         }
@@ -195,14 +195,14 @@ implements Listener2 {
         int n4;
         RenderPass renderPass;
         block3: {
-            RenderUtil4.Data data;
+            GpuPipelineFactory.Data data;
             RenderPass renderPass2;
             block4: {
                 block2: {
                     boolean bl;
                     block1: {
                         renderPass2 = (RenderPass)object;
-                        data = (RenderUtil4.Data)object2;
+                        data = (GpuPipelineFactory.Data)object2;
                         String[] stringArray = TextureRenderer.getTextArray3();
                         bl = this.flag89;
                         if (stringArray == null) break block1;
@@ -223,7 +223,7 @@ implements Listener2 {
                 renderPass2.disableScissor();
             }
             renderPass2.setVertexBuffer(0, this.gpuManager7.getGpuBuffer());
-            renderPass2.setIndexBuffer(RenderUtil4.m577(data.getInt()), RenderUtil4.getIndexType());
+            renderPass2.setIndexBuffer(GpuPipelineFactory.m577(data.getInt()), GpuPipelineFactory.getIndexType());
             renderPass = renderPass2;
             n4 = 0;
             n3 = 0;
@@ -258,7 +258,7 @@ implements Listener2 {
     @Override
     public void close() {
         this.gpuManager7.flush();
-        Manager4.manager4.removeListener(this);
+        FrameListenerManager.manager4.removeListener(this);
     }
 
     private static /* synthetic */ String cfrlam$draw$0() {

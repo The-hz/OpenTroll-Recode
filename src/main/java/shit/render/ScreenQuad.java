@@ -22,9 +22,9 @@ import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gl.SimpleFramebuffer;
 import net.minecraft.client.gl.UniformType;
 import net.minecraft.util.Identifier;
-import shit.util.BufferUtil2;
+import shit.util.ResourceLoader;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public class ScreenQuad {
@@ -35,7 +35,7 @@ public class ScreenQuad {
     private void m625() {
         Object var2_1 = null;
         if (this.renderPipeline24 == null) {
-            this.renderPipeline24 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(BufferUtil2.m52("pipeline/filter")).withVertexShader(Identifier.ofVanilla((String)"core/screenquad")).withFragmentShader(BufferUtil2.m52("filter")).withUniform("FilterColor", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withCull(false).build();
+            this.renderPipeline24 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(ResourceLoader.m52("pipeline/filter")).withVertexShader(Identifier.ofVanilla((String)"core/screenquad")).withFragmentShader(ResourceLoader.m52("filter")).withUniform("FilterColor", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withCull(false).build();
         }
     }
 
@@ -91,7 +91,7 @@ public class ScreenQuad {
         }
         CommandEncoder commandEncoder = RenderSystem.getDevice().createCommandEncoder();
         commandEncoder.copyTextureToTexture(framebuffer.getColorAttachment(), this.field36.getColorAttachment(), 0, 0, 0, 0, 0, framebuffer.textureWidth, framebuffer.textureHeight);
-        GpuBufferSlice gpuBufferSlice = RenderUtil4.m1027("filter_color", "Lumin Filter UBO", count68, 4, new Vec4f(color));
+        GpuBufferSlice gpuBufferSlice = GpuPipelineFactory.m1027("filter_color", "Lumin Filter UBO", count68, 4, new Vec4f(color));
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin Filter", framebuffer.getColorAttachmentView(), OptionalInt.empty());){
             renderPass.setPipeline(this.renderPipeline24);
             RenderSystem.bindDefaultUniforms((RenderPass)renderPass);

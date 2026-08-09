@@ -10,7 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.manager.FontManager2;
 import shit.module.Category;
 import shit.module.Module;
@@ -21,7 +21,7 @@ import shit.setting.NumberSetting;
 @Environment(value=EnvType.CLIENT)
 public class IrcChatHUD
 extends Module
-implements Listener3 {
+implements HudModule {
     public static IrcChatHUD INSTANCE;
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 10.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 200.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));

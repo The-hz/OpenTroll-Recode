@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.manager.FontManager2;
 import shit.module.Category;
 import shit.module.Module;
@@ -19,7 +19,7 @@ import shit.util.MC;
 @Environment(value=EnvType.CLIENT)
 public class ArmorHud
 extends Module
-implements Listener3 {
+implements HudModule {
     private final NumberSetting x = (NumberSetting)this.registerSetting(new NumberSetting("X", 6.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     private final NumberSetting y = (NumberSetting)this.registerSetting(new NumberSetting("Y", 54.0, 0.0, 5000.0, 1.0, 1.0, () -> false, null, "", false));
     public final BooleanSetting shadow = (BooleanSetting)this.registerSetting(new BooleanSetting("Shadow", true));

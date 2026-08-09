@@ -16,7 +16,7 @@ import java.util.HexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import shit.manager.SystemManager;
+import shit.manager.SystemInfoCollector;
 import shit.util.ApiEndpoints;
 import shit.util.AuthUtil;
 
@@ -346,12 +346,12 @@ public final class HttpUtil {
     private static String getText15() {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            HttpUtil.m455(messageDigest, SystemManager.m849("user.name"));
-            HttpUtil.m455(messageDigest, SystemManager.m849("os.name"));
-            HttpUtil.m455(messageDigest, SystemManager.m849("os.arch"));
-            HttpUtil.m455(messageDigest, SystemManager.m576("COMPUTERNAME"));
-            HttpUtil.m455(messageDigest, SystemManager.m576("PROCESSOR_IDENTIFIER"));
-            HttpUtil.m455(messageDigest, SystemManager.m576("PROCESSOR_ARCHITECTURE"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m849("user.name"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m849("os.name"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m849("os.arch"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m576("COMPUTERNAME"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m576("PROCESSOR_IDENTIFIER"));
+            HttpUtil.m455(messageDigest, SystemInfoCollector.m576("PROCESSOR_ARCHITECTURE"));
             return HexFormat.of().formatHex(messageDigest.digest());
         }
         catch (Throwable throwable) {

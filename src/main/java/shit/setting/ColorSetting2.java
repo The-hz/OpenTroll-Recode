@@ -13,7 +13,7 @@ import java.util.function.BooleanSupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.lwjgl.glfw.GLFW;
-import shit.render.Outline;
+import shit.render.I18nHelper;
 import shit.setting.Setting;
 
 @Environment(value=EnvType.CLIENT)
@@ -79,7 +79,7 @@ extends Setting {
                         n = this.isBound() ? 1 : 0;
                         if (string2 == null) {
                             if (n == 0) {
-                                return Outline.m14("None");
+                                return I18nHelper.m14("EmptySettingRenderer");
                             }
                             n = ColorSetting2.isEncodedKey(n2) ? 1 : 0;
                         }

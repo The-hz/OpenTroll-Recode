@@ -12,11 +12,11 @@ import shit.manager.FontManager;
 import shit.manager.Manager;
 import shit.manager.ModuleManager;
 import shit.misc.Helper;
-import shit.misc.Helper4;
+import shit.misc.TimerScaleManager;
 import shit.misc.Logger;
 import shit.misc.Logger2;
 import shit.misc.MathUtil;
-import shit.misc.RenderUtil3;
+import shit.misc.ItemSwitcher;
 import shit.module.Module;
 
 @Environment(value=EnvType.CLIENT)
@@ -29,8 +29,8 @@ public final class Client {
     public static final FontManager fontManager = new FontManager();
     public static final Helper helper = new Helper();
     public static final MathUtil mathUtil = new MathUtil();
-    public static final RenderUtil3 itemSwitcher = new RenderUtil3();
-    public static final Helper4 helper4 = new Helper4();
+    public static final ItemSwitcher itemSwitcher = new ItemSwitcher();
+    public static final TimerScaleManager timerScale = new TimerScaleManager();
     private static String[] texts2;
 
     private Client() {

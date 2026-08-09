@@ -16,7 +16,7 @@ import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import shit.Client;
-import shit.api.Listener7;
+import shit.api.PlayerMovePacketAccessor;
 import shit.event.Event2;
 import shit.event.EventHandler;
 import shit.event.PacketEvent;
@@ -135,7 +135,7 @@ extends Module {
         }
         if (this.mode.getValue() == Mode.Ground) {
             if (((Boolean)this.setNoGround.getValue()).booleanValue() && packetEventInner2.getPacket() instanceof PlayerMoveC2SPacket) {
-                ((Listener7)packetEventInner2.getPacket()).setOnGround(false);
+                ((PlayerMovePacketAccessor)packetEventInner2.getPacket()).setOnGround(false);
             }
             return;
         }

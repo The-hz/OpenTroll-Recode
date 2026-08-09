@@ -20,7 +20,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.Util3;
+import shit.util.InventoryClickHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class ChestStealer
@@ -48,7 +48,7 @@ extends Module {
 
     @EventHandler
     private void setEvent2Inner27(Event2.Event2Inner2 event2Inner2) {
-        if (Module.isNotInGame() || !Util3.isSet48()) {
+        if (Module.isNotInGame() || !InventoryClickHelper.isSet48()) {
             return;
         }
         if (this.mode.getValue() == Mode.ALWAYS) {
@@ -57,7 +57,7 @@ extends Module {
         if (!this.flag83 || !this.helper725.hasPassedMs((Double)this.delay.getValue())) {
             return;
         }
-        int n = Util3.getInt20();
+        int n = InventoryClickHelper.getInt20();
         for (int i = 0; i < n; ++i) {
             BlockItem blockItem;
             Item item;

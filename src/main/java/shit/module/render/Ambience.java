@@ -20,7 +20,7 @@ import shit.setting.ColorSetting;
 import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.RenderUtil3;
+import shit.util.VanillaTextHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class Ambience
@@ -125,7 +125,7 @@ extends Module {
         if (!((Boolean)this.filterDraw.getValue()).booleanValue()) {
             return;
         }
-        RenderUtil3.m526(render2DEvent.getDrawContext(), 0, 0, MC.mc.getWindow().getScaledWidth(), MC.mc.getWindow().getScaledHeight(), (Integer)this.filter.getValue());
+        VanillaTextHelper.m526(render2DEvent.getDrawContext(), 0, 0, MC.mc.getWindow().getScaledWidth(), MC.mc.getWindow().getScaledHeight(), (Integer)this.filter.getValue());
     }
 
     private void m488() {

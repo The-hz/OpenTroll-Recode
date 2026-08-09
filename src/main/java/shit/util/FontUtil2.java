@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import shit.util.RenderUtil3;
+import shit.util.VanillaTextHelper;
 
 @Environment(value=EnvType.CLIENT)
 public final class FontUtil2 {
@@ -23,7 +23,7 @@ public final class FontUtil2 {
         int n4 = n;
         int n5 = n2;
         int n6 = n3;
-        RenderUtil3.m454(textRenderer, drawContext, string, n4, n5, n6, false);
+        VanillaTextHelper.m454(textRenderer, drawContext, string, n4, n5, n6, false);
     }
 
     public static void setFlag7(boolean bl) {

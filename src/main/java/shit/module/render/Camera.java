@@ -23,7 +23,7 @@ import shit.setting.BooleanSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
 import shit.util.Pos;
-import shit.util.RenderUtil2;
+import shit.util.GlBufferHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class Camera
@@ -149,9 +149,9 @@ extends Module {
             Pos.m437(this.blur23.count170, 1);
             this.shaderProgram6.m241("uPrevious", 1);
             this.shaderProgram6.m82("uBlendFactor", f);
-            RenderUtil2.m504();
-            RenderUtil2.m149();
-            RenderUtil2.m582();
+            GlBufferHelper.m504();
+            GlBufferHelper.m149();
+            GlBufferHelper.m582();
             GlStateManager._glUseProgram((int)0);
             this.blur23.m554();
             this.blur23.m78();
@@ -160,9 +160,9 @@ extends Module {
             this.shaderProgram7.m1045();
             Pos.m437(n, 0);
             this.shaderProgram7.m241("uTexture", 0);
-            RenderUtil2.m504();
-            RenderUtil2.m149();
-            RenderUtil2.m582();
+            GlBufferHelper.m504();
+            GlBufferHelper.m149();
+            GlBufferHelper.m582();
             GlStateManager._glUseProgram((int)0);
             GlStateManager._glBindFramebuffer((int)36160, (int)n4);
             GlStateManager._viewport((int)0, (int)0, (int)n3, (int)n2);

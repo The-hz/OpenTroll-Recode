@@ -21,10 +21,10 @@ import net.minecraft.text.Style;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
 import org.jspecify.annotations.Nullable;
-import shit.api.SamplerCallback;
-import shit.data.BufferUtilData;
-import shit.manager.BufferUtilDataManager;
-import shit.misc.BufferUtil;
+import shit.api.SamplerSupplier;
+import shit.data.GlyphBufferUploadData;
+import shit.manager.GlyphBufferManager;
+import shit.misc.MiscGlyphBufferUtil;
 import shit.misc.RenderPipelines;
 import shit.module.Module;
 import shit.module.client.ClientSetting;
@@ -36,12 +36,12 @@ implements BakedGlyph {
     private static final Map map42 = new java.util.LinkedHashMap<>();
     private static final Map map15 = new java.util.LinkedHashMap<>();
     private final int count215;
-    private final BufferUtilDataManager bufferUtilDataManager7;
-    private final BufferUtilData bufferUtilData;
+    private final GlyphBufferManager bufferUtilDataManager7;
+    private final GlyphBufferUploadData bufferUtilData;
     private final GlyphMetrics field35;
     private static boolean flag158;
 
-    private GlyphRenderer(int n, BufferUtilDataManager bufferUtilDataManager, BufferUtilData bufferUtilData) {
+    private GlyphRenderer(int n, GlyphBufferManager bufferUtilDataManager, GlyphBufferUploadData bufferUtilData) {
         this.count215 = n;
         this.bufferUtilDataManager7 = bufferUtilDataManager;
         this.bufferUtilData = bufferUtilData;
@@ -67,7 +67,7 @@ implements BakedGlyph {
         Map map = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? map42 : map15;
         RenderPipeline renderPipeline = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18;
         String string = (Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue() != false ? "lumin_ttf_text_aa" : "lumin_ttf_text_no_aa";
-        return (RenderLayer)map.computeIfAbsent(this.bufferUtilData.bufferUtil(), bufferUtil -> RenderLayer.of((String)string, (RenderSetup)RenderSetup.builder((RenderPipeline)renderPipeline).texture("Sampler0", ((shit.misc.BufferUtil)bufferUtil).getObj18(), () -> ((shit.misc.BufferUtil)bufferUtil).getTexture().getSampler()).expectedBufferSize(786432).build()));
+        return (RenderLayer)map.computeIfAbsent(this.bufferUtilData.bufferUtil(), bufferUtil -> RenderLayer.of((String)string, (RenderSetup)RenderSetup.builder((RenderPipeline)renderPipeline).texture("Sampler0", ((shit.misc.MiscGlyphBufferUtil)bufferUtil).getObj18(), () -> ((shit.misc.MiscGlyphBufferUtil)bufferUtil).getTexture().getSampler()).expectedBufferSize(786432).build()));
     }
 
     private float m106(float f) {
@@ -167,7 +167,7 @@ implements BakedGlyph {
         float f11 = GlyphRenderer.m253(bl2);
         float f12 = glyphRendererData.field6.isItalic() ? 1.0f - 0.25f * (f9 - glyphRendererData.value67) : 0.0f;
         float f13 = glyphRendererData.field6.isItalic() ? 1.0f - 0.25f * (f10 - glyphRendererData.value67) : 0.0f;
-        BufferUtil.Vec4f vec4f = this.bufferUtilData.vec4f2();
+        MiscGlyphBufferUtil.Vec4f vec4f = this.bufferUtilData.vec4f2();
         vertexConsumer.vertex(matrix4fc, f7 + f12 - f11, f9 - f11, f6).texture(vec4f.getFloat23(), vec4f.value46()).color(n2);
         vertexConsumer.vertex(matrix4fc, f7 + f13 - f11, f10 + f11, f6).texture(vec4f.getFloat23(), vec4f.getFloat30()).color(n2);
         vertexConsumer.vertex(matrix4fc, f8 + f13 + f11, f10 + f11, f6).texture(vec4f.value47(), vec4f.getFloat30()).color(n2);
@@ -211,7 +211,7 @@ implements BakedGlyph {
     @Environment(value=EnvType.CLIENT)
     static final class GlyphRendererData 
     implements TextDrawable.DrawnGlyphRect,
-    SamplerCallback {
+    SamplerSupplier {
         private final GlyphRenderer glyphRenderer;
         private final float value66;
         private final float value67;
@@ -276,7 +276,7 @@ implements BakedGlyph {
 
         public GpuTextureView textureView() {
             boolean bl = GlyphRenderer.isSet134();
-            BufferUtilData bufferUtilData = this.glyphRenderer.bufferUtilData;
+            GlyphBufferUploadData bufferUtilData = this.glyphRenderer.bufferUtilData;
             if (bl) {
                 if (bufferUtilData == null) {
                     throw new IllegalStateException("Whitespace glyphs do not have textures");
@@ -289,7 +289,7 @@ implements BakedGlyph {
         @Override
         public GpuSampler getObj16() {
             boolean bl = GlyphRenderer.isSet134();
-            BufferUtilData bufferUtilData = this.glyphRenderer.bufferUtilData;
+            GlyphBufferUploadData bufferUtilData = this.glyphRenderer.bufferUtilData;
             if (bl) {
                 if (bufferUtilData == null) {
                     throw new IllegalStateException("Whitespace glyphs do not have samplers");

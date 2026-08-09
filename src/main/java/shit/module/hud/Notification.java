@@ -8,24 +8,24 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import shit.Client;
-import shit.api.Listener3;
+import shit.api.HudModule;
 import shit.event.EventHandler;
 import shit.event.ModuleToggleEvent;
 import shit.module.Category;
 import shit.module.Module;
 import shit.module.hud.AbstractHudModule;
-import shit.render.Outline;
-import shit.render.Passthrough;
+import shit.render.I18nHelper;
+import shit.render.ScreenCopyRenderer;
 import shit.setting.BooleanSetting;
 import shit.setting.ColorSetting;
 import shit.setting.NumberSetting;
 import shit.util.MC;
-import shit.util.RenderUtil3;
+import shit.util.VanillaTextHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class Notification
 extends Module
-implements Listener3 {
+implements HudModule {
     private static Notification INSTANCE;
     private final BooleanSetting moduleToggle = (BooleanSetting)this.registerSetting(new BooleanSetting("ModuleToggle", true));
     private final NumberSetting displayTime = (NumberSetting)this.registerSetting(new NumberSetting("DisplayTime", 1000.0, 500.0, 5000.0, 100.0));
@@ -64,8 +64,8 @@ implements Listener3 {
         if (!moduleToggleEvent.getModule().isDrawn()) {
             return;
         }
-        String string = Outline.m168((Object)moduleToggleEvent.getModule().getCategory());
-        String string2 = Outline.m14(moduleToggleEvent.isSet168() ? "Enabled" : "Disabled");
+        String string = I18nHelper.m168((Object)moduleToggleEvent.getModule().getCategory());
+        String string2 = I18nHelper.m14(moduleToggleEvent.isSet168() ? "Enabled" : "Disabled");
         String string3 = moduleToggleEvent.getModule().getDisplayName() + " " + string2;
         Type type = moduleToggleEvent.isSet168() ? Type.ENABLE : Type.DISABLE;
         this.copyOnWriteArrayList3.add(new Inner(string, string3, type, this.getLong13()));
@@ -161,19 +161,19 @@ implements Listener3 {
                 n3 = Math.round(f7);
                 n2 = this.m646((Object)type);
                 if (f6 <= 0.01f) {
-                    RenderUtil3.m526(drawContext, n4, n3, n8, n6, n2);
+                    VanillaTextHelper.m526(drawContext, n4, n3, n8, n6, n2);
                     return;
                 }
                 int n11 = (Integer)this.backgroundColor.getValue();
                 int n12 = (int)((float)(n11 >>> 24 & 0xFF) * f6);
                 n7 = n12 << 24 | n11 & 0xFFFFFF;
                 if (!((Boolean)this.blur.getValue()).booleanValue()) break block4;
-                Passthrough.m990(drawContext, 6, n4, n3, n8, n6, n7, false);
+                ScreenCopyRenderer.m990(drawContext, 6, n4, n3, n8, n6, n7, false);
                 if (true) break block5;
             }
-            RenderUtil3.m526(drawContext, n4, n3, n8, n6, n7);
+            VanillaTextHelper.m526(drawContext, n4, n3, n8, n6, n7);
         }
-        RenderUtil3.m526(drawContext, n4, n3, n5, n6, n2);
+        VanillaTextHelper.m526(drawContext, n4, n3, n5, n6, n2);
         int n13 = n4 + n5 + 6;
         int n14 = n3 + 4;
         int n15 = n3 + 4 + Client.fontManager.renderer2().getFontHeight() + 2;
@@ -183,8 +183,8 @@ implements Listener3 {
         int n19 = Math.round((float)(n17 >>> 24 & 0xFF) * f6);
         n16 = n18 << 24 | n16 & 0xFFFFFF;
         n17 = n19 << 24 | n17 & 0xFFFFFF;
-        RenderUtil3.m454(MC.mc.textRenderer, drawContext, string2, n13, n14, n16, true);
-        RenderUtil3.m454(MC.mc.textRenderer, drawContext, string, n13, n15, n17, false);
+        VanillaTextHelper.m454(MC.mc.textRenderer, drawContext, string2, n13, n14, n16, true);
+        VanillaTextHelper.m454(MC.mc.textRenderer, drawContext, string, n13, n15, n17, false);
     }
 
     private int m646(Object object) {

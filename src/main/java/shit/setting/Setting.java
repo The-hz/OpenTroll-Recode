@@ -9,7 +9,7 @@ import java.util.function.BooleanSupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import shit.module.Module;
-import shit.render.Outline;
+import shit.render.I18nHelper;
 
 @Environment(value=EnvType.CLIENT)
 public abstract class Setting {
@@ -41,7 +41,7 @@ public abstract class Setting {
     }
 
     public String getDisplayName() {
-        return Outline.m14(this.settingName);
+        return I18nHelper.m14(this.settingName);
     }
 
     public Object getDefaultValue() {

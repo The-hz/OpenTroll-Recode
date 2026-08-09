@@ -27,7 +27,7 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.jspecify.annotations.NonNull;
-import shit.util.BufferUtil2;
+import shit.util.ResourceLoader;
 import shit.util.MC;
 import shit.util.RenderPipelines;
 
@@ -44,7 +44,7 @@ implements MC {
     private static Color color26;
     private static float value125;
     private static RenderPipelines.ImmediateRendererHolder2 immediateRendererHolder2;
-    private static RenderPipelines.RenderUtil renderUtil;
+    private static RenderPipelines.HudRenderHelper renderUtil;
     private static Matrix4f matrix4f4;
     private static MatrixStack.Entry field54;
     private static double value160;

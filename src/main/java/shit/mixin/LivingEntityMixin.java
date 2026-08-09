@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shit.Client;
-import shit.api.Listener4;
+import shit.api.DamagePredicate;
 import shit.module.movement.InMove;
 import shit.module.movement.Velocity;
 import shit.module.player.AntiEffects;
@@ -29,7 +29,7 @@ import shit.module.player.AntiEffects;
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={LivingEntity.class})
 public abstract class LivingEntityMixin
-implements Listener4 {
+implements DamagePredicate {
     @Inject(method={"hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$onHasEffect(RegistryEntry registryEntry, CallbackInfoReturnable callbackInfoReturnable) {
         AntiEffects antiEffects = AntiEffects.INSTANCE;

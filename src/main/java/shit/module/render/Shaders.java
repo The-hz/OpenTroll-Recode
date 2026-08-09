@@ -39,8 +39,8 @@ import shit.event.InterceptEntityOutlineEvent;
 import shit.mixin.LevelRendererAccessor;
 import shit.module.Category;
 import shit.module.Module;
-import shit.render.Passthrough2;
-import shit.render.ShaderEffect;
+import shit.render.ScreenCopyRenderer2;
+import shit.render.ShaderPostEffect;
 import shit.setting.BooleanSetting;
 import shit.setting.ColorSetting;
 import shit.setting.EnumSetting;
@@ -82,7 +82,7 @@ extends Module {
     public final ColorSetting smokeOutlineColor2;
     public final ColorSetting fillColor2;
     public final ColorSetting fillColor3;
-    private final Passthrough2 passthrough2;
+    private final ScreenCopyRenderer2 passthrough2;
     public volatile boolean flag126;
 
     /*
@@ -129,7 +129,7 @@ extends Module {
         this.smokeOutlineColor2 = (ColorSetting)this.registerSetting(new ColorSetting("SmokeOutlineColor2", -12303292));
         this.fillColor2 = (ColorSetting)this.registerSetting(new ColorSetting("FillColor2", -3355444));
         this.fillColor3 = (ColorSetting)this.registerSetting(new ColorSetting("FillColor3", -10066330));
-        this.passthrough2 = new Passthrough2();
+        this.passthrough2 = new ScreenCopyRenderer2();
         this.flag126 = false;
     }
 
@@ -200,14 +200,14 @@ extends Module {
         FillMode fillMode = (FillMode)((Object)this.fillMode.getValue());
         if (Shaders.m473((Object)fillMode)) {
             object = switch (fillMode.ordinal()) {
-                case 5 -> ShaderEffect.Type.Smoke;
-                case 6 -> ShaderEffect.Type.Snow;
-                case 7 -> ShaderEffect.Type.Fade;
-                default -> ShaderEffect.Type.Default;
+                case 5 -> ShaderPostEffect.Type.Smoke;
+                case 6 -> ShaderPostEffect.Type.Snow;
+                case 7 -> ShaderPostEffect.Type.Fade;
+                default -> ShaderPostEffect.Type.Default;
             };
-            ShaderEffect.Data data = new ShaderEffect.Data(this.quality.getFloat(), this.width.getFloat(), (Boolean)this.smokeGlow.getValue(), this.fillAlpha.getFloat() * 255.0f, this.secondaryAlpha.getFloat() * 255.0f, this.gradientFactor.getFloat(), this.noiseScale.getFloat(), this.octaves.getFloat());
-            ShaderEffect.Data4 data4 = new ShaderEffect.Data4(Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor1.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor2.getValue()), Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.fillColor2.getValue()), Shaders.m1008((Integer)this.fillColor3.getValue()));
-            ShaderEffect.shaderEffect.m987(framebuffer, object, data, data4);
+            ShaderPostEffect.Data data = new ShaderPostEffect.Data(this.quality.getFloat(), this.width.getFloat(), (Boolean)this.smokeGlow.getValue(), this.fillAlpha.getFloat() * 255.0f, this.secondaryAlpha.getFloat() * 255.0f, this.gradientFactor.getFloat(), this.noiseScale.getFloat(), this.octaves.getFloat());
+            ShaderPostEffect.Data4 data4 = new ShaderPostEffect.Data4(Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor1.getValue()), Shaders.m1008((Integer)this.smokeOutlineColor2.getValue()), Shaders.m1008((Integer)this.color.getValue()), Shaders.m1008((Integer)this.fillColor2.getValue()), Shaders.m1008((Integer)this.fillColor3.getValue()));
+            ShaderPostEffect.shaderEffect.m987(framebuffer, object, data, data4);
         } else {
             ShadersUtil shadersUtil = new ShadersUtil();
             shadersUtil.value204 = System.currentTimeMillis() - time77;

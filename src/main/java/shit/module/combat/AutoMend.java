@@ -22,7 +22,7 @@ import shit.setting.EnumSetting;
 import shit.setting.NumberSetting;
 import shit.util.ItemUtil;
 import shit.util.MC;
-import shit.util.Util3;
+import shit.util.InventoryClickHelper;
 
 @Environment(value=EnvType.CLIENT)
 public class AutoMend
@@ -126,7 +126,7 @@ extends Module {
     private boolean shouldThrow() {
         EquipmentSlot[] equipmentSlotArray;
         Object var2_1 = null;
-        boolean bl = Util3.m189((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), true) != -1;
+        boolean bl = InventoryClickHelper.m189((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), true) != -1;
         if (!bl) {
             return false;
         }

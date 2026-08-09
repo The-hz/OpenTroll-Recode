@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import shit.manager.ShaderProgramManager;
+import shit.manager.ShaderProgramHolder;
 
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={Screen.class})
@@ -24,7 +24,7 @@ public class ScreenMainMenuBackgroundMixin {
                 && !((Object) this instanceof net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen)) {
             return;
         }
-        if (ShaderProgramManager.m252(drawContext)) {
+        if (ShaderProgramHolder.m252(drawContext)) {
             callbackInfo.cancel();
         }
     }

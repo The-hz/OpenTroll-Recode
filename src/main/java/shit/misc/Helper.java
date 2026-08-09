@@ -5,10 +5,10 @@ package shit.misc;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.manager.RenderLevelEventManager;
-import shit.manager.RenderLevelEventManager2;
-import shit.render.Passthrough;
-import shit.util.RenderUtil4;
+import shit.manager.WorldRenderDispatcher;
+import shit.manager.WorldRenderDispatcher2;
+import shit.render.ScreenCopyRenderer;
+import shit.util.GpuPipelineFactory;
 import shit.util.Timer;
 
 @Environment(value=EnvType.CLIENT)
@@ -21,19 +21,19 @@ public class Helper {
             return;
         }
         this.flag167 = true;
-        RenderLevelEventManager2.m605();
-        RenderLevelEventManager.m958();
+        WorldRenderDispatcher2.m605();
+        WorldRenderDispatcher.m958();
     }
 
     public void m818() {
-        RenderUtil4.m981();
+        GpuPipelineFactory.m981();
         Timer.m537();
-        RenderUtil4.m353();
+        GpuPipelineFactory.m353();
     }
 
     public void m27() {
         Timer.m816();
-        Passthrough.m638();
+        ScreenCopyRenderer.m638();
     }
 }
 

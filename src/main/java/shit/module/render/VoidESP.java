@@ -25,7 +25,7 @@ import shit.util.MC;
 public class VoidESP
 extends Module {
     private final BooleanSetting filled = (BooleanSetting)this.registerSetting(new BooleanSetting("Filled", true));
-    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("Outline", true));
+    private final BooleanSetting outline = (BooleanSetting)this.registerSetting(new BooleanSetting("I18nHelper", true));
     private final ColorSetting color = (ColorSetting)this.registerSetting(new ColorSetting("Color", -7036417));
     private final NumberSetting filledAlpha = (NumberSetting)this.registerSetting(new NumberSetting("FilledAlpha", 127.0, 0.0, 255.0, 1.0));
     private final NumberSetting outlineAlpha = (NumberSetting)this.registerSetting(new NumberSetting("OutlineAlpha", 255.0, 0.0, 255.0, 1.0));

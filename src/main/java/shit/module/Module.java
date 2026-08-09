@@ -11,12 +11,12 @@ import net.fabricmc.api.Environment;
 import shit.Client;
 import shit.event.ModuleToggleEvent;
 import shit.module.Category;
-import shit.render.Outline;
+import shit.render.I18nHelper;
 import shit.setting.BooleanSetting;
 import shit.setting.ColorSetting2;
 import shit.setting.Setting;
 import shit.util.MC;
-import shit.util.Util4;
+import shit.util.AuthGate;
 
 @Environment(value=EnvType.CLIENT)
 public abstract class Module
@@ -73,7 +73,7 @@ implements MC {
                     return;
                 }
                 if (bl2) {
-                    if (!Util4.isSet51()) {
+                    if (!AuthGate.isSet51()) {
                         return;
                     }
                 }
@@ -106,11 +106,11 @@ implements MC {
     }
 
     public String getDisplayName() {
-        return Outline.m14(this.moduleName);
+        return I18nHelper.m14(this.moduleName);
     }
 
     public String getDisplayDescription() {
-        return Outline.m14(this.moduleDescription);
+        return I18nHelper.m14(this.moduleDescription);
     }
 
     public Category getCategory() {

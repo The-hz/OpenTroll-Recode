@@ -24,7 +24,7 @@ import shit.Client;
 import shit.command.Command;
 import shit.command.CommandManager;
 import shit.command.ToggleCommand;
-import shit.render.LineRenderer2;
+import shit.render.StringDecryptor;
 
 @Environment(value=EnvType.CLIENT)
 public class KitCommand

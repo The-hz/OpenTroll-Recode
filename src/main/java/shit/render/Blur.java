@@ -31,9 +31,9 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
 import shit.module.Module;
-import shit.util.BufferUtil2;
+import shit.util.ResourceLoader;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 import shit.util.Util;
 
 @Environment(value=EnvType.CLIENT)
@@ -49,14 +49,14 @@ public class Blur {
     private void m288() {
         Object var2_1 = null;
         if (this.renderPipeline10 == null) {
-            this.renderPipeline10 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(BufferUtil2.m52("pipeline/blur")).withVertexShader(field37).withFragmentShader(field37).withUniform("BlurUniforms", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withBlend(BlendFunction.TRANSLUCENT).withCull(false).build();
+            this.renderPipeline10 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POST_EFFECT_PROCESSOR_SNIPPET}).withLocation(ResourceLoader.m52("pipeline/blur")).withVertexShader(field37).withFragmentShader(field37).withUniform("BlurUniforms", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withBlend(BlendFunction.TRANSLUCENT).withCull(false).build();
         }
     }
 
     private void m716() {
         Object var2_1 = null;
         if (this.renderPipeline5 == null) {
-            this.renderPipeline5 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POSITION_COLOR_SNIPPET}).withLocation(BufferUtil2.m52("pipeline/blur_3d_box")).withVertexShader(field21).withFragmentShader(field21).withUniform("BoxBlurUniforms", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withBlend(BlendFunction.TRANSLUCENT).withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).withDepthWrite(false).withCull(false).build();
+            this.renderPipeline5 = RenderPipeline.builder((RenderPipeline.Snippet[])new RenderPipeline.Snippet[]{RenderPipelines.POSITION_COLOR_SNIPPET}).withLocation(ResourceLoader.m52("pipeline/blur_3d_box")).withVertexShader(field21).withFragmentShader(field21).withUniform("BoxBlurUniforms", UniformType.UNIFORM_BUFFER).withSampler("InputSampler").withBlend(BlendFunction.TRANSLUCENT).withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).withDepthWrite(false).withCull(false).build();
         }
     }
 
@@ -94,7 +94,7 @@ public class Blur {
                     return;
                 }
                 Framebuffer framebuffer = MC.mc.getFramebuffer();
-                RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
+                GpuPipelineFactory.AutoCloseableImpl autoCloseableImpl = GpuPipelineFactory.getAutoCloseableImpl2();
                 gpuTexture = autoCloseableImpl == null ? framebuffer.getColorAttachment() : (GpuTexture)(Object)autoCloseableImpl.getGpuTextureView();
                 gpuTextureView = autoCloseableImpl == null ? framebuffer.getColorAttachmentView() : autoCloseableImpl.getGpuTextureView();
                 n2 = autoCloseableImpl == null ? framebuffer.textureWidth : autoCloseableImpl.getInt25();
@@ -113,11 +113,11 @@ public class Blur {
         if (this.field57.getColorAttachment() == null || this.field57.getColorAttachmentView() == null) {
             return;
         }
-        RenderUtil4.ColorData colorData = RenderUtil4.m13(f18, f17, f16, f15);
+        GpuPipelineFactory.ColorData colorData = GpuPipelineFactory.m13(f18, f17, f16, f15);
         if (!Util.hasPositiveArea(colorData)) {
             return;
         }
-        float f19 = (float)RenderUtil4.getDouble18();
+        float f19 = (float)GpuPipelineFactory.getDouble18();
         float f20 = f18 * f19;
         float f21 = (float)n - (f17 + f15) * f19;
         float f22 = f16 * f19;
@@ -129,7 +129,7 @@ public class Blur {
         float f28 = Math.max(0.0f, f10);
         CommandEncoder commandEncoder = RenderSystem.getDevice().createCommandEncoder();
         commandEncoder.copyTextureToTexture(gpuTexture, this.field57.getColorAttachment(), 0, 0, 0, 0, 0, n2, n);
-        GpuBufferSlice gpuBufferSlice = RenderUtil4.m1027("blur_uniforms", "Lumin Blur UBO", count74, 16, new Vec11f(n2, n, f28, f22, f23, f20, f21, f24, f25, f26, f27));
+        GpuBufferSlice gpuBufferSlice = GpuPipelineFactory.m1027("blur_uniforms", "Lumin Blur UBO", count74, 16, new Vec11f(n2, n, f28, f22, f23, f20, f21, f24, f25, f26, f27));
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin Blur", gpuTextureView, OptionalInt.empty());){
             renderPass.setPipeline(this.renderPipeline10);
             Util.enableScissorFromColorData(renderPass, colorData);

@@ -9,12 +9,12 @@ import net.minecraft.screen.ScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
-import shit.api.Listener8;
+import shit.api.ScreenHandlerStateIdAccessor;
 
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={ScreenHandler.class})
 public class AbstractContainerMenuMixin
-implements Listener8 {
+implements ScreenHandlerStateIdAccessor {
     @Shadow
     @Mutable
     private int revision;

@@ -7,19 +7,19 @@ import com.mojang.blaze3d.systems.RenderPass;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 
 @Environment(value=EnvType.CLIENT)
 public final class Util {
     private Util() {
     }
 
-    public static RenderUtil4.ColorData m74(float f, float f2, float f3, float f4) {
+    public static GpuPipelineFactory.ColorData m74(float f, float f2, float f3, float f4) {
         float f5 = f;
         float f6 = f2;
         float f7 = f3;
         float f8 = f4;
-        double d = RenderUtil4.getDouble18();
+        double d = GpuPipelineFactory.getDouble18();
         int n = Util.getInt58();
         int n2 = (int)Math.round((double)f5 * d);
         int n3 = (int)Math.round((double)n - (double)(f6 + f8) * d);
@@ -28,13 +28,13 @@ public final class Util {
         return Util.m1033(n2, n3, n4, n5);
     }
 
-    public static RenderUtil4.ColorData m830(float f, float f2, float f3, float f4, float f5) {
+    public static GpuPipelineFactory.ColorData m830(float f, float f2, float f3, float f4, float f5) {
         float f6 = f;
         float f7 = f2;
         float f8 = f3;
         float f9 = f4;
         float f10 = f5;
-        double d = RenderUtil4.getDouble18();
+        double d = GpuPipelineFactory.getDouble18();
         int n = (int)Math.round((double)f6 * d);
         int n2 = (int)Math.round((double)(f10 - f7 - f9) * d);
         int n3 = Math.max(0, (int)Math.round((double)f8 * d));
@@ -42,7 +42,7 @@ public final class Util {
         return Util.m1033(n, n2, n3, n4);
     }
 
-    public static RenderUtil4.ColorData m1033(int n, int n2, int n3, int n4) {
+    public static GpuPipelineFactory.ColorData m1033(int n, int n2, int n3, int n4) {
         int n5 = n;
         int n6 = n2;
         int n7 = n3;
@@ -53,11 +53,11 @@ public final class Util {
         int n12 = Math.clamp((long)n6, 0, n10);
         int n13 = Math.clamp((long)(n5 + n7), 0, n9);
         int n14 = Math.clamp((long)(n6 + n8), 0, n10);
-        return new RenderUtil4.ColorData(n11, n12, Math.max(0, n13 - n11), Math.max(0, n14 - n12));
+        return new GpuPipelineFactory.ColorData(n11, n12, Math.max(0, n13 - n11), Math.max(0, n14 - n12));
     }
 
     public static boolean hasPositiveArea(Object object) {
-        RenderUtil4.ColorData colorData = (RenderUtil4.ColorData)object;
+        GpuPipelineFactory.ColorData colorData = (GpuPipelineFactory.ColorData)object;
         return Util.isPositiveArea(colorData.count32(), colorData.count33());
     }
 
@@ -90,12 +90,12 @@ public final class Util {
 
     public static boolean enableScissorFromColorData(Object object, Object object2) {
         RenderPass renderPass = (RenderPass)object;
-        RenderUtil4.ColorData colorData = (RenderUtil4.ColorData)object2;
+        GpuPipelineFactory.ColorData colorData = (GpuPipelineFactory.ColorData)object2;
         return Util.enableScissor(renderPass, colorData.count30(), colorData.count31(), colorData.count32(), colorData.count33());
     }
 
     private static int getInt63() {
-        RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
+        GpuPipelineFactory.AutoCloseableImpl autoCloseableImpl = GpuPipelineFactory.getAutoCloseableImpl2();
         Object var1_1 = null;
         if (autoCloseableImpl != null) {
             return autoCloseableImpl.getInt25();
@@ -104,7 +104,7 @@ public final class Util {
     }
 
     private static int getInt58() {
-        RenderUtil4.AutoCloseableImpl autoCloseableImpl = RenderUtil4.getAutoCloseableImpl2();
+        GpuPipelineFactory.AutoCloseableImpl autoCloseableImpl = GpuPipelineFactory.getAutoCloseableImpl2();
         Object var1_1 = null;
         if (autoCloseableImpl != null) {
             return autoCloseableImpl.getInt87();

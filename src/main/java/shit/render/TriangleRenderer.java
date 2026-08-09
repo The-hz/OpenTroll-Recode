@@ -20,18 +20,18 @@ import net.minecraft.util.math.ColorHelper;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryUtil;
-import shit.api.Listener2;
+import shit.api.FrameListener;
 import shit.manager.GpuManager;
-import shit.manager.Manager4;
+import shit.manager.FrameListenerManager;
 import shit.misc.RenderPipelines;
 import shit.module.Module;
 import shit.render.TextureRenderer;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 import shit.util.Util;
 
 @Environment(value=EnvType.CLIENT)
 public class TriangleRenderer
-implements Listener2 {
+implements FrameListener {
     private final GpuManager gpuManager3 = new GpuManager(16384L, 32);
     private long time55 = 0L;
     private int count67 = 0;
@@ -46,7 +46,7 @@ implements Listener2 {
     }
 
     public static TriangleRenderer getTriangleRenderer2() {
-        return (TriangleRenderer)Manager4.manager4.addListener(new TriangleRenderer());
+        return (TriangleRenderer)FrameListenerManager.manager4.addListener(new TriangleRenderer());
     }
 
     public void m1056(float f, float f2, float f3, float f4, Object object) {
@@ -107,7 +107,7 @@ implements Listener2 {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        RenderUtil4.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
         this.flag110 = true;
         this.count130 = colorData.count30();
         this.count86 = colorData.count31();
@@ -127,16 +127,16 @@ implements Listener2 {
         if (this.gpuManager3.isMapped()) {
             this.gpuManager3.unmap();
         }
-        RenderUtil4.m486();
-        GpuTextureView view = RenderUtil4.getGpuTextureView6();
-        GpuTextureView view2 = RenderUtil4.getGpuTextureView4();
+        GpuPipelineFactory.m486();
+        GpuTextureView view = GpuPipelineFactory.getGpuTextureView6();
+        GpuTextureView view2 = GpuPipelineFactory.getGpuTextureView4();
         if (view == null) {
             return;
         }
         if (this.flag110 && !Util.isPositiveArea(this.count96, this.count222)) {
             return;
         }
-        GpuBufferSlice slice = RenderUtil4.m998(
+        GpuBufferSlice slice = GpuPipelineFactory.m998(
                 RenderSystem.getModelViewMatrix(),
                 new Vector4f(1.0F, 1.0F, 1.0F, 1.0F),
                 new Vector3f(0.0F, 0.0F, 0.0F),
@@ -165,7 +165,7 @@ implements Listener2 {
         if (this.flag110 && !Util.isPositiveArea(this.count96, this.count222)) {
             return false;
         }
-        this.gpuBufferSlice6 = RenderUtil4.getGpuBufferSlice2();
+        this.gpuBufferSlice6 = GpuPipelineFactory.getGpuBufferSlice2();
         return this.gpuBufferSlice6 != null;
     }
 
@@ -246,7 +246,7 @@ implements Listener2 {
     public void close() {
         this.endFrame();
         this.gpuManager3.flush();
-        Manager4.manager4.removeListener(this);
+        FrameListenerManager.manager4.removeListener(this);
     }
 
     private static /* synthetic */ String cfrlam$draw$0() {

@@ -33,19 +33,19 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.lwjgl.system.MemoryUtil;
-import shit.api.Listener2;
+import shit.api.FrameListener;
 import shit.gui.Texture;
 import shit.manager.GpuManager;
-import shit.manager.Manager2;
-import shit.manager.Manager4;
+import shit.manager.TextureManager;
+import shit.manager.FrameListenerManager;
 import shit.misc.RenderPipelines;
 import shit.util.MC;
-import shit.util.RenderUtil4;
+import shit.util.GpuPipelineFactory;
 import shit.util.Util;
 
 @Environment(value=EnvType.CLIENT)
 public class TextureRenderer
-implements Listener2 {
+implements FrameListener {
     private final Map<Object, GpuManagerHolder> map34 = new LinkedHashMap<>();
     private boolean flag117 = false;
     private int count193;
@@ -60,7 +60,7 @@ implements Listener2 {
     }
 
     public static TextureRenderer getTextureRenderer2() {
-        return (TextureRenderer)Manager4.manager4.addListener(new TextureRenderer());
+        return (TextureRenderer)FrameListenerManager.manager4.addListener(new TextureRenderer());
     }
 
     public void m656(int n, int n2, int n3, int n4) {
@@ -68,7 +68,7 @@ implements Listener2 {
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
-        RenderUtil4.ColorData colorData = Util.m1033(n5, n6, n7, n8);
+        GpuPipelineFactory.ColorData colorData = Util.m1033(n5, n6, n7, n8);
         this.flag117 = true;
         this.count193 = colorData.count30();
         this.count88 = colorData.count31();
@@ -235,8 +235,8 @@ implements Listener2 {
         if (this.map34.isEmpty()) {
             return;
         }
-        RenderUtil4.m486();
-        GpuTextureView view = RenderUtil4.getGpuTextureView6();
+        GpuPipelineFactory.m486();
+        GpuTextureView view = GpuPipelineFactory.getGpuTextureView6();
         if (view == null) {
             return;
         }
@@ -247,7 +247,7 @@ implements Listener2 {
         if (indexCount == 0) {
             return;
         }
-        GpuBufferSlice slice = RenderUtil4.getGpuBufferSlice2();
+        GpuBufferSlice slice = GpuPipelineFactory.getGpuBufferSlice2();
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(
                 () -> "Rounded Texture Draws", view, OptionalInt.empty(), null, OptionalDouble.empty())) {
             renderPass.setPipeline(RenderPipelines.renderPipeline16);
@@ -256,7 +256,7 @@ implements Listener2 {
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", slice);
-            renderPass.setIndexBuffer(RenderUtil4.m577(indexCount), RenderUtil4.getIndexType());
+            renderPass.setIndexBuffer(GpuPipelineFactory.m577(indexCount), GpuPipelineFactory.getIndexType());
             this.setObj52(renderPass);
         }
     }
@@ -275,8 +275,8 @@ implements Listener2 {
         if (this.count180 == 0) {
             return false;
         }
-        RenderUtil4.m577(this.count180);
-        this.gpuBufferSlice5 = RenderUtil4.getGpuBufferSlice2();
+        GpuPipelineFactory.m577(this.count180);
+        this.gpuBufferSlice5 = GpuPipelineFactory.getGpuBufferSlice2();
         return this.gpuBufferSlice5 != null;
     }
 
@@ -301,7 +301,7 @@ implements Listener2 {
                 }
                 return;
             }
-            renderPass.setIndexBuffer(RenderUtil4.m577(this.count180), RenderUtil4.getIndexType());
+            renderPass.setIndexBuffer(GpuPipelineFactory.m577(this.count180), GpuPipelineFactory.getIndexType());
             renderPass.setUniform("DynamicTransforms", this.gpuBufferSlice5);
             textureRenderer = this;
         }
@@ -361,7 +361,7 @@ implements Listener2 {
                     if (stringArray == null) break block4;
                     if (bl2) {
                         Identifier identifier2 = (Identifier)object3;
-                        return (Texture)Manager2.manager2.map20.computeIfAbsent(identifier2, identifier -> this.m596(identifier, bl3));
+                        return (Texture)TextureManager.manager2.map20.computeIfAbsent(identifier2, identifier -> this.m596(identifier, bl3));
                     }
                     object2 = object3;
                     if (stringArray == null) break block5;
@@ -478,8 +478,8 @@ implements Listener2 {
                 break block2;
             }
             this.map34.clear();
-            Manager2.manager2.m304();
-            Manager4.manager4.removeListener(this);
+            TextureManager.manager2.m304();
+            FrameListenerManager.manager4.removeListener(this);
         }
     }
 

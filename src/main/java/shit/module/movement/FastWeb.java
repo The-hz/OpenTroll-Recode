@@ -46,7 +46,7 @@ extends Module {
     @Override
     public void onDisable() {
         this.flag94 = false;
-        Client.helper4.m64();
+        Client.timerScale.m64();
     }
 
     @Override
@@ -101,11 +101,11 @@ extends Module {
         }
         this.flag94 = this.isSet88();
         if (!this.flag94) {
-            Client.helper4.m64();
+            Client.timerScale.m64();
         } else if (this.mode.getValue() == Mode.Vanilla) {
             MathUtil.setMotionY(-((Double)this.speed.getValue()).doubleValue());
         } else if (this.mode.getValue() == Mode.Strict) {
-            Client.helper4.setFloat5(this.speed.getFloat());
+            Client.timerScale.setFloat5(this.speed.getFloat());
         }
         if (((Boolean)this.grim.getValue()).booleanValue() && this.isSet116()) {
             for (BlockPos blockPos : this.getList5()) {
