@@ -36,14 +36,14 @@ public final class Client {
     private Client() {
     }
 
-    public static void m841() {
+    public static void init() {
         block0: {
-            fontManager.m497();
-            mathUtil.m935();
-            helper.m25();
+            fontManager.init();
+            mathUtil.init();
+            helper.init();
             moduleManager.init();
-            commandManager.m351();
-            configManager.m256();
+            commandManager.init();
+            configManager.init();
             Object var1 = null;
             Logger.logger2.info("{} client initialized.", (Object)"TrollHack-Recode");
             if (null == null) break block0;

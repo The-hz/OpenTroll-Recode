@@ -34,7 +34,7 @@ public class LocalPlayerMixin {
     @Inject(method={"sendMovementPackets()V"}, at={@At(value="HEAD")})
     private void trollhack$sendPositionPre(CallbackInfo callbackInfo) {
         ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity)(Object)this;
-        if (Client.mathUtil.isSet111()) {
+        if (Client.mathUtil.hasPendingRotation()) {
             Client.mathUtil.setObj37(clientPlayerEntity);
         }
     }
@@ -42,7 +42,7 @@ public class LocalPlayerMixin {
     @Inject(method={"sendMovementPackets()V"}, at={@At(value="TAIL")})
     private void setCallbackInfo3(CallbackInfo callbackInfo) {
         ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity)(Object)this;
-        if (Client.mathUtil.isSet111()) {
+        if (Client.mathUtil.hasPendingRotation()) {
             Client.mathUtil.setObj39(clientPlayerEntity);
         }
     }

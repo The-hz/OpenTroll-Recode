@@ -213,7 +213,7 @@ public final class ChatClient {
         if (minecraftClient.world != null) {
             string4 = minecraftClient.world.getRegistryKey().getValue().getPath();
         }
-        String string5 = IRC.isSet122() ? "&hide_admin=1" : "";
+        String string5 = IRC.isConnected() ? "&hide_admin=1" : "";
         String string6 = IRC.isSet59() ? "1" : "0";
         String string7 = URLEncoder.encode(string4, StandardCharsets.UTF_8);
         int n4 = n3;

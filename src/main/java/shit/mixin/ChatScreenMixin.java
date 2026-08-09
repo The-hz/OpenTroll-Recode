@@ -21,7 +21,7 @@ import shit.module.chat.FancyChat;
 public class ChatScreenMixin {
     @Inject(method={"sendMessage(Ljava/lang/String;Z)V"}, at={@At(value="HEAD")}, cancellable=true)
     private void trollhack$handleChatInput(String string, boolean bl, CallbackInfo callbackInfo) {
-        if (Client.commandManager.m571(string)) {
+        if (Client.commandManager.tryExecute(string)) {
             callbackInfo.cancel();
         }
     }

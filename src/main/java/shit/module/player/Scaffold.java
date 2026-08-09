@@ -60,8 +60,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotation();
+        Client.renderUtil3.restoreSlot();
         this.blockPos17 = null;
     }
 
@@ -95,7 +95,7 @@ extends Module {
         ClientSetting.SwitchMode switchMode = this.getSwitchMode11();
         boolean bl = false;
         if (((Boolean)this.autoSwitch.getValue()).booleanValue()) {
-            boolean bl2 = Client.renderUtil3.m223((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.getItem() instanceof BlockItem), (Object)switchMode);
+            boolean bl2 = Client.renderUtil3.switchToItem((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.getItem() instanceof BlockItem), (Object)switchMode);
             if (!bl2) {
                 this.blockPos17 = null;
                 return;
@@ -112,7 +112,7 @@ extends Module {
         this.blockPos17 = blockPos;
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)data.blockPos3).add((double)data.direction3.getOffsetX() * 0.5, (double)data.direction3.getOffsetY() * 0.5, (double)data.direction3.getOffsetZ() * 0.5);
         if (((Boolean)this.rotate.getValue()).booleanValue()) {
-            float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+            float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
             fArray[1] = Math.max(fArray[1], 75.0f);
             ClientSetting.RotateMode rotateMode = this.getRotateMode13();
             switch (Lambda.counts17[rotateMode.ordinal()]) {
@@ -125,28 +125,28 @@ extends Module {
                     Client.mathUtil.setFloat6(this.getFloat4());
                     if (!(Client.mathUtil.getFloat51() <= 5.0f)) break;
                     if (((Boolean)this.grim.getValue()).booleanValue()) {
-                        Client.mathUtil.m11(Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58());
+                        Client.mathUtil.setRotationPacket(Client.mathUtil.getFloat55(), Client.mathUtil.getFloat58());
                     }
                     this.m378(data, vec3d, hand);
                     break;
                 }
                 case 3: {
-                    Client.mathUtil.m303(fArray[0], fArray[1]);
+                    Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                     this.m378(data, vec3d, hand);
-                    Client.mathUtil.m844();
+                    Client.mathUtil.resetRotationSilent();
                     break;
                 }
                 case 4: {
-                    Client.mathUtil.m468(fArray[0], fArray[1]);
+                    Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                     this.m378(data, vec3d, hand);
-                    Client.mathUtil.m2();
+                    Client.mathUtil.resetRotationVisible();
                 }
             }
         } else {
             this.m378(data, vec3d, hand);
         }
         if (bl) {
-            Client.renderUtil3.m608();
+            Client.renderUtil3.restoreSlot();
         }
         this.count102 = this.delay.getInt();
         if (((Boolean)this.tower.getValue()).booleanValue() && MC.mc.player.input.playerInput.jump()) {

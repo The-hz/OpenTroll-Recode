@@ -38,8 +38,8 @@ extends Module {
      * Enabled force condition propagation
      * Lifted jumps to return sites
      */
-    public static boolean isSet122() {
-        String string = IRC.getText7();
+    public static boolean isConnected() {
+        String string = IRC.getConnectionId();
         IRC iRC = INSTANCE;
         if (string != null) {
             if (iRC == null) return false;
@@ -60,7 +60,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     public static boolean isSet59() {
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         IRC iRC = INSTANCE;
         if (string != null) {
             if (iRC == null) return false;
@@ -83,7 +83,7 @@ extends Module {
     public static boolean m615(Object object) {
         ChatClient.Data data;
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         String string3 = string;
         if (string2 != null) {
             if (!ChatClient.m404(string3)) {
@@ -133,15 +133,15 @@ extends Module {
 
     static {
         boolean bl = false;
-        IRC.setText5("FrGtC");
+        IRC.setConnectionId("FrGtC");
         time76 = 0L;
     }
 
-    public static void setText5(String string) {
+    public static void setConnectionId(String string) {
         text1489 = string;
     }
 
-    public static String getText7() {
+    public static String getConnectionId() {
         return text1489;
     }
 }

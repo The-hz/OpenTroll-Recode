@@ -85,7 +85,7 @@ extends Module {
             block5: {
                 BlockEntity blockEntity = (BlockEntity)object;
                 blockPos = blockEntity.getPos();
-                string = IRC.getText7();
+                string = IRC.getConnectionId();
                 Object object2 = this.set2;
                 if (string != null) {
                     if (!((Set)object2).add(blockPos.toImmutable())) {

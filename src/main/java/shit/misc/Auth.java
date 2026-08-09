@@ -19,7 +19,7 @@ public class Auth
 implements ClientModInitializer {
     public void onInitializeClient() {
         SystemManager.m320();
-        Client.m841();
+        Client.init();
         if (Module.getTextArray9() == null) {
             Client.setTextArray2(new String[1]);
         }

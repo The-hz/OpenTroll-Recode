@@ -62,7 +62,7 @@ extends Module {
         this.field66 = null;
         this.count135 = 0;
         this.flag77 = false;
-        Client.renderUtil3.m608();
+        Client.renderUtil3.restoreSlot();
     }
 
     @EventHandler
@@ -158,31 +158,31 @@ extends Module {
         float var6 = MC.mc.player.getYaw();
         switch (Lambda.counts22[var5.ordinal()]) {
             case 1: {
-                Client.mathUtil.m303(var6, 90.0f);
+                Client.mathUtil.setRotationSilent(var6, 90.0f);
                 break;
             }
             case 2: {
-                Client.mathUtil.m468(var6, 90.0f);
+                Client.mathUtil.setRotationVisible(var6, 90.0f);
                 break;
             }
             case 3: {
-                Client.mathUtil.m303(var6, 90.0f);
+                Client.mathUtil.setRotationSilent(var6, 90.0f);
                 break;
             }
         }
         if (((Boolean)this.inventorySwap.getValue()).booleanValue()) {
             int var7 = AutoPot.m264(var3);
-            if (var7 != -1 && Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.INVENTORY)) {
+            if (var7 != -1 && Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.INVENTORY)) {
                 MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
-                Client.renderUtil3.m608();
+                Client.renderUtil3.restoreSlot();
                 this.setObj91(var5);
                 this.helper748.resetTimer();
                 return;
             }
         }
-        if (AutoPot.m760(var3) != -1 && Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.SILENT)) {
+        if (AutoPot.m760(var3) != -1 && Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.SILENT)) {
             MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
-            Client.renderUtil3.m608();
+            Client.renderUtil3.restoreSlot();
         }
         this.setObj91(var5);
         this.helper748.resetTimer();
@@ -195,11 +195,11 @@ extends Module {
         ClientSetting.RotateMode var3 = (ClientSetting.RotateMode)var1_1;
         switch (Lambda.counts22[var3.ordinal()]) {
             case 1: {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
                 return;
             }
             case 2: {
-                Client.mathUtil.m2();
+                Client.mathUtil.resetRotationVisible();
                 return;
             }
             default: {

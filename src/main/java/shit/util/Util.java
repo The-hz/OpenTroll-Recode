@@ -56,16 +56,16 @@ public final class Util {
         return new RenderUtil4.ColorData(n11, n12, Math.max(0, n13 - n11), Math.max(0, n14 - n12));
     }
 
-    public static boolean m101(Object object) {
+    public static boolean hasPositiveArea(Object object) {
         RenderUtil4.ColorData colorData = (RenderUtil4.ColorData)object;
-        return Util.m843(colorData.count32(), colorData.count33());
+        return Util.isPositiveArea(colorData.count32(), colorData.count33());
     }
 
     /*
      * Enabled force condition propagation
      * Lifted jumps to return sites
      */
-    public static boolean m843(int n, int n2) {
+    public static boolean isPositiveArea(int n, int n2) {
         int n3 = n;
         int n4 = n2;
         Object var5_4 = null;
@@ -74,24 +74,24 @@ public final class Util {
         return true;
     }
 
-    public static boolean m268(Object object, int n, int n2, int n3, int n4) {
+    public static boolean enableScissor(Object object, int n, int n2, int n3, int n4) {
         RenderPass renderPass = (RenderPass)object;
         int n5 = n;
         int n6 = n2;
         int n7 = n3;
         int n8 = n4;
         Object var11_10 = null;
-        if (!Util.m843(n7, n8)) {
+        if (!Util.isPositiveArea(n7, n8)) {
             return false;
         }
         renderPass.enableScissor(n5, n6, n7, n8);
         return true;
     }
 
-    public static boolean m599(Object object, Object object2) {
+    public static boolean enableScissorFromColorData(Object object, Object object2) {
         RenderPass renderPass = (RenderPass)object;
         RenderUtil4.ColorData colorData = (RenderUtil4.ColorData)object2;
-        return Util.m268(renderPass, colorData.count30(), colorData.count31(), colorData.count32(), colorData.count33());
+        return Util.enableScissor(renderPass, colorData.count30(), colorData.count31(), colorData.count32(), colorData.count33());
     }
 
     private static int getInt63() {

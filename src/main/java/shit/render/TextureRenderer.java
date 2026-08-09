@@ -185,7 +185,7 @@ implements Listener2 {
             return holder;
         });
         gpuManagerHolder.gpuManager2.setLong(gpuManagerHolder.time34 + 224L);
-        gpuManagerHolder.gpuManager2.m691();
+        gpuManagerHolder.gpuManager2.ensureMapped();
         int n = ColorHelper.toAbgr((int)color.getRGB());
         float f25 = f13 + f15;
         float f26 = f14 + f16;
@@ -240,7 +240,7 @@ implements Listener2 {
         if (view == null) {
             return;
         }
-        if (this.flag117 && !Util.m843(this.count116, this.count148)) {
+        if (this.flag117 && !Util.isPositiveArea(this.count116, this.count148)) {
             return;
         }
         int indexCount = this.getInt61();
@@ -252,7 +252,7 @@ implements Listener2 {
                 () -> "Rounded Texture Draws", view, OptionalInt.empty(), null, OptionalDouble.empty())) {
             renderPass.setPipeline(RenderPipelines.renderPipeline16);
             if (this.flag117) {
-                Util.m268(renderPass, this.count193, this.count88, this.count116, this.count148);
+                Util.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", slice);
@@ -268,7 +268,7 @@ implements Listener2 {
         if (this.map34.isEmpty()) {
             return false;
         }
-        if (this.flag117 && !Util.m843(this.count116, this.count148)) {
+        if (this.flag117 && !Util.isPositiveArea(this.count116, this.count148)) {
             return false;
         }
         this.count180 = this.getInt61();
@@ -328,10 +328,10 @@ implements Listener2 {
                             if (n == 0) continue;
                             gpuManagerHolder = gpuManagerHolder2;
                             if (stringArray == null) break block7;
-                            bl = gpuManagerHolder.gpuManager2.isSet135();
+                            bl = gpuManagerHolder.gpuManager2.isMapped();
                         }
                         if (bl) {
-                            gpuManagerHolder2.gpuManager2.m587();
+                            gpuManagerHolder2.gpuManager2.unmap();
                         }
                         gpuManagerHolder2.texture3 = this.resolveTexture(entry.getKey(), gpuManagerHolder2.flag67);
                         if (stringArray == null) break block8;
@@ -379,7 +379,7 @@ implements Listener2 {
     private void setObj52(Object object) {
         RenderPass renderPass = (RenderPass)object;
         if (this.flag117) {
-            if (!Util.m268(renderPass, this.count193, this.count88, this.count116, this.count148)) {
+            if (!Util.enableScissor(renderPass, this.count193, this.count88, this.count116, this.count148)) {
                 return;
             }
         } else {
@@ -443,12 +443,12 @@ implements Listener2 {
                         if (gpuManagerHolder2.count120 > 0) {
                             GpuManager gpuManager = gpuManagerHolder.gpuManager2;
                             if (stringArray != null) {
-                                if (gpuManager.isSet135()) {
-                                    gpuManagerHolder.gpuManager2.m587();
+                                if (gpuManager.isMapped()) {
+                                    gpuManagerHolder.gpuManager2.unmap();
                                 }
                                 gpuManager = gpuManagerHolder.gpuManager2;
                             }
-                            gpuManager.m470();
+                            gpuManager.advanceBuffer();
                         }
                         gpuManagerHolder.time34 = 0L;
                         gpuManagerHolder.count120 = 0;
@@ -471,7 +471,7 @@ implements Listener2 {
             this.m155();
             String[] stringArray2 = stringArray;
             for (GpuManagerHolder gpuManagerHolder : this.map34.values()) {
-                gpuManagerHolder.gpuManager2.m145();
+                gpuManagerHolder.gpuManager2.flush();
                 if (stringArray2 != null) {
                     if (stringArray2 != null) continue;
                 }

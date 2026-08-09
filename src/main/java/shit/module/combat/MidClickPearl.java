@@ -53,8 +53,8 @@ extends Module {
     public void onDisable() {
         this.flag61 = false;
         flag80 = false;
-        Client.renderUtil3.m608();
-        Client.mathUtil.m370();
+        Client.renderUtil3.restoreSlot();
+        Client.mathUtil.resetRotation();
     }
 
     @EventHandler
@@ -108,16 +108,16 @@ extends Module {
                             if (null == null) break;
                         }
                         case 2: {
-                            Client.mathUtil.m303(f, f2);
+                            Client.mathUtil.setRotationSilent(f, f2);
                             if (null == null) break;
                         }
                         case 3: {
-                            Client.mathUtil.m468(f, f2);
+                            Client.mathUtil.setRotationVisible(f, f2);
                             break;
                         }
                     }
                     ClientSetting.SwitchMode switchMode = this.getSwitchMode10();
-                    boolean bl = Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)this::m178, (Object)switchMode);
+                    boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m178, (Object)switchMode);
                     if (!bl) {
                         return true;
                     }
@@ -125,16 +125,16 @@ extends Module {
                     MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, f2));
                     ItemUtil.setObj25(Hand.MAIN_HAND);
                     flag80 = false;
-                    Client.renderUtil3.m608();
+                    Client.renderUtil3.restoreSlot();
                     if (rotateMode != ClientSetting.RotateMode.rotateMode) break block7;
-                    Client.mathUtil.m2();
+                    Client.mathUtil.resetRotationVisible();
                     if (null == null) break block8;
                 }
                 if (rotateMode != ClientSetting.RotateMode.ONTICK) break block9;
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
                 if (null == null) break block8;
             }
-            Client.mathUtil.m370();
+            Client.mathUtil.resetRotation();
         }
         return true;
     }

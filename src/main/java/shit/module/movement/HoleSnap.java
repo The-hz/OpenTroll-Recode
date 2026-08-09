@@ -136,7 +136,7 @@ extends Module {
             this.setEnabled(false);
             return;
         }
-        float f = MathUtil.m547(vec3d, this.vec3d9)[0];
+        float f = MathUtil.getLookAngles(vec3d, this.vec3d9)[0];
         float f2 = f / 180.0f * (float)Math.PI;
         double d2 = this.speedMode.getValue() == SpeedMode.Physic ? Math.min((Double)this.physicSpeed.getValue(), d) : Math.min(0.2873, d);
         double d3 = -Math.sin(f2) * d2;

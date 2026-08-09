@@ -47,7 +47,7 @@ implements Listener4 {
         Object livingEntityMixin = (Object) this;
         if (livingEntityMixin instanceof ClientPlayerEntity) {
             ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity)livingEntityMixin;
-            if (Client.mathUtil.isSet111()) {
+            if (Client.mathUtil.hasPendingRotation()) {
                 Client.mathUtil.setObj37(clientPlayerEntity);
             }
         }
@@ -58,7 +58,7 @@ implements Listener4 {
         Object livingEntityMixin = (Object) this;
         if (livingEntityMixin instanceof ClientPlayerEntity) {
             ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity)livingEntityMixin;
-            if (Client.mathUtil.isSet111()) {
+            if (Client.mathUtil.hasPendingRotation()) {
                 Client.mathUtil.setObj39(clientPlayerEntity);
             }
         }

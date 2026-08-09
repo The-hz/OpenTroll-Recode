@@ -37,7 +37,7 @@ public class ConfigManager {
     private final Map map50 = new HashMap();
     private boolean flag31;
 
-    public void m256() {
+    public void init() {
         this.m780(this.path, true);
     }
 

@@ -155,7 +155,7 @@ public final class RenderPipelines {
                 this.count92 = 0;
                 this.renderPipeline12 = renderPipeline;
                 this.field28 = identifier;
-                this.gpuManager6.m691();
+                this.gpuManager6.ensureMapped();
                 immediateRenderer = this;
             }
             return immediateRenderer;
@@ -348,8 +348,8 @@ public final class RenderPipelines {
             }
             long need = this.field17 == VertexFormat.DrawMode.LINES ? (long)this.count223 * 2L : (long)this.count223;
             this.gpuManager6.setLong(this.time75 + need);
-            if (!this.gpuManager6.isSet135()) {
-                this.gpuManager6.m691();
+            if (!this.gpuManager6.isMapped()) {
+                this.gpuManager6.ensureMapped();
             }
             this.time66 = MemoryUtil.memAddress(this.gpuManager6.getByteBuffer()) + this.time75;
             return true;
@@ -360,8 +360,8 @@ public final class RenderPipelines {
             long savedTime = this.time75;
             try {
                 if (this.count92 > 0) {
-                    if (this.gpuManager6.isSet135()) {
-                        this.gpuManager6.m587();
+                    if (this.gpuManager6.isMapped()) {
+                        this.gpuManager6.unmap();
                     }
                     com.mojang.blaze3d.textures.GpuTextureView colorView = RenderUtil4.getGpuTextureView6();
                     com.mojang.blaze3d.textures.GpuTextureView depthView = RenderUtil4.getGpuTextureView4();
@@ -402,8 +402,8 @@ public final class RenderPipelines {
                     }
                 }
             } finally {
-                if (this.gpuManager6.isSet135()) {
-                    this.gpuManager6.m587();
+                if (this.gpuManager6.isMapped()) {
+                    this.gpuManager6.unmap();
                 }
                 if (drew != 0) {
                     this.flag106 = true;
@@ -425,17 +425,17 @@ public final class RenderPipelines {
                 boolean bl;
                 block5: {
                     int[] nArray = RenderPipelines.getIntArray6();
-                    bl = this.gpuManager6.isSet135();
+                    bl = this.gpuManager6.isMapped();
                     if (nArray != null) break block5;
                     if (bl) {
-                        this.gpuManager6.m587();
+                        this.gpuManager6.unmap();
                     }
                     immediateRenderer = this;
                     if (nArray != null) break block6;
                     bl = immediateRenderer.flag106;
                 }
                 if (bl) {
-                    this.gpuManager6.m470();
+                    this.gpuManager6.advanceBuffer();
                 }
                 this.flag106 = false;
                 this.time58 = 0L;

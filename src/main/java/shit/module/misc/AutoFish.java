@@ -91,7 +91,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet117() {
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         boolean bl = MC.mc.player.getMainHandStack().isOf(Items.FISHING_ROD);
         if (string == null) return bl;
         if (bl) return true;

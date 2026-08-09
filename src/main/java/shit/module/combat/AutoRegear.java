@@ -138,8 +138,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotation();
+        Client.renderUtil3.restoreSlot();
         this.m781();
     }
 
@@ -483,7 +483,7 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
         Object var4_4 = null;
-        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts15[this.getRotateMode10().ordinal()]) {
             case 1: {
                 Client.mathUtil.m355(fArray[0], fArray[1]);
@@ -491,11 +491,11 @@ extends Module {
                 if (null == null) break;
             }
             case 2: {
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                 if (null == null) break;
             }
             case 3: {
-                Client.mathUtil.m468(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                 break;
             }
         }
@@ -505,11 +505,11 @@ extends Module {
         Object var2_1 = null;
         switch (Lambda.counts15[this.getRotateMode10().ordinal()]) {
             case 2: {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
                 if (null == null) break;
             }
             case 3: {
-                Client.mathUtil.m2();
+                Client.mathUtil.resetRotationVisible();
                 break;
             }
         }
@@ -594,7 +594,7 @@ extends Module {
                 }
                 if (null == null) break block10;
             }
-            if (!Client.renderUtil3.m223(predicate, (Object)switchMode)) {
+            if (!Client.renderUtil3.switchToItem(predicate, (Object)switchMode)) {
                 return;
             }
         }
@@ -603,14 +603,14 @@ extends Module {
             Vec3d vec3d = data.getVec3d5();
             if (MC.mc.player.getEyePos().distanceTo(vec3d) <= (Double)this.range.getValue()) {
                 if (this.getRotateMode10() != ClientSetting.RotateMode.NONE) {
-                    float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+                    float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
                     MC.mc.player.networkHandler.sendPacket((Packet)new PlayerMoveC2SPacket.LookAndOnGround(fArray[0], fArray[1], MC.mc.player.isOnGround(), MC.mc.player.horizontalCollision));
                 }
                 BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
             }
         }
         if (switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY) {
-            Client.renderUtil3.m608();
+            Client.renderUtil3.restoreSlot();
         }
         this.m879();
     }

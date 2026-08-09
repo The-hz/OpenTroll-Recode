@@ -300,7 +300,7 @@ extends Module {
     @Override
     public void onDisable() {
         this.m989();
-        Client.renderUtil3.m608();
+        Client.renderUtil3.restoreSlot();
     }
 
     private void m989() {
@@ -483,7 +483,7 @@ extends Module {
                 }
             }
         }
-        if (!rotated && Client.mathUtil.isSet111()) {
+        if (!rotated && Client.mathUtil.hasPendingRotation()) {
             this.m244();
         }
         if (blockPos7 != null) {
@@ -575,7 +575,7 @@ extends Module {
                                 this.m400(bp, dir);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -592,7 +592,7 @@ extends Module {
                                 MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.m608();
+                                Client.renderUtil3.restoreSlot();
                             }
                             this.flag24 = false;
                             if (((Boolean)this.endRotate.getValue()).booleanValue()) {
@@ -645,7 +645,7 @@ extends Module {
                             ClientSetting.SwitchMode sm = this.getSwitchMode4();
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 BlockPos bp = this.blockPos12;
-                                Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -661,7 +661,7 @@ extends Module {
                                 MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.m608();
+                                Client.renderUtil3.restoreSlot();
                             }
                             this.setObj36("INSTANT STOP breakPos=" + String.valueOf(this.blockPos12));
                             flag95 = true;
@@ -774,7 +774,7 @@ extends Module {
                             if (switchMode != ClientSetting.SwitchMode.NONE) {
                                 blockPos = blockPos7;
                                 net.minecraft.util.math.BlockPos blockPosF = blockPos;
-                                Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getInt66();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(blockPosF)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -812,7 +812,7 @@ extends Module {
                 object = switchMode;
                 if (n == 0) break block37;
                 if (object != ClientSetting.SwitchMode.NONE) {
-                    Client.renderUtil3.m608();
+                    Client.renderUtil3.restoreSlot();
                 }
                 speedMine = this;
                 if (n == 0) break block38;
@@ -837,14 +837,14 @@ extends Module {
         Vec3d vec3d = direction != null
                 ? Vec3d.ofCenter((Vec3i)blockPos).add(direction.getOffsetX() * 0.5, direction.getOffsetY() * 0.5, direction.getOffsetZ() * 0.5)
                 : Vec3d.ofCenter((Vec3i)blockPos);
-        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts14[this.getRotateMode6().ordinal()]) {
             case 1: {
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                 break;
             }
             case 2: {
-                Client.mathUtil.m468(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                 break;
             }
             case 3: {
@@ -859,11 +859,11 @@ extends Module {
         boolean bl = false;
         switch (Lambda.counts14[this.getRotateMode6().ordinal()]) {
             case 1: {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
                 if (!false) break;
             }
             case 2: {
-                Client.mathUtil.m2();
+                Client.mathUtil.resetRotationVisible();
                 break;
             }
         }

@@ -131,8 +131,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m844();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotationSilent();
+        Client.renderUtil3.restoreSlot();
     }
 
     private boolean isSet137() {
@@ -287,7 +287,7 @@ extends Module {
                 }
             }
         }
-        Client.mathUtil.m370();
+        Client.mathUtil.resetRotation();
     }
 
     @EventHandler
@@ -400,11 +400,11 @@ extends Module {
     }
 
     private void useFirework() {
-        boolean bl = Client.renderUtil3.m223((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.isOf(Items.FIREWORK_ROCKET)), (Object)ClientSetting.SwitchMode.NORMAL);
+        boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.isOf(Items.FIREWORK_ROCKET)), (Object)ClientSetting.SwitchMode.NORMAL);
         Object var2_2 = null;
         if (bl) {
             MC.mc.getNetworkHandler().sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, MC.mc.player.getYaw(), MC.mc.player.getPitch()));
-            Client.renderUtil3.m608();
+            Client.renderUtil3.restoreSlot();
             this.time72 = System.currentTimeMillis();
         }
     }

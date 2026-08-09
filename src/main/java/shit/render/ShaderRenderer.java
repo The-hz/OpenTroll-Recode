@@ -400,7 +400,7 @@ implements Listener {
         if (colorView == null) {
             return;
         }
-        if (this.flag12 && !Util.m843(this.count214, this.count236)) {
+        if (this.flag12 && !Util.isPositiveArea(this.count214, this.count236)) {
             return;
         }
         int indexCount = this.getInt29();
@@ -412,7 +412,7 @@ implements Listener {
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Lumin TTF Draws", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             renderPass.setPipeline(((Boolean)ClientSetting.INSTANCE.fontAntiAliasing.getValue()).booleanValue() ? RenderPipelines.renderPipeline3 : RenderPipelines.renderPipeline18);
             if (this.flag12) {
-                Util.m268(renderPass, this.count48, this.count90, this.count214, this.count236);
+                Util.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", dynamicTransforms);
@@ -428,7 +428,7 @@ implements Listener {
         if (this.map33.isEmpty()) {
             return false;
         }
-        if (this.flag12 && !Util.m843(this.count214, this.count236)) {
+        if (this.flag12 && !Util.isPositiveArea(this.count214, this.count236)) {
             return false;
         }
         this.count206 = this.getInt29();
@@ -479,8 +479,8 @@ implements Listener {
             if (bufferUtil.time65 == 0L) {
                 continue;
             }
-            if (bufferUtil.gpuManager.isSet135()) {
-                bufferUtil.gpuManager.m587();
+            if (bufferUtil.gpuManager.isMapped()) {
+                bufferUtil.gpuManager.unmap();
                 bufferUtil.time38 = 0L;
             }
             int count = (int)(bufferUtil.time65 / 24L);
@@ -492,7 +492,7 @@ implements Listener {
     private void setObj34(Object var1_1) {
         RenderPass renderPass = (RenderPass)var1_1;
         if (this.flag12) {
-            if (!Util.m268(renderPass, this.count48, this.count90, this.count214, this.count236)) {
+            if (!Util.enableScissor(renderPass, this.count48, this.count90, this.count214, this.count236)) {
                 return;
             }
         } else {
@@ -527,13 +527,13 @@ implements Listener {
                         if (bufferUtil2.time65 > 0L) {
                             GpuManager gpuManager = bufferUtil.gpuManager;
                             if (moduleArray != null) {
-                                if (gpuManager.isSet135()) {
-                                    bufferUtil.gpuManager.m587();
+                                if (gpuManager.isMapped()) {
+                                    bufferUtil.gpuManager.unmap();
                                     bufferUtil.time38 = 0L;
                                 }
                                 gpuManager = bufferUtil.gpuManager;
                             }
-                            gpuManager.m470();
+                            gpuManager.advanceBuffer();
                         }
                         bufferUtil2 = bufferUtil;
                     }
@@ -555,7 +555,7 @@ implements Listener {
             Module[] moduleArray = ShaderRenderer.getModuleArray();
             while (iterator.hasNext()) {
                 BufferUtil bufferUtil = (BufferUtil)iterator.next();
-                bufferUtil.gpuManager.m145();
+                bufferUtil.gpuManager.flush();
                 if (moduleArray != null) {
                     if (moduleArray != null) continue;
                 }
@@ -635,12 +635,12 @@ implements Listener {
             long base = this.time65;
             long end = base + (long)n * 96L;
             this.gpuManager.setLong(end);
-            if (this.gpuManager.isSet135()) {
+            if (this.gpuManager.isMapped()) {
                 if (this.time38 == 0L) {
                     this.time38 = MemoryUtil.memAddress(this.gpuManager.getByteBuffer());
                 }
             } else {
-                this.gpuManager.m691();
+                this.gpuManager.ensureMapped();
                 this.time38 = MemoryUtil.memAddress(this.gpuManager.getByteBuffer());
             }
             this.time65 = end;

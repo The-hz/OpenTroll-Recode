@@ -72,9 +72,9 @@ extends Module {
             float f = AutoSprint.m821(MC.mc.player.getYaw());
             boolean bl2 = bl = AutoSprint.isSet177() && AutoSprint.m325(f, MC.mc.player.getYaw()) > 1.0f;
             if (bl) {
-                Client.mathUtil.m24(f, MC.mc.player.getPitch());
+                Client.mathUtil.setSprintRotation(f, MC.mc.player.getPitch());
             } else if (Client.mathUtil.getType2() == MathUtil.Type.SPRINT) {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
             }
         }
         if (!this.isSet80()) {
@@ -279,7 +279,7 @@ extends Module {
      */
     private static boolean isSet102() {
         Object var1 = null;
-        if (!Client.mathUtil.isSet111()) {
+        if (!Client.mathUtil.hasPendingRotation()) {
             return false;
         }
         boolean bl = ClientSetting.INSTANCE != null && ((Boolean)ClientSetting.INSTANCE.movementSync.getValue()).booleanValue();
@@ -290,7 +290,7 @@ extends Module {
     private static float getFloat64() {
         MathUtil mathUtil = Client.mathUtil;
         Object var1_1 = null;
-        return mathUtil.isSet111() ? mathUtil.getFloat55() : MC.mc.player.getYaw();
+        return mathUtil.hasPendingRotation() ? mathUtil.getFloat55() : MC.mc.player.getYaw();
     }
 
     private static float m325(float f, float f2) {

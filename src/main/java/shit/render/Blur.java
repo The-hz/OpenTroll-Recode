@@ -114,7 +114,7 @@ public class Blur {
             return;
         }
         RenderUtil4.ColorData colorData = RenderUtil4.m13(f18, f17, f16, f15);
-        if (!Util.m101(colorData)) {
+        if (!Util.hasPositiveArea(colorData)) {
             return;
         }
         float f19 = (float)RenderUtil4.getDouble18();
@@ -132,7 +132,7 @@ public class Blur {
         GpuBufferSlice gpuBufferSlice = RenderUtil4.m1027("blur_uniforms", "Lumin Blur UBO", count74, 16, new Vec11f(n2, n, f28, f22, f23, f20, f21, f24, f25, f26, f27));
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Lumin Blur", gpuTextureView, OptionalInt.empty());){
             renderPass.setPipeline(this.renderPipeline10);
-            Util.m599(renderPass, colorData);
+            Util.enableScissorFromColorData(renderPass, colorData);
             RenderSystem.bindDefaultUniforms((RenderPass)renderPass);
             renderPass.setUniform("BlurUniforms", gpuBufferSlice);
             renderPass.bindTexture("InputSampler", this.field57.getColorAttachmentView(), RenderSystem.getSamplerCache().get(FilterMode.LINEAR));

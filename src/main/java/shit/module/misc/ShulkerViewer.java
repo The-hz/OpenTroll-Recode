@@ -78,7 +78,7 @@ extends Module {
     private boolean m297(Object object) {
         Item item;
         ItemStack itemStack = (ItemStack)object;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         ItemStack itemStack2 = itemStack;
         if (string != null) {
             if (itemStack2.isEmpty()) return false;
@@ -107,7 +107,7 @@ extends Module {
         int n4 = n;
         int n5 = n2;
         ShulkerViewer shulkerViewer = INSTANCE;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         ShulkerViewer shulkerViewer2 = shulkerViewer;
         if (string != null) {
             if (shulkerViewer2 == null) return false;

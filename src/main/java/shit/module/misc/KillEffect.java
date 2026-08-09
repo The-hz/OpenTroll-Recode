@@ -104,7 +104,7 @@ extends Module {
             boolean bl;
             block5: {
                 livingEntity2 = (LivingEntity)object;
-                string = IRC.getText7();
+                string = IRC.getConnectionId();
                 bl = this.isEnabled();
                 if (string != null) {
                     if (!bl) return false;
@@ -162,7 +162,7 @@ extends Module {
         HashSet<UUID> hashSet;
         block8: {
             hashSet = new HashSet<UUID>();
-            string = IRC.getText7();
+            string = IRC.getConnectionId();
             iterator = MC.mc.world.getPlayers().iterator();
             block0: while (iterator.hasNext()) {
                 block10: {
@@ -229,7 +229,7 @@ extends Module {
             double d = playerEntity.getX();
             double d2 = playerEntity.getY();
             double d3 = playerEntity.getZ();
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             boolean bl = (Boolean)this.lightning.getValue();
             if (string != null) {
                 if (bl) {
@@ -258,7 +258,7 @@ extends Module {
         double d4 = d;
         double d5 = d2;
         double d6 = d3;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         MC.mc.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 10000.0f, 0.8f + this.random8.nextFloat() * 0.2f, false);
         MC.mc.world.playSoundClient(d4, d5, d6, SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.WEATHER, 2.0f, 0.5f + this.random8.nextFloat() * 0.2f, false);
         String string2 = string;

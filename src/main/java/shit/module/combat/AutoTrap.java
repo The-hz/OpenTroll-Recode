@@ -93,8 +93,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotation();
+        Client.renderUtil3.restoreSlot();
         this.player4 = null;
     }
 

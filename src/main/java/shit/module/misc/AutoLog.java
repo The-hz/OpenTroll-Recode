@@ -56,7 +56,7 @@ extends Module {
         block3: {
             AutoLog autoLog;
             block2: {
-                String string = IRC.getText7();
+                String string = IRC.getConnectionId();
                 autoLog = this;
                 if (string == null) break block2;
                 if (!((Boolean)autoLog.logOnEnable.getValue()).booleanValue()) break block3;
@@ -93,7 +93,7 @@ extends Module {
 
     private boolean isSet150() {
         Iterator iterator = MC.mc.world.getPlayers().iterator();
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         while (iterator.hasNext()) {
             PlayerEntity playerEntity;
             PlayerEntity playerEntity2 = playerEntity = (PlayerEntity)iterator.next();
@@ -149,7 +149,7 @@ extends Module {
     private void setObj60(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
         String string = playerEntity.getName().getString();
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         AutoLog autoLog = this;
         if (string2 != null) {
             if (((Boolean)autoLog.sendMessage.getValue()).booleanValue()) {
@@ -190,7 +190,7 @@ extends Module {
 
     private int getInt13() {
         int n = 0;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         for (ItemStack itemStack : MC.mc.player.getInventory().getMainStacks()) {
             if (itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
                 n += itemStack.getCount();
@@ -210,7 +210,7 @@ extends Module {
                 block5: {
                     string2 = (String)object;
                     flag84 = true;
-                    string = IRC.getText7();
+                    string = IRC.getConnectionId();
                     CommandManager.sendFeedback("\u00a74[AutoLog] \u00a7f" + string2);
                     bl = (Boolean)this.autoDisable.getValue();
                     if (string == null) break block5;
@@ -238,7 +238,7 @@ extends Module {
         StringBuilder stringBuilder;
         block3: {
             int n2 = n;
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             if (n2 <= 0) {
                 return "";
             }

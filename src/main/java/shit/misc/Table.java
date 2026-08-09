@@ -3307,7 +3307,7 @@ public class Table {
     public static final String text3227 = "\ue42b";
     public static final String text1682 = "\ueb74";
     public static final String text783 = "\ueb75";
-    public static final String text2195 = "\ue8ed";
+    public static final String prefix = "\ue8ed";
     public static final String text1032 = "\ue8ee";
     public static final String text2907 = "\uefc9";
     public static final String text3496 = "\uefc9";

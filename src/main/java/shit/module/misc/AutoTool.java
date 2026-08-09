@@ -71,7 +71,7 @@ extends Module {
             int n = -1;
             float f = MC.mc.player.getMainHandStack().getMiningSpeedMultiplier(blockState);
             int n2 = 0;
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             while (n2 < 9) {
                 ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 float f2 = itemStack.getMiningSpeedMultiplier(blockState);
@@ -96,7 +96,7 @@ extends Module {
             int n = -1;
             double d = this.m971(MC.mc.player.getMainHandStack());
             int n2 = 0;
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             while (n2 < 9) {
                 ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 double d2 = this.m971(itemStack);
@@ -118,7 +118,7 @@ extends Module {
 
     private double m971(Object object) {
         ItemStack itemStack = (ItemStack)object;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         boolean bl = itemStack.isEmpty();
         if (string != null) {
             if (bl) {
@@ -151,7 +151,7 @@ extends Module {
                             block5: {
                                 block4: {
                                     n2 = n;
-                                    string = IRC.getText7();
+                                    string = IRC.getConnectionId();
                                     n3 = n2;
                                     if (string == null) break block4;
                                     if (n3 < 0) break block5;
@@ -184,7 +184,7 @@ extends Module {
             block3: {
                 ClientPlayerEntity clientPlayerEntity;
                 block4: {
-                    String string = IRC.getText7();
+                    String string = IRC.getConnectionId();
                     autoTool = this;
                     if (string == null) break block2;
                     if (autoTool.count58 == -1) break block3;

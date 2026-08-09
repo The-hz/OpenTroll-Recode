@@ -57,7 +57,7 @@ implements Listener2 {
             float f18 = f9;
             Color color = (Color)object;
             this.gpuManager7.setLong(this.time37 + 192L);
-            this.gpuManager7.m691();
+            this.gpuManager7.ensureMapped();
             float f19 = f10 - f18;
             float f20 = f11 - f18;
             float f21 = f10 + f12 + f18;
@@ -128,8 +128,8 @@ implements Listener2 {
         if (this.count94 == 0) {
             return;
         }
-        if (this.gpuManager7.isSet135()) {
-            this.gpuManager7.m587();
+        if (this.gpuManager7.isMapped()) {
+            this.gpuManager7.unmap();
         }
         RenderUtil4.Data data = RenderUtil4.m1023(this.count94);
         if (data == null) {
@@ -138,7 +138,7 @@ implements Listener2 {
         if (data.getGpuTextureView3() == null) {
             return;
         }
-        if (this.flag89 && !Util.m843(this.count169, this.count43)) {
+        if (this.flag89 && !Util.isPositiveArea(this.count169, this.count43)) {
             return;
         }
         try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(
@@ -146,7 +146,7 @@ implements Listener2 {
                 data.getGpuTextureView2(), OptionalDouble.empty())) {
             renderPass.setPipeline(RenderPipelines.renderPipeline23);
             if (this.flag89) {
-                Util.m268(renderPass, this.count210, this.count168, this.count169, this.count43);
+                Util.enableScissor(renderPass, this.count210, this.count168, this.count169, this.count43);
             }
             RenderSystem.bindDefaultUniforms(renderPass);
             renderPass.setUniform("DynamicTransforms", data.gpuBufferSlice3());
@@ -160,10 +160,10 @@ implements Listener2 {
         if (this.count94 == 0) {
             return false;
         }
-        if (this.gpuManager7.isSet135()) {
-            this.gpuManager7.m587();
+        if (this.gpuManager7.isMapped()) {
+            this.gpuManager7.unmap();
         }
-        if (this.flag89 && !Util.m843(this.count169, this.count43)) {
+        if (this.flag89 && !Util.isPositiveArea(this.count169, this.count43)) {
             return false;
         }
         this.data = RenderUtil4.m369(this.count94, false);
@@ -213,7 +213,7 @@ implements Listener2 {
                         n2 = this.count169;
                         n = this.count43;
                         if (stringArray == null) break block3;
-                        bl = Util.m268(renderPass, n4, n3, n2, n);
+                        bl = Util.enableScissor(renderPass, n4, n3, n2, n);
                     }
                     if (!bl) {
                         return;
@@ -241,12 +241,12 @@ implements Listener2 {
             if (shadow.count94 > 0) {
                 GpuManager gpuManager = this.gpuManager7;
                 if (stringArray != null) {
-                    if (gpuManager.isSet135()) {
-                        this.gpuManager7.m587();
+                    if (gpuManager.isMapped()) {
+                        this.gpuManager7.unmap();
                     }
                     gpuManager = this.gpuManager7;
                 }
-                gpuManager.m470();
+                gpuManager.advanceBuffer();
             }
             this.count94 = 0;
             this.time37 = 0L;
@@ -257,7 +257,7 @@ implements Listener2 {
 
     @Override
     public void m523() {
-        this.gpuManager7.m145();
+        this.gpuManager7.flush();
         Manager4.manager4.setObj100(this);
     }
 

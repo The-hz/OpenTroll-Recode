@@ -382,20 +382,20 @@ implements MC {
         if (rotateMode != ClientSetting.RotateMode.NONE && !BlockUtil.m262(vec3d, rotateMode, rotateSpeed)) {
             return false;
         }
-        if (!Client.renderUtil3.m223(predicate, switchMode)) {
+        if (!Client.renderUtil3.switchToItem(predicate, switchMode)) {
             return false;
         }
         boolean silentSwitch = switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY;
         BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
         if (silentSwitch) {
-            Client.renderUtil3.m608();
+            Client.renderUtil3.restoreSlot();
         }
         if (rotateMode == ClientSetting.RotateMode.rotateMode) {
-            Client.mathUtil.m2();
+            Client.mathUtil.resetRotationVisible();
             return true;
         }
         if (rotateMode == ClientSetting.RotateMode.ONTICK) {
-            Client.mathUtil.m844();
+            Client.mathUtil.resetRotationSilent();
         }
         return true;
     }
@@ -404,17 +404,17 @@ implements MC {
         Vec3d vec3d = (Vec3d)object;
         ClientSetting.RotateMode rotateMode = (ClientSetting.RotateMode)((Object)object2);
         float f2 = f;
-        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         boolean bl = false;
         int bl2 = Lambda.counts26[rotateMode.ordinal()];
         if (false) {
             switch (bl2) {
                 case 1: {
-                    Client.mathUtil.m303(fArray[0], fArray[1]);
+                    Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                     return true;
                 }
                 case 2: {
-                    Client.mathUtil.m468(fArray[0], fArray[1]);
+                    Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                     return true;
                 }
                 case 3: {

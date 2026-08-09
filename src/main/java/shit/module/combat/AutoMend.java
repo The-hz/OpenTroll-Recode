@@ -54,8 +54,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.renderUtil3.m608();
-        Client.mathUtil.m370();
+        Client.renderUtil3.restoreSlot();
+        Client.mathUtil.resetRotation();
     }
 
     @EventHandler
@@ -96,29 +96,29 @@ extends Module {
                 break;
             }
             case 2: {
-                Client.mathUtil.m303(f, f2);
+                Client.mathUtil.setRotationSilent(f, f2);
                 break;
             }
             case 3: {
-                Client.mathUtil.m468(f, f2);
+                Client.mathUtil.setRotationVisible(f, f2);
                 break;
             }
         }
         ClientSetting.SwitchMode switchMode = this.getSwitchMode5();
-        boolean bl = Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), (Object)switchMode);
+        boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), (Object)switchMode);
         if (!bl) {
             return;
         }
         float f3 = f;
         MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f3, f2));
         ItemUtil.setObj25(Hand.MAIN_HAND);
-        Client.renderUtil3.m608();
+        Client.renderUtil3.restoreSlot();
         if (rotateMode == ClientSetting.RotateMode.rotateMode) {
-            Client.mathUtil.m2();
+            Client.mathUtil.resetRotationVisible();
         } else if (rotateMode == ClientSetting.RotateMode.ONTICK) {
-            Client.mathUtil.m844();
+            Client.mathUtil.resetRotationSilent();
         } else if (rotateMode != ClientSetting.RotateMode.SMOOTH) {
-            Client.mathUtil.m370();
+            Client.mathUtil.resetRotation();
         }
         this.count176 = this.delay.getInt();
     }

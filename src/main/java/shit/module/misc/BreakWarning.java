@@ -80,7 +80,7 @@ extends Module {
     private boolean m1004(Object object) {
         BlockPos blockPos = (BlockPos)object;
         BlockPos blockPos2 = MC.mc.player.getBlockPos();
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         int n = blockPos.getY();
         int n2 = blockPos2.getY();
         if (string != null) {
@@ -98,7 +98,7 @@ extends Module {
         PlayerEntity playerEntity = (PlayerEntity)object2;
         String string2 = (String)object3;
         String string3 = string + ":" + String.valueOf(playerEntity.getUuid());
-        String string4 = IRC.getText7();
+        String string4 = IRC.getConnectionId();
         long l = System.currentTimeMillis();
         if (string4 != null) {
             if (l - (Long)this.map3.getOrDefault(string3, 0L) < 1000L) {

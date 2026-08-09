@@ -24,7 +24,7 @@ public class PlayerMixin {
     private boolean shouldMovementSync() {
         boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getValue() != false;
         boolean bl2 = AutoSprint.INSTANCE != null && AutoSprint.INSTANCE.isSet160();
-        return (bl || bl2) && Client.mathUtil.isSet111();
+        return (bl || bl2) && Client.mathUtil.hasPendingRotation();
     }
 
     @Inject(method={"travel(Lnet/minecraft/util/math/Vec3d;)V"}, at={@At(value="HEAD")}, cancellable=true)

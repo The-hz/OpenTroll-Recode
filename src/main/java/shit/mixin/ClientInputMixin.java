@@ -22,7 +22,7 @@ public class ClientInputMixin {
     private boolean shouldMovementSync() {
         boolean bl = ClientSetting.INSTANCE != null && (Boolean)ClientSetting.INSTANCE.movementSync.getValue() != false;
         boolean bl2 = AutoSprint.INSTANCE != null && AutoSprint.INSTANCE.isSet160();
-        return (bl || bl2) && Client.mathUtil.isSet111();
+        return (bl || bl2) && Client.mathUtil.hasPendingRotation();
     }
 
     @Inject(method={"getMovementInput()Lnet/minecraft/util/math/Vec2f;"}, at={@At(value="RETURN")}, cancellable=true)

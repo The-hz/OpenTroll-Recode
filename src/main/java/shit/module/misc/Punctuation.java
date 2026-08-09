@@ -103,7 +103,7 @@ extends Module {
                 block9: {
                     HitResult hitResult2;
                     Entity entity = MC.mc.getCameraEntity();
-                    string2 = IRC.getText7();
+                    string2 = IRC.getConnectionId();
                     Entity entity2 = entity;
                     if (string2 != null) {
                         if (entity2 == null) {
@@ -253,7 +253,7 @@ extends Module {
 
     public String m668(Object object) {
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         try {
             Matcher matcher = Pattern.compile("EnemyHere\\{(-?\\d+),(-?\\d+),(-?\\d+),(-?\\d+)\\}").matcher(string);
             int n = matcher.find() ? 1 : 0;
@@ -288,7 +288,7 @@ extends Module {
 
     public String m850(Object object) {
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         try {
             int n;
             byte[] byArray;
@@ -326,7 +326,7 @@ extends Module {
         byte[] byArray = (byte[])object;
         String string = (String)object2;
         String string2 = (String)object3;
-        String string3 = IRC.getText7();
+        String string3 = IRC.getConnectionId();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(string.getBytes(StandardCharsets.UTF_8));
@@ -396,7 +396,7 @@ extends Module {
             StringBuilder stringBuilder2 = new StringBuilder(byArray.length * 2);
             byte[] byArray2 = byArray;
             int n = byArray2.length;
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             for (int i = 0; i < n; ++i) {
                 byte by = byArray2[i];
                 stringBuilder = stringBuilder2.append(String.format("%02x", by));
@@ -418,7 +418,7 @@ extends Module {
                     MinecraftClient minecraftClient;
                     String string;
                     block2: {
-                        string = IRC.getText7();
+                        string = IRC.getConnectionId();
                         minecraftClient = MC.mc;
                         if (string == null) break block2;
                         if (minecraftClient.player == null) break block3;
@@ -456,7 +456,7 @@ extends Module {
                                 n4 = n;
                                 n3 = n2;
                                 Vector4f vector4f = new Vector4f((float)(d4 - vec3d.x), (float)(d5 - vec3d.y), (float)(d6 - vec3d.z), 1.0f).mul((Matrix4fc)matrix4f);
-                                string = IRC.getText7();
+                                string = IRC.getConnectionId();
                                 float f4 = vector4f.w();
                                 float f5 = 0.05f;
                                 if (string != null) {

@@ -43,7 +43,7 @@ implements MC {
         return this.type2;
     }
 
-    public void m935() {
+    public void init() {
         Client.eventBus.subscribe(this);
     }
 
@@ -135,7 +135,7 @@ implements MC {
         return f4;
     }
 
-    public void m303(float f, float f2) {
+    public void setRotationSilent(float f, float f2) {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
@@ -152,7 +152,7 @@ implements MC {
         this.count218 = 10;
     }
 
-    public void m11(float f, float f2) {
+    public void setRotationPacket(float f, float f2) {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
@@ -166,7 +166,7 @@ implements MC {
         this.value163 = f4;
     }
 
-    public void m24(float f, float f2) {
+    public void setSprintRotation(float f, float f2) {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
@@ -179,7 +179,7 @@ implements MC {
         }
     }
 
-    public void m468(float f, float f2) {
+    public void setRotationVisible(float f, float f2) {
         float f3 = f;
         float f4 = f2;
         Object var6_5 = null;
@@ -231,34 +231,34 @@ implements MC {
         return (float)Math.sqrt(f * f + f2 * f2);
     }
 
-    public void m844() {
+    public void resetRotationSilent() {
         if (!this.flag19 || MC.mc.player == null) {
             return;
         }
         this.type2 = Type.NONE;
-        this.m303(MC.mc.player.getYaw(), MC.mc.player.getPitch());
+        this.setRotationSilent(MC.mc.player.getYaw(), MC.mc.player.getPitch());
         this.flag19 = false;
         this.count218 = 0;
     }
 
-    public void m2() {
+    public void resetRotationVisible() {
         if (!this.flag19 || MC.mc.player == null) {
             return;
         }
         this.type2 = Type.NONE;
-        this.m468(MC.mc.player.getYaw(), MC.mc.player.getPitch());
+        this.setRotationVisible(MC.mc.player.getYaw(), MC.mc.player.getPitch());
         this.flag19 = false;
         this.count218 = 0;
     }
 
-    public void m370() {
+    public void resetRotation() {
         this.flag19 = false;
         this.count218 = 0;
         this.flag50 = false;
         this.type2 = Type.NONE;
     }
 
-    public boolean isSet111() {
+    public boolean hasPendingRotation() {
         return this.flag19;
     }
 
@@ -328,7 +328,7 @@ implements MC {
         this.flag50 = false;
     }
 
-    public static float[] m547(Object object, Object object2) {
+    public static float[] getLookAngles(Object object, Object object2) {
         Vec3d vec3d = (Vec3d)object;
         Vec3d vec3d2 = (Vec3d)object2;
         double d = vec3d2.x - vec3d.x;

@@ -15,7 +15,7 @@ import shit.util.Timer;
 public class Helper {
     private boolean flag167;
 
-    public void m25() {
+    public void init() {
         Object var2_1 = null;
         if (this.flag167) {
             return;

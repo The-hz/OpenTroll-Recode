@@ -36,7 +36,7 @@ public abstract class LivingEntityRendererMixin {
 
     @Inject(method={"updateRenderState(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;F)V"}, at={@At(value="TAIL")})
     private void m898(LivingEntity livingEntity, LivingEntityRenderState livingEntityRenderState, float f, CallbackInfo callbackInfo) {
-        if (livingEntity == MinecraftClient.getInstance().player && Client.mathUtil.isSet111()) {
+        if (livingEntity == MinecraftClient.getInstance().player && Client.mathUtil.hasPendingRotation()) {
             float f2 = MathHelper.lerpAngleDegrees((float)f, (float)Client.mathUtil.getFloat42(), (float)Client.mathUtil.getFloat19());
             float f3 = MathHelper.lerpAngleDegrees((float)f, (float)Client.mathUtil.getFloat56(), (float)Client.mathUtil.getFloat25());
             float f4 = MathHelper.lerp((float)f, (float)Client.mathUtil.getFloat63(), (float)Client.mathUtil.getFloat65());

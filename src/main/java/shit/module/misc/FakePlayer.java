@@ -64,7 +64,7 @@ extends Module {
 
     @Override
     public void onEnable() {
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         super.onEnable();
         String string2 = string;
         if (string2 != null) {
@@ -122,7 +122,7 @@ extends Module {
         block3: {
             PlayerUtil playerUtil;
             block2: {
-                String string = IRC.getText7();
+                String string = IRC.getConnectionId();
                 super.onDisable();
                 String string2 = string;
                 playerUtil = FakePlayer.playerUtil;
@@ -189,7 +189,7 @@ extends Module {
             float f5 = FakePlayer.m856((Object)playerUtil, f4);
             float f6 = f = FakePlayer.m881((Object)playerUtil, f5);
             MC.mc.execute(() -> {
-                String string = IRC.getText7();
+                String string = IRC.getConnectionId();
                 if (string != null) {
                     if (playerUtil == null) {
                         return;
@@ -221,7 +221,7 @@ extends Module {
                             float f4;
                             block9: {
                                 f4 = f;
-                                string = IRC.getText7();
+                                string = IRC.getConnectionId();
                                 PlayerUtil playerUtil2 = FakePlayer.playerUtil;
                                 if (string != null) {
                                     if (playerUtil2 == null) {
@@ -274,7 +274,7 @@ extends Module {
         PlayerEntity playerEntity = (PlayerEntity)object;
         float f2 = f;
         double d = FakePlayer.m878(playerEntity);
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         double d2 = d;
         double d3 = 0.0;
         if (string != null) {
@@ -292,7 +292,7 @@ extends Module {
         block2: {
             PlayerEntity playerEntity = (PlayerEntity)object;
             double d2 = 0.0;
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             for (EquipmentSlot equipmentSlot : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
                 d = d2 + FakePlayer.m610(playerEntity.getEquippedStack(equipmentSlot));
                 if (string != null) {
@@ -309,7 +309,7 @@ extends Module {
     private static double m610(Object object) {
         ItemEnchantmentsComponent itemEnchantmentsComponent;
         ItemStack itemStack = (ItemStack)object;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         ItemStack itemStack2 = itemStack;
         if (string != null) {
             if (itemStack2.isEmpty()) {
@@ -346,7 +346,7 @@ extends Module {
     private static float m1044(Object object) {
         ItemEnchantmentsComponent itemEnchantmentsComponent;
         ItemStack itemStack = (ItemStack)object;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         ItemStack itemStack2 = itemStack;
         if (string != null) {
             if (itemStack2.isEmpty()) {

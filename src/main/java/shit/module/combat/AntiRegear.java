@@ -193,7 +193,7 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
+        Client.mathUtil.resetRotation();
         Object var2_1 = null;
         this.flag38 = false;
         if (MC.mc.player != null) {
@@ -763,7 +763,7 @@ extends Module {
             return;
         }
         Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
-        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         switch (Lambda.counts24[rotateMode.ordinal()]) {
             case 1: {
                 Client.mathUtil.m355(fArray[0], fArray[1]);
@@ -771,11 +771,11 @@ extends Module {
                 if (null == null) break;
             }
             case 2: {
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                 if (null == null) break;
             }
             case 3: {
-                Client.mathUtil.m468(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                 break;
             }
         }
@@ -786,11 +786,11 @@ extends Module {
         Object var2_2 = null;
         switch (Lambda.counts24[rotateMode.ordinal()]) {
             case 2: {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
                 if (null == null) break;
             }
             case 3: {
-                Client.mathUtil.m2();
+                Client.mathUtil.resetRotationVisible();
                 break;
             }
         }

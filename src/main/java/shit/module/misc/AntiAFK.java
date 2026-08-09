@@ -51,7 +51,7 @@ extends Module {
     public void onEnable() {
         block3: {
             block2: {
-                String string = IRC.getText7();
+                String string = IRC.getConnectionId();
                 this.helper717.resetTimer();
                 this.helper741.resetTimer();
                 this.count72 = this.delay.getInt();
@@ -68,7 +68,7 @@ extends Module {
 
     @Override
     public void onDisable() {
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         if (string != null) {
             if (MC.mc.options != null) {
                 MC.mc.options.forwardKey.setPressed(false);
@@ -137,7 +137,7 @@ extends Module {
                         double d2 = Math.abs(MC.mc.player.getX() - this.value202);
                         double d3 = Math.abs(MC.mc.player.getY() - this.value184);
                         double d4 = Math.abs(MC.mc.player.getZ() - this.value177);
-                        String string = IRC.getText7();
+                        String string = IRC.getConnectionId();
                         double d5 = d2 + d3 + d4 - 0.01;
                         d = d5 == 0.0 ? 0 : (d5 > 0.0 ? 1 : -1);
                         if (string == null) break block2;
@@ -162,7 +162,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet108() {
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         boolean bl = MC.mc.options.forwardKey.isPressed();
         if (string == null) return bl;
         if (bl) return true;
@@ -198,7 +198,7 @@ extends Module {
             block6: {
                 PacketEvent.PacketEventInner packetEventInner = (PacketEvent.PacketEventInner)object;
                 packet2 = packetEventInner.getPacket();
-                string2 = IRC.getText7();
+                string2 = IRC.getConnectionId();
                 bl = packet2 instanceof GameMessageS2CPacket;
                 if (string2 == null) break block6;
                 if (bl) {

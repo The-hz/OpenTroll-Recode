@@ -20,19 +20,19 @@ implements MC {
     private int count220 = -1;
     private boolean flag36;
 
-    public boolean isSet82() {
+    public boolean isSwitching() {
         Object var2_1 = null;
         return this.count100 != -1;
     }
 
-    public boolean m223(Object object, Object object2) {
+    public boolean switchToItem(Object object, Object object2) {
         Predicate predicate = (Predicate)object;
         ClientSetting.SwitchMode switchMode = (ClientSetting.SwitchMode)((Object)object2);
         Object var6_5 = null;
         if (MC.mc.player == null) {
             return false;
         }
-        if (this.isSet82()) {
+        if (this.isSwitching()) {
             return true;
         }
         int n = MC.mc.player.getInventory().getSelectedSlot();
@@ -64,11 +64,11 @@ implements MC {
         return true;
     }
 
-    public void m608() {
+    public void restoreSlot() {
         block5: {
             block4: {
                 Object var2_1 = null;
-                if (!this.isSet82() || MC.mc.player == null) {
+                if (!this.isSwitching() || MC.mc.player == null) {
                     return;
                 }
                 if (!this.flag36) break block4;

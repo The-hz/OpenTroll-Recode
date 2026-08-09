@@ -162,8 +162,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotation();
+        Client.renderUtil3.restoreSlot();
     }
 
     @EventHandler
@@ -203,7 +203,7 @@ extends Module {
             return;
         }
         object = this.getSwitchMode3();
-        if (!Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)this::m718, object)) {
+        if (!Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m718, object)) {
             this.setEnabled(false);
             return;
         }
@@ -238,7 +238,7 @@ extends Module {
                         this.setEnabled(false);
                     }
                     if (bl2) {
-                        Client.renderUtil3.m608();
+                        Client.renderUtil3.restoreSlot();
                     }
                     return;
                 }
@@ -265,13 +265,13 @@ extends Module {
                     this.setEnabled(false);
                 }
                 if (bl2) {
-                    Client.renderUtil3.m608();
+                    Client.renderUtil3.restoreSlot();
                 }
                 return;
             }
             if (!this.isSet86()) {
                 if (bl2) {
-                    Client.renderUtil3.m608();
+                    Client.renderUtil3.restoreSlot();
                 }
                 return;
             }
@@ -281,10 +281,10 @@ extends Module {
         if (type == Type.BYPASS) {
             if (bl) {
                 Vec3d vec3d = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose()), this.vec3d10.z);
-                float[] fArray = MathUtil.m547(vec3d, MC.mc.player.getEntityPos());
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                float[] fArray = MathUtil.getLookAngles(vec3d, MC.mc.player.getEntityPos());
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
             } else {
-                Client.mathUtil.m303(MC.mc.player.getYaw(), 90.0f);
+                Client.mathUtil.setRotationSilent(MC.mc.player.getYaw(), 90.0f);
             }
         }
         int n = 0;
@@ -308,7 +308,7 @@ extends Module {
         if (n > 0) {
             this.m632((Object)(bl ? (LagMode)((Object)this.moveLagMode.getValue()) : (LagMode)((Object)this.lagMode.getValue())), d, d2, d3);
             if (bl2) {
-                Client.renderUtil3.m608();
+                Client.renderUtil3.restoreSlot();
             }
             if (((Boolean)this.disable.getValue()).booleanValue()) {
                 this.setEnabled(false);
@@ -403,24 +403,24 @@ extends Module {
             MC.mc.world.playSoundClient((double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1.0f, 0.8f, false);
         }
         Vec3d vec3d2 = new Vec3d(this.vec3d10.x, this.vec3d10.y + (double)MC.mc.player.getEyeHeight(MC.mc.player.getPose()), this.vec3d10.z);
-        float[] fArray = MathUtil.m547(vec3d2, vec3d);
+        float[] fArray = MathUtil.getLookAngles(vec3d2, vec3d);
         BlockHitResult blockHitResult = new BlockHitResult(vec3d, direction2, blockPos2, false);
         switch (type.ordinal()) {
             case 1: {
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                 if (null == null) break;
             }
             case 3: {
-                Client.mathUtil.m468(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                 break;
             }
         }
         BlockUtil.m868(blockPos, Hand.MAIN_HAND, blockHitResult);
         if (type == Type.NORMAL) {
-            Client.mathUtil.m844();
+            Client.mathUtil.resetRotationSilent();
         }
         if (type == Type.type) {
-            Client.mathUtil.m2();
+            Client.mathUtil.resetRotationVisible();
         }
         this.list16.add(blockPos);
         ++this.count79;

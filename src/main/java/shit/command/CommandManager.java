@@ -33,37 +33,37 @@ import shit.util.MC;
 public class CommandManager
 implements MC {
     private final Map<String, Command> map4 = new LinkedHashMap<>();
-    private String text2195 = ".";
+    private String prefix = ".";
 
-    public void m351() {
-        this.setObj51(new HelpCommand());
-        this.setObj51(new ToggleCommand());
-        this.setObj51(new BindCommand());
-        this.setObj51(new FriendCommand());
-        this.setObj51(new PrefixCommand());
-        this.setObj51(new ConfigCommand());
-        this.setObj51(new SaveCommand());
-        this.setObj51(new LoadCommand());
-        this.setObj51(new KitCommand());
-        this.setObj51(new IrcCommand());
-        this.setObj51(new IrckickCommand());
-        this.setObj51(new IrccrashCommand());
+    public void init() {
+        this.setPrefix(new HelpCommand());
+        this.setPrefix(new ToggleCommand());
+        this.setPrefix(new BindCommand());
+        this.setPrefix(new FriendCommand());
+        this.setPrefix(new PrefixCommand());
+        this.setPrefix(new ConfigCommand());
+        this.setPrefix(new SaveCommand());
+        this.setPrefix(new LoadCommand());
+        this.setPrefix(new KitCommand());
+        this.setPrefix(new IrcCommand());
+        this.setPrefix(new IrckickCommand());
+        this.setPrefix(new IrccrashCommand());
     }
 
-    public boolean m571(Object object) {
+    public boolean tryExecute(Object object) {
         String string = (String)object;
         Object var4_3 = null;
-        if (!string.startsWith(this.text2195)) {
+        if (!string.startsWith(this.prefix)) {
             return false;
         }
-        String string2 = string.substring(this.text2195.length()).trim();
+        String string2 = string.substring(this.prefix.length()).trim();
         if (string2.isEmpty()) {
             return true;
         }
         String[] stringArray = string2.split("\\s+");
         Command command = (Command)this.map4.get(stringArray[0].toLowerCase(Locale.ROOT));
         if (command == null) {
-            CommandManager.sendFeedback("Unknown command. Try " + this.text2195 + "help.");
+            CommandManager.sendFeedback("Unknown command. Try " + this.prefix + "help.");
             return true;
         }
         String[] stringArray2 = new String[stringArray.length - 1];
@@ -76,7 +76,7 @@ implements MC {
         return true;
     }
 
-    public void setObj51(Object object) {
+    public void setPrefix(Object object) {
         Command command = (Command)object;
         this.map4.put(command.getText48().toLowerCase(Locale.ROOT), command);
     }
@@ -86,7 +86,7 @@ implements MC {
     }
 
     public String getPrefix() {
-        return this.text2195;
+        return this.prefix;
     }
 
     public void setObj8(Object object) {
@@ -94,7 +94,7 @@ implements MC {
             String string = (String)object;
             Object var4_3 = null;
             if (string == null || string.isBlank()) break block0;
-            this.text2195 = string;
+            this.prefix = string;
         }
     }
 

@@ -21,7 +21,7 @@ public class FontManager {
     private final Map<String, java.awt.Font> map45 = new ConcurrentHashMap();
     private final Map<String, shit.manager.FontManager2> map13 = new ConcurrentHashMap();
 
-    public void m497() {
+    public void init() {
         block0: {
             this.m80("default.ttf");
             this.m80("jura-light.ttf");

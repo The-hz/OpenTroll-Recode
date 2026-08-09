@@ -39,7 +39,7 @@ public class GpuManager {
         return this.counts5[this.count134];
     }
 
-    public boolean isSet135() {
+    public boolean isMapped() {
         return this.flag159;
     }
 
@@ -60,7 +60,7 @@ public class GpuManager {
         this.setInt2(GpuManager.m20(this.getInt15(), l2));
     }
 
-    public void m691() {
+    public void ensureMapped() {
         boolean bl = false;
         if (this.flag159) {
             return;
@@ -70,7 +70,7 @@ public class GpuManager {
         this.flag159 = true;
     }
 
-    public void m587() {
+    public void unmap() {
         boolean bl = false;
         if (!this.flag159) {
             return;
@@ -80,7 +80,7 @@ public class GpuManager {
         this.flag159 = false;
     }
 
-    public void m470() {
+    public void advanceBuffer() {
         this.m560();
         this.count134 = (this.count134 + 1) % this.gpuBuffers.length;
     }
@@ -89,13 +89,13 @@ public class GpuManager {
         return this.gpuBuffers[this.count134];
     }
 
-    public void m145() {
+    public void flush() {
         block4: {
             boolean bl = GpuManager.isSet62();
             GpuManager gpuManager = this;
             if (bl) {
                 if (gpuManager.flag159) {
-                    this.m587();
+                    this.unmap();
                 }
                 gpuManager = this;
             }
@@ -149,7 +149,7 @@ public class GpuManager {
                         GpuManager gpuManager = this;
                         if (bl) {
                             if (gpuManager.flag159) {
-                                this.m587();
+                                this.unmap();
                             }
                             gpuManager = this;
                         }
@@ -160,7 +160,7 @@ public class GpuManager {
                         if (!bl) break block15;
                         if (byteBuffer2 == null) break block16;
                         try {
-                            this.m691();
+                            this.ensureMapped();
                             MemoryUtil.memCopy((long)MemoryUtil.memAddress((ByteBuffer)byteBuffer3), (long)MemoryUtil.memAddress((ByteBuffer)this.mappedView.data()), (long)n3);
                             byteBuffer2 = byteBuffer3;
                         }

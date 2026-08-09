@@ -44,7 +44,7 @@ extends Module {
     public void onDisable() {
         PlayerModelPart[] playerModelPartArray = PlayerModelPart.values();
         int n = playerModelPartArray.length;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         for (int i = 0; i < n; ++i) {
             PlayerModelPart playerModelPart = playerModelPartArray[i];
             MC.mc.options.setPlayerModelPart(playerModelPart, true);
@@ -72,7 +72,7 @@ extends Module {
             int[] object2;
             block9: {
                 PlayerModelPart playerModelPart = (PlayerModelPart)object;
-                String string = IRC.getText7();
+                String string = IRC.getConnectionId();
                 object2 = Lambda.counts6;
                 if (string == null) break block9;
                 switch (object2[playerModelPart.ordinal()]) {

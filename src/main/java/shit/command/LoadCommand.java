@@ -65,7 +65,7 @@ extends Command {
                     this.setObj45(stringArray);
                     return;
                 }
-                Client.configManager.m256();
+                Client.configManager.init();
                 string = "Config loaded.";
             }
             CommandManager.sendFeedback(string);

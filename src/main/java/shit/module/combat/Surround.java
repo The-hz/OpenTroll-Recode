@@ -102,8 +102,8 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.mathUtil.m370();
-        Client.renderUtil3.m608();
+        Client.mathUtil.resetRotation();
+        Client.renderUtil3.restoreSlot();
     }
 
     @EventHandler
@@ -149,7 +149,7 @@ extends Module {
         this.setObj19(blockPos);
         this.setObj19(BlockPos.ofFloored((double)MC.mc.player.getX(), (double)(MC.mc.player.getY() + 0.8), (double)MC.mc.player.getZ()));
         if (this.count64 == 0) {
-            Client.mathUtil.m370();
+            Client.mathUtil.resetRotation();
         }
     }
 
@@ -169,7 +169,7 @@ extends Module {
             }
         } else if (this.flag125) {
             Vec3d vec3d = Vec3d.ofCenter((Vec3i)blockPos);
-            float[] fArray = MathUtil.m547(MC.mc.player.getEntityPos(), new Vec3d(vec3d.x, MC.mc.player.getY(), vec3d.z));
+            float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEntityPos(), new Vec3d(vec3d.x, MC.mc.player.getY(), vec3d.z));
             float f = fArray[0] / 180.0f * (float)Math.PI;
             double d3 = MC.mc.player.getEntityPos().distanceTo(new Vec3d(vec3d.x, MC.mc.player.getY(), vec3d.z));
             double d4 = Math.min(0.2873, d3);
@@ -262,21 +262,21 @@ extends Module {
                 } else if (this.m930(blockPos)) {
                     return;
                 }
-                if (!(bl = Client.renderUtil3.m223((java.util.function.Predicate<ItemStack>)this::m727, (Object)(switchMode = this.getSwitchMode7())))) {
+                if (!(bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m727, (Object)(switchMode = this.getSwitchMode7())))) {
                     return;
                 }
                 boolean bl2 = switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY;
                 BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
                 this.time67 = System.currentTimeMillis();
                 if (bl2) {
-                    Client.renderUtil3.m608();
+                    Client.renderUtil3.restoreSlot();
                 }
                 if (rotateMode != ClientSetting.RotateMode.rotateMode) break block21;
-                Client.mathUtil.m2();
+                Client.mathUtil.resetRotationVisible();
                 if (null == null) break block22;
             }
             if (rotateMode == ClientSetting.RotateMode.ONTICK) {
-                Client.mathUtil.m844();
+                Client.mathUtil.resetRotationSilent();
             }
         }
         ++this.count64;
@@ -290,15 +290,15 @@ extends Module {
     private boolean m53(Object object, Object object2) {
         Vec3d vec3d = (Vec3d)object;
         ClientSetting.RotateMode rotateMode = (ClientSetting.RotateMode)((Object)object2);
-        float[] fArray = MathUtil.m547(MC.mc.player.getEyePos(), vec3d);
+        float[] fArray = MathUtil.getLookAngles(MC.mc.player.getEyePos(), vec3d);
         Object var6_6 = null;
         switch (Lambda.counts7[rotateMode.ordinal()]) {
             case 1: {
-                Client.mathUtil.m303(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationSilent(fArray[0], fArray[1]);
                 return true;
             }
             case 2: {
-                Client.mathUtil.m468(fArray[0], fArray[1]);
+                Client.mathUtil.setRotationVisible(fArray[0], fArray[1]);
                 return true;
             }
             case 3: {

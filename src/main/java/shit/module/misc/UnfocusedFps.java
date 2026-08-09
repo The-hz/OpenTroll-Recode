@@ -52,7 +52,7 @@ extends Module {
         block3: {
             block4: {
                 block2: {
-                    String string = IRC.getText7();
+                    String string = IRC.getConnectionId();
                     if (this.integer == null) break block2;
                     gameOptions = MC.mc.options;
                     if (string == null) break block3;

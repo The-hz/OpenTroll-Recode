@@ -38,7 +38,7 @@ extends Module {
             block6: {
                 FakeGameMode fakeGameMode;
                 block5: {
-                    String string = IRC.getText7();
+                    String string = IRC.getConnectionId();
                     if (string == null) break block4;
                     if (MC.mc.interactionManager == null) break block5;
                     fakeGameMode = this;

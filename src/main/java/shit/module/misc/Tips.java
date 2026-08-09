@@ -222,7 +222,7 @@ extends Module {
      */
     private boolean m501(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         boolean bl = (Boolean)this.friends.getValue();
         if (string == null) return bl;
         if (bl) return true;
@@ -247,7 +247,7 @@ extends Module {
             boolean bl;
             HashSet<UUID> hashSet = new HashSet<UUID>();
             Iterator iterator = MC.mc.world.getPlayers().iterator();
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             while (iterator.hasNext()) {
                 block8: {
                     Tips tips;
@@ -316,7 +316,7 @@ extends Module {
                     block8: {
                         boolean bl;
                         block7: {
-                            string = IRC.getText7();
+                            string = IRC.getConnectionId();
                             bl = (Boolean)this.healthWarn.getValue();
                             if (string == null) break block7;
                             if (!bl) break block8;
@@ -341,7 +341,7 @@ extends Module {
 
     private String getText60() {
         StringBuilder stringBuilder = new StringBuilder();
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         int n = this.getInt8();
         if (string != null) {
             if (n > 0) {
@@ -357,7 +357,7 @@ extends Module {
     private int getInt8() {
         int n;
         block9: {
-            String string = IRC.getText7();
+            String string = IRC.getConnectionId();
             if (MC.mc.player == null) {
                 return 0;
             }
@@ -410,7 +410,7 @@ extends Module {
                     string = (String)object3;
                     int n3 = n ? 1 : 0;
                     statusEffectInstance = MC.mc.player.getStatusEffect(registryEntry);
-                    string2 = IRC.getText7();
+                    string2 = IRC.getConnectionId();
                     if (statusEffectInstance == null) break block4;
                     n2 = n3;
                     if (string2 == null) break block5;
@@ -473,7 +473,7 @@ extends Module {
 
     private int m1022(float f) {
         float f2 = f;
-        String string = IRC.getText7();
+        String string = IRC.getConnectionId();
         double d = (Double)this.minHealth.getValue();
         double d2 = 0.0;
         if (string != null) {

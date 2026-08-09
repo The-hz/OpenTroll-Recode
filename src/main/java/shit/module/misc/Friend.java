@@ -42,7 +42,7 @@ extends Module {
      */
     public static boolean m446(Object object) {
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         Friend friend = INSTANCE;
         if (string2 != null) {
             if (friend == null) return false;
@@ -121,7 +121,7 @@ extends Module {
 
     private void setObj110(Object object) {
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         if (string2 != null) {
             if (MC.mc.player == null) {
                 return;
@@ -142,7 +142,7 @@ extends Module {
      */
     public static boolean m913(Object object) {
         String string = (String)object;
-        String string2 = IRC.getText7();
+        String string2 = IRC.getConnectionId();
         boolean bl = string.equalsIgnoreCase("kiss_O_o");
         if (string2 == null) return bl;
         if (bl) return true;
