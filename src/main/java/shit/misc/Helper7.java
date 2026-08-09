@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 
 @Environment(value=EnvType.CLIENT)
 public class Helper7 {
-    private long time40 = -1L;
+    private long lastResetTime = -1L;
     private static String[] texts10;
 
     public Helper7() {
@@ -16,11 +16,11 @@ public class Helper7 {
     }
 
     public void resetTimer() {
-        this.time40 = System.currentTimeMillis();
+        this.lastResetTime = System.currentTimeMillis();
     }
 
     public long getElapsed() {
-        return System.currentTimeMillis() - this.time40;
+        return System.currentTimeMillis() - this.lastResetTime;
     }
 
     public boolean hasPassedSeconds(double d) {
@@ -35,11 +35,11 @@ public class Helper7 {
 
     public void setElapsed(long l) {
         long l2 = l;
-        this.time40 = System.currentTimeMillis() - l2;
+        this.lastResetTime = System.currentTimeMillis() - l2;
     }
 
     public boolean hasPassedMillis(long l) {
-        return System.currentTimeMillis() - this.time40 >= l;
+        return System.currentTimeMillis() - this.lastResetTime >= l;
     }
 
     public static void setTextArray3(String[] stringArray) {

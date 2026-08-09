@@ -78,7 +78,7 @@ extends Module {
         return true;
     }, null, "", false));
     private final ColorSetting2 switchArmorKey = (ColorSetting2)this.registerSetting(new ColorSetting2("SwitchArmorKey", -1, () -> {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         boolean bl = (Boolean)this.switchArmor.getValue();
         if (n != 0) {
             if (!bl) return false;
@@ -121,7 +121,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet104() {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         if (n != 0) {
             if (clientPlayerEntity == null) {
@@ -144,7 +144,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet145() {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         ElytraFly elytraFly = ElytraFly.INSTANCE;
         if (n != 0) {
             if (elytraFly == null) return false;
@@ -389,7 +389,7 @@ extends Module {
                                 block16: {
                                     MinecraftClient minecraftClient;
                                     block15: {
-                                        n = AutoArmor.getInt66();
+                                        n = AutoArmor.getSwitchFlag();
                                         minecraftClient = MC.mc;
                                         if (n == 0) break block15;
                                         if (minecraftClient.player == null) break block16;
@@ -547,7 +547,7 @@ extends Module {
             int[][] nArrayArray;
             n2 = 0;
             int n3 = 0;
-            int n4 = AutoArmor.getInt66();
+            int n4 = AutoArmor.getSwitchFlag();
             int[][] nArrayArray2 = new int[4][];
             int[] nArray = new int[2];
             nArray[0] = 39;
@@ -624,7 +624,7 @@ extends Module {
                         n5 = n;
                         type = (Type)((Object)object2);
                         itemStack = MC.mc.player.getInventory().getStack(n5);
-                        n4 = AutoArmor.getInt66();
+                        n4 = AutoArmor.getSwitchFlag();
                         itemStack2 = itemStack;
                         if (n4 == 0) break block11;
                         if (itemStack2.isEmpty()) break block12;
@@ -747,7 +747,7 @@ extends Module {
                     ItemStack itemStack2;
                     block25: {
                         itemStack = (ItemStack)object;
-                        n3 = AutoArmor.getInt66();
+                        n3 = AutoArmor.getSwitchFlag();
                         itemStack2 = itemStack;
                         if (n3 == 0) break block25;
                         if (AutoArmor.m328(itemStack2) != null) break block26;
@@ -935,7 +935,7 @@ extends Module {
         boolean bl;
         block6: {
             ItemStack itemStack = (ItemStack)object;
-            int n = AutoArmor.getInt66();
+            int n = AutoArmor.getSwitchFlag();
             ItemStack itemStack2 = itemStack;
             if (n != 0) {
                 if (!itemStack2.hasEnchantments()) {
@@ -1087,7 +1087,7 @@ extends Module {
         return count177;
     }
 
-    public static int getInt66() {
+    public static int getSwitchFlag() {
         boolean bl = false;
         return 111;
     }

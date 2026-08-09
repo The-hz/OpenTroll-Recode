@@ -418,7 +418,7 @@ public class Table {
     public static final String text1819 = "\uf1f4";
     public static final String text1994 = "\uf6eb";
     public static final String text3072 = "\ue678";
-    public static final String text1185 = "\uef81";
+    public static final String moduleDescription = "\uef81";
     public static final String text2263 = "\ue669";
     public static final String text1495 = "\uef45";
     public static final String text2953 = "\uea3a";
@@ -519,9 +519,9 @@ public class Table {
     public static final String text1808 = "\uf8cd";
     public static final String text1925 = "\uef48";
     public static final String text2333 = "\ue591";
-    public static final String text2598 = "\ue43c";
+    public static final String moduleName = "\ue43c";
     public static final String text2358 = "\ue98f";
-    public static final String text265 = "\ue7ee";
+    public static final String settingName = "\ue7ee";
     public static final String text438 = "\ueb3f";
     public static final String text2963 = "\uf84c";
     public static final String text1390 = "\uef84";

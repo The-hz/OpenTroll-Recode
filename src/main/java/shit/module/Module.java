@@ -21,23 +21,23 @@ import shit.util.Util4;
 @Environment(value=EnvType.CLIENT)
 public abstract class Module
 implements MC {
-    private final String text2598;
-    private final String text1185;
+    private final String moduleName;
+    private final String moduleDescription;
     private final Category category;
-    private final List list11;
-    private final BooleanSetting booleanSetting2;
+    private final List settingsList;
+    private final BooleanSetting drawnSetting;
     private final ColorSetting2 colorSetting2;
-    private boolean flag123;
+    private boolean enabled;
     private static String[] texts8;
 
     protected Module(String string, String string2, Category category) {
         block0: {
-            this.list11 = new ArrayList();
-            this.booleanSetting2 = (BooleanSetting)this.registerSetting(new BooleanSetting("Drawn", true));
+            this.settingsList = new ArrayList();
+            this.drawnSetting = (BooleanSetting)this.registerSetting(new BooleanSetting("Drawn", true));
             Object var4_4 = null;
             this.colorSetting2 = (ColorSetting2)this.registerSetting(new ColorSetting2("Bind", -1));
-            this.text2598 = string;
-            this.text1185 = string2;
+            this.moduleName = string;
+            this.moduleDescription = string2;
             this.category = category;
             if (null == null) break block0;
             Module.setTextArray9(new String[2]);
@@ -46,14 +46,14 @@ implements MC {
 
     protected Setting registerSetting(Object object) {
         Setting setting = (Setting)object;
-        this.list11.add(setting);
+        this.settingsList.add(setting);
         return setting;
     }
 
     public void toggle() {
         block0: {
             Object var2_1 = null;
-            this.setEnabled(!this.flag123);
+            this.setEnabled(!this.enabled);
             if (Module.getTextArray9() != null) break block0;
             Category.setText7("x3Qbmc");
         }
@@ -69,7 +69,7 @@ implements MC {
             block6: {
                 bl2 = bl;
                 Object var4_3 = null;
-                if (this.flag123 == bl2) {
+                if (this.enabled == bl2) {
                     return;
                 }
                 if (bl2) {
@@ -77,7 +77,7 @@ implements MC {
                         return;
                     }
                 }
-                this.flag123 = bl2;
+                this.enabled = bl2;
                 if (!bl2) break block6;
                 Client.eventBus.subscribe(this);
                 try {
@@ -102,15 +102,15 @@ implements MC {
     }
 
     public String getName() {
-        return this.text2598;
+        return this.moduleName;
     }
 
     public String getDisplayName() {
-        return Outline.m14(this.text2598);
+        return Outline.m14(this.moduleName);
     }
 
     public String getDisplayDescription() {
-        return Outline.m14(this.text1185);
+        return Outline.m14(this.moduleDescription);
     }
 
     public Category getCategory() {
@@ -118,11 +118,11 @@ implements MC {
     }
 
     public boolean isEnabled() {
-        return this.flag123;
+        return this.enabled;
     }
 
     public boolean isDrawn() {
-        return (Boolean)this.booleanSetting2.getValue();
+        return (Boolean)this.drawnSetting.getValue();
     }
 
     public ColorSetting2 getKeyBindSetting() {
@@ -130,7 +130,7 @@ implements MC {
     }
 
     public java.util.List<shit.setting.Setting> getSettings() {
-        return Collections.unmodifiableList(this.list11);
+        return Collections.unmodifiableList(this.settingsList);
     }
 
     public static boolean isNotInGame() {

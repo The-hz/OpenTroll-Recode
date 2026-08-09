@@ -19,8 +19,8 @@ extends Setting {
         this(string, n, true, null, null, "", false);
     }
 
-    public ColorSetting(String string, int n, boolean bl, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl2) {
-        super(string, n, booleanSupplier, biFunction, string2, bl2);
+    public ColorSetting(String string, int n, boolean bl, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string2, boolean bl2) {
+        super(string, n, visibilityPredicate, biFunction, string2, bl2);
         this.flag60 = bl;
     }
 

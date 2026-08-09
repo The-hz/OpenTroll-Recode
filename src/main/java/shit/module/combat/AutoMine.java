@@ -293,7 +293,7 @@ extends Module {
                     blockPos = (BlockPos)object;
                     boolean bl3 = bl;
                     BlockPos blockPos2 = blockPos.down();
-                    n = AutoArmor.getInt66();
+                    n = AutoArmor.getSwitchFlag();
                     bl2 = bl3;
                     if (n == 0) break block5;
                     if (!bl2) break block6;
@@ -324,7 +324,7 @@ extends Module {
         block3: {
             BlockPos blockPos = (BlockPos)object;
             Iterator iterator = MC.mc.world.getNonSpectatingEntities(Entity.class, new Box(blockPos)).iterator();
-            int n = AutoArmor.getInt66();
+            int n = AutoArmor.getSwitchFlag();
             while (iterator.hasNext()) {
                 block5: {
                     boolean bl2 = false;

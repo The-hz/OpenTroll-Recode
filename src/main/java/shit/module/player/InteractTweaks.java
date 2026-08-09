@@ -192,7 +192,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     private boolean isSet11() {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         int n2 = ((Boolean)this.autoGapple.getValue()).booleanValue() ? 1 : 0;
         if (n != 0) {
             if (n2 == 0) {
@@ -374,7 +374,7 @@ extends Module {
     private int getInt14() {
         int n;
         block3: {
-            int n2 = AutoArmor.getInt66();
+            int n2 = AutoArmor.getSwitchFlag();
             for (int i = 0; i < 9; ++i) {
                 n = this.m499(MC.mc.player.getInventory().getStack(i).getItem()) ? 1 : 0;
                 if (n2 != 0) {
@@ -398,7 +398,7 @@ extends Module {
      */
     private boolean m499(Object object) {
         Item item = (Item)object;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Item item2 = item;
         Item item3 = Items.ENCHANTED_GOLDEN_APPLE;
         if (n != 0) {
@@ -479,7 +479,7 @@ extends Module {
         block8: {
             int n;
             block7: {
-                int n2 = AutoArmor.getInt66();
+                int n2 = AutoArmor.getSwitchFlag();
                 n = this.flag155 ? 1 : 0;
                 if (n2 != 0) {
                     if (n != 0) {

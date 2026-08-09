@@ -26,8 +26,8 @@ extends Setting {
         this(string, d, d2, d3, d4, d4, null, null, "", false);
     }
 
-    public NumberSetting(String string, double d, double d2, double d3, double d4, double d5, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl) {
-        super(string, d, booleanSupplier, biFunction, string2, bl);
+    public NumberSetting(String string, double d, double d2, double d3, double d4, double d5, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string2, boolean bl) {
+        super(string, d, visibilityPredicate, biFunction, string2, bl);
         this.value169 = d2;
         this.value205 = d3;
         this.value112 = d4;

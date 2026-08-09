@@ -21,8 +21,8 @@ extends Setting {
         this.class_2 = enum_.getDeclaringClass();
     }
 
-    public EnumSetting(String string, Enum enum_, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl) {
-        super(string, enum_, booleanSupplier, biFunction, string2, bl);
+    public EnumSetting(String string, Enum enum_, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string2, boolean bl) {
+        super(string, enum_, visibilityPredicate, biFunction, string2, bl);
         this.class_2 = enum_.getDeclaringClass();
     }
 

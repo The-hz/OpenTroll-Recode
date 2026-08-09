@@ -41,7 +41,7 @@ extends Module {
     private final BooleanSetting reset = (BooleanSetting)this.registerSetting(new BooleanSetting("Reset", true, () -> (Boolean)this.tickShift.getValue(), null, "", false));
     private final BooleanSetting indicator = (BooleanSetting)this.registerSetting(new BooleanSetting("Indicator", true, () -> (Boolean)this.tickShift.getValue(), null, "", false));
     private final ColorSetting completed = (ColorSetting)this.registerSetting(new ColorSetting("Completed", -16711936, true, () -> {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         boolean bl = (Boolean)this.indicator.getValue();
         if (n != 0) {
             if (!bl) return false;
@@ -52,7 +52,7 @@ extends Module {
         return true;
     }, null, "", false));
     private final ColorSetting charging = (ColorSetting)this.registerSetting(new ColorSetting("Charging", -65536, true, () -> {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         boolean bl = (Boolean)this.indicator.getValue();
         if (n != 0) {
             if (!bl) return false;

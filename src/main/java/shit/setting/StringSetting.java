@@ -16,8 +16,8 @@ extends Setting {
         super(string, string2);
     }
 
-    public StringSetting(String string, String string2, BooleanSupplier booleanSupplier, BiFunction biFunction, String string3, boolean bl) {
-        super(string, string2, booleanSupplier, biFunction, string3, bl);
+    public StringSetting(String string, String string2, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string3, boolean bl) {
+        super(string, string2, visibilityPredicate, biFunction, string3, bl);
     }
 
     @Override

@@ -68,7 +68,7 @@ extends Module {
      */
     private boolean m1038(Object object) {
         ItemStack itemStack = (ItemStack)object;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         int n2 = itemStack.isEmpty() ? 1 : 0;
         if (n != 0) {
             if (n2 != 0) return false;

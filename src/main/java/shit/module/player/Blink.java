@@ -75,7 +75,7 @@ extends Module {
         int n;
         block8: {
             block7: {
-                n = AutoArmor.getInt66();
+                n = AutoArmor.getSwitchFlag();
                 if (n == 0) break block7;
                 if (MC.mc.player != null && MC.mc.player.networkHandler != null) break block8;
                 this.queue.clear();

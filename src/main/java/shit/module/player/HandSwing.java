@@ -51,7 +51,7 @@ extends Module {
      * Lifted jumps to return sites
      */
     public int getInt89() {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         HandSwing handSwing = this;
         if (n != 0) {
             if (((Boolean)handSwing.cancelClient.getValue()).booleanValue()) {

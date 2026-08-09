@@ -18,8 +18,8 @@ extends Setting {
         super(string, bl);
     }
 
-    public BooleanSetting(String string, boolean bl, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl2) {
-        super(string, bl, booleanSupplier, biFunction, string2, bl2);
+    public BooleanSetting(String string, boolean bl, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string2, boolean bl2) {
+        super(string, bl, visibilityPredicate, biFunction, string2, bl2);
     }
 
     @Override

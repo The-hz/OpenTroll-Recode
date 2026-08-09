@@ -576,7 +576,7 @@ extends Module {
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
-                                    int nInner = AutoArmor.getInt66();
+                                    int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
@@ -646,7 +646,7 @@ extends Module {
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 BlockPos bp = this.blockPos12;
                                 Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
-                                    int nInner = AutoArmor.getInt66();
+                                    int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
@@ -717,7 +717,7 @@ extends Module {
                                                     block26: {
                                                         block27: {
                                                             block25: {
-                                                                n = AutoArmor.getInt66();
+                                                                n = AutoArmor.getSwitchFlag();
                                                                 if (!((Boolean)this.doubleBreak.getValue()).booleanValue()) {
                                                                     return;
                                                                 }
@@ -775,7 +775,7 @@ extends Module {
                                 blockPos = blockPos7;
                                 net.minecraft.util.math.BlockPos blockPosF = blockPos;
                                 Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
-                                    int nInner = AutoArmor.getInt66();
+                                    int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(blockPosF)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
                                     if (nInner != 0) {
@@ -874,7 +874,7 @@ extends Module {
      */
     private ClientSetting.RotateMode getRotateMode6() {
         ClientSetting.RotateMode rotateMode;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {
@@ -919,7 +919,7 @@ extends Module {
      */
     private ClientSetting.SwitchMode getSwitchMode4() {
         ClientSetting.SwitchMode switchMode;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Object object = this.switchMode.getValue();
         if (n != 0) {
             if (object == SwitchMode.DEFAULT) {
@@ -1076,7 +1076,7 @@ extends Module {
             SpeedMine speedMine;
             block6: {
                 block5: {
-                    int n = AutoArmor.getInt66();
+                    int n = AutoArmor.getSwitchFlag();
                     direction = this.direction8;
                     if (n == 0) break block4;
                     if (direction != null) break block5;
@@ -1117,7 +1117,7 @@ extends Module {
         BlockPos blockPos = (BlockPos)object;
         int n3 = n;
         double d2 = d;
-        int n4 = AutoArmor.getInt66();
+        int n4 = AutoArmor.getSwitchFlag();
         int n5 = Module.isNotInGame() ? 1 : 0;
         if (n4 != 0) {
             if (n5 != 0) {
@@ -1228,7 +1228,7 @@ extends Module {
      */
     static boolean m822(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         SpeedMine speedMine = INSTANCE;
         if (n != 0) {
             if (speedMine == null) return false;
@@ -1260,7 +1260,7 @@ extends Module {
      */
     boolean m193(Object object) {
         BlockPos blockPos = (BlockPos)object;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         if (blockPos == null) return true;
         boolean bl = Module.isNotInGame();
         if (n == 0) return bl;

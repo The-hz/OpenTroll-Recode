@@ -8,15 +8,15 @@ import net.fabricmc.api.Environment;
 
 @Environment(value=EnvType.CLIENT)
 public class Event {
-    private boolean flag29;
+    private boolean cancelled;
     private static int count55;
 
     public boolean isCancelled() {
-        return this.flag29;
+        return this.cancelled;
     }
 
     public void cancel() {
-        this.flag29 = true;
+        this.cancelled = true;
     }
 
     public static void setInt(int n) {

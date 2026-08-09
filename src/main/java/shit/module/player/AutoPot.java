@@ -213,7 +213,7 @@ extends Module {
      */
     private ClientSetting.RotateMode getRotateMode4() {
         ClientSetting.RotateMode rotateMode;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {
@@ -256,7 +256,7 @@ extends Module {
     private static boolean m489(Object object, Object object2) {
         ItemStack itemStack = (ItemStack)object;
         RegistryEntry registryEntry = (RegistryEntry)object2;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Object object3 = itemStack.getItem();
         if (n != 0) {
             if (object3 != Items.SPLASH_POTION) {
@@ -290,7 +290,7 @@ extends Module {
         block4: {
             RegistryEntry registryEntry = (RegistryEntry)object;
             int n2 = 35;
-            int n3 = AutoArmor.getInt66();
+            int n3 = AutoArmor.getSwitchFlag();
             while (n2 >= 9) {
                 ItemStack itemStack = MC.mc.player.getInventory().getStack(n2);
                 if (n3 != 0) {
@@ -310,7 +310,7 @@ extends Module {
 
     @Override
     public String getInfo() {
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         AutoPot autoPot = this;
         if (n != 0) {
             if (autoPot.field66 != null) {

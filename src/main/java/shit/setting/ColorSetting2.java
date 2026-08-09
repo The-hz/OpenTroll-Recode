@@ -26,8 +26,8 @@ extends Setting {
         super(string, n);
     }
 
-    public ColorSetting2(String string, int n, BooleanSupplier booleanSupplier) {
-        super(string, n, booleanSupplier, null, "", false);
+    public ColorSetting2(String string, int n, BooleanSupplier visibilityPredicate) {
+        super(string, n, visibilityPredicate, null, "", false);
     }
 
     public boolean isSet148() {

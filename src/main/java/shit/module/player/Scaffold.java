@@ -186,7 +186,7 @@ extends Module {
             blockPos2 = (BlockPos)object;
             directionArray2 = directions;
             n4 = directionArray2.length;
-            n3 = AutoArmor.getInt66();
+            n3 = AutoArmor.getSwitchFlag();
             n2 = 0;
             while (n2 < n4) {
                 block13: {
@@ -275,7 +275,7 @@ extends Module {
                     block6: {
                         blockPos = (BlockPos)object;
                         BlockState blockState = MC.mc.world.getBlockState(blockPos);
-                        n = AutoArmor.getInt66();
+                        n = AutoArmor.getSwitchFlag();
                         bl2 = blockState.isAir();
                         if (n == 0) break block6;
                         if (bl2) break block7;
@@ -337,7 +337,7 @@ extends Module {
                 block4: {
                     boolean bl;
                     block2: {
-                        n = AutoArmor.getInt66();
+                        n = AutoArmor.getSwitchFlag();
                         bl = MC.mc.player.isOnGround();
                         if (n == 0) break block2;
                         if (!bl) break block3;
@@ -363,7 +363,7 @@ extends Module {
      */
     private ClientSetting.RotateMode getRotateMode13() {
         ClientSetting.RotateMode rotateMode;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         Object object = this.rotateMode.getValue();
         if (n != 0) {
             if (object == RotateMode.DEFAULT) {

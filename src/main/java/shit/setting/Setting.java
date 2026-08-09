@@ -13,52 +13,52 @@ import shit.render.Outline;
 
 @Environment(value=EnvType.CLIENT)
 public abstract class Setting {
-    private final String text265;
-    private final Object field47;
+    private final String settingName;
+    private final Object defaultValueField;
     private final String text3213;
-    private final BooleanSupplier booleanSupplier;
+    private final BooleanSupplier visibilityPredicate;
     private final BiFunction biFunction;
     private final boolean flag133;
-    private Object field48;
+    private Object currentValue;
     private static String text508;
 
     protected Setting(String string, Object object3) {
         this(string, object3, () -> true, (object, object2) -> object2, "", false);
     }
 
-    protected Setting(String string, Object object, BooleanSupplier booleanSupplier, BiFunction biFunction, String string2, boolean bl) {
-        this.text265 = string;
-        this.field47 = object;
-        this.field48 = object;
-        this.booleanSupplier = Objects.requireNonNullElseGet(booleanSupplier, () -> () -> true);
+    protected Setting(String string, Object object, BooleanSupplier visibilityPredicate, BiFunction biFunction, String string2, boolean bl) {
+        this.settingName = string;
+        this.defaultValueField = object;
+        this.currentValue = object;
+        this.visibilityPredicate = Objects.requireNonNullElseGet(visibilityPredicate, () -> () -> true);
         this.biFunction = Objects.requireNonNullElseGet(biFunction, () -> (a, b) -> b);
         this.text3213 = string2 != null ? string2 : "";
         this.flag133 = bl;
     }
 
     public String getName() {
-        return this.text265;
+        return this.settingName;
     }
 
     public String getDisplayName() {
-        return Outline.m14(this.text265);
+        return Outline.m14(this.settingName);
     }
 
     public Object getDefaultValue() {
-        return this.field47;
+        return this.defaultValueField;
     }
 
     public boolean isVisible() {
-        return this.booleanSupplier.getAsBoolean();
+        return this.visibilityPredicate.getAsBoolean();
     }
 
     public Object getValue() {
-        return this.field48;
+        return this.currentValue;
     }
 
     public void setValueInternal(Object object) {
         Object object2 = object;
-        this.field48 = this.biFunction.apply(this.field48, object2);
+        this.currentValue = this.biFunction.apply(this.currentValue, object2);
     }
 
     public abstract String getValueString();

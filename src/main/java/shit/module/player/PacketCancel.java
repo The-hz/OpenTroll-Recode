@@ -43,7 +43,7 @@ extends Module {
     private boolean m475(Object object, Object object2) {
         String string = (String)object;
         String string2 = (String)object2;
-        int n = AutoArmor.getInt66();
+        int n = AutoArmor.getSwitchFlag();
         String string3 = string;
         if (n != 0) {
             if (string3 == null) return false;

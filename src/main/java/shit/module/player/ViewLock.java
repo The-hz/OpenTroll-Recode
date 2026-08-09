@@ -30,7 +30,7 @@ extends Module {
     public void onEnable() {
         block3: {
             block2: {
-                int n = AutoArmor.getInt66();
+                int n = AutoArmor.getSwitchFlag();
                 if (n == 0) break block2;
                 if (MC.mc.player == null) break block3;
                 this.yawValue.setDouble(MC.mc.player.getYaw());
