@@ -26,7 +26,7 @@ implements Listener3 {
     public final BooleanSetting durability = (BooleanSetting)this.m28(new BooleanSetting("Durability", true));
 
     public ArmorHud() {
-        super("ArmorHud", "Placeholder armor hud.", Category.HUD);
+        super("ArmorHud", "Renders equipped armor with optional durability percent.", Category.HUD);
     }
 
     @Override

@@ -5,26 +5,66 @@ package shit.module.player;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import shit.event.Event2;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.common.DisconnectS2CPacket;
+import net.minecraft.network.packet.s2c.common.ResourcePackSendS2CPacket;
+import net.minecraft.network.packet.s2c.play.CloseScreenS2CPacket;
 import shit.event.EventHandler;
+import shit.event.PacketEvent;
 import shit.module.Category;
 import shit.module.Module;
+import shit.setting.BooleanSetting;
+import shit.util.MC;
 import shit.util.Util2;
 
 @Environment(value=EnvType.CLIENT)
 public class NoPacketKick
 extends Module {
+    public static NoPacketKick INSTANCE;
+    private final BooleanSetting cancelDisconnect = (BooleanSetting)this.m28(new BooleanSetting("CancelDisconnect", true));
+    private final BooleanSetting cancelResourcePack = (BooleanSetting)this.m28(new BooleanSetting("CancelResourcePack", true));
+    private final BooleanSetting cancelCloseScreen = (BooleanSetting)this.m28(new BooleanSetting("CancelCloseScreen", false));
+    private final BooleanSetting logToChat = (BooleanSetting)this.m28(new BooleanSetting("LogToChat", true));
+
     public NoPacketKick() {
-        super("NoPacketKick", "Disables itself after warning; deep packet guards are not needed in normal play.", Category.PLAYER);
+        super("NoPacketKick", "Cancels incoming packets that could disconnect or trap the player.", Category.PLAYER);
+        INSTANCE = this;
     }
 
     @Override
     public void onEnable() {
-        Util2.setObj10("[NoPacketKick] Current recode networking already guards packet dispatch through PacketEvent.");
+        Util2.setObj10("[NoPacketKick] Active. Cancelling: disconnect=" + (Boolean)this.cancelDisconnect.getObj() + ", resourcePack=" + (Boolean)this.cancelResourcePack.getObj() + ", closeScreen=" + (Boolean)this.cancelCloseScreen.getObj());
     }
 
-    @EventHandler
-    private void setEvent2Inner25(Event2.Event2Inner2 event2Inner2) {
+    @EventHandler(priority=2000)
+    private void setPacketEventInner9(PacketEvent.PacketEventInner packetEventInner) {
+        if (Module.isSet37()) {
+            return;
+        }
+        Packet packet = packetEventInner.getPacket();
+        if (packet == null) {
+            return;
+        }
+        if (((Boolean)this.cancelDisconnect.getObj()).booleanValue() && packet instanceof DisconnectS2CPacket) {
+            DisconnectS2CPacket disconnectS2CPacket = (DisconnectS2CPacket)packet;
+            String string = disconnectS2CPacket.reason() != null ? disconnectS2CPacket.reason().getString() : "(no reason)";
+            if (((Boolean)this.logToChat.getObj()).booleanValue()) {
+                Util2.setObj10("\u00a7c[NoPacketKick] \u00a7fBlocked server disconnect: " + string);
+            }
+            packetEventInner.m209();
+            return;
+        }
+        if (((Boolean)this.cancelResourcePack.getObj()).booleanValue() && packet instanceof ResourcePackSendS2CPacket) {
+            if (((Boolean)this.logToChat.getObj()).booleanValue()) {
+                Util2.setObj10("\u00a7c[NoPacketKick] \u00a7fBlocked server resource pack prompt.");
+            }
+            packetEventInner.m209();
+            return;
+        }
+        if (((Boolean)this.cancelCloseScreen.getObj()).booleanValue() && packet instanceof CloseScreenS2CPacket) {
+            if (MC.client3.currentScreen != null) {
+                packetEventInner.m209();
+            }
+        }
     }
 }
-
