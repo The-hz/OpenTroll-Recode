@@ -644,7 +644,7 @@ extends Module {
             if (!playerEntity.isAlive()) continue;
             if (playerEntity.isSpectator()) continue;
             try {
-                if (Client.manager.isFriend(playerEntity.getName().getString()) && null == null) continue;
+                if (Client.friendManager.isFriend(playerEntity.getName().getString()) && null == null) continue;
             }
             catch (Exception exception) {
             }
@@ -701,7 +701,7 @@ extends Module {
         for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
             if (playerEntity == MC.mc.player) continue;
             try {
-                if (!Client.manager.isFriend(playerEntity.getName().getString()) && null == null) continue;
+                if (!Client.friendManager.isFriend(playerEntity.getName().getString()) && null == null) continue;
             }
             catch (Exception exception) {
                 if (null == null) continue;

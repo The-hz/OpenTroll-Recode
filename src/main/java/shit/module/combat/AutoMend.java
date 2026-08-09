@@ -54,7 +54,7 @@ extends Module {
 
     @Override
     public void onDisable() {
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         Client.mathUtil.resetRotation();
     }
 
@@ -105,14 +105,14 @@ extends Module {
             }
         }
         ClientSetting.SwitchMode switchMode = this.getSwitchMode5();
-        boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), (Object)switchMode);
+        boolean bl = Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(Items.EXPERIENCE_BOTTLE)), (Object)switchMode);
         if (!bl) {
             return;
         }
         float f3 = f;
         MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f3, f2));
         ItemUtil.setObj25(Hand.MAIN_HAND);
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         if (rotateMode == ClientSetting.RotateMode.rotateMode) {
             Client.mathUtil.resetRotationVisible();
         } else if (rotateMode == ClientSetting.RotateMode.ONTICK) {

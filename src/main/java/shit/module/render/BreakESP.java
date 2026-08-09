@@ -105,7 +105,7 @@ extends Module {
             if (((Boolean)this.showName.getValue()).booleanValue() && (entity = MC.mc.world.getEntityById(blockBreakingInfo.getActorId())) instanceof PlayerEntity) {
                 object = (PlayerEntity)entity;
                 String string = ((PlayerEntity)object).getName().getString();
-                n3 = Client.manager.isFriend(string) ? -11184641 : -1;
+                n3 = Client.friendManager.isFriend(string) ? -11184641 : -1;
                 int n6 = Client.fontManager.renderer2().getStringWidth(string);
                 Client.fontManager.renderer2().drawText(render2DEvent.getDrawContext(), string, n4 - n6 / 2, n5, n3, true);
                 n5 += Client.fontManager.renderer2().getFontHeight() + 1;
@@ -141,7 +141,7 @@ extends Module {
         Entity entity = MC.mc.world.getEntityById(blockBreakingInfo.getActorId());
         if (entity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity)entity;
-            if (Client.manager.isFriend(playerEntity.getName().getString())) {
+            if (Client.friendManager.isFriend(playerEntity.getName().getString())) {
                 return (Integer)this.friendColor.getValue();
             }
         }

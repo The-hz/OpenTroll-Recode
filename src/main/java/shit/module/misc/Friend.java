@@ -53,7 +53,7 @@ extends Module {
             if (!bl) {
                 return false;
             }
-            bl = Client.manager.isFriend(string);
+            bl = Client.friendManager.isFriend(string);
         }
         if (string2 == null) return bl;
         if (bl) return true;
@@ -98,15 +98,15 @@ extends Module {
                 }
                 return;
             }
-            boolean bl = Client.manager.isFriend(object);
+            boolean bl = Client.friendManager.isFriend(object);
             if (bl) {
-                Client.manager.removeFriend(object);
+                Client.friendManager.removeFriend(object);
                 Util2.sendClientMessage("\u00a77\u2716 \u00a7c\u5df2\u79fb\u9664\u597d\u53cb\u00a7f: " + (String)object + " \u00a77\u2716 \u545c\u545c...");
                 if (((Boolean)this.sound.getValue()).booleanValue()) {
                     MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), (SoundEvent)SoundEvents.ENTITY_ITEM_BREAK.value(), SoundCategory.PLAYERS, 1.0f, 0.8f, false);
                 }
             } else {
-                Client.manager.addFriend(object);
+                Client.friendManager.addFriend(object);
                 Util2.sendClientMessage("\u00a7d\u2661 \u00a7a\u5df2\u6dfb\u52a0\u597d\u53cb\u00a7f: " + (String)object + " \u00a7d\u2661 \uff90\u30e3~");
                 if (((Boolean)this.sound.getValue()).booleanValue()) {
                     MC.mc.world.playSoundClient(MC.mc.player.getX(), MC.mc.player.getY(), MC.mc.player.getZ(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.2f, false);

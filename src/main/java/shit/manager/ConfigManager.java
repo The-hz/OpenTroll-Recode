@@ -281,7 +281,7 @@ public class ConfigManager {
             }
             Files.writeString(path, (CharSequence)stringBuilder.toString(), StandardCharsets.UTF_8, new OpenOption[0]);
             if (bl2) {
-                Files.write(this.path2, (Iterable<? extends CharSequence>)Client.manager.getFriends(), StandardCharsets.UTF_8, new OpenOption[0]);
+                Files.write(this.path2, (Iterable<? extends CharSequence>)Client.friendManager.getFriends(), StandardCharsets.UTF_8, new OpenOption[0]);
             }
         }
         catch (IOException iOException) {
@@ -320,7 +320,7 @@ public class ConfigManager {
     }
 
     private void m597() {
-        Client.manager.clearFriends();
+        Client.friendManager.clearFriends();
         Object var2_1 = null;
         if (!Files.exists(this.path2, new LinkOption[0])) {
             return;
@@ -329,7 +329,7 @@ public class ConfigManager {
             List<String> list = Files.readAllLines(this.path2, StandardCharsets.UTF_8);
             for (String string : list) {
                 if (!string.isBlank()) {
-                    Client.manager.addFriend(string.trim());
+                    Client.friendManager.addFriend(string.trim());
                 }
                 if (null == null) continue;
                 break;

@@ -30,20 +30,20 @@ extends Setting {
         super(string, n, visibilityPredicate, null, "", false);
     }
 
-    public boolean isSet148() {
+    public boolean isBound() {
         return ((Integer) this.getValue()).intValue() != 0;
     }
 
-    public static int m559(int n) {
+    public static int encodeKey(int n) {
         int n2 = n;
         return -100 - n2;
     }
 
-    public static boolean m232(int n) {
+    public static boolean isEncodedKey(int n) {
         return n <= -100;
     }
 
-    public static int m1003(int n) {
+    public static int decodeKey(int n) {
         int n2 = n;
         return -100 - n2;
     }
@@ -52,7 +52,7 @@ extends Setting {
      * Unable to fully structure code
      * Could not resolve type clashes
      */
-    public static Integer m911(Object var0) {
+    public static Integer parseKey(Object var0) {
         String s = ((String) var0).trim();
         try {
             return Integer.parseInt(s);
@@ -76,16 +76,16 @@ extends Setting {
                     block12: {
                         n2 = (Integer)this.getValue();
                         string2 = Setting.getText54();
-                        n = this.isSet148() ? 1 : 0;
+                        n = this.isBound() ? 1 : 0;
                         if (string2 == null) {
                             if (n == 0) {
                                 return Outline.m14("None");
                             }
-                            n = ColorSetting2.m232(n2) ? 1 : 0;
+                            n = ColorSetting2.isEncodedKey(n2) ? 1 : 0;
                         }
                         if (string2 != null) break block10;
                         if (n == 0) break block11;
-                        n3 = ColorSetting2.m1003(n2);
+                        n3 = ColorSetting2.decodeKey(n2);
                         if (string2 != null) break block12;
                         switch (n3) {
                             case 0: {
@@ -109,7 +109,7 @@ extends Setting {
                                 break block13;
                             }
                             default: {
-                                n3 = ColorSetting2.m1003(n2);
+                                n3 = ColorSetting2.decodeKey(n2);
                             }
                         }
                     }
@@ -159,7 +159,7 @@ extends Setting {
         try {
             if (s.contains(":")) {
                 String[] parts = s.split(":");
-                Integer kc = m911(parts[0]);
+                Integer kc = parseKey(parts[0]);
                 this.setValueInternal(kc != null ? kc : (Integer) this.getDefaultValue());
                 try {
                     this.setObj23(Type.valueOf(parts[1]));
@@ -167,7 +167,7 @@ extends Setting {
                     this.setObj23(Type.Toggle);
                 }
             } else {
-                Integer kc = m911(s);
+                Integer kc = parseKey(s);
                 this.setValueInternal(kc != null ? kc : (Integer) this.getDefaultValue());
                 this.setObj23(Type.Toggle);
             }

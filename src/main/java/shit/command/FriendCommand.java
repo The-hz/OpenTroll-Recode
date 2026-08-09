@@ -36,7 +36,7 @@ extends Command {
                 if (!string.equals("remove")) break block4;
             }
             String string = stringArray.length > 2 ? stringArray[2].toLowerCase() : "";
-            return (String[])Client.manager.getFriends().stream().filter(string2 -> ((String)string2).toLowerCase().startsWith(string)).toArray(String[]::new);
+            return (String[])Client.friendManager.getFriends().stream().filter(string2 -> ((String)string2).toLowerCase().startsWith(string)).toArray(String[]::new);
         }
         return new String[0];
     }
@@ -47,14 +47,14 @@ extends Command {
         if (args.length < 1) {
             CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());
         } else if (args[0].equalsIgnoreCase("list")) {
-            CommandManager.sendFeedback("Friends: " + String.join(", ", Client.manager.getFriends()));
+            CommandManager.sendFeedback("Friends: " + String.join(", ", Client.friendManager.getFriends()));
         } else if (args.length < 2) {
             CommandManager.sendFeedback("Missing name.");
         } else if (args[0].equalsIgnoreCase("add")) {
-            Client.manager.addFriend(args[1]);
+            Client.friendManager.addFriend(args[1]);
             CommandManager.sendFeedback("Added friend " + args[1] + ".");
         } else if (args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("remove")) {
-            Client.manager.removeFriend(args[1]);
+            Client.friendManager.removeFriend(args[1]);
             CommandManager.sendFeedback("Removed friend " + args[1] + ".");
         } else {
             CommandManager.sendFeedback("Usage: " + Client.commandManager.getPrefix() + this.getText31());

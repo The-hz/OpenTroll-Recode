@@ -40,7 +40,7 @@ implements Listener2 {
     }
 
     public static RectRenderer getRectRenderer() {
-        return (RectRenderer)Manager4.manager4.m276(new RectRenderer());
+        return (RectRenderer)Manager4.manager4.addListener(new RectRenderer());
     }
 
     public void m697(float f, float f2, float f3, float f4, Object object) {
@@ -136,7 +136,7 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         this.data4 = null;
         if (this.count44 == 0) {
             return false;
@@ -155,7 +155,7 @@ implements Listener2 {
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         RenderPass renderPass = (RenderPass)object;
         String[] stringArray = TextureRenderer.getTextArray3();
         RectRenderer rectRenderer = this;
@@ -237,10 +237,10 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         this.endFrame();
         this.gpuManager8.flush();
-        Manager4.manager4.setObj100(this);
+        Manager4.manager4.removeListener(this);
     }
 
     private static /* synthetic */ String cfrlam$draw$0() {

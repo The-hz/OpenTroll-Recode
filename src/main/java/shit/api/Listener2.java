@@ -11,16 +11,16 @@ import net.fabricmc.api.Environment;
 public interface Listener2 {
     public void draw2();
 
-    default public boolean isSet4() {
+    default public boolean prepareBuffers() {
         return false;
     }
 
-    default public void setObj103(Object object) {
+    default public void drawWithPass(Object object) {
         RenderPass cfr_ignored_0 = (RenderPass)object;
     }
 
     public void endFrame();
 
-    public void m523();
+    public void close();
 }
 

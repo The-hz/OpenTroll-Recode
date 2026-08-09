@@ -107,7 +107,7 @@ extends Module {
             float[] fArray;
             if (playerEntity == MC.mc.player) continue;
             if (!playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString())) continue;
+            if (playerEntity.isSpectator() || Client.friendManager.isFriend(playerEntity.getName().getString())) continue;
             Vec3d vec3d = (Double)this.predictTicks.getValue() > 0.0 ? playerEntity.getEntityPos().add(playerEntity.getVelocity().multiply(((Double)this.predictTicks.getValue()).doubleValue())) : playerEntity.getEntityPos();
             double d = vec3d.x;
             double d2 = vec3d.y;

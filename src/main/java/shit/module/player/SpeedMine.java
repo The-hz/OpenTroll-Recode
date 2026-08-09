@@ -300,7 +300,7 @@ extends Module {
     @Override
     public void onDisable() {
         this.m989();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
     }
 
     private void m989() {
@@ -575,7 +575,7 @@ extends Module {
                                 this.m400(bp, dir);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -592,7 +592,7 @@ extends Module {
                                 MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.restoreSlot();
+                                Client.itemSwitcher.restoreSlot();
                             }
                             this.flag24 = false;
                             if (((Boolean)this.endRotate.getValue()).booleanValue()) {
@@ -645,7 +645,7 @@ extends Module {
                             ClientSetting.SwitchMode sm = this.getSwitchMode4();
                             if (sm != ClientSetting.SwitchMode.NONE) {
                                 BlockPos bp = this.blockPos12;
-                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(bp)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -661,7 +661,7 @@ extends Module {
                                 MC.mc.player.swingHand(Hand.MAIN_HAND);
                             }
                             if (sm != ClientSetting.SwitchMode.NONE) {
-                                Client.renderUtil3.restoreSlot();
+                                Client.itemSwitcher.restoreSlot();
                             }
                             this.setObj36("INSTANT STOP breakPos=" + String.valueOf(this.blockPos12));
                             flag95 = true;
@@ -774,7 +774,7 @@ extends Module {
                             if (switchMode != ClientSetting.SwitchMode.NONE) {
                                 blockPos = blockPos7;
                                 net.minecraft.util.math.BlockPos blockPosF = blockPos;
-                                Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
+                                Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>) itemStack -> {
                                     int nInner = AutoArmor.getSwitchFlag();
                                     float f = itemStack.getMiningSpeedMultiplier(MC.mc.world.getBlockState(blockPosF)) - 1.0f;
                                     float f2 = f == 0.0f ? 0 : (f > 0.0f ? 1 : -1);
@@ -812,7 +812,7 @@ extends Module {
                 object = switchMode;
                 if (n == 0) break block37;
                 if (object != ClientSetting.SwitchMode.NONE) {
-                    Client.renderUtil3.restoreSlot();
+                    Client.itemSwitcher.restoreSlot();
                 }
                 speedMine = this;
                 if (n == 0) break block38;

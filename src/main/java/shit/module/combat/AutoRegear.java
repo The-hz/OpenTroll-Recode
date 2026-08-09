@@ -139,7 +139,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         this.m781();
     }
 
@@ -594,7 +594,7 @@ extends Module {
                 }
                 if (null == null) break block10;
             }
-            if (!Client.renderUtil3.switchToItem(predicate, (Object)switchMode)) {
+            if (!Client.itemSwitcher.switchToItem(predicate, (Object)switchMode)) {
                 return;
             }
         }
@@ -610,7 +610,7 @@ extends Module {
             }
         }
         if (switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY) {
-            Client.renderUtil3.restoreSlot();
+            Client.itemSwitcher.restoreSlot();
         }
         this.m879();
     }

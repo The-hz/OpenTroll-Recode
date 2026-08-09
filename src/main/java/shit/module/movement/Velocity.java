@@ -168,7 +168,7 @@ extends Module {
                 if (!bl2) {
                     if (!bl3) {
                         if (!((Boolean)this.static_.getValue()).booleanValue()) return vec3d;
-                        if (!MathUtil.isSet132()) {
+                        if (!MathUtil.isMovingHorizontally()) {
                             return vec3d;
                         }
                     }

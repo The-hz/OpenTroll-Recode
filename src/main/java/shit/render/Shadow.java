@@ -41,7 +41,7 @@ implements Listener2 {
     }
 
     public static Shadow getShadow2() {
-        return (Shadow)Manager4.manager4.m276(new Shadow());
+        return (Shadow)Manager4.manager4.addListener(new Shadow());
     }
 
     public void m536(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, Object object) {
@@ -155,7 +155,7 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         this.data = null;
         if (this.count94 == 0) {
             return false;
@@ -174,7 +174,7 @@ implements Listener2 {
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         RenderPass renderPass = (RenderPass)object;
         String[] stringArray = TextureRenderer.getTextArray3();
         Shadow shadow = this;
@@ -256,9 +256,9 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         this.gpuManager7.flush();
-        Manager4.manager4.setObj100(this);
+        Manager4.manager4.removeListener(this);
     }
 
     private static /* synthetic */ String cfrlam$draw$0() {

@@ -92,11 +92,11 @@ implements MC {
         }
     }
 
-    public static void setFlag12(boolean bl) {
+    public static void setFlag100(boolean bl) {
         flag100 = bl;
     }
 
-    public static boolean isSet78() {
+    public static boolean getFlag100() {
         return flag100;
     }
 

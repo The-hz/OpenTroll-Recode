@@ -103,7 +103,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
     }
 
     @EventHandler
@@ -262,14 +262,14 @@ extends Module {
                 } else if (this.m930(blockPos)) {
                     return;
                 }
-                if (!(bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m727, (Object)(switchMode = this.getSwitchMode7())))) {
+                if (!(bl = Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)this::m727, (Object)(switchMode = this.getSwitchMode7())))) {
                     return;
                 }
                 boolean bl2 = switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY;
                 BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
                 this.time67 = System.currentTimeMillis();
                 if (bl2) {
-                    Client.renderUtil3.restoreSlot();
+                    Client.itemSwitcher.restoreSlot();
                 }
                 if (rotateMode != ClientSetting.RotateMode.rotateMode) break block21;
                 Client.mathUtil.resetRotationVisible();

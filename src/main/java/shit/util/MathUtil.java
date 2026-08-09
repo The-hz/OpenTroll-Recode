@@ -44,7 +44,7 @@ implements MC {
     /*
      * Enabled aggressive block sorting
      */
-    public static boolean isSet132() {
+    public static boolean isMovingHorizontally() {
         boolean bl = false;
         ClientPlayerEntity clientPlayerEntity = MC.mc.player;
         double d = clientPlayerEntity.getVelocity().x - 0.0;
@@ -152,7 +152,7 @@ implements MC {
         return new double[]{d5, d6};
     }
 
-    public static void setDouble8(double d) {
+    public static void setMotionX(double d) {
         block3: {
             ClientPlayerEntity clientPlayerEntity;
             double d2;
@@ -168,7 +168,7 @@ implements MC {
         }
     }
 
-    public static void setDouble7(double d) {
+    public static void setMotionY(double d) {
         block3: {
             ClientPlayerEntity clientPlayerEntity;
             double d2;
@@ -184,7 +184,7 @@ implements MC {
         }
     }
 
-    public static void setDouble9(double d) {
+    public static void setMotionZ(double d) {
         block3: {
             ClientPlayerEntity clientPlayerEntity;
             double d2;
@@ -200,7 +200,7 @@ implements MC {
         }
     }
 
-    public static double m372(boolean bl, double d) {
+    public static double applySpeedModifiers(boolean bl, double d) {
         boolean bl2;
         double d2;
         block9: {

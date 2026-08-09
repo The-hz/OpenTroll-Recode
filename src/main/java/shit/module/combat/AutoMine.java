@@ -371,7 +371,7 @@ extends Module {
         for (PlayerEntity playerEntity2 : MC.mc.world.getPlayers()) {
             if (playerEntity2 == MC.mc.player) continue;
             if (playerEntity2.isSpectator()) continue;
-            if (playerEntity2.isCreative() || Client.manager.isFriend(playerEntity2.getName().getString())) continue;
+            if (playerEntity2.isCreative() || Client.friendManager.isFriend(playerEntity2.getName().getString())) continue;
             double d2 = MC.mc.player.distanceTo((Entity)playerEntity2);
             if (d2 < d) {
                 d = d2;

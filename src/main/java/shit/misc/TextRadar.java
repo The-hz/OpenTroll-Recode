@@ -63,7 +63,7 @@ extends AbstractHudModule {
             if (((Boolean)this.booleanSetting3.getValue()).booleanValue()) {
                 stringBuilder.append(String.format(Locale.ROOT, "%.1f ", Float.valueOf(abstractClientPlayerEntity2.getHealth() + abstractClientPlayerEntity2.getAbsorptionAmount())));
             }
-            stringBuilder.append(Client.manager.isFriend(abstractClientPlayerEntity2.getName().getString()) ? "[F] " : "");
+            stringBuilder.append(Client.friendManager.isFriend(abstractClientPlayerEntity2.getName().getString()) ? "[F] " : "");
             stringBuilder.append(abstractClientPlayerEntity2.getName().getString());
             if (((Boolean)this.booleanSetting8.getValue()).booleanValue()) {
                 stringBuilder.append(" ").append(this.m794(abstractClientPlayerEntity2)).append("ms");

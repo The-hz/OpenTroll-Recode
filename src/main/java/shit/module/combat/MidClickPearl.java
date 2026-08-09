@@ -53,7 +53,7 @@ extends Module {
     public void onDisable() {
         this.flag61 = false;
         flag80 = false;
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         Client.mathUtil.resetRotation();
     }
 
@@ -117,7 +117,7 @@ extends Module {
                         }
                     }
                     ClientSetting.SwitchMode switchMode = this.getSwitchMode10();
-                    boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m178, (Object)switchMode);
+                    boolean bl = Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)this::m178, (Object)switchMode);
                     if (!bl) {
                         return true;
                     }
@@ -125,7 +125,7 @@ extends Module {
                     MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, f2));
                     ItemUtil.setObj25(Hand.MAIN_HAND);
                     flag80 = false;
-                    Client.renderUtil3.restoreSlot();
+                    Client.itemSwitcher.restoreSlot();
                     if (rotateMode != ClientSetting.RotateMode.rotateMode) break block7;
                     Client.mathUtil.resetRotationVisible();
                     if (null == null) break block8;

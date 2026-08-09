@@ -226,7 +226,7 @@ extends Module {
         boolean bl = (Boolean)this.friends.getValue();
         if (string == null) return bl;
         if (bl) return true;
-        bl = Client.manager.isFriend(playerEntity.getName().getString());
+        bl = Client.friendManager.isFriend(playerEntity.getName().getString());
         if (string == null) return bl;
         if (bl) return false;
         return true;
@@ -235,7 +235,7 @@ extends Module {
     private String m734(Object object) {
         PlayerEntity playerEntity = (PlayerEntity)object;
         String string = playerEntity.getName().getString();
-        return Client.manager.isFriend(string) ? "\u00a7b" + string : "\u00a7f" + string;
+        return Client.friendManager.isFriend(string) ? "\u00a7b" + string : "\u00a7f" + string;
     }
 
     private void m839() {

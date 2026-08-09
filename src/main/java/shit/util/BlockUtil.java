@@ -382,13 +382,13 @@ implements MC {
         if (rotateMode != ClientSetting.RotateMode.NONE && !BlockUtil.m262(vec3d, rotateMode, rotateSpeed)) {
             return false;
         }
-        if (!Client.renderUtil3.switchToItem(predicate, switchMode)) {
+        if (!Client.itemSwitcher.switchToItem(predicate, switchMode)) {
             return false;
         }
         boolean silentSwitch = switchMode == ClientSetting.SwitchMode.SILENT || switchMode == ClientSetting.SwitchMode.INVENTORY;
         BlockUtil.m859(blockPos, data, Hand.MAIN_HAND);
         if (silentSwitch) {
-            Client.renderUtil3.restoreSlot();
+            Client.itemSwitcher.restoreSlot();
         }
         if (rotateMode == ClientSetting.RotateMode.rotateMode) {
             Client.mathUtil.resetRotationVisible();

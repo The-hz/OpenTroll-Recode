@@ -32,11 +32,11 @@ implements Listener2 {
 
     public static Listener2Impl m444(long l) {
         long l2 = l;
-        return (Listener2Impl)Manager4.manager4.m276(new Listener2Impl(l2));
+        return (Listener2Impl)Manager4.manager4.addListener(new Listener2Impl(l2));
     }
 
     public static Listener2Impl getListener2Impl3() {
-        return (Listener2Impl)Manager4.manager4.m276(new Listener2Impl());
+        return (Listener2Impl)Manager4.manager4.addListener(new Listener2Impl());
     }
 
     public void m1016(Object object, float f, float f2, float f3, Object object2, Object object3) {
@@ -102,12 +102,12 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         return this.listener.flag4();
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         RenderPass renderPass = (RenderPass)object;
         this.listener.setObj46(renderPass);
     }
@@ -118,7 +118,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         block3: {
             block2: {
                 String[] stringArray = TextureRenderer.getTextArray3();
@@ -127,7 +127,7 @@ implements Listener2 {
                 Listener2Impl listener2Impl = this;
                 if (stringArray2 == null) break block2;
                 if (!listener2Impl.flag33) break block3;
-                Manager4.manager4.setObj100(this);
+                Manager4.manager4.removeListener(this);
                 listener2Impl = this;
             }
             this.flag33 = false;
@@ -141,7 +141,7 @@ implements Listener2 {
                 Listener2Impl listener2Impl = this;
                 if (stringArray == null) break block2;
                 if (listener2Impl.flag33) break block3;
-                Manager4.manager4.m276(this);
+                Manager4.manager4.addListener(this);
                 listener2Impl = this;
             }
             this.flag33 = true;

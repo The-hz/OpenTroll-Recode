@@ -224,7 +224,7 @@ extends ModuleState {
             if (setting2 instanceof ColorSetting2) {
                 setting = (ColorSetting2)setting2;
                 if (n2 != 1) {
-                    setting.setValueInternal(ColorSetting2.m559(n2));
+                    setting.setValueInternal(ColorSetting2.encodeKey(n2));
                     this.flag48 = false;
                     return true;
                 }
@@ -554,7 +554,7 @@ extends ModuleState {
         Object var2_2 = null;
         if (object instanceof ColorSetting2) {
             ColorSetting2 colorSetting2 = (ColorSetting2)object;
-            return colorSetting2.isSet148() ? Integer.toString((Integer)colorSetting2.getValue()) : "none";
+            return colorSetting2.isBound() ? Integer.toString((Integer)colorSetting2.getValue()) : "none";
         }
         object = this.setting;
         if (object instanceof NumberSetting) {

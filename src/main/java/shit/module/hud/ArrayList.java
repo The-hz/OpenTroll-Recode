@@ -205,7 +205,7 @@ implements Listener3 {
         }
         if (bl) return bl2;
         if (!bl2) return true;
-        bl2 = module.getKeyBindSetting().isSet148();
+        bl2 = module.getKeyBindSetting().isBound();
         if (bl) return bl2;
         if (!bl2) return false;
         return true;

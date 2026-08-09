@@ -57,7 +57,7 @@ extends Module {
         }
         HashSet<UUID> hashSet = new HashSet<UUID>();
         for (net.minecraft.client.network.AbstractClientPlayerEntity object : MC.mc.world.getPlayers()) {
-            if (object == MC.mc.player || !object.isAlive() || object.isSpectator() || Client.manager.isFriend(object.getName().getString()) || MC.mc.getNetworkHandler().getPlayerListEntry(object.getUuid()) == null) continue;
+            if (object == MC.mc.player || !object.isAlive() || object.isSpectator() || Client.friendManager.isFriend(object.getName().getString()) || MC.mc.getNetworkHandler().getPlayerListEntry(object.getUuid()) == null) continue;
             hashSet.add(object.getUuid());
             this.map29.put(object.getUuid(), new Data(object.getName().getString(), object.getBlockPos()));
         }

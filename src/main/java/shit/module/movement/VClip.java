@@ -58,7 +58,7 @@ extends Module {
         this.flag116 = false;
         this.flag82 = false;
         this.count202 = -1;
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         Client.mathUtil.resetRotation();
     }
 
@@ -118,12 +118,12 @@ extends Module {
         float f = MC.mc.player.getYaw();
         Client.mathUtil.setRotationSilent(f, 90.0f);
         Object var2_2 = null;
-        boolean bl = Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m588, (Object)ClientSetting.SwitchMode.INVENTORY);
+        boolean bl = Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)this::m588, (Object)ClientSetting.SwitchMode.INVENTORY);
         if (bl) {
             MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, f, 90.0f));
             MC.mc.player.swingHand(Hand.MAIN_HAND, false);
         }
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         Client.mathUtil.resetRotation();
         return bl;
     }

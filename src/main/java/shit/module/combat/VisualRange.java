@@ -80,7 +80,7 @@ extends Module {
         String string = (String)object;
         Object var4_3 = null;
         if ((Boolean)this.friends.getValue() != false) return true;
-        if (Client.manager.isFriend(string)) return false;
+        if (Client.friendManager.isFriend(string)) return false;
         return true;
     }
 

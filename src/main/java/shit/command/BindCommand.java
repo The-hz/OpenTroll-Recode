@@ -69,7 +69,7 @@ extends Command {
                             }
                             return;
                         }
-                        n = n2 = ColorSetting2.m911(stringArray[1]);
+                        n = n2 = ColorSetting2.parseKey(stringArray[1]);
                         if (!bl) break block14;
                         if (n == null) {
                             CommandManager.sendFeedback("Use a key name, mouse button, GLFW key code, or none.");

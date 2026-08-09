@@ -437,7 +437,7 @@ extends Module {
                                     n2 = playerEntity3.isAlive() ? 1 : 0;
                                     if (n != 0) {
                                         if (n2 == 0) continue;
-                                        n2 = Client.manager.isFriend(playerEntity.getNameForScoreboard()) ? 1 : 0;
+                                        n2 = Client.friendManager.isFriend(playerEntity.getNameForScoreboard()) ? 1 : 0;
                                     }
                                     if (n == 0) break block22;
                                     if (n2 != 0) continue;

@@ -329,7 +329,7 @@ implements AutoCloseable {
     public void close() {
         this.m142();
         this.autoCloseableImpl2.close();
-        this.listener2Impl.m523();
+        this.listener2Impl.close();
         this.int2ObjectMap2.clear();
     }
 
@@ -679,12 +679,12 @@ implements AutoCloseable {
         }
 
         private boolean isSet163() {
-            return this.listener2.isSet4();
+            return this.listener2.prepareBuffers();
         }
 
         private void setObj89(Object object) {
             RenderPass renderPass = (RenderPass)object;
-            this.listener2.setObj103(renderPass);
+            this.listener2.drawWithPass(renderPass);
         }
 
         private void m476() {
@@ -694,7 +694,7 @@ implements AutoCloseable {
 
         @Override
         public void close() {
-            this.listener2.m523();
+            this.listener2.close();
         }
     }
 

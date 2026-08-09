@@ -104,7 +104,7 @@ extends Module {
             boolean bl = playerEntity2.isAlive();
             if (string != null) {
                 if (!bl) continue;
-                bl = Client.manager.isFriend(playerEntity.getName().getString());
+                bl = Client.friendManager.isFriend(playerEntity.getName().getString());
             }
             if (bl) continue;
             PlayerEntity playerEntity3 = playerEntity;

@@ -290,7 +290,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         this.blockPos6 = null;
         this.blockPos13 = null;
         this.blockPos11 = null;
@@ -716,7 +716,7 @@ extends Module {
             if (!(entity instanceof PlayerEntity)) continue;
             PlayerEntity playerEntity = (PlayerEntity)entity;
             if (playerEntity == MC.mc.player || !playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d3) continue;
+            if (playerEntity.isSpectator() || Client.friendManager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d3) continue;
             arrayList.add(playerEntity);
             if (null == null) continue;
         }
@@ -1298,7 +1298,7 @@ extends Module {
         if (switchMode == ClientSetting.SwitchMode.NONE) {
             return null;
         }
-        return Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(item)), (Object)switchMode) ? Hand.MAIN_HAND : null;
+        return Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> itemStack.isOf(item)), (Object)switchMode) ? Hand.MAIN_HAND : null;
     }
 
     private Hand getObj22() {
@@ -1313,7 +1313,7 @@ extends Module {
         if (switchMode == ClientSetting.SwitchMode.NONE) {
             return null;
         }
-        return Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m994, (Object)switchMode) ? Hand.MAIN_HAND : null;
+        return Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)this::m994, (Object)switchMode) ? Hand.MAIN_HAND : null;
     }
 
     private boolean m994(ItemStack itemStack) {
@@ -1332,7 +1332,7 @@ extends Module {
             ClientSetting.SwitchMode switchMode = this.getSwitchMode12();
             Object var2_2 = null;
             if (switchMode != ClientSetting.SwitchMode.SILENT && switchMode != ClientSetting.SwitchMode.INVENTORY) break block0;
-            Client.renderUtil3.restoreSlot();
+            Client.itemSwitcher.restoreSlot();
         }
     }
 

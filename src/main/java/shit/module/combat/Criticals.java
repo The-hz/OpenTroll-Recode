@@ -261,7 +261,7 @@ extends Module {
             block4: {
                 Object var2_1 = null;
                 if (!((Boolean)this.mini.getValue()).booleanValue()) break block4;
-                MathUtil.setDouble7((Double)this.motionY.getValue());
+                MathUtil.setMotionY((Double)this.motionY.getValue());
                 if (null == null) break block5;
             }
             if (MC.mc.player != null) {
@@ -310,7 +310,7 @@ extends Module {
                 if (null == null) break;
             }
             case 7: {
-                if (MathUtil.isMoving() || !MathUtil.isSet132()) {
+                if (MathUtil.isMoving() || !MathUtil.isMovingHorizontally()) {
                     return;
                 }
                 this.m179(0.0, true);

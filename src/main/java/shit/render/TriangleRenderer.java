@@ -46,7 +46,7 @@ implements Listener2 {
     }
 
     public static TriangleRenderer getTriangleRenderer2() {
-        return (TriangleRenderer)Manager4.manager4.m276(new TriangleRenderer());
+        return (TriangleRenderer)Manager4.manager4.addListener(new TriangleRenderer());
     }
 
     public void m1056(float f, float f2, float f3, float f4, Object object) {
@@ -154,7 +154,7 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         this.gpuBufferSlice6 = null;
         if (this.count67 == 0) {
             return false;
@@ -170,7 +170,7 @@ implements Listener2 {
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         RenderPass renderPass = (RenderPass)object;
         String[] stringArray = TextureRenderer.getTextArray3();
         TriangleRenderer triangleRenderer = this;
@@ -243,10 +243,10 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         this.endFrame();
         this.gpuManager3.flush();
-        Manager4.manager4.setObj100(this);
+        Manager4.manager4.removeListener(this);
     }
 
     private static /* synthetic */ String cfrlam$draw$0() {

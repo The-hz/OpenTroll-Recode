@@ -20,24 +20,24 @@ public class Manager4 {
     private Manager4() {
     }
 
-    public synchronized Listener2 m276(Object object) {
+    public synchronized Listener2 addListener(Object object) {
         Listener2 listener2 = (Listener2)object;
         this.list18.add(listener2);
         return listener2;
     }
 
-    public synchronized void setObj100(Object object) {
+    public synchronized void removeListener(Object object) {
         Listener2 listener2 = (Listener2)object;
         this.list18.remove(listener2);
     }
 
-    public synchronized void m825() {
+    public synchronized void closeAll() {
         block2: {
             Iterator iterator = List.copyOf(this.list18).iterator();
             String string = Manager4.getText68();
             while (iterator.hasNext()) {
                 Listener2 listener2 = (Listener2)iterator.next();
-                listener2.m523();
+                listener2.close();
                 if (string != null) {
                     if (string != null) continue;
                     Module.setTextArray9(new String[5]);

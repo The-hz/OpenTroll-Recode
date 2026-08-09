@@ -35,8 +35,8 @@ extends Module {
         if (!(MC.mc.player.isInSneakingPose() || MC.mc.player.isGliding() || ItemUtil.isInGame() || MC.mc.player.isInLava() || MC.mc.player.isTouchingWater() || MC.mc.player.getAbilities().flying)) {
             if (!MathUtil.isMoving()) {
                 if (((Boolean)this.airStop.getValue()).booleanValue()) {
-                    MathUtil.setDouble8(0.0);
-                    MathUtil.setDouble9(0.0);
+                    MathUtil.setMotionX(0.0);
+                    MathUtil.setMotionZ(0.0);
                 }
             } else {
                 double[] dArray = MathUtil.getMotionVector(this.getDouble10());

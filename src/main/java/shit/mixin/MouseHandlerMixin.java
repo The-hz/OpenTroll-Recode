@@ -20,7 +20,7 @@ import shit.setting.ColorSetting2;
 public class MouseHandlerMixin {
     @Inject(method={"onMouseButton(JLnet/minecraft/client/input/MouseInput;I)V"}, at={@At(value="HEAD")})
     private void trollhack$onMousePress(long l, MouseInput mouseInput, int n, CallbackInfo callbackInfo) {
-        int n2 = ColorSetting2.m559(mouseInput.button());
+        int n2 = ColorSetting2.encodeKey(mouseInput.button());
         for (Module module : Client.moduleManager.getModules()) {
             ColorSetting2 colorSetting2 = module.getKeyBindSetting();
             if ((Integer)colorSetting2.getValue() != n2) continue;

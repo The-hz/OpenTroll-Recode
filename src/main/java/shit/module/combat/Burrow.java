@@ -163,7 +163,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
     }
 
     @EventHandler
@@ -203,7 +203,7 @@ extends Module {
             return;
         }
         object = this.getSwitchMode3();
-        if (!Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)this::m718, object)) {
+        if (!Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)this::m718, object)) {
             this.setEnabled(false);
             return;
         }
@@ -238,7 +238,7 @@ extends Module {
                         this.setEnabled(false);
                     }
                     if (bl2) {
-                        Client.renderUtil3.restoreSlot();
+                        Client.itemSwitcher.restoreSlot();
                     }
                     return;
                 }
@@ -265,13 +265,13 @@ extends Module {
                     this.setEnabled(false);
                 }
                 if (bl2) {
-                    Client.renderUtil3.restoreSlot();
+                    Client.itemSwitcher.restoreSlot();
                 }
                 return;
             }
             if (!this.isSet86()) {
                 if (bl2) {
-                    Client.renderUtil3.restoreSlot();
+                    Client.itemSwitcher.restoreSlot();
                 }
                 return;
             }
@@ -308,7 +308,7 @@ extends Module {
         if (n > 0) {
             this.m632((Object)(bl ? (LagMode)((Object)this.moveLagMode.getValue()) : (LagMode)((Object)this.lagMode.getValue())), d, d2, d3);
             if (bl2) {
-                Client.renderUtil3.restoreSlot();
+                Client.itemSwitcher.restoreSlot();
             }
             if (((Boolean)this.disable.getValue()).booleanValue()) {
                 this.setEnabled(false);

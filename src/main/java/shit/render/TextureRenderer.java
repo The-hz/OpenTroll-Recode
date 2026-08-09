@@ -60,7 +60,7 @@ implements Listener2 {
     }
 
     public static TextureRenderer getTextureRenderer2() {
-        return (TextureRenderer)Manager4.manager4.m276(new TextureRenderer());
+        return (TextureRenderer)Manager4.manager4.addListener(new TextureRenderer());
     }
 
     public void m656(int n, int n2, int n3, int n4) {
@@ -262,7 +262,7 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         this.gpuBufferSlice5 = null;
         this.count180 = 0;
         if (this.map34.isEmpty()) {
@@ -281,7 +281,7 @@ implements Listener2 {
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         TextureRenderer textureRenderer;
         RenderPass renderPass;
         block4: {
@@ -465,7 +465,7 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         block2: {
             String[] stringArray = TextureRenderer.getTextArray3();
             this.endFrame();
@@ -479,7 +479,7 @@ implements Listener2 {
             }
             this.map34.clear();
             Manager2.manager2.m304();
-            Manager4.manager4.setObj100(this);
+            Manager4.manager4.removeListener(this);
         }
     }
 

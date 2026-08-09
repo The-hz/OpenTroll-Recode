@@ -103,7 +103,7 @@ extends Module {
         if (!this.flag94) {
             Client.helper4.m64();
         } else if (this.mode.getValue() == Mode.Vanilla) {
-            MathUtil.setDouble7(-((Double)this.speed.getValue()).doubleValue());
+            MathUtil.setMotionY(-((Double)this.speed.getValue()).doubleValue());
         } else if (this.mode.getValue() == Mode.Strict) {
             Client.helper4.setFloat5(this.speed.getFloat());
         }

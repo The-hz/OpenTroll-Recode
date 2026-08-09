@@ -85,7 +85,7 @@ extends Module {
             this.flag135 = false;
             return;
         }
-        boolean bl2 = ColorSetting2.m232(n) ? GLFW.glfwGetMouseButton((long)MC.mc.getWindow().getHandle(), (int)ColorSetting2.m1003(n)) == 1 : InputUtil.isKeyPressed((Window)MC.mc.getWindow(), (int)n);
+        boolean bl2 = ColorSetting2.isEncodedKey(n) ? GLFW.glfwGetMouseButton((long)MC.mc.getWindow().getHandle(), (int)ColorSetting2.decodeKey(n)) == 1 : InputUtil.isKeyPressed((Window)MC.mc.getWindow(), (int)n);
         if (bl2 && !this.flag135) {
             this.m611();
         }

@@ -94,7 +94,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         this.player4 = null;
     }
 
@@ -151,7 +151,7 @@ extends Module {
             PlayerEntity playerEntity = (PlayerEntity)iterator.next();
             if (playerEntity == MC.mc.player) continue;
             if (!playerEntity.isAlive()) continue;
-            if (playerEntity.isSpectator() || Client.manager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d) continue;
+            if (playerEntity.isSpectator() || Client.friendManager.isFriend(playerEntity.getName().getString()) || MC.mc.player.squaredDistanceTo((Entity)playerEntity) > d) continue;
             arrayList.add(playerEntity);
             if (this.targetMode.getValue() != TargetMode.Single && null == null) continue;
         }

@@ -25,11 +25,11 @@ public final class Client {
     public static final ModuleManager moduleManager = new ModuleManager();
     public static final CommandManager commandManager = new CommandManager();
     public static final ConfigManager configManager = new ConfigManager();
-    public static final Manager manager = new Manager();
+    public static final Manager friendManager = new Manager();
     public static final FontManager fontManager = new FontManager();
     public static final Helper helper = new Helper();
     public static final MathUtil mathUtil = new MathUtil();
-    public static final RenderUtil3 renderUtil3 = new RenderUtil3();
+    public static final RenderUtil3 itemSwitcher = new RenderUtil3();
     public static final Helper4 helper4 = new Helper4();
     private static String[] texts2;
 

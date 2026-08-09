@@ -61,7 +61,7 @@ extends Module {
     @Override
     public void onDisable() {
         Client.mathUtil.resetRotation();
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
         this.blockPos17 = null;
     }
 
@@ -95,7 +95,7 @@ extends Module {
         ClientSetting.SwitchMode switchMode = this.getSwitchMode11();
         boolean bl = false;
         if (((Boolean)this.autoSwitch.getValue()).booleanValue()) {
-            boolean bl2 = Client.renderUtil3.switchToItem((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.getItem() instanceof BlockItem), (Object)switchMode);
+            boolean bl2 = Client.itemSwitcher.switchToItem((java.util.function.Predicate<net.minecraft.item.ItemStack>)(itemStack -> itemStack.getItem() instanceof BlockItem), (Object)switchMode);
             if (!bl2) {
                 this.blockPos17 = null;
                 return;
@@ -146,7 +146,7 @@ extends Module {
             this.m378(data, vec3d, hand);
         }
         if (bl) {
-            Client.renderUtil3.restoreSlot();
+            Client.itemSwitcher.restoreSlot();
         }
         this.count102 = this.delay.getInt();
         if (((Boolean)this.tower.getValue()).booleanValue() && MC.mc.player.input.playerInput.jump()) {

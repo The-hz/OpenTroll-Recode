@@ -40,7 +40,7 @@ implements Listener2 {
     }
 
     public static RoundRectRenderer getRoundRectRenderer2() {
-        return (RoundRectRenderer)Manager4.manager4.m276(new RoundRectRenderer());
+        return (RoundRectRenderer)Manager4.manager4.addListener(new RoundRectRenderer());
     }
 
     public void m293(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, Object object) {
@@ -145,7 +145,7 @@ implements Listener2 {
     }
 
     @Override
-    public boolean isSet4() {
+    public boolean prepareBuffers() {
         this.data5 = null;
         if (this.count124 == 0) {
             return false;
@@ -164,7 +164,7 @@ implements Listener2 {
     }
 
     @Override
-    public void setObj103(Object object) {
+    public void drawWithPass(Object object) {
         RenderPass renderPass = (RenderPass)object;
         String[] stringArray = TextureRenderer.getTextArray3();
         RoundRectRenderer roundRectRenderer = this;
@@ -246,9 +246,9 @@ implements Listener2 {
     }
 
     @Override
-    public void m523() {
+    public void close() {
         this.gpuManager5.flush();
-        Manager4.manager4.setObj100(this);
+        Manager4.manager4.removeListener(this);
     }
 
     public void m776(int n, int n2, int n3, int n4) {

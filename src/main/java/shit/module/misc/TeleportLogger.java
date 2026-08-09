@@ -62,7 +62,7 @@ extends Module {
             iterator.remove();
         }
         for (PlayerEntity playerEntity : MC.mc.world.getPlayers()) {
-            if (playerEntity == MC.mc.player || Client.manager.isFriend(playerEntity.getName().getString()) || (double)playerEntity.distanceTo((Entity)MC.mc.player) < (Double)this.minDistance.getValue() || this.map48.containsKey(playerEntity.getUuid())) continue;
+            if (playerEntity == MC.mc.player || Client.friendManager.isFriend(playerEntity.getName().getString()) || (double)playerEntity.distanceTo((Entity)MC.mc.player) < (Double)this.minDistance.getValue() || this.map48.containsKey(playerEntity.getUuid())) continue;
             BlockPos blockPos = playerEntity.getBlockPos();
             this.map48.put(playerEntity.getUuid(), blockPos);
             int n = blockPos.getZ();

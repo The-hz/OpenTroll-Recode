@@ -62,7 +62,7 @@ extends Module {
         this.field66 = null;
         this.count135 = 0;
         this.flag77 = false;
-        Client.renderUtil3.restoreSlot();
+        Client.itemSwitcher.restoreSlot();
     }
 
     @EventHandler
@@ -172,17 +172,17 @@ extends Module {
         }
         if (((Boolean)this.inventorySwap.getValue()).booleanValue()) {
             int var7 = AutoPot.m264(var3);
-            if (var7 != -1 && Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.INVENTORY)) {
+            if (var7 != -1 && Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.INVENTORY)) {
                 MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
-                Client.renderUtil3.restoreSlot();
+                Client.itemSwitcher.restoreSlot();
                 this.setObj91(var5);
                 this.helper748.resetTimer();
                 return;
             }
         }
-        if (AutoPot.m760(var3) != -1 && Client.renderUtil3.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.SILENT)) {
+        if (AutoPot.m760(var3) != -1 && Client.itemSwitcher.switchToItem((java.util.function.Predicate<ItemStack>)(itemStack -> AutoPot.m489(itemStack, var3)), (Object)ClientSetting.SwitchMode.SILENT)) {
             MC.mc.player.networkHandler.sendPacket((Packet)new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0, var6, 90.0f));
-            Client.renderUtil3.restoreSlot();
+            Client.itemSwitcher.restoreSlot();
         }
         this.setObj91(var5);
         this.helper748.resetTimer();

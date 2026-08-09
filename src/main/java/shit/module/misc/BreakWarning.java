@@ -55,7 +55,7 @@ extends Module {
         if (!(entity instanceof PlayerEntity) || (playerEntity = (PlayerEntity)entity) == MC.mc.player) {
             return;
         }
-        if (((Boolean)this.ignoreFriends.getValue()).booleanValue() && Client.manager.isFriend(playerEntity.getName().getString())) {
+        if (((Boolean)this.ignoreFriends.getValue()).booleanValue() && Client.friendManager.isFriend(playerEntity.getName().getString())) {
             return;
         }
         BlockPos blockPos = blockBreakingProgressS2CPacket.getPos();
