@@ -20,8 +20,8 @@ import shit.mixin.ParticleAccessor;
 @Environment(value=EnvType.CLIENT)
 @Mixin(value={TotemParticle.class})
 public abstract class TotemParticleMixin {
-    @Inject(method={"<init>(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V"}, at={@At(value="TAIL")})
-    private void m893(ClientWorld clientWorld, double d, double d2, double d3, double d4, double d5, double d6, SpriteProvider spriteProvider, CallbackInfo callbackInfo) {
+    @Inject(method={"<init>(Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/client/particle/SpriteProvider;F)V"}, at={@At(value="TAIL")})
+    private void m893(ClientWorld clientWorld, double d, double d2, double d3, SpriteProvider spriteProvider, float f, CallbackInfo callbackInfo) {
         ParticleAccessor particleAccessor = (ParticleAccessor)((Object)this);
         HookTotemParticleInitEvent hookTotemParticleInitEvent = new HookTotemParticleInitEvent(particleAccessor.trollhack$getXd(), particleAccessor.trollhack$getYd(), particleAccessor.trollhack$getZd());
         Client.eventBus.post(hookTotemParticleInitEvent);
@@ -36,4 +36,3 @@ public abstract class TotemParticleMixin {
         }
     }
 }
-
